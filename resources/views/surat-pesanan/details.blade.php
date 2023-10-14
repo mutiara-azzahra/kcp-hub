@@ -49,7 +49,7 @@
                         </div>
 
 
-                        @if($check ===null)
+                        @if($check === null)
 
                         <div class="col-lg-12 p-1">
 

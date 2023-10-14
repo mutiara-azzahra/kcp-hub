@@ -9,9 +9,6 @@ class MasterAreaSales extends Model
 {
     use HasFactory;
 
-    //kode_kabupaten`, `id_sales
-
-
     protected $table = 'master_area_sales';
     protected $primaryKey = 'id';
 

@@ -6,7 +6,10 @@ use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
+use App\Models\User;
 use App\Models\MasterSales;
+use App\Models\MasterAreaOutlet;
+use App\Models\MasterAreaSales;
 
 class MasterSalesController extends Controller
 {
@@ -19,25 +22,65 @@ class MasterSalesController extends Controller
 
     public function create(){
 
-        $master_part = MasterPart::where('status', 'A')->get();
+        $username = User::where('status', 'A')->get();
 
-        return view('master-sales.create', compact('master_part'));
+        return view('master-sales.create', compact('username'));
     }
 
     public function store(Request $request){
 
         $request -> validate([
-            'part_no'      => 'required', 
-            'stok'         => 'required',
+            'sales'      => 'required',
         ]);
 
         $created = MasterSales::create($request->all());
 
         if ($created){
-            return redirect()->route('master-sales.index')->with('success','Data stok gudang baru berhasil ditambahkan');
+            return redirect()->route('master-sales.index')->with('success','Data sales baru berhasil ditambahkan');
         } else{
-            return redirect()->route('master-sales.index')->with('danger','Data stok gudang baru gagal ditambahkan');
+            return redirect()->route('master-sales.index')->with('danger','Data sales baru gagal ditambahkan');
         }
+    }
+
+    public function details($id){
+
+        $sales  = MasterSales::findOrFail($id);
+
+        return view('master-sales.details', compact('sales'));
+
+    }
+
+    public function tambah_wilayah($id){
+
+        $sales       = MasterSales::findOrFail($id);
+        $master_area = MasterAreaOutlet::where('status', 'Y')->get();
+        $area  = MasterAreaSales::where('id_sales', $id)->get();
+
+        return view('master-sales.details', compact('sales', 'master_area', 'area'));
+
+    }
+
+    public function store_details(Request $request){
+
+
+        $request->validate([
+                'inputs.*.kode_kabupaten'  => 'required',
+                'inputs.*.id_sales'        => 'required',
+        ]);
+
+        foreach($request->inputs as $key => $value){
+
+            $value['kode_kabupaten']    = $value['kode_kabupaten'];
+            $value['id_sales']          = $value['id_sales'];
+            $value['crea_date']         = NOW();
+            $value['crea_by']           = Auth::user()->nama_user;
+
+            //dd($value);
+           MasterAreaSales::create($value);
+        }        
+        
+        return redirect()->route('master-sales.index')->with('success','Data area sales berhasil ditambahkan!');
+
     }
 
     public function delete($id)

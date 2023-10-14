@@ -10,7 +10,6 @@ class MasterArea extends Model
     protected $table = 'master_area';
     protected $primaryKey = 'id';
 
-    //`kode_provinsi`, `kode_kabupaten`, `nama_area`, `status`,
     protected $fillable = [
         'kode_provinsi',
         'kode_kabupaten',

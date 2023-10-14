@@ -210,6 +210,8 @@ Route::group(['middleware' => 'auth'], function () {
     //ROUTE STOK GUDANG
     Route::get('/master-sales', [MasterSalesController::class, 'index'])->name('master-sales.index');
     Route::post('/master-sales', [MasterSalesController::class, 'store'])->name('master-sales.store');
+    Route::post('/master-sales/details', [MasterSalesController::class, 'store'])->name('master-sales.store');
+    Route::post('/master-sales/details', [MasterSalesController::class, 'store_details'])->name('master-sales.store-details');
     Route::get('/master-sales/create', [MasterSalesController::class, 'create'])->name('master-sales.create');
     Route::get('/master-sales/show/{id}', [MasterSalesController::class, 'show'])->name('master-sales.show');
     Route::get('/master-sales/delete/{id}', [MasterSalesController::class, 'delete'])->name('master-sales.delete');
