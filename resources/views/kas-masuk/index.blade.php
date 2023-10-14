@@ -7,9 +7,9 @@
              <div class="float-left">
                 <h4><b>Kas Masuk</b></h4>
             </div>
-            {{-- <div class="float-right m-1">
-                <a class="btn btn-info" href="{{ route('kas-masuk.pembayaran-manual') }}"><i class="fas fa-plus"></i> Terima Pembayaran Manual</a>
-            </div> --}}
+            <div class="float-right m-1">
+                <a class="btn btn-info" href="{{ route('kas-masuk.bayar-manual') }}"><i class="fas fa-plus"></i> Terima Pembayaran Manual</a>
+            </div>
             <div class="float-right m-1">
                 <a class="btn btn-success" href="{{ route('kas-masuk.bukti-bayar') }}"><i class="fas fa-plus"></i> Bukti Terima Pembayaran</a>
             </div>

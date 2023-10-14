@@ -24,11 +24,11 @@ class KasMasukController extends Controller
 
         return view('kas-masuk.create', compact('master_outlet'));
     }
-    public function pembayaran_manual(){
+    public function bayar_manual(){
 
         $master_outlet = MasterOutlet::all();
 
-        return view('kas-masuk.create', compact('master_outlet'));
+        return view('kas-masuk.bayar-manual', compact('master_outlet'));
     }
 
     public function show($id){
@@ -58,7 +58,6 @@ class KasMasukController extends Controller
             'crea_date'         => NOW(),
             'crea_by'           => Auth::user()->nama_user
         ]);
-
 
         $created = KasMasukHeader::create($request->all());
 

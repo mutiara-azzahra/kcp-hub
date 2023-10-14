@@ -71,6 +71,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //MASTER PLAFOND
     Route::get('/master-plafond', [PlafondController::class, 'index'])->name('master-plafond.index');
+    Route::get('/master-plafond/details', [PlafondController::class, 'detail'])->name('master-plafond.detail');
     Route::post('/master-plafond', [PlafondController::class, 'store'])->name('master-plafond.store');
     Route::get('/master-plafond/create', [PlafondController::class, 'create'])->name('master-plafond.create');
     Route::get('/master-plafond/show/{id}', [PlafondController::class, 'show'])->name('master-plafond.show');
@@ -230,7 +231,7 @@ Route::group(['middleware' => 'auth'], function () {
     //KAS KELUAR
     Route::get('/kas-masuk', [KasMasukController::class, 'index'])->name('kas-masuk.index');
     Route::get('/kas-masuk/bukti-bayar', [KasMasukController::class, 'bukti_bayar'])->name('kas-masuk.bukti-bayar');
-    Route::get('/kas-masuk/pembayaran-manual', [KasMasukController::class, 'pembayaran_manual'])->name('kas-masuk.pembayaran-manual');
+    Route::get('/kas-masuk/bayar-manual', [KasMasukController::class, 'bayar_manual'])->name('kas-masuk.bayar-manual');
     Route::post('/kas-masuk/store-bukti-bayar', [KasMasukController::class, 'store_bukti_bayar'])->name('kas-masuk.store-bukti-bayar');
     Route::post('/kas-masuk/store', [KasMasukController::class, 'store'])->name('kas-masuk.store');
 

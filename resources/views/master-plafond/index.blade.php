@@ -25,7 +25,7 @@
             <div class="card" style="padding: 10px;">
                 <div class="card-body">
                     <div class="col-lg-12">  
-                        <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example1">
+                        <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example2">
                             <thead>
                                 <tr style="background-color: #6082B6; color:white">
                                     <th class="text-center">Kode Toko</th>
@@ -41,9 +41,9 @@
 
                                 @foreach($plafond as $p)
                                 <tr>
-                                    <td class="text-center">{{ $p }}</td>
-                                    <td class="text-center">{{ $p }}</td>
-                                    <td class="text-center">{{ $p }}</td>
+                                    <td class="text-center">{{ $p->kd_outlet }}</td>
+                                    <td class="text-left">{{ $p->nm_outlet }}</td>
+                                    <td class="text-left">Rp. {{ number_format($p->nominal_plafond, 0, ',', '.') }}</td>
                                     <td class="text-center">
                                         <a class="btn btn-info btn-sm" href="{{ route('master-plafond.detail', $p->id ) }}">
                                             <i class="fas fa-eye"></i>
