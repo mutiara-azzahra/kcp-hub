@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use Auth;
 use App\Models\TransaksiSpHeader;
-use App\Models\MasterPartNon;
+use App\Models\MasterPart;
 use App\Models\MasterSales;
 use App\Models\MasterOutlet;
 use App\Models\MasterStokGudang;
@@ -70,7 +70,7 @@ class SuratPesananController extends Controller
     public function detail($nosp)
     {
         $details     = TransaksiSpHeader::where('nosp', $nosp)->first();
-        $master_part = MasterPartNon::all();
+        $master_part = MasterPart::all();
         $check       = TransaksiSpDetails::where('nosp', $nosp)->first();
 
         return view('surat-pesanan.details', ['nosp' => $nosp] ,compact('master_part', 'details', 'check'));
@@ -79,7 +79,7 @@ class SuratPesananController extends Controller
     public function detail_sp($nosp)
     {
         $details        = TransaksiSpHeader::where('nosp', $nosp)->first();
-        $master_part    = MasterPartNon::all();
+        $master_part    = MasterPart::all();
 
         return view('surat-pesanan.details-sp', ['nosp' => $nosp] ,compact('master_part', 'details'));
     }
@@ -94,7 +94,7 @@ class SuratPesananController extends Controller
 
         foreach($request->inputs as $key => $value){
 
-            $harga_het = MasterStokGudang::where('part_no', $value['part_no'])->value('het');
+            $harga_het = MasterPart::where('part_no', $value['part_no'])->value('het');
             
             $value['hrg_pcs'] = $harga_het;
 

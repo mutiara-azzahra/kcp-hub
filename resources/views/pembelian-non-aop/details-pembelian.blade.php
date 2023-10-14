@@ -70,8 +70,8 @@
                                                     <td class="text-left">{{ $d->part_no }}</td>
                                                     <td class="text-center">{{ $d->qty }}</td>
                                                     <td class="text-left">Rp. {{ number_format($d->harga, 0, ',', '.') }}</td>
-                                                    <td class="text-center">{{ $d->total_ppn }}</td>
-                                                    <td class="text-center">{{ $d->total_diskon_persen }}</td>
+                                                    <td class="text-left">Rp. {{ number_format($d->total_ppn, 0, ',', '.') }}</td>
+                                                    <td class="text-left">Rp. {{ number_format($d->total_diskon_persen, 0, ',', '.') }}</td>
                                                     <td class="text-left">Rp. {{ number_format($d->total_amount, 0, ',', '.') }}</td>
                                                 </tr>
                                                 @endforeach

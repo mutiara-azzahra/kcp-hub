@@ -103,4 +103,9 @@ class TransaksiSpHeader extends Model
     {
         return $this->hasOne(TransaksiSOHeader::class, 'noso', 'noso');
     }
+
+    public function outlet()
+    {
+        return $this->belongsTo(MasterOutlet::class, 'kd_outlet', 'kd_outlet');
+    }
 }

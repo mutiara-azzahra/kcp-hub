@@ -28,9 +28,15 @@ class MasterOutlet extends Model
     {
         return $this->belongsTo(MasterKodeArea::class, 'kode_kab', 'kode_kab');
     }
+
     public function lkh()
     {
         return $this->hasMany(TransaksiLKHDetails::class, 'kd_outlet', 'kd_outlet');
+    }
+
+    public function plafond()
+    {
+        return $this->hasOne(TransaksiPlafond::class, 'kd_outlet', 'kd_outlet');
     }
 
 }

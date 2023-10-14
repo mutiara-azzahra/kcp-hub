@@ -219,11 +219,6 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                      <a href="{{ route('master-part-het.index')}}" class="nav-link">
-                        <p>Master Part HET</p>
-                      </a>
-                  </li>
-                  <li class="nav-item">
                       <a href="{{ route('surat-pesanan.index')}}" class="nav-link">
                         <p>Surat Pesanan/SP</p>
                       </a>

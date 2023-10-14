@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\InvoiceNonHeader;
 use App\Models\InvoiceNonDetails;
-use App\Models\MasterPartNon;
+use App\Models\MasterPart;
 
 
 class PembelianController extends Controller
@@ -87,8 +87,8 @@ class PembelianController extends Controller
 
     public function detail($id)
     {
-        $pembelian  = InvoiceNonHeader::findOrFail($id);
-        $master_part = MasterPartNon::all();
+        $pembelian   = InvoiceNonHeader::findOrFail($id);
+        $master_part = MasterPart::all();
 
         return view('pembelian-non-aop.details',compact('pembelian', 'master_part'));
     }

@@ -17,4 +17,9 @@ class TransaksiPlafond extends Model
         'kd_outlet', 'nm_outlet', 'target_per_bulan', 'nominal_plafond', 'status', 'created_at', 
         'updated_at', 'created_by', 'updated_by'
     ];
+
+    public function outlet()
+    {
+        return $this->belongsTo(MasterOutlet::class, 'kd_outlet', 'kd_outlet');
+    }
 }

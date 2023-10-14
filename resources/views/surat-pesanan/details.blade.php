@@ -36,7 +36,7 @@
                                 <tr>
                                     <th class="text-left">Plafond Toko</th>
                                     <td>:</td>
-                                    <td class="text-left"></td>
+                                    <td class="text-left">{{ $details->outlet->plafond }}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left">Piutang Terakhir</th>
@@ -72,7 +72,7 @@
                                                             <select name="inputs[0][part_no]" class="form-control mr-2">
                                                                 <option value="">-- Pilih --</option>
                                                                 @foreach($master_part as $k)
-                                                                    <option value="{{ $k->part_no }}"> {{ $k->part_no }} | {{ $k->part_nama }} | Rp. {{ number_format($k->het->het, 0, ',', '.') }} </option>
+                                                                    <option value="{{ $k->part_no }}"> {{ $k->part_no }} | {{ $k->part_nama }} | Rp. {{ number_format($k->het, 0, ',', '.') }} </option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -153,7 +153,7 @@
                                                             <select name="inputs[${i}][part_no]" class="form-control mr-2">
                                                                 <option value="">-- Pilih --</option>
                                                                 @foreach($master_part as $k)
-                                                                    <option value="{{ $k->part_no }}"> {{ $k->part_no }} | {{ $k->part_nama }} | Rp. {{ number_format($k->het->het, 0, ',', '.') }}</option>
+                                                                    <option value="{{ $k->part_no }}"> {{ $k->part_no }} | {{ $k->part_nama }} | Rp. {{ number_format($k->het, 0, ',', '.') }}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>

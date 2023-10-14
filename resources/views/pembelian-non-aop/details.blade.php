@@ -13,7 +13,7 @@
         </div>
     </div>
             @if ($message = Session::get('success'))
-                <div class="alert alert-success">
+                <div class="alert alert-success" id="myAlert">
                     <p>{{ $message }}</p>
                 </div>
             @endif
@@ -22,9 +22,9 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12 p-3">
-                            <table class="table table-hover bg-light table-striped">
+                            <table class="table table-hover table-bordered bg-light table-striped">
                                 <thead>
-                                    <tr>
+                                    <tr style="background-color: #6082B6; color:white">
                                         <th class="text-center">Nota</th>
                                         <th class="text-center">Customer To</th>
                                         <th class="text-center">Supplier</th>
@@ -49,12 +49,12 @@
                                 <form action="{{ route('pembelian-non-aop.store_details')}}" method="POST">
                                 @csrf
 
-                                <table class="table table-hover table-sm bg-light table-striped">
+                                <table class="table table-hover table-bordered table-sm bg-light table-striped">
                                     <thead>
-                                        <tr>
+                                        <tr style="background-color: #6082B6; color:white">
                                             <th class="text-center">Part No | Nama</th>
                                             <th class="text-center">Qty</th>
-                                            <th class="text-center">Harga</th>
+                                            <th class="text-center">Harga Beli</th>
                                             <th class="text-center">PPN (%)</th>
                                             <th class="text-center">Disc (%)</th>
                                             <th class="text-center">Tambah</th>
@@ -195,9 +195,7 @@
           responsive: true,
         });
       });
-    </script>
-    
-    <script>
+      
     $(document).ready(function() {
         $('#tanggal_awal').change(function() {
             var selectedDate = $(this).val();
@@ -213,6 +211,17 @@
             }
         });
     });
+
+    //alert success time
+      function closeAlertAfterTime(alertId, milliseconds) {
+            setTimeout(function () {
+                var alertElement = document.getElementById(alertId);
+                if (alertElement) {
+                    alertElement.style.display = 'none'; 
+                }
+            }, milliseconds);
+        }
+        closeAlertAfterTime('myAlert', 2500);
     </script>
 
 @endsection
