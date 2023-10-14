@@ -31,4 +31,9 @@ class MasterAreaSales extends Model
     {
         return $this->hasOne(MasterSales::class, 'id', 'id_sales');
     }
+
+    public function outlet()
+    {
+        return $this->hasMany(MasterOutlet::class, 'kode_kab', 'kode_kabupaten');
+    }
 }

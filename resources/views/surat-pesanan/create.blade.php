@@ -33,12 +33,8 @@
                                     <strong>Toko</strong>
                                     <select name="kd_outlet" class="form-control mr-2">
                                         <option value="">-- Pilih Toko --</option>
-                                        @foreach($sales as $s)
-                                            @foreach($s->area_sales as $a)
-                                                @foreach($a->area->outlet as $outlet)
-                                                    <option value="{{ $outlet->kd_outlet }}">{{ $outlet->kd_outlet }} / {{ $outlet->nm_outlet }}</option>
-                                                @endforeach
-                                            @endforeach
+                                        @foreach($toko->outlet as $s)
+                                            <option value="{{ $s->kd_outlet }}">{{ $s->kd_outlet }} / {{ $s->nm_outlet }}</option>
                                         @endforeach
                                     </select>
 
@@ -65,49 +61,5 @@
 @endsection
 
 @section('script')
-
-    <script>
-      $(function () {
-        $("#example1")
-          .DataTable({
-            paging: true,
-            responsive: true,
-            lengthChange: false,
-            autoWidth: false,
-            buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
-          })
-          .buttons()
-          .container()
-          .appendTo("#example1_wrapper .col-md-6:eq(0)")
-                  
-        $("#example2").DataTable({
-          paging: true,
-          lengthChange: false,
-          searching: false,
-          ordering: true,
-          info: true,
-          autoWidth: false,
-          responsive: true,
-        });
-      });
-    </script>
-    
-    <script>
-    $(document).ready(function() {
-        $('#tanggal_awal').change(function() {
-            var selectedDate = $(this).val();
-            
-            if (selectedDate) {
-                // Get the year and month from the selected date
-                var year = selectedDate.split('-')[0];
-                var month = selectedDate.split('-')[1];
-                
-                // Set the date input to the first day of the selected month
-                var firstDayOfMonth = year + '-' + month + '-01';
-                $(this).val(firstDayOfMonth);
-            }
-        });
-    });
-    </script>
 
 @endsection

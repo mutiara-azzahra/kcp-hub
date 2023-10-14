@@ -11,6 +11,7 @@ use App\Models\MasterSales;
 use App\Models\MasterOutlet;
 use App\Models\MasterStokGudang;
 use App\Models\TransaksiSpDetails;
+use App\Models\MasterAreaSales;
 
 
 class SuratPesananController extends Controller
@@ -24,9 +25,10 @@ class SuratPesananController extends Controller
 
     public function create(){
 
-        $sales = MasterSales::where('sales', Auth::user()->username)->get();
+        $sales = MasterSales::where('sales', Auth::user()->username)->value('id');
+        $toko = MasterAreaSales::where('id_sales', $sales)->first();
 
-        return view('surat-pesanan.create', compact('sales'));
+        return view('surat-pesanan.create', compact('sales', 'toko'));
     }
 
     public function store(Request $request){

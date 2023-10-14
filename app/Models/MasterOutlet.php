@@ -39,4 +39,9 @@ class MasterOutlet extends Model
         return $this->hasOne(TransaksiPlafond::class, 'kd_outlet', 'kd_outlet');
     }
 
+    public function area_sales()
+    {
+        return $this->belongsTo(MasterAreaSales::class, 'kode_kabupaten', 'kode_kab');
+    }
+
 }
