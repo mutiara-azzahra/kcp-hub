@@ -57,13 +57,9 @@
                                                 <td class="text-left">{{ $s->part_no }}</td>
                                                 <td class="text-left">{{ $s->nama_part->part_nama }}</td>
                                                 <td class="text-center">{{ $s->qty }}</td>
-                                                <td class="text-center">{{ $s->stok_ready->stok }}</td>
+                                                <td class="text-center">{{ $s->stok_ready }}</td>
                                                 <td class="text-center" style="background-color: lime;">
-                                                @if($s->qty <= $s->stok_ready->stok)
-                                                Dapat Divalidasi
-                                                @elseif($s->qty > $s->stok_ready->stok)
-                                                Tidak Dapat Divalidasi
-                                                @endif
+                                               
                                                 </td>
                                             </tr>
                                             @endforeach

@@ -27,12 +27,12 @@ class TransaksiSODetails extends Model
 
     public function nama_part()
     {
-        return $this->hasOne(MasterPartNon::class, 'part_no', 'part_no');
+        return $this->hasOne(MasterPart::class, 'part_no', 'part_no');
     }
 
     public function stok_ready()
     {
-        return $this->belongsTo(StokGudang::class, 'part_no', 'part_no');
+        return $this->belongsTo(MasterStokGudang::class, 'part_no', 'part_no');
     }
 
 }

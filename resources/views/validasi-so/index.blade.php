@@ -36,7 +36,7 @@
                                     <th class="text-center">Kode Toko</th>
                                     <th class="text-center">Nama Toko</th>
                                     <th class="text-center">Tgl. SO</th>
-                                    <th class="text-center"></th>
+                                    <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -50,7 +50,7 @@
                                     <td class="text-left">{{ $v->noso }}</td>
                                     <td class="text-center">{{ $v->kd_outlet }}</td>
                                     <td class="text-left">{{ $v->nm_outlet }}</td>
-                                    <td class="text-center"></td>                                    
+                                    <td class="text-center">{{ $v->crea_date }}</td>                                    
                                     <td class="text-center">
                                         <a class="btn btn-success btn-sm" href="{{ route('validasi-so.details',$v->noso) }}"><i class="fas fa-check-square"></i></a>
                                     </td>
