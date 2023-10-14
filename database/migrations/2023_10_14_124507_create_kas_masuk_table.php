@@ -33,7 +33,6 @@ return new class extends Migration
             $table->enum('status', ['C', 'O'])->default('O');
             $table->enum('flag_batal', ['Y', 'N'])->default('N');
             $table->datetime('trx_date')->nullable();
-            $table->enum('status', ['A', 'N'])->default('A');
             $table->timestamps();
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();

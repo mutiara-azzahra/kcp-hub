@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class KasMasukDetails extends Model
 {
     use HasFactory;
+
+    protected $table = 'kas_masuk_details';
+    protected $primaryKey = 'id';
+    public $timestamps = false;
+
+    protected $fillable = [ 
+        'no_kas_masuk', 'perkiraan', 'akuntansi_to', 'total',
+        'status','created_at', 'created_by', 'updated_at',
+        'updated_by'
+    ];
 }
