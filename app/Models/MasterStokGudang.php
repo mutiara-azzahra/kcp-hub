@@ -9,12 +9,12 @@ class MasterStokGudang extends Model
 {
     use HasFactory;
 
-    protected $table = 'master_stok_gudang_het';
+    protected $table = 'master_stok_gudang';
     protected $primaryKey = 'id';
 
     protected $fillable = [
         'part_no', 
-        'het',
+        'stok',
         'status', 
         'create_at',
         'update_at',
@@ -27,6 +27,5 @@ class MasterStokGudang extends Model
         return $this->hasOne(MasterStokGudangHet::class, 'part_no', 'part_no');
     }
 
-    
 
 }

@@ -13,6 +13,7 @@ use App\Http\Controllers\MasterPartKelompokController;
 use App\Http\Controllers\MasterPartKategoriController;
 use App\Http\Controllers\MasterPartProdukController;
 use App\Http\Controllers\MasterPartGroupController;
+use App\Http\Controllers\MasterSalesController;
 use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\SuratPesananController;
@@ -202,6 +203,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/stok-gudang', [StokGudangController::class, 'index'])->name('stok-gudang.index');
     Route::post('/stok-gudang', [StokGudangController::class, 'store'])->name('stok-gudang.store');
     Route::get('/stok-gudang/create', [StokGudangController::class, 'create'])->name('stok-gudang.create');
+    Route::get('/stok-gudang/delete/{id}', [StokGudangController::class, 'delete'])->name('stok-gudang.delete');
+
+    //ROUTE STOK GUDANG
+    Route::get('/master-sales', [MasterSalesController::class, 'index'])->name('master-sales.index');
+    Route::post('/master-sales', [MasterSalesController::class, 'store'])->name('master-sales.store');
+    Route::get('/master-sales/create', [MasterSalesController::class, 'create'])->name('master-sales.create');
+    Route::get('/master-sales/delete/{id}', [MasterSalesController::class, 'delete'])->name('master-sales.delete');
 
     //ROUTE STOK GUDANG
     Route::get('/master-part-het', [MasterPartHetController::class, 'index'])->name('master-part-het.index');

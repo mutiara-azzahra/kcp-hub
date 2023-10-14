@@ -8,7 +8,7 @@
                 <h4><b>Stok Gudang</b></h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-success" href=""><i class="fas fa-plus"></i> Tambah Part</a>
+                <a class="btn btn-success" href="{{ route('stok-gudang.create') }}"><i class="fas fa-plus"></i> Tambah Stok</a>
             </div>
         </div>
     </div>
@@ -41,7 +41,7 @@
                                     <td class="text-left">{{ $p->part_no }}</td>
                                     <td class="text-center">{{ $p->stok }}</td>
                                     <td class="text-center">
-                                        <a class="btn btn-danger btn-sm"><i class="fas fa-times-circle"></i> </a>
+                                        <a class="btn btn-warning btn-sm" href="{{ route('stok-gudang.delete',$p->id) }}"><i class="fas fa-times-circle"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

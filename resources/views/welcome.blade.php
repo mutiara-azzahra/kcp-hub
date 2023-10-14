@@ -96,11 +96,31 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-              {{-- <li class="nav-item">
-                  <a href="{{ route('user.index')}}" class="nav-link">
-                    <p>User</p>
-                  </a>
-              </li> --}}
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon"></i>
+                  <p>
+                    Administrator
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                      <a href="{{ route('user.index')}}" class="nav-link">
+                        <p>User</p>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="{{ route('master-sales.index')}}" class="nav-link">
+                        <p>Master Sales</p>
+                      </a>
+                  </li>
+                  
+                </ul>
+              </li>
+
+            {{-- GUDANG --}}
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon"></i>
@@ -125,21 +145,6 @@
                         <p>Stok Gudang</p>
                       </a>
                   </li>
-                  <li class="nav-item">
-                      <a href="{{ route('part-kelompok.index')}}" class="nav-link">
-                        <p>Master Kategori Part</p>
-                      </a>
-                  </li>
-                  {{-- <li class="nav-item">
-                      <a href="{{ route('part-produk.index')}}" class="nav-link">
-                        <p>Part Produk</p>
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="{{ route('part-group.index')}}" class="nav-link">
-                        <p>Part Group</p>
-                      </a>
-                  </li> --}}
                   <li class="nav-item">
                       <a href="{{ route('intransit.index')}}" class="nav-link">
                         <p>Intransit</p>
