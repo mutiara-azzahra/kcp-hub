@@ -228,6 +228,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/account-receivable/store', [AccountReceivableController::class, 'store'])->name('account-receivable.store');
 
     //KAS KELUAR
+    Route::get('/kas-masuk', [KasMasukController::class, 'index'])->name('kas-masuk.index');
+    Route::get('/kas-masuk/bukti-bayar', [KasMasukController::class, 'bukti_bayar'])->name('kas-masuk.bukti-bayar');
+    Route::get('/kas-masuk/pembayaran-manual', [KasMasukController::class, 'pembayaran_manual'])->name('kas-masuk.pembayaran-manual');
+    Route::post('/kas-masuk/store-bukti-bayar', [KasMasukController::class, 'store_bukti_bayar'])->name('kas-masuk.store-bukti-bayar');
+    Route::post('/kas-masuk/store', [KasMasukController::class, 'store'])->name('kas-masuk.store');
+
+    Route::get('/kas-masuk/bukti-bayar', [KasMasukController::class, 'bukti_bayar'])->name('kas-masuk.bukti-bayar');
+    Route::get('/kas-masuk/pembayaran-manual', [KasMasukController::class, 'pembayaran_manual'])->name('kas-masuk.bayar_manual');
+
+    //KAS KELUAR
     Route::get('/kas-keluar', [KasKeluarController::class, 'index'])->name('kas-keluar.index');
     Route::get('/kas-keluar/create', [KasKeluarController::class, 'create'])->name('kas-keluar.create');
     Route::post('/kas-keluar/store', [KasKeluarController::class, 'store'])->name('kas-keluar.store');

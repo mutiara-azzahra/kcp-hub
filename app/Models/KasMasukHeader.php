@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use Carbon\Carbon;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,4 +20,32 @@ class KasMasukHeader extends Model
         'nominal_bonus','flag_kas_manual','terima_dari','keterangan','status','flag_batal', 'trx_date', 'created_at', 'created_by', 'updated_at',
         'updated_by'
     ];
+
+    public static function no_kas_masuk()
+    {
+        $now            = Carbon::now();
+        $currentYear    = $now->year;
+        $currentMonth   = $now->format('m');
+
+        $latestRecord = static::orderBy('no_kas_masuk', 'desc')->first();
+
+        if ($latestRecord) {
+            $lastCustomId   = $latestRecord->no_lkh;
+            $lastYear       = substr($lastCustomId, 4, 4);
+            $lastMonth      = substr($lastCustomId, 8, 2);
+            $lastNumber     = (int)substr($lastCustomId, -5);
+
+            if ($lastYear == $currentYear && $lastMonth == $currentMonth) {
+                $newNumber = $lastNumber + 1;
+            } else {
+                $newNumber = 1;
+            }
+        } else {
+            $newNumber = 1;
+        }
+
+        $newCustomId = 'KAS-' . $currentYear . $currentMonth . '-' . str_pad($newNumber, 5, '0', STR_PAD_LEFT);
+
+        return $newCustomId;
+    }
 }

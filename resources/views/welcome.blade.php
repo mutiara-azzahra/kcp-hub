@@ -262,7 +262,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                      <a href="{{ route('pembelian-non-aop.index')}}" class="nav-link">
+                      <a href="{{ route('kas-masuk.index')}}" class="nav-link">
                         <p>Kas Masuk</p>
                       </a>
                   </li>

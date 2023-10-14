@@ -5,10 +5,13 @@
     <div class="row mt-5">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4><b>Master Part</b></h4>
+                <h4><b>Kas Masuk</b></h4>
             </div>
-            <div class="float-right">
-                <a class="btn btn-success" href="{{ route('kas-masuk.create') }}"><i class="fas fa-plus"></i> Tambah Part</a>
+            {{-- <div class="float-right m-1">
+                <a class="btn btn-info" href="{{ route('kas-masuk.pembayaran-manual') }}"><i class="fas fa-plus"></i> Terima Pembayaran Manual</a>
+            </div> --}}
+            <div class="float-right m-1">
+                <a class="btn btn-success" href="{{ route('kas-masuk.bukti-bayar') }}"><i class="fas fa-plus"></i> Bukti Terima Pembayaran</a>
             </div>
         </div>
     </div>
@@ -25,10 +28,10 @@
                             <thead>
                                 <tr style="background-color: #6082B6; color:white">
                                     <th class="text-center">No</th>
-                                    <th class="text-center">Part Nomor</th>
-                                    <th class="text-center">Part Nama</th>
-                                    <th class="text-center">HET</th>
-                                    <th class="text-center">Aksi</th>
+                                    <th class="text-center">No. Kas Masuk</th>
+                                    <th class="text-center">Kode Toko</th>
+                                    <th class="text-center">Pembayaran Via</th>
+                                    <th class="text-center">Nominal</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,13 +42,10 @@
                                 @foreach($kas_masuk as $p)
                                 <tr>
                                     <td class="text-center">{{ $no++ }}.</td>
-                                    <td class="text-left">{{ $p->part_no }}</td>
-                                    <td class="text-left">{{ $p->part_nama }}</td>
-                                    <td class="text-left">Rp. {{ number_format($p->het, 0, ',', '.') }}</td>
-                                    <td class="text-center">                                        
-                                        <a class="btn btn-info btn-sm" href="{{ route('kas-masuk.edit',$p->id) }}"><i class="fas fa-edit"></i></a>
-                                        <a class="btn btn-warning btn-sm" href="{{ route('kas-masuk.delete',$p->id) }}"><i class="fas fa-times-circle"></i></a>
-                                    </td>
+                                    <td class="text-left">{{ $p->no_kas_masuk }}</td>
+                                    <td class="text-left">{{ $p->kd_outlet }}</td>
+                                    <td class="text-left">{{ $p->pembayaran_via }}</td>
+                                    <td class="text-left">Rp. {{ number_format($p->nominal, 0, ',', '.') }}</td>
                                 </tr>
                                 @endforeach
                                 

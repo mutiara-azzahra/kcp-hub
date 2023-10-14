@@ -38,7 +38,6 @@ class SalesOrderController extends Controller
 
         $surat_pesanan_id = TransaksiSpHeader::where('nosp', $nosp)->get();        
 
-        
         return view('sales-order.details', ['nosp' => $nosp] , compact('surat_pesanan_id'));
     }
 
