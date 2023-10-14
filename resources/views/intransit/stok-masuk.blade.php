@@ -10,7 +10,7 @@
         </div>
     </div>
             @if ($message = Session::get('success'))
-                <div class="alert alert-success">
+                <div class="alert alert-success" id="myAlert">
                     <p>{{ $message }}</p>
                 </div>
             @endif
@@ -30,7 +30,7 @@
                                 <table class="table table-hover table-sm bg-light table-striped" id="table">
                                     <thead>
 
-                                        <tr >
+                                        <tr style="background-color: #6082B6; color:white">
                                             <th></th>
                                             <th class="text-center">No. SP</th>
                                             <th class="text-center">No. Packingsheet</th>
@@ -56,7 +56,7 @@
                                                 <td class="text-left">{{ $i->no_doos }}</td>
                                                 <td class="text-left">{{ $i->part_no }}</td>
                                                 <td class="text-center">{{ $i->qty }}</td>
-                                                <td class="text-left">Rp. {{ $i->harga_pcs }}</td>
+                                                <td class="text-left">Rp. {{ number_format($i->harga_pcs, 0, ',', '.') }}</td>
                                             </tr>
 
                                             @endforeach
@@ -79,5 +79,18 @@
 @endsection
 
 @section('script')
+
+
+<script>
+        function closeAlertAfterTime(alertId, milliseconds) {
+            setTimeout(function () {
+                var alertElement = document.getElementById(alertId);
+                if (alertElement) {
+                    alertElement.style.display = 'none'; 
+                }
+            }, milliseconds);
+        }
+        closeAlertAfterTime('myAlert', 2500);
+    </script>
 
 @endsection

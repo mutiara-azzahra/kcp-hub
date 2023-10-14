@@ -13,7 +13,7 @@
         </div>
     </div>
             @if ($message = Session::get('success'))
-                <div class="alert alert-success">
+                <div class="alert alert-success" id="myAlert">
                     <p>{{ $message }}</p>
                 </div>
                 
@@ -44,10 +44,10 @@
                                     <td class="text-center">{{ $p->tanggal_packingsheet }}</td>
 
                                     @if($p->status == 'I')
-                                    <td class="text-center">Diproses</td>
+                                    <td style="background-color: yellow" class="text-center">Diproses</td>
 
                                     @elseif($p->status == 'T')
-                                    <td class="text-center">Diterima</td>
+                                    <td style="background-color: lime" class="text-center">Diterima</td>
 
                                     @endif
 
@@ -123,6 +123,18 @@
             }
         });
     });
+    </script>
+
+    <script>
+        function closeAlertAfterTime(alertId, milliseconds) {
+            setTimeout(function () {
+                var alertElement = document.getElementById(alertId);
+                if (alertElement) {
+                    alertElement.style.display = 'none'; 
+                }
+            }, milliseconds);
+        }
+        closeAlertAfterTime('myAlert', 2500);
     </script>
 
 @endsection

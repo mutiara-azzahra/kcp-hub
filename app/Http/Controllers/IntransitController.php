@@ -68,7 +68,7 @@ class IntransitController extends Controller
            IntransitDetails::create($value);
         }
         
-        return redirect()->route('intransit.index')->with('success','Data baru berhasil ditambahkan');
+        return redirect()->route('intransit.index')->with('success','Barang intransit berhasil ditambahkan!');
         
     }
 

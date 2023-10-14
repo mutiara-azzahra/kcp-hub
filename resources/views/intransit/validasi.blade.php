@@ -43,7 +43,14 @@
                                     <tr>
                                         <td class="text-center">{{ $intransit_header->no_surat_pesanan }}</td>
                                         <td class="text-center">{{ $intransit_header->tanggal_packingsheet }}</td>
-                                        <td class="text-center">{{ $intransit_header->status }}</td>
+
+                                        @if($intransit_header->status == 'I')
+                                        <td style="background-color: yellow" class="text-center">Menunggu Diterima</td>
+
+                                        @elseif($intransit_header->status == 'T')
+                                        <td style="background-color: lime" class="text-center">Diterima</td>
+
+                                        @endif
                                     </tr>
                                 </tbody>
                             </table>

@@ -5,7 +5,7 @@
     <div class="row mt-5">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4><b>Details Intransit Ichidai dengan Surat Pengantar</b></h4>
+                <h4><b>Details Intransit dengan Surat Pengantar</b></h4>
             </div>
             <div class="float-right">
                     <a class="btn btn-success" href="{{ route('intransit.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
