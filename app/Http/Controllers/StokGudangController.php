@@ -57,5 +57,29 @@ class StokGudangController extends Controller
         
     }
 
+    public function edit($id)
+    {
+        $stok_id  = MasterStokGudang::findOrFail($id);
+
+        return view('stok-gudang.update',compact('stok_id'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'stok'     => 'required|integer',
+        ]);
+
+        $stok_gudang = MasterStokGudang::find($id);
+
+        if (!$stok_gudang) {
+            return redirect()->route('stok-gudang.index')->with('danger', 'Data master part tidak ditemukan');
+        }
+
+        $stok_gudang->update($request->all());
+
+        return redirect()->route('stok-gudang.index')->with('success', 'Data master part berhasil diubah');
+    }
+
     
 }

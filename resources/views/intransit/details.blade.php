@@ -13,7 +13,7 @@
         </div>
     </div>
             @if ($message = Session::get('success'))
-                <div class="alert alert-success">
+                <div class="alert alert-success" id="myAlert">
                     <p>{{ $message }}</p>
                 </div>
             @endif
@@ -24,7 +24,7 @@
                         <div class="col-lg-12 p-3">
                             <table class="table table-hover bg-light table-striped">
                                 <thead>
-                                    <tr>
+                                    <tr style="background-color: #6082B6; color:white">
                                         <th class="text-center">No. SP AOP</th>
                                         <th class="text-center">Tgl. Packingsheet</th>
                                         <th class="text-center">Status</th>
@@ -61,12 +61,12 @@
                                                     <td class="text-center">
                                                         <div class="form-group col-12">
                                                             <input type="hidden" name="inputs[0][no_surat_pesanan]" value="{{ $intransit_header->no_surat_pesanan }}">
-                                                            <input type="text" name="inputs[0][no_packingsheet]" class="form-control" placeholder="0">
+                                                            <input type="text" name="inputs[0][no_packingsheet]" class="form-control" placeholder="No. Packingsheet">
                                                         </div>
                                                     </td>
                                                     <td class="text-center">
                                                         <div class="form-group col-12">
-                                                            <input type="text" name="inputs[0][no_doos]" class="form-control" placeholder="0">
+                                                            <input type="text" name="inputs[0][no_doos]" class="form-control" placeholder="No. Doos">
                                                         </div>
                                                     </td>
                                                     <td class="text-center">
@@ -162,5 +162,6 @@
     })
 
     </script>
+
 
 @endsection

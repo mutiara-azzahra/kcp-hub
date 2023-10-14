@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\IntransitHeader;
 use App\Models\IntransitDetails;
-use App\Models\MasterPartNon;
+use App\Models\MasterPart;
 use App\Models\StokGudang;
 
 
@@ -45,7 +45,7 @@ class IntransitController extends Controller
     public function details($id)
     {
         $intransit_header  = IntransitHeader::findOrFail($id);
-        $master_part       = MasterPartNon::all();
+        $master_part       = MasterPart::all();
 
         return view('intransit.details',compact('intransit_header', 'master_part'));
     }
@@ -56,7 +56,6 @@ class IntransitController extends Controller
         $request->validate([
                 'inputs.*.no_surat_pesanan' => 'required',
                 'inputs.*.no_packingsheet'  => 'required',
-                'inputs.*.no_doos'          => 'required',
                 'inputs.*.part_no'          => 'required', 
                 'inputs.*.qty'              => 'required', 
                 'inputs.*.harga_pcs'        => 'required',
@@ -99,7 +98,6 @@ class IntransitController extends Controller
 
     public function stok_masuk($no_surat_pesanan)
     {
-
         $intransit_details = IntransitDetails::where('no_surat_pesanan', $no_surat_pesanan)->get();
 
         return view('intransit.stok-masuk',compact('intransit_details'))->with('success', 'Data berhasil divalidasi, silahkan tambahkan barang ke gudang');

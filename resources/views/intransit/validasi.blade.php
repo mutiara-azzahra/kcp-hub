@@ -4,11 +4,14 @@
 <div class="container" style="padding: 10px;">
     <div class="row mt-5">
         <div class="col-lg-12 pb-3">
-            @if($intransit_header->status == 'I')
-            <div class="float-right">
-                <a class="btn btn-warning" href="{{ route('intransit.validasi_barang', $intransit_header->id) }}"><i class="fas fa-check"></i>  Validasi</a>
-            </div>
 
+            @if(Auth::user()->id_role == 10)
+                @if($intransit_header->status == 'I')
+                <div class="float-right">
+                    <a class="btn btn-warning" href="{{ route('intransit.validasi_barang', $intransit_header->id) }}"><i class="fas fa-check"></i>  Validasi</a>
+                </div>
+
+                @endif
             @endif
             <div class="float-left">
                 <a class="btn btn-success" href="{{ route('intransit.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>

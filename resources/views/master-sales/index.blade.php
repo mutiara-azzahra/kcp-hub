@@ -5,10 +5,10 @@
     <div class="row mt-5">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4><b>Stok Gudang</b></h4>
+                <h4><b>Master Sales</b></h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-success" href="{{ route('master-sales.create') }}"><i class="fas fa-plus"></i> Tambah Stok</a>
+                <a class="btn btn-success" href="{{ route('master-sales.create') }}"><i class="fas fa-plus"></i> Tambah Sales</a>
             </div>
         </div>
     </div>
@@ -39,6 +39,7 @@
                                     <td class="text-center">{{ $no++ }}</td>
                                     <td class="text-left">{{ $p->sales }}</td>
                                     <td class="text-center">
+                                        <a class="btn btn-info btn-sm" href="{{ route('master-sales.tambah-wilayah',$p->id) }}"><i class="fas fa-plus"></i></a>
                                         <a class="btn btn-warning btn-sm" href="{{ route('master-sales.delete',$p->id) }}"><i class="fas fa-times-circle"></i></a>
                                     </td>
                                 </tr>

@@ -34,13 +34,13 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
-                            <strong>Nama User</strong>
+                            <strong>Nama</strong>
                             <input type="text" name="nama_user" class="form-control" placeholder="Nama Lengkap">
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
-                            <strong>Nama User</strong>
+                            <strong>Username</strong>
                             <input type="text" name="username" class="form-control" placeholder="Username">
                         </div>
                     </div>

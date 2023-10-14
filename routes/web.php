@@ -204,12 +204,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/stok-gudang', [StokGudangController::class, 'store'])->name('stok-gudang.store');
     Route::get('/stok-gudang/create', [StokGudangController::class, 'create'])->name('stok-gudang.create');
     Route::get('/stok-gudang/delete/{id}', [StokGudangController::class, 'delete'])->name('stok-gudang.delete');
+    Route::get('/stok-gudang/update/{id}', [StokGudangController::class, 'edit'])->name('stok-gudang.edit');
+    Route::post('/stok-gudang/update/{id}', [StokGudangController::class, 'update'])->name('stok-gudang.update');
 
     //ROUTE STOK GUDANG
     Route::get('/master-sales', [MasterSalesController::class, 'index'])->name('master-sales.index');
     Route::post('/master-sales', [MasterSalesController::class, 'store'])->name('master-sales.store');
     Route::get('/master-sales/create', [MasterSalesController::class, 'create'])->name('master-sales.create');
+    Route::get('/master-sales/show/{id}', [MasterSalesController::class, 'show'])->name('master-sales.show');
     Route::get('/master-sales/delete/{id}', [MasterSalesController::class, 'delete'])->name('master-sales.delete');
+    Route::get('/master-sales/tambah-wilayah/{id}', [MasterSalesController::class, 'tambah_wilayah'])->name('master-sales.tambah-wilayah');
 
     //ROUTE STOK GUDANG
     Route::get('/master-part-het', [MasterPartHetController::class, 'index'])->name('master-part-het.index');
