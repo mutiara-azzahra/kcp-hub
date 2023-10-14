@@ -116,21 +116,21 @@
                       </a>
                   </li>
                   <li class="nav-item">
+                      <a href="{{ route('kode-rak-lokasi.index')}}" class="nav-link">
+                        <p>Master Kode Rak</p>
+                      </a>
+                  </li>
+                  <li class="nav-item">
                       <a href="{{ route('stok-gudang.index')}}" class="nav-link">
                         <p>Stok Gudang</p>
                       </a>
                   </li>
-                  {{-- <li class="nav-item">
-                      <a href="{{ route('part-kategori.index')}}" class="nav-link">
-                        <p>Part Kategori</p>
-                      </a>
-                  </li>
                   <li class="nav-item">
                       <a href="{{ route('part-kelompok.index')}}" class="nav-link">
-                        <p>Part Kelompok</p>
+                        <p>Master Kategori Part</p>
                       </a>
                   </li>
-                  <li class="nav-item">
+                  {{-- <li class="nav-item">
                       <a href="{{ route('part-produk.index')}}" class="nav-link">
                         <p>Part Produk</p>
                       </a>

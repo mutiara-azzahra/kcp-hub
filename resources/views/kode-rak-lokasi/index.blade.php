@@ -5,10 +5,10 @@
     <div class="row mt-5">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4><b>Kode Rak Lokasi</b></h4>
+                <h4><b>Master Kode Rak</b></h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-success" href="{{ route('kode-rak-lokasi.create') }}"><i class="fas fa-plus"></i> Tambah Part</a>
+                <a class="btn btn-success" href="{{ route('kode-rak-lokasi.create') }}"><i class="fas fa-plus"></i> Tambah Rak</a>
             </div>
         </div>
     </div>
@@ -29,13 +29,8 @@
                             <thead>
                                 <tr style="background-color: #6082B6; color:white">
                                     <th class="text-center">No</th>
-                                    <th class="text-center">Part Nomor</th>
-                                    <th class="text-center">Part Nama</th>
-                                    <th class="text-center">Level 4</th>
-                                    <th class="text-center">Supplier</th>
-                                    <th class="text-center">Kategori</th>
-                                    <th class="text-center">Group/Produk</th>
-                                    <th class="text-center">Kelompok</th>
+                                    <th class="text-center">Kode Rak</th>
+                                    <th class="text-center"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -43,19 +38,11 @@
                                 $no=1;
                                 @endphp
 
-                                @foreach($master_part as $p)
+                                @foreach($kode_rak as $p)
                                 <tr>
-
-                                    {{-- `id`, `part_no`, `part_nama`, `id_level_4`, `id_kategori_part`, 
-                                    `id_group_part`, `id_produk_part`, `id_kelompok_part` --}}
                                     <td class="text-center">{{ $no++ }}</td>
-                                    <td class="text-left">{{ $p->part_no }}</td>
-                                    <td class="text-left">{{ $p->part_nama }}</td>
-                                    <td class="text-center">{{ $p->level->level_4 }}</td>
-                                    <td class="text-center">NON AOP</td>
-                                    <td class="text-center">{{ $p->kategori->kategori_part }}</td>
-                                    <td class="text-center">{{ $p->group->group_part }}</td>
-                                    <td class="text-left">{{ $p->kelompok->kelompok_part }}</td>
+                                    <td class="text-center">{{ $p->kode_rak_lokasi }}</td>
+                                    <td class="text-center"></td>
                                 </tr>
                                 @endforeach
                                 

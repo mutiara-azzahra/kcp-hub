@@ -32,10 +32,6 @@
                                     <th class="text-center">Part Nomor</th>
                                     <th class="text-center">Part Nama</th>
                                     <th class="text-center">Level 4</th>
-                                    <th class="text-center">Supplier</th>
-                                    <th class="text-center">Kategori</th>
-                                    <th class="text-center">Group/Produk</th>
-                                    <th class="text-center">Kelompok</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,10 +48,6 @@
                                     <td class="text-left">{{ $p->part_no }}</td>
                                     <td class="text-left">{{ $p->part_nama }}</td>
                                     <td class="text-center">{{ $p->level->level_4 }}</td>
-                                    <td class="text-center">NON AOP</td>
-                                    <td class="text-center">{{ $p->kategori->kategori_part }}</td>
-                                    <td class="text-center">{{ $p->group->group_part }}</td>
-                                    <td class="text-left">{{ $p->kelompok->kelompok_part }}</td>
                                 </tr>
                                 @endforeach
                                 
