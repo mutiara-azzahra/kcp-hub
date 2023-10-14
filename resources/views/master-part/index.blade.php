@@ -5,7 +5,7 @@
     <div class="row mt-5">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4><b>Master Part Non</b></h4>
+                <h4><b>Master Part</b></h4>
             </div>
             <div class="float-right">
                 <a class="btn btn-success" href="{{ route('master-part.create') }}"><i class="fas fa-plus"></i> Tambah Part</a>
@@ -13,13 +13,9 @@
         </div>
     </div>
             @if ($message = Session::get('success'))
-                <div class="alert alert-success">
+                <div class="alert alert-success" id="myAlert">
                     <p>{{ $message }}</p>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                        <i class="fas fa-times"></i>
-                    </button>
                 </div>
-                
             @endif
 
             <div class="card" style="padding: 10px;">
@@ -31,7 +27,8 @@
                                     <th class="text-center">No</th>
                                     <th class="text-center">Part Nomor</th>
                                     <th class="text-center">Part Nama</th>
-                                    <th class="text-center">Level 4</th>
+                                    <th class="text-center">HET</th>
+                                    <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,13 +38,15 @@
 
                                 @foreach($master_part as $p)
                                 <tr>
-
-                                    {{-- `id`, `part_no`, `part_nama`, `id_level_4`, `id_kategori_part`, 
-                                    `id_group_part`, `id_produk_part`, `id_kelompok_part` --}}
-                                    <td class="text-center">{{ $no++ }}</td>
+                                    <td class="text-center">{{ $no++ }}.</td>
                                     <td class="text-left">{{ $p->part_no }}</td>
                                     <td class="text-left">{{ $p->part_nama }}</td>
-                                    <td class="text-center">{{ $p->level->level_4 }}</td>
+                                    <td class="text-left">Rp. {{ number_format($p->het, 0, ',', '.') }}</td>
+                                    <td class="text-center">                                        
+                                        <a class="btn btn-info btn-sm" href="{{ route('master-part.edit',$p->id) }}"><i class="fas fa-edit"></i></a>
+                                        <a class="btn btn-warning btn-sm" href="{{ route('master-part.delete',$p->id) }}"><i class="fas fa-times-circle"></i></a>
+
+                                    </td>
                                 </tr>
                                 @endforeach
                                 
@@ -85,6 +84,17 @@
           responsive: true,
         });
       });
+
+      //alert success time
+      function closeAlertAfterTime(alertId, milliseconds) {
+            setTimeout(function () {
+                var alertElement = document.getElementById(alertId);
+                if (alertElement) {
+                    alertElement.style.display = 'none'; 
+                }
+            }, milliseconds);
+        }
+        closeAlertAfterTime('myAlert', 2500);
     </script>
     
     <script>

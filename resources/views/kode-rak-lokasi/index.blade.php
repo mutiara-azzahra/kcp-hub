@@ -8,18 +8,14 @@
                 <h4><b>Master Kode Rak</b></h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-success" href="{{ route('kode-rak-lokasi.create') }}"><i class="fas fa-plus"></i> Tambah Rak</a>
+                <a class="btn btn-success" href="{{ route('kode-rak-lokasi.create') }}"><i class="fas fa-plus"></i> Tambah Kode Rak</a>
             </div>
         </div>
     </div>
             @if ($message = Session::get('success'))
-                <div class="alert alert-success">
+                <div class="alert alert-success"  id="myAlert">
                     <p>{{ $message }}</p>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                        <i class="fas fa-times"></i>
-                    </button>
                 </div>
-                
             @endif
 
             <div class="card" style="padding: 10px;">
@@ -30,7 +26,7 @@
                                 <tr style="background-color: #6082B6; color:white">
                                     <th class="text-center">No</th>
                                     <th class="text-center">Kode Rak</th>
-                                    <th class="text-center"></th>
+                                    <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,7 +38,9 @@
                                 <tr>
                                     <td class="text-center">{{ $no++ }}</td>
                                     <td class="text-center">{{ $p->kode_rak_lokasi }}</td>
-                                    <td class="text-center"></td>
+                                    <td class="text-center">
+                                        <a class="btn btn-warning btn-sm" href="{{ route('kode-rak-lokasi.delete',$p->id) }}"><i class="fas fa-times-circle"></i></a>
+                                    </td>
                                 </tr>
                                 @endforeach
                                 
@@ -80,6 +78,17 @@
           responsive: true,
         });
       });
+
+      //alert time success
+      function closeAlertAfterTime(alertId, milliseconds) {
+            setTimeout(function () {
+                var alertElement = document.getElementById(alertId);
+                if (alertElement) {
+                    alertElement.style.display = 'none'; 
+                }
+            }, milliseconds);
+        }
+        closeAlertAfterTime('myAlert', 2500);
     </script>
     
     <script>

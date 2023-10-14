@@ -29,10 +29,10 @@
                         @csrf
 
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <strong>Kode Rak Lokasi</strong>
-                                    <input type="text" name="kode_rak_lokasi" class="form-control" placeholder="contoh: 12-ABCD-XD">
+                                    <input type="text" name="kode_rak_lokasi" class="form-control" placeholder="contoh: A1.02.11">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

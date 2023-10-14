@@ -5,7 +5,7 @@
     <div class="row mt-5">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4><b>Tambah Master Part</b></h4>
+                <h4><b>Ubah Master Part</b></h4>
             </div>
             <div class="float-right">
                     <a class="btn btn-success" href="{{ route('master-part.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
@@ -13,50 +13,45 @@
         </div>
     </div>
             @if ($message = Session::get('success'))
-                <div class="alert alert-success">
+                <div class="alert alert-success" id="myAlert">
                     <p>{{ $message }}</p>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                        <i class="fas fa-times"></i>
-                    </button>
                 </div>
-                
             @endif
 
         <div class="card" style="padding: 10px;">
                 <div class="card-body">
                     <div class="col-lg-12">
-                        <form action="{{ route('master-part.store') }}" method="POST">
+                        <form action="{{ route('master-part.update', $master_part_id->id ) }}" method="POST">
                         @csrf
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <strong>Part No</strong>
-                                    <input type="text" name="part_no" class="form-control" placeholder="contoh: 12-ABCD-XD">
+                                    <input type="text" name="part_no" class="form-control" value="{{ $master_part_id->part_no }}">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <strong>Nama Part</strong>
-                                    <input type="text" name="part_nama" class="form-control" placeholder="contoh: AIR AKI">
+                                    <input type="text" name="part_nama" class="form-control" value="{{ $master_part_id->part_nama }}">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <strong>HET</strong>
-                                    <input type="text" name="het" class="form-control" placeholder="contoh: AIR AKI">
+                                    <input type="text" name="het" class="form-control" value="{{ $master_part_id->het }}">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <strong>Satuan Dus</strong>
-                                    <input type="text" name="satuan_dus" class="form-control" placeholder="contoh: 50">
+                                    <input type="text" name="satuan_dus" class="form-control" value="{{ $master_part_id->satuan_dus }}">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <strong>Kode Grup</strong>
-                                    <select name="id_grup" class="form-control" >
-                                        <option value="">---Pilih Group Part--</option>
+                                    <select name="id_grup" class="form-control" value="{{ $master_part_id->id_grup }}">
                                         <option value="1">Ichidai</option>
                                         <option value="2">Brio</option>
                                         <option value="3">Group Air Aki</option>
@@ -66,10 +61,9 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <strong>Kode Rak</strong>
-                                    <select name="id_rak" class="form-control" >
-                                        <option value="">---Pilih Kode Rak--</option>
-                                        @foreach($kode_rak as $a)
-                                            <option value="{{ $a->id }}">{{ $a->kode_rak_lokasi }}</option>
+                                    <select name="id_rak" class="form-control" value="{{ $master_part_id->id_rak }}">
+                                        @foreach($kode_rak as $k)
+                                        <option value=" {{ $k->id }}"> {{ $k->kode_rak_lokasi }} </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -114,6 +108,17 @@
           responsive: true,
         });
       });
+
+      //alert success time
+      function closeAlertAfterTime(alertId, milliseconds) {
+            setTimeout(function () {
+                var alertElement = document.getElementById(alertId);
+                if (alertElement) {
+                    alertElement.style.display = 'none'; 
+                }
+            }, milliseconds);
+        }
+        closeAlertAfterTime('myAlert', 2500);
     </script>
     
     <script>

@@ -8,7 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\InventarisController;
-use App\Http\Controllers\MasterPartNonController;
+use App\Http\Controllers\MasterPartController;
 use App\Http\Controllers\MasterPartKelompokController;
 use App\Http\Controllers\MasterPartKategoriController;
 use App\Http\Controllers\MasterPartProdukController;
@@ -59,11 +59,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/inventaris/show/{id}', [InventarisController::class, 'show'])->name('inventaris.show');
 
     //MASTER PART
-    Route::get('/master-part', [MasterPartNonController::class, 'index'])->name('master-part.index');
-    Route::post('/master-part', [MasterPartNonController::class, 'store'])->name('master-part.store');
-    Route::get('/master-part/create', [MasterPartNonController::class, 'create'])->name('master-part.create');
-    Route::get('/master-part/show/{id}', [MasterPartNonController::class, 'show'])->name('master-part.show');
-    Route::post('/master-part/store', [MasterPartNonController::class, 'store'])->name('master-part.store');
+    Route::get('/master-part', [MasterPartController::class, 'index'])->name('master-part.index');
+    Route::post('/master-part', [MasterPartController::class, 'store'])->name('master-part.store');
+    Route::get('/master-part/create', [MasterPartController::class, 'create'])->name('master-part.create');
+    Route::get('/master-part/update/{id}', [MasterPartController::class, 'edit'])->name('master-part.edit');
+    Route::get('/master-part/delete/{id}', [MasterPartController::class, 'delete'])->name('master-part.delete');
+    Route::get('/master-part/show/{id}', [MasterPartController::class, 'show'])->name('master-part.show');
+    Route::post('/master-part/store', [MasterPartController::class, 'store'])->name('master-part.store');
+    Route::post('/master-part/update/{id}', [MasterPartController::class, 'update'])->name('master-part.update');
 
     //MASTER PLAFOND
     Route::get('/master-plafond', [PlafondController::class, 'index'])->name('master-plafond.index');
@@ -220,6 +223,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/kode-rak-lokasi', [KodeRakLokasiController::class, 'store'])->name('kode-rak-lokasi.store');
     Route::get('/kode-rak-lokasi/create', [KodeRakLokasiController::class, 'create'])->name('kode-rak-lokasi.create');
     Route::get('/kode-rak-lokasi/show/{id}', [KodeRakLokasiController::class, 'show'])->name('kode-rak-lokasi.show');
+    Route::get('/kode-rak-lokasi/delete/{id}', [KodeRakLokasiController::class, 'delete'])->name('kode-rak-lokasi.delete');
     
 });
 
