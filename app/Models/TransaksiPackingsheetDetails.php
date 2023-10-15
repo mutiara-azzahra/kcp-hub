@@ -20,6 +20,6 @@ class TransaksiPackingsheetDetails extends Model
 
     public function master_part()
     {
-        return $this->belongsTo(MasterPartNon::class, 'part_no', 'part_no');
+        return $this->belongsTo(MasterPart::class, 'part_no', 'part_no');
     }
 }

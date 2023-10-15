@@ -108,4 +108,9 @@ class TransaksiSpHeader extends Model
     {
         return $this->belongsTo(MasterOutlet::class, 'kd_outlet', 'kd_outlet');
     }
+
+    public function plafond()
+    {
+        return $this->belongsTo(TransaksiPlafond::class, 'kd_outlet', 'kd_outlet');
+    }
 }

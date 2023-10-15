@@ -22,9 +22,6 @@ class KategoriDusPackingsheet extends Model
         'updated_by'
     ];
 
-    public function part_non(){
-        return $this->hasMany(MasterPartNon::class, 'id', 'id_kategori_part');
-    }
     public function dus()
     {
         return $this->belongsTo(TransaksiPackingsheetDetailsDus::class, 'kd_kategori', 'kd_kategori');

@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use PDF;
-
+use Auth;
+use Carbon\Carbon;
 use App\Models\TransaksiSOHeader;
 use App\Models\TransaksiSuratJalanHeader;
 use App\Models\TransaksiSuratJalanDetails;

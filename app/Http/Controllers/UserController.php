@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Auth;
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\MasterRole;
 use Illuminate\Support\Facades\Hash;

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use PDF;
+use Auth;
+use Carbon\Carbon;
 use App\Models\TransaksiSOHeader;
 use App\Models\TransaksiSODetails;
 use App\Models\TransaksiPackingsheetHeader;
@@ -85,7 +87,6 @@ class PackingSheetController extends Controller
     public function details($nops){
 
         $header_ps = TransaksiPackingsheetHeader::where('nops', $nops)->first();
-
         $header_ps_details = TransaksiPackingsheetHeader::where('nops', $nops)->get();
 
         return view('packingsheet.details', compact('header_ps', 'header_ps_details'));

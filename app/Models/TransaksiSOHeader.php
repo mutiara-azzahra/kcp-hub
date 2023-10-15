@@ -48,10 +48,5 @@ class TransaksiSOHeader extends Model
     {
         return $this->belongsTo(TransaksiInvoiceHeader::class, 'noso', 'noso');
     }
-
-    public function plafond()
-    {
-        return $this->hasOne(MasterPlafond::class, 'kd_outlet', 'kd_outlet');
-    }
     
 }

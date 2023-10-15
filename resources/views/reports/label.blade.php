@@ -125,12 +125,7 @@
           padding: 0px !important;
           } 
     </style>
-
-    @php
-    $counter = 0;
-    @endphp
                     @foreach($data_dus as $data)
-                    @if ($counter % 4 == 0)
 
                     <div class="header">
                             <table class="table atas">
@@ -183,12 +178,6 @@
                                 </tr>
                             </table>
                         </div>
-                    
-                    @endif 
-
-                    @php
-                    $counter++;
-                    @endphp
 
                     @endforeach
 

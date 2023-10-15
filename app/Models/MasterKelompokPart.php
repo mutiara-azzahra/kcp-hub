@@ -20,8 +20,5 @@ class MasterKelompokPart extends Model
         'updated_by'
     ];
 
-    public function part_non(){
-        return $this->hasMany(MasterPartNon::class, 'id', 'id_kelompok_part');
-    }
 
 }

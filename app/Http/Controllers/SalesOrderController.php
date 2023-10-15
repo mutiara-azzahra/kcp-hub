@@ -37,7 +37,7 @@ class SalesOrderController extends Controller
     public function details($nosp){
 
         $surat_pesanan_id = TransaksiSpHeader::where('nosp', $nosp)->get();
-        $plafond = TransaksiSpHeader::where('nosp', $nosp)->first();        
+        $plafond = TransaksiSpHeader::where('nosp', $nosp)->first();       
 
         return view('sales-order.details', ['nosp' => $nosp] , compact('surat_pesanan_id', 'plafond'));
     }
