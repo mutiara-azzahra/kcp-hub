@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class KategoriDusPackingsheet extends Model
+class KategoriDus extends Model
 {
     use HasFactory;
 

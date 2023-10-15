@@ -53,9 +53,10 @@ class TransaksiPackingsheetDetailsDus extends Model
     {
         return $this->hasOne(TransaksiPackingsheetHeader::class, 'nops', 'nops');
     }
+   
     public function kategori()
     {
-        return $this->hasOne(KategoriDusPackingsheet::class, 'kd_kategori', 'kd_kategori');
+        return $this->hasOne(KategoriDus::class, 'kd_kategori', 'kd_kategori');
     }
 
 }

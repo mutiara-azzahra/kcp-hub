@@ -119,8 +119,8 @@
 
                             <table class="table atas">
                                 <tr>
-                                    <td class="nama-kcp">PT. KCP</td>
-                                    <td class="atas">Surat Jalan / SJ</td>
+                                    <td class="nama-kcp"><b>PT. KCP</b></td>
+                                    <td class="atas"><b>Surat Jalan / SJ</b></td>
                                 </tr>
                                 <tr>
                                     <td class="alamat-kcp">Jl. Sutoyo S. No. 144 Banjarmasin</td>
@@ -128,37 +128,36 @@
                                 </tr>
                                 <tr>
                                     <td class="alamat-kcp">Hp. 0811 517 1595, 0812 5156 2768</td>
-                                    
-                                    <td class="atas">{{ $data->nm_outlet }} ({{ $data->kd_outlet }})</td>
+                                    <td class="atas"><b>{{ $data_details->kd_outlet }} / {{ $data_details->outlet->nm_outlet }}</b></td>
                                 </tr>
                                 <tr>
                                     <td class="alamat-kcp">Telp. 0511-4416579, 4417127</td>
-                                    <td class="atas"></td>
+                                    <td class="atas"><b>{{ $data_details->outlet->almt_outlet }}</b></td>
                                 </tr>
                                 <tr>
                                     <td class="alamat-kcp">Fax. 3364674 </td>
-                                    <td class="atas"></td>
+                                    <td class="atas"><b>{{ $data_details->outlet->kode_area->nm_area }}, {{ $data_details->outlet->kode_area->provinsi->provinsi }}</b></td>
                                 </tr>
-                                <tr>
-                                    <td class="alamat-kcp"></td>
-                                    <td class="atas"></td>
-                                </tr>
+                                
+                                @foreach($data as $d)
                                 <tr>
                                     <td class="nops">
                                         <table class="atas">
                                             <tr>
                                                 <td class="atas">No. SJ</td>
                                                 <td class="atas">:</td> 
+                                                <td class="atas">{{ $d->nosj}}</td> 
                                             </tr>
                                             <tr>
                                                 <td class="atas">Tanggal SJ</td>
                                                 <td class="atas">:</td>
-                                                <td class="atas"></td>
+                                                <td class="atas">{{ $d->created_at->format('d-m-Y') }}</td>
                                             </tr>
                                         </table>
                                     </td>
                                     <td class="atas"></td>
                                 </tr>
+                                @endforeach
                             </table>
     
     </div>
@@ -178,15 +177,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    @foreach ($data as $p)
+                    @foreach ($p->details_sj as $s)
+
                     <tr>
-                        <td class="td-qty"></td>
-                        <td class="td-part"></td>
-                        <td class="td-part"></td>
-                        <td class="td-qty"></td>
-                        <td class="td-angka"></td>
-                        <td class="td-angka"></td>
+                        <td class="td-qty">{{$loop->iteration}}. </td>
+                        <td class="td-part">{{ $s->nops }}</td>
+                        <td class="td-part">
+                            @foreach($s->header_ps->invoice as $i)
+                            {{ $i->noinv }},
+                            @endforeach
+                        </td>
+                        <td class="td-part">
+                            @foreach($s->header_ps->details_dus as $a)
+                            {{ $a->no_dus }},
+                            @endforeach
+                        </td>
+                        <td class="td-dus"></td>
+                        <td class="td-qty">{{ $s->header_ps->details_dus->first()->kd_kategori }} - {{ $s->header_ps->details_dus->first()->kategori }}</td>
                     </tr>
+
+                    @endforeach
+                    @endforeach
                 </tbody>
             </table>
                 <br>
@@ -197,7 +209,7 @@
                         <td class="alamat-kcp"></td>
                     </tr>
                     <tr>
-                        <td class="alamat-kcp">Cetak Oleh :</td>
+                        <td class="alamat-kcp">Cetak Oleh : {{ Auth::user()->nama_user }}, {{ NOW() }}</td>
                         <td class="alamat-kcp"></td>
                         <td class="alamat-kcp"></td>
                     </tr>
@@ -209,7 +221,7 @@
                     <tr>
                         <td class="atas">
                             <div class="ttd">
-                                <h6 style="margin:0px">Penjualan,</h6>
+                                <h5 style="margin:0px">Penjualan,</h5>
                                 <br>
                                 <br>
                                 <br>
@@ -220,7 +232,17 @@
                         </td>
                         <td class="atas">
                             <div class="ttd">
-                                <h6 style="margin:0px">Ekspedisi,</h6>
+                                <h5 style="margin:0px">Ekspedisi,</h5>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <h5 style="text-decoration:underline; margin:2px">{{ $data_details->outlet->expedisi }}</h5>
+                            </div>
+                        </td>
+                        <td class="atas">
+                            <div class="ttd">
+                                <h5 style="margin:0px">Toko,</h5>
                                 <br>
                                 <br>
                                 <br>
@@ -231,18 +253,7 @@
                         </td>
                         <td class="atas">
                             <div class="ttd">
-                                <h6 style="margin:0px">Toko,</h6>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                
-                                <h5 style="text-decoration:underline; margin:0px">__________________</h5>
-                            </div>
-                        </td>
-                        <td class="atas">
-                            <div class="ttd">
-                                <h6 style="margin:0px">Security,</h6>
+                                <h5 style="margin:0px">Security,</h5>
                                 <br>
                                 <br>
                                 <br>

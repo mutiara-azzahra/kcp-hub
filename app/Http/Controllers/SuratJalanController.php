@@ -74,8 +74,18 @@ class SuratJalanController extends Controller
 
     public function cetak($nosj)
     {
-        $data               = TransaksiSuratJalanHeader::where('nosj', $nosj)->first();
-        $pdf                = PDF::loadView('reports.surat-jalan', ['data'=>$data]);
+
+        TransaksiSuratJalanHeader::where('nosj', $nosj)->update([
+                'flag_cetak'      => 'Y',
+                'flag_cetak_date' => NOW(),
+                'updated_by'      => Auth::user()->nama_user
+        ]);
+
+        $data               = TransaksiSuratJalanHeader::where('nosj', $nosj)->get();
+        $data_details       = TransaksiSuratJalanDetails::where('nosj', $nosj)->first();
+
+
+        $pdf                = PDF::loadView('reports.surat-jalan', ['data'=>$data], ['data_details'=>$data_details]);
         $pdf->setPaper('letter', 'potrait');
 
         return $pdf->stream('surat-jalan.pdf');

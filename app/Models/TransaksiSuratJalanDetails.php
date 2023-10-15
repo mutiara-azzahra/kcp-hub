@@ -25,4 +25,9 @@ class TransaksiSuratJalanDetails extends Model
     {
         return $this->hasOne(TransaksiPackingsheetHeader::class, 'nops', 'nops');
     }
+
+    public function outlet()
+    {
+        return $this->hasOne(MasterOutlet::class, 'kd_outlet', 'kd_outlet');
+    }
 }

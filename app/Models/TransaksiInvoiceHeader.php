@@ -60,6 +60,11 @@ class TransaksiInvoiceHeader extends Model
         return $this->hasOne(TransaksiPackingsheetHeader::class, 'noso', 'noso');
     }
 
+    public function details_invoice()
+    {
+        return $this->hasMany(TransaksiInvoiceDetails::class, 'noinv', 'noinv');
+    }
+
     public function sj()
     {
         return $this->hasMany(TransaksiSuratJalan::class, 'noso', 'noso');

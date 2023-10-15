@@ -86,9 +86,9 @@
                                 @foreach($invoice as $s)
                                <tr>
                                     <td class="text-center">{{ $s->noinv }}</td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
+                                    <td class="text-center">{{ $s->noso }}</td>
+                                    <td class="text-center">{{ $s->kd_outlet }}/{{ $s->nm_outlet }}</td>
+                                    <td class="text-left">Rp. {{ number_format($s->details_invoice->sum('nominal_total'), 0, ',', '.') }}</td>
                                     <td class="text-center">
                                         <a class="btn btn-warning btn-sm" href="{{ route('invoice.cetak', $s->noinv) }}" target="_blank"><i class="fas fa-print"></i></a>
                                     </td>
