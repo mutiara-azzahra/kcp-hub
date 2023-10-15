@@ -22,9 +22,9 @@
                             <b>Validasi Sales Order/SO</b>
                         </div>       
                     </div>
-                    <div class="float-left">
+                    {{-- <div class="float-left">
                         <a class="btn btn-warning" href="{{ route('validasi-so.reset') }}"><i class="fas fa-repeat"></i> Reset Validasi</a>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="card-body">
                     <div class="col-lg-12">  

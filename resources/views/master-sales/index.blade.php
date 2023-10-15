@@ -55,42 +55,4 @@
 
 @section('script')
 
-    <script>
-      $(function () {
-        $("#example1")
-          .DataTable({
-            paging: true,
-            responsive: true,
-            lengthChange: false,
-            autoWidth: false,
-            buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
-          })
-          .buttons()
-          .container()
-          .appendTo("#example1_wrapper .col-md-6:eq(0)")
-                  
-        $("#example2").DataTable({
-          paging: true,
-          lengthChange: false,
-          searching: true,
-          ordering: true,
-          info: true,
-          autoWidth: false,
-          responsive: true,
-        });
-      });
-    </script>
-    
-    <script>
-        function closeAlertAfterTime(alertId, milliseconds) {
-            setTimeout(function () {
-                var alertElement = document.getElementById(alertId);
-                if (alertElement) {
-                    alertElement.style.display = 'none'; 
-                }
-            }, milliseconds);
-        }
-        closeAlertAfterTime('myAlert', 4000);
-    </script>
-
 @endsection

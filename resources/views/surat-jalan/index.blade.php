@@ -7,9 +7,9 @@
              <div class="float-left">
                 <h4><b>Surat Jalan / SJ</b></h4>
             </div>
-            <div class="float-right">
+            {{-- <div class="float-right">
                 <a class="btn btn-warning" href="{{ route('surat-jalan.reset') }}"><i class="fas fa-refresh"></i> Reset Surat Jalan</a>
-            </div>
+            </div> --}}
         </div>
     </div>
             @if ($message = Session::get('success'))
