@@ -37,7 +37,6 @@
                                             <option value="{{ $s->kd_outlet }}">{{ $s->kd_outlet }} / {{ $s->nm_outlet }}</option>
                                         @endforeach
                                     </select>
-
                                 </div>
                             </div>
                             <div class="col-12">

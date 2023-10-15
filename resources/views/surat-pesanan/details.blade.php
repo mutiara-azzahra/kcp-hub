@@ -36,7 +36,7 @@
                                 <tr>
                                     <th class="text-left">Plafond Toko</th>
                                     <td>:</td>
-                                    <td class="text-left">{{ $details->outlet->plafond }}</td>
+                                    <td class="text-left">Rp. {{ number_format($details->outlet->plafond->nominal_plafond, 0, ',', '.') }}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left">Piutang Terakhir</th>

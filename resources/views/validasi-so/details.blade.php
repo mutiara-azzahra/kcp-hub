@@ -13,9 +13,21 @@
         <div class="card" style="padding: 10px;">
                 <div class="card-header">
                     <div class="col-lg-12 pb-3">
-                        <div class="float-right">
+                        <div class="float-right m-1">
+                            <a class="btn btn-success" href="{{ route('validasi-so.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
+                        </div>
+
+                        @foreach($validasi_id as $d)
+                        @foreach($d->details_so as $s)
+
+                        @if($s->stok_ready->stok >= $s->qty)
+                        <div class="float-right m-1">
                             <a class="btn btn-warning" href="{{ route('validasi-so.validasi', $so->noso) }}"><i class="fas fa-check"></i> Validasi</a>
                         </div>
+                        @endif
+
+                        @endforeach
+                        @endforeach
                     </div>
                 </div>
 
@@ -35,14 +47,14 @@
                                 </tr>
                             </table>
                         </div>
-                            <div class="col-lg-12 p-3">
+                            <div class="col-lg-12 p-1">
                                 <table class="table table-hover table-sm bg-light table-striped table-bordered" id="table">
                                     <thead>
                                         <tr style="background-color: #6082B6; color:white">
                                             <th class="text-center">Part No</th>
                                             <th class="text-center">Nama Part</th>
                                             <th class="text-center">Qty SO</th>
-                                            <th class="text-center">Stock Gudang</th>
+                                            <th class="text-center">Stok Gudang</th>
                                             <th class="text-center">Keterangan</th>
                                         </tr>
                                     </thead>
@@ -57,10 +69,21 @@
                                                 <td class="text-left">{{ $s->part_no }}</td>
                                                 <td class="text-left">{{ $s->nama_part->part_nama }}</td>
                                                 <td class="text-center">{{ $s->qty }}</td>
-                                                <td class="text-center">{{ $s->stok_ready }}</td>
-                                                <td class="text-center" style="background-color: lime;">
-                                               
+                                                <td class="text-center">{{ $s->stok_ready->stok }}</td>
+
+
+
+                                                @if( $s->flag_vald_gudang == null)
+                                                <td class="text-center" style="background-color: yellow;">
+                                                    Belum Divalidasi
                                                 </td>
+
+                                                @else
+
+                                                <td class="text-center" style="background-color: lime;">
+                                                    Tervalidasi
+                                                </td>
+                                                @endif
                                             </tr>
                                             @endforeach
                                         @endforeach

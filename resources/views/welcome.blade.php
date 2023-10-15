@@ -97,6 +97,8 @@
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
+            {{-- Administrator --}}
+            @if(Auth::user()->id_role == 5)
             <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon"></i>
@@ -111,6 +113,22 @@
                         <p>User</p>
                       </a>
                   </li>
+                </ul>
+              </li>
+              @endif
+
+              {{-- Master --}}
+            @if(Auth::user()->id_role == 11)
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon"></i>
+                  <p>
+                    Master
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+               
+                <ul class="nav nav-treeview">
                   <li class="nav-item">
                       <a href="{{ route('master-sales.index')}}" class="nav-link">
                         <p>Master Sales</p>
@@ -119,6 +137,7 @@
                   
                 </ul>
               </li>
+            @endif
 
             {{-- GUDANG --}}
               <li class="nav-item">

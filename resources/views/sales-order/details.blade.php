@@ -62,7 +62,8 @@
                                 <tr>
                                     <th class="text-left">Plafond Toko</th>
                                     <td>:</td>
-                                    <td class="text-left"></td>
+                                    
+                                        <td class="text-left">{{ $plafond->plafond }}</td>
                                 </tr>
                                 <tr>
                                     <th class="text-left">Piutang Terakhir</th>
