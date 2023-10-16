@@ -97,7 +97,7 @@
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-            {{-- Administrator --}}
+            {{-- Administrator--}}
             @if(Auth::user()->id_role == 5)
             <li class="nav-item">
                 <a href="#" class="nav-link">
@@ -110,7 +110,14 @@
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                       <a href="{{ route('user.index')}}" class="nav-link">
-                        <p>User</p>
+                        <p>Master User</p>
+                      </a>
+                  </li>
+                </ul>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                      <a href="{{ route('master-role.index')}}" class="nav-link">
+                        <p>Master Role</p>
                       </a>
                   </li>
                 </ul>
@@ -118,7 +125,7 @@
               @endif
 
               {{-- Master --}}
-            @if(Auth::user()->id_role == 11)
+            @if(Auth::user()->id_role == 11 || 5)
             <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon"></i>
@@ -127,14 +134,42 @@
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
-               
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                      <a href="{{ route('master-sales.index')}}" class="nav-link">
-                        <p>Master Sales</p>
+                      <a href="{{ route('master-part.index')}}" class="nav-link">
+                        <p>Part</p>
                       </a>
                   </li>
-                  
+                  <li class="nav-item">
+                      <a href="{{ route('master-diskon.index')}}" class="nav-link">
+                        <p>Part Diskon</p>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="{{ route('master-sales.index')}}" class="nav-link">
+                        <p>Toko Sales</p>
+                      </a>
+                  </li>
+                </ul>
+              </li>
+            @endif
+
+              {{-- Master --}}
+            @if(Auth::user()->id_role == 9)
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon"></i>
+                  <p>
+                    Faktur
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                      <a href="{{ route('validasi-so.index')}}" class="nav-link">
+                        <p>Validasi Sales Order</p>
+                      </a>
+                  </li>
                 </ul>
               </li>
             @endif
@@ -167,11 +202,6 @@
                   <li class="nav-item">
                       <a href="{{ route('intransit.index')}}" class="nav-link">
                         <p>Intransit</p>
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="{{ route('validasi-so.index')}}" class="nav-link">
-                        <p>Validasi Sales Order</p>
                       </a>
                   </li>
                   <li class="nav-item">

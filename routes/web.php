@@ -8,12 +8,14 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\InventarisController;
+use App\Http\Controllers\MasterRoleController;
 use App\Http\Controllers\MasterPartController;
 use App\Http\Controllers\MasterPartKelompokController;
 use App\Http\Controllers\MasterPartKategoriController;
 use App\Http\Controllers\MasterPartProdukController;
 use App\Http\Controllers\MasterPartGroupController;
 use App\Http\Controllers\MasterSalesController;
+use App\Http\Controllers\MasterDiskonPartController;
 use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\SuratPesananController;
@@ -67,6 +69,24 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/master-part/show/{id}', [MasterPartController::class, 'show'])->name('master-part.show');
     Route::post('/master-part/store', [MasterPartController::class, 'store'])->name('master-part.store');
     Route::post('/master-part/update/{id}', [MasterPartController::class, 'update'])->name('master-part.update');
+
+    //MASTER PART DISKON
+    Route::get('/master-diskon', [MasterDiskonPartController::class, 'index'])->name('master-diskon.index');
+    Route::get('/master-diskon/create', [MasterDiskonPartController::class, 'create'])->name('master-diskon.create');
+    Route::get('/master-diskon/update/{id}', [MasterDiskonPartController::class, 'edit'])->name('master-diskon.edit');
+    Route::get('/master-diskon/delete/{id}', [MasterDiskonPartController::class, 'delete'])->name('master-diskon.delete');
+    Route::get('/master-diskon/show/{id}', [MasterDiskonPartController::class, 'show'])->name('master-diskon.show');
+    Route::post('/master-diskon/store', [MasterDiskonPartController::class, 'store'])->name('master-diskon.store');
+    Route::post('/master-diskon/update/{id}', [MasterDiskonPartController::class, 'update'])->name('master-diskon.update');
+
+    //MASTER ROLE
+    Route::get('/master-role', [MasterRoleController::class, 'index'])->name('master-role.index');
+    Route::get('/master-role/create', [MasterRoleController::class, 'create'])->name('master-role.create');
+    Route::get('/master-role/update/{id}', [MasterRoleController::class, 'edit'])->name('master-role.edit');
+    Route::get('/master-role/delete/{id}', [MasterRoleController::class, 'delete'])->name('master-role.delete');
+    Route::get('/master-role/show/{id}', [MasterRoleController::class, 'show'])->name('master-role.show');
+    Route::post('/master-role/store', [MasterRoleController::class, 'store'])->name('master-role.store');
+    Route::post('/master-role/update/{id}', [MasterRoleController::class, 'update'])->name('master-role.update');
 
     //MASTER PLAFOND
     Route::get('/master-plafond', [PlafondController::class, 'index'])->name('master-plafond.index');

@@ -94,5 +94,4 @@ class MasterPartController extends Controller
         return redirect()->route('master-part.index')->with('success', 'Data master part berhasil diubah');
     }
 
-
 }
