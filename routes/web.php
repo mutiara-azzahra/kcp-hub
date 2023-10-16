@@ -61,7 +61,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     //MASTER PART
     Route::get('/master-part', [MasterPartController::class, 'index'])->name('master-part.index');
-    Route::post('/master-part', [MasterPartController::class, 'store'])->name('master-part.store');
     Route::get('/master-part/create', [MasterPartController::class, 'create'])->name('master-part.create');
     Route::get('/master-part/update/{id}', [MasterPartController::class, 'edit'])->name('master-part.edit');
     Route::get('/master-part/delete/{id}', [MasterPartController::class, 'delete'])->name('master-part.delete');
@@ -72,31 +71,26 @@ Route::group(['middleware' => 'auth'], function () {
     //MASTER PLAFOND
     Route::get('/master-plafond', [PlafondController::class, 'index'])->name('master-plafond.index');
     Route::get('/master-plafond/details', [PlafondController::class, 'detail'])->name('master-plafond.detail');
-    Route::post('/master-plafond', [PlafondController::class, 'store'])->name('master-plafond.store');
     Route::get('/master-plafond/create', [PlafondController::class, 'create'])->name('master-plafond.create');
     Route::get('/master-plafond/show/{id}', [PlafondController::class, 'show'])->name('master-plafond.show');
     Route::post('/master-plafond/store', [PlafondController::class, 'store'])->name('master-plafond.store');
 
     Route::get('/part-kelompok', [MasterPartKelompokController::class, 'index'])->name('part-kelompok.index');
-    Route::post('/part-kelompok', [MasterPartKelompokController::class, 'store'])->name('part-kelompok.store');
     Route::get('/part-kelompok/create', [MasterPartKelompokController::class, 'create'])->name('part-kelompok.create');
     Route::get('/part-kelompok/show/{id}', [MasterPartKelompokController::class, 'show'])->name('part-kelompok.show');
     Route::post('/part-kelompok/store', [MasterPartKelompokController::class, 'store'])->name('part-kelompok.store');
    
     Route::get('/part-kategori', [MasterPartKategoriController::class, 'index'])->name('part-kategori.index');
-    Route::post('/part-kategori', [MasterPartKategoriController::class, 'store'])->name('part-kategori.store');
     Route::get('/part-kategori/create', [MasterPartKategoriController::class, 'create'])->name('part-kategori.create');
     Route::get('/part-kategori/show/{id}', [MasterPartKategoriController::class, 'show'])->name('part-kategori.show');
     Route::post('/part-kategori/store', [MasterPartKategoriController::class, 'store'])->name('part-kategori.store');
    
     Route::get('/part-produk', [MasterPartProdukController::class, 'index'])->name('part-produk.index');
-    Route::post('/part-produk', [MasterPartProdukController::class, 'store'])->name('part-produk.store');
     Route::get('/part-produk/create', [MasterPartProdukController::class, 'create'])->name('part-produk.create');
     Route::get('/part-produk/show/{id}', [MasterPartProdukController::class, 'show'])->name('part-produk.show');
     Route::post('/part-produk/store', [MasterPartProdukController::class, 'store'])->name('part-produk.store');
 
     Route::get('/part-group', [MasterPartGroupController::class, 'index'])->name('part-group.index');
-    Route::post('/part-group', [MasterPartGroupController::class, 'store'])->name('part-group.store');
     Route::get('/part-group/create', [MasterPartGroupController::class, 'create'])->name('part-group.create');
     Route::get('/part-group/show/{id}', [MasterPartGroupController::class, 'show'])->name('part-group.show');
     Route::post('/part-group/store', [MasterPartGroupController::class, 'store'])->name('part-group.store');
@@ -116,7 +110,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     //ROUTE PEMBELIAN
     Route::get('/pembelian-non-aop', [PembelianController::class, 'index'])->name('pembelian-non-aop.index');
-    Route::post('/pembelian-non-aop', [PembelianController::class, 'store'])->name('pembelian-non-aop.store');
     Route::get('/pembelian-non-aop/create', [PembelianController::class, 'create'])->name('pembelian-non-aop.create');
     Route::get('/pembelian-non-aop/show/{id}', [PembelianController::class, 'show'])->name('pembelian-non-aop.show');
     Route::post('/pembelian-non-aop/store', [PembelianController::class, 'store'])->name('pembelian-non-aop.store');
@@ -164,7 +157,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/packingsheet/reset-packingsheet', [PackingSheetController::class, 'reset'])->name('packingsheet.reset');
     Route::get('/packingsheet/details/{nops}', [PackingSheetController::class, 'details'])->name('packingsheet.details');
     Route::post('/packingsheet/details/', [PackingSheetController::class, 'store_packingsheet'])->name('packingsheet.store_packingsheet');
-    Route::get('/packingsheet/cetak', [PackingSheetController::class, 'cetak'])->name('packingsheet.cetak');
     Route::get('/packingsheet/koli/{nops}', [PackingSheetController::class, 'koli'])->name('packingsheet.koli');
     Route::post('/packingsheet/koli', [PackingSheetController::class, 'store_dus'])->name('packingsheet.store-dus');
     Route::get('/packingsheet/cetak/{nops}', [PackingSheetController::class, 'cetak'])->name('packingsheet.cetak');
@@ -192,7 +184,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/laporan-kiriman-harian/store', [LkhController::class, 'store'])->name('laporan-kiriman-harian.store');
     Route::get('/laporan-kiriman-harian/approve/{noso}', [LkhController::class, 'approve'])->name('laporan-kiriman-harian.approve');
     Route::get('/laporan-kiriman-harian/reject/{noso}', [LkhController::class, 'reject'])->name('laporan-kiriman-harian.reject');
-    Route::get('/laporan-kiriman-harian/cetak/{noinv}', [LkhController::class, 'cetak'])->name('laporan-kiriman-harian.cetak');
     Route::get('/laporan-kiriman-harian/details/{no_lkh}', [LkhController::class, 'details'])->name('laporan-kiriman-harian.details');
     Route::post('/laporan-kiriman-harian/details/{no_lkh}', [LkhController::class, 'store_details'])->name('laporan-kiriman-harian.store-details');
     Route::get('/laporan-kiriman-harian/cetak/{no_lkh}', [LkhController::class, 'cetak'])->name('laporan-kiriman-harian.cetak');
@@ -210,7 +201,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     //ROUTE STOK GUDANG
     Route::get('/master-sales', [MasterSalesController::class, 'index'])->name('master-sales.index');
-    Route::post('/master-sales', [MasterSalesController::class, 'store'])->name('master-sales.store');
     Route::post('/master-sales/details', [MasterSalesController::class, 'store'])->name('master-sales.store');
     Route::post('/master-sales/details', [MasterSalesController::class, 'store_details'])->name('master-sales.store-details');
     Route::get('/master-sales/create', [MasterSalesController::class, 'create'])->name('master-sales.create');
