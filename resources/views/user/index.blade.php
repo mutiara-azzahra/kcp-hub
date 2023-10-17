@@ -21,10 +21,13 @@
                     @endforeach
                 </ul>
             </div>
-            <button type="button" class="btn btn-tool" data-card-widget="remove">
-                <i class="fas fa-times"></i>
-            </button>
         @endif
+
+            @if($message = Session::get('success'))
+                <div class="alert alert-success" id="myAlert">
+                    <p>{{ $message }}</p>
+                </div>  
+            @endif
 
         <div class="card" style="padding:10px;">
             <div class="card-body">
@@ -37,7 +40,7 @@
                                     <th class="text-center">Nama</th>
                                     <th class="text-center">Username</th>
                                     <th class="text-center">Email</th>
-                                    <th class="text-center">Aksi</th>
+                                    <th class="text-center">Reset Password</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,7 +55,11 @@
                                     <td>{{ $p->nama_user }}</td>
                                     <td>{{ $p->username }}</td>
                                     <td>{{ $p->email }}</td>
-                                    <td></td>
+                                    <td class="text-center">
+                                        <a class="btn btn-warning btn-sm" href="{{ route('user.reset', $p->id) }}">
+                                            <i class="fa fa-refresh"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                                 @endforeach
                                 

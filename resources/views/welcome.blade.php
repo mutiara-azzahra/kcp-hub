@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Tempusdominus Bootstrap 4 -->
   <link rel="stylesheet" href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="{{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
   <!-- JQVMap -->
@@ -104,7 +105,7 @@
                   <i class="nav-icon"></i>
                   <p>
                     Administrator
-                    <i class="right fas fa-angle-left"></i>
+                    <i class="right fas fa-angle-right"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
@@ -131,7 +132,7 @@
                   <i class="nav-icon"></i>
                   <p>
                     Master
-                    <i class="right fas fa-angle-left"></i>
+                    <i class="right fas fa-angle-right"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
@@ -161,7 +162,7 @@
                   <i class="nav-icon"></i>
                   <p>
                     Faktur
-                    <i class="right fas fa-angle-left"></i>
+                    <i class="right fas fa-angle-right"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
@@ -180,7 +181,7 @@
                   <i class="nav-icon"></i>
                   <p>
                     Gudang
-                    <i class="right fas fa-angle-left"></i>
+                    <i class="right fas fa-angle-right"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
@@ -224,7 +225,7 @@
                   <i class="nav-icon"></i>
                   <p>
                     Finance
-                    <i class="right fas fa-angle-left"></i>
+                    <i class="right fas fa-angle-right"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
@@ -248,7 +249,7 @@
                         <i class="nav-icon"></i>
                         <p>
                           Penerimaan Piutang
-                          <i class="right fas fa-angle-left"></i>
+                          <i class="right fas fa-angle-right"></i>
                         </p>
                       </a>
                       <ul class="nav nav-treeview">
@@ -268,7 +269,7 @@
                   <i class="nav-icon"></i>
                   <p>
                     Marketing
-                    <i class="right fas fa-angle-left"></i>
+                    <i class="right fas fa-angle-right"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
@@ -306,7 +307,7 @@
                   <i class="nav-icon"></i>
                   <p>
                     Kasir
-                    <i class="right fas fa-angle-left"></i>
+                    <i class="right fas fa-angle-right"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
@@ -328,9 +329,9 @@
                 </ul>
               </li>
               <li class="nav-item">
-                      <a href="{{ route('logout')}}" class="nav-link">
-                        <p>Logout</p>
-                      </a>
+                  <a href="{{ route('logout')}}" class="nav-link">
+                    <p>Logout</p>
+                  </a>
               </li>
 
           </ul>
@@ -453,8 +454,17 @@
           responsive: true,
         });
       });
-    </script>
 
+      // Password toggle
+      function myPassword() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+          x.type = "text";
+        } else {
+          x.type = "password";
+        }
+      }
+    </script>
 
   @yield('script')
 

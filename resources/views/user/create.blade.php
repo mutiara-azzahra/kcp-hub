@@ -65,7 +65,8 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Password</strong>
-                            <input type="password" name="password" class="form-control" placeholder="Password">
+                            <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+                            <input type="checkbox" onclick="myPassword()"> Tampilkan Password
                         </div>
                     </div> 
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">

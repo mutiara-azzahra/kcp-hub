@@ -26,9 +26,9 @@ class SuratPesananController extends Controller
 
     public function create(){
 
-        $sales = MasterSales::where('sales', Auth::user()->username)->value('id');
-        $toko = MasterAreaSales::where('id_sales', $sales)->first();
-
+        $sales  = MasterSales::where('sales', Auth::user()->username)->value('id');
+        $toko   = MasterAreaSales::where('id_sales', $sales)->first();
+        
         return view('surat-pesanan.create', compact('sales', 'toko'));
     }
 

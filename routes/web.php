@@ -54,6 +54,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
     Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
     Route::post('/user/create', [UserController::class, 'store'])->name('user.store');
+    Route::get('/user/reset/{id}', [UserController::class, 'reset'])->name('user.reset');
+
 
     //INVENTARIS
     Route::get('/inventaris', [InventarisController::class, 'index'])->name('inventaris.index');

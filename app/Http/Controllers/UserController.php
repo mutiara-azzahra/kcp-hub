@@ -33,7 +33,6 @@ class UserController extends Controller
         $request -> validate([
             'nama_user'     => 'required',
             'username'      => 'required',
-            'email'         => 'required',
             'password'      => 'required',
         ]);
     
@@ -43,10 +42,23 @@ class UserController extends Controller
         $input['username']          = $request->username;
         $input['email']             = $request->email;
         $input['password']          = Hash::make($request['password']);
-
         $user                       = User::create($input);
 
-        return redirect()->route('user.index')->with('success','Akun baru selesai ditambahkan!');
+        return redirect()->route('user.index')->with('success','Akun baru berhasil ditambahkan!');
+        
+    }
+
+    public function reset($id){
+
+        $username  = User::where('id', $id)->value('username');
+
+        User::where('id', $id)->update([
+                'password'   => Hash::make($username),
+                'updated_by' => Auth::user()->nama_user,
+                'updated_at' => NOW()
+            ]);
+
+        return redirect()->route('user.index')->with('success','Password berhasil di reset!');
         
     }
 
