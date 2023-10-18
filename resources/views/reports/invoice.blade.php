@@ -121,56 +121,73 @@
      </style>
     <div class="header">
 
-                            <table class="table atas" style="line-height: 13px;">
+                            <table class="table atas" style="line-height: 12px;">
                                 <tr>
-                                    <td class="nama-kcp">PT. KCP</td>
-                                    <td class="atas"><b>INVOICE</b></td>
+                                    <td class="atas" style="width: 350px;">
+                                        <table class="atas" style="line-height: 13px;">
+                                            <tr>
+                                                <td class="atas">PT. KCP</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="alamat-kcp">Jl. Sutoyo S. No. 144 Banjarmasin</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="alamat-kcp">Hp. 0811 517 1595, 0812 5156 2768</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="alamat-kcp">Telp. 0511-4416579, 4417127</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="alamat-kcp">Fax. 3364674 </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td class="atas">
+                                        <table class="atas" style="line-height: 13px;">
+                                            <tr>
+                                                <td class="atas"><b>PACKINGSHEET (P/S)</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="atas"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="atas">{{ $data->outlet->nm_outlet }} ({{ $data->outlet->kd_outlet }})</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="atas">{{ $data->outlet->almt_pengiriman }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="atas">{{ $data->outlet->kode_area->provinsi->provinsi}}</td>
+                                            </tr>
+                                        </table>
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <td class="alamat-kcp">Jl. Sutoyo S. No. 144 Banjarmasin</td>
-                                    <td class="atas"></td>
-                                </tr>
-                                <tr>
-                                    <td class="alamat-kcp">Hp. 0811 517 1595, 0812 5156 2768</td>
-                                    
-                                    <td class="atas">{{ $data->nm_outlet }} ({{ $data->kd_outlet }})</td>
-                                </tr>
-                                <tr>
-                                    <td class="alamat-kcp">Telp. 0511-4416579, 4417127</td>
-                                    <td class="atas">{{ $data->outlet->almt_pengiriman }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="alamat-kcp">Fax. 3364674 </td>
-                                    <td class="atas">{{ $data->outlet->kode_area->nm_area }}, {{ $data->outlet->kode_area->provinsi->provinsi}}</td>
-                                </tr>
-                                <tr>
+                                <tr style="line-height: 13px;">
                                     <td class="nops">
                                         <table class="atas">
                                             <tr>
-                                                <td class="atas">No. Nota</td>
+                                                <td class="atas">No. P/S</td>
                                                 <td class="atas">:</td>
-
                                                 @if($data->outlet->kode_area->provinsi->kode_prp == 6200)
-                                                <td class="atas">KCP/KT/{{ $data->noinv }}</td>
+                                                <td class="atas">KCP/NON/{{ $data->noinv }}</td>
 
                                                 @else
-                                                <td class="atas">KCP/KS/{{ $data->noinv }}</td>
+                                                <td class="atas">KCP/NON/{{ $data->noinv }}</td>
                                                 @endif
                                             </tr>
                                         </table>
                                     </td>
+
                                     <td class="nops">
                                         <table class="atas">
                                             <tr>
-                                                <td class="atas">Tanggal</td>
+                                                <td class="atas">Tanggal P/S</td>
                                                 <td class="atas">:</td>
                                                 <td class="atas">{{ $data->created_at }}</td>
                                             </tr>
                                         </table>
                                     </td>
-                                    
                                 </tr>
-                                
                             </table>
     
     </div>

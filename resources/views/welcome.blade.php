@@ -283,11 +283,11 @@
                         <p>Sales Order/SO</p>
                       </a>
                   </li>
-                  <li class="nav-item">
+                  {{-- <li class="nav-item">
                       <a href="{{ route('back-order.index')}}" class="nav-link">
                         <p>Back Order/BO</p>
                       </a>
-                  </li>
+                  </li> --}}
                   <li class="nav-item">
                       <a href="{{ route('invoice.index')}}" class="nav-link">
                         <p>Invoice</p>

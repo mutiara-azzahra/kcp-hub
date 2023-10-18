@@ -32,9 +32,7 @@
         <div class="card" style="padding: 10px;">
                 <div class="card-body">
                     <div class="col-lg-12">
-
-                        
-                            <div class="col-lg-6 p-1">
+                            <div class="col-lg-6">
                                 <table class="table table-borderless">
                                     <tr>
                                         <th class="text-left">No. Packingsheet</th>
@@ -45,7 +43,7 @@
                             </div>
 
                             @if($check === null)
-                            <div col-lg-12 p-1>
+                            <div col-lg-12>
                                 <form action="{{ route('packingsheet.store-dus')}}" method="POST">
                                 @csrf
                                     <table class="table table-hover table-sm bg-light table-striped table-bordered" id="table">
@@ -94,7 +92,7 @@
 
                             @else
 
-                            <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example1">
+                            <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example2">
                             <thead>
                                 <tr style="background-color: #6082B6; color:white">
                                     <th class="text-center">No. Dus</th>
@@ -112,7 +110,11 @@
                                 <tr>
                                     <td class="text-left">{{ $v->no_dus }}</td>
                                     <td class="text-center">{{ $v->kd_kategori }}</td>
-                                    <td class="text-left"></td>
+                                    @if($v->kd_kategori == 'A')
+                                    <td class="text-left">AIR AKI</td>
+                                    @elseif($v->kd_kategori == 'SP')
+                                    <td class="text-left">SPAREPART</td>
+                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>

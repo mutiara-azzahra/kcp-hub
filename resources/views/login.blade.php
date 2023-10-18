@@ -48,10 +48,11 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" name="password" class="form-control" id="password" placeholder="password">
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+                        
                         <div class="input-group-append">
                             <div class="input-group-text">
-                            <span class="fas fa-lock"></span>
+                                <span class="fas fa-lock"></span>
                             </div>
                         </div>
                     </div>

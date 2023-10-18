@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use PDF;
 use Illuminate\Http\Request;
+use App\Models\MasterStokGudang;
 use App\Models\TransaksiSOHeader;
 use App\Models\TransaksiInvoiceHeader;
 use App\Models\TransaksiInvoiceDetails;
@@ -59,20 +60,25 @@ class InvoiceController extends Controller
 
             foreach($a->details_so as $s){
 
-                $details['noinv']              = $header->noinv;
-                $details['area_inv']           = $s->area_so;
-                $details['kd_outlet']          = $a->kd_outlet;
-                $details['part_no']            = $s->part_no;
-                $details['nm_part']            = $s->nm_part;
-                $details['qty']                = $s->qty;
-                $details['hrg_pcs']            = $s->hrg_pcs;
-                $details['disc']               = $s->disc;
-                $details['nominal']            = $s->nominal;
-                $details['nominal_disc']       = $s->nominal_disc;
-                $details['nominal_disc_ppn']   = $a->nominal_total * 0.11;
-                $details['nominal_total']      = $s->nominal_total;
+                $stok_ready = MasterStokGudang::where('part_no', $s->part_no)->value('stok');
 
-                TransaksiInvoiceDetails::create($details);
+                    if($stok_ready != 0){
+                        
+                        $details['noinv']              = $header->noinv;
+                        $details['area_inv']           = $s->area_so;
+                        $details['kd_outlet']          = $a->kd_outlet;
+                        $details['part_no']            = $s->part_no;
+                        $details['nm_part']            = $s->nm_part;
+                        $details['qty']                = $s->qty;
+                        $details['hrg_pcs']            = $s->hrg_pcs;
+                        $details['disc']               = $s->disc;
+                        $details['nominal']            = $s->nominal;
+                        $details['nominal_disc']       = $s->nominal_disc;
+                        $details['nominal_disc_ppn']   = $a->nominal_total * 0.11;
+                        $details['nominal_total']      = $s->nominal_total;
+
+                        TransaksiInvoiceDetails::create($details);
+                    }
             }
         }
 

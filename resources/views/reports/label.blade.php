@@ -92,7 +92,7 @@
      .header{
          margin-bottom: 18px;
          text-align: center;
-         height: 200px;
+         height: 180px;
          padding: 4px;
          border: 0.5px solid #000;
      }
@@ -122,14 +122,14 @@
         @page { 
           size: 21 cm 29.6 cm; 
           margin-top: 20px;
-          margin-left: 0px;
-          margin-right: 0px;
+          margin-left: 20px;
+          margin-right: 20px;
           padding: 0px !important;
           } 
     </style>
                     @foreach($data_dus as $data)
                     <div class="header">
-                            <table class="table atas">
+                            <table class="table atas" style="line-height: 12px;">
                                 <tr>
                                     <td class="nama-kcp">PT. KCP</td>
                                     <td class="atas"><b>KCP/{{ $data->header_ps->kd_outlet }}/{{ $data->nops }}</b></td>
@@ -170,7 +170,7 @@
                             </table>
 
                             <br>
-                            <table class="table atas">
+                            <table class="table atas" style="line-height: 12px;">
                                 <tr>
                                     <td class="nama-kcp">{{ $data->header_ps->outlet->almt_outlet }}</td>
                                 </tr>

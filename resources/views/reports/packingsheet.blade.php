@@ -77,7 +77,7 @@
      .header{
          margin-bottom: 0px;
          text-align: center;
-         height: 130px;
+         height: 105px;
          padding: 0; /* Remove padding */
         margin: 0; /* Remove margin */
      }
@@ -125,41 +125,70 @@
     <div class="header">
                             <table class="table atas" style="line-height: 12px;">
                                 <tr>
-                                    <td class="nama-kcp">PT. KCP</td>
-                                    <td class="atas"><b>Packingsheet / PS</b></td>
+                                    <td class="atas" style="width: 350px;">
+                                        <table class="atas" style="line-height: 13px;">
+                                            <tr>
+                                                <td class="atas">PT. KCP</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="alamat-kcp">Jl. Sutoyo S. No. 144 Banjarmasin</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="alamat-kcp">Hp. 0811 517 1595, 0812 5156 2768</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="alamat-kcp">Telp. 0511-4416579, 4417127</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="alamat-kcp">Fax. 3364674 </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td class="atas">
+                                        <table class="atas" style="line-height: 13px;">
+                                            <tr>
+                                                <td class="atas"><b>PACKINGSHEET (P/S)</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="atas"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="atas">{{ $data->outlet->nm_outlet }} ({{ $data->outlet->kd_outlet }})</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="atas">{{ $data->outlet->almt_pengiriman }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="atas">{{ $data->outlet->kode_area->provinsi->provinsi}}</td>
+                                            </tr>
+                                        </table>
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <td class="alamat-kcp">Jl. Sutoyo S. No. 144 Banjarmasin</td>
-                                    <td class="atas"></td>
-                                </tr>
-                                <tr>
-                                    <td class="alamat-kcp">Hp. 0811 517 1595, 0812 5156 2768</td>
-                                    <td class="atas"> {{ $data->nm_outlet }} ({{ $data->kd_outlet }})</td>
-                                </tr>
-                                <tr>
-                                    <td class="alamat-kcp">Telp. 0511-4416579, 4417127</td>
-                                    <td class="atas">{{ $data->outlet->almt_pengiriman }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="alamat-kcp">Fax. 3364674 </td>
-                                    <td class="atas">{{ $data->outlet->kode_area->nm_area }}, {{ $data->outlet->kode_area->provinsi->provinsi}}</td>
-                                </tr>
-                                <tr>
+                                <tr style="line-height: 13px;">
                                     <td class="nops">
                                         <table class="atas">
                                             <tr>
                                                 <td class="atas">No. P/S</td>
                                                 <td class="atas">:</td>
-                                                <td class="atas">KCP/{{ $data->area_ps }}/{{ $data->nops }}</td>
+                                                @if($data->outlet->kode_area->provinsi->kode_prp == 6200)
+                                                <td class="atas">KCP/NON/{{ $data->area_ps }}/{{ $data->noso }}</td>
+
+                                                @else
+                                                <td class="atas">KCP/NON/{{ $data->area_ps }}/{{ $data->noso }}</td>
+                                                @endif
                                             </tr>
+                                        </table>
+                                    </td>
+
+                                    <td class="nops">
+                                        <table class="atas">
                                             <tr>
-                                                <td class="atas">Tgl. P/S</td>
+                                                <td class="atas">Tanggal P/S</td>
                                                 <td class="atas">:</td>
                                                 <td class="atas">{{ $data->created_at }}</td>
                                             </tr>
                                         </table>
                                     </td>
-                                    <td class="atas"></td>
                                 </tr>
                             </table>
     
@@ -201,13 +230,11 @@
                             <div class="ttd">
                                 
                                 <br>
-                                <br>
                                 <h5 style="text-decoration:underline; margin:0px">Checker</h5>
                             </div>
                         </td>
                         <td class="atas">
                             <div class="ttd">
-                                <br>
                                 <br>
                                 <h5 style="text-decoration:underline; margin:0px">Yang Membuat</h5>
                             </div>

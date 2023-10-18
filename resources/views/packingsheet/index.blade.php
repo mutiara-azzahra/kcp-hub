@@ -42,7 +42,7 @@
                                     <th class="text-center">No Sales Order</th>
                                     <th class="text-center">Kode Toko</th>
                                     <th class="text-center">Nama Toko</th>
-                                    <th class="text-center">Tgl. Validasi Gudang</th>
+                                    <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -95,7 +95,7 @@
                                     <th class="text-center">No. Packingsheet</th>
                                     <th class="text-center">Kode Outlet</th>
                                     <th class="text-center">Nama Outlet</th>
-                                    <th class="text-center">Tgl. Packingsheet</th>
+                                    <th class="text-center">Aksi</th>
                                     
                                 </tr>
                             </thead>
@@ -106,14 +106,14 @@
 
                                 @foreach($list_packingsheet as $v)
                                 <tr>
-                                    <td class="text-center">KCP/NON/{{ $v->area_ps }}/{{ $v->nops }}</td>
+                                    <td class="text-left">KCP/NON/{{ $v->area_ps }}/{{ $v->nops }}</td>
                                     <td class="text-center">{{ $v->kd_outlet }}</td>
                                     <td class="text-left">{{ $v->nm_outlet }}</td>
                                     <td class="text-center">
                                         <a class="btn btn-info btn-sm" href="{{ route('packingsheet.details',$v->nops) }}">
                                             <i class="fas fa-list"></i>
                                         </a>
-                                        <a class="btn btn-warning btn-sm" href="{{ route('packingsheet.cetak_label',$v->nops) }}" target="_blank">
+                                        <a class="btn btn-warning btn-sm" href="{{ route('packingsheet.cetak',$v->nops) }}" target="_blank">
                                             <i class="fas fa-print"></i>
                                         </a>
                                     </td>

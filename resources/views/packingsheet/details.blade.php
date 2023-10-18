@@ -2,34 +2,38 @@
  
 @section('content')
 <div class="container" style="padding: 10px;">
-    <div class="row mt-5">
-    </div>
+                <div class="row mt-5">
+                    <div class="col-lg-12 pb-3">
+                         <div class="float-left m-1">
+                            <h4>Details Packingsheet / PS</h4>
+                        </div>
+                        <div class="float-right m-1">
+                            <a class="btn btn-success" href="{{ route('packingsheet.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
+                        </div>
+                        @if($check != null)
+                        <div class="float-right m-1">
+                            <a class="btn btn-warning" href="{{ route('packingsheet.cetak_label', $header_ps->nops) }}" target="_blank"><i class="fas fa-print"></i> Cetak Label</a>
+                        </div>
+                        @endif
+                    </div>
+                </div>
+
             @if ($message = Session::get('success'))
-                <div class="alert alert-success">
+                <div class="alert alert-success" id="myAlert">
                     <p>{{ $message }}</p>
                 </div>
             @endif
 
         <div class="card" style="padding: 10px;">
-                <div class="card-header">
-                    <div class="col-lg-12 pb-3">
-                        <div class="float-right m-1">
-                            <a class="btn btn-warning" href="{{ route('packingsheet.cetak', $header_ps->nops) }}" target="_blank"><i class="fas fa-print"></i> Cetak</a>
-                        </div>
-                        <div class="float-right m-1">
-                            <a class="btn btn-success" href="{{ route('packingsheet.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-6 p-1">
-                            <table class="table table-hover bg-light table-striped">
+                        <div class="col-lg-6">
+                            <table class="table table-borderless">
                                 <tr>
                                     <th class="text-left">No. Packingsheet</th>
                                     <td>:</td>
-                                    <td class="text-left">{{ $header_ps->nops }}</td>
+                                    <td class="text-left"><b>{{ $header_ps->nops }}</b></td>
                                 </tr>
                                 <tr>
                                     <th class="text-left">Koli</th>
@@ -40,8 +44,8 @@
                                 </tr>
                             </table>
                         </div>
-                            <div class="col-lg-12 p-3">
-                                <table class="table table-hover table-sm bg-light table-striped table-bordered" id="table">
+                            <div class="col-lg-12">
+                                <table class="table table-hover table-sm bg-light table-striped table-bordered" id="example2">
                                     <thead>
                                         <tr style="background-color: #6082B6; color:white">
                                             <th class="text-center">Part No</th>

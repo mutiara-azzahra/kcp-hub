@@ -7,9 +7,6 @@
              <div class="float-left">
                 <h4>Invoice</h4>
             </div>
-            <div class="float-right">
-                <a class="btn btn-success" href="{{ route('invoice.create') }}"><i class="fas fa-eye"></i> Lihat Invoice</a>
-            </div>
         </div>
     </div>
             @if ($message = Session::get('success'))
@@ -43,9 +40,9 @@
                                 @endphp
                                 @foreach($so_approved as $s)
                                 <tr>
-                                    <td class="text-center">KCP/NON/{{ $s->noso }}</td>
+                                    <td class="text-left">KCP/NON/{{ $s->noso }}</td>
                                     <td class="text-center">{{ $s->kd_outlet}} </td>
-                                    <td class="text-center">{{ $s->nm_outlet }}</td>
+                                    <td class="text-left">{{ $s->nm_outlet }}</td>
                                     <td class="text-left" style="background-color: yellow;">Rp. {{ number_format($s->details_so->sum('nominal_total'), 0, ',', '.')  }}</td>
                                     <td class="text-center">{{ $s->user_sales}}</td>
                                     <td class="text-center">
@@ -73,7 +70,7 @@
                                 <tr style="background-color: #6082B6; color:white">
                                     <th class="text-center">No. Invoice</th>
                                     <th class="text-center">No. Sales Order/SO</th>
-                                    <th class="text-center">Kode Toko</th>
+                                    <th class="text-center">Kode | Nama Toko</th>
                                     <th class="text-center">Nominal Invoice</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
@@ -85,9 +82,9 @@
                                 
                                 @foreach($invoice as $s)
                                <tr>
-                                    <td class="text-center">{{ $s->noinv }}</td>
-                                    <td class="text-center">{{ $s->noso }}</td>
-                                    <td class="text-center">{{ $s->kd_outlet }}/{{ $s->nm_outlet }}</td>
+                                    <td class="text-left">{{ $s->noinv }}</td>
+                                    <td class="text-left">{{ $s->noso }}</td>
+                                    <td class="text-left">{{ $s->kd_outlet }}/{{ $s->nm_outlet }}</td>
                                     <td class="text-left">Rp. {{ number_format($s->details_invoice->sum('nominal_total'), 0, ',', '.') }}</td>
                                     <td class="text-center">
                                         <a class="btn btn-warning btn-sm" href="{{ route('invoice.cetak', $s->noinv) }}" target="_blank"><i class="fas fa-print"></i></a>

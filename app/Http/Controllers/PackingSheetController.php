@@ -25,7 +25,6 @@ class PackingSheetController extends Controller
 
         $list_packingsheet = TransaksiPackingsheetHeader::where('status', 'A')->orderBy('nops', 'desc')->get();
 
-
         return view('packingsheet.index', compact('so_validated', 'list_packingsheet'));
     }
 
@@ -94,10 +93,11 @@ class PackingSheetController extends Controller
 
     public function details($nops){
 
-        $header_ps = TransaksiPackingsheetHeader::where('nops', $nops)->first();
-        $header_ps_details = TransaksiPackingsheetHeader::where('nops', $nops)->get();
+        $header_ps          = TransaksiPackingsheetHeader::where('nops', $nops)->first();
+        $check              = TransaksiPackingsheetDetailsDus::where('nops', $nops)->first();
+        $header_ps_details  = TransaksiPackingsheetHeader::where('nops', $nops)->get();
 
-        return view('packingsheet.details', compact('header_ps', 'header_ps_details'));
+        return view('packingsheet.details', compact('header_ps', 'header_ps_details', 'check'));
     }
 
     public function koli($nops){
