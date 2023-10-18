@@ -5,7 +5,7 @@
     <div class="row mt-5">
         <div class="col-lg-12 pb-3">
             <div class="float-left">
-                <h4><b>Approval SP</b></h4>
+                <h4><b>Approval SP / Surat Pesanan</b></h4>
             </div>
             <div class="float-right">
                 <a class="btn btn-success" href="{{ route('sales-order.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
@@ -23,7 +23,6 @@
                     <div class="float-left">
                         Sales Order
                     </div>
-
                     
                     <div class="float-right">
 
@@ -33,8 +32,8 @@
                             @if(isset($s->so))
 
                             @else
-                                <a class="btn btn-warning btn-md m-1" href="{{ route('sales-order.approve', $s->nosp) }}"><i class="fas fa-reply"></i> Approve</a>
-                                <a class="btn btn-danger btn-md m-1" href="{{ route('sales-order.reject', $s->nosp) }}"><i class="fas fa-ban"></i>Tolak</a>
+                                <a class="btn btn-warning btn-md m-1" href="{{ route('sales-order.approve', $s->nosp) }}"><i class="fas fa-check"></i> Approve</a>
+                                <a class="btn btn-danger btn-md m-1" href="{{ route('sales-order.reject', $s->nosp) }}"><i class="fas fa-ban"></i> Tolak</a>
                             @endif
 
                         @endforeach
@@ -50,20 +49,26 @@
                                 <tr>
                                     <th class="text-left">No. Surat Pesanan / SP</th>
                                     <td>:</td>
-                                    <td class="text-left">{{ $nosp }}</td>
+                                    <td class="text-left"><b>{{ $nosp }}</b></td>
                                 </tr>
                                 <tr>
                                     <th class="text-left">Kode / Nama Toko</th>
                                     <td>:</td>
                                     @foreach($surat_pesanan_id as $s)
-                                        <td class="text-left">{{ $s->kd_outlet }} / {{ $s->nm_outlet }}</td>
+                                        <td class="text-left"><b>{{ $s->kd_outlet }} / {{ $s->nm_outlet }}</b></td>
                                     @endforeach
                                 </tr>
                                 <tr>
                                     <th class="text-left">Plafond Toko</th>
                                     <td>:</td>
                                     
-                                        <td class="text-left">{{ $plafond->plafond }}</td>
+                                    @if($s->outlet->plafond != null)
+                                    <td class="text-left">Rp. {{ number_format($s->outlet->plafond->nominal_plafond, 0, ',', '.') }}</td>
+                                    @else
+                                    <td class="text-left" style="color: red;">Belum Ada Plafond</td>
+                                    @endif
+
+                                </tr>
                                 </tr>
                                 <tr>
                                     <th class="text-left">Piutang Terakhir</th>
@@ -83,7 +88,7 @@
                                             <th class="text-center">HET</th>
                                             <th class="text-center">Qty</th>
                                             <th class="text-center">Nominal Disc</th>
-                                            <th class="text-center">Nominal</th>
+                                            <th class="text-center">Nominal Final</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -93,9 +98,7 @@
                                                     <td class="text-left">{{ $d->part_no }}</td>
                                                     <td class="text-left">Rp. {{ number_format($d->hrg_pcs, 0, ',', '.') }}</td>
                                                     <td class="text-center">{{ $d->qty }}</td>
-                                                    <td class="text-left">Rp. {{ number_format($d->nominal_disc, 0, ',', '.') }}</td>
-
-                                                    {{-- number_format($xxx, 0, ',', '.') --}}
+                                                    <td class="text-center">{{ $d->disc }} %</td>
                                                     <td class="text-left">Rp. {{ number_format($d->nominal_total, 0, ',', '.') }}</td>
                                                 </tr>
                                             @endforeach

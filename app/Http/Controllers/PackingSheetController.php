@@ -13,6 +13,7 @@ use App\Models\TransaksiPackingsheetHeader;
 use App\Models\TransaksiPackingsheetDetails;
 use App\Models\TransaksiPackingsheetDetailsDus;
 use App\Models\KategoriDusPackingsheet;
+use App\Models\MasterStokGudang;
 
 class PackingSheetController extends Controller
 {
@@ -35,9 +36,11 @@ class PackingSheetController extends Controller
         $selectedItems = $request->input('selected_items', []);
 
         foreach ($selectedItems as $noso) {
+
             $so_validated = TransaksiSOHeader::where('noso', $noso)->get();
 
             foreach($so_validated as $s){
+
                 $data['nops']       = $nops;
                 $data['area_ps']    = $s->area_so;
                 $data['noso']       = $s->noso;
@@ -54,17 +57,22 @@ class PackingSheetController extends Controller
             
             foreach($so_validated as $h){
                 foreach($h->details_so as $s){
-                    $details['nops']       = $nops;
-                    $details['area_ps']    = $s->area_so;
-                    $details['noso']       = $s->noso;
-                    $details['kd_outlet']  = $s->kd_outlet;
-                    $details['part_no']    = $s->part_no;
-                    $details['qty']        = $s->qty;
-                    $details['created_at'] = NOW();
-                    $details['created_by'] = Auth::user()->nama_user;
 
-                   // dd($details);
-                    TransaksiPackingsheetDetails::create($details);
+                    $stok_ready = MasterStokGudang::where('part_no', $s->part_no)->value('stok');
+
+                    if($stok_ready != 0){
+                        $details['nops']       = $nops;
+                        $details['area_ps']    = $s->area_so;
+                        $details['noso']       = $s->noso;
+                        $details['kd_outlet']  = $s->kd_outlet;
+                        $details['part_no']    = $s->part_no;
+                        $details['qty']        = $s->qty;
+                        $details['created_at'] = NOW();
+                        $details['created_by'] = Auth::user()->nama_user;
+
+                        TransaksiPackingsheetDetails::create($details);
+                    }
+
                 }
             }
         }

@@ -7,10 +7,10 @@
     <title>Invoice</title>
     <style>
     h4,h2{
-        font-family:serif;
+        font-family: 'Times New Roman', Times;
     }
         body{
-            font-family:sans-serif;
+            font-family:'Times New Roman', Times;
         }
         table{
         border-collapse: collapse;
@@ -32,6 +32,7 @@
       }
       .ttd-table{
           border: none;
+          text-align: left;
       }
       .nama-kcp{
           text-align: left;
@@ -79,6 +80,7 @@
       .table-bawah{
         border-left: none; /* Remove left border */
         border-right: none;
+        line-height: 14px;
       }
      .judul{
          text-align: center;
@@ -86,7 +88,7 @@
      .header{
          margin-bottom: 0;
          text-align: center;
-         height: 200px;
+         height: 105px;
          padding: 0px;
      }
      hr{
@@ -110,17 +112,19 @@
 <body>
     <style>
         @page { 
-          size: 21 cm 29.6 cm; 
-          margin: 0 cm 0 cm 0 cm 0 cm !important;
+          size: 21 cm 14.8 cm; 
+          margin-top: 10px;
+          margin-left: 5px;
+          margin-right: 5px;
           padding: 0px !important;
           } 
      </style>
     <div class="header">
 
-                            <table class="table atas">
+                            <table class="table atas" style="line-height: 13px;">
                                 <tr>
                                     <td class="nama-kcp">PT. KCP</td>
-                                    <td class="atas">INVOICE</td>
+                                    <td class="atas"><b>INVOICE</b></td>
                                 </tr>
                                 <tr>
                                     <td class="alamat-kcp">Jl. Sutoyo S. No. 144 Banjarmasin</td>
@@ -137,11 +141,7 @@
                                 </tr>
                                 <tr>
                                     <td class="alamat-kcp">Fax. 3364674 </td>
-                                    <td class="atas">{{ $data->outlet->kode_area->nm_area }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="alamat-kcp"></td>
-                                    <td class="atas">{{ $data->outlet->kode_area->provinsi->provinsi}}</td>
+                                    <td class="atas">{{ $data->outlet->kode_area->nm_area }}, {{ $data->outlet->kode_area->provinsi->provinsi}}</td>
                                 </tr>
                                 <tr>
                                     <td class="nops">
@@ -157,6 +157,10 @@
                                                 <td class="atas">KCP/KS/{{ $data->noinv }}</td>
                                                 @endif
                                             </tr>
+                                        </table>
+                                    </td>
+                                    <td class="nops">
+                                        <table class="atas">
                                             <tr>
                                                 <td class="atas">Tanggal</td>
                                                 <td class="atas">:</td>
@@ -164,8 +168,9 @@
                                             </tr>
                                         </table>
                                     </td>
-                                    <td class="atas"></td>
+                                    
                                 </tr>
+                                
                             </table>
     
     </div>
@@ -201,63 +206,48 @@
                     @endforeach
                 </tbody>
             </table>
-                                        <table class="atas">
+                                        <table class="atas" style="line-height: 15px;">
                                             <tr>
                                                 <td class="atas">Tanggal Jatuh Tempo: </td>
                                                 <td class="atas-total"><b>TOTAL :</b></td>
                                                 <td class="atas-total"><b>{{ number_format($p->sum('nominal_total'), 0, ',', '.') }}</b></td>
                                             </tr>
-                                            <tr>
-                                                <td class="atas">Terbilang</td>
-                                                <td class="atas"></td>
-                                                <td class="atas"></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="atas"># #</td>
-                                                <td class="atas"></td>
-                                                <td class="atas"></td>
-                                            </tr>
                                         </table>
-        
-                <table class="atas">
-                    <tr>
-                        <td class="atas">
-                            <div class="ttd">
-                                <h6 style="margin:0px">Penjualan,</h6>
-                                <br>
-                                <br>
-                                <br>
-                                <br>
-                                
-                                <h5 style="text-decoration:underline; margin:0px">__________________________</h5>
-                            </div>
-                        </td>
-                        <td class="atas">
-                            <div class="ttd">
-                                <h6 style="margin:0px">AR</h6>
-                                <br>
-                                <br>
-                                <br>
-                                <h6 style="margin:0px">Approve by System</h6>
-                                <h5 style="text-decoration:underline; margin:0px">__________________________</h5>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
 
-                <br>
-                <br>
-                <table class="table atas">
-                    <tr>
-                        <td class="alamat-kcp">- Pembayaran dianggap sah bila dicap LUNAS</td>
-                    </tr>
-                    <tr>
-                        <td class="alamat-kcp">- Barang yang sudah dibeli tidak dapat ditukarkan/dikembalikan</td>
-                    </tr>
-                    <tr>
-                        <td class="alamat-kcp">- Pembayaran dengan giro/cheque dianggap sah bila telah diclearingkan</td>
-                    </tr>
-                </table>
+                                        <table class="atas">
+                                            <tr>
+                                                <td class="atas">
+                                                    <table class="table atas" style="line-height: 11px;">
+                                                        <tr>
+                                                            <td class="alamat-kcp">- Pembayaran dianggap sah bila dicap LUNAS</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="alamat-kcp">- Barang yang sudah dibeli tidak dapat ditukarkan/dikembalikan</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="alamat-kcp">- Pembayaran dengan giro/cheque dianggap sah bila telah diclearingkan</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                                <td class="nama-kcp">
+                                                    <table class="atas">
+                                                        <tr>
+                                                            <td class="atas">
+                                                                <div class="ttd">
+                                                                    <br>
+                                                                    <h6 style="margin:0px; text-decoration:underline;" >Approve by System</h6>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            
+                                        </table>
+                    
+                
+
+                
             </div>
         </div>
     </body>

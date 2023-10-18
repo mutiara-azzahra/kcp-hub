@@ -23,13 +23,13 @@
         <div class="card">
             <div class="card-body login-card-body">
                 @if ($message = Session::get('success'))
-                <div class="alert alert-success mt-3">
+                <div class="alert alert-success mt-3" id="myAlert">
                     <div class="row">
                         <i class="fas fa-info-circle p-1"></i><p>{{ $message }}</p>            
                     </div>
                 </div>
                 @elseif ($message = Session::get('danger'))
-                <div class="alert alert-danger mt-3">
+                <div class="alert alert-danger mt-3" id="myAlert">
                     <div class="row">
                         <i class="fas fa-info-circle p-1"></i><p>{{ $message }}</p>      
                     </div>

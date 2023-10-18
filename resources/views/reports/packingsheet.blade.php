@@ -13,11 +13,13 @@
             font-family:'Times New Roman', Times, serif;
         }
         table{
+        border: 0.5px solid black;
         border-collapse: collapse;
         width:100%;
       }
-      table, th, td{
-        border: 1px solid black;
+      th, td{
+        border: 0.5px solid black;
+
       }
       th{
         text-align: center;
@@ -75,7 +77,7 @@
      .header{
          margin-bottom: 0px;
          text-align: center;
-         height: 180px;
+         height: 130px;
          padding: 0; /* Remove padding */
         margin: 0; /* Remove margin */
      }
@@ -115,16 +117,16 @@
     <style>
         @page { 
           size: 21 cm 29.6 cm; 
-          margin: 0 cm 0 cm 0 cm 0 cm !important;
+          margin: 20px;
           padding: 0px !important;
           } 
      </style>
     
     <div class="header">
-                            <table class="table atas">
+                            <table class="table atas" style="line-height: 12px;">
                                 <tr>
                                     <td class="nama-kcp">PT. KCP</td>
-                                    <td class="atas">Packingsheet / PS</td>
+                                    <td class="atas"><b>Packingsheet / PS</b></td>
                                 </tr>
                                 <tr>
                                     <td class="alamat-kcp">Jl. Sutoyo S. No. 144 Banjarmasin</td>
@@ -140,7 +142,7 @@
                                 </tr>
                                 <tr>
                                     <td class="alamat-kcp">Fax. 3364674 </td>
-                                    <td class="atas">{{ $data->outlet->kode_area->nm_area }}</td>
+                                    <td class="atas">{{ $data->outlet->kode_area->nm_area }}, {{ $data->outlet->kode_area->provinsi->provinsi}}</td>
                                 </tr>
                                 <tr>
                                     <td class="nops">
@@ -165,7 +167,7 @@
 
     <div class="container">
         <div class="isi">
-            <table class="table table-bawah" id="dataTable">
+            <table class="table table-bawah" style="line-height: 14px;">
                 <thead class="thead-light">
                     <tr>
                         <th class="th-header">No.</th>
@@ -180,7 +182,7 @@
                 <tbody>
                     @foreach ($ps_details as $p)
                     <tr>
-                        <td class="td-qty">{{$loop->iteration}}. </td>
+                        <td class="td-qty" style="width: 6px;">{{$loop->iteration}}. </td>
                         <td class="td-part">{{ $p->noso }}</td>
                         <td class="td-part">{{ $p->part_no }}</td>
                         <td class="td-qty">{{ $p->qty }}</td>
@@ -192,26 +194,22 @@
             </table>
 
                 <br>
-                <br>
 
                 <table class="atas">
                     <tr>
                         <td class="atas">
                             <div class="ttd">
-                                <h6 style="margin:0px">Checker,</h6>
+                                
                                 <br>
                                 <br>
-                                <br>
-                                <h5 style="text-decoration:underline; margin:0px">__________________________</h5>
+                                <h5 style="text-decoration:underline; margin:0px">Checker</h5>
                             </div>
                         </td>
                         <td class="atas">
                             <div class="ttd">
-                                <h6 style="margin:0px">Yang Membuat,</h6>
                                 <br>
                                 <br>
-                                <br>
-                                <h5 style="text-decoration:underline; margin:0px">__________________________</h5>
+                                <h5 style="text-decoration:underline; margin:0px">Yang Membuat</h5>
                             </div>
                         </td>
                     </tr>

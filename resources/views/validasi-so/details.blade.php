@@ -34,16 +34,16 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-6 p-1">
-                            <table class="table table-hover bg-light table-striped">
+                            <table class="table table-borderless">
                                 <tr>
                                     <th class="text-left">No. Sales Order/SO</th>
                                     <td>:</td>
-                                    <td class="text-left">{{ $so->noso }}</td>
+                                    <td class="text-left"><b>{{ $so->noso }}</b></td>
                                 </tr>
                                 <tr>
                                     <th class="text-left">Kode / Nama Toko</th>
                                     <td>:</td>
-                                    <td class="text-left">{{ $so->kd_outlet }} / {{ $so->nm_outlet }}</td>
+                                    <td class="text-left"><b>{{ $so->kd_outlet }} / {{ $so->nm_outlet }}</b></td>
                                 </tr>
                             </table>
                         </div>
@@ -53,6 +53,7 @@
                                         <tr style="background-color: #6082B6; color:white">
                                             <th class="text-center">Part No</th>
                                             <th class="text-center">Nama Part</th>
+                                            <th class="text-center">Diskon</th>
                                             <th class="text-center">Qty SO</th>
                                             <th class="text-center">Stok Gudang</th>
                                             <th class="text-center">Keterangan</th>
@@ -68,16 +69,15 @@
                                             <tr>
                                                 <td class="text-left">{{ $s->part_no }}</td>
                                                 <td class="text-left">{{ $s->nama_part->part_nama }}</td>
+                                                <td class="text-center">{{ $s->disc }}%</td>
                                                 <td class="text-center">{{ $s->qty }}</td>
                                                 <td class="text-center">{{ $s->stok_ready->stok }}</td>
-
-
 
                                                 @if( $s->flag_vald_gudang == null)
                                                 <td class="text-center" style="background-color: yellow;">
                                                     Belum Divalidasi
                                                 </td>
-
+                                                
                                                 @else
 
                                                 <td class="text-center" style="background-color: lime;">

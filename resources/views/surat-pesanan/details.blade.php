@@ -16,6 +16,10 @@
                 <div class="alert alert-success" id="myAlert">
                     <p>{{ $message }}</p>
                 </div>
+            @elseif ($message = Session::get('danger'))
+                <div class="alert alert-danger" id="myAlert">
+                    <p>{{ $message }}</p>
+                </div>
             @endif
 
         <div class="card" style="padding: 10px;">
@@ -26,17 +30,23 @@
                                 <tr>
                                     <th class="text-left">No. Surat Pesanan / SP</th>
                                     <td>:</td>
-                                    <td class="text-left">{{ $nosp }}</td>
+                                    <td class="text-left"><b>{{ $nosp }}</b></td>
                                 </tr>
                                 <tr>
                                     <th class="text-left">Kode / Nama Toko</th>
                                     <td>:</td>
-                                    <td class="text-left">{{ $details->kd_outlet }} / {{ $details->nm_outlet }}</td>
+                                    <td class="text-left"><b>{{ $details->kd_outlet }} / {{ $details->nm_outlet }}</b></td>
                                 </tr>
                                 <tr>
                                     <th class="text-left">Plafond Toko</th>
                                     <td>:</td>
-                                    {{-- <td class="text-left">Rp. {{ number_format($details->outlet->plafond->nominal_plafond, 0, ',', '.') }}</td> --}}
+
+                                    @if($details->outlet->plafond != null)
+                                    <td class="text-left">Rp. {{ number_format($details->outlet->plafond->nominal_plafond, 0, ',', '.') }}</td>
+                                    @else
+                                    <td class="text-left" style="color: red;">Belum Ada Plafond</td>
+                                    @endif
+                                    
                                 </tr>
                                 <tr>
                                     <th class="text-left">Piutang Terakhir</th>
@@ -59,7 +69,7 @@
                                 <table class="table table-hover table-sm bg-light table-striped table-bordered" id="table">
                                     <thead>
                                         <tr style="background-color: #6082B6; color:white">
-                                            <th class="text-center">Part No | Nama Part | HET</th>
+                                            <th class="text-center">Part No | Nama Part | HET | Maks. Disc (%)</th>
                                             <th class="text-center">Qty</th>
                                             <th class="text-center">Disc (%)</th>
                                             <th class="text-center">Tambah</th>
@@ -72,7 +82,11 @@
                                                             <select name="inputs[0][part_no]" class="form-control mr-2">
                                                                 <option value="">-- Pilih --</option>
                                                                 @foreach($master_part as $k)
-                                                                    <option value="{{ $k->part_no }}"> {{ $k->part_no }} | {{ $k->part_nama }} | Rp. {{ number_format($k->het, 0, ',', '.') }} </option>
+                                                                    @if( $k->max_disc != null)
+                                                                    <option value="{{ $k->part_no }}"> {{ $k->part_no }} | {{ $k->part_nama }} | Rp. {{ number_format($k->het, 0, ',', '.') }} | {{ $k->max_disc->diskon_maksimal }}%</option>
+                                                                    @else
+                                                                    <option value="{{ $k->part_no }}"> {{ $k->part_no }} | {{ $k->part_nama }} | Rp. {{ number_format($k->het, 0, ',', '.') }}</option>
+                                                                    @endif
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -125,7 +139,7 @@
                                             {{-- number_format($xxx, 0, ',', '.') --}}
                                             <td class="text-left">Rp. {{ number_format($d->hrg_pcs, 0, ',', '.') }}</td>
                                             <td class="text-center">{{ $d->qty }}</td>
-                                            <td class="text-left">Rp. {{ number_format($d->nominal_disc, 0, ',', '.') }}</td>
+                                            <td class="text-center">{{ $d->disc }}%</td>
                                             <td class="text-left">Rp. {{ number_format($d->nominal_total, 0, ',', '.') }}</td>
                                         </tr>
                                         @endforeach
@@ -153,7 +167,11 @@
                                                             <select name="inputs[${i}][part_no]" class="form-control mr-2">
                                                                 <option value="">-- Pilih --</option>
                                                                 @foreach($master_part as $k)
+                                                                    @if( $k->max_disc != null)
+                                                                    <option value="{{ $k->part_no }}"> {{ $k->part_no }} | {{ $k->part_nama }} | Rp. {{ number_format($k->het, 0, ',', '.') }} | {{ $k->max_disc->diskon_maksimal }}%</option>
+                                                                    @else
                                                                     <option value="{{ $k->part_no }}"> {{ $k->part_no }} | {{ $k->part_nama }} | Rp. {{ number_format($k->het, 0, ',', '.') }}</option>
+                                                                    @endif
                                                                 @endforeach
                                                             </select>
                                                         </div>

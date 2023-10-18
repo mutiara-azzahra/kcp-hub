@@ -111,7 +111,7 @@
     <style>
         @page { 
           size: 21 cm 29.6 cm; 
-          margin: 0 cm 0 cm 0 cm 0 cm !important;
+          margin: 20px;
           padding: 0px !important;
           } 
      </style>

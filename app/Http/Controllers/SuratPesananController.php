@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Auth;
-
+use PDF;
+use Carbon\Carbon;
 use App\Models\TransaksiSpHeader;
 use App\Models\MasterPart;
 use App\Models\MasterSales;
@@ -13,13 +14,14 @@ use App\Models\MasterOutlet;
 use App\Models\MasterStokGudang;
 use App\Models\TransaksiSpDetails;
 use App\Models\MasterAreaSales;
+use App\Models\MasterDiskonPart;
 
 
 class SuratPesananController extends Controller
 {
     public function index(){
 
-        $surat_pesanan = TransaksiSpHeader::orderBy('nosp', 'desc')->get();
+        $surat_pesanan = TransaksiSpHeader::orderBy('crea_date', 'desc')->get();
 
         return view('surat-pesanan.index', compact('surat_pesanan'));
     }
@@ -28,7 +30,7 @@ class SuratPesananController extends Controller
 
         $sales  = MasterSales::where('sales', Auth::user()->username)->value('id');
         $toko   = MasterAreaSales::where('id_sales', $sales)->first();
-        
+
         return view('surat-pesanan.create', compact('sales', 'toko'));
     }
 
@@ -97,34 +99,68 @@ class SuratPesananController extends Controller
 
         foreach($request->inputs as $key => $value){
 
-            $harga_het = MasterPart::where('part_no', $value['part_no'])->value('het');
-            
-            $value['hrg_pcs'] = $harga_het;
+            $harga_het      = MasterPart::where('part_no', $value['part_no'])->value('het');
+            $diskon_maks    = MasterDiskonPart::where('part_no', $value['part_no'])->value('diskon_maksimal');
 
-            if($value['disc'] == null){
-                $value['disc'] = 0;
+            if($diskon_maks != null){
+                if($value['disc'] > $diskon_maks){
+
+                    return redirect()->route('surat-pesanan.index')->with('danger','Nilai diskon part melebihi diskon maskimal! Silahkan input kembali');
+                
+                } else{
+
+                    $value['hrg_pcs'] = $harga_het;
+
+                    if($value['disc'] == null){
+                        $value['disc'] = 0;
+                    }
+
+                    $value['disc']          = $value['disc'];
+                    $value['nominal']       = $harga_het * $value['qty'];
+                    $value['nominal_disc']  = ($harga_het * $value['qty'] * $value['disc'])/100;
+                    $value['nominal_total'] = $value['nominal'] - $value['nominal_disc'];
+                    $value['crea_date']     = NOW();
+
+                    $newSo          = new TransaksiSpHeader();
+                    $newSo->noso    = TransaksiSpHeader::noso();
+                    
+                    TransaksiSpHeader::where('nosp', $value['nosp'])->update([
+                        'noso'      => TransaksiSpHeader::noso(),
+                        'status'    => 'C',
+                        'modi_date' => NOW()
+                    ]);
+
+                    TransaksiSpDetails::create($value);
+                }
+            } else {
+
+                    $value['hrg_pcs'] = $harga_het;
+
+                    if($value['disc'] == null){
+                        $value['disc'] = 0;
+                    }
+
+                    $value['disc']          = $value['disc'];
+                    $value['nominal']       = $harga_het * $value['qty'];
+                    $value['nominal_disc']  = ($harga_het * $value['qty'] * $value['disc'])/100;
+                    $value['nominal_total'] = $value['nominal'] - $value['nominal_disc'];
+                    $value['crea_date']     = NOW();
+
+                    $newSo          = new TransaksiSpHeader();
+                    $newSo->noso    = TransaksiSpHeader::noso();
+                    
+                    TransaksiSpHeader::where('nosp', $value['nosp'])->update([
+                        'noso'      => TransaksiSpHeader::noso(),
+                        'status'    => 'C',
+                        'modi_date' => NOW()
+                    ]);
+
+                    TransaksiSpDetails::create($value);
             }
-
-            $value['disc']          = $value['disc'];
-            $value['nominal']       = $harga_het * $value['qty'];
-            $value['nominal_disc']  = ($harga_het * $value['qty'] * $value['disc'])/100;
-            $value['nominal_total'] = $value['nominal'] - $value['nominal_disc'];
-            $value['crea_date']     = NOW();
-
-
-            $newSo          = new TransaksiSpHeader();
-            $newSo->noso    = TransaksiSpHeader::noso();
             
-            TransaksiSpHeader::where('nosp', $value['nosp'])->update([
-                'noso'      => TransaksiSpHeader::noso(),
-                'status'    => 'C',
-                'modi_date' => NOW()
-            ]);
-
-            TransaksiSpDetails::create($value);
         }        
         
-        return redirect()->route('surat-pesanan.index')->with('success','Data baru berhasil ditambahkan');
+        return redirect()->route('surat-pesanan.index')->with('success','Data baru berhasil ditambahkan!');
         
     }
 }

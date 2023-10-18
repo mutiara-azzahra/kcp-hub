@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Auth;
+use PDF;
 use Carbon\Carbon;
 use App\Models\TransaksiSOHeader;
+use App\Models\TransaksiSODetails;
 
 class ValidasiSOController extends Controller
 {
@@ -38,5 +40,16 @@ class ValidasiSOController extends Controller
 
         return redirect()->route('validasi-so.index')->with('success','Data SO berhasil divalidasi, diteruskan ke packingsheet');
 
+    }
+
+    public function cetak($noso)
+    {
+        $data           = TransaksiSOHeader::where('noso', $noso)->get();
+        $data_details   = TransaksiSODetails::where('noso', $noso)->get();
+        $header         = TransaksiSOHeader::where('noso', $noso)->first();
+        $pdf            = PDF::loadView('reports.sales-order', ['data'=>$data, 'data_details'=>$data_details], ['header'=>$header]);
+        $pdf->setPaper('letter', 'potrait');
+
+        return $pdf->stream('sales-order.pdf');
     }
 }

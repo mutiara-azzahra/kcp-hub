@@ -8,7 +8,7 @@
                 <h4>Invoice</h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-success" href="{{ route('invoice.create') }}"><i class="fas fa-eyes"></i> Lihat Invoice</a>
+                <a class="btn btn-success" href="{{ route('invoice.create') }}"><i class="fas fa-eye"></i> Lihat Invoice</a>
             </div>
         </div>
     </div>
@@ -21,7 +21,7 @@
             <div class="card" style="padding: 10px;">
                 <div class="card-header">
                     <div class="col-lg-12">
-                        <b>List Sales Order yang Belum Invoice</b>
+                        List Sales Order yang Belum Invoice
                     </div>
                 </div>
                 <div class="card-body">
@@ -34,7 +34,7 @@
                                     <th class="text-center">Nama Toko</th>
                                     <th class="text-center">Nominal Invoice</th>
                                     <th class="text-center">Nama Sales</th>
-                                    <th class="text-center"></th>
+                                    <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -63,12 +63,12 @@
             <div class="card" style="padding: 10px;">
                 <div class="card-header">
                     <div class="col-lg-12">
-                        <b>List Invoice</b>
+                        List Invoice
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="col-lg-12">  
-                        <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example1">
+                        <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example2">
                             <thead>
                                 <tr style="background-color: #6082B6; color:white">
                                     <th class="text-center">No. Invoice</th>

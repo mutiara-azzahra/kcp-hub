@@ -18,13 +18,13 @@
             <div class="card" style="padding: 10px;">
                 <div class="card-header">
                     <div class="col-lg-12">
-                        <div class="float-right">
-                            <b>Validasi Sales Order/SO</b>
+                        <div class="float-left">
+                            Validasi Sales Order/SO
                         </div>       
                     </div>
-                    {{-- <div class="float-left">
-                        <a class="btn btn-warning" href="{{ route('validasi-so.reset') }}"><i class="fas fa-repeat"></i> Reset Validasi</a>
-                    </div> --}}
+                    <div class="float-right">
+                        <a class="btn btn-warning" href="{{ route('validasi-so.reset') }}"><i class="fas fa-refresh"></i> Reset Validasi</a>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="col-lg-12">  
@@ -52,7 +52,8 @@
                                     <td class="text-left">{{ $v->nm_outlet }}</td>
                                     <td class="text-center">{{ $v->crea_date }}</td>                                    
                                     <td class="text-center">
-                                        <a class="btn btn-success btn-sm" href="{{ route('validasi-so.details',$v->noso) }}"><i class="fas fa-check-square"></i></a>
+                                        <a class="btn btn-success btn-sm" href="{{ route('validasi-so.details',$v->noso) }}"><i class="fas fa-check"></i></a>
+                                        <a class="btn btn-warning btn-sm" href="{{ route('validasi-so.cetak',$v->noso) }}"><i class="fas fa-print" target="_blank"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -61,6 +62,8 @@
                     </div>
                 </div>
             </div>
+
+        
 </div>
 @endsection
 

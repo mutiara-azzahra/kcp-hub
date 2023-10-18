@@ -16,4 +16,8 @@ class MasterPart extends Model
         'part_no', 'part_nama', 'het', 'satuan_dus', 'id_grup', 'id_rak', 'status', 
         'created_at', 'updated_at', 'created_by', 'updated_by'
     ];
+
+    public function max_disc(){
+        return $this->hasOne(MasterDiskonPart::class, 'part_no', 'part_no');
+    }
 }

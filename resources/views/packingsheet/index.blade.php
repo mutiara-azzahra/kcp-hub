@@ -19,11 +19,11 @@
                 <div class="card-header">
                     <div class="col-lg-12">
                         <div class="float-left">
-                            <b>List SO yang Telah Divalidasi</b>
+                            List SO yang Telah Divalidasi
                         </div>       
                     </div>
                     <div class="float-right">
-                        <a class="btn btn-warning" href="{{ route('packingsheet.reset') }}"><i class="fas fa-repeat"></i> Reset Packingsheet</a>
+                        <a class="btn btn-warning" href="{{ route('packingsheet.reset') }}"><i class="fas fa-refresh"></i> Reset Packingsheet</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -57,7 +57,7 @@
                                             <input class="form-check-input" type="checkbox" name="selected_items[]" value="{{ $v->noso }}">
                                         </div>
                                     </td>
-                                    <td class="text-left">KCP/ON/{{ $v->area_so }}/{{ $v->noso }}</td>
+                                    <td class="text-left">KCP/NON/{{ $v->area_so }}/{{ $v->noso }}</td>
                                     <td class="text-center">{{ $v->kd_outlet }}</td>
                                     <td class="text-left">{{ $v->nm_outlet }}</td>
                                     <td class="text-center">{{ $v->flag_vald_date}}</td>                                    
@@ -83,7 +83,7 @@
                 <div class="card-header">
                     <div class="col-lg-12">
                         <div class="float-left">
-                            <b>List Packingsheet</b>
+                            List Packingsheet
                         </div>       
                     </div>
                 </div>

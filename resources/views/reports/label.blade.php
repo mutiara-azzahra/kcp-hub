@@ -90,10 +90,10 @@
          text-align: center;
      }
      .header{
-         margin-bottom: 20px;
+         margin-bottom: 18px;
          text-align: center;
          height: 200px;
-         padding: 5px;
+         padding: 4px;
          border: 0.5px solid #000;
      }
      hr{
@@ -121,12 +121,13 @@
     <style>
         @page { 
           size: 21 cm 29.6 cm; 
-          margin: 0 cm 0 cm 0 cm 0 cm !important;
+          margin-top: 20px;
+          margin-left: 0px;
+          margin-right: 0px;
           padding: 0px !important;
           } 
     </style>
                     @foreach($data_dus as $data)
-
                     <div class="header">
                             <table class="table atas">
                                 <tr>
@@ -135,7 +136,7 @@
                                 </tr>
                                 <tr>
                                     <td class="alamat-kcp">Jl. Sutoyo S. No. 144 Banjarmasin</td>
-                                    <td class="alamat-kcp">Tgl. Packingsheet: {{ $data->created_at }}</td>
+                                    <td class="alamat-kcp">Tgl. Packingsheet: {{ $data->created_at}}</td>
                                 </tr>
                                 <tr>
                                     <td class="alamat-kcp">Hp. 0811 517 1595, 0812 5156 2768</td>
@@ -180,8 +181,6 @@
                         </div>
 
                     @endforeach
-
-                    <div class="page-break"></div>
                         
 </body>
 </html>

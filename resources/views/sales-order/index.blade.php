@@ -52,7 +52,13 @@
                                     <td class="text-center">{{ $s->kd_outlet }}</td>
                                     <td class="text-left">{{ $s->nm_outlet }}</td>
                                     <td class="text-left">Rp. {{ number_format($s->details_sp->sum('nominal_total'), 0, ',', '.') }}</td>
-                                    <td class="text-center"></td>
+
+                                    @if($s->outlet->plafond != null)
+                                    <td class="text-left">Rp. {{ number_format($s->outlet->plafond->nominal_plafond, 0, ',', '.') }}</td>
+                                    @else
+                                    <td class="text-center" style="color: red;">Belum ada</td>
+                                    @endif
+
                                     <td class="text-center">{{ $s->user_sales }}</td>
 
                                     @if(isset($s->so['flag_approve']) && $s->so['flag_approve'] ==='Y')

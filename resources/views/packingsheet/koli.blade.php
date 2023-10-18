@@ -13,11 +13,19 @@
         </div>
     </div>
             @if ($message = Session::get('success'))
-                <div class="alert alert-success">
+                <div class="alert alert-success" id="myAlert">
                     <p>{{ $message }}</p>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                        <i class="fas fa-times"></i>
-                    </button>
+                </div>
+            @endif
+
+            @if ($errors->any())
+                <div class="alert alert-danger" id="myAlert">
+                    <strong>Maaf!</strong> Ada yang data yang belum terisi<br><br>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
                 </div>
             @endif
 
@@ -31,7 +39,7 @@
                                     <tr>
                                         <th class="text-left">No. Packingsheet</th>
                                         <td>:</td>
-                                        <td class="text-left">{{ $header_ps->nops }}</td>
+                                        <td class="text-left"><b>{{ $header_ps->nops }}</b></td>
                                     </tr>
                                 </table>
                             </div>

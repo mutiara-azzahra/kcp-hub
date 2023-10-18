@@ -48,5 +48,10 @@ class TransaksiSOHeader extends Model
     {
         return $this->belongsTo(TransaksiInvoiceHeader::class, 'noso', 'noso');
     }
+
+    public function outlet()
+    {
+        return $this->hasOne(MasterOutlet::class, 'kd_outlet', 'kd_outlet');
+    }
     
 }

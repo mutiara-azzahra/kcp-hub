@@ -15,7 +15,11 @@
             @if ($message = Session::get('success'))
                 <div class="alert alert-success" id="myAlert">
                     <p>{{ $message }}</p>
-                </div>  
+                </div>
+            @elseif ($message = Session::get('danger'))
+                <div class="alert alert-danger" id="myAlert">
+                    <p>{{ $message }}</p>
+                </div>
             @endif
 
             <div class="card" style="padding: 10px;">

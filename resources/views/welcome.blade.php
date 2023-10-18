@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>KCP Non AOP</title>
+  <title>KCP Shop</title>
   <link rel = "icon" href ="{{ asset('dist/img/logo_1.png')}}">
 
   <!-- Google Font: Source Sans Pro -->
@@ -79,7 +79,7 @@
       <!-- Brand Logo -->
       <a href="{{ route('dashboard')}}" class="brand-link">
         <img src="{{ asset('dist/img/logo_1.png')}} " alt="AdminLTE Logo" class="brand-image" style="opacity: .9">
-        <span class="brand-text font-weight-light">KCP Non AOP</span>
+        <span class="brand-text font-weight-light">KCP Shop</span>
       </a>
 
       <!-- Sidebar -->
@@ -155,13 +155,13 @@
               </li>
             @endif
 
-              {{-- Master --}}
-            @if(Auth::user()->id_role == 9)
+              {{-- Admin --}}
+            @if(Auth::user()->id_role == 11 || 9)
             <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon"></i>
                   <p>
-                    Faktur
+                    Admin
                     <i class="right fas fa-angle-right"></i>
                   </p>
                 </a>
@@ -464,6 +464,7 @@
           x.type = "password";
         }
       }
+
     </script>
 
   @yield('script')

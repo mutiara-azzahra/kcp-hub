@@ -12,7 +12,6 @@ class TransaksiSpHeader extends Model
     use HasFactory;
 
     protected $table = 'trns_sp_header';
-    // protected $primaryKey   = 'nosp';
     public $timestamps = false;
     public $incrementing = false;
 
@@ -27,7 +26,7 @@ class TransaksiSpHeader extends Model
         'status',
         'ket_status',
         'user_sales',
-        'crea_at',
+        'crea_date',
         'crea_by',
         'modi_date',
         'modi_by'
