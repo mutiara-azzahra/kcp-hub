@@ -53,7 +53,7 @@
                                     <td class="text-center">{{ $v->crea_date }}</td>                                    
                                     <td class="text-center">
                                         <a class="btn btn-success btn-sm" href="{{ route('validasi-so.details',$v->noso) }}"><i class="fas fa-check"></i></a>
-                                        <a class="btn btn-warning btn-sm" href="{{ route('validasi-so.cetak',$v->noso) }}"><i class="fas fa-print" target="_blank"></i></a>
+                                        <a class="btn btn-warning btn-sm" href="{{ route('validasi-so.cetak',$v->noso) }}" target="_blank"><i class="fas fa-print"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

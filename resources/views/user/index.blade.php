@@ -5,7 +5,7 @@
     <div class="row mt-5">
         <div class="col-lg-12 margin-tb pb-3">
              <div class="float-left">
-                <h4><b>User</b></h4>
+                <h4>Master User</h4>
             </div>
             <div class="float-right">
                 <a class="btn btn-success" href="{{ route('user.create') }}"><i class="fas fa-plus"></i> Tambah User</a>

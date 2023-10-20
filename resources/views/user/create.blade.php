@@ -14,7 +14,7 @@
         </div>
     </div>
         @if ($errors->any())
-            <div class="alert alert-danger">
+            <div class="alert alert-danger" id="myAlert">
                 <strong>Maaf!</strong> Ada yang salah
                 <ul>
                     @foreach ($errors->all() as $error)
@@ -22,9 +22,6 @@
                     @endforeach
                 </ul>
             </div>
-            <button type="button" class="btn btn-tool" data-card-widget="remove">
-                <i class="fas fa-times"></i>
-            </button>
         @endif
 
         <div class="card" style="padding: 30px;">
@@ -44,10 +41,9 @@
                             <select name="id_role" class="form-control mr-2">
                                 <option value="">-- Pilih Role --</option>
                                 @foreach($role as $s)
-                                    <option value="{{ $s->id_role }}">{{ $s->role }}</option>
+                                    <option value="{{ $s->id }}">{{ $s->role }}</option>
                                 @endforeach
                             </select>
-
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
@@ -59,7 +55,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Email</strong>
-                            <input type="text" name="email" class="form-control" placeholder="Username">
+                            <input type="text" name="email" class="form-control" placeholder="Email">
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">

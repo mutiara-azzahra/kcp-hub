@@ -197,7 +197,7 @@
                         
                     </tr>
                 </thead>
-                <tbody>
+                <tbody style="line-height: 15px;">
                     @foreach ($data_details as $p)
                     <tr>
                         <td class="td-qty" style="width: 6px;">{{$loop->iteration}}.</td>

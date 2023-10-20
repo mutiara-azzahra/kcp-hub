@@ -22,7 +22,7 @@
                 <div class="card-header">
                     <div class="col-lg-12">
                         <div class="float-left">
-                            <b>List Packingsheet</b>
+                            List Packingsheet
                         </div>       
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                 <div class="card-header">
                     <div class="col-lg-12">
                         <div class="float-left">
-                            <b>List Surat Jalan</b>
+                            List Surat Jalan
                         </div>       
                     </div>
                 </div>
@@ -107,16 +107,18 @@
                                 @endphp
 
                                 @foreach($surat_jalan as $s)
+                                @foreach($s->details_sj as $d)
                                 <tr>
-                                    @foreach($s->details_sj as $d)
+                                    
                                     <td>{{ $s->nosj }}</td>
                                     <td>{{ $d->kd_outlet }}/{{ $d->header_ps->nm_outlet }}</td>
                                     <td class="text-center">{{ $d->koli }}</td>
                                     <td class="text-center">
                                         <a class="btn btn-warning btn-sm" href="{{ route('surat-jalan.cetak', $s->nosj) }}" target="_blank"><i class="fas fa-print"></i></a>
                                     </td>
-                                    @endforeach
+                                    
                                 </tr>
+                                @endforeach
                                 @endforeach
                                 
                             </tbody>

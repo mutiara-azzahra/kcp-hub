@@ -7,10 +7,10 @@
     <title>Invoice</title>
     <style>
     h4,h2{
-        font-family:serif;
+        font-family:'Times New Roman', Times;
     }
         body{
-            font-family:sans-serif;
+            font-family:'Times New Roman', Times;
         }
         table{
         border-collapse: collapse;
@@ -68,9 +68,9 @@
       }
       .th-header{
         text-align: center;
-        border-top: 1px solid #000; /* Add a top border with a black color */
-        border-bottom: 1px solid #000; /* Add a bottom border with a black color */
-        border-left: none; /* Remove the left border */
+        border-top: 1px solid #000; 
+        border-bottom: 1px solid #000;
+        border-left: none;
         border-right: none;
       }
       br{
@@ -86,7 +86,7 @@
      .header{
          margin-bottom: 0;
          text-align: center;
-         height: 200px;
+         height: 110px;
          padding: 0px;
      }
      hr{
@@ -111,52 +111,76 @@
     <style>
         @page { 
           size: 21 cm 29.6 cm; 
-          margin: 20px;
+          margin: 10px;
           padding: 0px !important;
           } 
      </style>
     <div class="header">
-
-                            <table class="table atas">
+                            <table class="table atas" style="line-height: 12px;">
                                 <tr>
-                                    <td class="nama-kcp"><b>PT. KCP</b></td>
-                                    <td class="atas"><b>Surat Jalan / SJ</b></td>
-                                </tr>
-                                <tr>
-                                    <td class="alamat-kcp">Jl. Sutoyo S. No. 144 Banjarmasin</td>
-                                    <td class="atas"></td>
-                                </tr>
-                                <tr>
-                                    <td class="alamat-kcp">Hp. 0811 517 1595, 0812 5156 2768</td>
-                                    <td class="atas"><b>{{ $data_details->kd_outlet }} / {{ $data_details->outlet->nm_outlet }}</b></td>
-                                </tr>
-                                <tr>
-                                    <td class="alamat-kcp">Telp. 0511-4416579, 4417127</td>
-                                    <td class="atas"><b>{{ $data_details->outlet->almt_outlet }}</b></td>
-                                </tr>
-                                <tr>
-                                    <td class="alamat-kcp">Fax. 3364674 </td>
-                                    <td class="atas"><b>{{ $data_details->outlet->kode_area->nm_area }}, {{ $data_details->outlet->kode_area->provinsi->provinsi }}</b></td>
-                                </tr>
-                                
-                                @foreach($data as $d)
-                                <tr>
-                                    <td class="nops">
-                                        <table class="atas">
+                                    <td class="atas" style="width: 350px;">
+                                        <table class="atas" style="line-height: 13px;">
                                             <tr>
-                                                <td class="atas">No. SJ</td>
-                                                <td class="atas">:</td> 
-                                                <td class="atas">{{ $d->nosj}}</td> 
+                                                <td class="atas">PT. KCP</td>
                                             </tr>
                                             <tr>
-                                                <td class="atas">Tanggal SJ</td>
-                                                <td class="atas">:</td>
-                                                <td class="atas">{{ $d->created_at->format('d-m-Y') }}</td>
+                                                <td class="alamat-kcp">Jl. Sutoyo S. No. 144 Banjarmasin</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="alamat-kcp">Hp. 0811 517 1595, 0812 5156 2768</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="alamat-kcp">Telp. 0511-4416579, 4417127</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="alamat-kcp">Fax. 3364674 </td>
                                             </tr>
                                         </table>
                                     </td>
-                                    <td class="atas"></td>
+                                    <td class="atas">
+                                        <table class="atas" style="line-height: 13px;">
+                                            <tr>
+                                                <td class="atas"><b>SURAT JALAN (SJ)</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="atas"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="atas">{{ $data_details->outlet->nm_outlet }} ({{ $data_details->outlet->kd_outlet }})</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="atas">{{ $data_details->outlet->almt_pengiriman }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="atas">{{ $data_details->outlet->kode_area->provinsi->provinsi}}</td>
+                                            </tr>
+                                        </table>
+                                    </td>
                                 </tr>
+
+                                @foreach($data as $i)
+                                <tr style="line-height: 10px;">
+                                    <td class="nops">
+                                        <table class="atas">
+                                            <tr>
+                                                <td class="atas">No. P/S</td>
+                                                <td class="atas">:</td>
+                                                <td class="atas">{{ $i->nosj }}</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+
+                                    <td class="nops">
+                                        <table class="atas">
+                                            <tr>
+                                                <td class="atas">Tanggal SJ</td>
+                                                <td class="atas">:</td>
+                                                <td class="atas">{{ $i->created_at }}</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+
                                 @endforeach
                             </table>
     
@@ -170,8 +194,8 @@
                         <th class="th-header">No.</th>
                         <th class="th-header">No. Packingsheet</th>
                         <th class="th-header">Invoice</th>
-                        <th class="th-header">Dus</th>
-                        <th class="th-header">Check</th>
+                        <th class="th-header" style="width: 150px;">Dus</th>
+                        <th class="th-header" style="width: 30px;">Check</th>
                         <th class="th-header">Keterangan</th>
                         
                     </tr>
@@ -189,9 +213,7 @@
                             @endforeach
                         </td>
                         <td class="td-part">
-                            @foreach($s->header_ps->details_dus as $a)
-                            {{ $a->no_dus }},
-                            @endforeach
+                           {{ $s->header_ps->details_dus->first()->no_dus }} - {{ $s->header_ps->details_dus->last()->no_dus }}
                         </td>
                         <td class="td-dus"></td>
                         <td class="td-qty">{{ $s->header_ps->details_dus->first()->kd_kategori }} - {{ $s->header_ps->details_dus->first()->kategori }}</td>
@@ -201,7 +223,6 @@
                     @endforeach
                 </tbody>
             </table>
-                <br>
                 <table class="table atas">
                     <tr>
                         <td class="alamat-kcp">Catatan:</td>
@@ -214,16 +235,11 @@
                         <td class="alamat-kcp"></td>
                     </tr>
                 </table>
-
-                <br>
-                <br>
                 <table class="atas">
                     <tr>
                         <td class="atas">
                             <div class="ttd">
                                 <h5 style="margin:0px">Penjualan,</h5>
-                                <br>
-                                <br>
                                 <br>
                                 <br>
                                 
@@ -235,16 +251,12 @@
                                 <h5 style="margin:0px">Ekspedisi,</h5>
                                 <br>
                                 <br>
-                                <br>
-                                <br>
                                 <h5 style="text-decoration:underline; margin:2px">{{ $data_details->outlet->expedisi }}</h5>
                             </div>
                         </td>
                         <td class="atas">
                             <div class="ttd">
                                 <h5 style="margin:0px">Toko,</h5>
-                                <br>
-                                <br>
                                 <br>
                                 <br>
                                 
@@ -254,8 +266,6 @@
                         <td class="atas">
                             <div class="ttd">
                                 <h5 style="margin:0px">Security,</h5>
-                                <br>
-                                <br>
                                 <br>
                                 <br>
                                 

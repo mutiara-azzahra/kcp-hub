@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use PDF;
 use Illuminate\Http\Request;
-
+use App\Models\User;
 use App\Models\TransaksiPackingsheetHeader;
 use App\Models\TransaksiLkhHeader;
 use App\Models\TransaksiLkhDetails;
@@ -67,8 +67,9 @@ class LkhController extends Controller
     {
         $details     = TransaksiLkhHeader::where('no_lkh', $no_lkh)->first();
         $lkh_details  = TransaksiLkhHeader::where('no_lkh', $no_lkh)->get();
+        $driver  = User::where('id_role', 22)->get();
 
-        return view('laporan-kiriman-harian.details', ['no_lkh' => $no_lkh] ,compact('details', 'lkh_details'));
+        return view('laporan-kiriman-harian.details', ['no_lkh' => $no_lkh] ,compact('details', 'lkh_details', 'driver'));
     }
 
     public function store_details(Request $request, $no_lkh)

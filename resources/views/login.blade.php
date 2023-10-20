@@ -49,12 +49,14 @@
                     </div>
                     <div class="input-group mb-3">
                         <input type="password" id="password" name="password" class="form-control" placeholder="Password">
-                        
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="checkbox" onclick="myPassword()" class="mr-1">Tampilkan Password
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -82,5 +84,19 @@
 <script src="{{ asset('/plugins/bootstrap/js/bootstrap.bundle.min.js')}} "></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('/dist/js/adminlte.min.js')}} "></script>
+
+<script>
+
+      // Password toggle
+      function myPassword() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+          x.type = "text";
+        } else {
+          x.type = "password";
+        }
+      }
+
+</script>
 </body>
 </html>

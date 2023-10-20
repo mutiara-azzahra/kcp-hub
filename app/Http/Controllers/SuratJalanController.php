@@ -33,6 +33,7 @@ class SuratJalanController extends Controller
         $selectedItems = $request->input('selected_items', []);
 
         foreach ($selectedItems as $noso) {
+
             $invoice_belum_sj = TransaksiSOHeader::where('noso', $noso)->get();
 
             foreach($invoice_belum_sj as $s){
@@ -64,9 +65,10 @@ class SuratJalanController extends Controller
                     $details['koli']       = $h->ps->details_dus->count('no_dus');
                     $details['created_at'] = NOW();
 
-                    TransaksiSuratJalanDetails::create($details);
-                }
+                } 
             }
+
+            TransaksiSuratJalanDetails::create($details);
         }
 
         return redirect()->route('surat-jalan.index')->with('success','Data SO berhasil diteruskan ke packingsheet');
@@ -83,7 +85,6 @@ class SuratJalanController extends Controller
 
         $data               = TransaksiSuratJalanHeader::where('nosj', $nosj)->get();
         $data_details       = TransaksiSuratJalanDetails::where('nosj', $nosj)->first();
-
 
         $pdf                = PDF::loadView('reports.surat-jalan', ['data'=>$data], ['data_details'=>$data_details]);
         $pdf->setPaper('letter', 'potrait');

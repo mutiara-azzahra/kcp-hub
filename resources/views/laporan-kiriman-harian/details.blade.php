@@ -36,11 +36,16 @@
                     </div>
                 </div> 
                 <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Driver</strong>
-                        <input type="text" name="driver" class="form-control" placeholder="">
+                        <div class="form-group">
+                            <strong>Driver</strong>
+                            <select name="id" class="form-control mr-2">
+                                <option value="">-- Pilih Driver --</option>
+                                @foreach($driver as $s)
+                                    <option value="{{ $s->username }}">{{ $s->username }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
-                </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Helper</strong>
@@ -102,7 +107,7 @@
                                             <th class="text-center">Koli</th>
                                             <th class="text-center">No. Urut</th>
                                             <th class="text-center">Ekspedisi</th>
-                                            <th class="text-center"></th>
+                                            {{-- <th class="text-center">Aksi</th> --}}
                                         </tr>
                                     </thead>
                                     <tbody class="input-fields">
@@ -124,9 +129,9 @@
                                                 <td class="text-left">{{ $o->expedisi }}</td>
                                                 @endforeach
 
-                                                <td class="text-center">
+                                                {{-- <td class="text-center">
                                                     <a class="btn btn-danger btn-sm" href=""><i class="fas fa-times"></i></a>
-                                                </td>
+                                                </td> --}}
                                             </tr>
 
                                             @endforeach

@@ -70,8 +70,6 @@
 
                                     @endforeach
                                     <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
 
                                 </tr>
                                  @endforeach
@@ -106,7 +104,7 @@
                                     <th class="text-center">Driver</th>
                                     <th class="text-center">Helper</th>
                                     <th class="text-center">Plat Mobil </th>
-                                    <th class="text-center"></th>
+                                    <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -231,6 +231,7 @@
                                             </tr>
                                         </table>
 
+                                        <br>
                                         <table class="atas">
                                             <tr>
                                                 <td class="atas">
@@ -246,7 +247,7 @@
                                                         </tr>
                                                     </table>
                                                 </td>
-                                                <td class="nama-kcp">
+                                                <td class="nama-kcp" style="width: 250px">
                                                     <table class="atas">
                                                         <tr>
                                                             <td class="atas">

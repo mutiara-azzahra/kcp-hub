@@ -34,6 +34,7 @@ class UserController extends Controller
             'nama_user'     => 'required',
             'username'      => 'required',
             'password'      => 'required',
+            'id_role'       => 'required',
         ]);
     
         $input = $request->all();
@@ -41,6 +42,7 @@ class UserController extends Controller
         $input['nama_user']         = $request->nama_user;
         $input['username']          = $request->username;
         $input['email']             = $request->email;
+        $input['id_role']           = $request->id_role;
         $input['password']          = Hash::make($request['password']);
         $user                       = User::create($input);
 
@@ -59,6 +61,22 @@ class UserController extends Controller
             ]);
 
         return redirect()->route('user.index')->with('success','Password berhasil di reset!');
+        
+    }
+
+    public function nonaktif($id)
+    {
+        $nonaktif = User::where('id', $id)->update([
+                'status'         => 'N',
+                'updated_at'     => NOW(),
+                'updated_by'     => Auth::user()->nama_user
+            ]);
+
+        if ($nonaktif){
+            return redirect()->route('user.index')->with('success','Data user berhasil dinonaktifkan!');
+        } else{
+            return redirect()->route('user.index')->with('danger','Data user gagal dinonaktifkan');
+        }
         
     }
 
