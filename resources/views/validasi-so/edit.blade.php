@@ -18,7 +18,10 @@
                 </div>
             @endif
 
-        <div class="card" style="padding: 10px;">
+        <form action="{{ route('validasi-so.store_edit', $details->id)}}" method="POST">
+        @csrf
+
+            <div class="card" style="padding: 10px;">
                 <div class="card-body">
                     <div class="row">
 
@@ -29,7 +32,6 @@
                                             <th class="text-center">Part No</th>
                                             <th class="text-center">Qty</th>
                                             <th class="text-center">Diskon (%)</th>
-                                            <th class="text-center">Simpan</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -48,18 +50,18 @@
                                                             <input type="number" name="disc" class="form-control" value="{{ $details->disc }}">
                                                         </div>
                                                     </td>
-                                                    <td class="text-center">
-                                                        <div class="form-group col-12">
-                                                            <a type="button" class="btn btn-success m-1" id="add"><i class="fas fa-check"></i></a>                                                                                  
-                                                        </div>
-                                                    </td>
                                     </tbody>
-                                    
                                 </table>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                            <div class="float-right">
+                                <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Data</button>                            
+                            </div>
                         </div>
                     </div>
                 </div>
-        </div>
+            </div>
+        </form>
 
 </div>
 @endsection
