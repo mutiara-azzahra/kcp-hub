@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\TransaksiSpHeader;
 use App\Models\TransaksiSOHeader;
 use App\Models\TransaksiSODetails;
-
+use App\Models\MasterStokGudang;
 
 class SalesOrderController extends Controller
 {
@@ -36,8 +36,8 @@ class SalesOrderController extends Controller
 
     public function details($nosp){
 
-        $surat_pesanan_id = TransaksiSpHeader::where('nosp', $nosp)->get();
-        $plafond = TransaksiSpHeader::where('nosp', $nosp)->first();       
+        $surat_pesanan_id   = TransaksiSpHeader::where('nosp', $nosp)->get();
+        $plafond            = TransaksiSpHeader::where('nosp', $nosp)->first();       
 
         return view('sales-order.details', ['nosp' => $nosp] , compact('surat_pesanan_id', 'plafond'));
     }
@@ -76,24 +76,30 @@ class SalesOrderController extends Controller
         //move to details so Approve
         foreach($approve_so as $a){
             foreach($a->details_sp as $d){
-                $details['noso']               = $a->noso;
-                $details['area_so']            = $a->area_sp;
-                $details['kd_outlet']          = $a->kd_outlet;
-                $details['part_no']            = $d->part_no;
-                $details['qty']                = $d->qty;
-                $details['hrg_pcs']            = $d->hrg_pcs;
-                $details['disc']               = $d->disc;
-                $details['nominal']            = $d->nominal;
-                $details['nominal_disc']       = $d->nominal_disc;
-                $details['nominal_total']      = $d->nominal_total;
-                $details['status']             = 'O';
-                $details['ket_status']         = 'OPEN';
-                $details['user_sales']         = $d->user_sales;
-                $details['flag_approve_date']  = NOW();
-                $details['crea_date']          = NOW();
-                $details['crea_by']            = Auth::user()->nama_user;
 
-                TransaksiSODetails::create($details);
+                $stok_ready = MasterStokGudang::where('part_no', $d->part_no)->value('stok');
+
+                if($stok_ready != 0){
+                    $details['noso']               = $a->noso;
+                    $details['area_so']            = $a->area_sp;
+                    $details['kd_outlet']          = $a->kd_outlet;
+                    $details['part_no']            = $d->part_no;
+                    $details['qty']                = $d->qty;
+                    $details['hrg_pcs']            = $d->hrg_pcs;
+                    $details['disc']               = $d->disc;
+                    $details['nominal']            = $d->nominal;
+                    $details['nominal_disc']       = $d->nominal_disc;
+                    $details['nominal_total']      = $d->nominal_total;
+                    $details['status']             = 'O';
+                    $details['ket_status']         = 'OPEN';
+                    $details['user_sales']         = $d->user_sales;
+                    $details['flag_approve_date']  = NOW();
+                    $details['crea_date']          = NOW();
+                    $details['crea_by']            = Auth::user()->nama_user;
+
+                    TransaksiSODetails::create($details);
+                }
+                
             }
         }
         

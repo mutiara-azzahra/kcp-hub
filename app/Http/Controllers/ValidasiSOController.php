@@ -34,7 +34,6 @@ class ValidasiSOController extends Controller
 
     public function validasi($noso){
 
-        
         $validasi_so = TransaksiSOHeader::where('noso', $noso)->update([
             'flag_vald_gudang'  => 'Y',
             'flag_vald_date'    => NOW()
