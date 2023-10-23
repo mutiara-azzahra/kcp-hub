@@ -160,7 +160,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/sales-order/reject/{nosp}', [SalesOrderController::class, 'reject'])->name('sales-order.reject');
     Route::get('/sales-order/list-approved-so', [SalesOrderController::class, 'so_approved'])->name('sales-order.approved');
     Route::get('/sales-order/list-rejected-so', [SalesOrderController::class, 'so_rejected'])->name('sales-order.rejected');
-
+    Route::get('/sales-order/edit/{id}', [SalesOrderController::class, 'edit_details'])->name('sales-order.edit_details');
+    
     //ROUTE BO
     Route::get('/back-order', [BackOrderController::class, 'index'])->name('back-order.index');
     Route::get('/back-order/create', [BackOrderController::class, 'create'])->name('back-order.create');

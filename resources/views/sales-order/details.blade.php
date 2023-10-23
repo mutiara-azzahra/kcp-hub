@@ -44,7 +44,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-6 p-1">
+                        <div class="col-lg-12 p-1">
                             <table class="table table-borderless">
                                 <tr>
                                     <th class="text-left">No. Surat Pesanan / SP</th>
@@ -89,6 +89,7 @@
                                             <th class="text-center">Qty</th>
                                             <th class="text-center">Nominal Disc</th>
                                             <th class="text-center">Nominal Final</th>
+                                            <th class="text-center">Ubah</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -100,6 +101,9 @@
                                                     <td class="text-center">{{ $d->qty }}</td>
                                                     <td class="text-center">{{ $d->disc }} %</td>
                                                     <td class="text-left">Rp. {{ number_format($d->nominal_total, 0, ',', '.') }}</td>
+                                                    <td class="text-center">
+                                                         <a class="btn btn-info btn-sm" href="{{ route('sales-order.edit_details', $d->id) }}"><i class="fas fa-edit"></i></a>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         @endforeach

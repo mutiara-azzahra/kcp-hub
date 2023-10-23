@@ -22,10 +22,10 @@
                 </div>
             @endif
 
-        <div class="card" style="padding: 10px;">
+        <div class="card" >
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-6 p-1">
+                        <div class="col-lg-8 p-1">
                             <table class="table table-borderless">
                                 <tr>
                                     <th class="text-left">No. Surat Pesanan / SP</th>
@@ -61,17 +61,18 @@
 
                         @if($check === null)
 
-                        <div class="col-lg-12 p-1">
-
+                        <div class="col-lg-12 p-1" id="main" data-loading="true">
                             <form action="{{ route('surat-pesanan.store_details')}}" method="POST">
                                 @csrf
 
                                 <table class="table table-hover table-sm bg-light table-striped table-bordered" id="table">
                                     <thead>
                                         <tr style="background-color: #6082B6; color:white">
-                                            <th class="text-center">Part No | Nama Part | HET | Maks. Disc (%)</th>
+                                            <th class="text-center">Part No | Nama Part</th>
+                                            <th class="text-center">HET</th>
                                             <th class="text-center">Qty</th>
                                             <th class="text-center">Disc (%)</th>
+                                            <th class="text-center">Nominal</th>
                                             <th class="text-center">Tambah</th>
                                         </tr>
                                     </thead>
@@ -79,16 +80,17 @@
                                                 <tr>
                                                     <td class="text-center">
                                                         <div class="form-group col-12">
-                                                            <select name="inputs[0][part_no]" class="form-control mr-2">
+                                                            <select name="inputs[0][part_no]" class="form-control mr-2" id="package">
                                                                 <option value="">-- Pilih --</option>
                                                                 @foreach($master_part as $k)
-                                                                    @if( $k->max_disc != null)
-                                                                    <option value="{{ $k->part_no }}"> {{ $k->part_no }} | {{ $k->part_nama }} | Rp. {{ number_format($k->het, 0, ',', '.') }} | {{ $k->max_disc->diskon_maksimal }}%</option>
-                                                                    @else
-                                                                    <option value="{{ $k->part_no }}"> {{ $k->part_no }} | {{ $k->part_nama }} | Rp. {{ number_format($k->het, 0, ',', '.') }}</option>
-                                                                    @endif
+                                                                    <option value="{{ $k->part_no }}" data-het="{{ $k->het }}"> {{ $k->part_no }} | {{ $k->part_nama }}</option>
                                                                 @endforeach
                                                             </select>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <div class="form-group col-12">
+                                                            <input type="text" name="het" for="het" class="form-control" readonly>
                                                         </div>
                                                     </td>
                                                     <td class="text-center">
@@ -100,6 +102,11 @@
                                                     <td class="text-center">
                                                         <div class="form-group col-12">
                                                             <input type="number" name="inputs[0][disc]" class="form-control" placeholder="0">
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-center" id="nominal">
+                                                        <div class="form-group col-12">
+                                                            <input type="text" name="nominal" for="nominal" class="form-control" readonly>
                                                         </div>
                                                     </td>
                                                     <td class="text-center">
@@ -164,16 +171,17 @@
             $('#table').append(`<tr>
                                                     <td class="text-center">
                                                         <div class="form-group col-12">
-                                                            <select name="inputs[${i}][part_no]" class="form-control mr-2">
+                                                            <select name="inputs[${i}][part_no]" class="form-control mr-2" id="package">
                                                                 <option value="">-- Pilih --</option>
                                                                 @foreach($master_part as $k)
-                                                                    @if( $k->max_disc != null)
-                                                                    <option value="{{ $k->part_no }}"> {{ $k->part_no }} | {{ $k->part_nama }} | Rp. {{ number_format($k->het, 0, ',', '.') }} | {{ $k->max_disc->diskon_maksimal }}%</option>
-                                                                    @else
-                                                                    <option value="{{ $k->part_no }}"> {{ $k->part_no }} | {{ $k->part_nama }} | Rp. {{ number_format($k->het, 0, ',', '.') }}</option>
-                                                                    @endif
+                                                                    <option value="{{ $k->part_no }}" data-het="{{ $k->het }}"> {{ $k->part_no }} | {{ $k->part_nama }}</option>
                                                                 @endforeach
                                                             </select>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <div class="form-group col-12">
+                                                            <input type="text" name="het" for="het" class="form-control" readonly>
                                                         </div>
                                                     </td>
                                                     <td class="text-center">
@@ -185,6 +193,11 @@
                                                     <td class="text-center">
                                                         <div class="form-group col-12">
                                                             <input type="number" name="inputs[${i}][disc]" class="form-control" placeholder="0">
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-center" id="nominal">
+                                                        <div class="form-group col-12">
+                                                            <input type="text" name="nominal" for="nominal" class="form-control" readonly>
                                                         </div>
                                                     </td>
                                                     <td class="text-center">
@@ -200,6 +213,19 @@
         $(this).parents('tr').remove();
     })
 
-    </script>
+
+    //HET MUNCUL
+    const data = $('#main').data('loading');
+
+    $('#package').on('change', function(){
+        const het = $('#package option:selected').data('het');
+
+        const formattedHet = Number(het).toLocaleString('id-ID');
+
+        $('[name=het]').val(formattedHet);
+    });
+
+
+    </script>    
 
 @endsection

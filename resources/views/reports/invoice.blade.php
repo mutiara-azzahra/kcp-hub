@@ -145,7 +145,7 @@
                                     <td class="atas">
                                         <table class="atas" style="line-height: 13px;">
                                             <tr>
-                                                <td class="atas"><b>PACKINGSHEET (P/S)</b></td>
+                                                <td class="atas"><b>INVOICE</b></td>
                                             </tr>
                                             <tr>
                                                 <td class="atas"></td>

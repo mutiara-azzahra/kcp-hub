@@ -149,4 +149,12 @@ class SalesOrderController extends Controller
         return redirect()->route('sales-order.index')->with('success','Data SO berhasil ditolak');
 
     }
+
+    public function edit_details($id){
+
+        $details       = TransaksiSODetails::findOrFail($id);
+
+        return view('sales-order.edit', compact('details'));
+
+    }
 }
