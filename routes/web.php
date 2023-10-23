@@ -175,6 +175,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/validasi-so/reset-so', [ValidasiSOController::class, 'reset'])->name('validasi-so.reset');
     Route::get('/validasi-so/validasi/{noso}', [ValidasiSOController::class, 'validasi'])->name('validasi-so.validasi');
     Route::get('/validasi-so/cetak/{noso}', [ValidasiSOController::class, 'cetak'])->name('validasi-so.cetak');
+    Route::get('/validasi-so/edit/{id}', [ValidasiSOController::class, 'edit_details'])->name('validasi-so.edit_details');
 
     //ROUTE PACKINGSHEET
     Route::get('/packingsheet', [PackingSheetController::class, 'index'])->name('packingsheet.index');

@@ -5,7 +5,7 @@
     <div class="row mt-5">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4><b>Master Kode Rak</b></h4>
+                <h4>Master Kode Rak</h4>
             </div>
             <div class="float-right">
                 <a class="btn btn-success" href="{{ route('kode-rak-lokasi.create') }}"><i class="fas fa-plus"></i> Tambah Kode Rak</a>

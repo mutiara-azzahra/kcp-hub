@@ -202,8 +202,7 @@
                         <th class="th-header">Nama Barang</th>
                         <th class="th-header">Qty</th>
                         <th class="th-header">Hrg/Pcs</th>
-                        <th class="th-header">Disc</th>
-                        <th class="th-header">%</th>
+                        <th class="th-header">Disc %</th>
                         <th class="th-header">Jumlah</th>
                         
                     </tr>
@@ -216,7 +215,6 @@
                         <td class="td-part">{{ $p->nama_part->part_nama }}</td>
                         <td class="td-qty">{{ $p->qty }}</td>
                         <td class="td-angka">{{ number_format($p->hrg_pcs, 0, ',', '.') }}</td>
-                        <td class="td-angka">{{ number_format($p->nominal_disc, 0, ',', '.') }}</td>
                         <td class="td-angka">{{ $p->disc }}</td>
                         <td class="td-angka">{{ number_format($p->nominal_total, 0, ',', '.') }}</td>
                     </tr>

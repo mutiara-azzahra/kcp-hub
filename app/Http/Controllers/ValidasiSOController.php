@@ -25,7 +25,7 @@ class ValidasiSOController extends Controller
 
         $so = TransaksiSOHeader::where('noso', $noso)->first();
 
-        $validasi_id = TransaksiSOHeader::where('noso', $noso)->get();
+        $validasi_id = TransaksiSOHeader::where('noso', $noso)->first();
 
         return view('validasi-so.details', compact('validasi_id', 'so'));
     }
@@ -51,5 +51,13 @@ class ValidasiSOController extends Controller
         $pdf->setPaper('letter', 'potrait');
 
         return $pdf->stream('sales-order.pdf');
+    }
+
+    public function edit_details($id){
+
+        $details       = TransaksiSODetails::findOrFail($id);
+
+        return view('validasi-so.edit', compact('details'));
+
     }
 }

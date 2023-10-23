@@ -3,33 +3,31 @@
 @section('content')
 <div class="container" style="padding: 10px;">
     <div class="row mt-5">
-    </div>
+                <div class="col-lg-12 pb-3">
+                        <div class="float-right m-1">
+                            <a class="btn btn-success" href="{{ route('validasi-so.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
+                        </div>
+
+                        
+                        @foreach($validasi_id->details_so as $s)
+
+                            @if($s->stok_ready->stok >= $s->qty)
+                            <div class="float-right m-1">
+                                <a class="btn btn-warning" href="{{ route('validasi-so.validasi', $so->noso) }}"><i class="fas fa-check"></i> Validasi</a>
+                            </div>
+                            @endif
+
+                        @endforeach
+                    </div>
+                </div>
+
             @if ($message = Session::get('success'))
-                <div class="alert alert-success">
+                <div class="alert alert-success" id="myAlert">
                     <p>{{ $message }}</p>
                 </div>
             @endif
 
         <div class="card" style="padding: 10px;">
-                <div class="card-header">
-                    <div class="col-lg-12 pb-3">
-                        <div class="float-right m-1">
-                            <a class="btn btn-success" href="{{ route('validasi-so.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
-                        </div>
-
-                        @foreach($validasi_id as $d)
-                        @foreach($d->details_so as $s)
-
-                        @if($s->stok_ready->stok >= $s->qty)
-                        <div class="float-right m-1">
-                            <a class="btn btn-warning" href="{{ route('validasi-so.validasi', $so->noso) }}"><i class="fas fa-check"></i> Validasi</a>
-                        </div>
-                        @endif
-
-                        @endforeach
-                        @endforeach
-                    </div>
-                </div>
 
                 <div class="card-body">
                     <div class="row">
@@ -57,6 +55,7 @@
                                             <th class="text-center">Qty SO</th>
                                             <th class="text-center">Stok Gudang</th>
                                             <th class="text-center">Keterangan</th>
+                                            <th class="text-center">Ubah</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -64,8 +63,7 @@
                                         $no=1;
                                         @endphp
 
-                                        @foreach($validasi_id as $d)
-                                            @foreach($d->details_so as $s)
+                                            @foreach($validasi_id->details_so as $s)
                                             <tr>
                                                 <td class="text-left">{{ $s->part_no }}</td>
                                                 <td class="text-left">{{ $s->nama_part->part_nama }}</td>
@@ -79,14 +77,16 @@
                                                 </td>
                                                 
                                                 @else
-
                                                 <td class="text-center" style="background-color: lime;">
                                                     Tervalidasi
                                                 </td>
                                                 @endif
+
+                                                <td class="text-center">
+                                                    <a class="btn btn-info btn-sm" href="{{ route('validasi-so.edit_details', $s->id) }}"><i class="fas fa-edit"></i></a>
+                                                </td>
                                             </tr>
                                             @endforeach
-                                        @endforeach
                                     </tbody>    
                                    
                                 </table>

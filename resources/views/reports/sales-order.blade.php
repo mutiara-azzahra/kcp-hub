@@ -86,7 +86,7 @@
      .header{
          margin-bottom: 0;
          text-align: center;
-         height: 100px;
+         height: 95px;
          padding: 0px;
      }
      .ttd{
@@ -96,9 +96,21 @@
      .text-right{
          text-align:right;
      }
+     .kanan{
+        float:right;
+     }
      .isi{
          padding:0px;
      }
+     .kotak {
+        width: 20px;
+        height: 14px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        line-height: 14px; /* Sesuaikan line-height dengan tinggi kotak */
+        border: none; /* Mengatur ketebalan garis dan warna garis */
+    }
 
     </style>
 </head>
@@ -106,7 +118,7 @@
     <style>
         @page { 
           size: 21 cm 29.6 cm; 
-          margin: 20px;
+          margin: 10px;
           padding: 0px !important;
           } 
      </style>
@@ -125,10 +137,7 @@
                                                 <td class="alamat-kcp">Hp. 0811 517 1595, 0812 5156 2768</td>
                                             </tr>
                                             <tr>
-                                                <td class="alamat-kcp">Telp. 0511-4416579, 4417127</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="alamat-kcp">Fax. 3364674 </td>
+                                                <td class="alamat-kcp">Telp. 4417127</td>
                                             </tr>
                                         </table>
                                     </td>
@@ -144,10 +153,7 @@
                                                 <td class="atas">{{ $header->outlet->nm_outlet }} ({{ $header->outlet->kd_outlet }})</td>
                                             </tr>
                                             <tr>
-                                                <td class="atas">{{ $header->outlet->almt_pengiriman }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="atas">{{ $header->outlet->kode_area->provinsi->provinsi}}</td>
+                                                <td class="atas">{{ $header->outlet->almt_pengiriman }}, {{ $header->outlet->kode_area->provinsi->provinsi}}</td>
                                             </tr>
                                         </table>
                                     </td>
@@ -193,6 +199,8 @@
                         <th class="th-header">Nama Barang</th>
                         <th class="th-header">Qty</th>
                         <th class="th-header">Qty Gudang</th>
+                        <th class="th-header">Rak</th>
+                        <th class="th-header">Check</th>
 
                         
                     </tr>
@@ -205,24 +213,46 @@
                         <td class="td-qty">{{$p->nama_part->part_nama}}</td>
                         <td class="td-qty">{{$p->qty}}</td>
                         <td class="td-qty">{{$p->stok_ready->stok}}</td>
+
+                        @if($p->nama_part->rak != null)
+                        <td class="td-qty">{{$p->nama_part->rak->kode_rak}}</td>
+                        @else
+                        <td class="td-qty">-</td>
+                        @endif
+
+                        <td class="td-qty">
+                            
+                        </td>
                         
                     </tr>
                     @endforeach
                 </tbody>
             </table>
-        
+
+            <div class="kanan col-6">
                 <table class="atas">
                     <tr>
                         <td class="atas">
                             <div class="ttd">
                                 <br>
+                                <h6 style="text-decoration:underline; margin:0px; color:white">xxxx</h6>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="kanan col-6">
+                <table class="atas">
+                    <tr>
+                        <td class="atas">
+                            <div class="ttd">
                                 <br>
                                 <h6 style="text-decoration:underline; margin:0px">Approve by System</h6>
                             </div>
                         </td>
                     </tr>
                 </table>
-            </div>
+            </div> 
         </div>
     </body>
 </html>

@@ -20,4 +20,9 @@ class MasterPart extends Model
     public function max_disc(){
         return $this->hasOne(MasterDiskonPart::class, 'part_no', 'part_no');
     }
+
+    public function rak()
+    {
+        return $this->hasOne(MasterKodeRak::class, 'id', 'id_rak');
+    }
 }

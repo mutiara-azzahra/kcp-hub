@@ -5,7 +5,7 @@
     <div class="row mt-5">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4><b>Tambah Kode Rak Lokasi</b></h4>
+                <h4>Tambah Kode Rak Lokasi</h4>
             </div>
             <div class="float-right">
                     <a class="btn btn-success" href="{{ route('kode-rak-lokasi.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>

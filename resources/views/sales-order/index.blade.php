@@ -32,12 +32,12 @@
                                 <tr style="background-color: #6082B6; color:white">
                                     <th class="text-center">No Sales Order</th>
                                     <th class="text-center">Back Order</th>
-                                    <th class="text-center">Kode Toko</th>
-                                    <th class="text-center">Nama Toko</th>
+                                    <th class="text-center" style="width: 15px;">Kode Toko</th>
+                                    <th class="text-center" style="width: 100px;">Nama Toko</th>
                                     <th class="text-center">Nominal SP</th>
                                     <th class="text-center">Nominal Plafond</th>
                                     <th class="text-center">Sales</th>
-                                    <th class="text-center">Approve SPV</th>
+                                    <th class="text-center" style="width: 50px;">Approve SPV</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
@@ -47,7 +47,7 @@
                                 @endphp
                                 @foreach($surat_pesanan as $s)
                                 <tr>
-                                    <td class="text-center">{{ $s->noso }}</td>
+                                    <td class="text-left">{{ $s->noso }}</td>
                                     <td class="text-center"></td>
                                     <td class="text-center">{{ $s->kd_outlet }}</td>
                                     <td class="text-left">{{ $s->nm_outlet }}</td>
@@ -56,7 +56,7 @@
                                     @if($s->outlet->plafond != null)
                                     <td class="text-left">Rp. {{ number_format($s->outlet->plafond->nominal_plafond, 0, ',', '.') }}</td>
                                     @else
-                                    <td class="text-center" style="color: red;">Belum ada</td>
+                                    <td class="text-left" style="color: red;">Belum ada</td>
                                     @endif
 
                                     <td class="text-center">{{ $s->user_sales }}</td>
