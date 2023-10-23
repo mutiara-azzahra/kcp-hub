@@ -7,10 +7,10 @@
     <title>LKH</title>
     <style>
     h4,h2{
-        font-family:serif;
+        font-family:'Times New Roman', Times;
     }
         body{
-            font-family:sans-serif;
+            font-family:'Times New Roman', Times;
         }
         table{
         border-collapse: collapse;
@@ -83,7 +83,7 @@
      .header{
          margin-bottom: 0;
          text-align: center;
-         height: 200px;
+         height: 120px;
          padding: 0px;
          border: none;
      }
@@ -114,7 +114,7 @@
           } 
      </style>
     <div class="header">
-                            <table class="table atas">
+                            <table class="table atas" style="line-height: 12px;">
                                 <tr>
                                     <td class="nama-kcp">Laporan Kiriman Harian - LKH</td>
                                     <td class="nama-kcp">KCP/{{ $data_no_lkh->no_lkh }}</td>
@@ -189,7 +189,7 @@
 
     <div class="container">
         <div class="isi">
-            <table>
+            <table style="line-height: 14px;">
                 <thead>
                     <tr>
                         <th>No.</th>
@@ -207,12 +207,12 @@
 
                     @foreach($d->ps->invoice as $i)
                     <tr>
-                        <td>{{$loop->iteration}}.</td>
-                        <td>{{ $i->kd_outlet }}/{{ $i->nm_outlet }}</td>
-                        <td>{{ $d->ps->details_dus->count('no_dus') }}</td>
-                        <td>{{ $i->noinv }}</td>
-                        <td>{{ $i->outlet->expedisi }}</td>
-                        <td></td>
+                        <td class="td-qty">{{$loop->iteration}}.</td>
+                        <td class="td-qty">{{ $i->kd_outlet }}/{{ $i->nm_outlet }}</td>
+                        <td class="td-qty">{{ $d->ps->details_dus->count('no_dus') }}</td>
+                        <td class="td-qty">{{ $i->noinv }}</td>
+                        <td class="td-qty">{{ $i->outlet->expedisi }}</td>
+                        <td class="td-qty"></td>
                     </tr>
 
                     @endforeach
@@ -225,37 +225,27 @@
             </table>
 
             <br>
-            <br>
                 <table class="atas">
                     <tr>
                         <td class="atas">
                             <div class="ttd">
-                                <h6 style="margin:0px">AR</h6>
-                                <br>
-                                <br>
                                 <br>
                                 
-                                <h5 style="text-decoration:underline; margin:0px">__________________________</h5>
+                                <h5 style="text-decoration:underline; margin:0px">AR</h5>
                             </div>
                         </td>
                         <td class="atas">
                             <div class="ttd">
-                                <h6 style="margin:0px">Security</h6>
-                                <br>
-                                <br>
                                 <br>
 
-                                <h5 style="text-decoration:underline; margin:0px">__________________________</h5>
+                                <h5 style="text-decoration:underline; margin:0px">SECURITY</h5>
                             </div>
                         </td>
                         <td class="atas">
                             <div class="ttd">
-                                <h6 style="margin:0px">Driver</h6>
-                                <br>
-                                <br>
                                 <br>
                                 
-                                <h5 style="text-decoration:underline; margin:0px">__________________________</h5>
+                                <h5 style="text-decoration:underline; margin:0px">DRIVER</h5>
                             </div>
                         </td>
                     </tr>

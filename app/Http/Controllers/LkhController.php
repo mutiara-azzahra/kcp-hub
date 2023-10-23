@@ -75,14 +75,18 @@ class LkhController extends Controller
     public function store_details(Request $request, $no_lkh)
     {
 
+        $request -> validate([
+            'driver'            => 'required', 
+            'helper'            => 'required',
+            'plat_mobil'        => 'required',
+            'jam_berangkat'     => 'required',
+        ]);
+
         TransaksiLkhHeader::where('no_lkh', $no_lkh)->update([
                 'driver'            => $request->driver,
                 'helper'            => $request->helper,
                 'plat_mobil'        => $request->plat_mobil,
                 'jam_berangkat'     => $request->jam_berangkat,
-                'jam_kembali'       => $request->jam_kembali,
-                'km_berangkat_mobil'=> $request->km_berangkat_mobil,
-                'km_kembali_mobil'  => $request->km_kembali_mobil,
             ]);
         
         return redirect()->route('laporan-kiriman-harian.index')->with('success','Details LKH berhasil ditambahkan!');
