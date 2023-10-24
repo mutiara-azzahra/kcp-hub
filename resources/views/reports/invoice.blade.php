@@ -135,10 +135,7 @@
                                                 <td class="alamat-kcp">Hp. 0811 517 1595, 0812 5156 2768</td>
                                             </tr>
                                             <tr>
-                                                <td class="alamat-kcp">Telp. 0511-4416579, 4417127</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="alamat-kcp">Fax. 3364674 </td>
+                                                <td class="alamat-kcp">Telp. 4417127</td>
                                             </tr>
                                         </table>
                                     </td>
@@ -154,10 +151,7 @@
                                                 <td class="atas">{{ $data->outlet->nm_outlet }} ({{ $data->outlet->kd_outlet }})</td>
                                             </tr>
                                             <tr>
-                                                <td class="atas">{{ $data->outlet->almt_pengiriman }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="atas">{{ $data->outlet->kode_area->provinsi->provinsi}}</td>
+                                                <td class="atas">{{ $data->outlet->almt_pengiriman }}, {{ $data->outlet->kode_area->provinsi->provinsi}}</td>
                                             </tr>
                                         </table>
                                     </td>

@@ -5,7 +5,7 @@
     <div class="row mt-5">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4><b>Surat Pesanan / SP by Sales</b></h4>
+                <h4>Surat Pesanan / SP by Sales</h4>
             </div>
             <div class="float-right">
                 <a class="btn btn-success" href="{{ route('surat-pesanan.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
@@ -80,7 +80,7 @@
                                                 <tr>
                                                     <td class="text-center">
                                                         <div class="form-group col-12">
-                                                            <select name="inputs[0][part_no]" class="form-control mr-2" id="package">
+                                                            <select name="inputs[0][part_no]" class="form-control mr-2" id="package-default" onchange="updateData(`default`)">
                                                                 <option value="">-- Pilih --</option>
                                                                 @foreach($master_part as $k)
                                                                     <option value="{{ $k->part_no }}" data-het="{{ $k->het }}"> {{ $k->part_no }} | {{ $k->part_nama }}</option>
@@ -90,23 +90,23 @@
                                                     </td>
                                                     <td class="text-center">
                                                         <div class="form-group col-12">
-                                                            <input type="text" name="het" for="het" class="form-control" readonly>
+                                                            <input type="text" name="het" for="het" id="het-default" class="form-control" readonly>
                                                         </div>
                                                     </td>
                                                     <td class="text-center">
                                                         <div class="form-group col-12">
                                                             <input type="hidden" name="inputs[0][nosp]" value="{{ $nosp }}">
-                                                            <input type="number" name="inputs[0][qty]" class="form-control" placeholder="0">
+                                                            <input type="number" id="qty-default" name="inputs[0][qty]" class="form-control" placeholder="0" onkeyup="updateNominal(`default`)">
                                                         </div>
                                                     </td>
                                                     <td class="text-center">
                                                         <div class="form-group col-12">
-                                                            <input type="number" name="inputs[0][disc]" class="form-control" placeholder="0">
+                                                            <input type="number" id="disc-default" name="inputs[0][disc]" class="form-control" placeholder="0" onkeyup="updateNominal(`default`)">
                                                         </div>
                                                     </td>
                                                     <td class="text-center" id="nominal">
                                                         <div class="form-group col-12">
-                                                            <input type="text" name="nominal" for="nominal" class="form-control" readonly>
+                                                            <input type="text" id="nominal-default" name="nominal" for="nominal" class="form-control" readonly>
                                                         </div>
                                                     </td>
                                                     <td class="text-center">
@@ -169,43 +169,43 @@
         $('#add').click(function(){
             ++i;
             $('#table').append(`<tr>
-                                                    <td class="text-center">
-                                                        <div class="form-group col-12">
-                                                            <select name="inputs[${i}][part_no]" class="form-control mr-2" id="package">
-                                                                <option value="">-- Pilih --</option>
-                                                                @foreach($master_part as $k)
-                                                                    <option value="{{ $k->part_no }}" data-het="{{ $k->het }}"> {{ $k->part_no }} | {{ $k->part_nama }}</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="form-group col-12">
-                                                            <input type="text" name="het" for="het" class="form-control" readonly>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="form-group col-12">
-                                                            <input type="hidden" name="inputs[${i}][nosp]" value="{{ $nosp }}">
-                                                            <input type="number" name="inputs[${i}][qty]" class="form-control" placeholder="0">
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="form-group col-12">
-                                                            <input type="number" name="inputs[${i}][disc]" class="form-control" placeholder="0">
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center" id="nominal">
-                                                        <div class="form-group col-12">
-                                                            <input type="text" name="nominal" for="nominal" class="form-control" readonly>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="form-group col-12">
-                                                            <button type="submit" class="btn btn-danger remove-table-row"><i class="fas fa-minus"></i></button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                <td class="text-center">
+                    <div class="form-group col-12">
+                        <select name="inputs[${i}][part_no]" class="form-control mr-2" id="package-${i}" onchange="updateData(${i})">
+                            <option value="">-- Pilih --</option>
+                            @foreach($master_part as $k)
+                                <option value="{{ $k->part_no }}" data-het="{{ $k->het }}"> {{ $k->part_no }} | {{ $k->part_nama }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <div class="form-group col-12">
+                        <input type="text" id="het-${i}" name="het" for="het" class="form-control" readonly>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <div class="form-group col-12">
+                        <input type="hidden" name="inputs[${i}][nosp]" value="{{ $nosp }}">
+                        <input type="number" id="qty-${i}" name="inputs[${i}][qty]" class="form-control" placeholder="0" onkeyup="updateNominal(${i})">
+                    </div>
+                </td>
+                <td class="text-center">
+                    <div class="form-group col-12">
+                        <input type="number" id="disc-${i}" name="inputs[${i}][disc]" class="form-control" placeholder="0" onkeyup="updateNominal(${i})">
+                    </div>
+                </td>
+                <td class="text-center" id="nominal">
+                    <div class="form-group col-12">
+                        <input type="text" name="nominal" id="nominal-${i}" for="nominal" class="form-control" readonly>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <div class="form-group col-12">
+                        <button type="submit" class="btn btn-danger remove-table-row"><i class="fas fa-minus"></i></button>
+                    </div>
+                </td>
+            </tr>
             `);
         });
 
@@ -215,15 +215,35 @@
 
 
     //HET MUNCUL
-    const data = $('#main').data('loading');
+     const data = $('#main').data('loading');
 
-    $('#package').on('change', function(){
-        const het = $('#package option:selected').data('het');
+    // $('#package').on('change', function(){
+    //     const het = $('#package option:selected').data('het');
+
+    //     const formattedHet = Number(het).toLocaleString('id-ID');
+
+    //     $(`#het`).val(formattedHet);
+    // });
+
+    function updateData(i){
+        const het = $(`#package-${i} option:selected`).data('het');
 
         const formattedHet = Number(het).toLocaleString('id-ID');
 
-        $('[name=het]').val(formattedHet);
-    });
+        $(`#het-${i}`).val(formattedHet);
+    }
+
+    function updateNominal(i){
+        const het = $(`#package-${i} option:selected`).data('het');
+        const qty = Number($(`#qty-${i}`).val());
+        const disc = Number($(`#disc-${i}`).val());
+        const nominal = (het *qty ) - (het *qty * disc/100);
+
+        const formattedNominal = Number(nominal).toLocaleString('id-ID');
+
+        $(`#nominal-${i}`).val(formattedNominal);
+
+    }
 
 
     </script>    

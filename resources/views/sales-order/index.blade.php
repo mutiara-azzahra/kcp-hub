@@ -33,7 +33,7 @@
                                     <th class="text-center">No Sales Order</th>
                                     <th class="text-center">Back Order</th>
                                     <th class="text-center" style="width: 15px;">Kode Toko</th>
-                                    <th class="text-center" style="width: 100px;">Nama Toko</th>
+                                    <th class="text-center">Nama Toko</th>
                                     <th class="text-center">Nominal SP</th>
                                     <th class="text-center">Nominal Plafond</th>
                                     <th class="text-center">Sales</th>

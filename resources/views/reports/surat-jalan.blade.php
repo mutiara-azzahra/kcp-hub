@@ -58,6 +58,10 @@
         text-align: left;
         border: none;
       }
+      .td-center{
+        text-align: center;
+        border: none;
+      }
       .td-qty{
         text-align: center;
         border: none;
@@ -86,7 +90,7 @@
      .header{
          margin-bottom: 0;
          text-align: center;
-         height: 110px;
+         height: 90px;
          padding: 0px;
      }
      hr{
@@ -130,10 +134,7 @@
                                                 <td class="alamat-kcp">Hp. 0811 517 1595, 0812 5156 2768</td>
                                             </tr>
                                             <tr>
-                                                <td class="alamat-kcp">Telp. 0511-4416579, 4417127</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="alamat-kcp">Fax. 3364674 </td>
+                                                <td class="alamat-kcp">Telp. 4417127</td>
                                             </tr>
                                         </table>
                                     </td>
@@ -195,6 +196,7 @@
                         <th class="th-header">No. Packingsheet</th>
                         <th class="th-header">Invoice</th>
                         <th class="th-header" style="width: 150px;">Dus</th>
+                        <th class="th-header">Koli</th>
                         <th class="th-header" style="width: 30px;">Check</th>
                         <th class="th-header">Keterangan</th>
                         
@@ -215,8 +217,17 @@
                         <td class="td-part">
                            {{ $s->header_ps->details_dus->first()->no_dus }} - {{ $s->header_ps->details_dus->last()->no_dus }}
                         </td>
+                        <td class="td-center">{{ $s->header_ps->details_dus->count('no_dus') }}</td>
                         <td class="td-dus"></td>
-                        <td class="td-qty">{{ $s->header_ps->details_dus->first()->kd_kategori }} - {{ $s->header_ps->details_dus->first()->kategori }}</td>
+                        <td class="td-qty">
+                            @foreach($s->header_ps->details_dus as $d)
+                                @if($d->kd_kategori == 'A')
+                                AIR AKI,
+                                @elseif($d->kd_kategori == 'SP')
+                                SPAREPART,
+                                @endif
+                            @endforeach
+                        </td>
                     </tr>
 
                     @endforeach
@@ -265,7 +276,7 @@
                         </td>
                         <td class="atas">
                             <div class="ttd">
-                                <h5 style="margin:0px">Security,</h5>
+                                <h5 style="margin:0px">Staff Gudang,</h5>
                                 <br>
                                 <br>
                                 

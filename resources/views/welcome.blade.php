@@ -50,15 +50,7 @@
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
       </ul>
-
-      <!-- Right navbar links -->
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="{{ route('logout')}}" class="nav-link">Log Out
-            <i class="right fa fa-sign-out"></i>
-          </a>
-        </li>
-      </ul>
+      
     </nav>
     <!-- /.navbar -->
 
@@ -316,9 +308,12 @@
                   </li>
                 </ul>
               </li>
-              <li class="nav-item d-none d-sm-inline-block">
-                <a href="{{ route('logout')}}" class="nav-link">Log Out
-                  <i class="right fa fa-sign-out"></i>
+              <li class="nav-item">
+                <a href="{{ route('logout')}}" class="nav-link">
+                  <i class="nav-icon fa fa-sign-out"></i>
+                  <p>
+                    Logout
+                  </p>
                 </a>
               </li>
 
@@ -416,7 +411,7 @@
                 }
             }, milliseconds);
         }
-        closeAlertAfterTime('myAlert', 2500);
+        closeAlertAfterTime('myAlert', 3500);
     </script>
 
     <script>

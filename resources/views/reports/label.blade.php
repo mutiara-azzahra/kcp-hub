@@ -143,15 +143,7 @@
                                     <td class="atas"></td>
                                 </tr>
                                 <tr>
-                                    <td class="alamat-kcp">Telp. 0511-4416579, 4417127</td>
-                                    <td class="atas"></td>
-                                </tr>
-                                <tr>
-                                    <td class="alamat-kcp">Fax. 3364674 </td>
-                                    <td class="atas"></td>
-                                </tr>
-                                <tr>
-                                    <td class="alamat-kcp"></td>
+                                    <td class="alamat-kcp">Telp. 4417127</td>
                                     <td class="atas"></td>
                                 </tr>
                             </table>
