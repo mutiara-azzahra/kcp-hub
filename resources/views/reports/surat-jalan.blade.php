@@ -189,7 +189,7 @@
 
     <div class="container">
         <div class="isi">
-            <table class="table table-bawah">
+            <table class="table table-bawah" style="line-height: 14px;">
                 <thead>
                     <tr>
                         <th class="th-header">No.</th>
@@ -220,13 +220,30 @@
                         <td class="td-center">{{ $s->header_ps->details_dus->count('no_dus') }}</td>
                         <td class="td-dus"></td>
                         <td class="td-qty">
+                            @php
+                            $uniqueValues = [];
+                            $valueMap = [
+                                'A' => 'AIR AKI',
+                                'SP' => 'SPAREPART',
+                            ];
+                            @endphp
+
                             @foreach($s->header_ps->details_dus as $d)
-                                @if($d->kd_kategori == 'A')
-                                AIR AKI,
-                                @elseif($d->kd_kategori == 'SP')
-                                SPAREPART,
+                                @if(array_key_exists($d->kd_kategori, $valueMap) && !in_array($d->kd_kategori, $uniqueValues))
+                                    @php
+                                    $uniqueValues[] = $d->kd_kategori;
+                                    @endphp
                                 @endif
                             @endforeach
+
+                            @foreach($uniqueValues as $value)
+                                {{ $valueMap[$value] }}
+                                @if (!$loop->last)
+                                    , 
+                                @endif
+                            @endforeach
+
+
                         </td>
                     </tr>
 
