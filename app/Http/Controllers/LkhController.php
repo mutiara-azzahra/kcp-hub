@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use PDF;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -65,9 +66,10 @@ class LkhController extends Controller
 
     public function details($no_lkh)
     {
-        $details     = TransaksiLkhHeader::where('no_lkh', $no_lkh)->first();
-        $lkh_details  = TransaksiLkhHeader::where('no_lkh', $no_lkh)->get();
-        $driver  = User::where('id_role', 22)->get();
+        $details        = TransaksiLkhHeader::where('no_lkh', $no_lkh)->first();
+        $lkh_details    = TransaksiLkhHeader::where('no_lkh', $no_lkh)->get();
+        $driver         = User::where('id_role', 22)->get();
+        $helper         = User::where('id_role', 13)->get();
 
         return view('laporan-kiriman-harian.details', ['no_lkh' => $no_lkh] ,compact('details', 'lkh_details', 'driver'));
     }
@@ -101,4 +103,21 @@ class LkhController extends Controller
 
         return $pdf->stream('lkh.pdf');
     }
+
+    public function store_update(Request $request, $no_lkh)
+    {
+
+        $request -> validate([
+            'jam_kembali'            => 'required',
+        ]);
+
+        TransaksiLkhHeader::where('no_lkh', $no_lkh)->update([
+                'jam_kembali'       => $request->jam_kembali,
+                'updated_at'        => NOW(),
+                'updated_by'        => Auth::user()->nama_user
+            ]);
+        
+        return redirect()->route('laporan-kiriman-harian.index')->with('success','Details LKH berhasil diubah!');
+    }
+
 }

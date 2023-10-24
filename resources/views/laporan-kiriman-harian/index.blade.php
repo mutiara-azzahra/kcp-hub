@@ -2,7 +2,7 @@
  
 @section('content')
 <div class="container" style="padding: 10px;">
-    <div class="row mt-5">
+    <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
                 <h4>Kiriman Harian</h4>
@@ -18,7 +18,7 @@
             <div class="card" style="padding: 10px;">
                 <div class="card-header">
                     <div class="col-lg-12">
-                        <b>List Sales Order yang Belum LKH</b>
+                        List Sales Order yang Belum LKH
                     </div>
                 </div>
                 <div class="card-body">
@@ -90,7 +90,7 @@
             <div class="card" style="padding: 10px;">
                 <div class="card-header">
                     <div class="col-lg-12">
-                        <b>List LKH Siap Kirim</b>
+                        List LKH Siap Kirim
                     </div>
                 </div>
                 <div class="card-body">
@@ -123,7 +123,7 @@
                                         <a class="btn btn-info btn-sm" href="{{ route('laporan-kiriman-harian.details',$s->no_lkh) }}">
                                             <i class="fas fa-list"></i>
                                         </a>
-                                        <a class="btn btn-warning btn-sm" href="{{ route('laporan-kiriman-harian.cetak', $s->no_lkh) }}">
+                                        <a class="btn btn-warning btn-sm" href="{{ route('laporan-kiriman-harian.cetak', $s->no_lkh) }}" target="_blank">
                                             <i class="fas fa-print"></i>
                                         </a>
                                     </td>

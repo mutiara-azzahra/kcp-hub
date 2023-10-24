@@ -59,8 +59,7 @@
         border: none;
       }
       .td-qty{
-        text-align: center;
-        border: none;
+        text-align: left;
       }
       .td-angka{
         text-align: right;
@@ -83,7 +82,7 @@
      .header{
          margin-bottom: 0;
          text-align: center;
-         height: 120px;
+         height: 100px;
          padding: 0px;
          border: none;
      }
@@ -116,19 +115,18 @@
     <div class="header">
                             <table class="table atas" style="line-height: 12px;">
                                 <tr>
-                                    <td class="nama-kcp">Laporan Kiriman Harian - LKH</td>
-                                    <td class="nama-kcp">KCP/{{ $data_no_lkh->no_lkh }}</td>
+                                    <th class="nama-kcp">Laporan Kiriman Harian - KCP/NON/{{ $data_no_lkh->no_lkh }}</th>
                                 </tr>
                             </table>
 
-                            <table class="table atas">
+                            <table class="table atas" style="line-height: 12px;">
                                 <tr class="nama-kcp">
                                     <td class="nama-kcp">
                                         <table class="table atas">
                                             <tr>
                                                 <th class="nama-kcp">Tanggal</th>
                                                 <td class="nama-kcp">:</td>
-                                                <td class="nama-kcp">{{ $data_no_lkh->created_at }}</td>
+                                                <td class="nama-kcp">{{ $data_no_lkh->created_at->format('d-m-Y') }}</td>
                                             </tr>
                                             <tr>
                                                 <th class="nama-kcp">Jam Berangkat</th>
@@ -136,7 +134,7 @@
                                                 <td class="nama-kcp">{{ $data_no_lkh->jam_berangkat }}</td>
                                             </tr>
                                             <tr>
-                                                <th class="nama-kcp">Tanggal</th>
+                                                <th class="nama-kcp">Jam Kembali</th>
                                                 <td class="nama-kcp">:</td>
                                                 <td class="nama-kcp">{{ $data_no_lkh->jam_kembali }}</td>
                                             </tr>
@@ -170,13 +168,13 @@
                                                 <td class="nama-kcp">{{ $data_no_lkh->plat_mobil }}</td>
                                             </tr>
                                             <tr>
-                                                <th class="nama-kcp">Total Toko</th>
-                                                <td class="nama-kcp">:</td>
+                                                <th class="nama-kcp"></th>
+                                                <td class="nama-kcp"></td>
                                                 <td class="nama-kcp"></td>
                                             </tr>
                                             <tr>
-                                                <th class="nama-kcp">Total Koli</th>
-                                                <td class="nama-kcp">:</td>
+                                                <th class="nama-kcp"></th>
+                                                <td class="nama-kcp"></td>
                                                 <td class="nama-kcp"></td>
                                             </tr>
                                         </table>
@@ -188,7 +186,7 @@
 
     <div class="container">
         <div class="isi">
-            <table style="line-height: 14px;">
+            <table style="line-height: 15px;">
                 <thead>
                     <tr>
                         <th>No.</th>
@@ -201,23 +199,18 @@
                 </thead>
                 <tbody>
                     @foreach ($data as $p)
-
-                    @foreach($p->details_lkh as $d)
-
-                    @foreach($d->ps->invoice as $i)
-                    <tr>
-                        <td class="td-qty">{{$loop->iteration}}.</td>
-                        <td class="td-qty">{{ $i->kd_outlet }}/{{ $i->nm_outlet }}</td>
-                        <td class="td-qty">{{ $d->ps->details_dus->count('no_dus') }}</td>
-                        <td class="td-qty">{{ $i->noinv }}</td>
-                        <td class="td-qty">{{ $i->outlet->expedisi }}</td>
-                        <td class="td-qty"></td>
-                    </tr>
-
-                    @endforeach
-
-                    @endforeach
-
+                        @foreach($p->details_lkh as $d)
+                            @foreach($d->ps->invoice as $i)
+                            <tr>
+                                <td class="td-qty">{{$loop->iteration}}.</td>
+                                <td class="td-qty">{{ $i->kd_outlet }}/{{ $i->nm_outlet }}</td>
+                                <td class="td-qty">{{ $d->ps->details_dus->count('no_dus') }}</td>
+                                <td class="td-qty">{{ $i->noinv }}</td>
+                                <td class="td-qty">{{ $i->outlet->expedisi }}</td>
+                                <td class="td-qty"></td>
+                            </tr>
+                            @endforeach
+                        @endforeach
                     @endforeach
                 </tbody>
 
@@ -228,22 +221,16 @@
                     <tr>
                         <td class="atas">
                             <div class="ttd">
-                                <br>
-                                
                                 <h5 style="text-decoration:underline; margin:0px">AR</h5>
                             </div>
                         </td>
                         <td class="atas">
                             <div class="ttd">
-                                <br>
-
                                 <h5 style="text-decoration:underline; margin:0px">SECURITY</h5>
                             </div>
                         </td>
                         <td class="atas">
                             <div class="ttd">
-                                <br>
-                                
                                 <h5 style="text-decoration:underline; margin:0px">DRIVER</h5>
                             </div>
                         </td>

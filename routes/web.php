@@ -1,9 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Middleware\Auth;
-
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
@@ -213,6 +211,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/laporan-kiriman-harian/details/{no_lkh}', [LkhController::class, 'details'])->name('laporan-kiriman-harian.details');
     Route::post('/laporan-kiriman-harian/details/{no_lkh}', [LkhController::class, 'store_details'])->name('laporan-kiriman-harian.store-details');
     Route::get('/laporan-kiriman-harian/cetak/{no_lkh}', [LkhController::class, 'cetak'])->name('laporan-kiriman-harian.cetak');
+    Route::post('/laporan-kiriman-harian/store-update/{no_lkh}', [LkhController::class, 'store-update'])->name('laporan-kiriman-harian.store-update');
+
 
     //ROUTE SURAT JALAN
     Route::get('/surat-jalan', [SuratJalanController::class, 'index'])->name('surat-jalan.index');
