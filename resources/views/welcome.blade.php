@@ -79,7 +79,7 @@
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
             {{-- Administrator--}}
-            @if(Auth::user()->id_role == 5)
+            @if(Auth::user()->id_role == 5 || 7 || 12 || 14 || 17)
             <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon"></i>
@@ -106,7 +106,7 @@
               @endif
 
               {{-- Master --}}
-            @if(Auth::user()->id_role == 11 || 5)
+            @if(Auth::user()->id_role == 5 || 7 || 11 || 12 || 17 || 24)
             <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon"></i>
@@ -136,7 +136,7 @@
             @endif
 
               {{-- Admin --}}
-            @if(Auth::user()->id_role == 11 || 9)
+            @if(Auth::user()->id_role == 5 || 7 || 9 || 12 || 17)
             <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon"></i>
@@ -156,6 +156,7 @@
             @endif
 
             {{-- GUDANG --}}
+            @if(Auth::user()->id_role == 3 || 5 || 7 || 8 || 10 || 12 || 13 || 17 || 18 || 19 || 21 || 22 || 23)
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon"></i>
@@ -197,8 +198,10 @@
                   </li>
                 </ul>
               </li>
+            @endif
 
               {{-- FINANCE --}}
+              @if(Auth::user()->id_role == 2 || 5 || 6 || 7 || 11 || 12 || 17)
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon"></i>
@@ -241,7 +244,9 @@
                   </li>
                 </ul>
               </li>
+              @endif
 
+              @if(Auth::user()->id_role == 4 || 5 || 6 || 7 || 9 || 11 || 12 || 17 || 20 || 24)
               {{-- MARKETING --}}
               <li class="nav-item">
                 <a href="#" class="nav-link">
@@ -280,7 +285,9 @@
 
                 </ul>
               </li>
+              @endif
 
+              @if(Auth::user()->id_role == 2 || 5 || 6 || 7 || 12 || 16 || 12 || 17)
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon"></i>
@@ -307,6 +314,8 @@
                   </li>
                 </ul>
               </li>
+
+              @endif
               <li class="nav-item">
                 <a href="{{ route('logout')}}" class="nav-link">
                   <i class="nav-icon fa fa-sign-out"></i>
