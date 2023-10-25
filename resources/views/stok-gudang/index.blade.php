@@ -2,10 +2,10 @@
  
 @section('content')
 <div class="container" style="padding: 10px;">
-    <div class="row mt-5">
+    <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4><b>Stok Gudang</b></h4>
+                <h4>Stok Gudang</h4>
             </div>
             <div class="float-right">
                 <a class="btn btn-success" href="{{ route('stok-gudang.create') }}"><i class="fas fa-plus"></i> Tambah Stok</a>
@@ -39,7 +39,7 @@
                                 <tr>
                                     <td class="text-center">{{ $no++ }}</td>
                                     <td class="text-left">{{ $p->part_no }}</td>
-                                    <td class="text-center">{{ $p->stok }}</td>
+                                    <td class="text-right">{{ number_format($p->stok, 0, ',', '.') }}</td>
                                     <td class="text-center">
                                         <a class="btn btn-info btn-sm" href="{{ route('stok-gudang.edit',$p->id) }}"><i class="fas fa-edit"></i></a>
                                         <a class="btn btn-warning btn-sm" href="{{ route('stok-gudang.delete',$p->id) }}"><i class="fas fa-times-circle"></i></a>

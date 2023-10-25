@@ -37,9 +37,15 @@ class SalesOrderController extends Controller
     public function details($nosp){
 
         $surat_pesanan_id   = TransaksiSpHeader::where('nosp', $nosp)->get();
-        $plafond            = TransaksiSpHeader::where('nosp', $nosp)->first();       
+        $plafond            = TransaksiSpHeader::where('nosp', $nosp)->first(); 
+        
+        $totalSum = 0;
 
-        return view('sales-order.details', ['nosp' => $nosp] , compact('surat_pesanan_id', 'plafond'));
+        foreach($surat_pesanan_id as $s){
+            $totalSum += $s->details_sp->sum('nominal_total');
+        }
+
+        return view('sales-order.details', ['nosp' => $nosp] , compact('surat_pesanan_id', 'plafond', 'totalSum'));
     }
 
     public function create(){

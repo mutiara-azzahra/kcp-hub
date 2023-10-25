@@ -2,10 +2,10 @@
  
 @section('content')
 <div class="container" style="padding: 10px;">
-    <div class="row mt-5">
+    <div class="row mt-2">
         <div class="col-lg-12 pb-3">
             <div class="float-left">
-                <h4><b>Approval SP / Surat Pesanan</b></h4>
+                <h4>Approval SP / Surat Pesanan</h4>
             </div>
             <div class="float-right">
                 <a class="btn btn-success" href="{{ route('sales-order.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
@@ -87,9 +87,8 @@
                                             <th class="text-center">Part No</th>
                                             <th class="text-center">HET</th>
                                             <th class="text-center">Qty</th>
-                                            <th class="text-center">Nominal Disc</th>
-                                            <th class="text-center">Nominal Final</th>
-                                            <th class="text-center">Ubah</th>
+                                            <th class="text-center">Disc (%)</th>
+                                            <th class="text-center">Nominal</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -101,12 +100,14 @@
                                                     <td class="text-center">{{ $d->qty }}</td>
                                                     <td class="text-center">{{ $d->disc }} %</td>
                                                     <td class="text-left">Rp. {{ number_format($d->nominal_total, 0, ',', '.') }}</td>
-                                                    <td class="text-center">
-                                                         <a class="btn btn-info btn-sm" href="{{ route('sales-order.edit_details', $d->id) }}"><i class="fas fa-edit"></i></a>
-                                                    </td>
                                                 </tr>
                                             @endforeach
                                         @endforeach
+                                                <tr>
+                                                    <td class="text-center" colspan="4"><b>TOTAL</b></td>
+                                                    <td class="text-left"><b>Rp. {{ number_format($totalSum, 0, ',', '.') }}</b></td>
+                                                </tr>
+                                            
                                     </tbody>
                                 </table>
                         </div>

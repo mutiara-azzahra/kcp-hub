@@ -2,10 +2,10 @@
  
 @section('content')
 <div class="container" style="padding: 10px;">
-    <div class="row mt-5">
+    <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4><b>Surat Jalan / SJ</b></h4>
+                <h4>Surat Jalan / SJ</h4>
             </div>
             {{-- <div class="float-right">
                 <a class="btn btn-warning" href="{{ route('surat-jalan.reset') }}"><i class="fas fa-refresh"></i> Reset Surat Jalan</a>

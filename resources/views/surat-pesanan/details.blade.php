@@ -2,7 +2,7 @@
  
 @section('content')
 <div class="container" style="padding: 10px;">
-    <div class="row mt-5">
+    <div class="row mt-3">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
                 <h4>Surat Pesanan / SP by Sales</h4>
