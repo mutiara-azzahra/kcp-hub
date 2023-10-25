@@ -92,7 +92,7 @@
     </div>
     @else
     <div class="card" style="padding: 20px;">
-        <form action="{{ route('laporan-kiriman-harian.store-update', ['id' => $details->id ]) }}" method="POST">
+        <form action="{{ route('laporan-kiriman-harian.update', ['no_lkh', $details->no_lkh]) }}" method="POST">
             @csrf
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -128,7 +128,12 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Jam Kembali</strong>
+
+                        @if($details->jam_kembali != null)
+                        <input type="text" name="plat_mobil" class="form-control" placeholder="{{ $details->jam_kembali }}" readonly>
+                        @else
                         <input type="datetime-local" name="jam_kembali" class="form-control" placeholder="">
+                        @endif
                     </div>
                 </div> 
                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -143,11 +148,15 @@
                         <input type="text" name="km_kembali_mobil" class="form-control" placeholder="">
                     </div>
                 </div>
+                @if($details->jam_kembali != null)
+
+                @else
                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                     <div class="float-right">
                         <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Data</button>
                     </div>
                 </div>
+                @endif
             </div>
         </form>
     </div>

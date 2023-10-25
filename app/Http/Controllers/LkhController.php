@@ -104,7 +104,7 @@ class LkhController extends Controller
         return $pdf->stream('lkh.pdf');
     }
 
-    public function store_update(Request $request, $no_lkh)
+    public function update(Request $request, $no_lkh)
     {
 
         $request -> validate([
@@ -113,6 +113,7 @@ class LkhController extends Controller
 
         TransaksiLkhHeader::where('no_lkh', $no_lkh)->update([
                 'jam_kembali'       => $request->jam_kembali,
+                'km_kembali_mobil'  => $request->jam_kembali,
                 'updated_at'        => NOW(),
                 'updated_by'        => Auth::user()->nama_user
             ]);
