@@ -29,11 +29,11 @@
                         @if($toko != null)
                         <form action="{{ route('surat-pesanan.store') }}" method="POST">
                             @csrf
-                            <div class="row">
-                                <div class="col-12">
+                            <div class="col">                        
+                                <div class="col-lg-6">
                                     <div class="form-group">
-                                        <strong>Toko</strong>
-                                        <select name="kd_outlet" class="form-control mr-2">
+                                        <strong>Toko</strong><br>
+                                        <select name="kd_outlet" class="form-control mb-2 my-select">     
                                             <option value="">-- Pilih Toko --</option>
                                             @foreach($toko->outlet as $s)
                                                 <option value="{{ $s->kd_outlet }}">{{ $s->kd_outlet }} / {{ $s->nm_outlet }}</option>
@@ -41,7 +41,8 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-12">
+
+                                <div class="col-lg-6">
                                     <div class="form-group">
                                         <strong>Keterangan</strong>
                                         <input type="text" name="keterangan" class="form-control" placeholder="Isi Keterangan">

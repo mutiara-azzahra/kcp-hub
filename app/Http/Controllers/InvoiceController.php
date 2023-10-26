@@ -39,10 +39,9 @@ class InvoiceController extends Controller
                 'flag_invoice_date' => NOW(),
             ]);
 
-        $newInv = new TransaksiInvoiceHeader();
-        $newInv->noinv = TransaksiInvoiceHeader::noinv();
-
-        $so_to_invoice = TransaksiSOHeader::where('noso', $noso)->get();
+        $newInv         = new TransaksiInvoiceHeader();
+        $newInv->noinv  = TransaksiInvoiceHeader::noinv();
+        $so_to_invoice  = TransaksiSOHeader::where('noso', $noso)->get();
         
         foreach($so_to_invoice as $a){
             $data['noinv']              = $newInv->noinv;
@@ -81,6 +80,10 @@ class InvoiceController extends Controller
                     }
             }
         }
+
+        
+
+            
 
         return redirect()->route('invoice.index')->with('success','SO baru berhasil diteruskan menjadi invoice');
 
