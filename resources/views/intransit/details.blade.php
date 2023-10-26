@@ -2,10 +2,10 @@
  
 @section('content')
 <div class="container" style="padding: 10px;">
-    <div class="row mt-5">
+    <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4><b>Details Intransit</b></h4>
+                <h4>Details Intransit</h4>
             </div>
             <div class="float-right">
                     <a class="btn btn-success" href="{{ route('intransit.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
@@ -22,7 +22,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12 p-3">
-                            <table class="table table-hover bg-light table-striped">
+                            <table class="table table-hover bg-light table-bordered table-striped">
                                 <thead>
                                     <tr style="background-color: #6082B6; color:white">
                                         <th class="text-center">No. SP AOP</th>
@@ -34,7 +34,12 @@
                                     <tr>
                                         <td class="text-center">{{ $intransit_header->no_surat_pesanan }}</td>
                                         <td class="text-center">{{ $intransit_header->tanggal_packingsheet }}</td>
-                                        <td class="text-center">{{ $intransit_header->status }}</td>
+                                        
+                                        @if($intransit_header->status == 'I' )
+                                        <td class="text-center">Intransit</td>
+                                        @elseif($intransit_header->status == 'T' )
+                                        <td class="text-center">Diterima</td>
+                                        @endif
                                     </tr> 
                                 </tbody>
                             </table>
@@ -44,7 +49,7 @@
                                 <form action="{{ route('intransit.store_details')}}" method="POST">
                                 @csrf
 
-                                <table class="table table-hover table-sm bg-light table-striped" id="table">
+                                <table class="table table-hover table-sm bg-light table-bordered table-striped" id="table">
                                     <thead>
                                         <tr style="background-color: #6082B6; color:white">
                                             <th class="text-center">No. Packingsheet</th>

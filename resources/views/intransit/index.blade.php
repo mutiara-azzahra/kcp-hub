@@ -2,10 +2,10 @@
  
 @section('content')
 <div class="container" style="padding: 10px;">
-    <div class="row mt-5">
+    <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4><b>Intransit</b></h4>
+                <h4>Intransit</h4>
             </div>
             <div class="float-right">
                 <a class="btn btn-success" href="{{ route('intransit.create') }}"><i class="fas fa-plus"></i> Entry Intransit</a>
@@ -15,8 +15,7 @@
             @if ($message = Session::get('success'))
                 <div class="alert alert-success" id="myAlert">
                     <p>{{ $message }}</p>
-                </div>
-                
+                </div> 
             @endif
 
             <div class="card" style="padding: 10px;">

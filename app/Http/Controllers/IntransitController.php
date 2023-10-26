@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\IntransitHeader;
 use App\Models\IntransitDetails;
 use App\Models\MasterPart;
-use App\Models\StokGudang;
+use App\Models\MasterStokGudang;
 
 
 class IntransitController extends Controller
@@ -112,14 +112,14 @@ class IntransitController extends Controller
         $no_packingsheet    = $request->input('no_packingsheet', []);
 
         foreach ($selectedItems as $itemPartNo) {
-            $stok_lama = StokGudang::where('part_no', $itemPartNo)->value('stok');
+            $stok_lama = MasterStokGudang::where('part_no', $itemPartNo)->value('stok');
             
             $stok_masuk = IntransitDetails::where('part_no', $itemPartNo)
                 ->where('no_doos', $no_doos)
                 ->where('no_packingsheet', $no_packingsheet)
                 ->value('qty');
             
-            StokGudang::where('part_no', $itemPartNo)->update(['stok' => $stok_lama + $stok_masuk]);
+            MasterStokGudang::where('part_no', $itemPartNo)->update(['stok' => $stok_lama + $stok_masuk]);
         }
 
         return redirect()->route('intransit.index')->with('success', 'Barang berhasil dimasukkan ke gudang');

@@ -2,7 +2,7 @@
  
 @section('content')
 <div class="container" style="padding: 10px;">
-    <div class="row mt-5">
+    <div class="row mt-2">
         <div class="col-lg-12 pb-3">
 
             @if(Auth::user()->id_role == 10)
@@ -10,7 +10,6 @@
                 <div class="float-right">
                     <a class="btn btn-warning" href="{{ route('intransit.validasi_barang', $intransit_header->id) }}"><i class="fas fa-check"></i>  Validasi</a>
                 </div>
-
                 @endif
             @endif
             <div class="float-left">
@@ -26,7 +25,7 @@
 
         <div class="card" style="padding: 10px;">
             <div class="card-header">
-                <b>Validasi Intransit</b>
+            Validasi Intransit
             </div>
                 <div class="card-body">
                     <div class="row">

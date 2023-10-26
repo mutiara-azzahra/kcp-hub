@@ -2,7 +2,7 @@
  
 @section('content')
 <div class="container" style="padding: 10px;">
-    <div class="row mt-5">
+    <div class="row mt-2">
         <div class="col-lg-12 pb-3">
             <div class="float-left">
                 <a class="btn btn-success" href="{{ route('intransit.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
@@ -17,7 +17,7 @@
 
         <div class="card" style="padding: 10px;">
             <div class="card-header">
-                <b>Memasukkan Intransit ke Gudang</b>
+                Memasukkan Intransit ke Gudang
             </div>
                 <div class="card-body">
                     <div class="row">
@@ -27,7 +27,7 @@
                                 <form action="{{ route('intransit.store_stok_gudang', ['part_no' => $i->part_no]) }}" method="POST">
                                 @csrf
 
-                                <table class="table table-hover table-sm bg-light table-striped" id="table">
+                                <table class="table table-hover table-sm bg-light table-bordered table-striped" id="table">
                                     <thead>
 
                                         <tr style="background-color: #6082B6; color:white">
