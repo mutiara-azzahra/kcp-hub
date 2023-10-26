@@ -208,12 +208,12 @@
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                       <a href="{{ route('pembelian-non-aop.index')}}" class="nav-link">
-                        <p>Pembelian Non AOP</p>
+                        <p>Pembelian Part Non</p>
                       </a>
                   </li>
                   <li class="nav-item">
                       <a href="{{ route('pembayaran-non-aop.index')}}" class="nav-link">
-                        <p>Pembayaran Non AOP</p>
+                        <p>Pembayaran Part Non</p>
                       </a>
                   </li>
                   <li class="nav-item">

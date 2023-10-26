@@ -5,7 +5,7 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4><b>PEMBELIAN NON AOP</b></h4>
+                <h4>Pembelian</h4>
             </div>
             <div class="float-right">
                 <a class="btn btn-info" href="{{ route('pembelian-non-aop.create') }}"><i class="fas fa-plus"></i> Buat Pembelian Baru</a>
@@ -26,7 +26,7 @@
                             <thead>
                                 <tr style="background-color: #6082B6; color:white">
                                     <th class="text-center">No</th>
-                                    <th class="text-center">Invoice Non AOP</th>
+                                    <th class="text-center">Invoice Non</th>
                                     <th class="text-center">Tanggal Nota</th>
                                     <th class="text-center">Customer To</th>
                                     <th class="text-center">Supplier</th>
