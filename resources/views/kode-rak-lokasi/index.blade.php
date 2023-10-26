@@ -2,7 +2,7 @@
  
 @section('content')
 <div class="container" style="padding: 10px;">
-    <div class="row mt-5">
+    <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
                 <h4>Master Kode Rak</h4>
@@ -39,6 +39,7 @@
                                     <td class="text-center">{{ $no++ }}</td>
                                     <td class="text-center">{{ $p->kode_rak_lokasi }}</td>
                                     <td class="text-center">
+                                        <a class="btn btn-info btn-sm" href="{{ route('kode-rak-lokasi.delete',$p->id) }}"><i class="fas fa-edit"></i></a>
                                         <a class="btn btn-warning btn-sm" href="{{ route('kode-rak-lokasi.delete',$p->id) }}"><i class="fas fa-times-circle"></i></a>
                                     </td>
                                 </tr>

@@ -70,7 +70,7 @@
                                         <select name="id_rak" class="form-control">
                                             <option value="">-- Pilih Kode Rak --</option>
                                             @foreach($kode_rak as $k)
-                                                <option value="{{ $k->id }}" {{ $k->id_rak == $master_part_id->id_rak ? 'selected' : '' }}>
+                                                <option value="{{ $k->id }}" {{ $k->id == $master_part_id->id_rak ? 'selected' : '' }}>
                                                     {{ $k->kode_rak_lokasi }}
                                                 </option>
                                             @endforeach
