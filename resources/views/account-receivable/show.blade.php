@@ -5,7 +5,7 @@
     <div class="row mt-5">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4><b>Tambah Inventaris</b></h4>
+                <h4>Tambah Inventaris</h4>
             </div>
             <div class="float-right">
                     <a class="btn btn-success" href="{{ route('inventaris.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
