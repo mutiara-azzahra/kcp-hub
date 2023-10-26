@@ -62,7 +62,6 @@ class MasterSalesController extends Controller
 
     public function store_details(Request $request){
 
-
         $request->validate([
                 'inputs.*.kode_kabupaten'  => 'required',
                 'inputs.*.id_sales'        => 'required',

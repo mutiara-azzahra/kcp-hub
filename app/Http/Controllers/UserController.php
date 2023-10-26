@@ -44,6 +44,9 @@ class UserController extends Controller
         $input['email']             = $request->email;
         $input['id_role']           = $request->id_role;
         $input['password']          = Hash::make($request['password']);
+        $input['created_at']        = NOW();
+        $input['created_by']        = Auth::user()->nama_user;
+        
         $user                       = User::create($input);
 
         return redirect()->route('user.index')->with('success','Akun baru berhasil ditambahkan!');
