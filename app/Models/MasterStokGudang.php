@@ -22,10 +22,16 @@ class MasterStokGudang extends Model
         'updated_by'
     ];
 
-    public function het()
+    public function transaksi_so()
     {
-        return $this->hasOne(MasterStokGudangHet::class, 'part_no', 'part_no');
+        return $this->hasMany(TransaksiSODetails::class, 'part_no', 'part_no');
     }
+    
+    public function master_part()
+    {
+        return $this->belongsTo(MasterPart::class, 'part_no', 'part_no');
+    }
+
 
 
 }

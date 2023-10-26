@@ -223,6 +223,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/stok-gudang/delete/{id}', [StokGudangController::class, 'delete'])->name('stok-gudang.delete');
     Route::get('/stok-gudang/update/{id}', [StokGudangController::class, 'edit'])->name('stok-gudang.edit');
     Route::post('/stok-gudang/update/{id}', [StokGudangController::class, 'update'])->name('stok-gudang.update');
+    Route::get('/stok-gudang/show/{id}', [StokGudangController::class, 'show'])->name('stok-gudang.show');
 
     //ROUTE STOK GUDANG
     Route::get('/master-sales', [MasterSalesController::class, 'index'])->name('master-sales.index');
@@ -233,7 +234,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/master-sales/delete/{id}', [MasterSalesController::class, 'delete'])->name('master-sales.delete');
     Route::get('/master-sales/tambah-wilayah/{id}', [MasterSalesController::class, 'tambah_wilayah'])->name('master-sales.tambah-wilayah');
 
-    //ROUTE STOK GUDANG
+    //ROUTE MASTER PART HET
     Route::get('/master-part-het', [MasterPartHetController::class, 'index'])->name('master-part-het.index');
     Route::post('/master-part-het', [MasterPartHetController::class, 'store'])->name('master-part-het.store');
     Route::get('/master-part-het/create', [MasterPartHetController::class, 'create'])->name('master-part-het.create');

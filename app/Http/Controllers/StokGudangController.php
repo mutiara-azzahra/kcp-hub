@@ -81,5 +81,12 @@ class StokGudangController extends Controller
         return redirect()->route('stok-gudang.index')->with('success', 'Data master part berhasil diubah');
     }
 
+    public function show($id)
+    {
+        $stok_id  = MasterStokGudang::findOrFail($id);
+
+        return view('stok-gudang.show',compact('stok_id'));
+    }
+
     
 }

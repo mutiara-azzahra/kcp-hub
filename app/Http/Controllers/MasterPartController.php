@@ -79,8 +79,6 @@ class MasterPartController extends Controller
         $request->validate([
             'part_no'       => 'required',
             'part_nama'     => 'required',
-            'het'           => 'required|integer',
-            'satuan_dus'    => 'required|integer',
         ]);
 
         $masterPart = MasterPart::find($id);

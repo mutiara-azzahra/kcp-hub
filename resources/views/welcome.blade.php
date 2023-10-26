@@ -106,7 +106,7 @@
               @endif
 
               {{-- Master --}}
-            @if(in_array(Auth::user()->id_role, [5, 7, 11, 12, 17, 24]))
+            @if(in_array(Auth::user()->id_role, [5, 7, 10, 11, 12, 17, 24]))
             <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon"></i>

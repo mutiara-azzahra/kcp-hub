@@ -26,7 +26,6 @@
                 <div class="card-body">
                     <div class="col-lg-12">
                         <form action="{{ route('stok-gudang.store') }}" method="POST">
-
                         @csrf
                         <div class="row">
                             <div class="col-md-12">

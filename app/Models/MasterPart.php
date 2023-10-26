@@ -25,4 +25,10 @@ class MasterPart extends Model
     {
         return $this->hasOne(MasterKodeRak::class, 'id', 'id_rak');
     }
+
+    public function stok_gudang()
+    {
+        return $this->hasOne(StokGudang::class, 'part_no', 'part_no');
+    }
+
 }
