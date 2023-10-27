@@ -82,13 +82,13 @@ class SuratPesananController extends Controller
 
         $totalSum = 0;
 
-        foreach($total as $s){
+        // foreach($total as $s){
 
-        }
-        $totalSum += $s->sum('nominal_total');
+        // }
+        // $totalSum += $s->sum('nominal_total');
 
 
-        return view('surat-pesanan.details', ['nosp' => $nosp] ,compact('master_part', 'details', 'check', 'totalSum'));
+        return view('surat-pesanan.details', ['nosp' => $nosp] ,compact('master_part', 'details', 'check'));
     }
 
     public function detail_sp($nosp)

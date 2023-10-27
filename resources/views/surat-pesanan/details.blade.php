@@ -148,10 +148,7 @@
                                             <td class="text-right">Rp. {{ number_format($d->nominal_total, 0, ',', '.') }}</td>
                                         </tr>
                                         @endforeach
-                                            <tr>
-                                                <td class="text-center" colspan="4"><b>TOTAL</b></td>
-                                                <td class="text-right"><b>Rp. {{ number_format($totalSum, 0, ',', '.') }}</b></td>
-                                            </tr>
+                                            
                                     </tbody>
                                 </table>
                             </div>

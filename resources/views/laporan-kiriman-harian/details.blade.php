@@ -104,25 +104,30 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Driver</strong>
-                        <input type="text" name="helper" class="form-control" placeholder="{{ $details->driver }}" readonly>
+                        <input type="text" name="helper" class="form-control" placeholder="{{ $details->driver }}">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Helper</strong>
-                        <input type="text" name="helper" class="form-control" placeholder="{{ $details->helper }}" readonly>
+                        <input type="text" name="helper" class="form-control" placeholder="{{ $details->helper }}">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Plat Mobil</strong>
-                        <input type="text" name="plat_mobil" class="form-control" placeholder="{{ $details->plat_mobil }}" readonly>
+                        <input type="text" name="plat_mobil" class="form-control" placeholder="{{ $details->plat_mobil }}">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Jam Berangkat</strong>
-                        <input type="text" name="plat_mobil" class="form-control" placeholder="{{ $details->jam_berangkat }}" readonly>
+                        @if($details->jam_berangkat != null)
+                        <input type="text" name="plat_mobil" class="form-control" placeholder="{{ $details->jam_kembali }}">
+                        @else
+                        <input type="datetime-local" name="jam_kembali" class="form-control" placeholder="">
+                        @endif
+                        
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -130,7 +135,7 @@
                         <strong>Jam Kembali</strong>
 
                         @if($details->jam_kembali != null)
-                        <input type="text" name="plat_mobil" class="form-control" placeholder="{{ $details->jam_kembali }}" readonly>
+                        <input type="text" name="plat_mobil" class="form-control" placeholder="{{ $details->jam_kembali }}">
                         @else
                         <input type="datetime-local" name="jam_kembali" class="form-control" placeholder="">
                         @endif
@@ -139,7 +144,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>KM. Berangkat</strong>
-                        <input type="text" name="km_berangkat_mobil" class="form-control" placeholder="" readonly>
+                        <input type="text" name="km_berangkat_mobil" class="form-control" placeholder="">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
