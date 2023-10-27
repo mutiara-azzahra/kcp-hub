@@ -2,10 +2,10 @@
  
 @section('content')
 <div class="container" style="padding: 10px;">
-    <div class="row mt-5">
+    <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4><b>Ubah Master Part</b></h4>
+                <h4>Ubah Master Part</h4>
             </div>
             <div class="float-right">
                     <a class="btn btn-success" href="{{ route('master-diskon.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
@@ -27,7 +27,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <strong>Part No</strong>
-                                    <input type="text" name="part_no" class="form-control" value="{{ $master_diskon_id->part_no }}">
+                                    <input type="text" name="part_no" class="form-control" value="{{ $master_diskon_id->part_no }}" readonly>
                                 </div>
                             </div>
                             <div class="col-md-12">

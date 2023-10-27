@@ -2,10 +2,10 @@
  
 @section('content')
 <div class="container" style="padding: 10px;">
-    <div class="row mt-5">
+    <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4><b>Tambah Diskon Maksimal Part</b></h4>
+                <h4>Tambah Diskon Maksimal Part</h4>
             </div>
             <div class="float-right">
                     <a class="btn btn-success" href="{{ route('master-diskon.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
@@ -27,9 +27,9 @@
                             <div class="col-md-12">
                                 <div class="form-group">
 
-                                <strong>Isi Part No.</strong>
+                                <strong>Isi Part No</strong>
 
-                                <select name="part_no" class="form-control mr-2">
+                                <select name="part_no" class="form-control mr-2 my-select">
                                     <option value="">-- Pilih --</option>
                                     @foreach($master_part as $k)
                                     <option value="{{ $k->part_no }}">{{ $k->part_no }} | {{ $k->part_nama }}</option>
@@ -41,7 +41,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <strong>Isi Maksimal Diskon (dalam %)</strong>
-                                    <input type="number" name="diskon_maksimal" class="form-control" placeholder="">
+                                    <input type="number" name="diskon_maksimal" class="form-control" placeholder="Contoh: 10">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

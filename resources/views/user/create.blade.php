@@ -38,7 +38,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Role</strong>
-                            <select name="id_role" class="form-control mr-2">
+                            <select name="id_role" class="form-control mr-2 my-select">
                                 <option value="">-- Pilih Role --</option>
                                 @foreach($role as $s)
                                     <option value="{{ $s->id }}">{{ $s->role }}</option>

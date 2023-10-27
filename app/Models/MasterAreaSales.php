@@ -27,6 +27,11 @@ class MasterAreaSales extends Model
         return $this->belongsTo(MasterArea::class, 'kode_kabupaten', 'kode_kabupaten');
     }
 
+    public function area_outlet()
+    {
+        return $this->hasOne(MasterAreaOutlet::class, 'kode_kab', 'kode_kabupaten');
+    }
+
     public function area_sales()
     {
         return $this->hasOne(MasterSales::class, 'id', 'id_sales');

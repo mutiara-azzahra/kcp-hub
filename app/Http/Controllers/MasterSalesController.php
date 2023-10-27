@@ -54,7 +54,7 @@ class MasterSalesController extends Controller
 
         $sales       = MasterSales::findOrFail($id);
         $master_area = MasterAreaOutlet::where('status', 'Y')->get();
-        $area  = MasterAreaSales::where('id_sales', $id)->get();
+        $area        = MasterAreaSales::where('id_sales', $id)->get();
 
         return view('master-sales.details', compact('sales', 'master_area', 'area'));
 

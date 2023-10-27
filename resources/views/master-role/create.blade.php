@@ -2,10 +2,10 @@
  
 @section('content')
 <div class="container" style="padding: 10px;">
-    <div class="row mt-5">
+    <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4><b>Tambah Master Role</b></h4>
+                <h4>Tambah Master Role</h4>
             </div>
             <div class="float-right">
                     <a class="btn btn-success" href="{{ route('master-role.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
@@ -31,7 +31,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <strong>Role</strong>
-                                    <input type="text" name="role" class="form-control" placeholder="Tambahkan Role">
+                                    <input type="text" name="role" class="form-control" placeholder="Tambahkan Role Baru">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
