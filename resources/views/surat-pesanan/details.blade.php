@@ -142,14 +142,16 @@
                                         @foreach($details->details_sp as $d)
                                         <tr>
                                             <td class="text-left">{{ $d->part_no }}</td>
-
-                                            {{-- number_format($xxx, 0, ',', '.') --}}
                                             <td class="text-left">Rp. {{ number_format($d->hrg_pcs, 0, ',', '.') }}</td>
                                             <td class="text-center">{{ $d->qty }}</td>
                                             <td class="text-center">{{ $d->disc }}%</td>
-                                            <td class="text-left">Rp. {{ number_format($d->nominal_total, 0, ',', '.') }}</td>
+                                            <td class="text-right">Rp. {{ number_format($d->nominal_total, 0, ',', '.') }}</td>
                                         </tr>
                                         @endforeach
+                                            <tr>
+                                                <td class="text-center" colspan="4"><b>TOTAL</b></td>
+                                                <td class="text-right"><b>Rp. {{ number_format($totalSum, 0, ',', '.') }}</b></td>
+                                            </tr>
                                     </tbody>
                                 </table>
                             </div>

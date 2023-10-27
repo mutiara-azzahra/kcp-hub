@@ -28,10 +28,11 @@ class SuratPesananController extends Controller
 
     public function create(){
 
-        $sales  = MasterSales::where('sales', Auth::user()->username)->value('id');
-        $toko   = MasterAreaSales::where('id_sales', $sales)->first();
+        $sales      = MasterSales::where('sales', Auth::user()->username)->value('id');
+        $toko       = MasterAreaSales::where('id_sales', $sales)->first();
+        $all_toko   = MasterOutlet::where('status', 'Y')->get();
 
-        return view('surat-pesanan.create', compact('sales', 'toko'));
+        return view('surat-pesanan.create', compact('sales', 'toko', 'all_toko'));
     }
 
     public function store(Request $request){
@@ -75,10 +76,19 @@ class SuratPesananController extends Controller
     public function detail($nosp)
     {
         $details     = TransaksiSpHeader::where('nosp', $nosp)->first();
+        $total       = TransaksiSpDetails::where('nosp', $nosp)->get();
         $master_part = MasterPart::all();
         $check       = TransaksiSpDetails::where('nosp', $nosp)->first();
 
-        return view('surat-pesanan.details', ['nosp' => $nosp] ,compact('master_part', 'details', 'check'));
+        $totalSum = 0;
+
+        foreach($total as $s){
+
+        }
+        $totalSum += $s->sum('nominal_total');
+
+
+        return view('surat-pesanan.details', ['nosp' => $nosp] ,compact('master_part', 'details', 'check', 'totalSum'));
     }
 
     public function detail_sp($nosp)

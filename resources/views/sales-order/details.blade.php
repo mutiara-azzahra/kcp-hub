@@ -105,7 +105,7 @@
                                         @endforeach
                                                 <tr>
                                                     <td class="text-center" colspan="4"><b>TOTAL</b></td>
-                                                    <td class="text-left"><b>Rp. {{ number_format($totalSum, 0, ',', '.') }}</b></td>
+                                                    <td class="text-right"><b>Rp. {{ number_format($totalSum, 0, ',', '.') }}</b></td>
                                                 </tr>
                                             
                                     </tbody>

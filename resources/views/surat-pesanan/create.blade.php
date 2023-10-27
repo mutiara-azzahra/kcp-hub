@@ -4,8 +4,13 @@
 <div class="container" style="padding: 10px;">
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
-             <div class="float-left">
-                <h4>Buat Surat Pesanan/SP</h4>
+            <div class="float-left">
+            @if(Auth::user()->id_role == 11)
+            <h4>Buat Surat Pesanan/SP by Office</h4>
+            @else
+            <h4>Buat Surat Pesanan/SP by Sales</h4>
+            @endif
+                
             </div>
             <div class="float-right">
                     <a class="btn btn-success" href="{{ route('surat-pesanan.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
@@ -25,7 +30,6 @@
         <div class="card" style="padding: 10px;">
                 <div class="card-body">
                     <div class="col-lg-12">
-
                         @if($toko != null)
                         <form action="{{ route('surat-pesanan.store') }}" method="POST">
                             @csrf
@@ -58,12 +62,46 @@
 
                         @else
 
-                            <div class="card-header">
-                                <b>Pemberitahuan</b>
-                            </div>
-                            <div class="card-body">
-                                <p>Maaf, anda belum memiliki Toko.</li>
-                            </div>
+                            @if(Auth::user()->id_role == 11)
+
+                            <form action="{{ route('surat-pesanan.store') }}" method="POST">
+                            @csrf
+                                <div class="col">                        
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <strong>Toko</strong><br>
+                                            <select name="kd_outlet" class="form-control mb-2 my-select">     
+                                                <option value="">-- Pilih Toko --</option>
+                                                @foreach($all_toko as $s)
+                                                    <option value="{{ $s->kd_outlet }}">{{ $s->kd_outlet }} / {{ $s->nm_outlet }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <strong>Keterangan</strong>
+                                            <input type="text" name="keterangan" class="form-control" placeholder="Isi Keterangan">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                                        <div class="float-right">
+                                            <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Data</button>                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                            @else
+                                <div class="card-header">
+                                    <b>Pemberitahuan</b>
+                                </div>
+                                <div class="card-body">
+                                    <p>Maaf, anda belum memiliki Toko.</li>
+                                </div>
+                            @endif
+
                         @endif
                     </div>
                 </div>
