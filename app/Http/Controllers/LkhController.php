@@ -72,7 +72,7 @@ class LkhController extends Controller
         $driver         = User::where('id_role', 22)->get();
         $helper         = User::where('id_role', 13)->get();
 
-        return view('laporan-kiriman-harian.details', ['no_lkh' => $no_lkh] ,compact('details', 'lkh_details', 'driver'));
+        return view('laporan-kiriman-harian.details', ['no_lkh' => $no_lkh] ,compact('details', 'lkh_details', 'driver', 'helper'));
     }
 
     public function store_details(Request $request, $no_lkh)
@@ -80,13 +80,14 @@ class LkhController extends Controller
 
         $request -> validate([
             'driver'            => 'required', 
-            'helper'            => 'required',
             'plat_mobil'        => 'required',
         ]);
 
-        TransaksiLkhHeader::where('no_lkh', $no_lkh)->update([
+            TransaksiLkhHeader::where('no_lkh', $no_lkh)->update([
                 'driver'            => $request->driver,
                 'helper'            => $request->helper,
+                'jam_berangkat'     => $request->jam_berangkat,
+                'km_berangkat_mobil'=> $request->km_berangkat_mobil,
                 'plat_mobil'        => $request->plat_mobil,
             ]);
         

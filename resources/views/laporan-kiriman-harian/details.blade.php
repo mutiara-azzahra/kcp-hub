@@ -24,7 +24,7 @@
         </div>
     @endif
 
-    @if($details == null)
+    @if($details->driver == null)
     <div class="card" style="padding: 20px;">
         <form action="{{ route('laporan-kiriman-harian.store-details', ['no_lkh' => $details->no_lkh ]) }}" method="POST">
             @csrf
@@ -35,36 +35,41 @@
                         {{ $details->no_lkh }}<br>
                     </div>
                 </div> 
-                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
-                            <strong>Driver</strong>
-                            <select name="id" class="form-control mr-2">
+                            <strong>Driver</strong> *wajib diisi
+                            <select name="driver" class="form-control mr-2">
                                 <option value="">-- Pilih Driver --</option>
                                 @foreach($driver as $s)
-                                    <option value="{{ $s->username }}">{{ $s->username }}</option>
+                                    <option value="{{ $s->username }}">{{ $s->nama_user }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Helper</strong>
+                            <select name="helper" class="form-control mr-2">
+                                <option value="">-- Pilih Helper --</option>
+                                @foreach($helper as $s)
+                                    <option value="{{ $s->username }}">{{ $s->nama_user }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        <strong>Helper</strong>
-                        <input type="text" name="helper" class="form-control" placeholder="">
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
                         <strong>Plat Mobil</strong>
-                        <input type="text" name="plat_mobil" class="form-control" placeholder="">
+                        <input type="text" name="plat_mobil" class="form-control" placeholder="Contoh: DA 1234 BC">
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="col-xs-12 col-sm-12 col-md-6">
                     <div class="form-group">
-                        <strong>Jam Berangkat</strong>
+                        <strong>Jam Berangkat</strong> *wajib diisi
                         <input type="datetime-local" name="jam_berangkat" class="form-control" placeholder="">
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="col-xs-12 col-sm-12 col-md-6">
                     <div class="form-group">
                         <strong>Jam Kembali</strong>
                         <input type="datetime-local" name="jam_kembali" class="form-control" placeholder="">
@@ -73,13 +78,13 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>KM. Berangkat</strong>
-                        <input type="text" name="km_berangkat_mobil" class="form-control" placeholder="">
+                        <input type="text" name="km_berangkat_mobil" class="form-control" placeholder="Contoh: 30.000">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>KM. Kembali</strong>
-                        <input type="text" name="km_kembali_mobil" class="form-control" placeholder="">
+                        <input type="text" name="km_kembali_mobil" class="form-control" placeholder="Contoh: 30.000">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
@@ -104,7 +109,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Driver</strong>
-                        <input type="text" name="helper" class="form-control" placeholder="{{ $details->driver }}">
+                        <input type="text" name="driver" class="form-control" placeholder="{{ $details->driver }}">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -123,9 +128,9 @@
                     <div class="form-group">
                         <strong>Jam Berangkat</strong>
                         @if($details->jam_berangkat != null)
-                        <input type="text" name="plat_mobil" class="form-control" placeholder="{{ $details->jam_kembali }}">
+                        <input type="text" name="plat_mobil" class="form-control" placeholder="{{ $details->jam_berangkat }}">
                         @else
-                        <input type="datetime-local" name="jam_kembali" class="form-control" placeholder="">
+                        <input type="datetime-local" name="jam_berangkat" class="form-control" placeholder="">
                         @endif
                         
                     </div>
@@ -144,7 +149,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>KM. Berangkat</strong>
-                        <input type="text" name="km_berangkat_mobil" class="form-control" placeholder="">
+                        <input type="text" name="km_berangkat_mobil" class="form-control" placeholder="{{ $details->km_berangkat_mobil }}">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">

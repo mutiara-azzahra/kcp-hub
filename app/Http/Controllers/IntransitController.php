@@ -114,7 +114,6 @@ class IntransitController extends Controller
             $itemPartNo = $selectedItems[$i];
             $stok_lama = MasterStokGudang::where('part_no', $itemPartNo)->value('stok');
     
-            // Get the corresponding values from no_doos and no_packingsheet arrays
             $doos = $no_doos[$i];
             $packingsheet = $no_packingsheet[$i];
     
@@ -128,12 +127,5 @@ class IntransitController extends Controller
 
         return redirect()->route('intransit.index')->with('success', 'Barang berhasil dimasukkan ke gudang');
     }
-
-
-
-
-
-
-
 
 }
