@@ -41,7 +41,7 @@
                                             <td class="text-left">{{ $f->supplier }}</td>
                                             <td class="text-left">{{ $f->tanggal_nota }}</td>
                                             <td class="text-left">{{ $f->tanggal_jatuh_tempo }}</td>
-                                            <td class="text-left">Rp. {{ number_format($f->details_pembelian->sum('total_amount'), 0, ',', '.') }}</td>
+                                            <td class="text-right">Rp. {{ number_format($f->details_pembelian->sum('total_amount'), 0, ',', '.') }}</td>
                                             
                                         @endforeach
 
@@ -57,8 +57,7 @@
                                         <tr style="background-color: #6082B6; color:white">
                                             <th class="text-center">Part No | Nama</th>
                                             <th class="text-center">Qty</th>
-                                            <th class="text-center">Harga</th>
-                                            <th class="text-center">PPN (%)</th>
+                                            <th class="text-center">HET</th>
                                             <th class="text-center">Disc (%)</th>
                                             <th class="text-center">Amount</th>
                                         </tr>
@@ -69,10 +68,15 @@
                                                 <tr>
                                                     <td class="text-left">{{ $d->part_no }}</td>
                                                     <td class="text-center">{{ $d->qty }}</td>
-                                                    <td class="text-left">Rp. {{ number_format($d->harga, 0, ',', '.') }}</td>
-                                                    <td class="text-left">Rp. {{ number_format($d->total_ppn, 0, ',', '.') }}</td>
-                                                    <td class="text-left">Rp. {{ number_format($d->total_diskon_persen, 0, ',', '.') }}</td>
-                                                    <td class="text-left">Rp. {{ number_format($d->total_amount, 0, ',', '.') }}</td>
+                                                    <td class="text-right">Rp. {{ number_format($d->harga, 0, ',', '.') }}</td>
+                                                    @if( $d->diskon_persen != null)
+                                                    <td class="text-center">{{ $d->diskon_persen }}</td>
+
+                                                    @else
+                                                    <td class="text-center">-</td>
+
+                                                    @endif
+                                                    <td class="text-right">Rp. {{ number_format($d->total_amount, 0, ',', '.') }}</td>
                                                 </tr>
                                                 @endforeach
                                             @endforeach

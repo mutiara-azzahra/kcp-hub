@@ -5,7 +5,7 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4><b>Buat Pembelian Non AOP</b></h4>
+                <h4>Tambah Pembelian Non AOP</h4>
             </div>
             <div class="float-right">
                     <a class="btn btn-success" href="{{ route('pembelian-non-aop.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
@@ -49,13 +49,12 @@
                                 <form action="{{ route('pembelian-non-aop.store_details')}}" method="POST">
                                 @csrf
 
-                                <table class="table table-hover table-bordered table-sm bg-light table-striped">
+                                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="table">
                                     <thead>
                                         <tr style="background-color: #6082B6; color:white">
                                             <th class="text-center">Part No | Nama</th>
                                             <th class="text-center">Qty</th>
-                                            <th class="text-center">Harga Beli</th>
-                                            <th class="text-center">PPN (%)</th>
+                                            <th class="text-center">HET</th>
                                             <th class="text-center">Disc (%)</th>
                                             <th class="text-center">Tambah</th>
                                         </tr>
@@ -81,11 +80,6 @@
                                                     <td class="text-center">
                                                         <div class="form-group col-12">
                                                             <input type="number" name="inputs[0][harga]" class="form-control" placeholder="0">
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="form-group col-12">
-                                                            <input type="number" name="inputs[0][ppn_persen]" class="form-control" placeholder="0">
                                                         </div>
                                                     </td>
                                                     <td class="text-center">
@@ -140,11 +134,6 @@
                                                     <td class="text-center">
                                                         <div class="form-group col-12">
                                                             <input type="number" name="inputs[${i}][harga]" class="form-control" placeholder="0">
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="form-group col-12">
-                                                            <input type="number" name="inputs[${i}][ppn_persen]" class="form-control" placeholder="0">
                                                         </div>
                                                     </td>
                                                     <td class="text-center">

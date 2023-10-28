@@ -107,9 +107,9 @@ class PembelianController extends Controller
         foreach($request->inputs as $key => $value){
 
             //ppn_persen
-            if($value['ppn_persen'] == null){
-                $value['ppn_persen'] = 0;
-            }
+            // if($value['ppn_persen'] == null){
+            //     $value['ppn_persen'] = 0;
+            // }
 
             //diskon_nominal
             if($value['diskon_nominal'] == null){
@@ -121,10 +121,10 @@ class PembelianController extends Controller
             $value['total_harga'] = $value['qty'] * $value['harga'];
 
             //total_ppn
-            if($value['ppn_persen'] == 0){
-                $value['total_ppn'] = 0;
-            }
-            $value['total_ppn'] = ($value['ppn_persen']*$value['total_harga'])/100;
+            // if($value['ppn_persen'] == 0){
+            //     $value['total_ppn'] = 0;
+            // }
+            //$value['total_ppn'] = ($value['ppn_persen']*$value['total_harga'])/100;
 
             //total_diskon_persen
             if($value['diskon_nominal'] == 0){
@@ -134,7 +134,11 @@ class PembelianController extends Controller
             $value['total_diskon_persen'] = ($value['diskon_nominal'] * $value['qty'] * $value['harga'])/100 ;
 
             //total_amount
-            $value['total_amount'] = $value['total_harga'] - $value['total_diskon_persen'] - $value['total_ppn'];
+            // $value['total_amount'] = $value['total_harga'] - $value['total_diskon_persen'] - $value['total_ppn'];
+
+            $value['total_amount'] = $value['total_harga'] - $value['total_diskon_persen'];
+
+            // dd($value);
 
             InvoiceNonDetails::create($value);
         }

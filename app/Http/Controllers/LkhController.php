@@ -68,6 +68,7 @@ class LkhController extends Controller
     {
         $details        = TransaksiLkhHeader::where('no_lkh', $no_lkh)->first();
         $lkh_details    = TransaksiLkhHeader::where('no_lkh', $no_lkh)->get();
+        $check    = TransaksiLkhHeader::where('no_lkh', $no_lkh)->get();
         $driver         = User::where('id_role', 22)->get();
         $helper         = User::where('id_role', 13)->get();
 

@@ -18,7 +18,7 @@
         </div>
     </div>
             @if ($message = Session::get('success'))
-                <div class="alert alert-success">
+                <div class="alert alert-success" id="myAlert">
                     <p>{{ $message }}</p>
                 </div>
             @endif
@@ -64,7 +64,6 @@
                                             <th class="text-center">No. Doos</th>
                                             <th class="text-center">Part No</th>
                                             <th class="text-center">Qty</th>
-                                            <th class="text-center">Harga/Pcs</th>
                                         </tr>
                                     </thead>
                                         <tbody class="input-fields">
@@ -74,7 +73,6 @@
                                                 <td class="text-left">{{ $i->no_doos }}</td>
                                                 <td class="text-left">{{ $i->part_no }}</td>
                                                 <td class="text-center">{{ $i->qty }}</td>
-                                                <td class="text-left">Rp. {{ number_format($i->harga_pcs, 0, ',', '.') }}</td>
                                             </tr>
 
                                             @endforeach

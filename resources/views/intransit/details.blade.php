@@ -56,12 +56,11 @@
                                             <th class="text-center">No. Doos</th>
                                             <th class="text-center">Part No.</th>
                                             <th class="text-center">Qty</th>
-                                            <th class="text-center">Harga/pcs</th>
+                                            <!-- <th class="text-center">Harga/pcs</th> -->
                                             <th class="text-center">Tambah</th>
                                         </tr>
                                     </thead>
                                     <tbody class="input-fields">
-                                        {{-- `no_surat_pesanan`, `no_packingsheet`, `no_doos`, `part_no`, `qty`, `harga_pcs`, --}}
                                                 <tr>
                                                     <td class="text-center">
                                                         <div class="form-group col-12">
@@ -89,11 +88,11 @@
                                                             <input type="number" name="inputs[0][qty]" class="form-control" placeholder="0">
                                                         </div>
                                                     </td>
-                                                    <td class="text-center">
+                                                    <!-- <td class="text-center">
                                                         <div class="form-group col-12">
                                                             <input type="number" name="inputs[0][harga_pcs]" class="form-control" placeholder="0">
                                                         </div>
-                                                    </td>
+                                                    </td> -->
                                                     <td class="text-center">
                                                         <div class="form-group col-12">
                                                             <a type="button" class="btn btn-primary m-1" id="add"><i class="fas fa-plus"></i></a>                                                                                  
@@ -146,11 +145,6 @@
                                                     <td class="text-center">
                                                         <div class="form-group col-12">
                                                             <input type="number" name="inputs[${i}][qty]" class="form-control" placeholder="0">
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="form-group col-12">
-                                                            <input type="number" name="inputs[${i}][harga_pcs]" class="form-control" placeholder="0">
                                                         </div>
                                                     </td>
                                                     <td class="text-center">

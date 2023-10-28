@@ -58,7 +58,6 @@ class IntransitController extends Controller
                 'inputs.*.no_packingsheet'  => 'required',
                 'inputs.*.part_no'          => 'required', 
                 'inputs.*.qty'              => 'required', 
-                'inputs.*.harga_pcs'        => 'required',
         ]);
 
         foreach($request->inputs as $key => $value){
@@ -111,14 +110,19 @@ class IntransitController extends Controller
         $no_doos            = $request->input('no_doos', []);
         $no_packingsheet    = $request->input('no_packingsheet', []);
 
-        foreach ($selectedItems as $itemPartNo) {
+        for ($i = 0; $i < count($selectedItems); $i++) {
+            $itemPartNo = $selectedItems[$i];
             $stok_lama = MasterStokGudang::where('part_no', $itemPartNo)->value('stok');
-            
+    
+            // Get the corresponding values from no_doos and no_packingsheet arrays
+            $doos = $no_doos[$i];
+            $packingsheet = $no_packingsheet[$i];
+    
             $stok_masuk = IntransitDetails::where('part_no', $itemPartNo)
-                ->where('no_doos', $no_doos)
-                ->where('no_packingsheet', $no_packingsheet)
+                ->where('no_doos', $doos)
+                ->where('no_packingsheet', $packingsheet)
                 ->value('qty');
-            
+    
             MasterStokGudang::where('part_no', $itemPartNo)->update(['stok' => $stok_lama + $stok_masuk]);
         }
 

@@ -40,20 +40,24 @@
                                     <input type="date" name="tanggal_nota" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-group col-12">
-                                    <label for="">Customer To</label>
+                                <div class="form-group col-12">
+                                    <label for="">Vendor</label>
                                     <select name="customer_to" class="form-control mr-2">
-                                        <option value="">-- Pilih Customer --</option>
-                                        <option value="KCP01001">KCP01001</option>
-                                        <option value="KCP02001">KCP02001</option>
+                                        <option value="">-- Pilih Vendor --</option>
+                                        <option value="ICHIDAI">ICHIDAI</option>
+                                        <option value="BRIO">BRIO</option>
+                                        <option value="LIQUID">LIQUID</option>
                                     </select>
                                 </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <strong>Supplier</strong>
-                                    <input type="text" name="supplier" class="form-control" placeholder="contoh: supplier a ">
+                                <div class="form-group col-12">
+                                    <label for="">Supplier</label>
+                                    <select name="supplier" class="form-control mr-2">
+                                        <option value="">-- Pilih Supplier --</option>
+                                        <option value="SSI">SSI</option>
+                                        <option value="KMC">KMC</option>
+                                        <option value="ABADI_MAKMUR">ABADI MAKMUR</option>
+                                    </select>
                                 </div>
-                            </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <strong>TOP</strong>
