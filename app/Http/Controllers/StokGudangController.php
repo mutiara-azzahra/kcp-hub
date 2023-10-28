@@ -25,6 +25,13 @@ class StokGudangController extends Controller
         return view('stok-gudang.create', compact('master_part'));
     }
 
+    public function create_barang_masuk(){
+
+        // $master_part = MasterPart::where('status', 'A')->get();
+
+        return view('stok-gudang.tambah');
+    }
+
     public function store(Request $request){
 
         $request -> validate([

@@ -7,7 +7,10 @@
              <div class="float-left">
                 <h4>Stok Gudang</h4>
             </div>
-            <div class="float-right">
+            <div class="float-right m-1">
+                <a class="btn btn-info" href="{{ route('stok-gudang.tambah') }}"><i class="fas fa-plus"></i> Tambah Stok</a>
+            </div>
+            <div class="float-right m-1">
                 <a class="btn btn-success" href="{{ route('stok-gudang.create') }}"><i class="fas fa-plus"></i> Tambah Stok</a>
             </div>
         </div>

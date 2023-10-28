@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('invoice_non_header', function (Blueprint $table) {
-
             $table->increments('id');
             $table->string('invoice_non');
             $table->string('txt_invoice')->nullable();

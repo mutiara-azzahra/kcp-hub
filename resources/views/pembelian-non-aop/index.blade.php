@@ -13,10 +13,9 @@
         </div>
     </div>
             @if ($message = Session::get('success'))
-                <div class="alert alert-success">
+                <div class="alert alert-success" id="myAlert">
                     <p>{{ $message }}</p>
-                </div>
-                
+                </div>           
             @endif
 
             <div class="card" style="padding: 10px;">
@@ -41,7 +40,6 @@
 
                                 @foreach($pembelian as $p)
                                 <tr>
-
                                     <td class="text-center">{{ $no++ }}</td>
                                     <td class="text-left">{{ $p->invoice_non }}</td>
                                     <td class="text-left">{{ $p->tanggal_nota }}</td>

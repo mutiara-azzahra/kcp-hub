@@ -2,10 +2,10 @@
  
 @section('content')
         <div class="container" style="padding: 10px;">
-            <div class="row mt-5">
+            <div class="row mt-2">
                 <div class="col-lg-12 margin-tb pb-3">
                     <div class="float-left">
-                        <h4><b>Penggunaan Website PT. KCP</b></h4>
+                        <h4>Penggunaan Website PT. KCP</h4>
                     </div>
                 </div>
             </div>
