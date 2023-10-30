@@ -30,4 +30,9 @@ class IntransitDetails extends Model
     {
         return $this->hasOne(IntransitHeader::class, 'no_surat_pesanan', 'no_surat_pesanan');
     }
+
+    public function nama()
+    {
+        return $this->hasOne(MasterPart::class, 'part_no', 'part_no');
+    }
 }

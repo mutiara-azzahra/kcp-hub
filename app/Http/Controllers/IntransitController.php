@@ -56,27 +56,6 @@ class IntransitController extends Controller
         return view('intransit.details',compact('intransit_header', 'master_part', 'details'));
     }
 
-
-    // public function store_details(Request $request){
-
-    //     $request->validate([
-    //             'inputs.*.no_surat_pesanan' => 'required',
-    //             'inputs.*.no_packingsheet'  => 'required',
-    //             'inputs.*.part_no'          => 'required', 
-    //             'inputs.*.qty'              => 'required', 
-    //     ]);
-
-    //     foreach($request->inputs as $key => $value){
-
-    //         $value['status'] = 'I';
-
-    //        IntransitDetails::create($value);
-    //     }
-        
-    //     return redirect()->route('intransit.index')->with('success','Barang intransit berhasil ditambahkan!');
-        
-    // }
-
     public function store_details(Request $request){
 
         $no_surat_pesanan = $request->input('no_surat_pesanan');
@@ -106,7 +85,6 @@ class IntransitController extends Controller
         }
         
     }
-    
 
     public function tambah_gudang($id)
     {
@@ -144,7 +122,7 @@ class IntransitController extends Controller
     {
 
         $selectedItems      = $request->input('selected_items', []);
-        $no_surat_pesanans   = $request->input('no_surat_pesanan', []);
+        $no_surat_pesanans  = $request->input('no_surat_pesanan', []);
 
         for ($i = 0; $i < count($selectedItems); $i++) {
             $itemPartNo         = $selectedItems[$i];

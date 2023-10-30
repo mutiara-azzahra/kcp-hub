@@ -40,51 +40,60 @@
                                         <td class="text-center">{{ $pembelian->tanggal_nota }}</td>
                                         <td class="text-center">{{ $pembelian->tanggal_jatuh_tempo }}</td>
                                     </tr>
+                                    
                                 </tbody>
                             </table>
                         </div>
                             <div class="col-lg-12 p-3">
 
-                                <form action="{{ route('pembelian-non-aop.store_details', $pembelian->invoice_non )}}" method="POST">
+                                <form action="{{ route('pembelian-non-aop.store_details')}}" method="POST">
                                 @csrf
 
                                 <table class="table table-hover table-bordered table-sm bg-light table-striped" id="table">
                                     <thead>
                                         <tr style="background-color: #6082B6; color:white">
-                                            <th class="text-center">Part No</th>
+                                            <th class="text-center">Part No | Nama</th>
                                             <th class="text-center">Qty</th>
                                             <th class="text-center">HET</th>
-                                            <th class="text-center" style="width: 150px;">Disc (%)</th>
+                                            <th class="text-center">Disc (%)</th>
+                                            <th class="text-center">Tambah</th>
                                         </tr>
                                     </thead>
                                     <tbody class="input-fields">
-
-                                        @foreach($intransit_details as $i)
-                                        <tr>
-                                            <td>
-                                                <div class="form-group col-12">
-                                                    <input type="hidden" name="invoice_non" value="{{ $pembelian->invoice_non }}">
-                                                    <input type="text" name="part_no[]" class="form-control" value="{{ $i->part_no }}" readonly>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group col-12">
-                                                    <input type="number" name="qty[]" class="form-control" value="{{ $i->qty }}" readonly>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group col-12">
-                                                    <input type="number" name="harga[]" class="form-control" value="{{ $i->nama->het }}" readonly>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group col-12">
-                                                    <input type="number" name="disc[]" class="form-control" placeholder="0">
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
+                                                <tr>
+                                                    <td class="text-center">
+                                                        <div class="form-group col-12">
+                                                            <select name="inputs[0][part_no]" class="form-control mr-2">
+                                                                <option value="">-- Pilih --</option>
+                                                                @foreach($master_part as $k)
+                                                                    <option value="{{ $k->part_no }}"> {{ $k->part_no }} | {{ $k->part_nama }} </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <div class="form-group col-12">
+                                                            <input type="hidden" name="inputs[0][invoice_non]" value="{{ $pembelian->invoice_non }}">
+                                                            <input type="number" name="inputs[0][qty]" class="form-control" placeholder="0">
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <div class="form-group col-12">
+                                                            <input type="number" name="inputs[0][harga]" class="form-control" placeholder="0">
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <div class="form-group col-12">
+                                                            <input type="number" name="inputs[0][diskon_nominal]" class="form-control" placeholder="0">
+                                                        </div>
+                                                    </td>
+                                                    <!-- <td class="text-center">
+                                                        <div class="form-group col-12">
+                                                            <a type="button" class="btn btn-primary m-1" id="add"><i class="fas fa-plus"></i></a>                                                                                  
+                                                        </div>
+                                                    </td> -->
+                                                </tr>
+                                            </tbody>
                                     </table>
                                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                                         <div class="float-right">

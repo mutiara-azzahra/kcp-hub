@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 use App\Models\InvoiceNonHeader;
 use App\Models\InvoiceNonDetails;
+use App\Models\IntransitHeader;
+use App\Models\IntransitDetails;
 use App\Models\MasterPart;
 
 
@@ -22,7 +24,11 @@ class PembelianController extends Controller
 
     public function create(){
 
-        return view('pembelian-non-aop.create');
+        $intransit = IntransitHeader::where('status', 'T')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('pembelian-non-aop.create', compact('intransit') );
     }
 
     public function show($id){
@@ -36,7 +42,7 @@ class PembelianController extends Controller
     public function store(Request $request){
 
         $request -> validate([
-            'txt_invoice'              => 'required', 
+            'invoice_non'              => 'required', 
             'tanggal_nota'             => 'required', 
             'customer_to'              => 'required', 
             'supplier'                 => 'required', 
@@ -46,24 +52,29 @@ class PembelianController extends Controller
         $request['flag_ppn']            = 'N';
         $request['status']              = 'A';
         $request['flag_pembayaran']     = 'N';
-        $request['invoice_non'] = str_replace('/', '', $request['txt_invoice']);
 
         $created = InvoiceNonHeader::create($request->all());
 
         if ($created){
-            return redirect()->route('pembelian-non-aop.detail', ['id' => $created->id])->with('success','Invoice header Berhasil ditambahkan, silahkan input details Invoice');
+            return redirect()->route('pembelian-non-aop.detail', ['id' => $created->id ])->with('success','Invoice header Berhasil ditambahkan, silahkan input details Invoice');
         } else{
             return redirect()->route('pembelian-non-aop.index')->with('danger','Data baru gagal ditambahkan');
         }
     }
 
-
-    public function detail_pembelian($invoice_non)
+    public function detail($id)
     {
-      //  $pembelian_details  = InvoiceNonDetails::where('invoice_non', $invoice_non)->get();
-        $pembelian_header  = InvoiceNonHeader::where('invoice_non', $invoice_non)->get();
+        $pembelian          = InvoiceNonHeader::findOrFail($id);
+        $intransit_details  = IntransitDetails::where('no_surat_pesanan', $pembelian->invoice_non)->get();
+        $master_part        = MasterPart::all();
 
-      //  dd($pembelian_header);
+        return view('pembelian-non-aop.details',compact('pembelian', 'master_part', 'intransit_details'));
+    }
+
+
+    public function detail_pembelian($id)
+    {
+        $pembelian_header  = InvoiceNonHeader::where('invoice_non', $invoice_non)->get();
 
         return view('pembelian-non-aop.details-pembelian',compact( 'pembelian_header'));
     }
@@ -87,64 +98,44 @@ class PembelianController extends Controller
         }
     }
 
-    public function detail($id)
-    {
-        $pembelian   = InvoiceNonHeader::findOrFail($id);
-        $master_part = MasterPart::all();
-
-        return view('pembelian-non-aop.details',compact('pembelian', 'master_part'));
-    }
-
-    public function store_details(Request $request){
-
-        $request->validate([
-                'inputs.*.invoice_non' => 'required',
-                'inputs.*.part_no'     => 'required',
-                'inputs.*.qty'         => 'required', 
-                'inputs.*.harga'       => 'required',
-        ]);
-
-        foreach($request->inputs as $key => $value){
-
-            //ppn_persen
-            // if($value['ppn_persen'] == null){
-            //     $value['ppn_persen'] = 0;
-            // }
-
-            //diskon_nominal
-            if($value['diskon_nominal'] == null){
-                $value['diskon_nominal'] = 0;
-            }
-            $value['diskon_nominal'] = $value['diskon_nominal'];
-
-            //total_harga
-            $value['total_harga'] = $value['qty'] * $value['harga'];
-
-            //total_ppn
-            // if($value['ppn_persen'] == 0){
-            //     $value['total_ppn'] = 0;
-            // }
-            //$value['total_ppn'] = ($value['ppn_persen']*$value['total_harga'])/100;
-
-            //total_diskon_persen
-            if($value['diskon_nominal'] == 0){
-                $value['total_diskon_persen'] = 0;
-
-            }
-            $value['total_diskon_persen'] = ($value['diskon_nominal'] * $value['qty'] * $value['harga'])/100 ;
-
-            //total_amount
-            // $value['total_amount'] = $value['total_harga'] - $value['total_diskon_persen'] - $value['total_ppn'];
-
-            $value['total_amount'] = $value['total_harga'] - $value['total_diskon_persen'];
-
-            // dd($value);
-
-            InvoiceNonDetails::create($value);
+   
+    public function store_details(Request $request) {
+        $invoice_non = $request->input('invoice_non');
+        $part_nos = $request->input('part_no');
+        $qtys = $request->input('qty');
+        $hets = $request->input('harga');
+        $discs = $request->input('disc');
+    
+        $details = [];
+    
+        foreach ($part_nos as $index => $part_no) {
+            $qty = $qtys[$index];
+            $het = $hets[$index];
+            $disc = $discs[$index];
+    
+            $total_diskon_persen = $disc * $het;
+            $total_amount = ($het * $qty )- $total_diskon_persen;
+    
+            $detail = [
+                'invoice_non' => $invoice_non, // Use the common value for each row
+                'part_no' => $part_no,
+                'qty' => $qty,
+                'harga' => $het,
+                'diskon_nominal' => $disc,
+                'total_diskon_persen' => $total_diskon_persen,
+                'total_amount' => $total_amount,
+            ];
+    
+            $details[] = $detail;
         }
-        
-            return redirect()->route('pembelian-non-aop.index')->with('success','Data baru berhasil ditambahkan');
-        
+    
+        // Now you have an array of details that you can save to the database
+        // Uncomment this line when you want to save the details
+        InvoiceNonDetails::insert($details);
+    
+        return redirect()->route('pembelian-non-aop.index')->with('success', 'Data baru berhasil ditambahkan');
     }
+    
+    
     
 }

@@ -28,12 +28,15 @@
                         <form action="{{ route('pembelian-non-aop.store') }}" method="POST">
                         @csrf
                         <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <strong>Nomor Nota</strong>
-                                    <input type="text" name="txt_invoice" class="form-control" placeholder="contoh: 12-234-77">
+                            <div class="form-group col-12">
+                                    <label for="">Nomor Nota</label>
+                                    <select name="invoice_non" class="form-control mr-2 my-select">
+                                        <option value="">-- Pilih No Surat Pesanan --</option>
+                                        @foreach($intransit as $i)
+                                        <option value="{{ $i->no_surat_pesanan }}">{{ $i->no_surat_pesanan}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                            </div>
                             <div class="col-12">
                                 <div class="form-group">
                                     <strong>Tanggal Nota</strong>

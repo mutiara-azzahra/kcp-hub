@@ -27,13 +27,13 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <strong>Part No</strong>
-                                    <input type="text" name="part_no" class="form-control" value="{{ $master_part_id->part_no }}">
+                                    <input type="text" name="part_no" class="form-control" value="{{ $master_part_id->part_no }}" readonly>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <strong>Nama Part</strong>
-                                    <input type="text" name="part_nama" class="form-control" value="{{ $master_part_id->part_nama }}">
+                                    <input type="text" name="part_nama" class="form-control" value="{{ $master_part_id->part_nama }}" readonly>
                                 </div>
                             </div>
                             @if(in_array(Auth::user()->id_role, [10]))
@@ -61,19 +61,6 @@
                                             <option value="1" {{ $master_part_id->id_grup == 1 ? 'selected' : '' }}>Ichidai</option>
                                             <option value="2" {{ $master_part_id->id_grup == 2 ? 'selected' : '' }}>Brio</option>
                                             <option value="3" {{ $master_part_id->id_grup == 3 ? 'selected' : '' }}>Grup Air Aki</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <strong>Kode Rak</strong>
-                                        <select name="id_rak" class="form-control">
-                                            <option value="">-- Pilih Kode Rak --</option>
-                                            @foreach($kode_rak as $k)
-                                                <option value="{{ $k->id }}" {{ $k->id == $master_part_id->id_rak ? 'selected' : '' }}>
-                                                    {{ $k->kode_rak_lokasi }}
-                                                </option>
-                                            @endforeach
                                         </select>
                                     </div>
                                 </div>

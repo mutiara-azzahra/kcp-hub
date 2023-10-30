@@ -28,7 +28,6 @@
                                     <th class="text-center">Part Nomor</th>
                                     <th class="text-center">Part Nama</th>
                                     @if(in_array(Auth::user()->id_role, [10]))
-                                    <th class="text-center">Lokasi Rak</th>
 
                                     @else
                                     <th class="text-center">HET</th>
@@ -48,11 +47,6 @@
                                     <td class="text-left">{{ $p->part_no }}</td>
                                     <td class="text-left">{{ $p->part_nama }}</td>
                                     @if(in_array(Auth::user()->id_role, [10]))
-                                        @if($p->rak != null)
-                                        <td class="text-center">{{ $p->rak->kode_rak_lokasi }}</td>
-                                        @else
-                                        <td class="text-center">-</td>
-                                        @endif
                                     @else
                                     <td class="text-left">Rp. {{ number_format($p->het, 0, ',', '.') }}</td>
                                     @endif
