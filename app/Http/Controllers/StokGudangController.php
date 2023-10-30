@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
 use App\Models\MasterStokGudang;
 use App\Models\MasterPart;
+use App\Models\BarangMasukHeader;
+use App\Models\MasterKodeRak;
 
 class StokGudangController extends Controller
 {
@@ -27,10 +28,65 @@ class StokGudangController extends Controller
 
     public function create_barang_masuk(){
 
-        // $master_part = MasterPart::where('status', 'A')->get();
+        return view('stok-gudang.tambah');
+    }
+
+    public function store_barang_masuk(Request $request){
+
+        $request -> validate([
+            'invoice_non'  => 'required', 
+            'customer_to'  => 'required',
+            'supplier'     => 'required',
+            'tanggal_nota' => 'required',
+        ]);
+
+        $created = BarangMasukHeader::create($request->all());
+        $created->update(['created_by' => Auth::user()->nama_user]);
+
+        if ($created){
+            return redirect()->route('stok-gudang.add-details',['id' => $created->id])->with('success','Data stok gudang baru berhasil ditambahkan');
+        } else{
+            return redirect()->route('stok-gudang.index')->with('danger','Data stok gudang baru gagal ditambahkan');
+        }
 
         return view('stok-gudang.tambah');
     }
+
+    public function add_details($id)
+    {
+        $header         = BarangMasukHeader::findOrFail($id);
+        $master_part    = MasterPart::all();
+        $rak            = MasterKodeRak::all();
+
+        return view('stok-gudang.add-details',compact('header', 'master_part', 'rak'));
+    } 
+    //store_add_details
+    // MasterKodeRak
+
+    public function store_add_details(Request $request){
+
+        $request->validate([
+            'inputs.*.part_no' => 'required',
+            'inputs.*.qty'     => 'required',
+            'inputs.*.id_rak'  => 'required',
+        ]);
+
+        foreach($request->inputs as $key => $value){
+                    $value['part_no']       = $value['part_no'];
+                    $value['qty']           = $value['qty'];
+                    $value['id_rak']        = $value['id_rak'];
+                    $value['crea_by']       = $value['crea_by'];
+                    $value['crea_date']     = NOW();
+
+                    dd($value);
+
+                   // BarangMasukHeader::create($value);
+            }       
+        
+        return redirect()->route('surat-pesanan.index')->with('success','Data baru berhasil ditambahkan!');
+        
+    }
+    
 
     public function store(Request $request){
 

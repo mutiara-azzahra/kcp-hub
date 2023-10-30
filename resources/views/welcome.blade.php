@@ -469,6 +469,8 @@
     //SELECT DROPDOWN
         $('.my-select').select2({
         });
+
+
     </script>
     
 

@@ -226,6 +226,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/stok-gudang/show/{id}', [StokGudangController::class, 'show'])->name('stok-gudang.show');
     Route::get('/stok-gudang/create-barang-masuk', [StokGudangController::class, 'create_barang_masuk'])->name('stok-gudang.tambah');
     Route::post('/stok-gudang/create-barang-masuk', [StokGudangController::class, 'store_barang_masuk'])->name('stok-gudang.store-barang-masuk');
+    Route::get('/stok-gudang/details-barang-masuk/{id}', [StokGudangController::class, 'add_details'])->name('stok-gudang.add-details');
+    Route::post('/stok-gudang/details-barang-masuk', [StokGudangController::class, 'store_add_details'])->name('stok-gudang.store_add_details');
 
     //ROUTE STOK GUDANG
     Route::get('/master-sales', [MasterSalesController::class, 'index'])->name('master-sales.index');

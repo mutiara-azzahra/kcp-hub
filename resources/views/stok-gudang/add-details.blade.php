@@ -33,17 +33,17 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td class="text-center">{{ $pembelian->invoice_non }}</td>
-                                        <td class="text-center">{{ $pembelian->customer_to }}</td>
-                                        <td class="text-center">{{ $pembelian->supplier }}</td>
-                                        <td class="text-center">{{ $pembelian->tanggal_nota }}</td>
+                                        <td class="text-center">{{ $header->invoice_non }}</td>
+                                        <td class="text-center">{{ $header->customer_to }}</td>
+                                        <td class="text-center">{{ $header->supplier }}</td>
+                                        <td class="text-center">{{ $header->tanggal_nota }}</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                             <div class="col-lg-12 p-3">
 
-                                <form action="{{ route('pembelian-non-aop.store_details')}}" method="POST">
+                                <form action="{{ route('stok-gudang.store_add_details')}}" method="POST">
                                 @csrf
 
                                 <table class="table table-hover table-bordered table-sm bg-light table-striped" id="table">
@@ -51,6 +51,7 @@
                                         <tr style="background-color: #6082B6; color:white">
                                             <th class="text-center">Part No</th>
                                             <th class="text-center">Qty</th>
+                                            <th class="text-center">Kode Rak</th>
                                             <th class="text-center">Tambah</th>
                                         </tr>
                                     </thead>
@@ -58,7 +59,7 @@
                                                 <tr>
                                                     <td class="text-center">
                                                         <div class="form-group col-12">
-                                                            <select name="inputs[0][part_no]" class="form-control mr-2 my-select">
+                                                            <select name="inputs[0][part_no]" class="form-control mr-2" id="my-select">
                                                                 <option value="">-- Pilih --</option>
                                                                 @foreach($master_part as $k)
                                                                     <option value="{{ $k->part_no }}"> {{ $k->part_no }} | {{ $k->part_nama }} </option>
@@ -68,8 +69,18 @@
                                                     </td>
                                                     <td class="text-center">
                                                         <div class="form-group col-12">
-                                                            <input type="hidden" name="inputs[0][invoice_non]" value="{{ $pembelian->invoice_non }}">
+                                                            <input type="hidden" name="inputs[0][invoice_non]" value="{{ $header->invoice_non }}">
                                                             <input type="number" name="inputs[0][qty]" class="form-control" placeholder="0">
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <div class="form-group col-12">
+                                                            <select name="inputs[0][part_no]" class="form-control mr-2" id="my-select">
+                                                                <option value="">-- Pilih --</option>
+                                                                @foreach($rak as $k)
+                                                                    <option value="{{ $k->id }}"> {{ $k->kode_rak_lokasi }} </option>
+                                                                @endforeach
+                                                            </select>
                                                         </div>
                                                     </td>
                                                     <td class="text-center">
@@ -102,7 +113,7 @@
             $('#table').append(`<tr>
                                                     <td class="text-center">
                                                         <div class="form-group col-12">
-                                                            <select name="inputs[${i}][part_no]" class="form-control mr-2">
+                                                            <select name="inputs[${i}][part_no]" class="form-control mr-2 my-select">
                                                                 <option value="">-- Pilih --</option>
                                                                 @foreach($master_part as $k)
                                                                     <option value="{{ $k->part_no }}"> {{ $k->part_no }} | {{ $k->part_nama }} </option>
@@ -112,8 +123,18 @@
                                                     </td>
                                                     <td class="text-center">
                                                         <div class="form-group col-12">
-                                                            <input type="hidden" name="inputs[${i}][invoice_non]" value="{{ $pembelian->invoice_non }}">
+                                                            <input type="hidden" name="inputs[${i}][invoice_non]" value="{{ $header->invoice_non }}">
                                                             <input type="number" name="inputs[${i}][qty]" class="form-control" placeholder="0">
+                                                        </div>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <div class="form-group col-12">
+                                                            <select name="inputs[${i}][part_no]" class="form-control mr-2 my-select">
+                                                                <option value="">-- Pilih --</option>
+                                                                @foreach($rak as $k)
+                                                                    <option value="{{ $k->id }}"> {{ $k->kode_rak_lokasi }}</option>
+                                                                @endforeach
+                                                            </select>
                                                         </div>
                                                     </td>
                                                     <td class="text-center">

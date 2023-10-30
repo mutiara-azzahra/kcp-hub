@@ -31,7 +31,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <strong>Nomor Nota</strong>
-                                    <input type="text" name="txt_invoice" class="form-control" placeholder="contoh: 12-234-77">
+                                    <input type="text" name="invoice_non" class="form-control" placeholder="contoh: 12-234-77">
                                 </div>
                             </div>
                             <div class="col-md-12 col-lg-12">
