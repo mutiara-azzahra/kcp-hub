@@ -31,13 +31,8 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
-                                    <strong>No. Nota</strong>
-                                    <select name="no_surat_pesanan" class="form-control mr-2 my-select">
-                                        <option value="">-- Pilih --</option>
-                                            @foreach($invoice_non as $k)
-                                                <option value="{{ $k->invoice_non }}"> {{ $k->invoice_non }} </option>
-                                            @endforeach
-                                    </select>
+                                    <strong>No. Surat Pesanan</strong>
+                                    <input type="text" name="no_surat_pesanan" class="form-control" placeholder="contoh: 12-ABCD-XD">
                                 </div>
                             </div>
                             <div class="col-6">

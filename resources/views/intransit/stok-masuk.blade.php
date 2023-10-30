@@ -34,8 +34,6 @@
                                             <tr style="background-color: #6082B6; color:white">
                                                 <th></th>
                                                 <th class="text-center">No. SP</th>
-                                                <th class="text-center">No. Packingsheet</th>
-                                                <th class="text-center">No. Doos</th>
                                                 <th class="text-center">Part No</th>
                                                 <th class="text-center">Qty</th>
                                             </tr>
@@ -47,13 +45,9 @@
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="checkbox" name="selected_items[]" value="{{ $i->part_no }}">
                                                             <input type="hidden" name="no_surat_pesanan[]" value="{{ $i->no_surat_pesanan }}">
-                                                            <input type="hidden" name="no_packingsheet[]" value="{{ $i->no_packingsheet }}">
-                                                            <input type="hidden" name="no_doos[]" value="{{ $i->no_doos }}">
                                                         </div>
                                                     </td>
                                                     <td class="text-left">{{ $i->no_surat_pesanan }}</td>
-                                                    <td class="text-left">{{ $i->no_packingsheet }}</td>
-                                                    <td class="text-left">{{ $i->no_doos }}</td>
                                                     <td class="text-left">{{ $i->part_no }}</td>
                                                     <td class="text-center">{{ $i->qty }}</td>
                                                 </tr>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use PDF;
 use Illuminate\Http\Request;
 use App\Models\MasterStokGudang;

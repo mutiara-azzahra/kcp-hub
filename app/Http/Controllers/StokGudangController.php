@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\MasterStokGudang;
 use App\Models\MasterPart;
 use App\Models\BarangMasukHeader;
+use App\Models\BarangMasukDetails;
 use App\Models\MasterKodeRak;
 
 class StokGudangController extends Controller
@@ -40,6 +41,12 @@ class StokGudangController extends Controller
             'tanggal_nota' => 'required',
         ]);
 
+        $existingRecord = BarangMasukHeader::where('invoice_non', $request->invoice_non)->first();
+
+        if($existingRecord){
+            return redirect()->route('stok-gudang.index')->with('danger','Nomor Nota '. $request->invoice_non .' sudah terdata! ');
+        }
+
         $created = BarangMasukHeader::create($request->all());
         $created->update(['created_by' => Auth::user()->nama_user]);
 
@@ -49,19 +56,16 @@ class StokGudangController extends Controller
             return redirect()->route('stok-gudang.index')->with('danger','Data stok gudang baru gagal ditambahkan');
         }
 
-        return view('stok-gudang.tambah');
     }
 
     public function add_details($id)
     {
         $header         = BarangMasukHeader::findOrFail($id);
-        $master_part    = MasterPart::all();
-        $rak            = MasterKodeRak::all();
+        $master_part    = MasterPart::where('status', 'A')->get();
+        $rak            = MasterKodeRak::where('status', 'A')->get();
 
         return view('stok-gudang.add-details',compact('header', 'master_part', 'rak'));
-    } 
-    //store_add_details
-    // MasterKodeRak
+    }
 
     public function store_add_details(Request $request){
 
@@ -75,15 +79,18 @@ class StokGudangController extends Controller
                     $value['part_no']       = $value['part_no'];
                     $value['qty']           = $value['qty'];
                     $value['id_rak']        = $value['id_rak'];
-                    $value['crea_by']       = $value['crea_by'];
-                    $value['crea_date']     = NOW();
+                    $value['created_by']    = Auth::user()->nama_user;
+                    $value['created_at']    = NOW();
 
-                    dd($value);
-
-                   // BarangMasukHeader::create($value);
+                    $created = BarangMasukDetails::create($value);
             }       
-        
-        return redirect()->route('surat-pesanan.index')->with('success','Data baru berhasil ditambahkan!');
+                    
+            // dd($value);
+            if ($created){
+                return redirect()->route('stok-gudang.index')->with('success','Silahkan Validasi Barang Masuk pada Menu Intransit!');
+            } else{
+                return redirect()->route('stok-gudang.index')->with('danger','Data stok gudang baru gagal ditambahkan');
+            }
         
     }
     

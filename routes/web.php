@@ -121,7 +121,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/intransit/create', [IntransitController::class, 'create'])->name('intransit.create');
     Route::get('/intransit/details/{id}', [IntransitController::class, 'details'])->name('intransit.details');
     Route::get('/intransit/show/{id}', [IntransitController::class, 'show'])->name('intransit.show');
-    Route::post('/intransit/details', [IntransitController::class, 'store_details'])->name('intransit.store_details');
+    Route::post('/intransit/details/{id}', [IntransitController::class, 'store_details'])->name('intransit.store_details');
     Route::get('/intransit/validasi/{id}', [IntransitController::class, 'validasi'])->name('intransit.validasi');
     Route::get('/intransit/validasi-barang/{id}', [IntransitController::class, 'validasi_barang'])->name('intransit.validasi_barang');
     Route::get('/intransit/tambah-gudang/{id}', [IntransitController::class, 'tambah_gudang'])->name('intransit.tambah-gudang');

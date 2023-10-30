@@ -46,60 +46,28 @@
                         </div>
                             <div class="col-lg-12 p-3">
 
-                                <form action="{{ route('intransit.store_details')}}" method="POST">
+                                <form action="{{ route('intransit.store_details', $intransit_header->no_surat_pesanan )}}" method="POST">
                                 @csrf
 
-                                <table class="table table-hover table-sm bg-light table-bordered table-striped" id="table">
+                                <table class="table table-hover table-sm bg-light table-bordered" id="table">
                                     <thead>
                                         <tr style="background-color: #6082B6; color:white">
-                                            <th class="text-center">No. Packingsheet</th>
-                                            <th class="text-center">No. Doos</th>
                                             <th class="text-center">Part No.</th>
                                             <th class="text-center">Qty</th>
-                                            <!-- <th class="text-center">Harga/pcs</th> -->
-                                            <th class="text-center">Tambah</th>
+                                            <th class="text-center">Lokasi Rak</th>
                                         </tr>
                                     </thead>
                                     <tbody class="input-fields">
-                                                <tr>
-                                                    <td class="text-center">
-                                                        <div class="form-group col-12">
-                                                            <input type="hidden" name="inputs[0][no_surat_pesanan]" value="{{ $intransit_header->no_surat_pesanan }}">
-                                                            <input type="text" name="inputs[0][no_packingsheet]" class="form-control" placeholder="No. Packingsheet">
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="form-group col-12">
-                                                            <input type="text" name="inputs[0][no_doos]" class="form-control" placeholder="No. Doos">
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="form-group col-12">
-                                                            <select name="inputs[0][part_no]" class="form-control mr-2">
-                                                                <option value="">-- Pilih --</option>
-                                                                @foreach($master_part as $k)
-                                                                    <option value="{{ $k->part_no }}"> {{ $k->part_no }} | {{ $k->part_nama }} </option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="form-group col-12">
-                                                            <input type="number" name="inputs[0][qty]" class="form-control" placeholder="0">
-                                                        </div>
-                                                    </td>
-                                                    <!-- <td class="text-center">
-                                                        <div class="form-group col-12">
-                                                            <input type="number" name="inputs[0][harga_pcs]" class="form-control" placeholder="0">
-                                                        </div>
-                                                    </td> -->
-                                                    <td class="text-center">
-                                                        <div class="form-group col-12">
-                                                            <a type="button" class="btn btn-primary m-1" id="add"><i class="fas fa-plus"></i></a>                                                                                  
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
+                                        <input type="hidden" name="no_surat_pesanan" value="{{ $intransit_header->no_surat_pesanan }}">
+                                        @foreach($details as $i)
+                                        <tr>
+                                            <td class="text-center">{{ $i->part_no }}</td>
+                                            <td class="text-center">{{ $i->qty }}</td>
+                                            <td class="text-center">{{ $i->id_rak }}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                            
                                     </table>
                                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                                         <div class="float-right">

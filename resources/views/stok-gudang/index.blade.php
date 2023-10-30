@@ -19,6 +19,10 @@
                 <div class="alert alert-success" id="myAlert">
                     <p>{{ $message }}</p>
                 </div>
+            @elseif ($message = Session::get('danger'))
+                <div class="alert alert-warning" id="myAlert">
+                    <p>{{ $message }}</p>
+                </div>
             @endif
 
             <div class="card" style="padding: 10px;">
@@ -30,7 +34,6 @@
                                     <th class="text-center">No</th>
                                     <th class="text-center">Part No</th>
                                     <th class="text-center">Stok Gudang</th>
-                                    <th class="text-center">Lokasi Rak</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
@@ -44,11 +47,6 @@
                                     <td class="text-center">{{ $no++ }}</td>
                                     <td class="text-left">{{ $p->part_no }}</td>
                                     <td class="text-right">{{ number_format($p->stok, 0, ',', '.') }}</td>
-                                    @if($p->master_part->rak !=null )
-                                    <td class="text-center">{{ $p->master_part->rak->kode_rak_lokasi }}</td>
-                                    @else
-                                    <td class="text-center">-</td>
-                                    @endif
                                     <td class="text-center">
                                         <a class="btn btn-info btn-sm" href="{{ route('stok-gudang.show',$p->id) }}"><i class="fas fa-eye"></i></a>
                                         <a class="btn btn-warning btn-sm" href="{{ route('stok-gudang.edit',$p->id) }}"><i class="fas fa-edit"></i></a>

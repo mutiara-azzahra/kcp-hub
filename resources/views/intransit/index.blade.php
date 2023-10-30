@@ -7,13 +7,22 @@
              <div class="float-left">
                 <h4>Intransit</h4>
             </div>
-            <div class="float-right">
+            <!-- yg salah -->
+            <div class="float-right p-1">
                 <a class="btn btn-success" href="{{ route('intransit.create') }}"><i class="fas fa-plus"></i> Entry Intransit</a>
+            </div>
+
+            <div class="float-right p-1">
+                <a class="btn btn-info" href="{{ route('intransit.create') }}"><i class="fas fa-plus"></i> Entry Intransit</a>
             </div>
         </div>
     </div>
             @if ($message = Session::get('success'))
                 <div class="alert alert-success" id="myAlert">
+                    <p>{{ $message }}</p>
+                </div>
+            @elseif ($message = Session::get('danger'))
+                <div class="alert alert-warning" id="myAlert">
                     <p>{{ $message }}</p>
                 </div> 
             @endif

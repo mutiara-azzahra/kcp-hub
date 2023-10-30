@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
 
 use App\Models\IntransitHeader;
 use App\Models\IntransitDetails;
 use App\Models\MasterPart;
 use App\Models\MasterStokGudang;
+use App\Models\BarangMasukHeader;
+use App\Models\BarangMasukDetails;
 
 
 class IntransitController extends Controller
@@ -21,7 +24,9 @@ class IntransitController extends Controller
 
     public function create(){
 
-        return view('intransit.create');
+        $invoice_non = BarangMasukHeader::all();
+
+        return view('intransit.create', compact('invoice_non'));
     }
 
     public function store(Request $request){
@@ -45,31 +50,63 @@ class IntransitController extends Controller
     public function details($id)
     {
         $intransit_header  = IntransitHeader::findOrFail($id);
+        $details           = BarangMasukDetails::where('invoice_non', $intransit_header->no_surat_pesanan)->get();
         $master_part       = MasterPart::all();
 
-        return view('intransit.details',compact('intransit_header', 'master_part'));
+        return view('intransit.details',compact('intransit_header', 'master_part', 'details'));
     }
 
+
+    // public function store_details(Request $request){
+
+    //     $request->validate([
+    //             'inputs.*.no_surat_pesanan' => 'required',
+    //             'inputs.*.no_packingsheet'  => 'required',
+    //             'inputs.*.part_no'          => 'required', 
+    //             'inputs.*.qty'              => 'required', 
+    //     ]);
+
+    //     foreach($request->inputs as $key => $value){
+
+    //         $value['status'] = 'I';
+
+    //        IntransitDetails::create($value);
+    //     }
+        
+    //     return redirect()->route('intransit.index')->with('success','Barang intransit berhasil ditambahkan!');
+        
+    // }
 
     public function store_details(Request $request){
 
-        $request->validate([
-                'inputs.*.no_surat_pesanan' => 'required',
-                'inputs.*.no_packingsheet'  => 'required',
-                'inputs.*.part_no'          => 'required', 
-                'inputs.*.qty'              => 'required', 
-        ]);
+        $no_surat_pesanan = $request->input('no_surat_pesanan');
 
-        foreach($request->inputs as $key => $value){
-
-            $value['status'] = 'I';
-
-           IntransitDetails::create($value);
+        $details_intransit = BarangMasukDetails::where('invoice_non', $no_surat_pesanan)->get();
+    
+        try {
+            foreach ($details_intransit as $value) {
+                $value->no_surat_pesanan = $no_surat_pesanan;
+                $value->status = 'I';
+                $value->created_at = now();
+                $value->created_by = Auth::user()->nama_user;
+    
+                IntransitDetails::create([
+                    'no_surat_pesanan' => $value->no_surat_pesanan,
+                    'part_no' => $value->part_no,
+                    'qty' => $value->qty,
+                    'status' => $value->status,
+                    'created_at' => $value->created_at,
+                    'created_by' => $value->created_by,
+                ]);
+            }
+    
+            return redirect()->route('intransit.index')->with('success', 'Barang intransit berhasil ditambahkan!');
+        } catch (\Exception $e) {
+            return redirect()->route('intransit.index')->with('danger', 'Gagal menambahkan barang intransit: ' . $e->getMessage());
         }
         
-        return redirect()->route('intransit.index')->with('success','Barang intransit berhasil ditambahkan!');
-        
     }
+    
 
     public function tambah_gudang($id)
     {
@@ -107,22 +144,19 @@ class IntransitController extends Controller
     {
 
         $selectedItems      = $request->input('selected_items', []);
-        $no_doos            = $request->input('no_doos', []);
-        $no_packingsheet    = $request->input('no_packingsheet', []);
+        $no_surat_pesanans   = $request->input('no_surat_pesanan', []);
 
         for ($i = 0; $i < count($selectedItems); $i++) {
-            $itemPartNo = $selectedItems[$i];
-            $stok_lama = MasterStokGudang::where('part_no', $itemPartNo)->value('stok');
-    
-            $doos = $no_doos[$i];
-            $packingsheet = $no_packingsheet[$i];
+            $itemPartNo         = $selectedItems[$i];
+            $no_surat_pesanan   = $no_surat_pesanans[$i];
+
+            $stok_lama  = MasterStokGudang::where('part_no', $itemPartNo)->value('stok');
     
             $stok_masuk = IntransitDetails::where('part_no', $itemPartNo)
-                ->where('no_doos', $doos)
-                ->where('no_packingsheet', $packingsheet)
+                ->where('no_surat_pesanan', $no_surat_pesanan)
                 ->value('qty');
-    
-            MasterStokGudang::where('part_no', $itemPartNo)->update(['stok' => $stok_lama + $stok_masuk]);
+ 
+           MasterStokGudang::where('part_no', $itemPartNo)->update(['stok' => $stok_lama + $stok_masuk]);
         }
 
         return redirect()->route('intransit.index')->with('success', 'Barang berhasil dimasukkan ke gudang');
