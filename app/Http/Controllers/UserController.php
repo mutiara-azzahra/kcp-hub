@@ -92,7 +92,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::where('id', $id)->first();
-        
+
         return view('profil.edit',compact('user'));
     }
 
@@ -104,24 +104,16 @@ class UserController extends Controller
 
         $request->validate([
             'password'          => 'required',
-            'password_baru'     => 'required'
         ]);
 
-        $input['password_baru']  = Hash::make($request['password_baru']);
-        if(Hash::check($request->password, $user->password))
-        {
-            $user->password = $input['password'];
+        $input['password']  = Hash::make($request['password']);
+
+        $user->password = $input['password'];
             
-            $user->update();
+        $user->update();
 
-            return redirect()->route('profil.show')->with('success','Password user berhasil diubah!');           
-        }
-        else{
-            return redirect()->route('profil.show')->with('error','Password lama tidak sama');           
-
-        }
-         
-        $user->update($request->all());
+        return redirect()->route('profil.show', ['id' => $id])->with('success','Password user berhasil diubah!');           
+        
     }
 
 }

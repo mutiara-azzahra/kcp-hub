@@ -60,7 +60,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
     Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
 
-
     //INVENTARIS
     Route::get('/inventaris', [InventarisController::class, 'index'])->name('inventaris.index');
     Route::post('/inventaris', [InventarisController::class, 'store'])->name('inventaris.store');

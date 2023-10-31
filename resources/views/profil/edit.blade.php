@@ -25,7 +25,7 @@
         @endif
 
         <div class="card" style="padding: 30px;">
-            <form action="{{ route('user.edit',$user->id) }}" method="POST">
+            <form action="{{ route('user.update',$user->id) }}" method="POST">
                 @csrf
                 @method('PUT')
         
