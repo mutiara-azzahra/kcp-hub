@@ -167,6 +167,20 @@
                       </a>
                   </li>
                 </ul>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                      <a href="{{ route('invoice.index')}}" class="nav-link">
+                        <p>Invoice</p>
+                      </a>
+                  </li>
+                </ul>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                      <a href="{{ route('surat-jalan.index')}}" class="nav-link">
+                        <p>Surat Jalan</p>
+                      </a>
+                  </li>
+                </ul>
               </li>
             @endif
 
@@ -277,18 +291,6 @@
                         <p>Sales Order/SO</p>
                       </a>
                   </li>
-                  @if(in_array(Auth::user()->id_role, [4, 5, 6, 7, 9, 12, 17, 20, 24]))
-                  <li class="nav-item">
-                      <a href="{{ route('invoice.index')}}" class="nav-link">
-                        <p>Invoice</p>
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="{{ route('surat-jalan.index')}}" class="nav-link">
-                        <p>Surat Jalan</p>
-                      </a>
-                  </li>
-                  @endif
 
                 </ul>
               </li>

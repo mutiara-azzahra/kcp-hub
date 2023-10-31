@@ -17,7 +17,7 @@ class IntransitController extends Controller
 {
     public function index(){
 
-        $intransit_header = IntransitHeader::all();
+        $intransit_header = IntransitHeader::orderBy('created_at', 'desc')->get();
 
         return view('intransit.index', compact('intransit_header'));
     }

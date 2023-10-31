@@ -10,9 +10,9 @@
             <div class="float-right m-1">
                 <a class="btn btn-info" href="{{ route('stok-gudang.tambah') }}"><i class="fas fa-plus"></i> Tambah Stok</a>
             </div>
-            <div class="float-right m-1">
+            <!-- <div class="float-right m-1">
                 <a class="btn btn-success" href="{{ route('stok-gudang.create') }}"><i class="fas fa-plus"></i> Tambah Stok</a>
-            </div>
+            </div> -->
         </div>
     </div>
             @if ($message = Session::get('success'))
