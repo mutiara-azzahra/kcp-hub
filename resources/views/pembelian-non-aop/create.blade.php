@@ -28,7 +28,7 @@
                         <form action="{{ route('pembelian-non-aop.store') }}" method="POST">
                         @csrf
                         <div class="row">
-                            <div class="form-group col-12">
+                            <div class="form-group col-6">
                                     <label for="">Nomor Nota</label>
                                     <select name="invoice_non" class="form-control mr-2 my-select">
                                         <option value="">-- Pilih No Surat Pesanan --</option>
@@ -37,9 +37,9 @@
                                         @endforeach
                                     </select>
                                 </div>
-                            <div class="col-12">
+                            <div class="col-6">
                                 <div class="form-group">
-                                    <strong>Tanggal Nota</strong>
+                                    <strong>Tanggal Nota</strong> *wajib diisi
                                     <input type="date" name="tanggal_nota" class="form-control">
                                 </div>
                             </div>
@@ -61,9 +61,9 @@
                                         <option value="ABADI_MAKMUR">ABADI MAKMUR</option>
                                     </select>
                                 </div>
-                            <div class="col-12">
+                            <div class="col-md-12 col-lg-6">
                                 <div class="form-group">
-                                    <strong>TOP</strong>
+                                    <strong>TOP</strong> *wajib diisi
                                     <input type="date" name="tanggal_jatuh_tempo" class="form-control">
                                 </div>
                             </div>

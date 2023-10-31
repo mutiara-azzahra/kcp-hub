@@ -38,6 +38,20 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
+  <style>
+    .without_ampm::-webkit-datetime-edit-ampm-field {
+      display: none;
+    }
+    input[type=time]::-webkit-clear-button {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      -o-appearance: none;
+      -ms-appearance:none;
+      appearance: none;
+      margin: -10px; 
+    }
+  </style>
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
   <div class="wrapper">

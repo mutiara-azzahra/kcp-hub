@@ -7,13 +7,8 @@
              <div class="float-left">
                 <h4>Intransit</h4>
             </div>
-            <!-- yg salah -->
-            <!-- <div class="float-right p-1">
-                <a class="btn btn-success" href="{{ route('intransit.create') }}"><i class="fas fa-plus"></i> Entry Intransit</a>
-            </div> -->
-
             <div class="float-right p-1">
-                <a class="btn btn-info" href="{{ route('intransit.create') }}"><i class="fas fa-plus"></i> Entry Intransit</a>
+                <a class="btn btn-success" href="{{ route('intransit.create') }}"><i class="fas fa-plus"></i> Entry Intransit</a>
             </div>
         </div>
     </div>

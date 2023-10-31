@@ -8,7 +8,7 @@
                 <h4>Pembelian</h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-info" href="{{ route('pembelian-non-aop.create') }}"><i class="fas fa-plus"></i> Buat Pembelian Baru</a>
+                <a class="btn btn-success" href="{{ route('pembelian-non-aop.create') }}"><i class="fas fa-plus"></i> Buat Pembelian Baru</a>
             </div>
         </div>
     </div>

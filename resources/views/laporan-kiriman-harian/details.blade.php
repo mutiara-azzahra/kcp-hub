@@ -66,13 +66,13 @@
                 <div class="col-xs-12 col-sm-12 col-md-6">
                     <div class="form-group">
                         <strong>Jam Berangkat</strong> *wajib diisi
-                        <input type="datetime-local" name="jam_berangkat" class="form-control" placeholder="">
+                        <input type="text" name="jam_berangkat" class="form-control"  placeholder="HH:mm" step="60">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6">
                     <div class="form-group">
                         <strong>Jam Kembali</strong>
-                        <input type="datetime-local" name="jam_kembali" class="form-control" placeholder="">
+                        <input type="text" name="jam_kembali" class="form-control"  placeholder="HH:mm" step="60">
                     </div>
                 </div> 
                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -97,7 +97,7 @@
     </div>
     @else
     <div class="card" style="padding: 20px;">
-        <form action="{{ route('laporan-kiriman-harian.update', ['no_lkh', $details->no_lkh]) }}" method="POST">
+        <form action="{{ route('laporan-kiriman-harian.update',['no_lkh' => $details->no_lkh ]) }}" method="POST">
             @csrf
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -128,9 +128,9 @@
                     <div class="form-group">
                         <strong>Jam Berangkat</strong>
                         @if($details->jam_berangkat != null)
-                        <input type="text" name="plat_mobil" class="form-control" value="{{ $details->jam_berangkat }}" readonly>
+                        <input type="text" name="jam_berangkat" class="form-control" value="{{ $details->jam_berangkat }}" readonly>
                         @else
-                        <input type="datetime-local" name="jam_berangkat" class="form-control" value="">
+                        <input type="text" name="jam_berangkat" class="form-control" placeholder="HH:mm">
                         @endif
                         
                     </div>
@@ -142,7 +142,7 @@
                         @if($details->jam_kembali != null)
                         <input type="text" name="jam_kembali" class="form-control" value="{{ $details->jam_kembali }}" readonly>
                         @else
-                        <input type="datetime-local" name="jam_kembali" class="form-control" placeholder="">
+                        <input type="text" name="jam_kembali" class="form-control" placeholder="HH:mm">
                         @endif
                     </div>
                 </div> 
@@ -155,7 +155,11 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>KM. Kembali</strong>
-                        <input type="text" name="km_kembali_mobil" class="form-control" placeholder="Isi KM Kembali">
+                        @if($details->km_kembali_mobil != null)
+                        <input type="number" name="km_kembali_mobil" class="form-control" value="{{ $details->km_kembali_mobil }}" readonly>
+                        @else
+                        <input type="number" name="km_kembali_mobil" class="form-control" placeholder="Contoh: 15000">
+                        @endif
                     </div>
                 </div>
                 @if($details->jam_kembali != null)
