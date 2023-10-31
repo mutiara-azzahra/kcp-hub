@@ -56,7 +56,7 @@ class PembelianController extends Controller
         $created = InvoiceNonHeader::create($request->all());
 
         if ($created){
-            return redirect()->route('pembelian-non-aop.detail', ['id' => $created->id ])->with('success','Invoice header Berhasil ditambahkan, silahkan input details Invoice');
+            return redirect()->route('pembelian-non-aop.detail', ['id' => $created->id, 'invoice_non' => $created->invoice_non])->with('success', 'Invoice header Berhasil ditambahkan, silahkan input details Invoice');
         } else{
             return redirect()->route('pembelian-non-aop.index')->with('danger','Data baru gagal ditambahkan');
         }
@@ -74,7 +74,7 @@ class PembelianController extends Controller
 
     public function detail_pembelian($id)
     {
-        $pembelian_header  = InvoiceNonHeader::where('invoice_non', $invoice_non)->get();
+        $pembelian_header  = InvoiceNonHeader::where('id', $id)->get();
 
         return view('pembelian-non-aop.details-pembelian',compact( 'pembelian_header'));
     }

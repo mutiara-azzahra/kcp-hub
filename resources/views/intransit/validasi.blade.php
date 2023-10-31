@@ -4,15 +4,14 @@
 <div class="container" style="padding: 10px;">
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
-
             @if(Auth::user()->id_role == 10)
                 @if($intransit_header->status == 'I')
-                <div class="float-right">
+                <div class="float-right p-1">
                     <a class="btn btn-warning" href="{{ route('intransit.validasi_barang', $intransit_header->id) }}"><i class="fas fa-check"></i>  Validasi</a>
                 </div>
                 @endif
             @endif
-            <div class="float-left">
+            <div class="float-right p-1">
                 <a class="btn btn-success" href="{{ route('intransit.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
             </div>
         </div>
@@ -59,9 +58,6 @@
                                 <table class="table table-hover table-sm bg-light table-striped table-bordered" id="table">
                                     <thead>
                                         <tr style="background-color: #6082B6; color:white">
-                                        
-                                            <th class="text-center">No. Packingsheet</th>
-                                            <th class="text-center">No. Doos</th>
                                             <th class="text-center">Part No</th>
                                             <th class="text-center">Qty</th>
                                         </tr>
@@ -69,9 +65,7 @@
                                         <tbody class="input-fields">
                                             @foreach($intransit_header->details as $i)
                                             <tr>
-                                                <td class="text-left">{{ $i->no_packingsheet }}</td>
-                                                <td class="text-left">{{ $i->no_doos }}</td>
-                                                <td class="text-left">{{ $i->part_no }}</td>
+                                                <td class="text-center">{{ $i->part_no }}</td>
                                                 <td class="text-center">{{ $i->qty }}</td>
                                             </tr>
 

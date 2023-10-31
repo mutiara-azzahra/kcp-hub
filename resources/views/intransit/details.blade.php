@@ -63,7 +63,7 @@
                                         <tr>
                                             <td class="text-center">{{ $i->part_no }}</td>
                                             <td class="text-center">{{ $i->qty }}</td>
-                                            <td class="text-center">{{ $i->id_rak }}</td>
+                                            <td class="text-center">{{ $i->rak->kode_rak_lokasi }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>

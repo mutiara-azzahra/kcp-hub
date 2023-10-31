@@ -17,4 +17,9 @@ class BarangMasukDetails extends Model
     protected $fillable = [
         'invoice_non', 'part_no', 'qty', 'id_rak', 'created_at', 'updated_at', 'created_by', 'updated_by'
     ];
+
+    public function rak()
+    {
+        return $this->hasOne(MasterKodeRak::class, 'id', 'id_rak');
+    }
 }

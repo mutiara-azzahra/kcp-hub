@@ -140,7 +140,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/pembelian-non-aop/store', [PembelianController::class, 'store'])->name('pembelian-non-aop.store');
     Route::get('/pembelian-non-aop/detail/{id}/invoice/{invoice_non}', [PembelianController::class, 'detail'])->name('pembelian-non-aop.detail');
     Route::post('/pembelian-non-aop/store-details', [PembelianController::class, 'store_details'])->name('pembelian-non-aop.store_details');
-    Route::get('/pembelian-non-aop/pembelian-details/{invoice_non}', [PembelianController::class, 'detail_pembelian'])->name('pembelian-non-aop.pembelian-details');
+    Route::get('/pembelian-non-aop/pembelian-details/{id}', [PembelianController::class, 'detail_pembelian'])->name('pembelian-non-aop.pembelian-details');
 
     //ROUTE PEMBAYARAN
     Route::get('/pembayaran-non-aop', [PembayaranController::class, 'index'])->name('pembayaran-non-aop.index');

@@ -47,7 +47,7 @@
                                     <td class="text-left">{{ $p->supplier }}</td>
                                     <td class="text-left">Rp. {{ number_format($p->details_pembelian->sum('total_amount'), 0, ',', '.') }}</td>
                                     <td class="text-center">
-                                        <a class="btn btn-info btn-sm" href="{{ route('pembelian-non-aop.pembelian-details',$p->invoice_non) }}">
+                                        <a class="btn btn-info btn-sm" href="{{ route('pembelian-non-aop.pembelian-details',$p->id) }}">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </td>
