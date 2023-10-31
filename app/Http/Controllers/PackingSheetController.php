@@ -172,7 +172,7 @@ class PackingSheetController extends Controller
             'flag_cetak_date'    => NULL
         ]);
 
-        return redirect()->route('validasi-so.index')->with('success','Data Packingsheet berhasil direset!');
+        return redirect()->route('packingsheet.index')->with('success','Data Packingsheet berhasil direset!');
 
     }
 
@@ -184,5 +184,46 @@ class PackingSheetController extends Controller
         $pdf->setPaper('a4', 'potrait');
 
         return $pdf->stream('label.pdf');
+    }
+
+    public function edit_details($id){
+
+        $details       = TransaksiPackingsheetDetails::findOrFail($id);
+
+        return view('packingsheet.edit', compact('details'));
+    }
+
+    public function store_edit($id, $nops , Request $request)
+    {
+        $cari_so    = TransaksiPackingsheetHeader::where('nops', $nops)->value('noso');
+        $ubah_so    = TransaksiSOHeader::where('noso', $cari_so)->first();
+        $part_no_ps = TransaksiPackingsheetDetails::where('id', $id)->value('part_no');
+
+        $updated    = TransaksiPackingsheetDetails::where('id', $id)->update([
+            'qty'           => $request->qty,
+            'modi_date'     => NOW(),
+            'modi_by'       => Auth::user()->nama_user
+        ]);
+
+        $het    = MasterPart::where('part_no', $update->part_no)->value('het');
+        $getDisc = TransaksiSODetails::where('noso', $cari_so)->where('part_no', $part_no_ps)->value('disc');
+
+        $updated = TransaksiSODetails::where('noso', $cari_so)->where('part_no', $part_no_ps)
+            ->update([
+            'qty'           => $request->qty,
+            'nominal'       => $request->qty * $het,
+            'nominal_disc'  => $request->qty * $het * $getDisc/100,
+            'nominal_total' => ($request->qty * $het) - $request->qty * $het * $getDisc/100,
+            'modi_date'     => NOW(),
+            'modi_by'       => Auth::user()->nama_user
+        ]);
+
+        if ($updated){
+            return redirect()->route('packingsheet.index')->with('success','Data Packingsheet berhasil diubah!');
+        } else{
+            return redirect()->route('packingsheet.index')->with('danger','Data Packingsheet gagal diubah');
+        }
+
+               
     }
 }

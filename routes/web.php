@@ -192,6 +192,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/packingsheet/cetak/{nops}', [PackingSheetController::class, 'cetak'])->name('packingsheet.cetak');
     Route::get('/packingsheet/cetak-label/{nops}', [PackingSheetController::class, 'cetak_label'])->name('packingsheet.cetak_label');
     Route::get('/packingsheet/reset-packingsheet/{nops}', [PackingSheetController::class, 'store_reset'])->name('packingsheet.store_reset');
+    Route::get('/packingsheet/edit/{id}', [PackingSheetController::class, 'edit_details'])->name('packingsheet.edit_details');
+    Route::post('/packingsheet/update/{id}/{nops}', [PackingSheetController::class, 'store_edit'])->name('packingsheet.store_edit');
 
 
     //ROUTE INVOICE

@@ -126,6 +126,5 @@ class ValidasiSOController extends Controller
 
                 }
             }
-        
-    }
+        }
 }

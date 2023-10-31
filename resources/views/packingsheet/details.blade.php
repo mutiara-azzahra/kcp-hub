@@ -51,6 +51,7 @@
                                             <th class="text-center">Part No</th>
                                             <th class="text-center">Nama Part</th>
                                             <th class="text-center">Qty SO</th>
+                                            <th class="text-center">Stok Gudang</th>
                                             <th class="text-center">Dus</th>
                                         </tr>
                                     </thead>
@@ -64,8 +65,11 @@
                                             <tr>
                                                 <td class="text-left">{{ $d->part_no }}</td>
                                                 <td class="text-left">{{ $d->master_part->part_nama }}</td>
-                                                <td class="text-center">{{ $d->qty }}</td>
-                                                <td class="text-center"></td>
+                                                <td class="text-center" style="color: red">{{ $d->qty }}</td>
+                                                <td class="text-center">{{ $d->stok->stok }}</td>
+                                                <td class="text-center">
+                                                    <a class="btn btn-info btn-sm" href="{{ route('packingsheet.edit_details', $d->id) }}"><i class="fas fa-edit"></i></a>
+                                                </td>
                                             </tr>
                                             @endforeach
 

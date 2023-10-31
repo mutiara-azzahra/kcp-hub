@@ -28,32 +28,28 @@
                         <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example1">
                             <thead>
                                 <tr style="background-color: #6082B6; color:white">
-                                    <th class="text-center"></th>
-                                    <th class="text-center">No</th>
-                                    <th class="text-center">No Invoice</th>
-                                    <th class="text-center">Kode/Nama Toko</th>
-                                    <th class="text-center">Tgl. Buat</th>
-                                    <th class="text-center">Tgl. Jatuh Tempo</th>
-                                    <th class="text-center">Aksi</th>
+                                    <th class="text-center">No. Invoice</th>
+                                    <th class="text-center">Kode | Nama Toko</th>
+                                    <th class="text-center">Nominal Invoice</th>
+                                    <th class="text-center">Tanggal Invoice</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @php
                                 $no=1;
                                 @endphp
-
-                                @foreach($piutang_header as $p)
-                                <tr>
-                                    <td class="text-center">{{ $p }}</td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center">
-                                        <a class="btn btn-info btn-sm" href="{{ route('account-receivable.detail', $p->no_piutang ) }}">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                    </td>
+                                
+                                @foreach($invoice as $s)
+                               <tr>
+                                    <td class="text-left">{{ $s->noinv }}</td>
+                                    <td class="text-left">{{ $s->kd_outlet }}/{{ $s->nm_outlet }}</td>
+                                    <td class="text-left">Rp. {{ number_format($s->details_invoice->sum('nominal_total'), 0, ',', '.') }}</td>
+                                    <td class="text-left">{{ $s->created_at }}</td>
                                 </tr>
+
                                 @endforeach
+
+                            </tbody>
                                 
                             </tbody>
                         </table>

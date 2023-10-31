@@ -84,10 +84,6 @@ class InvoiceController extends Controller
             }
         }
 
-        
-
-            
-
         return redirect()->route('invoice.index')->with('success','SO baru berhasil diteruskan menjadi invoice');
 
     }

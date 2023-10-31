@@ -22,4 +22,8 @@ class TransaksiPackingsheetDetails extends Model
     {
         return $this->belongsTo(MasterPart::class, 'part_no', 'part_no');
     }
+    public function stok()
+    {
+        return $this->belongsTo(MasterStokGudang::class, 'part_no', 'part_no');
+    }
 }
