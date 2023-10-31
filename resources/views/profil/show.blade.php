@@ -60,32 +60,7 @@
                                 </div>
                             </div>  
                         </div>
-                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                            <form action="{{ route('user.update',$user->id_user) }}" method="POST">
-                                @csrf
-                                @method('PUT')
-                         
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                        <div class="form-group">
-                                            <strong>Kata Sandi Lama</strong>
-                                            <input type="password" name="password" class="form-control" placeholder="" value="">
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                        <div class="form-group">
-                                            <strong>Kata Sandi Baru</strong>
-                                            <input type="password" name="password_baru" class="form-control" placeholder="" value="">
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                                        <div class="float-right">
-                                            <button type="submit" class="btn btn-success"> Ubah Kata Sandi</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+                        
                       </div>
                     </div>
                   </div>

@@ -34,7 +34,7 @@
                                             <tr>
                                                 <td>
                                                     <div class="form-group col-md-12">
-                                                        <select name="inputs[0][kode_kabupaten]" class="form-control my-select">
+                                                        <select name="inputs[0][kode_kabupaten]" class="form-control">
                                                             <option value="">---Pilih Area--</option>
                                                             @foreach($master_area as $a)
                                                                 <option value="{{ $a->kode_kab }}">{{ $a->nm_area }}</option>
@@ -112,7 +112,7 @@
             $('#table').append(`<tr>
                                                 <td>
                                                     <div class="form-group col-md-12">
-                                                        <select name="inputs[${i}][kode_kabupaten]" class="form-control my-select">
+                                                        <select name="inputs[${i}][kode_kabupaten]" class="form-control">
                                                             <option value="">---Pilih Area--</option>
                                                             @foreach($master_area as $a)
                                                                 <option value="{{ $a->kode_kab }}">{{ $a->nm_area }}</option>

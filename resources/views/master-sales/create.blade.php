@@ -8,7 +8,7 @@
                 <h4>Tambah Sales</h4>
             </div>
             <div class="float-right">
-                    <a class="btn btn-success" href="{{ route('stok-gudang.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
+                    <a class="btn btn-success" href="{{ route('master-sales.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
             </div>
         </div>
     </div>
@@ -26,13 +26,13 @@
                 <div class="card-body">
                     <div class="col-lg-12">
                         <form action="{{ route('master-sales.store') }}" method="POST">
-
                         @csrf
+
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="form-group my-select">
+                                <div class="form-group mb-2">
                                     <strong>Pilih User</strong>
-                                    <select name="sales" class="form-control" >
+                                    <select name="sales" class="form-control my-select" >
                                         <option value="">---Pilih User--</option>
                                         @foreach($username as $a)
                                             <option value="{{ $a->username }}">{{ $a->username }}</option>
@@ -41,7 +41,7 @@
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                                <div class="float-right">
+                                <div class="float-right pt-3">
                                     <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Data</button>                            
                                 </div>
                             </div>

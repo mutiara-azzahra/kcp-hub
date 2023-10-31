@@ -112,7 +112,7 @@ class UserController extends Controller
             
         $user->update();
 
-        return redirect()->route('profil.show', ['id' => $id])->with('success','Password user berhasil diubah!');           
+        return redirect()->route('user.show', ['id' => $id])->with('success','Password user berhasil diubah!');           
         
     }
 

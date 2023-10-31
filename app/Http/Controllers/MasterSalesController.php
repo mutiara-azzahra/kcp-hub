@@ -22,7 +22,7 @@ class MasterSalesController extends Controller
 
     public function create(){
 
-        $username = User::where('status', 'A')->get();
+        $username = User::where('id_role', 20)->get();
 
         return view('master-sales.create', compact('username'));
     }
@@ -74,7 +74,6 @@ class MasterSalesController extends Controller
             $value['crea_date']         = NOW();
             $value['crea_by']           = Auth::user()->nama_user;
 
-            //dd($value);
            MasterAreaSales::create($value);
         }        
         
