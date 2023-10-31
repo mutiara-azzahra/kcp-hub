@@ -82,5 +82,43 @@ class UserController extends Controller
         }
         
     }
+    public function show($id)
+    {
+
+        $user = User::where('id', $id)->first();
+
+        return view('profil.show',compact('user'));
+    }
+
+    public function edit(User $user)
+    {
+        return view('user.edit',compact('user'));
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $input = $request->all();
+
+        $request->validate([
+            'password'          => 'required',
+            'password_baru'     => 'required'
+        ]);
+
+        $input['password_baru']  = Hash::make($request['password_baru']);
+        if(Hash::check($request->password, $user->password))
+        {
+            $user->password = $input['password_baru'];
+            
+            $user->update();
+
+            return redirect()->route('profil.show')->with('success','Password user berhasil diubah!');           
+        }
+        else{
+            return redirect()->route('profil.show')->with('error','Password lama tidak sama');           
+
+        }
+         
+        $user->update($request->all());
+    }
 
 }

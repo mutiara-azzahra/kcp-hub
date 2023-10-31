@@ -19,8 +19,12 @@ class ValidasiSOController extends Controller
         $validasi_so_gudang = TransaksiSOHeader::where('flag_approve', 'Y')
             ->where('flag_vald_gudang', 'N')
             ->orderBy('noso', 'desc')->get();
+        
+        $so_validated = TransaksiSOHeader::where('flag_approve', 'Y')
+            ->where('flag_vald_gudang', 'Y')
+            ->orderBy('noso', 'desc')->get();
 
-        return view('validasi-so.index', compact('validasi_so_gudang'));
+        return view('validasi-so.index', compact('validasi_so_gudang', 'so_validated'));
     }
 
     public function details($noso){

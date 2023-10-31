@@ -83,7 +83,17 @@
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-            {{-- Administrator--}}
+          <!-- PROFIL -->
+              <li class="nav-item">
+                <a href="{{ route('user.show', Auth::user()->id)}}" class="nav-link">
+                  <i class="nav-icon fa fa-user"></i>
+                  <p>
+                    Profil
+                  </p>
+                </a>
+              </li>  
+          
+          <!-- {{-- Administrator--}} -->
             @if(in_array(Auth::user()->id_role, [5, 7, 12, 14, 17]))
             <li class="nav-item">
                 <a href="#" class="nav-link">
@@ -110,7 +120,7 @@
               </li>
               @endif
 
-              {{-- Master --}}
+              <!-- {{-- Master --}} -->
             @if(in_array(Auth::user()->id_role, [5, 7, 10, 11, 12, 17, 24]))
             <li class="nav-item">
                 <a href="#" class="nav-link">
@@ -140,7 +150,7 @@
               </li>
             @endif
 
-              {{-- Admin --}}
+              <!-- {{-- Admin --}} -->
             @if(in_array(Auth::user()->id_role, [5, 7, 9, 12, 17]))
             <li class="nav-item">
                 <a href="#" class="nav-link">
@@ -160,7 +170,7 @@
               </li>
             @endif
 
-            {{-- GUDANG --}}
+            <!-- {{-- GUDANG --}} -->
             @if(in_array(Auth::user()->id_role, [3, 5, 7, 8, 10, 12, 13, 17, 18, 19, 21, 22, 23]))
               <li class="nav-item">
                 <a href="#" class="nav-link">
@@ -200,7 +210,7 @@
               </li>
             @endif
 
-              {{-- FINANCE --}}
+              <!-- {{-- FINANCE --}} -->
               @if(in_array(Auth::user()->id_role, [2, 5, 6, 7, 11, 12, 17]))
               <li class="nav-item">
                 <a href="#" class="nav-link">
@@ -247,7 +257,7 @@
               @endif
 
               @if(in_array(Auth::user()->id_role, [4, 5, 6, 7, 9, 11, 12, 17, 20, 24]))
-              {{-- MARKETING --}}
+              <!-- {{-- MARKETING --}} -->
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon"></i>
@@ -465,11 +475,9 @@
         }
       }
 
-
     //SELECT DROPDOWN
         $('.my-select').select2({
         });
-
 
     </script>
     

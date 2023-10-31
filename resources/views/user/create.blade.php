@@ -5,7 +5,7 @@
     <div class="row mt-2">
         <div class="col-lg-12 margin-tb pb-3">
              <div class="float-left">
-                <h4><b>Tambah User Baru</b></h4>
+                <h4>Tambah User Baru</h4>
             </div>
             <div class="float-right">
                 <a class="btn btn-success" href="{{ route('user.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>

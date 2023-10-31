@@ -2,12 +2,11 @@
  
 @section('content')
 <div class="container" style="padding: 10px;">
-    <div class="row mt-5">
+    <div class="row mt-2">
         <div class="col-lg-12 margin-tb pb-3">
              <div class="float-left">
-                <h4><b>User</b></h4>
+                <h4>User</h4>
             </div>
-
         </div>
     </div>
         @if ($errors->any())
@@ -19,9 +18,6 @@
                     @endforeach
                 </ul>
             </div>
-            <button type="button" class="btn btn-tool" data-card-widget="remove">
-                <i class="fas fa-times"></i>
-            </button>
         @endif
 
         <div class="card" style="padding:10px;">

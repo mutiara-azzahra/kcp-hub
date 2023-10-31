@@ -49,10 +49,15 @@ Route::group(['middleware' => 'auth'], function () {
         return view('dashboard');
     })->name('dashboard');
 
+    //USER
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
     Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
     Route::post('/user/create', [UserController::class, 'store'])->name('user.store');
     Route::get('/user/reset/{id}', [UserController::class, 'reset'])->name('user.reset');
+
+    //PROFIL
+    Route::get('/user/show/{id}', [UserController::class, 'show'])->name('user.show');
+    Route::post('/user/show', [UserController::class, 'update'])->name('user.update');
 
 
     //INVENTARIS
