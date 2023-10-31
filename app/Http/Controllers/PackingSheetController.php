@@ -14,6 +14,8 @@ use App\Models\TransaksiPackingsheetDetails;
 use App\Models\TransaksiPackingsheetDetailsDus;
 use App\Models\KategoriDusPackingsheet;
 use App\Models\MasterStokGudang;
+use App\Models\MasterPart;
+
 
 class PackingSheetController extends Controller
 {
@@ -201,14 +203,14 @@ class PackingSheetController extends Controller
 
         $updated    = TransaksiPackingsheetDetails::where('id', $id)->update([
             'qty'           => $request->qty,
-            'modi_date'     => NOW(),
-            'modi_by'       => Auth::user()->nama_user
+            'updated_at'     => NOW(),
+            'updated_by'       => Auth::user()->nama_user
         ]);
 
-        $het    = MasterPart::where('part_no', $update->part_no)->value('het');
+        $het    = MasterPart::where('part_no', $part_no_ps)->value('het');
         $getDisc = TransaksiSODetails::where('noso', $cari_so)->where('part_no', $part_no_ps)->value('disc');
 
-        $updated = TransaksiSODetails::where('noso', $cari_so)->where('part_no', $part_no_ps)
+        $updated_so = TransaksiSODetails::where('noso', $cari_so)->where('part_no', $part_no_ps)
             ->update([
             'qty'           => $request->qty,
             'nominal'       => $request->qty * $het,
@@ -218,7 +220,7 @@ class PackingSheetController extends Controller
             'modi_by'       => Auth::user()->nama_user
         ]);
 
-        if ($updated){
+        if ($updated_so){
             return redirect()->route('packingsheet.index')->with('success','Data Packingsheet berhasil diubah!');
         } else{
             return redirect()->route('packingsheet.index')->with('danger','Data Packingsheet gagal diubah');
