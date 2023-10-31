@@ -100,37 +100,35 @@ class PembelianController extends Controller
 
    
     public function store_details(Request $request) {
-        $invoice_non = $request->input('invoice_non');
-        $part_nos = $request->input('part_no');
-        $qtys = $request->input('qty');
-        $hets = $request->input('harga');
-        $discs = $request->input('disc');
+        $invoice_non    = $request->input('invoice_non');
+        $part_nos       = $request->input('part_no');
+        $qtys           = $request->input('qty');
+        $hets           = $request->input('harga');
+        $discs          = $request->input('disc');
     
         $details = [];
     
         foreach ($part_nos as $index => $part_no) {
-            $qty = $qtys[$index];
-            $het = $hets[$index];
-            $disc = $discs[$index];
+            $qty    = $qtys[$index];
+            $het    = $hets[$index];
+            $disc   = $discs[$index];
     
             $total_diskon_persen = $disc * $het;
             $total_amount = ($het * $qty )- $total_diskon_persen;
     
             $detail = [
-                'invoice_non' => $invoice_non, // Use the common value for each row
-                'part_no' => $part_no,
-                'qty' => $qty,
-                'harga' => $het,
-                'diskon_nominal' => $disc,
-                'total_diskon_persen' => $total_diskon_persen,
-                'total_amount' => $total_amount,
+                'invoice_non'           => $invoice_non,
+                'part_no'               => $part_no,
+                'qty'                   => $qty,
+                'harga'                 => $het,
+                'diskon_nominal'        => $disc,
+                'total_diskon_persen'   => $total_diskon_persen,
+                'total_amount'          => $total_amount,
             ];
     
             $details[] = $detail;
         }
     
-        // Now you have an array of details that you can save to the database
-        // Uncomment this line when you want to save the details
         InvoiceNonDetails::insert($details);
     
         return redirect()->route('pembelian-non-aop.index')->with('success', 'Data baru berhasil ditambahkan');

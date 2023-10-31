@@ -78,37 +78,34 @@ class SalesOrderController extends Controller
             TransaksiSOHeader::create($data);
         }
 
-        foreach ($approve_so as $a) {
-            foreach ($a->details_sp as $d) {
+        foreach($approve_so as $a){
+            foreach($a->details_sp as $d){
+
                 $stok_ready = MasterStokGudang::where('part_no', $d->part_no)->value('stok');
-        
-                if ($stok_ready == 0) {
-                    continue;
+
+                if($stok_ready != 0){
+                    $details['noso']               = $a->noso;
+                    $details['area_so']            = $a->area_sp;
+                    $details['kd_outlet']          = $a->kd_outlet;
+                    $details['part_no']            = $d->part_no;
+                    $details['qty']                = $d->qty;
+                    $details['hrg_pcs']            = $d->hrg_pcs;
+                    $details['disc']               = $d->disc;
+                    $details['nominal']            = $d->nominal;
+                    $details['nominal_disc']       = $d->nominal_disc;
+                    $details['nominal_total']      = $d->nominal_total;
+                    $details['status']             = 'O';
+                    $details['ket_status']         = 'OPEN';
+                    $details['user_sales']         = $d->user_sales;
+                    $details['flag_approve_date']  = NOW();
+                    $details['crea_date']          = NOW();
+                    $details['crea_by']            = Auth::user()->nama_user;
+
+                    TransaksiSODetails::create($details);
                 }
-        
-                $details = [
-                    'noso' => $a->noso,
-                    'area_so' => $a->area_sp,
-                    'kd_outlet' => $a->kd_outlet,
-                    'part_no' => $d->part_no,
-                    'qty' => $d->qty,
-                    'hrg_pcs' => $d->hrg_pcs,
-                    'disc' => $d->disc,
-                    'nominal' => $d->nominal,
-                    'nominal_disc' => $d->nominal_disc,
-                    'nominal_total' => $d->nominal_total,
-                    'status' => 'O',
-                    'ket_status' => 'OPEN',
-                    'user_sales' => $d->user_sales,
-                    'flag_approve_date' => now(),
-                    'crea_date' => now(),
-                    'crea_by' => Auth::user()->nama_user,
-                ];
-        
-                TransaksiSODetails::create($details);
+                
             }
         }
-        
         
         return redirect()->route('sales-order.index')->with('success','Data SO berhasil di Approve!');
 
