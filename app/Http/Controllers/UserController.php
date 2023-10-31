@@ -84,19 +84,22 @@ class UserController extends Controller
     }
     public function show($id)
     {
-
         $user = User::where('id', $id)->first();
 
         return view('profil.show',compact('user'));
     }
 
-    public function edit(User $user)
+    public function edit($id)
     {
-        return view('user.edit',compact('user'));
+        $user = User::where('id', $id)->first();
+        
+        return view('profil.edit',compact('user'));
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
+        $user = User::findOrFail($id);
+
         $input = $request->all();
 
         $request->validate([
@@ -107,7 +110,7 @@ class UserController extends Controller
         $input['password_baru']  = Hash::make($request['password_baru']);
         if(Hash::check($request->password, $user->password))
         {
-            $user->password = $input['password_baru'];
+            $user->password = $input['password'];
             
             $user->update();
 

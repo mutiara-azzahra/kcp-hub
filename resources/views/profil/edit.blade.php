@@ -3,12 +3,12 @@
 @section('content')
     <div class="container" style="padding: 20px;">
         <div class="row mt-2">
-            <div class="col-lg-12 margin-tb">
+            <div class="col-lg-12 margin-tb mb-3">
                 <div class="float-left">
                     <h4>Sunting Profil</h4>
                 </div>
                 <div class="float-right">
-                    <a class="btn btn-secondary" href="{{ route('profil.show', $user->id_user) }}"> Kembali</a>
+                    <a class="btn btn-success" href="{{ route('user.show', $user->id) }}"><i class="fas fa-arrow-left"></i> Kembali</a>
                 </div>
             </div>
         </div>
@@ -23,22 +23,30 @@
                 </ul>
             </div>
         @endif
-    
-        <form action="{{ route('user.edit',$user->id) }}" method="POST">
-            @csrf
-            @method('PUT')
-     
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Kata Sandi Baru</strong>
-                        <input type="password" name="password" class="form-control" placeholder="" value="">
+
+        <div class="card" style="padding: 30px;">
+            <form action="{{ route('user.edit',$user->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+        
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Password Baru</strong>
+                            <input type="password" id="password" name="password" class="form-control mb-2" placeholder="Isi password baru">
+                            <input type="checkbox" onclick="myPassword()"> Tampilkan Password
+                        </div>
+                    </div> 
+
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                        <div class="float-right">
+                            <button type="submit" class="btn btn-warning"><i class="fas fa-save"></i> Ubah Data</button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                    <button type="submit" class="btn btn-primary"> Ubah</button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
+    
+        
     </div>
 @endsection

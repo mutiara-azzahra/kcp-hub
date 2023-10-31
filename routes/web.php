@@ -57,7 +57,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     //PROFIL
     Route::get('/user/show/{id}', [UserController::class, 'show'])->name('user.show');
-    Route::post('/user/show', [UserController::class, 'update'])->name('user.update');
+    Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+    Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
 
 
     //INVENTARIS

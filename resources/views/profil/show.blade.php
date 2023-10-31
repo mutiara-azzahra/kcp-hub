@@ -7,8 +7,12 @@
             <div class="float-left">
                 <h4>Lihat/Edit Profil</h4>
             </div>
-            <div class="float-right">
+            
+            <div class="float-right p-1">
                 <a class="btn btn-success" href="{{route('dashboard')}}"><i class="fas fa-arrow-left"></i>  Kembali</a>
+            </div>
+            <div class="float-right p-1">
+                <a class="btn btn-warning" href="{{route('user.edit', $user->id)}}"><i class="fas fa-refresh"></i>  Ubah Password</a>
             </div>
         </div>
     </div>
