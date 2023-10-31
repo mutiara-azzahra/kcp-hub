@@ -107,18 +107,20 @@
                                 @endphp
 
                                 @foreach($surat_jalan as $s)
-                                @foreach($s->details_sj as $d)
-                                <tr>
-                                    
-                                    <td>{{ $s->nosj }}</td>
-                                    <td>{{ $d->kd_outlet }}/{{ $d->header_ps->nm_outlet }}</td>
-                                    <td class="text-center">{{ $d->koli }}</td>
-                                    <td class="text-center">
-                                        <a class="btn btn-warning btn-sm" href="{{ route('surat-jalan.cetak', $s->nosj) }}" target="_blank"><i class="fas fa-print"></i></a>
-                                    </td>
-                                    
-                                </tr>
-                                @endforeach
+                                    @foreach($s->details_sj as $d)
+                                    <tr>
+                                        <td>{{ $s->nosj }}</td>
+                                        <td>{{ $d->kd_outlet }}/{{ $d->header_ps->nm_outlet }}</td>
+                                        <td class="text-center">{{ $d->koli }}</td>
+                                        <td class="text-center">
+                                        @if($d->koli == null || $d->koli == 0)
+
+                                        @else
+                                            <a class="btn btn-warning btn-sm" href="{{ route('surat-jalan.cetak', $s->nosj) }}" target="_blank"><i class="fas fa-print"></i></a>
+                                        @endif
+                                        </td>
+                                    </tr>
+                                    @endforeach
                                 @endforeach
                                 
                             </tbody>

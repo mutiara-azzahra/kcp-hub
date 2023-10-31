@@ -175,7 +175,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/validasi-so/details/{noso}', [ValidasiSOController::class, 'details'])->name('validasi-so.details');
     Route::get('/validasi-so/create', [ValidasiSOController::class, 'create'])->name('validasi-so.create');
     Route::post('/validasi-so/store', [ValidasiSOController::class, 'store'])->name('validasi-so.store');
-    Route::post('/validasi-so/reset-so', [ValidasiSOController::class, 'reset'])->name('validasi-so.reset');
+    Route::get('/validasi-so/reset-so', [ValidasiSOController::class, 'reset'])->name('validasi-so.reset');
     Route::get('/validasi-so/validasi/{noso}', [ValidasiSOController::class, 'validasi'])->name('validasi-so.validasi');
     Route::get('/validasi-so/cetak/{noso}', [ValidasiSOController::class, 'cetak'])->name('validasi-so.cetak');
     Route::get('/validasi-so/edit/{id}', [ValidasiSOController::class, 'edit_details'])->name('validasi-so.edit_details');

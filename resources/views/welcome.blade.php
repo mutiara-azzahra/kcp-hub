@@ -121,7 +121,7 @@
               @endif
 
               <!-- {{-- Master --}} -->
-            @if(in_array(Auth::user()->id_role, [5, 7, 10, 11, 12, 17, 24]))
+            @if(in_array(Auth::user()->id_role, [5, 7, 10, 12, 17, 24]))
             <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon"></i>
@@ -211,7 +211,7 @@
             @endif
 
               <!-- {{-- FINANCE --}} -->
-              @if(in_array(Auth::user()->id_role, [2, 5, 6, 7, 11, 12, 17]))
+              @if(in_array(Auth::user()->id_role, [2, 5, 6, 7, 12, 17]))
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon"></i>
@@ -277,11 +277,7 @@
                         <p>Sales Order/SO</p>
                       </a>
                   </li>
-                  {{-- <li class="nav-item">
-                      <a href="{{ route('back-order.index')}}" class="nav-link">
-                        <p>Back Order/BO</p>
-                      </a>
-                  </li> --}}
+                  @if(in_array(Auth::user()->id_role, [4, 5, 6, 7, 9, 12, 17, 20, 24]))
                   <li class="nav-item">
                       <a href="{{ route('invoice.index')}}" class="nav-link">
                         <p>Invoice</p>
@@ -292,6 +288,7 @@
                         <p>Surat Jalan</p>
                       </a>
                   </li>
+                  @endif
 
                 </ul>
               </li>

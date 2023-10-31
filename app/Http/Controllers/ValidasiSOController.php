@@ -22,6 +22,7 @@ class ValidasiSOController extends Controller
         
         $so_validated = TransaksiSOHeader::where('flag_approve', 'Y')
             ->where('flag_vald_gudang', 'Y')
+            ->where('flag_cetak_gudang', 'N')
             ->orderBy('noso', 'desc')->get();
 
         return view('validasi-so.index', compact('validasi_so_gudang', 'so_validated'));
@@ -34,6 +35,27 @@ class ValidasiSOController extends Controller
         $validasi_id = TransaksiSOHeader::where('noso', $noso)->first();
 
         return view('validasi-so.details', compact('validasi_id', 'so'));
+    }
+
+    public function reset(){
+
+        $so_validated = TransaksiSOHeader::where('flag_approve', 'Y')
+            ->where('flag_vald_gudang', 'Y')
+            ->where('flag_cetak_gudang', 'Y')
+            ->orderBy('noso', 'desc')->get();
+
+        return view('validasi-so.reset', compact('so_validated'));
+    }
+
+    public function store_reset($noso){
+
+        $validasi_so = TransaksiSOHeader::where('noso', $noso)->update([
+            'flag_cetak_gudang'  => 'Y',
+            'flag_cetak_gudang_date'    => NULL
+        ]);
+
+        return redirect()->route('validasi-so.index')->with('success','Data SO berhasil divalidasi, diteruskan ke packingsheet');
+
     }
 
     public function validasi($noso){
@@ -52,6 +74,12 @@ class ValidasiSOController extends Controller
         $data           = TransaksiSOHeader::where('noso', $noso)->get();
         $data_details   = TransaksiSODetails::where('noso', $noso)->get();
         $header         = TransaksiSOHeader::where('noso', $noso)->first();
+
+        $flag_cetak = TransaksiSOHeader::where('noso', $noso)->update([
+            'flag_cetak_gudang'         => 'Y',
+            'flag_cetak_gudang_date'    => NOW()
+        ]);
+
         $pdf            = PDF::loadView('reports.sales-order', ['data'=>$data, 'data_details'=>$data_details], ['header'=>$header]);
         $pdf->setPaper('letter', 'potrait');
 

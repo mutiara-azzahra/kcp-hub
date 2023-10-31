@@ -30,7 +30,7 @@ class MasterSalesController extends Controller
     public function store(Request $request){
 
         $request -> validate([
-            'sales'      => 'required',
+            'sales'      => 'required|unique:master_sales,sales',
         ]);
 
         $created = MasterSales::create($request->all());

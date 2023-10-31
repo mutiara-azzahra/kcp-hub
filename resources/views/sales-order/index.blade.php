@@ -31,7 +31,6 @@
                             <thead>
                                 <tr style="background-color: #6082B6; color:white">
                                     <th class="text-center">No Sales Order</th>
-                                    <th class="text-center">Back Order</th>
                                     <th class="text-center" style="width: 15px;">Kode Toko</th>
                                     <th class="text-center">Nama Toko</th>
                                     <th class="text-center">Nominal SP</th>
@@ -45,10 +44,10 @@
                                 @php
                                 $no=1;
                                 @endphp
+
                                 @foreach($surat_pesanan as $s)
                                 <tr>
                                     <td class="text-left">{{ $s->noso }}</td>
-                                    <td class="text-center"></td>
                                     <td class="text-center">{{ $s->kd_outlet }}</td>
                                     <td class="text-left">{{ $s->nm_outlet }}</td>
                                     <td class="text-left">Rp. {{ number_format($s->details_sp->sum('nominal_total'), 0, ',', '.') }}</td>
@@ -68,8 +67,7 @@
                                     @else
                                     <td class="text-center" style="background-color: yellow;">Diproses</td>
                                     @endif
-                                    <td class="text-left">
-                                        <a class="btn btn-warning btn-sm"><i class="fas fa-random"></i> </a>
+                                    <td class="text-center">
                                         <a class="btn btn-info btn-sm" href="{{ route('sales-order.details', $s->nosp) }}">
                                             <i class="fas fa-info"></i>
                                         </a>

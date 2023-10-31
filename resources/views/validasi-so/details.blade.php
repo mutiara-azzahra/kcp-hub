@@ -2,21 +2,25 @@
  
 @section('content')
 <div class="container" style="padding: 10px;">
-    <div class="row mt-5">
+    <div class="row mt-2">
                 <div class="col-lg-12 pb-3">
                         <div class="float-right m-1">
                             <a class="btn btn-success" href="{{ route('validasi-so.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
                         </div>
 
-                        
+                        @php
+                            $isValidasiButtonShown = false;
+                        @endphp
+
                         @foreach($validasi_id->details_so as $s)
-
-                            @if($s->stok_ready->stok >= $s->qty)
-                            <div class="float-right m-1">
-                                <a class="btn btn-warning" href="{{ route('validasi-so.validasi', $so->noso) }}"><i class="fas fa-check"></i> Validasi</a>
-                            </div>
+                            @if($s->stok_ready->stok >= $s->qty && !$isValidasiButtonShown)
+                                <div class="float-right m-1">
+                                    <a class="btn btn-warning" href="{{ route('validasi-so.validasi', $so->noso) }}"><i class="fas fa-check"></i> Validasi</a>
+                                </div>
+                                @php
+                                    $isValidasiButtonShown = true;
+                                @endphp
                             @endif
-
                         @endforeach
                     </div>
                 </div>
@@ -51,9 +55,9 @@
                                         <tr style="background-color: #6082B6; color:white">
                                             <th class="text-center">Part No</th>
                                             <th class="text-center">Nama Part</th>
-                                            <th class="text-center">Diskon</th>
                                             <th class="text-center">Qty SO</th>
                                             <th class="text-center">Stok Gudang</th>
+                                            <th class="text-center">Diskon</th>
                                             <th class="text-center">Keterangan</th>
                                             <th class="text-center">Ubah</th>
                                         </tr>
@@ -67,9 +71,9 @@
                                             <tr>
                                                 <td class="text-left">{{ $s->part_no }}</td>
                                                 <td class="text-left">{{ $s->nama_part->part_nama }}</td>
+                                                <td class="text-right">{{ $s->qty }}</td>
+                                                <td class="text-right">{{ $s->stok_ready->stok }}</td>
                                                 <td class="text-center">{{ $s->disc }}%</td>
-                                                <td class="text-center">{{ $s->qty }}</td>
-                                                <td class="text-center">{{ $s->stok_ready->stok }}</td>
 
                                                 @if( $s->flag_vald_gudang == null)
                                                 <td class="text-center" style="background-color: yellow;">

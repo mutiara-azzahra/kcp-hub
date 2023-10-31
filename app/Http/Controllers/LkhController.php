@@ -107,11 +107,8 @@ class LkhController extends Controller
     public function update(Request $request, $no_lkh)
     {
 
-        // $request -> validate([
-        //     'jam_kembali'            => 'required',
-        // ]);
-
         TransaksiLkhHeader::where('no_lkh', $no_lkh)->update([
+                'jam_kembali'       => $request->jam_kembali,
                 'km_kembali_mobil'  => $request->km_kembali_mobil,
                 'updated_at'        => NOW(),
                 'updated_by'        => Auth::user()->nama_user

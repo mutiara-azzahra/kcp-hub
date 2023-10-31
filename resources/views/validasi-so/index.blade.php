@@ -98,10 +98,15 @@
                                     <td class="text-left">{{ $v->noso }}</td>
                                     <td class="text-center">{{ $v->kd_outlet }}</td>
                                     <td class="text-left">{{ $v->nm_outlet }}</td>
-                                    <td class="text-center">{{ $v->crea_date }}</td>                                    
-                                    <td class="text-center">
-                                        <a class="btn btn-warning btn-sm" href="{{ route('validasi-so.cetak',$v->noso) }}" target="_blank"><i class="fas fa-print"></i></a>
-                                    </td>
+                                    <td class="text-center">{{ $v->crea_date }}</td>
+                                    
+                                    @if($v->flag_cetak_gudang == 'N')
+                                        <td class="text-center">
+                                            <a class="btn btn-warning btn-sm" href="{{ route('validasi-so.cetak',$v->noso) }}" target="_blank"><i class="fas fa-print"></i></a>
+                                        </td>
+                                    @else
+
+                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>

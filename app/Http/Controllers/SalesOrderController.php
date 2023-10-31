@@ -15,7 +15,8 @@ class SalesOrderController extends Controller
 {
     public function index(){
 
-        $surat_pesanan = TransaksiSpHeader::where('status', 'C')->get();
+        $surat_pesanan = TransaksiSpHeader::orderBy('nosp', 'desc')->get();
+
 
         return view('sales-order.index', compact('surat_pesanan'));
     }
@@ -61,6 +62,11 @@ class SalesOrderController extends Controller
     public function approve($nosp){
 
         $approve_so = TransaksiSpHeader::where('nosp', $nosp)->get();
+
+        TransaksiSpHeader::where('nosp', $nosp)->update([
+            'status'    => 'C',
+            'modi_date' => NOW()
+        ]);
 
         foreach($approve_so as $a){
             $data['noso']               = $a->noso;

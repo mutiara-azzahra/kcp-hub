@@ -21,7 +21,9 @@ class SuratPesananController extends Controller
 {
     public function index(){
 
-        $surat_pesanan = TransaksiSpHeader::orderBy('crea_date', 'desc')->get();
+        $surat_pesanan = TransaksiSpHeader::orderBy('crea_date', 'desc')
+            ->where('status', 'O')
+            ->get();
 
         return view('surat-pesanan.index', compact('surat_pesanan'));
     }
@@ -56,7 +58,7 @@ class SuratPesananController extends Controller
 
         $request->merge([
             'nosp'      => $newSp->nosp,
-            'status'    => 'O', //O open | C close
+            'status'    => 'O',
             'area_sp'   => $area_sp,
             'nm_outlet' => $nama_outlet,
             'user_sales'=> $nama_sales,
@@ -136,7 +138,6 @@ class SuratPesananController extends Controller
                     
                     TransaksiSpHeader::where('nosp', $value['nosp'])->update([
                         'noso'      => TransaksiSpHeader::noso(),
-                        'status'    => 'C',
                         'modi_date' => NOW()
                     ]);
 

@@ -27,17 +27,16 @@
                     <div class="float-right">
 
                         @if(Auth::user()->id_role == 11)
-                        @foreach($surat_pesanan_id as $s)
+                            @foreach($surat_pesanan_id as $s)
 
-                            @if(isset($s->so))
+                                @if(isset($s->so))
 
-                            @else
-                                <a class="btn btn-warning btn-md m-1" href="{{ route('sales-order.approve', $s->nosp) }}"><i class="fas fa-check"></i> Approve</a>
-                                <a class="btn btn-danger btn-md m-1" href="{{ route('sales-order.reject', $s->nosp) }}"><i class="fas fa-ban"></i> Tolak</a>
-                            @endif
+                                @else
+                                    <a class="btn btn-warning btn-md m-1" href="{{ route('sales-order.approve', $s->nosp) }}"><i class="fas fa-check"></i> Approve</a>
+                                    <a class="btn btn-danger btn-md m-1" href="{{ route('sales-order.reject', $s->nosp) }}"><i class="fas fa-ban"></i> Tolak</a>
+                                @endif
 
-                        @endforeach
-
+                            @endforeach
                         @endif
                         
                     </div>
@@ -96,10 +95,10 @@
                                             @foreach($s->details_sp as $d)
                                                 <tr>
                                                     <td class="text-left">{{ $d->part_no }}</td>
-                                                    <td class="text-left">Rp. {{ number_format($d->hrg_pcs, 0, ',', '.') }}</td>
+                                                    <td class="text-right">Rp. {{ number_format($d->hrg_pcs, 0, ',', '.') }}</td>
                                                     <td class="text-center">{{ $d->qty }}</td>
                                                     <td class="text-center">{{ $d->disc }} %</td>
-                                                    <td class="text-left">Rp. {{ number_format($d->nominal_total, 0, ',', '.') }}</td>
+                                                    <td class="text-right">Rp. {{ number_format($d->nominal_total, 0, ',', '.') }}</td>
                                                 </tr>
                                             @endforeach
                                         @endforeach
