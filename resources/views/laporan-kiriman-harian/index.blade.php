@@ -121,10 +121,11 @@
                                     <td class="text-center">{{ $s->plat_mobil }}</td>
                                     <td class="text-center">
 
+                                    @if($s->jam_kembali == null)
                                         <a class="btn btn-info btn-sm" href="{{ route('laporan-kiriman-harian.details',$s->no_lkh) }}">
                                             <i class="fas fa-list"></i>
                                         </a>
-                                        
+                                    @endif    
                                         <a class="btn btn-warning btn-sm" href="{{ route('laporan-kiriman-harian.cetak', $s->no_lkh) }}" target="_blank">
                                             <i class="fas fa-print"></i>
                                         </a>
