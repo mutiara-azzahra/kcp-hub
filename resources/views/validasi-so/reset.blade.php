@@ -49,7 +49,7 @@
                                     <td class="text-left">{{ $v->nm_outlet }}</td>
                                     <td class="text-center">{{ $v->crea_date }}</td>                                    
                                     <td class="text-center">
-                                        <a class="btn btn-warning btn-sm" href="{{ route('validasi-so.cetak',$v->noso) }}"><i class="fas fa-refresh"></i></a>
+                                        <a class="btn btn-warning btn-sm" href="{{ route('validasi-so.store_reset',$v->noso) }}"><i class="fas fa-refresh"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

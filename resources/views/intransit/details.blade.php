@@ -16,6 +16,10 @@
                 <div class="alert alert-success" id="myAlert">
                     <p>{{ $message }}</p>
                 </div>
+            @elseif ($message = Session::get('danger'))
+                <div class="alert alert-warning" id="myAlert">
+                    <p>{{ $message }}</p>
+                </div>
             @endif
 
         <div class="card" style="padding: 10px;">
@@ -36,9 +40,9 @@
                                         <td class="text-center">{{ $intransit_header->tanggal_packingsheet }}</td>
                                         
                                         @if($intransit_header->status == 'I' )
-                                        <td class="text-center">Intransit</td>
+                                        <td class="text-center" style="background-color: yellow">Intransit</td>
                                         @elseif($intransit_header->status == 'T' )
-                                        <td class="text-center">Diterima</td>
+                                        <td class="text-center" style="background-color: green">Diterima</td>
                                         @endif
                                     </tr> 
                                 </tbody>
@@ -62,7 +66,7 @@
                                         @foreach($details as $i)
                                         <tr>
                                             <td class="text-center">{{ $i->part_no }}</td>
-                                            <td class="text-center">{{ $i->qty }}</td>
+                                            <td class="text-center">{{ number_format($i->qty, 0, ',', '.') }}</td>
                                             <td class="text-center">{{ $i->rak->kode_rak_lokasi }}</td>
                                         </tr>
                                         @endforeach

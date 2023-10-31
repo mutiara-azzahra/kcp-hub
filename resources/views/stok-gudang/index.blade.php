@@ -8,11 +8,8 @@
                 <h4>Stok Gudang</h4>
             </div>
             <div class="float-right m-1">
-                <a class="btn btn-info" href="{{ route('stok-gudang.tambah') }}"><i class="fas fa-plus"></i> Tambah Stok</a>
+                <a class="btn btn-success" href="{{ route('stok-gudang.tambah') }}"><i class="fas fa-plus"></i> Tambah Stok</a>
             </div>
-            <!-- <div class="float-right m-1">
-                <a class="btn btn-success" href="{{ route('stok-gudang.create') }}"><i class="fas fa-plus"></i> Tambah Stok</a>
-            </div> -->
         </div>
     </div>
             @if ($message = Session::get('success'))
@@ -49,8 +46,6 @@
                                     <td class="text-right">{{ number_format($p->stok, 0, ',', '.') }}</td>
                                     <td class="text-center">
                                         <a class="btn btn-info btn-sm" href="{{ route('stok-gudang.show',$p->id) }}"><i class="fas fa-eye"></i></a>
-                                        <a class="btn btn-warning btn-sm" href="{{ route('stok-gudang.edit',$p->id) }}"><i class="fas fa-edit"></i></a>
-                                        <a class="btn btn-danger btn-sm" href="{{ route('stok-gudang.delete',$p->id) }}"><i class="fas fa-times-circle"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

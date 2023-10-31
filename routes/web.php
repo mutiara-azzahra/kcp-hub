@@ -176,6 +176,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/validasi-so/create', [ValidasiSOController::class, 'create'])->name('validasi-so.create');
     Route::post('/validasi-so/store', [ValidasiSOController::class, 'store'])->name('validasi-so.store');
     Route::get('/validasi-so/reset-so', [ValidasiSOController::class, 'reset'])->name('validasi-so.reset');
+    Route::get('/validasi-so/reset-so-store/{noso}', [ValidasiSOController::class, 'store_reset'])->name('validasi-so.store_reset');
     Route::get('/validasi-so/validasi/{noso}', [ValidasiSOController::class, 'validasi'])->name('validasi-so.validasi');
     Route::get('/validasi-so/cetak/{noso}', [ValidasiSOController::class, 'cetak'])->name('validasi-so.cetak');
     Route::get('/validasi-so/edit/{id}', [ValidasiSOController::class, 'edit_details'])->name('validasi-so.edit_details');
@@ -190,6 +191,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/packingsheet/koli', [PackingSheetController::class, 'store_dus'])->name('packingsheet.store-dus');
     Route::get('/packingsheet/cetak/{nops}', [PackingSheetController::class, 'cetak'])->name('packingsheet.cetak');
     Route::get('/packingsheet/cetak-label/{nops}', [PackingSheetController::class, 'cetak_label'])->name('packingsheet.cetak_label');
+    Route::get('/packingsheet/reset-packingsheet/{nops}', [PackingSheetController::class, 'store_reset'])->name('packingsheet.store_reset');
+
 
     //ROUTE INVOICE
     Route::get('/invoice', [InvoiceController::class, 'index'])->name('invoice.index');

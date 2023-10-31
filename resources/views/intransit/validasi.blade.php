@@ -66,9 +66,8 @@
                                             @foreach($intransit_header->details as $i)
                                             <tr>
                                                 <td class="text-center">{{ $i->part_no }}</td>
-                                                <td class="text-center">{{ $i->qty }}</td>
+                                                <td class="text-center">{{ number_format($i->qty, 0, ',', '.') }}</td>
                                             </tr>
-
                                             @endforeach
                                         </tbody>
                                     </table>

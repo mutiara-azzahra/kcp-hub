@@ -23,7 +23,9 @@ class PackingSheetController extends Controller
             ->where('flag_packingsheet', 'N')
             ->orderBy('flag_vald_date', 'desc')->get();
 
-        $list_packingsheet = TransaksiPackingsheetHeader::where('status', 'A')->orderBy('nops', 'desc')->get();
+        $list_packingsheet = TransaksiPackingsheetHeader::where('status', 'A')
+            ->where('flag_cetak', 'N')
+            ->orderBy('nops', 'desc')->get();
 
         return view('packingsheet.index', compact('so_validated', 'list_packingsheet'));
     }
@@ -90,7 +92,6 @@ class PackingSheetController extends Controller
         return redirect()->route('packingsheet.index')->with('success','Data SO berhasil diteruskan ke packingsheet');
     }
 
-
     public function details($nops){
 
         $header_ps          = TransaksiPackingsheetHeader::where('nops', $nops)->first();
@@ -142,6 +143,12 @@ class PackingSheetController extends Controller
 
     public function cetak($nops)
     {
+        TransaksiPackingsheetHeader::where('nops', $nops)->update([
+            'flag_cetak'      => 'Y',
+            'flag_cetak_date' => NOW(),
+            'updated_by'      => Auth::user()->nama_user
+        ]);
+
         $data       = TransaksiPackingsheetHeader::where('nops', $nops)->first();
         $ps_details = TransaksiPackingsheetDetails::where('nops', $nops)->get();
         $pdf        = PDF::loadView('reports.packingsheet', ['data'=>$data], ['ps_details'=>$ps_details]);
@@ -150,8 +157,28 @@ class PackingSheetController extends Controller
         return $pdf->stream('packingsheet.pdf');
     }
 
+    public function reset(){
+
+        $ps_validated = TransaksiPackingsheetHeader::where('flag_cetak', 'Y')
+            ->orderBy('created_at', 'desc')->get();
+
+        return view('packingsheet.reset', compact('ps_validated'));
+    }
+
+    public function store_reset($nops){
+
+        $packingsheet = TransaksiPackingsheetHeader::where('nops', $nops)->update([
+            'flag_cetak'         => 'Y',
+            'flag_cetak_date'    => NULL
+        ]);
+
+        return redirect()->route('validasi-so.index')->with('success','Data Packingsheet berhasil direset!');
+
+    }
+
     public function cetak_label($nops)
     {
+
         $data_dus = TransaksiPackingsheetDetailsDus::where('nops', $nops)->get();
         $pdf      = PDF::loadView('reports.label', ['data_dus'=>$data_dus]);
         $pdf->setPaper('a4', 'potrait');
