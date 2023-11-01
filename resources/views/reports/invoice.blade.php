@@ -232,9 +232,6 @@
                                                             <td class="alamat-kcp">- Pembayaran dianggap sah bila dicap LUNAS</td>
                                                         </tr>
                                                         <tr>
-                                                            <td class="alamat-kcp">- Barang yang sudah dibeli tidak dapat ditukarkan/dikembalikan</td>
-                                                        </tr>
-                                                        <tr>
                                                             <td class="alamat-kcp">- Pembayaran dengan giro/cheque dianggap sah bila telah diclearingkan</td>
                                                         </tr>
                                                     </table>
