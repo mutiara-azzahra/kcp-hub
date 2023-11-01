@@ -14,7 +14,7 @@ class UserController extends Controller
 {
     public function index(){
 
-        $user = User::all();
+        $user = User::where('status', 'A')->get();
 
         return view('user.index', compact('user'));
 
@@ -25,7 +25,6 @@ class UserController extends Controller
         $role = MasterRole::all();
 
         return view('user.create', compact('role'));
-        
     }
 
     public function store(Request $request){
@@ -36,12 +35,10 @@ class UserController extends Controller
             'password'      => 'required',
             'id_role'       => 'required',
         ]);
-    
-        $input = $request->all();
+
 
         $input['nama_user']         = $request->nama_user;
         $input['username']          = $request->username;
-        $input['email']             = $request->email;
         $input['id_role']           = $request->id_role;
         $input['password']          = Hash::make($request['password']);
         $input['created_at']        = NOW();

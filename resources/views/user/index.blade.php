@@ -26,6 +26,10 @@
             @if($message = Session::get('success'))
                 <div class="alert alert-success" id="myAlert">
                     <p>{{ $message }}</p>
+                </div>
+            @elseif($message = Session::get('danger'))
+                <div class="alert alert-warning" id="myAlert">
+                    <p>{{ $message }}</p>
                 </div>  
             @endif
 
