@@ -161,7 +161,7 @@ class PackingSheetController extends Controller
 
     public function reset(){
 
-        $ps_validated = TransaksiPackingsheetHeader::where('flag_cetak', 'Y')
+        $ps_validated = TransaksiPackingsheetHeader::where('flag_cetak', 'N')
             ->orderBy('created_at', 'desc')->get();
 
         return view('packingsheet.reset', compact('ps_validated'));
