@@ -96,12 +96,12 @@
                                                     <td class="text-center">
                                                         <div class="form-group col-12">
                                                             <input type="hidden" name="inputs[0][nosp]" value="{{ $nosp }}">
-                                                            <input type="number" id="qty-default" name="inputs[0][qty]" class="form-control" placeholder="0" onkeyup="updateNominal(`default`)">
+                                                            <input type="text" id="qty-default" name="inputs[0][qty]" class="form-control" placeholder="0" onkeyup="updateNominal(`default`)">
                                                         </div>
                                                     </td>
                                                     <td class="text-center">
                                                         <div class="form-group col-12">
-                                                            <input type="number" id="disc-default" name="inputs[0][disc]" class="form-control" placeholder="0" onkeyup="updateNominal(`default`)">
+                                                            <input type="text" id="disc-default" name="inputs[0][disc]" class="form-control" placeholder="0" onkeyup="updateNominal(`default`)">
                                                         </div>
                                                     </td>
                                                     <td class="text-center" id="nominal">
@@ -186,12 +186,12 @@
                 <td class="text-center">
                     <div class="form-group col-12">
                         <input type="hidden" name="inputs[${i}][nosp]" value="{{ $nosp }}">
-                        <input type="number" id="qty-${i}" name="inputs[${i}][qty]" class="form-control" placeholder="0" onkeyup="updateNominal(${i})">
+                        <input type="text" id="qty-${i}" name="inputs[${i}][qty]" class="form-control" placeholder="0" onkeyup="updateNominal(${i})">
                     </div>
                 </td>
                 <td class="text-center">
                     <div class="form-group col-12">
-                        <input type="number" id="disc-${i}" name="inputs[${i}][disc]" class="form-control" placeholder="0" onkeyup="updateNominal(${i})">
+                        <input type="text" id="disc-${i}" name="inputs[${i}][disc]" class="form-control" placeholder="0" onkeyup="updateNominal(${i})">
                     </div>
                 </td>
                 <td class="text-center" id="nominal">

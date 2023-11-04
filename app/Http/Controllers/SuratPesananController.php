@@ -31,7 +31,7 @@ class SuratPesananController extends Controller
     public function create(){
 
         $sales      = MasterSales::where('sales', Auth::user()->username)->value('id');
-        $toko       = MasterAreaSales::where('id_sales', $sales)->first();
+        $toko       = MasterAreaSales::where('id_sales', $sales)->get();
         $all_toko   = MasterOutlet::where('status', 'Y')->get();
 
         return view('surat-pesanan.create', compact('sales', 'toko', 'all_toko'));
@@ -40,7 +40,9 @@ class SuratPesananController extends Controller
     public function store(Request $request){
 
         $newSp          = new TransaksiSpHeader();
+        $newSo          = new TransaksiSpHeader();
         $newSp->nosp    = TransaksiSpHeader::nosp();
+        $newSo->noso    = TransaksiSpHeader::noso();
         $nama_sales     = MasterSales::where('sales', Auth::user()->username)->value('sales');
 
         $request -> validate([
@@ -58,6 +60,7 @@ class SuratPesananController extends Controller
 
         $request->merge([
             'nosp'      => $newSp->nosp,
+            'noso'      => $newSo->noso,
             'status'    => 'O',
             'area_sp'   => $area_sp,
             'nm_outlet' => $nama_outlet,
@@ -133,13 +136,13 @@ class SuratPesananController extends Controller
                     $value['nominal_total'] = $value['nominal'] - $value['nominal_disc'];
                     $value['crea_date']     = NOW();
 
-                    $newSo          = new TransaksiSpHeader();
-                    $newSo->noso    = TransaksiSpHeader::noso();
+                    // $newSo          = new TransaksiSpHeader();
+                    // $newSo->noso    = TransaksiSpHeader::noso();
                     
-                    TransaksiSpHeader::where('nosp', $value['nosp'])->update([
-                        'noso'      => TransaksiSpHeader::noso(),
-                        'modi_date' => NOW()
-                    ]);
+                    // TransaksiSpHeader::where('nosp', $value['nosp'])->update([
+                    //     'noso'      => TransaksiSpHeader::noso(),
+                    //     'modi_date' => NOW()
+                    // ]);
 
                     TransaksiSpDetails::create($value);
                 }
@@ -157,14 +160,14 @@ class SuratPesananController extends Controller
                     $value['nominal_total'] = $value['nominal'] - $value['nominal_disc'];
                     $value['crea_date']     = NOW();
 
-                    $newSo          = new TransaksiSpHeader();
-                    $newSo->noso    = TransaksiSpHeader::noso();
+                    // $newSo          = new TransaksiSOHeader();
+                    // $newSo->noso    = TransaksiSOHeader::noso();
                     
-                    TransaksiSpHeader::where('nosp', $value['nosp'])->update([
-                        'noso'      => TransaksiSpHeader::noso(),
-                        'status'    => 'C',
-                        'modi_date' => NOW()
-                    ]);
+                    // TransaksiSpHeader::where('nosp', $value['nosp'])->update([
+                    //     'noso'      => TransaksiSpHeader::noso(),
+                    //     'status'    => 'C',
+                    //     'modi_date' => NOW()
+                    // ]);
 
                     TransaksiSpDetails::create($value);
             }

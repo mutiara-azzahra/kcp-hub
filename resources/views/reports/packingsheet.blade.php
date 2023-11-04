@@ -168,10 +168,10 @@
                                                 <td class="atas">No. P/S</td>
                                                 <td class="atas">:</td>
                                                 @if($data->outlet->kode_area->provinsi->kode_prp == 6200)
-                                                <td class="atas">KCP/NON/{{ $data->area_ps }}/{{ $data->noso }}</td>
+                                                <td class="atas">KCP/NON/{{ $data->area_ps }}/{{ $data->nops }}</td>
 
                                                 @else
-                                                <td class="atas">KCP/NON/{{ $data->area_ps }}/{{ $data->noso }}</td>
+                                                <td class="atas">KCP/NON/{{ $data->area_ps }}/{{ $data->nops }}</td>
                                                 @endif
                                             </tr>
                                         </table>

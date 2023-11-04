@@ -17,7 +17,6 @@ class SalesOrderController extends Controller
 
         $surat_pesanan = TransaksiSpHeader::orderBy('nosp', 'desc')->get();
 
-
         return view('sales-order.index', compact('surat_pesanan'));
     }
 

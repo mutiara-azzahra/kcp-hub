@@ -62,7 +62,7 @@
 
                                     @if(isset($s->so['flag_approve']) && $s->so['flag_approve'] ==='Y')
                                     <td class="text-center" style="background-color: #32CD32; color:white">Approved</td>
-                                    @elseif(isset($s->so['flag_approve']) && $s->flag_approve === 'N')
+                                    @elseif(isset($s->so['flag_approve']) && $s->so['flag_approve'] === 'N')
                                     <td class="text-center" style="background-color: red;">Ditolak</td>
                                     @else
                                     <td class="text-center" style="background-color: yellow;">Diproses</td>

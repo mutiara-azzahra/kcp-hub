@@ -160,7 +160,7 @@
                                     <td class="nops">
                                         <table class="atas">
                                             <tr>
-                                                <td class="atas">No. P/S</td>
+                                                <td class="atas">NO. INV</td>
                                                 <td class="atas">:</td>
                                                 @if($data->outlet->kode_area->provinsi->kode_prp == 6200)
                                                 <td class="atas">KCP/NON/{{ $data->noinv }}</td>
@@ -175,7 +175,7 @@
                                     <td class="nops">
                                         <table class="atas">
                                             <tr>
-                                                <td class="atas">Tanggal P/S</td>
+                                                <td class="atas">Tanggal Invoice</td>
                                                 <td class="atas">:</td>
                                                 <td class="atas">{{ $data->created_at }}</td>
                                             </tr>

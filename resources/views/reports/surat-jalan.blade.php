@@ -90,7 +90,7 @@
      .header{
          margin-bottom: 0;
          text-align: center;
-         height: 90px;
+         height: 120px;
          padding: 0px;
      }
      hr{

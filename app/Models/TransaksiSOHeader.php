@@ -53,5 +53,9 @@ class TransaksiSOHeader extends Model
     {
         return $this->hasOne(MasterOutlet::class, 'kd_outlet', 'kd_outlet');
     }
+    public function provinsi()
+    {
+        return $this->hasOne(MasterProvinsi::class, 'kode_prp', 'kode_prp');
+    }
     
 }

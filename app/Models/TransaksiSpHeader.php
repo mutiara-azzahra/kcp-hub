@@ -48,14 +48,14 @@ class TransaksiSpHeader extends Model
             $lastNumber = (int)substr($lastCustomId, -5);
 
             if ($lastYear == $currentYear && $lastMonth == $currentMonth) {
-                // Same year and month, increment the number
+            
                 $newNumber = $lastNumber + 1;
             } else {
-                // New year or month, reset the number
+               
                 $newNumber = 1;
             }
         } else {
-            // No previous records, start with 1
+            
             $newNumber = 1;
         }
 
@@ -67,22 +67,27 @@ class TransaksiSpHeader extends Model
     public static function noso()
     {
 
-        $now = Carbon::now();
+        $now            = Carbon::now();
         $currentYear    = $now->year;
         $currentMonth   = $now->format('m');
 
         $latestRecord = static::orderBy('noso', 'desc')->first();
 
-        if ($latestRecord) {
-            $lastCustomId = $latestRecord->noso;
-            $lastYear = substr($lastCustomId, 3, 4);
-            $lastMonth = substr($lastCustomId, 7, 2);
-            $lastNumber = (int)substr($lastCustomId, -5);
+        
 
+        if ($latestRecord) {
+            $lastCustomId   = $latestRecord->noso;
+
+            
+            $lastYear       = substr($lastCustomId, 3, 4);
+            $lastMonth      = substr($lastCustomId, 7, 2);
+            $lastNumber     = (int)substr($lastCustomId, -5);
+            
             if ($lastYear == $currentYear && $lastMonth == $currentMonth) {
                 $newNumber = $lastNumber + 1;
             } else {
                 $newNumber = 1;
+                dd($newNumber);
             }
         } else {
             $newNumber = 1;

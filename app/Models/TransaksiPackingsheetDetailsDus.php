@@ -22,20 +22,27 @@ class TransaksiPackingsheetDetailsDus extends Model
 
     public static function no_dus()
     {
-        $now = Carbon::now();
-        $currentYear = $now->year;
-        $currentMonth = $now->format('m');
+        $now            = Carbon::now();
+        $currentYear    = $now->year;
+        $currentMonth   = $now->format('m');
 
-        $latestRecord = static::orderBy('no_dus', 'desc')->first();
+        $latestRecord   = static::orderBy('no_dus', 'desc')->first();
 
         if ($latestRecord) {
             $lastCustomId = $latestRecord->no_dus;
-            $lastYear = substr($lastCustomId, 4, 4); // Adjust the starting position
-            $lastMonth = substr($lastCustomId, 8, 2); // Adjust the starting position
+            $lastYear = substr($lastCustomId, 4, 4);
+            $lastMonth = substr($lastCustomId, 8, 2);
             $lastNumber = (int)substr($lastCustomId, -5);
 
             if ($lastYear == $currentYear && $lastMonth == $currentMonth) {
-                $newNumber = $lastNumber + 1;
+
+                $lastNumber = (int)substr($lastCustomId, -5);
+                
+                if ($lastNumber < 99999) {  // Check if the last number is less than 99999
+                    $newNumber = $lastNumber + 1;
+                } else {
+                    $newNumber = 1;  // Reset to 1 when it reaches 99999
+                }
             } else {
                 $newNumber = 1;
             }
@@ -47,6 +54,7 @@ class TransaksiPackingsheetDetailsDus extends Model
 
         return $newCustomId;
     }
+
 
 
     public function header_ps()

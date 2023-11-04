@@ -32,29 +32,27 @@ class SuratJalanController extends Controller
 
         $selectedItems = $request->input('selected_items', []);
 
+        $data['nosj']           = $nosj;
+        $data['flag_cetak']     = 'N';
+        $data['status ']        = 'O';
+        $data['created_at']     = NOW();
+
+       TransaksiSuratJalanHeader::create($data);
+
         foreach ($selectedItems as $noso) {
 
-            $invoice_belum_sj = TransaksiSOHeader::where('noso', $noso)->get();
-
-            foreach($invoice_belum_sj as $s){
-
-                $data['nosj']           = $nosj;
-                $data['flag_cetak']     = 'N';
-                $data['status ']        = 'O';
-                $data['created_at']     = NOW();
-
-                TransaksiSuratJalanHeader::create($data);
-            }
+            // foreach($invoice_belum_sj as $s){
 
             //update
             TransaksiSOHeader::where('noso', $noso)->update([
                 'flag_sj'      => 'Y',
                 'flag_sj_date' => NOW(),
             ]);
-        }
+      //  }
+    }
 
         foreach ($selectedItems as $noso) {
-
+            $invoice_belum_sj = TransaksiSOHeader::where('noso', $noso)->get();
 
             foreach($invoice_belum_sj as $h){
                 foreach($h->details_so as $s){
