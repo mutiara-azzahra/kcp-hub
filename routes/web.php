@@ -185,6 +185,7 @@ Route::group(['middleware' => 'auth'], function () {
     //ROUTE PACKINGSHEET
     Route::get('/packingsheet', [PackingSheetController::class, 'index'])->name('packingsheet.index');
     Route::get('/packingsheet/reset-packingsheet', [PackingSheetController::class, 'reset'])->name('packingsheet.reset');
+    Route::get('/packingsheet/reset-label/{nops}', [PackingSheetController::class, 'reset_label'])->name('packingsheet.reset_label');
     Route::get('/packingsheet/details/{nops}', [PackingSheetController::class, 'details'])->name('packingsheet.details');
     Route::post('/packingsheet/details/', [PackingSheetController::class, 'store_packingsheet'])->name('packingsheet.store_packingsheet');
     Route::get('/packingsheet/koli/{nops}', [PackingSheetController::class, 'koli'])->name('packingsheet.koli');

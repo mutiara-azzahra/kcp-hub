@@ -145,6 +145,7 @@ class PackingSheetController extends Controller
 
     public function cetak($nops)
     {
+
         TransaksiPackingsheetHeader::where('nops', $nops)->update([
             'flag_cetak'      => 'Y',
             'flag_cetak_date' => NOW(),
@@ -167,6 +168,17 @@ class PackingSheetController extends Controller
         return view('packingsheet.reset', compact('ps_validated'));
     }
 
+    public function reset_label($nops){
+
+        $label_ps = TransaksiPackingsheetDetailsDus::where('nops', $nops)->get();
+        
+        foreach ($label_ps as $label) {
+            $label->delete();
+        }
+
+        return redirect()->route('packingsheet.details', [$nops])->with('success','Label Packingsheet berhasil direset!');
+    }
+
     public function store_reset($nops){
 
         $packingsheet = TransaksiPackingsheetHeader::where('nops', $nops)->update([
@@ -174,7 +186,7 @@ class PackingSheetController extends Controller
             'flag_cetak_date'    => NULL
         ]);
 
-        return redirect()->route('packingsheet.index')->with('success','Data Packingsheet berhasil direset!');
+        return redirect()->route('packingsheet.index')->with('success','Cetak Packingsheet berhasil direset!');
 
     }
 
@@ -182,7 +194,6 @@ class PackingSheetController extends Controller
     {
 
         $data_dus = TransaksiPackingsheetDetailsDus::where('nops', $nops)->get();
-        // dd($data_dus);
         $pdf      = PDF::loadView('reports.label', ['data_dus'=>$data_dus]);
         $pdf->setPaper('a4', 'potrait');
 

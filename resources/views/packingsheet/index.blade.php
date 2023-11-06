@@ -130,5 +130,4 @@
 
 @section('script')
 
-
 @endsection

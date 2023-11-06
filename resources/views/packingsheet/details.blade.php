@@ -14,6 +14,9 @@
                         <div class="float-right m-1">
                             <a class="btn btn-warning" href="{{ route('packingsheet.cetak_label', $header_ps->nops) }}" target="_blank"><i class="fas fa-print"></i> Cetak Label</a>
                         </div>
+                        <div class="float-right m-1">
+                            <a class="btn btn-danger" href="{{ route('packingsheet.reset_label', $header_ps->nops) }}"><i class="fas fa-refresh"></i> Reset Label</a>
+                        </div>
                         @endif
                     </div>
                 </div>
