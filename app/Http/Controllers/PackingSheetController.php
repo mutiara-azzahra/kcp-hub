@@ -127,7 +127,7 @@ class PackingSheetController extends Controller
             $koli           = $value['koli'];
 
             for ($i = 0; $i < $koli; $i++) {
-                $no_dus = TransaksiPackingsheetDetailsDus::no_dus();
+                $no_dus = TransaksiPackingsheetDetailsDus::no_dus($nops);
 
                 TransaksiPackingsheetDetailsDus::create([
                     'nops'          => $nops,
@@ -161,7 +161,7 @@ class PackingSheetController extends Controller
 
     public function reset(){
 
-        $ps_validated = TransaksiPackingsheetHeader::where('flag_cetak', 'N')
+        $ps_validated = TransaksiPackingsheetHeader::where('flag_cetak', 'Y')
             ->orderBy('created_at', 'desc')->get();
 
         return view('packingsheet.reset', compact('ps_validated'));
@@ -170,7 +170,7 @@ class PackingSheetController extends Controller
     public function store_reset($nops){
 
         $packingsheet = TransaksiPackingsheetHeader::where('nops', $nops)->update([
-            'flag_cetak'         => 'Y',
+            'flag_cetak'         => 'N',
             'flag_cetak_date'    => NULL
         ]);
 
@@ -182,6 +182,7 @@ class PackingSheetController extends Controller
     {
 
         $data_dus = TransaksiPackingsheetDetailsDus::where('nops', $nops)->get();
+        // dd($data_dus);
         $pdf      = PDF::loadView('reports.label', ['data_dus'=>$data_dus]);
         $pdf->setPaper('a4', 'potrait');
 

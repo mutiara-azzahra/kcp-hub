@@ -20,13 +20,13 @@ class TransaksiPackingsheetDetailsDus extends Model
         'kategori', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'
     ];
 
-    public static function no_dus()
+    public static function no_dus($nops)
     {
         $now            = Carbon::now();
         $currentYear    = $now->year;
         $currentMonth   = $now->format('m');
 
-        $latestRecord   = static::orderBy('no_dus', 'desc')->first();
+        $latestRecord   = static::where('nops', $nops)->orderBy('no_dus', 'desc')->first();
 
         if ($latestRecord) {
             $lastCustomId = $latestRecord->no_dus;
@@ -38,10 +38,10 @@ class TransaksiPackingsheetDetailsDus extends Model
 
                 $lastNumber = (int)substr($lastCustomId, -5);
                 
-                if ($lastNumber < 99999) {  // Check if the last number is less than 99999
+                if ($lastNumber < 99999) { 
                     $newNumber = $lastNumber + 1;
                 } else {
-                    $newNumber = 1;  // Reset to 1 when it reaches 99999
+                    $newNumber = 1;  
                 }
             } else {
                 $newNumber = 1;
@@ -54,8 +54,6 @@ class TransaksiPackingsheetDetailsDus extends Model
 
         return $newCustomId;
     }
-
-
 
     public function header_ps()
     {

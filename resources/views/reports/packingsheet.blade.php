@@ -77,7 +77,7 @@
      .header{
          margin-bottom: 0px;
          text-align: center;
-         height: 105px;
+         height: 120px;
          padding: 0; /* Remove padding */
         margin: 0; /* Remove margin */
      }
