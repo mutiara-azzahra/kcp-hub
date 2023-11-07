@@ -17,7 +17,6 @@
             <p>{{ $message }}</p>
         </div>           
     @endif
-
     <div class="card" style="padding: 10px;">
         <div class="card-body">
             <div class="col-lg-12">  
