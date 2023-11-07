@@ -136,6 +136,7 @@
                                             <th class="text-center">Qty</th>
                                             <th class="text-center">Nominal Diskon</th>
                                             <th class="text-center">Nominal</th>
+                                            <th class="text-center"></th>
                                         </tr>
                                     </thead>
                                     <tbody class="input-fields">

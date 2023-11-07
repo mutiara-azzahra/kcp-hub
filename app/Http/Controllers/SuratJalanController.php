@@ -41,15 +41,14 @@ class SuratJalanController extends Controller
 
         foreach ($selectedItems as $noso) {
 
-            // foreach($invoice_belum_sj as $s){
+            //foreach($invoice_belum_sj as $s){
 
             //update
             TransaksiSOHeader::where('noso', $noso)->update([
                 'flag_sj'      => 'Y',
                 'flag_sj_date' => NOW(),
             ]);
-      //  }
-    }
+        }
 
         foreach ($selectedItems as $noso) {
             $invoice_belum_sj = TransaksiSOHeader::where('noso', $noso)->get();

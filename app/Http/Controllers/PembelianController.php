@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
 use App\Models\InvoiceNonHeader;
 use App\Models\InvoiceNonDetails;
 use App\Models\IntransitHeader;
@@ -46,9 +45,12 @@ class PembelianController extends Controller
             'tanggal_nota'             => 'required', 
             'customer_to'              => 'required', 
             'supplier'                 => 'required', 
-            'tanggal_jatuh_tempo'      => 'required',
         ]);
 
+        $tanggalNota = Carbon::parse($request->tanggal_nota);
+        $top = $tanggalNota->addDays($request->tanggal_jatuh_tempo);
+
+        $request['tanggal_jatuh_tempo'] = $top;
         $request['flag_ppn']            = 'N';
         $request['status']              = 'A';
         $request['flag_pembayaran']     = 'N';
@@ -71,12 +73,14 @@ class PembelianController extends Controller
         return view('pembelian-non-aop.details',compact('pembelian', 'master_part', 'intransit_details'));
     }
 
-
     public function detail_pembelian($id)
     {
         $pembelian_header  = InvoiceNonHeader::where('id', $id)->get();
+        $header            = InvoiceNonHeader::where('id', $id)->first();
+        $check             = InvoiceNonDetails::where('invoice_non', $header->invoice_non)->get();
+        $intransit_details = IntransitDetails::where('no_surat_pesanan', $header->invoice_non)->get();
 
-        return view('pembelian-non-aop.details-pembelian',compact( 'pembelian_header'));
+        return view('pembelian-non-aop.details-pembelian',compact( 'pembelian_header', 'check', 'intransit_details', 'header'));
     }
 
     public function update(Request $request, MasterPartNon $pembelian)
@@ -97,7 +101,6 @@ class PembelianController extends Controller
             return redirect()->route('pembelian-non-aop.index')->with('danger','Data master part gagal diubah');
         }
     }
-
    
     public function store_details(Request $request) {
         $invoice_non    = $request->input('invoice_non');
@@ -106,15 +109,16 @@ class PembelianController extends Controller
         $hets           = $request->input('harga');
         $discs          = $request->input('disc');
     
-        $details = [];
+        $details        = [];
     
         foreach ($part_nos as $index => $part_no) {
             $qty    = $qtys[$index];
             $het    = $hets[$index];
             $disc   = $discs[$index];
     
-            $total_diskon_persen = $disc * $het;
-            $total_amount = ($het * $qty )- $total_diskon_persen;
+            $amount                 = $qty * $het;
+            $total_diskon_persen    = ($amount * $disc)/100;
+            $total_amount           = ($het * $qty ) - $total_diskon_persen;
     
             $detail = [
                 'invoice_non'           => $invoice_non,

@@ -163,7 +163,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/sales-order/reject/{nosp}', [SalesOrderController::class, 'reject'])->name('sales-order.reject');
     Route::get('/sales-order/list-approved-so', [SalesOrderController::class, 'so_approved'])->name('sales-order.approved');
     Route::get('/sales-order/list-rejected-so', [SalesOrderController::class, 'so_rejected'])->name('sales-order.rejected');
-    Route::get('/sales-order/edit/{id}', [SalesOrderController::class, 'edit_details'])->name('sales-order.edit_details');
+    Route::get('/sales-order/edit/{id}', [SalesOrderController::class, 'edit'])->name('sales-order.edit');
+    Route::post('/sales-order/update/{id}', [SalesOrderController::class, 'store_edit'])->name('sales-order.store_edit');
     
     //ROUTE BO
     Route::get('/back-order', [BackOrderController::class, 'index'])->name('back-order.index');

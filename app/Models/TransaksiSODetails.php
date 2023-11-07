@@ -11,7 +11,7 @@ class TransaksiSODetails extends Model
 
     protected $table = 'trns_so_details';
     protected $primaryKey = 'id';
-    public $timestamps = false;
+    // public $timestamps = false;
 
     protected $fillable = [ 
         'noso', 'area_so', 'kd_outlet', 'part_no', 'nm_part', 'qty', 'hrg_pcs', 'disc', 'nominal', 

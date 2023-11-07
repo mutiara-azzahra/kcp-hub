@@ -64,7 +64,7 @@
                             <div class="col-md-12 col-lg-6">
                                 <div class="form-group">
                                     <strong>TOP</strong> *wajib diisi
-                                    <input type="date" name="tanggal_jatuh_tempo" class="form-control">
+                                    <input type="number" name="tanggal_jatuh_tempo" class="form-control">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

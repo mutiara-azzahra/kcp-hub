@@ -7,9 +7,12 @@ use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 use App\Models\TransaksiSpHeader;
+use App\Models\TransaksiSpDetails;
 use App\Models\TransaksiSOHeader;
 use App\Models\TransaksiSODetails;
 use App\Models\MasterStokGudang;
+use App\Models\MasterPart;
+use App\Models\MasterDiskonPart;
 
 class SalesOrderController extends Controller
 {
@@ -166,11 +169,63 @@ class SalesOrderController extends Controller
 
     }
 
-    public function edit_details($id){
+    public function edit($id){
 
-        $details       = TransaksiSODetails::findOrFail($id);
+        $details       = TransaksiSPDetails::findOrFail($id);
 
         return view('sales-order.edit', compact('details'));
 
+    }
+
+    public function store_edit($id, Request $request)
+    {
+        $cari_sp    = TransaksiSPDetails::where('id', $id)->first();
+        $het        = MasterPart::where('part_no', $request->part_no)->value('het');
+        $getDiscMax = MasterDiskonPart::where('part_no', $request->part_no)->value('diskon_maksimal');
+
+        if($getDiscMax != null){
+
+            if($request->disc > $getDiscMax){
+
+                return redirect()->route('sales_order.index')->with('danger','Nilai diskon part melebihi diskon maskimal! Silahkan input kembali');
+            
+            } else{
+
+                if($request->disc == null){
+                    $request->disc = 0;
+                }
+
+                $updated_sp = TransaksiSpDetails::where('id', $id)
+                    ->update([
+                    'qty'           => $request->qty,
+                    'disc'          => $request->disc,
+                    'nominal'       => $request->qty * $het,
+                    'nominal_disc'  => $request->qty * $het * $request->disc/100,
+                    'nominal_total' => ($request->qty * $het) - ($request->qty * $het * $request->disc)/100,
+                    'modi_date'     => NOW(),
+                    'modi_by'       => Auth::user()->nama_user
+                ]);
+
+
+            }
+        } else {
+
+            $updated_sp = TransaksiSpDetails::where('id', $id)
+                ->update([
+                'qty'           => $request->qty,
+                'disc'          => $request->disc,
+                'nominal'       => $request->qty * $het,
+                'nominal_disc'  => $request->qty * $het * $request->disc/100,
+                'nominal_total' => ($request->qty * $het) - ($request->qty * $het * $request->disc/100),
+                'modi_date'     => NOW(),
+                'modi_by'       => Auth::user()->nama_user
+            ]);
+        }
+
+        if ($updated_sp){
+            return redirect()->route('sales-order.details', $cari_sp->nosp)->with('success','Data SP berhasil diubah!');
+        } else{
+            return redirect()->route('sales-order.details', $cari_sp->nosp)->with('danger','Data SP gagal diubah');
+        }
     }
 }

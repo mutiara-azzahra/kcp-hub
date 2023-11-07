@@ -23,82 +23,80 @@
             @endif
 
         <div class="card" style="padding: 10px;">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-12 p-3">
-                            <table class="table table-hover table-bordered bg-light table-striped">
-                                <thead>
-                                    <tr style="background-color: #6082B6; color:white">
-                                        <th class="text-center">Nota</th>
-                                        <th class="text-center">Customer To</th>
-                                        <th class="text-center">Supplier</th>
-                                        <th class="text-center">Tanggal Nota</th>
-                                        <th class="text-center">Tanggal Jatuh Tempo</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-center">{{ $pembelian->invoice_non }}</td>
-                                        <td class="text-center">{{ $pembelian->customer_to }}</td>
-                                        <td class="text-center">{{ $pembelian->supplier }}</td>
-                                        <td class="text-center">{{ $pembelian->tanggal_nota }}</td>
-                                        <td class="text-center">{{ $pembelian->tanggal_jatuh_tempo }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                            <div class="col-lg-12 p-3">
-
-                                <form action="{{ route('pembelian-non-aop.store_details', $pembelian->invoice_non )}}" method="POST">
-                                @csrf
-
-                                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="table">
-                                    <thead>
-                                        <tr style="background-color: #6082B6; color:white">
-                                            <th class="text-center">Part No</th>
-                                            <th class="text-center">Qty</th>
-                                            <th class="text-center">HET</th>
-                                            <th class="text-center" style="width: 150px;">Disc (%)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="input-fields">
-
-                                        @foreach($intransit_details as $i)
-                                        <tr>
-                                            <td>
-                                                <div class="form-group col-12">
-                                                    <input type="hidden" name="invoice_non" value="{{ $pembelian->invoice_non }}">
-                                                    <input type="text" name="part_no[]" class="form-control" value="{{ $i->part_no }}" readonly>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group col-12">
-                                                    <input type="number" name="qty[]" class="form-control" value="{{ $i->qty }}" readonly>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group col-12">
-                                                    <input type="number" name="harga[]" class="form-control" value="{{ $i->nama->het }}" readonly>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="form-group col-12">
-                                                    <input type="number" name="disc[]" class="form-control" placeholder="0">
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                    </table>
-                                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                                        <div class="float-right">
-                                            <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Data</button>                           
-                                        </div>
-                                    </div>
-                            </div>
-                        </form>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-12 p-3">
+                        <table class="table table-hover table-bordered bg-light table-striped">
+                            <thead>
+                                <tr style="background-color: #6082B6; color:white">
+                                    <th class="text-center">Nota</th>
+                                    <th class="text-center">Customer To</th>
+                                    <th class="text-center">Supplier</th>
+                                    <th class="text-center">Tanggal Nota</th>
+                                    <th class="text-center">Tanggal Jatuh Tempo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">{{ $pembelian->invoice_non }}</td>
+                                    <td class="text-center">{{ $pembelian->customer_to }}</td>
+                                    <td class="text-center">{{ $pembelian->supplier }}</td>
+                                    <td class="text-center">{{ $pembelian->tanggal_nota }}</td>
+                                    <td class="text-center">{{ $pembelian->tanggal_jatuh_tempo }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
+                    <div class="col-lg-12 p-3">
+                        <form action="{{ route('pembelian-non-aop.store_details', $pembelian->invoice_non )}}" method="POST">
+                        @csrf
+                        <table class="table table-hover table-bordered table-sm bg-light table-striped" id="table">
+                            <thead>
+                                <tr style="background-color: #6082B6; color:white">
+                                    <th class="text-center">Part No</th>
+                                    <th class="text-center">Qty</th>
+                                    <th class="text-center">HET</th>
+                                    <th class="text-center" style="width: 150px;">Disc (%)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="input-fields">
+
+                            @foreach($intransit_details as $i)
+                            <tr>
+                                <td>
+                                    <div class="form-group col-12">
+                                        <input type="hidden" name="invoice_non" value="{{ $pembelian->invoice_non }}">
+                                        <input type="text" name="part_no[]" class="form-control" value="{{ $i->part_no }}" readonly>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group col-12">
+                                        <input type="number" name="qty[]" class="form-control" value="{{ $i->qty }}" readonly>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group col-12">
+                                        <input type="number" name="harga[]" class="form-control" value="{{ $i->nama->het }}" readonly>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group col-12">
+                                        <input type="text" name="disc[]" class="form-control" placeholder="0">
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                        </table>
+                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                            <div class="float-right">
+                                <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Data</button>                           
+                            </div>
+                        </div>
+                    </div>
+                    </form>
                 </div>
+            </div>
         </div>
 
 </div>

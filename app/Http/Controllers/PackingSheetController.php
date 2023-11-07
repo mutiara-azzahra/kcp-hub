@@ -215,12 +215,12 @@ class PackingSheetController extends Controller
 
         $updated    = TransaksiPackingsheetDetails::where('id', $id)->update([
             'qty'           => $request->qty,
-            'updated_at'     => NOW(),
-            'updated_by'       => Auth::user()->nama_user
+            'updated_at'    => NOW(),
+            'updated_by'    => Auth::user()->nama_user
         ]);
 
-        $het    = MasterPart::where('part_no', $part_no_ps)->value('het');
-        $getDisc = TransaksiSODetails::where('noso', $cari_so)->where('part_no', $part_no_ps)->value('disc');
+        $het        = MasterPart::where('part_no', $part_no_ps)->value('het');
+        $getDisc    = TransaksiSODetails::where('noso', $cari_so)->where('part_no', $part_no_ps)->value('disc');
 
         $updated_so = TransaksiSODetails::where('noso', $cari_so)->where('part_no', $part_no_ps)
             ->update([
@@ -236,8 +236,6 @@ class PackingSheetController extends Controller
             return redirect()->route('packingsheet.index')->with('success','Data Packingsheet berhasil diubah!');
         } else{
             return redirect()->route('packingsheet.index')->with('danger','Data Packingsheet gagal diubah');
-        }
-
-               
+        }    
     }
 }

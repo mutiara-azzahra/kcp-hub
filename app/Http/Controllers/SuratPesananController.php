@@ -118,6 +118,7 @@ class SuratPesananController extends Controller
             $diskon_maks    = MasterDiskonPart::where('part_no', $value['part_no'])->value('diskon_maksimal');
 
             if($diskon_maks != null){
+
                 if($value['disc'] > $diskon_maks){
 
                     return redirect()->route('surat-pesanan.index')->with('danger','Nilai diskon part melebihi diskon maskimal! Silahkan input kembali');
@@ -136,14 +137,6 @@ class SuratPesananController extends Controller
                     $value['nominal_total'] = $value['nominal'] - $value['nominal_disc'];
                     $value['crea_date']     = NOW();
 
-                    // $newSo          = new TransaksiSpHeader();
-                    // $newSo->noso    = TransaksiSpHeader::noso();
-                    
-                    // TransaksiSpHeader::where('nosp', $value['nosp'])->update([
-                    //     'noso'      => TransaksiSpHeader::noso(),
-                    //     'modi_date' => NOW()
-                    // ]);
-
                     TransaksiSpDetails::create($value);
                 }
             } else {
@@ -159,15 +152,6 @@ class SuratPesananController extends Controller
                     $value['nominal_disc']  = ($harga_het * $value['qty'] * $value['disc'])/100;
                     $value['nominal_total'] = $value['nominal'] - $value['nominal_disc'];
                     $value['crea_date']     = NOW();
-
-                    // $newSo          = new TransaksiSOHeader();
-                    // $newSo->noso    = TransaksiSOHeader::noso();
-                    
-                    // TransaksiSpHeader::where('nosp', $value['nosp'])->update([
-                    //     'noso'      => TransaksiSpHeader::noso(),
-                    //     'status'    => 'C',
-                    //     'modi_date' => NOW()
-                    // ]);
 
                     TransaksiSpDetails::create($value);
             }

@@ -75,7 +75,6 @@
                                                 </td>
                                             </tr>
                                             @endforeach
-
                                         @endforeach
                                         
                                     </tbody>    
