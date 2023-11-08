@@ -36,7 +36,7 @@
                         @php
                         $no=1;
                         @endphp
-
+                        
                         @foreach($pembelian as $p)
                         <tr>
                             <td class="text-center">{{ $no++ }}</td>

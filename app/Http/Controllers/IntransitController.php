@@ -104,6 +104,10 @@ class IntransitController extends Controller
     {
 
         $intransit_header       = IntransitHeader::where('id', $id)->update(["status" => "T"]);
+        $header                 = IntransitHeader::where('id', $id)->value('no_surat_pesanan');
+
+        IntransitDetails::where('no_surat_pesanan', $header)->update(['status' => 'T']);
+
         $id_intransit_header    = IntransitHeader::where('id',$id)->value('no_surat_pesanan');
 
         return redirect()->route('intransit.stok_masuk', ['id_intransit_header' => $id_intransit_header])->with('success', 'Data berhasil divalidasi');

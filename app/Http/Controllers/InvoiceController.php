@@ -64,23 +64,23 @@ class InvoiceController extends Controller
  
                 MasterStokGudang::where('part_no', $s->part_no)->update(['stok' => $stok_ready - $s->qty]);
 
-                    if($stok_ready != 0){
-                        
-                        $details['noinv']              = $header->noinv;
-                        $details['area_inv']           = $s->area_so;
-                        $details['kd_outlet']          = $a->kd_outlet;
-                        $details['part_no']            = $s->part_no;
-                        $details['nm_part']            = $s->nm_part;
-                        $details['qty']                = $s->qty;
-                        $details['hrg_pcs']            = $s->hrg_pcs;
-                        $details['disc']               = $s->disc;
-                        $details['nominal']            = $s->nominal;
-                        $details['nominal_disc']       = $s->nominal_disc;
-                        $details['nominal_disc_ppn']   = $a->nominal_total * 0.11;
-                        $details['nominal_total']      = $s->nominal_total;
+                if($stok_ready != 0){
+                    
+                    $details['noinv']              = $header->noinv;
+                    $details['area_inv']           = $s->area_so;
+                    $details['kd_outlet']          = $a->kd_outlet;
+                    $details['part_no']            = $s->part_no;
+                    $details['nm_part']            = $s->nm_part;
+                    $details['qty']                = $s->qty;
+                    $details['hrg_pcs']            = $s->hrg_pcs;
+                    $details['disc']               = $s->disc;
+                    $details['nominal']            = $s->nominal;
+                    $details['nominal_disc']       = $s->nominal_disc;
+                    $details['nominal_disc_ppn']   = $a->nominal_total * 0.11;
+                    $details['nominal_total']      = $s->nominal_total;
 
-                        TransaksiInvoiceDetails::create($details);
-                    }
+                    TransaksiInvoiceDetails::create($details);
+                }
             }
         }
 

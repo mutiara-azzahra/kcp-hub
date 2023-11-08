@@ -31,7 +31,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <strong>Pilih Part</strong>
-                                    <select name="part_no" class="form-control" >
+                                    <select name="part_no" class="form-control">
                                         <option value="">---Pilih Part--</option>
                                         @foreach($master_part as $a)
                                             <option value="{{ $a->part_no }}">{{ $a->part_no }}</option>
