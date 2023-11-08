@@ -155,13 +155,11 @@ class StokGudangController extends Controller
 
     public function show($id)
     {
-        $stok_id    = MasterStokGudang::findOrFail($id);
-        $stok_masuk = IntransitDetails::where('part_no', $stok_id->part_no)
-            ->where('status', 'T')
-            ->get();
-        $barang_terjual    = TransaksiInvoiceDetails::where('part_no', $stok_id->part_no)->get();
+        $stok_id        = MasterStokGudang::findOrFail($id);
+        $barang_terjual = TransaksiInvoiceDetails::where('part_no', $stok_id->part_no)->get();
+        $barang_masuk   = BarangMasukDetails::where('part_no', $stok_id->part_no)->get();
 
-        return view('stok-gudang.show',compact('stok_id', 'stok_masuk', 'barang_terjual'));
+        return view('stok-gudang.show',compact('stok_id', 'barang_masuk', 'barang_terjual'));
     }
 
     

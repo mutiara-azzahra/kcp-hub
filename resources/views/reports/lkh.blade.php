@@ -198,11 +198,16 @@
                     </tr>
                 </thead>
                 <tbody>
+
+                    @php
+                    $no=1;
+                    @endphp
+                    
                     @foreach ($data as $p)
                         @foreach($p->details_lkh as $d)
                             @foreach($d->ps->invoice as $i)
                             <tr>
-                                <td class="td-qty">{{$loop->iteration}}.</td>
+                                <td class="td-qty">{{$no++}}.</td>
                                 <td class="td-qty">{{ $i->kd_outlet }}/{{ $i->nm_outlet }}</td>
                                 <td class="td">{{ $d->ps->details_dus->count('no_dus') }}</td>
                                 <td class="td-qty">{{ $i->noinv }}</td>

@@ -5,7 +5,7 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4>Tambah Details Kiriman Harian</h4>
+                <h4>Edit Kiriman Harian</h4>
             </div>
             <div class="float-right">
                 <a class="btn btn-success" href="{{ route('laporan-kiriman-harian.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
@@ -34,44 +34,44 @@
                         {{ $details->no_lkh }}<br>
                     </div>
                 </div> 
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="form-group">
-                            <strong>Driver</strong> *wajib diisi
-                            <select name="driver" class="form-control mr-2">
-                                <option value="">-- Pilih Driver --</option>
-                                @foreach($driver as $s)
-                                    <option value="{{ $s->username }}" {{ $s->username == $s->username ? 'selected' : '' }}>{{ $s->nama_user }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>Driver</strong> *wajib diisi
+                        <select name="driver" class="form-control mr-2">
+                            <option value="">-- Pilih Driver --</option>
+                            @foreach($driver as $s)
+                                <option value="{{ $s->username }}">{{ $s->nama_user }}</option>
+                            @endforeach
+                        </select>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="form-group">
-                            <strong>Helper</strong>
-                            <select name="helper" class="form-control mr-2">
-                                <option value="{{ $details->helper }}">-- Pilih Helper --</option>
-                                @foreach($helper as $s)
-                                    <option value="{{ $s->username }}" {{ $s->username == $s->username ? 'selected' : '' }}>{{ $s->nama_user }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>Helper</strong>
+                        <select name="helper" class="form-control mr-2">
+                            <option value="">-- Pilih Helper --</option>
+                            @foreach($helper as $s)
+                                <option value="{{ $s->username }}">{{ $s->nama_user }}</option>
+                            @endforeach
+                        </select>
                     </div>
+                </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Plat Mobil</strong>
-                        <input type="text" name="plat_mobil" class="form-control" value="{{ $details->plat_mobil }}" placeholder="Contoh: DA 1234 BC">
+                        <input type="text" name="plat_mobil" class="form-control" value="{{ $details->plat_mobil }}">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6">
                     <div class="form-group">
                         <strong>Jam Berangkat</strong> *wajib diisi
-                        <input type="text" name="jam_berangkat" class="form-control" value="{{ $details->jam_berangkat }}"  placeholder="HH:mm" step="60">
+                        <input type="text" name="jam_berangkat" class="form-control"  value="{{ $details->jam_berangkat }}" placeholder="HH:mm">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6">
                     <div class="form-group">
-                        <strong>Jam Kembali</strong>
-                        <input type="text" name="jam_kembali" class="form-control"  value="{{ $details->jam_kembali }}" placeholder="HH:mm" step="60">
+                        <strong>Jam Kembali</strong> *wajib diisi
+                        <input type="text" name="jam_kembali" class="form-control" value="{{ $details->jam_kembali }}" placeholder="HH:mm">
                     </div>
                 </div> 
                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -83,7 +83,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>KM. Kembali</strong>
-                        <input type="text" name="km_kembali_mobil" class="form-control" value="{{ $details->km_berangkat_kembali }}" placeholder="Contoh: 30.000">
+                        <input type="text" name="km_kembali_mobil" class="form-control" value="{{ $details->km_kembali_bmobil }}" placeholder="Contoh: 30.000">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
@@ -95,9 +95,9 @@
         </form>
     </div>
 </div>
-
 @endsection
 
 @section('script')
+
 
 @endsection

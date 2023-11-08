@@ -40,7 +40,9 @@
                             <th class="text-center">No</th>
                             <th class="text-center">Part No</th>
                             <th class="text-center">Keterangan</th>
-                            <th class="text-center">Stok</th>
+                            <th class="text-center">Stok Masuk</th>
+                            <th class="text-center">Stok Keluar</th>
+                            <th class="text-center">Lokasi Rak</th>
                             <th class="text-center">Tanggal</th>
                         </tr>
                     </thead>
@@ -49,12 +51,14 @@
                         $no=1;
                         @endphp
 
-                        @foreach($stok_masuk as $p)
+                        @foreach($barang_masuk as $p)
                         <tr>
                             <td class="text-center">{{ $no++ }}</td>
                             <td class="text-left">{{ $p->part_no }}</td>
-                            <td class="text-left">Barang Masuk</td>
+                            <td class="text-center">MASUK</td>
                             <td class="text-right">{{ number_format($p->qty, 0, ',', '.') }}</td>
+                            <td></td>
+                            <td class="text-center">{{ $p->rak->kode_rak_lokasi }}</td>
                             <td class="text-center">{{ $p->created_at }}</td>
                         </tr>
                         @endforeach
@@ -62,12 +66,13 @@
                         <tr>
                             <td class="text-center">{{ $no++ }}</td>
                             <td class="text-left">{{ $p->part_no }}</td>
-                            <td class="text-left">Barang Terjual</td>
+                            <td class="text-center">TERJUAL</td>
+                            <td></td>
                             <td class="text-right">{{ number_format($p->qty, 0, ',', '.') }}</td>
+                            <td></td>
                             <td class="text-center">{{ $p->created_at }}</td>
                         </tr>
                         @endforeach
-                        
                     </tbody>
                 </table>
             </div>
