@@ -113,75 +113,74 @@
           } 
      </style>
     <div class="header">
-                            <table class="table atas" style="line-height: 12px;">
-                                <tr>
-                                    <th class="nama-kcp">Laporan Kiriman Harian - KCP/NON/{{ $data_no_lkh->no_lkh }}</th>
-                                </tr>
-                            </table>
+        <table class="table atas" style="line-height: 12px;">
+            <tr>
+                <th class="nama-kcp">Laporan Kiriman Harian - KCP/NON/{{ $data_no_lkh->no_lkh }}</th>
+            </tr>
+        </table>
 
-                            <table class="table atas" style="line-height: 12px;">
-                                <tr class="nama-kcp">
-                                    <td class="nama-kcp">
-                                        <table class="table atas">
-                                            <tr>
-                                                <th class="nama-kcp">Tanggal</th>
-                                                <td class="nama-kcp">:</td>
-                                                <td class="nama-kcp">{{ $data_no_lkh->created_at->format('d-m-Y') }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th class="nama-kcp">Jam Berangkat</th>
-                                                <td class="nama-kcp">:</td>
-                                                <td class="nama-kcp">{{ $data_no_lkh->jam_berangkat }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th class="nama-kcp">Jam Kembali</th>
-                                                <td class="nama-kcp">:</td>
-                                                <td class="nama-kcp">{{ $data_no_lkh->jam_kembali }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th class="nama-kcp">KM Saat Berangkat</th>
-                                                <td class="nama-kcp">:</td>
-                                                <td class="nama-kcp">{{ $data_no_lkh->km_berangkat_mobil }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th class="nama-kcp">KM Saat Kembali</th>
-                                                <td class="nama-kcp">:</td>
-                                                <td class="nama-kcp">{{ $data_no_lkh->km_kembali_mobil }}</td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                    <td class="nama-kcp">
-                                        <table class="table atas">
-                                            <tr>
-                                                <th class="nama-kcp">Driver</th>
-                                                <td class="nama-kcp">:</td>
-                                                <td class="nama-kcp">{{ $data_no_lkh->driver }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th class="nama-kcp">Helper</th>
-                                                <td class="nama-kcp">:</td>
-                                                <td class="nama-kcp">{{ $data_no_lkh->helper }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th class="nama-kcp">Plat Mobil</th>
-                                                <td class="nama-kcp">:</td>
-                                                <td class="nama-kcp">{{ $data_no_lkh->plat_mobil }}</td>
-                                            </tr>
-                                            <tr>
-                                                <th class="nama-kcp"></th>
-                                                <td class="nama-kcp"></td>
-                                                <td class="nama-kcp"></td>
-                                            </tr>
-                                            <tr>
-                                                <th class="nama-kcp"></th>
-                                                <td class="nama-kcp"></td>
-                                                <td class="nama-kcp"></td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-    
+        <table class="table atas" style="line-height: 12px;">
+            <tr class="nama-kcp">
+                <td class="nama-kcp">
+                    <table class="table atas">
+                        <tr>
+                            <th class="nama-kcp">Tanggal</th>
+                            <td class="nama-kcp">:</td>
+                            <td class="nama-kcp">{{ $data_no_lkh->created_at->format('d-m-Y') }}</td>
+                        </tr>
+                        <tr>
+                            <th class="nama-kcp">Jam Berangkat</th>
+                            <td class="nama-kcp">:</td>
+                            <td class="nama-kcp">{{ $data_no_lkh->jam_berangkat }}</td>
+                        </tr>
+                        <tr>
+                            <th class="nama-kcp">Jam Kembali</th>
+                            <td class="nama-kcp">:</td>
+                            <td class="nama-kcp">{{ $data_no_lkh->jam_kembali }}</td>
+                        </tr>
+                        <tr>
+                            <th class="nama-kcp">KM Saat Berangkat</th>
+                            <td class="nama-kcp">:</td>
+                            <td class="nama-kcp">{{ $data_no_lkh->km_berangkat_mobil }}</td>
+                        </tr>
+                        <tr>
+                            <th class="nama-kcp">KM Saat Kembali</th>
+                            <td class="nama-kcp">:</td>
+                            <td class="nama-kcp">{{ $data_no_lkh->km_kembali_mobil }}</td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="nama-kcp">
+                    <table class="table atas">
+                        <tr>
+                            <th class="nama-kcp">Driver</th>
+                            <td class="nama-kcp">:</td>
+                            <td class="nama-kcp">{{ $data_no_lkh->driver }}</td>
+                        </tr>
+                        <tr>
+                            <th class="nama-kcp">Helper</th>
+                            <td class="nama-kcp">:</td>
+                            <td class="nama-kcp">{{ $data_no_lkh->helper }}</td>
+                        </tr>
+                        <tr>
+                            <th class="nama-kcp">Plat Mobil</th>
+                            <td class="nama-kcp">:</td>
+                            <td class="nama-kcp">{{ $data_no_lkh->plat_mobil }}</td>
+                        </tr>
+                        <tr>
+                            <th class="nama-kcp"></th>
+                            <td class="nama-kcp"></td>
+                            <td class="nama-kcp"></td>
+                        </tr>
+                        <tr>
+                            <th class="nama-kcp"></th>
+                            <td class="nama-kcp"></td>
+                            <td class="nama-kcp"></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
     </div>
 
     <div class="container">

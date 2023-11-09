@@ -127,52 +127,50 @@
           padding: 0px !important;
           } 
     </style>
-                    @foreach($data_dus as $data)
-                    <div class="header">
-                            <table class="table atas" style="line-height: 12px;">
-                                <tr>
-                                    <td class="nama-kcp">PT. KCP</td>
-                                    <td class="atas"><b>KCP/{{ $data->header_ps->kd_outlet }}/{{ $data->nops }}</b></td>
-                                </tr>
-                                <tr>
-                                    <td class="alamat-kcp">Jl. Sutoyo S. No. 144 Banjarmasin</td>
-                                    <td class="alamat-kcp">Tgl. Packingsheet: {{ $data->created_at}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="alamat-kcp">Hp. 0811 517 1595, 0812 5156 2768</td>
-                                    <td class="atas"></td>
-                                </tr>
-                                <tr>
-                                    <td class="alamat-kcp">Telp. 4417127</td>
-                                    <td class="atas"></td>
-                                </tr>
-                            </table>
+        @foreach($data_dus as $data)
+        <div class="header">
+            <table class="table atas" style="line-height: 12px;">
+                <tr>
+                    <td class="nama-kcp">PT. KCP</td>
+                    <td class="atas"><b>KCP/{{ $data->header_ps->kd_outlet }}/{{ $data->nops }}</b></td>
+                </tr>
+                <tr>
+                    <td class="alamat-kcp">Jl. Sutoyo S. No. 144 Banjarmasin</td>
+                    <td class="alamat-kcp">Tgl. Packingsheet: {{ $data->created_at}}</td>
+                </tr>
+                <tr>
+                    <td class="alamat-kcp">Hp. 0811 517 1595, 0812 5156 2768</td>
+                    <td class="atas"></td>
+                </tr>
+                <tr>
+                    <td class="alamat-kcp">Telp. 4417127</td>
+                    <td class="atas"></td>
+                </tr>
+            </table>
 
-                            <table class="table atas-tengah">
-                                <tr>
-                                    <td class="atas-center">
-                                        <b>{{ $data->header_ps->nm_outlet }}</b>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="atas-center">
-                                        <b>KCP/{{ $data->header_ps->kd_outlet }}/{{ $data->no_dus }}</b>
-                                    </td>
-                                </tr>
-                            </table>
+            <table class="table atas-tengah">
+                <tr>
+                    <td class="atas-center">
+                        <b>{{ $data->header_ps->nm_outlet }}</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="atas-center">
+                        <b>KCP/{{ $data->header_ps->kd_outlet }}/{{ $data->no_dus }}</b>
+                    </td>
+                </tr>
+            </table>
 
-                            <br>
-                            <table class="table atas" style="line-height: 12px;">
-                                <tr>
-                                    <td class="nama-kcp">{{ $data->header_ps->outlet->almt_outlet }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="alamat-kcp">{{ $data->header_ps->outlet->kode_area->nm_area }}, {{ $data->header_ps->outlet->kode_area->provinsi->provinsi }}</td>
-                                </tr>
-                            </table>
-                        </div>
-
-                    @endforeach
-                        
-</body>
+            <br>
+            <table class="table atas" style="line-height: 12px;">
+                <tr>
+                    <td class="nama-kcp">{{ $data->header_ps->outlet->almt_outlet }}</td>
+                </tr>
+                <tr>
+                    <td class="alamat-kcp">{{ $data->header_ps->outlet->kode_area->nm_area }}, {{ $data->header_ps->outlet->kode_area->provinsi->provinsi }}</td>
+                </tr>
+            </table>
+        </div>
+        @endforeach
+    </body>
 </html>

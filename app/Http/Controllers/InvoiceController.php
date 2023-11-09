@@ -61,8 +61,9 @@ class InvoiceController extends Controller
             foreach($a->details_so as $s){
 
                 $stok_ready = MasterStokGudang::where('part_no', $s->part_no)->value('stok');
+                $stok_akhir = $stok_ready - $s->qty;
  
-                MasterStokGudang::where('part_no', $s->part_no)->update(['stok' => $stok_ready - $s->qty]);
+                MasterStokGudang::where('part_no', $s->part_no)->update(['stok' => $stok_akhir]);
 
                 if($stok_ready != 0){
                     
