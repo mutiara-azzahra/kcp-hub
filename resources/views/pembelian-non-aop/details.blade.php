@@ -57,35 +57,50 @@
                                     <th class="text-center">Qty</th>
                                     <th class="text-center">HET</th>
                                     <th class="text-center" style="width: 150px;">Disc (%)</th>
+                                    <th class="text-center">Nominal</th>
                                 </tr>
                             </thead>
                             <tbody class="input-fields">
 
-                            @foreach($intransit_details as $i)
-                            <tr>
-                                <td>
-                                    <div class="form-group col-12">
-                                        <input type="hidden" name="invoice_non" value="{{ $pembelian->invoice_non }}">
-                                        <input type="text" name="part_no[]" class="form-control" value="{{ $i->part_no }}" readonly>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group col-12">
-                                        <input type="number" name="qty[]" class="form-control" value="{{ $i->qty }}" readonly>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group col-12">
-                                        <input type="number" name="harga[]" class="form-control" value="{{ $i->nama->het }}" readonly>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group col-12">
-                                        <input type="text" name="disc[]" class="form-control" placeholder="0">
-                                    </div>
-                                </td>
-                            </tr>
+                            @php
+                            $i = 0;
+                            @endphp
+
+                            @foreach($intransit_details as $t)
+                                <tr>
+                                    <td>
+                                        <div class="form-group col-12">
+                                            <input type="hidden" name="invoice_non" value="{{ $pembelian->invoice_non }}">
+                                            <input type="text" name="part_no[]" class="form-control" value="{{ $t->part_no }}" readonly>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group col-12">
+                                            <input type="text" name="qty[]" id="qty-{{ $i }}" class="form-control" value="{{ $t->qty }}" data-qty="{{ $t->qty }}" readonly>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group col-12">
+                                            <input type="text" name="harga[]" id="harga-{{ $i }}" class="form-control" value="{{ $t->nama->het }}" data-harga="{{ $t->nama->het }}" readonly>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group col-12">
+                                            <input type="text" name="disc[]" id="disc-{{ $i }}" class="form-control" placeholder="0" onkeyup="updateNominal('{{ $i }}')">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group col-12">
+                                            <input type="text" id="nominal-{{ $i }}" class="form-control" placeholder="0" readonly>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @php
+                                    $i++;
+                                @endphp
                             @endforeach
+
+                            
                         </tbody>
                         </table>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
@@ -104,48 +119,20 @@
 
 @section('script')
     <script>
-        var i = 0;
-        $('#add').click(function(){
-            ++i;
-            $('#table').append(`<tr>
-                                                    <td class="text-center">
-                                                        <div class="form-group col-12">
-                                                            <select name="inputs[${i}][part_no]" class="form-control mr-2">
-                                                                <option value="">-- Pilih --</option>
-                                                                @foreach($master_part as $k)
-                                                                    <option value="{{ $k->part_no }}"> {{ $k->part_no }} | {{ $k->part_nama }} </option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="form-group col-12">
-                                                            <input type="hidden" name="inputs[${i}][invoice_non]" value="{{ $pembelian->invoice_non }}">
-                                                            <input type="number" name="inputs[${i}][qty]" class="form-control" placeholder="0">
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="form-group col-12">
-                                                            <input type="number" name="inputs[${i}][harga]" class="form-control" placeholder="0">
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="form-group col-12">
-                                                            <input type="number" name="inputs[${i}][diskon_nominal]" class="form-control" placeholder="0">
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="form-group col-12">
-                                                            <button type="submit" class="btn btn-danger remove-table-row"><i class="fas fa-minus"></i></button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-            `);
-        });
 
-    $(document).on('click','.remove-table-row', function(){
-        $(this).parents('tr').remove();
-    })
+    function updateNominal(i) {
+        const qty       = $('#qty-' + i).data('qty');
+        const harga     = $('#harga-' + i).data('harga');
+        const disc      = Number($('#disc-' + i).val());
+        const nominal   = (harga * qty) - (harga * qty * disc / 100);
+
+        const formattedNominal = Number(nominal).toLocaleString('id-ID');
+
+        $('#nominal-' + i).val(formattedNominal);
+
+        console.log(harga);
+
+    }
 
     </script>
 

@@ -78,21 +78,20 @@ class StokGudangController extends Controller
         ]);
 
         foreach($request->inputs as $key => $value){
-                    $value['part_no']       = $value['part_no'];
-                    $value['qty']           = $value['qty'];
-                    $value['id_rak']        = $value['id_rak'];
-                    $value['created_by']    = Auth::user()->nama_user;
-                    $value['created_at']    = NOW();
+            $value['part_no']       = $value['part_no'];
+            $value['qty']           = $value['qty'];
+            $value['id_rak']        = $value['id_rak'];
+            $value['created_by']    = Auth::user()->nama_user;
+            $value['created_at']    = NOW();
 
-                    $created = BarangMasukDetails::create($value);
-            }       
+            $created = BarangMasukDetails::create($value);
+        }       
                     
-            // dd($value);
-            if ($created){
-                return redirect()->route('stok-gudang.index')->with('success','Silahkan Validasi Barang Masuk pada Menu Intransit!');
-            } else{
-                return redirect()->route('stok-gudang.index')->with('danger','Data stok gudang baru gagal ditambahkan');
-            }
+        if ($created){
+            return redirect()->route('stok-gudang.index')->with('success','Silahkan Validasi Barang Masuk pada Menu Intransit!');
+        } else{
+            return redirect()->route('stok-gudang.index')->with('danger','Data stok gudang baru gagal ditambahkan');
+        }
         
     }
     

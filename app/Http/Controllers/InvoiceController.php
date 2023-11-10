@@ -65,7 +65,7 @@ class InvoiceController extends Controller
  
                 MasterStokGudang::where('part_no', $s->part_no)->update(['stok' => $stok_akhir]);
 
-                if($stok_ready != 0){
+                if(($stok_ready != 0) && ($stok_ready > 0)){
                     
                     $details['noinv']              = $header->noinv;
                     $details['area_inv']           = $s->area_so;

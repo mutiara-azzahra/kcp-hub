@@ -58,36 +58,51 @@
                                             <th class="text-center">Qty</th>
                                             <th class="text-center">HET</th>
                                             <th class="text-center" style="width: 150px;">Disc (%)</th>
+                                            <th class="text-center"></th>
                                         </tr>
                                     </thead>
                                     <tbody class="input-fields">
 
-                                    @foreach($intransit_details as $i)
+                                    @php
+                                    $i = 0;
+                                    @endphp
+
+                                    @foreach($intransit_details as $t)
                                     <tr>
                                         <td>
                                             <div class="form-group col-12">
                                                 <input type="hidden" name="invoice_non" value="{{ $header->invoice_non }}">
-                                                <input type="text" name="part_no[]" class="form-control" value="{{ $i->part_no }}" readonly>
+                                                <input type="text" name="part_no[]" class="form-control" value="{{ $t->part_no }}" readonly>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="form-group col-12">
-                                                <input type="number" name="qty[]" class="form-control" value="{{ $i->qty }}" readonly>
+                                                <input type="number" name="qty[]" class="form-control" id="qty-{{ $i }}" value="{{ $t->qty }}" data-qty="{{ $t->qty }}" readonly>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="form-group col-12">
-                                                <input type="number" name="harga[]" class="form-control" value="{{ $i->nama->het }}" readonly>
+                                                <input type="number" name="harga[]" class="form-control" id="harga-{{ $i }}" value="{{ $t->nama->het }}" data-harga="{{ $t->nama->het }}" readonly>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="form-group col-12">
-                                                <input type="text" name="disc[]" class="form-control" placeholder="0">
+                                                <input type="text" name="disc[]" id="disc-{{ $i }}" class="form-control" placeholder="0" onkeyup="updateNominal('{{ $i }}')">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group col-12">
+                                                <input type="text" id="nominal-{{ $i }}" class="form-control" placeholder="0" readonly>
                                             </div>
                                         </td>
                                     </tr>
+
+                                    @php
+                                    $i++;
+                                    @endphp
+
                                     @endforeach
-                                </tbody>
+                                    </tbody>
                                 </table>
                                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                                     <div class="float-right">
@@ -116,7 +131,7 @@
                                             <td class="text-right">{{ number_format($d->qty, 0, ',', '.') }}</td>
                                             <td class="text-right">Rp. {{ number_format($d->harga, 0, ',', '.') }}</td>
                                             @if( $d->diskon_nominal != null)
-                                            <td class="text-center">{{ $d->diskon_nominal }}</td>
+                                            <td class="text-center">{{ number_format($d->diskon_nominal, 2, ',', '.') }} %</td>
 
                                             @else
                                             <td class="text-center">-</td>
@@ -139,5 +154,21 @@
 @endsection
 
 @section('script')
+    <script>
+
+    function updateNominal(i) {
+        const qty       = $('#qty-' + i).data('qty');
+        const harga     = $('#harga-' + i).data('harga');
+        const disc      = Number($('#disc-' + i).val());
+        const nominal   = (harga * qty) - (harga * qty * disc / 100);
+
+        const formattedNominal = Number(nominal).toLocaleString('id-ID');
+
+        $('#nominal-' + i).val(formattedNominal);
+
+        console.log(harga);
+    }
+
+    </script>
 
 @endsection
