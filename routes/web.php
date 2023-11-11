@@ -33,6 +33,7 @@ use App\Http\Controllers\KasKeluarController;
 use App\Http\Controllers\KasMasukController;
 use App\Http\Controllers\KodeRakLokasiController;
 use App\Http\Controllers\MonitoringController;
+use App\Http\Controllers\MasterTargetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -280,6 +281,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/kode-rak-lokasi/create', [KodeRakLokasiController::class, 'create'])->name('kode-rak-lokasi.create');
     Route::get('/kode-rak-lokasi/show/{id}', [KodeRakLokasiController::class, 'show'])->name('kode-rak-lokasi.show');
     Route::get('/kode-rak-lokasi/delete/{id}', [KodeRakLokasiController::class, 'delete'])->name('kode-rak-lokasi.delete');
+
+    //MST. SALES ACHIVEMENTS
+    Route::get('/master-target', [MasterTargetController::class, 'index'])->name('master-target.index');
+    Route::post('/master-target', [MasterTargetController::class, 'store'])->name('master-target.store');
+    Route::get('/master-target/create', [MasterTargetController::class, 'create'])->name('master-target.create');
+    Route::get('/master-target/show/{id}', [MasterTargetController::class, 'show'])->name('master-target.show');
+    Route::get('/master-target/delete/{id}', [MasterTargetController::class, 'delete'])->name('master-target.delete');
 
 
     //MONITORING ACH. MARKETING
