@@ -32,6 +32,7 @@ use App\Http\Controllers\AccountReceivableController;
 use App\Http\Controllers\KasKeluarController;
 use App\Http\Controllers\KasMasukController;
 use App\Http\Controllers\KodeRakLokasiController;
+use App\Http\Controllers\MonitoringController;
 
 /*
 |--------------------------------------------------------------------------
@@ -197,7 +198,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/packingsheet/edit/{id}', [PackingSheetController::class, 'edit_details'])->name('packingsheet.edit_details');
     Route::post('/packingsheet/update/{id}/{nops}', [PackingSheetController::class, 'store_edit'])->name('packingsheet.store_edit');
 
-
     //ROUTE INVOICE
     Route::get('/invoice', [InvoiceController::class, 'index'])->name('invoice.index');
     Route::get('/invoice/create', [InvoiceController::class, 'create'])->name('invoice.create');
@@ -266,7 +266,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/kas-masuk/bayar-manual', [KasMasukController::class, 'bayar_manual'])->name('kas-masuk.bayar-manual');
     Route::post('/kas-masuk/store-bukti-bayar', [KasMasukController::class, 'store_bukti_bayar'])->name('kas-masuk.store-bukti-bayar');
     Route::post('/kas-masuk/store', [KasMasukController::class, 'store'])->name('kas-masuk.store');
-
     Route::get('/kas-masuk/bukti-bayar', [KasMasukController::class, 'bukti_bayar'])->name('kas-masuk.bukti-bayar');
     Route::get('/kas-masuk/pembayaran-manual', [KasMasukController::class, 'pembayaran_manual'])->name('kas-masuk.bayar_manual');
 
@@ -281,7 +280,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/kode-rak-lokasi/create', [KodeRakLokasiController::class, 'create'])->name('kode-rak-lokasi.create');
     Route::get('/kode-rak-lokasi/show/{id}', [KodeRakLokasiController::class, 'show'])->name('kode-rak-lokasi.show');
     Route::get('/kode-rak-lokasi/delete/{id}', [KodeRakLokasiController::class, 'delete'])->name('kode-rak-lokasi.delete');
-    
+
+
+    //MONITORING ACH. MARKETING
+    Route::get('/monitoring', [MonitoringController::class, 'index'])->name('monitoring.index');
+    Route::post('/monitoring/store', [MonitoringController::class, 'store'])->name('monitoring.store');
+    Route::get('/monitoring/pencapaian/{target_bulanan}', [MonitoringController::class, 'view'])->name('monitoring.view');
+
+    //REPORTS
+
 });
 
 Route::get('/login', [LoginController::class, 'formLogin'])->name('login.formLogin');

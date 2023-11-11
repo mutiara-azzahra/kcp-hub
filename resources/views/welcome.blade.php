@@ -305,7 +305,36 @@
                         <p>Sales Order/SO</p>
                       </a>
                   </li>
+                </ul>
+              </li>
+              @endif
 
+              @if(in_array(Auth::user()->id_role, [4, 5, 6, 7, 9, 11, 12, 17, 20, 24]))
+              <!-- {{-- MONITORING --}} -->
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon"></i>
+                  <p>
+                    Monitoring
+                    <i class="right fas fa-angle-right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                      <a href="{{ route('monitoring.index')}}" class="nav-link">
+                        <p>Pesanan</p>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="{{ route('monitoring.index')}}" class="nav-link">
+                        <p>Pencapaian Sales</p>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="{{ route('sales-order.index')}}" class="nav-link">
+                        <p>Pencapaian Supervisor</p>
+                      </a>
+                  </li>
                 </ul>
               </li>
               @endif
