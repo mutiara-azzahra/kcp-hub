@@ -117,67 +117,74 @@
     <style>
         @page { 
           size: 21 cm 29.6 cm; 
-          margin: 10px;
+          margin: 20px;
           padding: 0px !important;
           } 
      </style>
     
     <div class="header">
-        <table class="table atas" style="line-height: 12px;">
-            <tr>
-                <td class="atas" style="width: 350px;">
-                    <table class="atas" style="line-height: 13px;">
-                        <tr>
-                            <td class="atas">PT. KCP</td>
-                        </tr>
-                        <tr>
-                            <td class="alamat-kcp">Jl. Sutoyo S. No. 144 Banjarmasin</td>
-                        </tr>
-                        <tr>
-                            <td class="alamat-kcp">Hp. 0811 517 1595, 0812 5156 2768</td>
-                        </tr>
-                        <tr>
-                            <td class="alamat-kcp">Telp. 4417127</td>
-                        </tr>
-                    </table>
-                </td>
-                <td class="atas">
-                    <table class="atas" style="line-height: 13px;">
-                        <tr>
-                            <td class="atas"><b>PACKINGSHEET (P/S)</b></td>
-                        </tr>
-                        <tr>
-                            <td class="atas">{{ $data_details->outlet->nm_outlet }} ({{ $data_details->outlet->kd_outlet }})</td>
-                        </tr>
-                        <tr>
-                            <td class="atas">{{ $data_details->outlet->almt_pengiriman }}, {{ $data_details->outlet->kode_area->provinsi->provinsi}}</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <tr style="line-height: 13px;">
-                <td class="nops">
-                    <table class="atas">
-                        <tr>
-                            <td class="atas">No. P/S</td>
-                            <td class="atas">:</td>
-                            <td class="atas">{{ $data->nops }}</td>
-                            
-                        </tr>
-                    </table>
-                </td>
+                            <table class="table atas" style="line-height: 12px;">
+                                <tr>
+                                    <td class="atas" style="width: 350px;">
+                                        <table class="atas" style="line-height: 13px;">
+                                            <tr>
+                                                <td class="atas">PT. KCP</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="alamat-kcp">Jl. Sutoyo S. No. 144 Banjarmasin</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="alamat-kcp">Hp. 0811 517 1595, 0812 5156 2768</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="alamat-kcp">Telp. 4417127</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td class="atas">
+                                        <table class="atas" style="line-height: 13px;">
+                                            <tr>
+                                                <td class="atas"><b>PACKINGSHEET (P/S)</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="atas">{{ $data_details->outlet->nm_outlet }} ({{ $data_details->outlet->kd_outlet }})</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="atas">{{ $data_details->outlet->almt_pengiriman }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="atas">{{ $data_details->outlet->kode_area->provinsi->provinsi}}</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr style="line-height: 13px;">
+                                    <td class="nops">
+                                        <table class="atas">
+                                            <tr>
+                                                <td class="atas">No. P/S</td>
+                                                <td class="atas">:</td>
+                                                @if($data->outlet->kode_area->provinsi->kode_prp == 6200)
+                                                <td class="atas">KCP/NON/{{ $data->area_ps }}/{{ $data->nops }}</td>
 
-                <td class="nops">
-                    <table class="atas">
-                        <tr>
-                            <td class="atas">Tanggal P/S</td>
-                            <td class="atas">:</td>
-                            <td class="atas">{{ $data->created_at }}</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
+                                                @else
+                                                <td class="atas">KCP/NON/{{ $data->area_ps }}/{{ $data->nops }}</td>
+                                                @endif
+                                            </tr>
+                                        </table>
+                                    </td>
+
+                                    <td class="nops">
+                                        <table class="atas">
+                                            <tr>
+                                                <td class="atas">Tanggal P/S</td>
+                                                <td class="atas">:</td>
+                                                <td class="atas">{{ $data->created_at }}</td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
     
     </div>
 

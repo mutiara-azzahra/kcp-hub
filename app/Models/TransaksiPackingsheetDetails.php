@@ -26,4 +26,14 @@ class TransaksiPackingsheetDetails extends Model
     {
         return $this->belongsTo(MasterStokGudang::class, 'part_no', 'part_no');
     }
+    public function outlet()
+    {
+        return $this->hasOne(MasterOutlet::class, 'kd_outlet', 'kd_outlet');
+    }
+
+    public function invoice()
+    {
+        return $this->hasOne(TransaksiInvoiceHeader::class, 'noso', 'noso');
+    }
+    
 }

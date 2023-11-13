@@ -95,22 +95,22 @@ class SalesOrderController extends Controller
                 }
         
                 $details = [
-                    'noso' => $a->noso,
-                    'area_so' => $a->area_sp,
-                    'kd_outlet' => $a->kd_outlet,
-                    'part_no' => $d->part_no,
-                    'qty' => $d->qty,
-                    'hrg_pcs' => $d->hrg_pcs,
-                    'disc' => $d->disc,
-                    'nominal' => $d->nominal,
-                    'nominal_disc' => $d->nominal_disc,
+                    'noso'          => $a->noso,
+                    'area_so'       => $a->area_sp,
+                    'kd_outlet'     => $a->kd_outlet,
+                    'part_no'       => $d->part_no,
+                    'qty'           => $d->qty,
+                    'hrg_pcs'       => $d->hrg_pcs,
+                    'disc'          => $d->disc,
+                    'nominal'       => $d->nominal,
+                    'nominal_disc'  => $d->nominal_disc,
                     'nominal_total' => $d->nominal_total,
-                    'status' => 'O',
-                    'ket_status' => 'OPEN',
-                    'user_sales' => $d->user_sales,
+                    'status'        => 'O',
+                    'ket_status'    => 'OPEN',
+                    'user_sales'    => $d->user_sales,
                     'flag_approve_date' => now(),
-                    'crea_date' => now(),
-                    'crea_by' => Auth::user()->nama_user,
+                    'crea_date'     => now(),
+                    'crea_by'       => Auth::user()->nama_user,
                 ];
         
                 TransaksiSODetails::create($details);

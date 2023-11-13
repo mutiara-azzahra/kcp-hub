@@ -292,8 +292,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //MONITORING ACH. MARKETING
     Route::get('/monitoring', [MonitoringController::class, 'index'])->name('monitoring.index');
-    Route::post('/monitoring/store', [MonitoringController::class, 'store'])->name('monitoring.store');
-    Route::get('/monitoring/pencapaian/{target_bulanan}', [MonitoringController::class, 'view'])->name('monitoring.view');
+    Route::get('/monitoring/pencapaian-sales', [MonitoringController::class, 'store'])->name('monitoring.store');
 
     //REPORTS
 

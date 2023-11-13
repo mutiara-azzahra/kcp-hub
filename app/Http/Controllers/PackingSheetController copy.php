@@ -37,26 +37,34 @@ class PackingSheetController extends Controller
         $nops = TransaksiPackingsheetHeader::nops();
 
         $selectedItems = $request->input('selected_items', []);
-        $firstItem     = reset($selectedItems);
-        $so            = TransaksiSOHeader::where('noso', $firstItem)->first();
 
-        $data['nops']       = $nops;
-        $data['area_ps']    = $so->area_so;
-        $data['kd_outlet']  = $so->kd_outlet;
-        $data['nm_outlet']  = $so->nm_outlet;
-        $data['created_at'] = NOW();
-        $data['created_by'] = Auth::user()->nama_user;
+        dd($selectedItems);
 
-        TransaksiPackingsheetHeader::create($data);
+        // foreach ($selectedItems as $noso) {
+
+            // $so_validated = TransaksiSOHeader::where('noso', $noso)->get();
+            // dd($so_validated);
+
+            // foreach($so_validated as $s){
+
+                $data['nops']       = $nops;
+                // $data['area_ps']    = $s->area_so;
+                // $data['noso']       = $s->noso;
+                // $data['kd_outlet']  = $s->kd_outlet;
+                // $data['nm_outlet']  = $s->nm_outlet;
+                $data['created_at'] = NOW();
+                $data['created_by'] = Auth::user()->nama_user;
+
+               TransaksiPackingsheetHeader::create($data);
+        //     }
+        // }
 
         foreach ($selectedItems as $noso) {
             
-        $so_validated = TransaksiSOHeader::where('noso', $noso)->get();
+        // $so_validated = TransaksiSOHeader::where('noso', $noso)->get();
 
             foreach($so_validated as $h){
-
                 foreach($h->details_so as $s){
-
                     $stok_ready = MasterStokGudang::where('part_no', $s->part_no)->value('stok');
 
                     if($stok_ready != 0){
@@ -69,7 +77,7 @@ class PackingSheetController extends Controller
                         $details['created_at'] = NOW();
                         $details['created_by'] = Auth::user()->nama_user;
 
-                        TransaksiPackingsheetDetails::create($details);
+                       TransaksiPackingsheetDetails::create($details);
                     }
 
                 }
@@ -149,15 +157,8 @@ class PackingSheetController extends Controller
         ]);
 
         $data       = TransaksiPackingsheetHeader::where('nops', $nops)->first();
-        $data_details = TransaksiPackingsheetDetails::where('nops', $nops)->first();
         $ps_details = TransaksiPackingsheetDetails::where('nops', $nops)->get();
-
-        $pdf = PDF::loadView('reports.packingsheet', [
-            'data' => $data,
-            'ps_details' => $ps_details,
-            'data_details' => $data_details
-        ]);
-        
+        $pdf        = PDF::loadView('reports.packingsheet', ['data'=>$data], ['ps_details'=>$ps_details]);
         $pdf->setPaper('letter', 'potrait');
 
         return $pdf->stream('packingsheet.pdf');

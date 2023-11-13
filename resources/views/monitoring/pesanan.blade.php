@@ -5,7 +5,7 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4>Monitoring Sales</h4>
+                <h4>Monitoring Terjual</h4>
             </div>
         </div>
     </div>
@@ -21,24 +21,11 @@
     @endif
 
     <div class="card" style="padding: 10px;">
-        <div class="card-header">
-            Pilih Sales, Tanggal Awal dan Tanggal Akhir
-        </div>
+        <div class="card-header"></div>
         <div class="card-body">
-            <form action="{{ route('monitoring.store') }}"  method="GET">
+            <form action="{{ route('monitoring.pesanan-store') }}"  method="GET">
                 <!-- @csrf -->
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group mb-2">
-                            <strong>Pilih Sales</strong>
-                            <select name="sales" class="form-control my-select" >
-                                <option value="">---Pilih Sales--</option>
-                                @foreach($username as $a)
-                                    <option value="{{ $a->username }}">{{ $a->username }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
                     <div class="form-group col-6">
                         <label for="">Tanggal Awal</label>
                         <input type="date" name="tanggal_awal" id="" class="form-control" placeholder="">
@@ -52,7 +39,7 @@
 
                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                     <div class="float-right pt-3">
-                        <button type="submit" class="btn btn-warning"><i class="fas fa-save"></i> Proses Data</button>                            
+                        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Data</button>                            
                     </div>
                 </div>
             </form>

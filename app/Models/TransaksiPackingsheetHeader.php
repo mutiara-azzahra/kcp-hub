@@ -93,4 +93,5 @@ class TransaksiPackingsheetHeader extends Model
     {
         return $this->hasMany(TransaksiLkhDetails::class, 'nops', 'no_packingsheet');
     }
+
 }

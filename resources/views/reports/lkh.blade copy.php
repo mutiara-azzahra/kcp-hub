@@ -168,15 +168,9 @@
                             <td class="nama-kcp">{{ $data_no_lkh->plat_mobil }}</td>
                         </tr>
                         <tr>
-                            <th class="nama-kcp">Total Koli</th>
-                            <td class="nama-kcp">:</td>
-                            <td class="nama-kcp">
-                            @foreach ($data as $p)
-                                @foreach($p->details_lkh as $d)
-                                    {{ $d->ps->details_dus->count('no_dus') }}
-                                @endforeach
-                            @endforeach
-                            </td>
+                            <th class="nama-kcp"></th>
+                            <td class="nama-kcp"></td>
+                            <td class="nama-kcp"></td>
                         </tr>
                         <tr>
                             <th class="nama-kcp"></th>
@@ -195,35 +189,33 @@
                 <thead>
                     <tr>
                         <th>No.</th>
-                        <th>Invoice</th>
                         <th>Nama Toko/Alamat</th>
+                        <th>Koli</th>
+                        <th>Invoice</th>
                         <th>Ekspedisi</th>
+                        <th>Keterangan</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                @php
-                $no=1;
-                @endphp
-                
-                @foreach ($data as $p)
-                    @foreach($p->details_lkh as $d)
-
-                        @php
-                            $uniqueNoinvs = $d->ps->details_ps->pluck('invoice')->unique();
-                        @endphp
-
-                        @foreach($uniqueNoinvs as $i)
-                        <tr>
-                            <td class="td-qty">{{$no++}}.</td>
-                            <td class="td-qty">{{ $i->noinv }}</td>
-                            <td class="td">{{ $i->kd_outlet }} / {{ $i->nm_outlet }}</td>
-                            <td class="td-qty">{{ $i->outlet->expedisi }}</td>
-                        </tr>
+                    @php
+                    $no=1;
+                    @endphp
+                    
+                    @foreach ($data as $p)
+                        @foreach($p->details_lkh as $d)
+                            @foreach($d->ps->invoice as $i)
+                            <tr>
+                                <td class="td-qty">{{$no++}}.</td>
+                                <td class="td-qty">{{ $i->kd_outlet }}/{{ $i->nm_outlet }}</td>
+                                <td class="td">{{ $d->ps->details_dus->count('no_dus') }}</td>
+                                <td class="td-qty">{{ $i->noinv }}</td>
+                                <td class="td-qty">{{ $i->outlet->expedisi }}</td>
+                                <td class="td-qty"></td>
+                            </tr>
+                            @endforeach
                         @endforeach
                     @endforeach
-                @endforeach
-                
                 </tbody>
 
             </table>

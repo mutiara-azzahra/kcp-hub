@@ -118,7 +118,7 @@
           margin: 10px;
           padding: 0px !important;
           } 
-    </style>
+     </style>
     <div class="header">
         <table class="table atas" style="line-height: 12px;">
             <tr>
@@ -203,54 +203,50 @@
                 </thead>
                 <tbody>
                     @foreach ($data as $p)
-                        @foreach ($p->details_sj as $s)
+                    @foreach ($p->details_sj as $s)
 
-                        <tr>
-                            <td class="td-qty">{{$loop->iteration}}. </td>
-                            <td class="td-part">{{ $s->nops }}</td>
-                            <td class="td-part">
-                                @php
-                                    $uniqueNoinvs = $s->header_ps->details_ps->pluck('invoice.noinv')->unique();
-                                @endphp
+                    <tr>
+                        <td class="td-qty">{{$loop->iteration}}. </td>
+                        <td class="td-part">{{ $s->nops }}</td>
+                        <td class="td-part">
+                            @foreach($s->header_ps->invoice as $i)
+                            {{ $i->noinv }},
+                            @endforeach
+                        </td>
+                        <td class="td-part">
+                           {{ $s->header_ps->details_dus->first()->no_dus }} - {{ $s->header_ps->details_dus->last()->no_dus }}
+                        </td>
+                        <td class="td-center">{{ $s->header_ps->details_dus->count('no_dus') }}</td>
+                        <td class="td-dus"></td>
+                        <td class="td-qty">
+                            @php
+                            $uniqueValues = [];
+                            $valueMap = [
+                                'A' => 'AIR AKI',
+                                'SP' => 'SPAREPART',
+                            ];
+                            @endphp
 
-                                @foreach($uniqueNoinvs as $i)
-                                {{ $i }},
-                                @endforeach
-                            </td>
-                            <td class="td-part">
-                            {{ $s->header_ps->details_dus->first()->no_dus }} - {{ $s->header_ps->details_dus->last()->no_dus }}
-                            </td>
-                            <td class="td-center">{{ $s->header_ps->details_dus->count('no_dus') }}</td>
-                            <td class="td-dus"></td>
-                            <td class="td-qty">
-                                @php
-                                $uniqueValues = [];
-                                $valueMap = [
-                                    'A' => 'AIR AKI',
-                                    'SP' => 'SPAREPART',
-                                ];
-                                @endphp
+                            @foreach($s->header_ps->details_dus as $d)
+                                @if(array_key_exists($d->kd_kategori, $valueMap) && !in_array($d->kd_kategori, $uniqueValues))
+                                    @php
+                                    $uniqueValues[] = $d->kd_kategori;
+                                    @endphp
+                                @endif
+                            @endforeach
 
-                                @foreach($s->header_ps->details_dus as $d)
-                                    @if(array_key_exists($d->kd_kategori, $valueMap) && !in_array($d->kd_kategori, $uniqueValues))
-                                        @php
-                                        $uniqueValues[] = $d->kd_kategori;
-                                        @endphp
-                                    @endif
-                                @endforeach
-
-                                @foreach($uniqueValues as $value)
-                                    {{ $valueMap[$value] }}
-                                    @if (!$loop->last)
-                                        , 
-                                    @endif
-                                @endforeach
+                            @foreach($uniqueValues as $value)
+                                {{ $valueMap[$value] }}
+                                @if (!$loop->last)
+                                    , 
+                                @endif
+                            @endforeach
 
 
-                            </td>
-                        </tr>
+                        </td>
+                    </tr>
 
-                        @endforeach
+                    @endforeach
                     @endforeach
                 </tbody>
             </table>

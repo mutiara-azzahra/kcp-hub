@@ -86,13 +86,7 @@ class SuratPesananController extends Controller
         $check       = TransaksiSpDetails::where('nosp', $nosp)->first();
 
         $totalSum = 0;
-
-        // foreach($total as $s){
-
-        // }
-        // $totalSum += $s->sum('nominal_total');
-
-
+        
         return view('surat-pesanan.details', ['nosp' => $nosp] ,compact('master_part', 'details', 'check'));
     }
 

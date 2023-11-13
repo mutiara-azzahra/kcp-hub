@@ -5,7 +5,7 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4>Tambah Achievement</h4>
+                <h4>Tambah Target Sales</h4>
             </div>
             <div class="float-right">
                 <a class="btn btn-success" href="{{ route('master-target.create') }}"><i class="fas fa-plus"></i> Tambah Achievement</a>
@@ -15,6 +15,10 @@
 
     @if ($message = Session::get('success'))
         <div class="alert alert-success" id="myAlert">
+            <p>{{ $message }}</p>
+        </div>
+    @elseif ($message = Session::get('danger'))
+        <div class="alert alert-warning" id="myAlert">
             <p>{{ $message }}</p>
         </div>
     @endif
@@ -41,7 +45,7 @@
                         <tr>
                             <td class="text-center">{{ $no++ }}</td>
                             <td class="text-left">{{ $p->sales }}</td>
-                            <td class="text-left">{{ $p->bulan }}</td>
+                            <td class="text-center">{{ $p->bulan }}</td>
                             <td class="text-center">{{ $p->tahun }}</td>
                             <td class="text-right">Rp. {{ number_format($p->nominal, 0, ',', '.') }}</td>
                         </tr>

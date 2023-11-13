@@ -30,9 +30,10 @@ class ValidasiSOController extends Controller
 
     public function details($noso){
 
-        $so = TransaksiSOHeader::where('noso', $noso)->first();
+        $so         = TransaksiSOHeader::where('noso', $noso)->first();
 
         $validasi_id = TransaksiSOHeader::where('noso', $noso)->first();
+        // dd($validasi_id);
 
         return view('validasi-so.details', compact('validasi_id', 'so'));
     }

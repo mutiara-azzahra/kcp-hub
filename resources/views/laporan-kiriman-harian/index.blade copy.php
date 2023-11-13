@@ -38,6 +38,7 @@
                                     <th class="text-center">No. Packingsheet</th>
                                     <th class="text-center">Tgl. Packingsheet</th>
                                     <th class="text-center">No. Invoice</th>
+                                    <th class="text-center">Tgl. Invoice</th>
                                     <th class="text-center">No. Surat Jalan</th>
                                     <th class="text-center">Tanggal Surat Jalan</th>
                                     <th class="text-center">Jenis Barang</th>
@@ -58,13 +59,11 @@
                                     <td class="text-center">{{ $s->nops }}</td>
                                     <td class="text-center">{{ $s->created_at }}</td>
 
+                                    @foreach( $s->invoice as $i )
+                                    <td class="text-center">{{ $i->noinv }}</td>
+                                    <td class="text-center">{{ $i->created_at }}</td>
+                                    @endforeach
                                     
-                                    <td class="text-left">
-                                        @foreach ($s->details_ps->pluck('invoice.noinv')->unique() as $x)
-                                        {{ $x }},
-                                        @endforeach
-                                    </td>
-
                                     @foreach( $s->details_sj as $j)
                                     <td class="text-center">{{ $j->nosj }}</td>
                                     <td class="text-center">{{ $j->created_at }}</td>

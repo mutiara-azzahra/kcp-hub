@@ -5,43 +5,58 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\TargetSales;
 use App\Models\TransaksiInvoiceHeader;
 use App\Models\TransaksiInvoiceDetails;
+use App\Models\User;
 
 class MonitoringController extends Controller
 {
     public function index(){
 
-        return view('monitoring.index');
-    }
+        $username = User::where('id_role', 20)->get();
 
+        return view('monitoring.index', compact('username'));
+    }
 
     public function store(Request $request){
 
         $request->validate([
+            'sales'         => 'required',
             'tanggal_awal'  => 'required', 
             'tanggal_akhir' => 'required',
         ]);
         
+        $sales  = $request->sales;
         $awal   = $request->tanggal_awal;
         $akhir  = $request->tanggal_akhir;
 
         $tanggal_awal   = Carbon::parse($awal)->startOfDay();
         $tanggal_akhir  = Carbon::parse($akhir)->endOfDay();
+        $bulan          = Carbon::parse($awal)->month;
+        $tahun          = Carbon::parse($awal)->year;
 
-        //$target_bulanan = TransaksiInvoiceHeader::whereBetween('created_at', [$tanggal_awal, $tanggal_akhir])->get();
+        $getTargetBulanan = TransaksiInvoiceDetails::whereBetween('created_at', [$tanggal_awal, $tanggal_akhir])
+            ->where('created_by', $sales)
+            ->get();
 
-        $getTargetBulanan = TransaksiInvoiceDetails::whereBetween('created_at', [$tanggal_awal, $tanggal_akhir])->get();
+        $getTarget = TargetSales::where('bulan', $bulan)
+            ->where('tahun', $tahun)
+            ->where('sales', $sales)
+            ->value('nominal');
 
         $target = $getTargetBulanan->sum('nominal_total');
 
-        return redirect()->route('monitoring.view')->with('target', $target);
+        $selisih = $target - $getTarget;
+
+        $pencapaian_persen = ($target / $getTarget)/ 100;
+
+        return view('monitoring.spv', compact('target', 'sales', 'getTarget', 'selisih', 'pencapaian_persen'));
     }
 
-    public function view()
-    {
-        $test = session('target');
-
-        return view('monitoring.spv', compact('test'));
-    }
+    // public function view()
+    // {
+        
+    //     return view('monitoring.spv');
+    // }
 }

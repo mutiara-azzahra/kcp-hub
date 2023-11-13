@@ -15,7 +15,13 @@ use App\Models\TransaksiPackingsheetDetails;
 class SuratJalanController extends Controller
 {
     public function index(){
-        
+
+        // $invoice_belum_sj = TransaksiSOHeader::where('flag_approve', 'Y')
+        // ->where('flag_packingsheet', 'Y')
+        // ->where('flag_invoice', 'Y')
+        // ->where('flag_sj', 'N')
+        // ->get();
+
         $invoice_belum_sj = TransaksiPackingsheetHeader::where('flag_sj', 'N')->get();
         $surat_jalan      = TransaksiSuratJalanHeader::all();
 
@@ -26,56 +32,52 @@ class SuratJalanController extends Controller
 
         $nosj = TransaksiSuratJalanHeader::nosj();
 
+        $selectedItems = $request->input('selected_items', []);
+
         $data['nosj']           = $nosj;
         $data['flag_cetak']     = 'N';
         $data['status ']        = 'O';
         $data['created_at']     = NOW();
 
        TransaksiSuratJalanHeader::create($data);
-        
-        $selectedItems = $request->input('selected_items', []);
 
-        foreach ($selectedItems as $nops) {
+        foreach ($selectedItems as $noso) {
 
-            $ps_details = TransaksiPackingsheetDetails::where('nops', $nops)->get();
-
-            foreach($ps_details as $so){
-                TransaksiSOHeader::where('noso', $so->noso)->update([
-                    'flag_sj'      => 'Y',
-                    'flag_sj_date' => NOW(),
-                ]);
-            }
-        }
-
-        foreach ($selectedItems as $nops) {
-            $ps = TransaksiPackingsheetHeader::where('nops', $nops)->first();
-
-            $details['nosj']       = $nosj;
-            $details['area_sj']    = $ps->area_ps;
-            $details['nops']       = $ps->nops;
-            $details['kd_outlet']  = $ps->kd_outlet;
-            $details['koli']       = $ps->details_ps->count('koli');
-            $details['created_at'] = NOW();
-
-            TransaksiSuratJalanDetails::create($details);
-
-
-            TransaksiPackingsheetHeader::where('nops', $nops)->update([
+            //update
+            TransaksiSOHeader::where('noso', $noso)->update([
                 'flag_sj'      => 'Y',
                 'flag_sj_date' => NOW(),
             ]);
         }
 
-        return redirect()->route('surat-jalan.index')->with('success','Data Packingsheet berhasil diteruskan menjadi Surat Jalan');
+        foreach ($selectedItems as $noso) {
+            $invoice_belum_sj = TransaksiSOHeader::where('noso', $noso)->get();
+
+            foreach($invoice_belum_sj as $h){
+                foreach($h->details_so as $s){
+                    $details['nosj']       = $nosj;
+                    $details['area_sj']    = $s->area_so;
+                    $details['nops']       = $h->ps->nops;
+                    $details['kd_outlet']  = $s->kd_outlet;
+                    $details['koli']       = $h->ps->details_dus->count('no_dus');
+                    $details['created_at'] = NOW();
+
+                } 
+            }
+
+            TransaksiSuratJalanDetails::create($details);
+        }
+
+        return redirect()->route('surat-jalan.index')->with('success','Data SO berhasil diteruskan ke packingsheet');
     }
 
     public function cetak($nosj)
     {
 
         TransaksiSuratJalanHeader::where('nosj', $nosj)->update([
-            'flag_cetak'      => 'Y',
-            'flag_cetak_date' => NOW(),
-            'updated_by'      => Auth::user()->nama_user
+                'flag_cetak'      => 'Y',
+                'flag_cetak_date' => NOW(),
+                'updated_by'      => Auth::user()->nama_user
         ]);
 
         $data               = TransaksiSuratJalanHeader::where('nosj', $nosj)->get();

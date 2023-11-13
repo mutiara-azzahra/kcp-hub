@@ -41,10 +41,7 @@
                                 <tr style="background-color: #6082B6; color:white">
                                     <th class="text-center"></th>
                                     <th class="text-center">No. P/S</th>
-                                    <th class="text-center">Area P/S</th>
-                                    <th class="text-center">No. P/S</th>
                                     <th class="text-center">No. SO</th>
-                                    <th class="text-center">Koli</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -56,24 +53,19 @@
                                 <tr>
                                     <td>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="selected_items[]" value="{{ $s->nops }}">
+                                            <input class="form-check-input" type="checkbox" name="selected_items[]" value="{{ $s->noso }}">
                                         </div>
-                                        
                                     </td>
-
                                     <td>{{ $s->nops }}</td>
-                                    <td class="text-center">{{ $s->area_ps }}</td>
-                                    <td>{{ $s->nm_outlet }}</td>
+
+                                    @php
+                                        $uniqueNosos = array_unique($s->details_ps->pluck('noso')->toArray());
+                                    @endphp
                                     <td>
-                                        @foreach($s->details_ps->unique('noso') as $i)
-                                            {{ $i->noso }},
+                                        @foreach($uniqueNosos as $i)
+                                            {{ $i }},
                                         @endforeach
                                     </td>
-                                    <td class="text-center">
-                                        {{ $s->details_dus->count('no_dus') }}
-                                    </td>
-
-                                   
                                 </tr>
                                 @endforeach
                                 
@@ -117,7 +109,7 @@
                                 @foreach($surat_jalan as $s)
                                     <tr>
                                         <td>{{ $s->nosj }}</td>
-                                        <td class="text-center">{{ $s->details_sj }}</td>
+                                        <td class="text-center">{{ $s->details_sj->sum('koli') }}</td>
                                         <td class="text-center">
                                             <a class="btn btn-warning btn-sm" href="{{ route('surat-jalan.cetak', $s->nosj) }}" target="_blank"><i class="fas fa-print"></i></a>
                                         </td>
