@@ -293,8 +293,10 @@ Route::group(['middleware' => 'auth'], function () {
     //MONITORING ACH. MARKETING
     Route::get('/monitoring', [MonitoringController::class, 'index'])->name('monitoring.index');
     Route::get('/monitoring/pencapaian-sales', [MonitoringController::class, 'store'])->name('monitoring.store');
-
-    //REPORTS
+    Route::get('/monitoring/spv', [MonitoringController::class, 'spv'])->name('monitoring.spv');
+    Route::get('/monitoring/pencapaian-spv', [MonitoringController::class, 'spv_store'])->name('monitoring.spv_store');
+    Route::get('/monitoring/pesanan', [MonitoringController::class, 'pesanan'])->name('monitoring.pesanan');
+    Route::get('/monitoring/pesanan-terjual', [MonitoringController::class, 'pesanan_store'])->name('monitoring.pesanan-store');
 
 });
 

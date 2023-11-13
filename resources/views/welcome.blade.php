@@ -326,7 +326,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                      <a href="{{ route('monitoring.index')}}" class="nav-link">
+                      <a href="{{ route('monitoring.pesanan')}}" class="nav-link">
                         <p>Pesanan</p>
                       </a>
                   </li>
@@ -336,7 +336,7 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a href="{{ route('sales-order.index')}}" class="nav-link">
+                      <a href="{{ route('monitoring.spv')}}" class="nav-link">
                         <p>Pencapaian Supervisor</p>
                       </a>
                   </li>
@@ -502,6 +502,24 @@
           .appendTo("#example1_wrapper .col-md-6:eq(0)")
                   
         $("#example2").DataTable({
+          paging: true,
+          lengthChange: false,
+          searching: true,
+          ordering: true,
+          info: true,
+          autoWidth: false,
+          responsive: true,
+        });
+        $("#example3").DataTable({
+          paging: true,
+          lengthChange: false,
+          searching: true,
+          ordering: true,
+          info: true,
+          autoWidth: false,
+          responsive: true,
+        });
+        $("#example4").DataTable({
           paging: true,
           lengthChange: false,
           searching: true,

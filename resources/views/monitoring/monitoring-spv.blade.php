@@ -5,7 +5,7 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4>Monitoring Stok Terjual</h4>
+                <h4>Monitoring Supervisor</h4>
             </div>
         </div>
     </div>
@@ -21,9 +21,11 @@
     @endif
 
     <div class="card" style="padding: 10px;">
-        <div class="card-header">Pilih Tanggal Awal dan Akhir</div>
+        <div class="card-header">
+            Pilih Tanggal Awal dan Tanggal Akhir
+        </div>
         <div class="card-body">
-            <form action="{{ route('monitoring.pesanan-store') }}"  method="GET">
+            <form action="{{ route('monitoring.spv_store') }}"  method="GET">
                 <!-- @csrf -->
                 <div class="row">
                     <div class="form-group col-6">
