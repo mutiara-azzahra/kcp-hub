@@ -117,7 +117,7 @@
                                 @foreach($surat_jalan as $s)
                                     <tr>
                                         <td>{{ $s->nosj }}</td>
-                                        <td class="text-center">{{ $s->details_sj }}</td>
+                                        <td class="text-center">{{ $s->details_sj->sum('koli') }}</td>
                                         <td class="text-center">
                                             <a class="btn btn-warning btn-sm" href="{{ route('surat-jalan.cetak', $s->nosj) }}" target="_blank"><i class="fas fa-print"></i></a>
                                         </td>

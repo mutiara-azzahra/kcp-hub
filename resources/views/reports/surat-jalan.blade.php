@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Invoice</title>
+    <title>Surat Jalan</title>
     <style>
     h4,h2{
         font-family:'Times New Roman', Times;
@@ -108,6 +108,9 @@
      .isi{
          padding:0px;
      }
+     .ukuran{
+        font-size: 13px;
+     }
 
     </style>
 </head>
@@ -191,20 +194,19 @@
             <table class="table table-bawah" style="line-height: 14px;">
                 <thead>
                     <tr>
-                        <th class="th-header">No.</th>
-                        <th class="th-header">No. Packingsheet</th>
-                        <th class="th-header">Invoice</th>
-                        <th class="th-header" style="width: 150px;">Dus</th>
-                        <th class="th-header">Koli</th>
-                        <th class="th-header" style="width: 30px;">Check</th>
-                        <th class="th-header">Keterangan</th>
+                        <th class="th-header" style="width: 20px;">No.</th>
+                        <th class="th-header" style="width: 110px;">No. Packingsheet</th>
+                        <th class="th-header" style="width: 170px;">Invoice</th>
+                        <th class="th-header" style="width: 170px;">Dus</th>
+                        <th class="th-header" style="width: 20px;">Koli</th>
+                        <th class="th-header" style="width: 20px;">Check</th>
+                        <th class="th-header" style="width: 80px;">Keterangan</th>
                         
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="ukuran">
                     @foreach ($data as $p)
                         @foreach ($p->details_sj as $s)
-
                         <tr>
                             <td class="td-qty">{{$loop->iteration}}. </td>
                             <td class="td-part">{{ $s->nops }}</td>
@@ -218,7 +220,11 @@
                                 @endforeach
                             </td>
                             <td class="td-part">
-                            {{ $s->header_ps->details_dus->first()->no_dus }} - {{ $s->header_ps->details_dus->last()->no_dus }}
+                                @if($s->header_ps->details_dus->count() == 1)
+                                    {{ $s->header_ps->details_dus->first()->no_dus }}
+                                @else
+                                    {{ $s->header_ps->details_dus->first()->no_dus }} - {{ $s->header_ps->details_dus->last()->no_dus }}
+                                @endif
                             </td>
                             <td class="td-center">{{ $s->header_ps->details_dus->count('no_dus') }}</td>
                             <td class="td-dus"></td>
@@ -245,8 +251,6 @@
                                         , 
                                     @endif
                                 @endforeach
-
-
                             </td>
                         </tr>
 

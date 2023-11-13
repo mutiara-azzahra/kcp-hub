@@ -54,11 +54,10 @@ class SuratJalanController extends Controller
             $details['area_sj']    = $ps->area_ps;
             $details['nops']       = $ps->nops;
             $details['kd_outlet']  = $ps->kd_outlet;
-            $details['koli']       = $ps->details_ps->count('koli');
+            $details['koli']       = $ps->details_dus->count('no_dus');
             $details['created_at'] = NOW();
 
             TransaksiSuratJalanDetails::create($details);
-
 
             TransaksiPackingsheetHeader::where('nops', $nops)->update([
                 'flag_sj'      => 'Y',
