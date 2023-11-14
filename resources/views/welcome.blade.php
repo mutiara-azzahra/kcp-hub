@@ -209,7 +209,7 @@
             @endif
 
             <!-- {{-- GUDANG --}} -->
-            @if(in_array(Auth::user()->id_role, [3, 5, 7, 8, 10, 12, 13, 17, 18, 19, 21, 22, 23]))
+            @if(in_array(Auth::user()->id_role, [3, 5, 7, 8, 10, 12, 13, 17, 18, 19, 21, 22, 23, 11]))
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="nav-icon"></i>
@@ -219,16 +219,21 @@
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
+                  @if(in_array(Auth::user()->id_role, [3,5,7,8,10,13,17,18,19,21,23]))
                   <li class="nav-item">
                       <a href="{{ route('kode-rak-lokasi.index')}}" class="nav-link">
                         <p>Kode Rak</p>
                       </a>
                   </li>
+                  @endif
+                  @if(in_array(Auth::user()->id_role, [3,5,7,8,10,13,17,18,19,21,23,11]))
                   <li class="nav-item">
                       <a href="{{ route('stok-gudang.index')}}" class="nav-link">
                         <p>Stok Gudang</p>
                       </a>
                   </li>
+                  @endif
+                  @if(in_array(Auth::user()->id_role, [3,5,7,8,10,13,17,18,19,21,23]))
                   <li class="nav-item">
                       <a href="{{ route('intransit.index')}}" class="nav-link">
                         <p>Intransit</p>
@@ -244,6 +249,7 @@
                         <p>Kiriman Harian / LKH</p>
                       </a>
                   </li>
+                  @endif
                 </ul>
               </li>
             @endif

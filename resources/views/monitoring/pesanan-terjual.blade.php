@@ -17,6 +17,7 @@
             </div>
         </div>
     </div>
+
     @if ($message = Session::get('success'))
         <div class="alert alert-success" id="myAlert">
             <p>{{ $message }}</p>
@@ -96,7 +97,6 @@
                             <td colspan="2" class="text-center"><b>TOTAL</b></td>
                             <td class="text-right"><b>Rp. {{ number_format($getPesananBrio->sum('nominal_total'), 0, ',', '.') }}</b></td>
                         </tr>
-                        
                     </tbody>
                 </table>
             </div>
@@ -119,6 +119,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            
                             @php
                             $no=1;
                             @endphp
