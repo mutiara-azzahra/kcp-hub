@@ -6,6 +6,7 @@ use DB;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\TargetSpv;
 use App\Models\TargetSales;
 use App\Models\TransaksiInvoiceHeader;
 use App\Models\TransaksiInvoiceDetails;
@@ -36,6 +37,7 @@ class MonitoringController extends Controller
         $tanggal_akhir  = Carbon::parse($akhir)->endOfDay();
         $bulan          = Carbon::parse($awal)->month;
         $tahun          = Carbon::parse($awal)->year;
+        $monthName      = Carbon::parse($awal)->month($bulan)->format('F');
 
         $getTargetBulanan = TransaksiInvoiceDetails::whereBetween('created_at', [$tanggal_awal, $tanggal_akhir])
             ->where('created_by', $sales)
@@ -46,30 +48,31 @@ class MonitoringController extends Controller
             ->where('sales', $sales)
             ->value('nominal');
 
-        $target = $getTargetBulanan->sum('nominal_total');
+        $getTargetActual    = TargetSales::where('sales', $sales)->get();
+        $target             = $getTargetBulanan->sum('nominal_total');
+        $selisih            = $target - $getTarget;
+        $pencapaian_persen  = ($target / $getTarget)/ 100;
 
-        $selisih = $target - $getTarget;
-
-        $pencapaian_persen = ($target / $getTarget)/ 100;
-
-        return view('monitoring.spv', compact('target', 'sales', 'getTarget', 'selisih', 'pencapaian_persen'));
+        return view('monitoring.spv', compact('target', 'monthName','sales', 'getTarget', 'getTargetActual', 'selisih', 'pencapaian_persen', 'getTargetBulanan'));
     }
 
 
     public function spv(){
 
-        return view('monitoring.monitoring-spv');
+        $username = User::where('id_role', 11)->get();
+
+        return view('monitoring.monitoring-spv', compact('username'));
     }
 
     public function spv_store(Request $request){
 
         $request->validate([
-            // 'sales'         => 'required',
+            'spv'           => 'required',
             'tanggal_awal'  => 'required', 
             'tanggal_akhir' => 'required',
         ]);
-        
-        // $sales  = $request->sales;
+
+        $spv    = $request->spv;
         $awal   = $request->tanggal_awal;
         $akhir  = $request->tanggal_akhir;
 
@@ -77,22 +80,22 @@ class MonitoringController extends Controller
         $tanggal_akhir  = Carbon::parse($akhir)->endOfDay();
         $bulan          = Carbon::parse($awal)->month;
         $tahun          = Carbon::parse($awal)->year;
+        $monthName      = Carbon::parse($awal)->month($bulan)->format('F');
 
         $getTargetBulanan = TransaksiInvoiceDetails::whereBetween('created_at', [$tanggal_awal, $tanggal_akhir])
             ->get();
 
-        $getTarget = TargetSales::where('bulan', $bulan)
+        $getTarget = TargetSpv::where('bulan', $bulan)
             ->where('tahun', $tahun)
-            ->where('sales', $sales)
+            ->where('spv', $spv)
             ->value('nominal');
 
-        $target = $getTargetBulanan->sum('nominal_total');
+        $getTargetActual    = TargetSpv::where('spv', $spv)->get();
+        $target             = $getTargetBulanan->sum('nominal_total');
+        $selisih            = $target - $getTarget;
+        $pencapaian_persen  = ($target / $getTarget)/ 100;
 
-        $selisih = $target - $getTarget;
-
-        $pencapaian_persen = ($target / $getTarget)/ 100;
-
-        return view('monitoring.spv-store', compact('target', 'sales', 'getTarget', 'selisih', 'pencapaian_persen'));
+        return view('monitoring.sales', compact('target', 'monthName','spv', 'getTarget', 'getTargetActual', 'getTargetBulanan','selisih', 'pencapaian_persen'));
     }
 
     public function pesanan(){
@@ -115,6 +118,7 @@ class MonitoringController extends Controller
         $tanggal_akhir  = Carbon::parse($akhir)->endOfDay();
         $bulan          = Carbon::parse($awal)->month;
         $tahun          = Carbon::parse($awal)->year;
+        $monthName      = Carbon::parse($awal)->month($bulan)->format('F');
 
         $getPesanan = TransaksiInvoiceDetails::whereBetween('created_at', [$tanggal_awal, $tanggal_akhir])->get();
 
@@ -143,7 +147,7 @@ class MonitoringController extends Controller
             })
             ->get();
 
-        return view('monitoring.pesanan-terjual', compact('getPesanan', 'getPesananIchidai', 'getPesananBrio', 'getPesananAccu'));
+        return view('monitoring.pesanan-terjual', compact('monthName', 'getPesanan', 'getPesananIchidai', 'getPesananBrio', 'getPesananAccu'));
     }
 
 }

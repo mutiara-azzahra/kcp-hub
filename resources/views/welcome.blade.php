@@ -162,7 +162,12 @@
                   </li>
                   <li class="nav-item">
                       <a href="{{ route('master-target.index')}}" class="nav-link">
-                        <p>Master Achievement</p>
+                        <p>Master Target Sales</p>
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                      <a href="{{ route('master-target-spv.index')}}" class="nav-link">
+                        <p>Master Target SPV</p>
                       </a>
                   </li>
                 </ul>
@@ -327,7 +332,7 @@
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                       <a href="{{ route('monitoring.pesanan')}}" class="nav-link">
-                        <p>Pesanan</p>
+                        <p>Stok Terjual</p>
                       </a>
                   </li>
                   <li class="nav-item">
@@ -528,6 +533,14 @@
           autoWidth: false,
           responsive: true,
         });
+        $("excel")
+          .DataTable({
+            paging: false,
+            responsive: false,
+            lengthChange: false,
+            autoWidth: false,
+            buttons: ["excel", "pdf"],
+          })
       });
 
       // Password toggle

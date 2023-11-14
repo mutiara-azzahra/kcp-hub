@@ -3,12 +3,17 @@
 @section('content')
 <div class="container" style="padding: 10px;">
     <div class="row mt-2">
-        <div class="col-lg-12 pb-3">
-             <div class="float-left">
-                <h4>Monitoring Sales</h4>
+        <div class="col-lg-12 pb-1">
+            <div class="float-left">
+                <h4>Monitoring Stok Terjual</h4>
             </div>
             <div class="float-right">
                 <a class="btn btn-success" href="{{ route('monitoring.pesanan') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
+            </div>
+        </div>
+        <div class="col-lg-12 pb-3">
+            <div class="float-left">
+                <h6>{{ $monthName }} 2023</h6>
             </div>
         </div>
     </div>
@@ -25,15 +30,16 @@
     <!-- ICHIDAI -->
     <div class="card" style="padding: 10px;">
         <div class="card-header">
-            GROUP ICHIDAI
+            <b>GROUP ICHIDAI</b>
         </div>
         <div class="card-body">
             <div class="col-lg-12">  
-            <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example2">
+            <table class="table table-hover table-bordered table-sm bg-light" id="example2">
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
                             <th class="text-center">Part No</th>
                             <th class="text-center">Jumlah</th>
+                            <th class="text-center">Nominal</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,9 +51,13 @@
                         <tr>
                             <td class="text-center">{{ $i->first()->part_no }}</td>
                             <td class="text-center">{{ $i->sum('qty') }}</td>
-                            
+                            <td class="text-right">{{ number_format($i->sum('nominal_total'), 0, ',', '.') }}</td>
                         </tr>
                         @endforeach
+                        <tr class="bg-warning">
+                            <td colspan="2" class="text-center"><b>TOTAL</b></td>
+                            <td class="text-right"><b>Rp. {{ number_format($getPesananIchidai->sum('nominal_total'), 0, ',', '.') }}</b></td>
+                        </tr>
                         
                     </tbody>
                 </table>
@@ -58,15 +68,16 @@
     <!-- ICHIDAI -->
     <div class="card" style="padding: 10px;">
         <div class="card-header">
-            GROUP BRIO
+            <b>GROUP BRIO</b>
         </div>
         <div class="card-body">
             <div class="col-lg-12">  
-            <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example3">
+            <table class="table table-hover table-bordered table-sm bg-light" id="example3">
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
                             <th class="text-center">Part No</th>
                             <th class="text-center">Jumlah</th>
+                            <th class="text-center">Nominal</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -78,9 +89,13 @@
                         <tr>
                             <td class="text-center">{{ $i->first()->part_no }}</td>
                             <td class="text-center">{{ $i->sum('qty') }}</td>
-                            
+                            <td class="text-right">{{ number_format($i->sum('nominal_total'), 0, ',', '.') }}</td>
                         </tr>
                         @endforeach
+                        <tr class="bg-warning">
+                            <td colspan="2" class="text-center"><b>TOTAL</b></td>
+                            <td class="text-right"><b>Rp. {{ number_format($getPesananBrio->sum('nominal_total'), 0, ',', '.') }}</b></td>
+                        </tr>
                         
                     </tbody>
                 </table>
@@ -91,15 +106,16 @@
     <!-- BRIO -->
     <div class="card" style="padding: 10px;">
         <div class="card-header">
-            GROUP AIR AKI
+            <b>GROUP AIR AKI</b>
         </div>
         <div class="card-body">
             <div class="col-lg-12">  
-                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example4">
+                <table class="table table-hover table-bordered table-sm bg-light" id="example4">
                         <thead>
                             <tr style="background-color: #6082B6; color:white">
                                 <th class="text-center">Part No</th>
                                 <th class="text-center">Jumlah</th>
+                                <th class="text-center">Nominal</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -111,9 +127,13 @@
                             <tr>
                                 <td class="text-center">{{ $i->first()->part_no }}</td>
                                 <td class="text-center">{{ $i->sum('qty') }}</td>
-                                
+                                <td class="text-right">{{ number_format($i->sum('nominal_total'), 0, ',', '.') }}</td>
                             </tr>
                             @endforeach
+                            <tr class="bg-warning">
+                                <td colspan="2" class="text-center"><b>TOTAL</b></td>
+                                <td class="text-right"><b>Rp. {{ number_format($getPesananAccu->sum('nominal_total'), 0, ',', '.') }}</b></td>
+                            </tr>
                             
                         </tbody>
                     </table>

@@ -28,6 +28,18 @@
             <form action="{{ route('monitoring.spv_store') }}"  method="GET">
                 <!-- @csrf -->
                 <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="form-group mb-2">
+                            <strong>Pilih SPV</strong>
+                            <select name="spv" class="form-control my-select" >
+                                <option value="">---Pilih SPV--</option>
+                                @foreach($username as $a)
+                                    <option value="{{ $a->username }}">{{ $a->username }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                     <div class="form-group col-6">
                         <label for="">Tanggal Awal</label>
                         <input type="date" name="tanggal_awal" id="" class="form-control" placeholder="">

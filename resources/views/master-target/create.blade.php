@@ -5,7 +5,7 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4>Tambah Sales</h4>
+                <h4>Tambah Target Sales</h4>
             </div>
             <div class="float-right">
                     <a class="btn btn-success" href="{{ route('master-target.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>

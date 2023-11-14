@@ -34,6 +34,8 @@ use App\Http\Controllers\KasMasukController;
 use App\Http\Controllers\KodeRakLokasiController;
 use App\Http\Controllers\MonitoringController;
 use App\Http\Controllers\MasterTargetController;
+use App\Http\Controllers\MasterTargetSpvController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -289,6 +291,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/master-target/show/{id}', [MasterTargetController::class, 'show'])->name('master-target.show');
     Route::get('/master-target/delete/{id}', [MasterTargetController::class, 'delete'])->name('master-target.delete');
 
+    //MST. SPV ACHIVEMENTS
+    Route::get('/master-target-spv', [MasterTargetSpvController::class, 'index'])->name('master-target-spv.index');
+    Route::post('/master-target-spv', [MasterTargetSpvController::class, 'store'])->name('master-target-spv.store');
+    Route::get('/master-target-spv/create', [MasterTargetSpvController::class, 'create'])->name('master-target-spv.create');
+    Route::get('/master-target-spv/show/{id}', [MasterTargetSpvController::class, 'show'])->name('master-target-spv.show');
+    Route::get('/master-target-spv/delete/{id}', [MasterTargetSpvController::class, 'delete'])->name('master-target-spv.delete');
 
     //MONITORING ACH. MARKETING
     Route::get('/monitoring', [MonitoringController::class, 'index'])->name('monitoring.index');
