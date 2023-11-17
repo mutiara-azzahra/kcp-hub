@@ -44,6 +44,7 @@ class PackingSheetController extends Controller
         $data['area_ps']    = $so->area_so;
         $data['kd_outlet']  = $so->kd_outlet;
         $data['nm_outlet']  = $so->nm_outlet;
+        $data['flag_sj']    = 'N';
         $data['created_at'] = NOW();
         $data['created_by'] = Auth::user()->nama_user;
 

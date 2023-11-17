@@ -71,6 +71,13 @@
                                         <a class="btn btn-info btn-sm" href="{{ route('sales-order.details', $s->nosp) }}">
                                             <i class="fas fa-info"></i>
                                         </a>
+                                        @if($s->status == 'C')
+                                        <a class="btn btn-danger btn-sm" href="{{ route('sales-order.tolak', $s->noso) }}">
+                                            <i class="fas fa-times"></i>
+                                        </a>
+                                        @else
+
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach

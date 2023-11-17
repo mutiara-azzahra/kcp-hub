@@ -254,146 +254,144 @@
               </li>
             @endif
 
-              <!-- {{-- FINANCE --}} -->
-              @if(in_array(Auth::user()->id_role, [2, 5, 6, 7, 12, 17]))
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon"></i>
-                  <p>
-                    Finance
-                    <i class="right fas fa-angle-right"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                      <a href="{{ route('pembelian-non-aop.index')}}" class="nav-link">
-                        <p>Pembelian Part Non</p>
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="{{ route('pembayaran-non-aop.index')}}" class="nav-link">
-                        <p>Pembayaran Part Non</p>
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="{{ route('master-plafond.index')}}" class="nav-link">
-                        <p>Master Plafond</p>
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="#" class="nav-link">
-                        <i class="nav-icon"></i>
-                        <p>
-                          Penerimaan Piutang
-                          <i class="right fas fa-angle-right"></i>
-                        </p>
-                      </a>
-                      <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('account-receivable.index')}}" class="nav-link">
-                              <p>Account Receiveable / AR</p>
-                            </a>
-                        </li>
-                      </ul>
-                  </li>
-                </ul>
-              </li>
-              @endif
+            <!-- {{-- FINANCE --}} -->
+            @if(in_array(Auth::user()->id_role, [2, 5, 6, 7, 12, 17]))
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon"></i>
+                <p>
+                  Finance
+                  <i class="right fas fa-angle-right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('pembelian-non-aop.index')}}" class="nav-link">
+                      <p>Pembelian Part Non</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('pembayaran-non-aop.index')}}" class="nav-link">
+                      <p>Pembayaran Part Non</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('master-plafond.index')}}" class="nav-link">
+                      <p>Master Plafond</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon"></i>
+                      <p>
+                        Penerimaan Piutang
+                        <i class="right fas fa-angle-right"></i>
+                      </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                      <li class="nav-item">
+                          <a href="{{ route('account-receivable.index')}}" class="nav-link">
+                            <p>Account Receiveable / AR</p>
+                          </a>
+                      </li>
+                    </ul>
+                </li>
+              </ul>
+            </li>
+            @endif
 
-              @if(in_array(Auth::user()->id_role, [4, 5, 6, 7, 9, 11, 12, 17, 20, 24]))
-              <!-- {{-- MARKETING --}} -->
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon"></i>
-                  <p>
-                    Marketing
-                    <i class="right fas fa-angle-right"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                      <a href="{{ route('surat-pesanan.index')}}" class="nav-link">
-                        <p>Surat Pesanan/SP</p>
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="{{ route('sales-order.index')}}" class="nav-link">
-                        <p>Sales Order/SO</p>
-                      </a>
-                  </li>
-                </ul>
-              </li>
-              @endif
+            @if(in_array(Auth::user()->id_role, [4, 5, 6, 7, 9, 11, 12, 17, 20, 24]))
+            <!-- {{-- MARKETING --}} -->
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon"></i>
+                <p>
+                  Marketing
+                  <i class="right fas fa-angle-right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('surat-pesanan.index')}}" class="nav-link">
+                      <p>Surat Pesanan/SP</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('sales-order.index')}}" class="nav-link">
+                      <p>Sales Order/SO</p>
+                    </a>
+                </li>
+              </ul>
+            </li>
+            @endif
 
-              @if(in_array(Auth::user()->id_role, [4, 5, 6, 7, 9, 11, 12, 17, 20, 24]))
-              <!-- {{-- MONITORING --}} -->
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon"></i>
-                  <p>
-                    Monitoring
-                    <i class="right fas fa-angle-right"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                      <a href="{{ route('monitoring.pesanan')}}" class="nav-link">
-                        <p>Stok Terjual</p>
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="{{ route('monitoring.index')}}" class="nav-link">
-                        <p>Pencapaian Sales</p>
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="{{ route('monitoring.spv')}}" class="nav-link">
-                        <p>Pencapaian Supervisor</p>
-                      </a>
-                  </li>
-                </ul>
-              </li>
-              @endif
+            @if(in_array(Auth::user()->id_role, [4, 5, 6, 7, 9, 11, 12, 17, 20, 24]))
+            <!-- {{-- MONITORING --}} -->
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon"></i>
+                <p>
+                  Monitoring
+                  <i class="right fas fa-angle-right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('monitoring.pesanan')}}" class="nav-link">
+                      <p>Stok Terjual</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('monitoring.index')}}" class="nav-link">
+                      <p>Pencapaian Sales</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('monitoring.spv')}}" class="nav-link">
+                      <p>Pencapaian Supervisor</p>
+                    </a>
+                </li>
+              </ul>
+            </li>
+            @endif
 
-              @if(in_array(Auth::user()->id_role, [2, 5, 6, 7, 12, 16, 17]))
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon"></i>
-                  <p>
-                    Kasir
-                    <i class="right fas fa-angle-right"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                      <a href="{{ route('kas-masuk.index')}}" class="nav-link">
-                        <p>Kas Masuk</p>
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="{{ route('kas-keluar.index')}}" class="nav-link">
-                        <p>Kas Keluar</p>
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a href="{{ route('invoice.index')}}" class="nav-link">
-                        <p>Report Kas</p>
-                      </a>
-                  </li>
-                </ul>
-              </li>
+            @if(in_array(Auth::user()->id_role, [2, 5, 6, 7, 12, 16, 17]))
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon"></i>
+                <p>
+                  Kasir
+                  <i class="right fas fa-angle-right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('kas-masuk.index')}}" class="nav-link">
+                      <p>Kas Masuk</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('kas-keluar.index')}}" class="nav-link">
+                      <p>Kas Keluar</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('invoice.index')}}" class="nav-link">
+                      <p>Report Kas</p>
+                    </a>
+                </li>
+              </ul>
+            </li>
 
-              @endif
-              <li class="nav-item">
-                <a href="{{ route('logout')}}" class="nav-link">
-                  <i class="nav-icon fa fa-sign-out"></i>
-                  <p>
-                    Logout
-                  </p>
-                </a>
-              </li>
-
-
+            @endif
+            <li class="nav-item">
+              <a href="{{ route('logout')}}" class="nav-link">
+                <i class="nav-icon fa fa-sign-out"></i>
+                <p>
+                  Logout
+                </p>
+              </a>
+            </li>
           </ul>
         </nav>
       </div>

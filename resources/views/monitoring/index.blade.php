@@ -28,6 +28,7 @@
             <form action="{{ route('monitoring.store') }}"  method="GET">
                 <!-- @csrf -->
                 <div class="row">
+                    @if(Auth::user()->id_role == 24)
                     <div class="col-md-12">
                         <div class="form-group mb-2">
                             <strong>Pilih Sales</strong>
@@ -39,6 +40,12 @@
                             </select>
                         </div>
                     </div>
+                    @elseif(Auth::user()->id_role == 20)
+                    <div class="form-group col-6">
+                        <label for="">Sales</label>
+                        <input type="text" name="sales" value="{{ Auth::user()->username }}" id="" class="form-control" readonly>
+                    </div>
+                    @endif
                     <div class="form-group col-6">
                         <label for="">Tanggal Awal</label>
                         <input type="date" name="tanggal_awal" id="" class="form-control" placeholder="">

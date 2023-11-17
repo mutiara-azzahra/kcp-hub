@@ -18,7 +18,7 @@ class MasterTargetSpvController extends Controller
 
     public function create(){
 
-        $username = User::where('id_role', 11)->get();
+        $username = User::where('id_role', 24)->get();
 
         return view('master-target-spv.create', compact('username'));
     }
@@ -31,8 +31,6 @@ class MasterTargetSpvController extends Controller
             'tahun'      => 'required',
             'nominal'    => 'required',
         ]);
-
-        //dd($request->all());
 
         $created = TargetSpv::create($request->all());
 

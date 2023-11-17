@@ -43,8 +43,6 @@
                                     <th class="text-center">No. P/S</th>
                                     <th class="text-center">Area P/S</th>
                                     <th class="text-center">No. P/S</th>
-                                    <th class="text-center">No. SO</th>
-                                    <th class="text-center">Koli</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -64,14 +62,7 @@
                                     <td>{{ $s->nops }}</td>
                                     <td class="text-center">{{ $s->area_ps }}</td>
                                     <td>{{ $s->nm_outlet }}</td>
-                                    <td>
-                                        @foreach($s->details_ps->unique('noso') as $i)
-                                            {{ $i->noso }},
-                                        @endforeach
-                                    </td>
-                                    <td class="text-center">
-                                        {{ $s->details_dus->count('no_dus') }}
-                                    </td>
+                                    
 
                                    
                                 </tr>

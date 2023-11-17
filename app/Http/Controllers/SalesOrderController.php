@@ -228,4 +228,24 @@ class SalesOrderController extends Controller
             return redirect()->route('sales-order.details', $cari_sp->nosp)->with('danger','Data SP gagal diubah');
         }
     }
+
+
+    public function tolak($noso){
+
+        $data   = TransaksiSOHeader::where('noso',$noso)->first();
+
+        $tolak  = TransaksiSOHeader::where('noso',$noso)->update([
+            'flag_approve'     => 'N',
+            'flag_reject'      => 'Y',
+            'flag_reject_date' => NOW(),
+            'modi_date'        => NOW(),
+            'modi_by'          => Auth::user()->nama_user
+        ]);
+
+        if ($tolak){
+            return redirect()->route('sales-order.index')->with('success','Data SO berhasil dibatalkan!');
+        } else {
+            return redirect()->route('sales-order.index')->with('warning','Data SO gagal dibatalkan!');
+        }
+    }
 }

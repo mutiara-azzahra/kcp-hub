@@ -45,10 +45,14 @@ class InvoiceController extends Controller
         $so_to_invoice  = TransaksiSOHeader::where('noso', $noso)->get();
         
         foreach($so_to_invoice as $a){
+
+            $top = NOW()->addDays($a->outlet->jth_tempo);
+
             $data['noinv']              = $newInv->noinv;
             $data['noso']               = $a->noso;
             $data['kd_outlet']          = $a->kd_outlet;
             $data['nm_outlet']          = $a->nm_outlet;
+            $data['tgl_jatuh_tempo']    = $top;
             $data['status']             = 'O';
             $data['ket_status']         = 'OPEN';
             $data['user_sales']         = $a->user_sales;

@@ -169,6 +169,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/sales-order/list-rejected-so', [SalesOrderController::class, 'so_rejected'])->name('sales-order.rejected');
     Route::get('/sales-order/edit/{id}', [SalesOrderController::class, 'edit'])->name('sales-order.edit');
     Route::post('/sales-order/update/{id}', [SalesOrderController::class, 'store_edit'])->name('sales-order.store_edit');
+    Route::get('/sales-order/tolak/{noso}', [SalesOrderController::class, 'tolak'])->name('sales-order.tolak');
     
     //ROUTE BO
     Route::get('/back-order', [BackOrderController::class, 'index'])->name('back-order.index');

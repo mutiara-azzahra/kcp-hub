@@ -32,8 +32,6 @@ class MasterTargetController extends Controller
             'nominal'    => 'required',
         ]);
 
-        //dd($request->all());
-
         $created = TargetSales::create($request->all());
 
         if ($created){

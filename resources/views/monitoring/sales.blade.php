@@ -43,8 +43,8 @@
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
                             <th class="text-center">Target</th>
-                            <th class="text-center">Insentif Actual</th>
-                            <th class="text-center">Pencapaian</th>
+                            <th class="text-center">Actual</th>
+                            <th class="text-center">Ach.</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,8 +54,13 @@
                         
                         <tr>
                             <td class="text-center">Rp. {{ number_format($getTarget, 0, ',', '.') }}</td>
+
+                            @if($target == null)
+
+                            @else
                             <td class="text-center">Rp. {{ number_format($target, 0, ',', '.') }}, <p style="color:red;">({{ number_format($selisih, 0, ',', '.') }})</p></td>
-                            <td class="text-center">{{ number_format($pencapaian_persen, 10, ',', '.') }} %</td>
+                            @endif
+                            <td class="text-center">{{ number_format($pencapaian_persen, 3, ',', '.') }} %</td>
                         </tr>
                         
                     </tbody>
@@ -71,51 +76,52 @@
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
                             <th class="text-center"></th>
-                            <th class="text-center">Januari</th>
-                            <th class="text-center">Februari</th>
-                            <th class="text-center">Maret</th>
-                            <th class="text-center">April</th>
+                            <th class="text-center">Jan</th>
+                            <th class="text-center">Feb</th>
+                            <th class="text-center">Mar</th>
+                            <th class="text-center">Apr</th>
                             <th class="text-center">Mei</th>
-                            <th class="text-center">Juni</th>
-                            <th class="text-center">Juli</th>
-                            <th class="text-center">Agustus</th>
-                            <th class="text-center">September</th>
-                            <th class="text-center">Oktober</th>
-                            <th class="text-center">November</th>
-                            <th class="text-center">Desember</th>
+                            <th class="text-center">Jun</th>
+                            <th class="text-center">Jul</th>
+                            <th class="text-center">Agt</th>
+                            <th class="text-center">Sep</th>
+                            <th class="text-center">Okt</th>
+                            <th class="text-center">Nov</th>
+                            <th class="text-center">Des</th>
                         </tr>
                     </thead>
                     <tbody>
                         
+                        
                         <tr>
-                            <td class="text-right" style="background-color: yellow; color:black">ACTUAL</td>
-                            <td class="text-right">-</td>
-                            <td class="text-right">-</td>
-                            <td class="text-right">-</td>
-                            <td class="text-right">-</td>
-                            <td class="text-right">-</td>
-                            <td class="text-right">-</td>
-                            <td class="text-right">-</td>
-                            <td class="text-right">-</td>
-                            <td class="text-right">-</td>
-                            <td class="text-right">-</td>
-                            <td class="text-right">{{ number_format($getTargetBulanan->sum('nominal_total'), 0, ',', '.') }}</td>
-                            <td class="text-right">-</td>
+                            <td class="text-right" style="background-color: yellow; color:black">TARGET</td>
+                            <td class="text-right">{{ $target_jan }}</td>
+                            <td class="text-right">{{ $target_feb }}</td>
+                            <td class="text-right">{{ $target_mar }}</td>
+                            <td class="text-right">{{ $target_apr }}</td>
+                            <td class="text-right">{{ $target_may }}</td>
+                            <td class="text-right">{{ $target_jun }}</td>
+                            <td class="text-right">{{ $target_jul }}</td>
+                            <td class="text-right">{{ $target_agu }}</td>
+                            <td class="text-right">{{ $target_sep }}</td>
+                            <td class="text-right">{{ $target_oct }}</td>
+                            <td class="text-right">{{ $target_nov }}</td>
+                            <td class="text-right">{{ $target_dec }}</td>
                         </tr>
                         <tr>
-                            <td class="text-right" style="background-color: red; color:white">TARGET</td>
-                            <td class="text-right">{{ number_format($getTargetActual->where('bulan', 1)->value('nominal'), 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format($getTargetActual->where('bulan', 2)->value('nominal'), 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format($getTargetActual->where('bulan', 3)->value('nominal'), 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format($getTargetActual->where('bulan', 4)->value('nominal'), 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format($getTargetActual->where('bulan', 5)->value('nominal'), 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format($getTargetActual->where('bulan', 6)->value('nominal'), 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format($getTargetActual->where('bulan', 7)->value('nominal'), 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format($getTargetActual->where('bulan', 8)->value('nominal'), 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format($getTargetActual->where('bulan', 9)->value('nominal'), 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format($getTargetActual->where('bulan', 10)->value('nominal'), 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format($getTargetActual->where('bulan', 11)->value('nominal'), 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format($getTargetActual->where('bulan', 12)->value('nominal'), 0, ',', '.') }}</td>
+                            <td class="text-right" style="background-color: red; color:white">ACTUAL</td>
+                            <td class="text-right">{{ $jan }}</td>
+                            <td class="text-right">{{ $feb }}</td>
+                            <td class="text-right">{{ $mar }}</td>
+                            <td class="text-right">{{ $apr }}</td>
+                            <td class="text-right">{{ $may }}</td>
+                            <td class="text-right">{{ $jun }}</td>
+                            <td class="text-right">{{ $jul }}</td>
+                            <td class="text-right">{{ $agu }}</td>
+                            <td class="text-right">{{ $sep }}</td>
+                            <td class="text-right">{{ $oct }}</td>
+                            <td class="text-right">{{ $nov }}</td>
+                            <td class="text-right">{{ $dec }}</td>
                         </tr>
                         
                     </tbody>

@@ -96,7 +96,6 @@
                                     <th class="text-center">Kode Outlet</th>
                                     <th class="text-center">Nama Outlet</th>
                                     <th class="text-center">Aksi</th>
-                                    
                                 </tr>
                             </thead>
                             <tbody>
