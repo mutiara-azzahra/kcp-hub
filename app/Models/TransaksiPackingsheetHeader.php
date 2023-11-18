@@ -13,12 +13,11 @@ class TransaksiPackingsheetHeader extends Model
 
     protected $table = 'transaksi_packingsheet_header';
     protected $primaryKey = 'id';
-    public $timestamps = false;
 
     protected $fillable = [ 
         'nops', 'area_ps', 'noso', 'kd_outlet', 'nm_outlet', 'flag_cetak', 'flag_cetak_date', 
         'flag_cetak_label', 'flag_cetak_label_date', 'koli', 'flag_lkh', 'no_lkh', 'date_lkh', 
-        'status', 'created_at', 'updated_at', 'created_by', 'updated_by'
+        'status', 'created_at', 'updated_at', 'created_by', 'updated_by', 'flag_sj', 'flag_sj_date'
     ];
 
 

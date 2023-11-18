@@ -8,7 +8,7 @@
                 <h4>Surat Pesanan / SP Sales</h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-success" href="{{ route('surat-pesanan.create') }}"><i class="fas fa-plus"></i> Buat SP Baru</a>
+                <a class="btn btn-info" href="{{ route('surat-pesanan.create') }}"><i class="fas fa-plus"></i> Buat SP Baru</a>
             </div>
         </div>
     </div>
