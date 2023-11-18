@@ -156,7 +156,17 @@
                             <td class="atas">{{ $data_details->outlet->almt_pengiriman }}</td>
                         </tr>
                         <tr>
-                            <td class="atas">{{ $data_details->outlet->kode_area->provinsi->provinsi}}</td>
+                            <td class="atas">
+                                @if($data_details->outlet->kode_prp == 6300)
+
+                                Kalimantan Selatan
+
+                                @elseif($data_details->outlet->kode_prp == 6200)
+
+                                Kalimantan Tengah
+
+                                @endif
+                            </td>
                         </tr>
                     </table>
                 </td>

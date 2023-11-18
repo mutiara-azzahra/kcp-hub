@@ -150,7 +150,13 @@
                             <td class="atas">{{ $data->outlet->nm_outlet }} ({{ $data->outlet->kd_outlet }})</td>
                         </tr>
                         <tr>
-                            <td class="atas">{{ $data->outlet->almt_pengiriman }}, {{ $data->outlet->kode_area->provinsi->provinsi}}</td>
+                            <td class="atas">{{ $data->outlet->almt_pengiriman }}, 
+                                @if($data->outlet->kode_prp == 6300 )
+                                Kalimantan Selatan
+                                @elseif($data->outlet->kode_prp == 6200 )
+                                Kalimantan Tengah
+                                @endif
+                            </td>
                         </tr>
                     </table>
                 </td>
@@ -161,11 +167,11 @@
                         <tr>
                             <td class="atas">No. Inv</td>
                             <td class="atas">:</td>
-                            @if($data->outlet->kode_area->provinsi->kode_prp == 6200)
-                            <td class="atas">KCP/NON/{{ $data->noinv }}</td>
+                            @if($data->outlet->kode_prp == 6200)
+                            <td class="atas">KCP/NON/KT/{{ $data->noinv }}</td>
 
                             @else
-                            <td class="atas">KCP/NON/{{ $data->noinv }}</td>
+                            <td class="atas">KCP/NON/KS/{{ $data->noinv }}</td>
                             @endif
                         </tr>
                     </table>
@@ -214,7 +220,7 @@
             </table>
             <table class="atas" style="line-height: 15px;">
                 <tr>
-                    <td class="atas">Tanggal Jatuh Tempo: {{ date('d-m-Y'), strtotime($data->tgl_jatuh_tempo) }}</td>
+                    <td class="atas">Tanggal Jatuh Tempo: {{ Carbon\Carbon::parse($data->tgl_jatuh_tempo)->format('d-m-Y') }}</td>
                     <td class="atas-total"><b>TOTAL :</b></td>
                     <td class="atas-total"><b>{{ number_format($invoice_details->sum('nominal_total'), 0, ',', '.') }}</b></td>
                 </tr>

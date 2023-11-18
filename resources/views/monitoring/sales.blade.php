@@ -60,7 +60,7 @@
                             @else
                             <td class="text-center">Rp. {{ number_format($target, 0, ',', '.') }}, <p style="color:red;">({{ number_format($selisih, 0, ',', '.') }})</p></td>
                             @endif
-                            <td class="text-center">{{ number_format($pencapaian_persen, 3, ',', '.') }} %</td>
+                            <td class="text-center">{{ number_format((($target/$getTarget) * 100), 3, ',', '.') }} %</td>
                         </tr>
                         
                     </tbody>
@@ -90,9 +90,7 @@
                             <th class="text-center">Des</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        
-                        
+                    <tbody>      
                         <tr>
                             <td class="text-right" style="background-color: yellow; color:black">TARGET</td>
                             <td class="text-right">{{ $target_jan }}</td>

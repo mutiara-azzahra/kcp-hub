@@ -77,7 +77,6 @@ class PackingSheetController extends Controller
             }
         }
 
-        //update flag_packingsheet_status jadi Y
         foreach ($selectedItems as $noso) {
 
             TransaksiSOHeader::where('noso', $noso)->update([

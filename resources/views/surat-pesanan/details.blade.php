@@ -63,7 +63,7 @@
                 <div class="col-lg-12 p-1" id="main" data-loading="true">
                     <form action="{{ route('surat-pesanan.store_details')}}" method="POST">
                     @csrf
-                    <table class="table table-hover table-sm bg-light table-striped table-bordered" id="table">
+                    <table class="table table-hover table-sm bg-light table-striped table-bordered table-responsive" id="table">
                         <thead>
                             <tr style="background-color: #6082B6; color:white">
                                 <th class="text-center">Part No | Nama Part</th>
@@ -78,7 +78,7 @@
                             <tr>
                                 <td class="text-center">
                                     <div class="form-group col-12">
-                                        <select name="inputs[0][part_no]" class="form-control mr-2" id="package-default" onchange="updateData(`default`)">
+                                        <select name="inputs[0][part_no]" class="form-control mr-2 my-select" id="package-default" onchange="updateData(`default`)">
                                             <option value="">-- Pilih --</option>
                                             @foreach($master_part as $k)
                                                 <option value="{{ $k->part_no }}" data-het="{{ $k->het }}"> {{ $k->part_no }} | {{ $k->part_nama }}</option>
@@ -165,7 +165,7 @@
             $('#table').append(`<tr>
                 <td class="text-center">
                     <div class="form-group col-12">
-                        <select name="inputs[${i}][part_no]" class="form-control mr-2" id="package-${i}" onchange="updateData(${i})">
+                        <select name="inputs[${i}][part_no]" class="form-control mr-2 my-select-1" id="package-${i}" onchange="updateData(${i})">
                             <option value="">-- Pilih --</option>
                             @foreach($master_part as $k)
                                 <option value="{{ $k->part_no }}" data-het="{{ $k->het }}"> {{ $k->part_no }} | {{ $k->part_nama }}</option>
@@ -201,6 +201,9 @@
                 </td>
             </tr>
             `);
+            $('.my-select-1').select2({
+                width: '100%'
+            });
         });
 
     $(document).on('click','.remove-table-row', function(){

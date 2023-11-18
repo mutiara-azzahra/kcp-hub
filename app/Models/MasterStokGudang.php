@@ -33,5 +33,4 @@ class MasterStokGudang extends Model
     }
 
 
-
 }

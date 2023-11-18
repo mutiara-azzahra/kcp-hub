@@ -28,7 +28,7 @@ class MasterPart extends Model
 
     public function stok_gudang()
     {
-        return $this->hasOne(StokGudang::class, 'part_no', 'part_no');
+        return $this->hasOne(MasterStokGudang::class, 'part_no', 'part_no');
     }
 
 }

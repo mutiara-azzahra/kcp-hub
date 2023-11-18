@@ -45,7 +45,7 @@
                         <tr style="background-color: #6082B6; color:white">
                             <th class="text-center">Target</th>
                             <th class="text-center">Actual</th>
-                            <th class="text-center">Achievement</th>
+                            <th class="text-center">Ach.</th>
                         </tr>
                     </thead>
                     <tbody>
