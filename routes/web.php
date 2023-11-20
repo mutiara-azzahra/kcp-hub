@@ -35,6 +35,7 @@ use App\Http\Controllers\KodeRakLokasiController;
 use App\Http\Controllers\MonitoringController;
 use App\Http\Controllers\MasterTargetController;
 use App\Http\Controllers\MasterTargetSpvController;
+use App\Http\Controllers\ReportLssController;
 
 
 /*
@@ -306,6 +307,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/monitoring/pencapaian-spv', [MonitoringController::class, 'spv_store'])->name('monitoring.spv_store');
     Route::get('/monitoring/pesanan', [MonitoringController::class, 'pesanan'])->name('monitoring.pesanan');
     Route::get('/monitoring/pesanan-terjual', [MonitoringController::class, 'pesanan_store'])->name('monitoring.pesanan-store');
+
+    //LSS
+    Route::get('/report-lss', [ReportLssController::class, 'index'])->name('report-lss.index');
+    Route::get('/report-lss/{tahun}', [ReportLssController::class, 'store'])->name('report-lss.store');
 
 });
 

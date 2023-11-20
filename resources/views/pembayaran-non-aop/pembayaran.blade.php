@@ -23,22 +23,22 @@
                     <div class="col-lg-12">
                         <form action="{{ route('pembayaran-non-aop.pembayaran-store') }}" method="POST">
                         @csrf
-                            <div class="row">
-                                <div class="form-group col-12">
-                                    <label for="">Pembayaran Via</label>
-                                    <select name="customer_to" class="form-control mr-2">
-                                        <option value="">-- Pilih Pembayaran --</option>
-                                        <option value="">Cash</option>
-                                        <option value="">Transfer</option>
-                                        <option value="">BG</option>
-                                    </select>
-                                </div>
+                        <div class="row">
+                            <div class="form-group col-12">
+                                <label for="">Pembayaran Via</label>
+                                <select name="customer_to" class="form-control mr-2">
+                                    <option value="">-- Pilih Pembayaran --</option>
+                                    <option value="">Cash</option>
+                                    <option value="">Transfer</option>
+                                    <option value="">BG</option>
+                                </select>
                             </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                                <div class="float-right">
-                                    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Data</button>                           
-                                </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                            <div class="float-right">
+                                <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Data</button>                           
                             </div>
+                        </div>
                         </form>
                     </div>
                 </div>

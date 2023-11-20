@@ -355,6 +355,26 @@
             </li>
             @endif
 
+            @if(in_array(Auth::user()->id_role, [4, 5, 6, 7, 9, 11, 12, 17, 20, 24]))
+            <!-- {{-- MONITORING --}} -->
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon"></i>
+                <p>
+                  Reports
+                  <i class="right fas fa-angle-right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('report-lss.index')}}" class="nav-link">
+                      <p>LSS</p>
+                    </a>
+                </li>
+              </ul>
+            </li>
+            @endif
+
             @if(in_array(Auth::user()->id_role, [2, 5, 6, 7, 12, 16, 17]))
             <li class="nav-item">
               <a href="#" class="nav-link">
@@ -484,84 +504,77 @@
   <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
   <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 
-    <script>
-        function closeAlertAfterTime(alertId, milliseconds) {
-            setTimeout(function () {
-                var alertElement = document.getElementById(alertId);
-                if (alertElement) {
-                    alertElement.style.display = 'none'; 
-                }
-            }, milliseconds);
-        }
-        closeAlertAfterTime('myAlert', 3500);
-    </script>
-
-    <script>
-      $(function () {
-        $("#example1")
-          .DataTable({
-            paging: true,
-            responsive: true,
-            lengthChange: false,
-            autoWidth: false,
-            buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
-          })
-          .buttons()
-          .container()
-          .appendTo("#example1_wrapper .col-md-6:eq(0)")
-                  
-        $("#example2").DataTable({
-          paging: true,
-          lengthChange: false,
-          searching: true,
-          ordering: true,
-          info: true,
-          autoWidth: false,
-          responsive: true,
-        });
-        $("#example3").DataTable({
-          paging: true,
-          lengthChange: false,
-          searching: true,
-          ordering: true,
-          info: true,
-          autoWidth: false,
-          responsive: true,
-        });
-        $("#example4").DataTable({
-          paging: true,
-          lengthChange: false,
-          searching: true,
-          ordering: true,
-          info: true,
-          autoWidth: false,
-          responsive: true,
-        });
-        $("excel")
-          .DataTable({
-            paging: false,
-            responsive: false,
-            lengthChange: false,
-            autoWidth: false,
-            buttons: ["excel", "pdf"],
-          })
-      });
-
-      // Password toggle
-      function myPassword() {
-        var x = document.getElementById("password");
-        if (x.type === "password") {
-          x.type = "text";
-        } else {
-          x.type = "password";
-        }
+  <script>
+      function closeAlertAfterTime(alertId, milliseconds) {
+          setTimeout(function () {
+              var alertElement = document.getElementById(alertId);
+              if (alertElement) {
+                  alertElement.style.display = 'none'; 
+              }
+          }, milliseconds);
       }
+      closeAlertAfterTime('myAlert', 3500);
+  </script>
+
+  <script>
+    $(function () {
+      $("#example1")
+        .DataTable({
+          paging: true,
+          responsive: true,
+          lengthChange: false,
+          autoWidth: false,
+          buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+        })
+        .buttons()
+        .container()
+        .appendTo("#example1_wrapper .col-md-6:eq(0)")
+                
+      $("#example2").DataTable({
+        paging: true,
+        lengthChange: false,
+        searching: true,
+        ordering: true,
+        info: true,
+        autoWidth: false,
+        responsive: true,
+      });
+      $("#example3").DataTable({
+        paging: true,
+        lengthChange: false,
+        searching: true,
+        ordering: true,
+        info: true,
+        autoWidth: false,
+        responsive: true,
+      });
+      $("#example4").DataTable({
+        paging: true,
+        lengthChange: false,
+        searching: true,
+        ordering: true,
+        info: true,
+        autoWidth: false,
+        responsive: true,
+      });
+      
+    });
+
+    // Password toggle
+    function myPassword() {
+      var x = document.getElementById("password");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
 
     //SELECT DROPDOWN
-        $('.my-select').select2({
-          width: '100%'
-        });
-    </script>
+    $('.my-select').select2({
+      width: '100%'
+    });
+  </script>
     
 
   @yield('script')
