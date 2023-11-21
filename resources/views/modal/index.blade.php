@@ -29,8 +29,8 @@
                             <th class="text-center">No.</th>
                             <th class="text-center">Part No</th>
                             <th class="text-center">Qty Pembelian</th>
-                            <th class="text-center">Modal</th>
-                            <th class="text-center">HET</th>
+                            <th class="text-center">Modal per item</th>
+                            <th class="text-center">Nilai Persediaan</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,9 +42,9 @@
                         <tr>
                             <td class="text-center">{{ $no++ }}.</td>
                             <td class="text-left">{{ $p->part_no }}</td>
-                            <td class="text-right">{{ $p->qty }}</td>
-                            <td class="text-right">{{ $p->total_amount/$p->qty }}</td>
-                            <td class="text-right">{{ $p->harga }}</td>
+                            <td class="text-right">{{ number_format($p->qty, 0, ',', '.') }}</td>
+                            <td class="text-right">{{ number_format($p->modal, 0, ',', '.') }}</td>
+                            <td class="text-right">{{ number_format(($p->qty * $p->modal), 0, ',', '.') }}</td>
                         </tr>
                         @endforeach
                     </tbody>
