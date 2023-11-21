@@ -112,14 +112,6 @@ class ReportLssController extends Controller
         $hppI08     = $getHpp->whereIn('part_no', $flattened_I08)->sum('nominal_total')/1.11;
         $hppI09     = $getHpp->whereIn('part_no', $flattened_I09)->sum('nominal_total')/1.11;
 
-
-        
-
-        
-
-        
-
-
         //IL1
         $ichidai_IL1    = MasterPart::where('level_2', 'IC2')->where('level_4', 'IL1')->pluck('part_no')->toArray();
         $flattened_IL1  = collect($ichidai_IL1)->flatten()->toArray();

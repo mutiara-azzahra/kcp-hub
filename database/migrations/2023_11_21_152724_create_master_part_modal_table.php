@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('target_sales', function (Blueprint $table) {
+        Schema::create('master_part_modal', function (Blueprint $table) {
             $table->increments('id');
-            $table->Integer('sales');
-            $table->Integer('bulan');
-            $table->Integer('tahun');
-            $table->Integer('nominal');
+            $table->Integer('part_no');
+            $table->Integer('qty');
+            $table->Integer('modal');
+            $table->enum('status', ['A', 'N'])->default('A');
             $table->timestamps();
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('target_sales');
+        Schema::dropIfExists('master_part_modal');
     }
 };

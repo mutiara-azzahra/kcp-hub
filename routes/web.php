@@ -36,6 +36,7 @@ use App\Http\Controllers\MonitoringController;
 use App\Http\Controllers\MasterTargetController;
 use App\Http\Controllers\MasterTargetSpvController;
 use App\Http\Controllers\ReportLssController;
+use App\Http\Controllers\ModalDbpController;
 
 
 /*
@@ -310,7 +311,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     //LSS
     Route::get('/report-lss', [ReportLssController::class, 'index'])->name('report-lss.index');
-    Route::get('/report-lss/{tahun}', [ReportLssController::class, 'store'])->name('report-lss.store');
+    Route::get('/report-lss/view', [ReportLssController::class, 'store'])->name('report-lss.store');
+
+    //MODAL PENJUALAN
+    Route::get('/modal', [ModalDbpController::class, 'index'])->name('modal.index');
 
 });
 

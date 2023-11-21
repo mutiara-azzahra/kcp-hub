@@ -372,6 +372,13 @@
                     </a>
                 </li>
               </ul>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('modal.index')}}" class="nav-link">
+                      <p>Modal</p>
+                    </a>
+                </li>
+              </ul>
             </li>
             @endif
 
