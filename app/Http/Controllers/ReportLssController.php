@@ -327,109 +327,6 @@ class ReportLssController extends Controller
 
         $hppIM3     = $getHppIM3->sum('nominal_total')/1.11;
 
-        //IL4
-        $ichidai_IM4    = MasterPart::where('level_2', 'IC2')->where('level_4', 'IM4')->pluck('part_no')->toArray();
-        $flattened_IM4  = collect($ichidai_IM4)->flatten()->toArray();
-
-        $getHppIM4 = TransaksiInvoiceDetails::where('created_at', '>=', $tahun.'-'.$bulan.'-01')
-            ->where('created_at', '<=', $tahun.'-'.$bulan.'-'.Carbon::createFromDate($tahun, $bulan, 1)->endOfMonth()->format('d'))
-            ->whereIn('part_no', $flattened_IM4)
-            ->get();
-
-        $beliIM4 = 0;
-
-        foreach($getBeli as $i){
-            $beliIM4 += $i->details_pembelian->whereIn('part_no', $flattened_IM4)->sum('total_amount');
-        }
-
-        $hppIM4     = $getHppIL4->sum('nominal_total')/1.11;
-
-        //IM5
-        $ichidai_IM5    = MasterPart::where('level_2', 'IC2')->where('level_4', 'IM5')->pluck('part_no')->toArray();
-        $flattened_IM5  = collect($ichidai_IM5)->flatten()->toArray();
-
-        $getHppIM5 = TransaksiInvoiceDetails::where('created_at', '>=', $tahun.'-'.$bulan.'-01')
-            ->where('created_at', '<=', $tahun.'-'.$bulan.'-'.Carbon::createFromDate($tahun, $bulan, 1)->endOfMonth()->format('d'))
-            ->whereIn('part_no', $flattened_IM5)
-            ->get();
-
-        $beliIM5 = 0;
-
-        foreach($getBeli as $i){
-            $beliIM5 += $i->details_pembelian->whereIn('part_no', $flattened_IM5)->sum('total_amount');
-        }
-
-        $hppIM5     = $getHppIM5->sum('nominal_total')/1.11;
-
-        //IM6
-        $ichidai_IM6    = MasterPart::where('level_2', 'IC2')->where('level_4', 'IM6')->pluck('part_no')->toArray();
-        $flattened_IM6  = collect($ichidai_IM6)->flatten()->toArray();
-
-        $getHppIM6 = TransaksiInvoiceDetails::where('created_at', '>=', $tahun.'-'.$bulan.'-01')
-            ->where('created_at', '<=', $tahun.'-'.$bulan.'-'.Carbon::createFromDate($tahun, $bulan, 1)->endOfMonth()->format('d'))
-            ->whereIn('part_no', $flattened_IM6)
-            ->get();
-
-        $beliIM6 = 0;
-
-        foreach($getBeli as $i){
-            $beliIM6 += $i->details_pembelian->whereIn('part_no', $flattened_IM6)->sum('total_amount');
-        }
-
-        $hppIM6     = $getHppIM6->sum('nominal_total')/1.11;
-
-        //IM7
-        $ichidai_IM7    = MasterPart::where('level_2', 'IC2')->where('level_4', 'IM7')->pluck('part_no')->toArray();
-        $flattened_IM7  = collect($ichidai_IM7)->flatten()->toArray();
-
-        $getHppIM7 = TransaksiInvoiceDetails::where('created_at', '>=', $tahun.'-'.$bulan.'-01')
-            ->where('created_at', '<=', $tahun.'-'.$bulan.'-'.Carbon::createFromDate($tahun, $bulan, 1)->endOfMonth()->format('d'))
-            ->whereIn('part_no', $flattened_IM7)
-            ->get();
-
-        $beliIM7 = 0;
-
-        foreach($getBeli as $i){
-            $beliIM7 += $i->details_pembelian->whereIn('part_no', $flattened_IM7)->sum('total_amount');
-        }
-
-        $hppIM7     = $getHppIM7->sum('nominal_total')/1.11;
-
-        //IM8
-        $ichidai_IM8    = MasterPart::where('level_2', 'IC2')->where('level_4', 'IM8')->pluck('part_no')->toArray();
-        $flattened_IM8  = collect($ichidai_IM8)->flatten()->toArray();
-
-        $getHppIM8 = TransaksiInvoiceDetails::where('created_at', '>=', $tahun.'-'.$bulan.'-01')
-            ->where('created_at', '<=', $tahun.'-'.$bulan.'-'.Carbon::createFromDate($tahun, $bulan, 1)->endOfMonth()->format('d'))
-            ->whereIn('part_no', $flattened_IM8)
-            ->get();
-
-        $beliIM8 = 0;
-
-        foreach($getBeli as $i){
-            $beliIM8 += $i->details_pembelian->whereIn('part_no', $flattened_IM8)->sum('total_amount');
-        }
-
-        $hppIM8     = $getHppIM8->sum('nominal_total')/1.11;
-
-
-        //IL9
-        $ichidai_IM9    = MasterPart::where('level_2', 'IC2')->where('level_4', 'IM9')->pluck('part_no')->toArray();
-        $flattened_IM9  = collect($ichidai_IM9)->flatten()->toArray();
-
-        $getHppIM9 = TransaksiInvoiceDetails::where('created_at', '>=', $tahun.'-'.$bulan.'-01')
-            ->where('created_at', '<=', $tahun.'-'.$bulan.'-'.Carbon::createFromDate($tahun, $bulan, 1)->endOfMonth()->format('d'))
-            ->whereIn('part_no', $flattened_IM9)
-            ->get();
-
-        $beliIM9 = 0;
-
-        foreach($getBeli as $i){
-            $beliIM9 += $i->details_pembelian->whereIn('part_no', $flattened_IM9)->sum('total_amount');
-        }
-
-        $hppIM9     = $getHppIM9->sum('nominal_total')/1.11;
-
         //B01
         $brio_B01    = MasterPart::where('level_2', 'BP2')->where('level_4', 'B01')->pluck('part_no')->toArray();
         $flattened_B01  = collect($brio_B01)->flatten()->toArray();
@@ -534,12 +431,10 @@ class ReportLssController extends Controller
 
         //BELI LEVEL2 IC2
         $getBeliIC2 = $beliI01 + $beliI02 + $beliI03 + $beliI04 + $beliI05 + $beliI06 + $beliI07 + $beliI08 + $beliI09 + $beliIL1 + $beliIL2 + $beliIL3 + $beliIL4 + 
-                        $beliIL5 + $beliIL6 + $beliIL7 + $beliIL8 + $beliIL9 + $beliIM1 + $beliIM2 + $beliIM3 + $beliIM4 + 
-                        $beliIM5 + $beliIM6 + $beliIM7 + $beliIM8 + $beliIM9;
+                        $beliIL5 + $beliIL6 + $beliIL7 + $beliIL8 + $beliIL9 + $beliIM1 + $beliIM2 + $beliIM3;
 
         $getRbpIC2 = $hppI01 + $hppI02 + $hppI03 + $hppI04 + $hppI05 + $hppI06 + $hppI07 + $hppI08 + $hppI09 + $hppIL1 + $hppIL2 + $hppIL3 + $hppIL4 + 
-                        $hppIL5 + $hppIL6 + $hppIL7 + $hppIL8 + $hppIL9 + $hppIM1 + $hppIM2 + $hppIM3 + $hppIM4 + 
-                        $hppIM5 + $hppIM6 + $hppIM7 + $hppIM8 + $hppIM9;
+                        $hppIL5 + $hppIL6 + $hppIL7 + $hppIL8 + $hppIL9 + $hppIM1 + $hppIM2 + $hppIM3;
 
 
         return view('report-lss.view', 
@@ -548,8 +443,8 @@ class ReportLssController extends Controller
             'hppI01', 'hppI02', 'hppI03', 'hppI04', 'hppI05', 'hppI06', 'hppI07', 'hppI08', 'hppI09',
             'beliIL1', 'beliIL2', 'beliIL3', 'beliIL4', 'beliIL5', 'beliIL6', 'beliIL7', 'beliIL8', 'beliIL9',
             'hppIL1', 'hppIL2', 'hppIL3', 'hppIL4', 'hppIL5', 'hppIL6', 'hppIL7', 'hppIL8', 'hppIL9',
-            'beliIM1', 'beliIM2', 'beliIM3', 'beliIM4', 'beliIM5', 'beliIM6', 'beliIM7', 'beliIM8', 'beliIM9',
-            'hppIM1', 'hppIM2', 'hppIM3', 'hppIM4', 'hppIM5', 'hppIM6', 'hppIM7', 'hppIM8', 'hppIM9',
+            'beliIM1', 'beliIM2', 'beliIM3',
+            'hppIM1', 'hppIM2', 'hppIM3',
             'beliB01', 'beliB02', 'beliB03',
             'hppB01', 'hppB02', 'hppB03',
             'beliL01', 'beliL02', 'beliL03',

@@ -233,60 +233,6 @@
                             <td class="text-right"></td>
                             <td class="text-right"></td>
                         </tr>
-                        <tr>
-                            <td class="text-left">IM4</td>
-                            <td class="text-right"></td>
-                            <td class="text-right"></td>
-                            <td class="text-right">{{ number_format($beliIM4, 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format($hppIM4, 0, ',', '.') }}</td>
-                            <td class="text-right"></td>
-                            <td class="text-right"></td>
-                        </tr>
-                        <tr>
-                            <td class="text-left">IM5</td>
-                            <td class="text-right"></td>
-                            <td class="text-right"></td>
-                            <td class="text-right">{{ number_format($beliIM5, 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format($hppIM5, 0, ',', '.') }}</td>
-                            <td class="text-right"></td>
-                            <td class="text-right"></td>
-                        </tr>
-                        <tr>
-                            <td class="text-left">IM6</td>
-                            <td class="text-right"></td>
-                            <td class="text-right"></td>
-                            <td class="text-right">{{ number_format($beliIM6, 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format($hppIM6, 0, ',', '.') }}</td>
-                            <td class="text-right"></td>
-                            <td class="text-right"></td>
-                        </tr>
-                        <tr>
-                            <td class="text-left">IM7</td>
-                            <td class="text-right"></td>
-                            <td class="text-right"></td>
-                            <td class="text-right">{{ number_format($beliIM7, 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format($hppIM7, 0, ',', '.') }}</td>
-                            <td class="text-right"></td>
-                            <td class="text-right"></td>
-                        </tr>
-                        <tr>
-                            <td class="text-left">IM8</td>
-                            <td class="text-right"></td>
-                            <td class="text-right"></td>
-                            <td class="text-right">{{ number_format($beliIM8, 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format($hppIM8, 0, ',', '.') }}</td>
-                            <td class="text-right"></td>
-                            <td class="text-right"></td>
-                        </tr>
-                        <tr>
-                            <td class="text-left">IM9</td>
-                            <td class="text-right"></td>
-                            <td class="text-right"></td>
-                            <td class="text-right">{{ number_format($beliIM9, 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format($hppIM9, 0, ',', '.') }}</td>
-                            <td class="text-right"></td>
-                            <td class="text-right"></td>
-                        </tr>
                         <tr style="background-color: orange; color:black">
                             <td class="text-center"><b>TOTAL</b></td>
                             <td class="text-center"><b>IC2</b></td>
