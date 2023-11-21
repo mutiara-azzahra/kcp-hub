@@ -46,10 +46,10 @@
                             <option value="12">Desember</option>
                         </select>
                     </div>
-                    <div class="form-group col-lg-12">
+                    <div class="form-group col-lg-6 col-md-6">
                         <label for="">Tahun</label>
-                        <br>
-                        <select id="date-dropdown" name="tahun">
+                        <select class="form-control mr-2" id="date-dropdown" name="tahun">
+                            <option value="">-- Pilih Tahun --</option>
                         </select>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
   let dateDropdown = document.getElementById('date-dropdown'); 
        
   let currentYear = new Date().getFullYear();    
-  let earliestYear = 1970;     
+  let earliestYear = 2022;     
   while (currentYear >= earliestYear) {      
     let dateOption = document.createElement('option');          
     dateOption.text = currentYear;      

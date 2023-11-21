@@ -4,11 +4,16 @@
 <div class="container" style="padding: 10px;">
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
-             <div class="float-left">
+            <div class="float-left">
                 <h4>Report LSS</h4>
             </div>
             <div class="float-right">
                 <a class="btn btn-success" href="{{ route('report-lss.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
+            </div>
+        </div>
+        <div class="col-lg-12 pb-3">
+            <div class="float-left">
+                <h5>{{ \Carbon\Carbon::create()->month($bulan)->format('F') }} {{ $tahun }}</h5>
             </div>
         </div>
     </div>
@@ -33,7 +38,7 @@
                             <th class="text-center">Produk Part</th>
                             <th class="text-center">Awal Amount</th>
                             <th class="text-center">Beli</th>
-                            <th class="text-center">Jual HPP</th>
+                            <th class="text-center">Jual RBP</th>
                             <th class="text-center">Jual DBP</th>
                             <th class="text-center">Akhir Amount</th>
                         </tr>
@@ -205,8 +210,8 @@
                             <td class="text-left">IM1</td>
                             <td class="text-right"></td>
                             <td class="text-right"></td>
-                            <td class="text-right"></td>
-                            <td class="text-right"></td>
+                            <td class="text-right">{{ number_format($beliIM1, 0, ',', '.') }}</td>
+                            <td class="text-right">{{ number_format($hppIM1, 0, ',', '.') }}</td>
                             <td class="text-right"></td>
                             <td class="text-right"></td>
                         </tr>
@@ -214,8 +219,8 @@
                             <td class="text-left">IM2</td>
                             <td class="text-right"></td>
                             <td class="text-right"></td>
-                            <td class="text-right"></td>
-                            <td class="text-right"></td>
+                            <td class="text-right">{{ number_format($beliIM2, 0, ',', '.') }}</td>
+                            <td class="text-right">{{ number_format($hppIM2, 0, ',', '.') }}</td>
                             <td class="text-right"></td>
                             <td class="text-right"></td>
                         </tr>
@@ -223,8 +228,8 @@
                             <td class="text-left">IM3</td>
                             <td class="text-right"></td>
                             <td class="text-right"></td>
-                            <td class="text-right"></td>
-                            <td class="text-right"></td>
+                            <td class="text-right">{{ number_format($beliIM3, 0, ',', '.') }}</td>
+                            <td class="text-right">{{ number_format($hppIM3, 0, ',', '.') }}</td>
                             <td class="text-right"></td>
                             <td class="text-right"></td>
                         </tr>
@@ -232,8 +237,8 @@
                             <td class="text-left">IM4</td>
                             <td class="text-right"></td>
                             <td class="text-right"></td>
-                            <td class="text-right"></td>
-                            <td class="text-right"></td>
+                            <td class="text-right">{{ number_format($beliIM4, 0, ',', '.') }}</td>
+                            <td class="text-right">{{ number_format($hppIM4, 0, ',', '.') }}</td>
                             <td class="text-right"></td>
                             <td class="text-right"></td>
                         </tr>
@@ -241,8 +246,8 @@
                             <td class="text-left">IM5</td>
                             <td class="text-right"></td>
                             <td class="text-right"></td>
-                            <td class="text-right"></td>
-                            <td class="text-right"></td>
+                            <td class="text-right">{{ number_format($beliIM5, 0, ',', '.') }}</td>
+                            <td class="text-right">{{ number_format($hppIM5, 0, ',', '.') }}</td>
                             <td class="text-right"></td>
                             <td class="text-right"></td>
                         </tr>
@@ -250,8 +255,8 @@
                             <td class="text-left">IM6</td>
                             <td class="text-right"></td>
                             <td class="text-right"></td>
-                            <td class="text-right"></td>
-                            <td class="text-right"></td>
+                            <td class="text-right">{{ number_format($beliIM6, 0, ',', '.') }}</td>
+                            <td class="text-right">{{ number_format($hppIM6, 0, ',', '.') }}</td>
                             <td class="text-right"></td>
                             <td class="text-right"></td>
                         </tr>
@@ -259,8 +264,8 @@
                             <td class="text-left">IM7</td>
                             <td class="text-right"></td>
                             <td class="text-right"></td>
-                            <td class="text-right"></td>
-                            <td class="text-right"></td>
+                            <td class="text-right">{{ number_format($beliIM7, 0, ',', '.') }}</td>
+                            <td class="text-right">{{ number_format($hppIM7, 0, ',', '.') }}</td>
                             <td class="text-right"></td>
                             <td class="text-right"></td>
                         </tr>
@@ -268,8 +273,8 @@
                             <td class="text-left">IM8</td>
                             <td class="text-right"></td>
                             <td class="text-right"></td>
-                            <td class="text-right"></td>
-                            <td class="text-right"></td>
+                            <td class="text-right">{{ number_format($beliIM8, 0, ',', '.') }}</td>
+                            <td class="text-right">{{ number_format($hppIM8, 0, ',', '.') }}</td>
                             <td class="text-right"></td>
                             <td class="text-right"></td>
                         </tr>
@@ -277,8 +282,8 @@
                             <td class="text-left">IM9</td>
                             <td class="text-right"></td>
                             <td class="text-right"></td>
-                            <td class="text-right"></td>
-                            <td class="text-right"></td>
+                            <td class="text-right">{{ number_format($beliIM9, 0, ',', '.') }}</td>
+                            <td class="text-right">{{ number_format($hppIM9, 0, ',', '.') }}</td>
                             <td class="text-right"></td>
                             <td class="text-right"></td>
                         </tr>
@@ -286,12 +291,8 @@
                             <td class="text-center"><b>TOTAL</b></td>
                             <td class="text-center"><b>IC2</b></td>
                             <td class="text-right"></td>
-                            <td class="text-right"><b>{{ number_format(($beliI01 + $beliI02 + $beliI03 + $beliI04 + 
-                                $beliI05 + $beliI06 + $beliI07 + $beliI08 + $beliI09 + $beliIL1 + $beliIL2 + $beliIL3 + $beliIL4 + 
-                                $beliIL5 + $beliIL6 + $beliIL7 + $beliIL8 + $beliIL9), 0, ',', '.') }}</b></td>
-                            <td class="text-right"><b>{{ number_format(($hppI01 + $hppI02 + $hppI03 + $hppI04 + 
-                                $hppI05 + $hppI06 + $hppI07 + $hppI08 + $hppI09 + $hppIL1 + $hppIL2 + $hppIL3 + $hppIL4 + 
-                                $hppIL5 + $hppIL6 + $hppIL7 + $hppIL8 + $hppIL9), 0, ',', '.') }}</b></td>
+                            <td class="text-right"><b>{{ number_format(($getBeliIC2), 0, ',', '.') }}</b></td>
+                            <td class="text-right"><b>{{ number_format(($getRbpIC2), 0, ',', '.') }}</b></td>
                             <td class="text-right"></td>
                             <td class="text-right"></td>
                         </tr>

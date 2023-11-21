@@ -111,7 +111,7 @@
           margin: 20px;
           padding: 0px !important;
           } 
-     </style>
+    </style>
     <div class="header">
         <table class="table atas" style="line-height: 12px;">
             <tr>
@@ -225,7 +225,6 @@
                 @endforeach
                 
                 </tbody>
-
             </table>
 
             <br>
