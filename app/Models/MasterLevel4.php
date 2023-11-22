@@ -5,23 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MasterLevelPart extends Model
+class MasterLevel4 extends Model
 {
-
     use HasFactory;
-    protected $table = 'master_part_level_4';
+    protected $table = 'master_level_4';
     protected $primaryKey = 'id';
 
     protected $fillable = [
         'level_4', 
-        'status',
+        'keterangan',
+        'id_level_2',
         'create_at',
         'update_at',
         'created_by', 
         'updated_by'
     ];
-
-    public function part_non(){
-        return $this->hasMany(MasterPartNon::class, 'id', 'id_level_4');
-    }
 }

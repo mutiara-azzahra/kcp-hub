@@ -5,23 +5,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MasterLevelPart extends Model
+class LSS extends Model
 {
-
     use HasFactory;
-    protected $table = 'master_part_level_4';
+
+    protected $table = 'lss';
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'level_4', 
-        'status',
+        'bulan',
+        'tahun',
+        'sub_kelompok_part',
+        'produk_part',
+        'awal_amount',
+        'beli',
+        'jual_rbp',
+        'jual_dbp',
+        'akhir_amount',
+        'status', 
         'create_at',
         'update_at',
         'created_by', 
         'updated_by'
     ];
-
-    public function part_non(){
-        return $this->hasMany(MasterPartNon::class, 'id', 'id_level_4');
-    }
 }

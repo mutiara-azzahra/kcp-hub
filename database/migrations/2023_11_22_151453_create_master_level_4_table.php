@@ -1,0 +1,33 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('master_level_4', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('level_4');
+            $table->string('keterangan');
+            $table->Integer('id_level_2');
+            $table->enum('status', ['A', 'N'])->default('A');
+            $table->timestamps();
+            $table->string('created_by')->nullable();
+            $table->string('updated_by')->nullable();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('master_level_4');
+    }
+};
