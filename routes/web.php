@@ -315,6 +315,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //MODAL PENJUALAN
     Route::get('/modal', [ModalDbpController::class, 'index'])->name('modal.index');
+    Route::post('/modal/store', [ModalDbpController::class, 'store'])->name('modal.store');
 
 });
 

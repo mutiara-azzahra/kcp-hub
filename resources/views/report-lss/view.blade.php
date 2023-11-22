@@ -50,7 +50,7 @@
                             <td class="text-right"></td>
                             <td class="text-right">{{ number_format($beliI01, 0, ',', '.') }}</td>
                             <td class="text-right">{{ number_format($hppI01, 0, ',', '.') }}</td>
-                            <td class="text-right"></td>
+                            <td class="text-right">{{ number_format($jualI01, 0, ',', '.') }}</td>
                             <td class="text-right"></td>
                         </tr>
                         <tr>
@@ -59,7 +59,7 @@
                             <td class="text-right"></td>
                             <td class="text-right">{{ number_format($beliI02, 0, ',', '.') }}</td>
                             <td class="text-right">{{ number_format($hppI02, 0, ',', '.') }}</td>
-                            <td class="text-right"></td>
+                            <td class="text-right">{{ number_format($jualI02, 0, ',', '.') }}</td>
                             <td class="text-right"></td>
                         </tr>
                         <tr>
@@ -68,7 +68,7 @@
                             <td class="text-right"></td>
                             <td class="text-right">{{ number_format($beliI03, 0, ',', '.') }}</td>
                             <td class="text-right">{{ number_format($hppI03, 0, ',', '.') }}</td>
-                            <td class="text-right"></td>
+                            <td class="text-right">{{ number_format($jualI03, 0, ',', '.') }}</td>
                             <td class="text-right"></td>
                         </tr>
                         <tr>
@@ -77,7 +77,7 @@
                             <td class="text-right"></td>
                             <td class="text-right">{{ number_format($beliI04, 0, ',', '.') }}</td>
                             <td class="text-right">{{ number_format($hppI04, 0, ',', '.') }}</td>
-                            <td class="text-right"></td>
+                            <td class="text-right">{{ number_format($jualI04, 0, ',', '.') }}</td>
                             <td class="text-right"></td>
                         </tr>
                         <tr>
@@ -86,7 +86,7 @@
                             <td class="text-right"></td>
                             <td class="text-right">{{ number_format($beliI05, 0, ',', '.') }}</td>
                             <td class="text-right">{{ number_format($hppI05, 0, ',', '.') }}</td>
-                            <td class="text-right"></td>
+                            <td class="text-right">{{ number_format($jualI05, 0, ',', '.') }}</td>
                             <td class="text-right"></td>
                         </tr>
                         <tr>
@@ -95,7 +95,7 @@
                             <td class="text-right"></td>
                             <td class="text-right">{{ number_format($beliI06, 0, ',', '.') }}</td>
                             <td class="text-right">{{ number_format($hppI06, 0, ',', '.') }}</td>
-                            <td class="text-right"></td>
+                            <td class="text-right">{{ number_format($jualI06, 0, ',', '.') }}</td>
                             <td class="text-right"></td>
                         </tr>
                         <tr>
@@ -104,7 +104,7 @@
                             <td class="text-right"></td>
                             <td class="text-right">{{ number_format($beliI07, 0, ',', '.') }}</td>
                             <td class="text-right">{{ number_format($hppI07, 0, ',', '.') }}</td>
-                            <td class="text-right"></td>
+                            <td class="text-right">{{ number_format($jualI07, 0, ',', '.') }}</td>
                             <td class="text-right"></td>
                         </tr>
                         <tr>
@@ -113,7 +113,7 @@
                             <td class="text-right"></td>
                             <td class="text-right">{{ number_format($beliI08, 0, ',', '.') }}</td>
                             <td class="text-right">{{ number_format($hppI08, 0, ',', '.') }}</td>
-                            <td class="text-right"></td>
+                            <td class="text-right">{{ number_format($jualI08, 0, ',', '.') }}</td>
                             <td class="text-right"></td>
                         </tr>
                         <tr>
@@ -122,7 +122,7 @@
                             <td class="text-right"></td>
                             <td class="text-right">{{ number_format($beliI09, 0, ',', '.') }}</td>
                             <td class="text-right">{{ number_format($hppI09, 0, ',', '.') }}</td>
-                            <td class="text-right"></td>
+                            <td class="text-right">{{ number_format($jualI09, 0, ',', '.') }}</td>
                             <td class="text-right"></td>
                         </tr>
                         <tr>

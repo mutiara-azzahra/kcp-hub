@@ -10,6 +10,7 @@ use App\Models\MasterPart;
 use App\Models\InvoiceNonHeader;
 use App\Models\InvoiceNonDetails;
 use App\Models\TransaksiInvoiceDetails;
+use App\Models\ModalPartTerjual;
 
 class ReportLssController extends Controller
 {
@@ -33,6 +34,10 @@ class ReportLssController extends Controller
             ->get();
 
         $getHpp = TransaksiInvoiceDetails::where('created_at', '>=', $tahun.'-'.$bulan.'-01')
+            ->where('created_at', '<=', $tahun.'-'.$bulan.'-'.Carbon::createFromDate($tahun, $bulan, 1)->endOfMonth()->format('d'))
+            ->get();
+
+        $getModalTerjual = ModalPartTerjual::where('created_at', '>=', $tahun.'-'.$bulan.'-01')
             ->where('created_at', '<=', $tahun.'-'.$bulan.'-'.Carbon::createFromDate($tahun, $bulan, 1)->endOfMonth()->format('d'))
             ->get();
 
@@ -111,6 +116,16 @@ class ReportLssController extends Controller
         $hppI07     = $getHpp->whereIn('part_no', $flattened_I07)->sum('nominal_total')/1.11;
         $hppI08     = $getHpp->whereIn('part_no', $flattened_I08)->sum('nominal_total')/1.11;
         $hppI09     = $getHpp->whereIn('part_no', $flattened_I09)->sum('nominal_total')/1.11;
+
+        $jualI01     = $getModalTerjual->whereIn('part_no', $flattened_I01)->sum('nominal_modal')/1.11;
+        $jualI02     = $getModalTerjual->whereIn('part_no', $flattened_I02)->sum('nominal_modal')/1.11;
+        $jualI03     = $getModalTerjual->whereIn('part_no', $flattened_I03)->sum('nominal_modal')/1.11;
+        $jualI04     = $getModalTerjual->whereIn('part_no', $flattened_I04)->sum('nominal_modal')/1.11;
+        $jualI05     = $getModalTerjual->whereIn('part_no', $flattened_I05)->sum('nominal_modal')/1.11;
+        $jualI06     = $getModalTerjual->whereIn('part_no', $flattened_I06)->sum('nominal_modal')/1.11;
+        $jualI07     = $getModalTerjual->whereIn('part_no', $flattened_I07)->sum('nominal_modal')/1.11;
+        $jualI08     = $getModalTerjual->whereIn('part_no', $flattened_I08)->sum('nominal_modal')/1.11;
+        $jualI09     = $getModalTerjual->whereIn('part_no', $flattened_I09)->sum('nominal_modal')/1.11;
 
         //IL1
         $ichidai_IL1    = MasterPart::where('level_2', 'IC2')->where('level_4', 'IL1')->pluck('part_no')->toArray();
@@ -433,6 +448,7 @@ class ReportLssController extends Controller
         compact(
             'beliI01', 'beliI02', 'beliI03', 'beliI04', 'beliI05', 'beliI06', 'beliI07', 'beliI08', 'beliI09',
             'hppI01', 'hppI02', 'hppI03', 'hppI04', 'hppI05', 'hppI06', 'hppI07', 'hppI08', 'hppI09',
+            'jualI01', 'jualI02', 'jualI03', 'jualI04', 'jualI05', 'jualI06', 'jualI07', 'jualI08', 'jualI09',
             'beliIL1', 'beliIL2', 'beliIL3', 'beliIL4', 'beliIL5', 'beliIL6', 'beliIL7', 'beliIL8', 'beliIL9',
             'hppIL1', 'hppIL2', 'hppIL3', 'hppIL4', 'hppIL5', 'hppIL6', 'hppIL7', 'hppIL8', 'hppIL9',
             'beliIM1', 'beliIM2', 'beliIM3',

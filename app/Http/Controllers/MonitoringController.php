@@ -98,8 +98,6 @@ class MonitoringController extends Controller
             ->where('created_at', '<=', $tahun.'-07-'.Carbon::createFromDate($tahun, 7, 1)->endOfMonth()->format('d'))
             ->get();
 
-        
-        
         $getActualSales8 = TransaksiInvoiceHeader::where('user_sales', $sales)
             ->where('created_at', '>=', $tahun.'-08-01')
             ->where('created_at', '<=', $tahun.'-08-'.Carbon::createFromDate($tahun, 8, 1)->endOfMonth()->format('d'))
