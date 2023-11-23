@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\KasMasukHeader;
 use App\Models\MasterKodeRak;
 use App\Models\MasterOutlet;
+use App\Models\MasterPerkiraan;
 
 class KasMasukController extends Controller
 {
@@ -71,9 +72,10 @@ class KasMasukController extends Controller
 
     public function details($no_kas_masuk){
 
+        $perkiraan = MasterPerkiraan::all();
         $kas_masuk = KasMasukHeader::where('no_kas_masuk', $no_kas_masuk)->first();
 
-       return view('kas-masuk.details', compact('kas_masuk'));
+       return view('kas-masuk.details', compact('kas_masuk', 'perkiraan'));
       
    }
 

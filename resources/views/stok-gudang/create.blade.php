@@ -12,49 +12,50 @@
             </div>
         </div>
     </div>
-            @if ($message = Session::get('success'))
-                <div class="alert alert-success">
-                    <p>{{ $message }}</p>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                
-            @endif
 
-        <div class="card" style="padding: 10px;">
-                <div class="card-body">
-                    <div class="col-lg-12">
-                        <form action="{{ route('stok-gudang.store') }}" method="POST">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <strong>Pilih Part</strong>
-                                    <select name="part_no" class="form-control">
-                                        <option value="">---Pilih Part--</option>
-                                        @foreach($master_part as $a)
-                                            <option value="{{ $a->part_no }}">{{ $a->part_no }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <strong>Stok</strong>
-                                    <input type="number" name="stok" class="form-control" placeholder="contoh: 50">
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                                <div class="float-right">
-                                    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Data</button>                            
-                                </div>
-                            </div>
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+            <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+    @endif
+
+    <div class="card" style="padding: 10px;">
+        <div class="card-body">
+            <div class="col-lg-12">
+                <form action="{{ route('stok-gudang.store') }}" method="POST">
+                @csrf
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <strong>Pilih Part</strong>
+                            <select name="part_no" class="form-control">
+                                <option value="">---Pilih Part--</option>
+                                @foreach($master_part as $a)
+                                    <option value="{{ $a->part_no }}">{{ $a->part_no }}</option>
+                                @endforeach
+                            </select>
                         </div>
-                    </form>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <strong>Stok</strong>
+                            <input type="number" name="stok" class="form-control" placeholder="contoh: 50">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                        <div class="float-right">
+                            <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Data</button>                            
+                        </div>
                     </div>
                 </div>
+            </form>
+            </div>
         </div>
+    </div>
 
 </div>
 @endsection

@@ -5,7 +5,7 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4>Details Kas Masuk Keluar</h4>
+                <h4>Details</h4>
             </div>
             <div class="float-right">
                 <a class="btn btn-success" href="{{ route('kas-masuk.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
@@ -59,7 +59,7 @@
                 <table class="table table-hover table-sm bg-light table-striped table-bordered" id="table">
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
-                            <th class="text-center">Perkiraan</th>
+                            <th class="text-center">Pekiraan</th>
                             <th class="text-center">Akuntansi To</th>
                             <th class="text-center">Total</th>
                             <th class="text-center"></th>
@@ -69,26 +69,28 @@
                         <tr>
                             <td class="text-center">
                                 <div class="form-group col-12">
-                                    <select name="inputs[0][part_no]" class="form-control mr-2 my-select">
-                                        <option value="">-- Pilih Perkiraan --</option>
+                                    <select name="inputs[0][part_no]" class="form-control mr-2 my-select" id="package-default" onchange="updateData(`default`)">
+                                        <option value="">-- Pilih --</option>
                                         @foreach($perkiraan as $k)
-                                            <option value="{{ $k->perkiraan }}">{{ $k->perkiraan }}.{{ $k->sub_perkiraan }}</option>
+                                            <option value="{{ $k->perkiraan }}"> {{ $k->sub_perkiraan }} | {{ $k->perkiraan }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </td>
                             <td class="text-center">
-                                <div class="form-group col-12">
-                                    <select name="inputs[0][part_no]" class="form-control mr-2">
-                                        <option value="">-- Pilih --</option>
-                                        <option value="D">DEBET</option>
-                                        <option value="K">KREDIT</option>
-                                    </select>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <select name="akuntansi_to" class="form-control my-select" >
+                                            <option value="">--Pilih--</option>
+                                            <option value="D">Debet</option>
+                                            <option value="K">Kredit</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </td>
                             <td class="text-center">
                                 <div class="form-group col-12">
-                                    <input type="text" name="stok" for="stok" id="stok-default" class="form-control">
+                                    <input type="text" name="het" for="het" id="het-default" class="form-control">
                                 </div>
                             </td>
                             <td class="text-center">
@@ -110,6 +112,7 @@
 </div>
 @endsection
 
+
 @section('script')
     <script>
         var i = 0;
@@ -118,26 +121,27 @@
             $('#table').append(`<tr>
                 <td class="text-center">
                     <div class="form-group col-12">
-                        <select name="inputs[${i}][part_no]" class="form-control mr-2 my-select-1" id="package-${i}">
-                            <option value="">-- Pilih Perkiraan --</option>
+                        <select name="inputs[0][part_no]" class="form-control mr-2 my-select" id="package-default" onchange="updateData(`default`)">
+                            <option value="">-- Pilih --</option>
                             @foreach($perkiraan as $k)
-                                <option value="{{ $k->perkiraan }}"> {{ $k->perkiraan }}.{{ $k->sub_perkiraan }}</option>
+                                <option value="{{ $k->perkiraan }}"> {{ $k->sub_perkiraan }} | {{ $k->perkiraan }}</option>
                             @endforeach
                         </select>
                     </div>
                 </td>
-                <td class="text-center">
-                    <div class="form-group col-12">
-                        <select name="inputs[${i}][part_no]" class="form-control mr-2">
-                            <option value="">-- Pilih --</option>
-                            <option value="D">DEBET</option>
-                            <option value="K">KREDIT</option>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <strong>Pilih Bank</strong>
+                        <select name="akuntansi_to" class="form-control my-select" >
+                            <option value="">--Pilih--</option>
+                            <option value="D">Debet</option>
+                            <option value="K">Kredit</option>
                         </select>
                     </div>
-                </td>
+                </div>
                 <td class="text-center">
                     <div class="form-group col-12">
-                        <input type="text" id="stok-${i}" name="stok" for="stok" class="form-control">
+                        <input type="text" name="het" for="het" id="het-default" class="form-control">
                     </div>
                 </td>
                 <td class="text-center">
@@ -147,14 +151,12 @@
                 </td>
             </tr>
             `);
-            $('.my-select-1').select2({
-                width: '100%'
-            });
         });
 
         $(document).on('click','.remove-table-row', function(){
             $(this).parents('tr').remove();
-        })
+        });
+
     </script>    
 
 @endsection
