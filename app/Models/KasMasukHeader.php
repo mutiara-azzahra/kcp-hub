@@ -12,7 +12,6 @@ class KasMasukHeader extends Model
 
     protected $table = 'kas_masuk_header';
     protected $primaryKey = 'id';
-    public $timestamps = false;
 
     protected $fillable = [ 
         'no_kas_masuk', 'no_piutang', 'id_transfer', 'tanggal_rincian_tagihan',
@@ -30,7 +29,7 @@ class KasMasukHeader extends Model
         $latestRecord = static::orderBy('no_kas_masuk', 'desc')->first();
 
         if ($latestRecord) {
-            $lastCustomId   = $latestRecord->no_lkh;
+            $lastCustomId   = $latestRecord->no_kas_masuk;
             $lastYear       = substr($lastCustomId, 4, 4);
             $lastMonth      = substr($lastCustomId, 8, 2);
             $lastNumber     = (int)substr($lastCustomId, -5);
@@ -47,5 +46,10 @@ class KasMasukHeader extends Model
         $newCustomId = 'KAS-' . $currentYear . $currentMonth . '-' . str_pad($newNumber, 5, '0', STR_PAD_LEFT);
 
         return $newCustomId;
+    }
+
+    public function harga_het()
+    {
+        return $this->belongsTo(MasterPartNon::class, 'part_no', 'part_no');
     }
 }

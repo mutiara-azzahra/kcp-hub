@@ -20,13 +20,13 @@ class KasMasukController extends Controller
 
     public function bukti_bayar(){
 
-        $master_outlet = MasterOutlet::all();
+        $master_outlet = MasterOutlet::where('status', 'Y')->get();
 
         return view('kas-masuk.create', compact('master_outlet'));
     }
     public function bayar_manual(){
 
-        $master_outlet = MasterOutlet::all();
+        $master_outlet = MasterOutlet::where('status', 'Y')->get();
 
         return view('kas-masuk.bayar-manual', compact('master_outlet'));
     }
@@ -45,33 +45,70 @@ class KasMasukController extends Controller
             'tanggal_rincian_tagihan'   => 'required', 
             'kd_outlet'                 => 'required', 
             'pembayaran_via'            => 'required',
-            'nominal'                   => 'required',
-            'bank'                      => 'required',
         ]);
 
         $newKas                 = new KasMasukHeader();
         $newKas->no_kas_masuk   = KasMasukHeader::no_kas_masuk();
 
+        
         $request->merge([
+            'terima_dari'       => $request->terima_dari,
+            'keterangan'        => $request->keterangan,
             'no_kas_masuk'      => $newKas->no_kas_masuk,
-            'status'            => 'O', //O open | C close
-            'crea_date'         => NOW(),
-            'crea_by'           => Auth::user()->nama_user
+            'status'            => 'O',
+            'flag_kas_manual'   => 'Y',
+            'created_by'        => Auth::user()->nama_user
         ]);
 
         $created = KasMasukHeader::create($request->all());
 
         if ($created){
-            return redirect()->route('kas-masuk.index')->with('success','Bukti bayar baru berhasil ditambahkan');
+            return redirect()->route('kas-masuk.details', ['no_kas_masuk' => $newKas->no_kas_masuk])->with('success', 'Bukti bayar baru berhasil ditambahkan');
         } else{
             return redirect()->route('kas-masuk.index')->with('danger','Bukti bayar baru gagal ditambahkan');
         }
     }
 
+    public function details($no_kas_masuk){
+
+        $kas_masuk = KasMasukHeader::where('no_kas_masuk', $no_kas_masuk)->first();
+
+       return view('kas-masuk.details', compact('kas_masuk'));
+      
+   }
+
+   public function store(Request $request){
+
+        $request -> validate([
+            'tanggal_rincian_tagihan'   => 'required', 
+            'kd_outlet'                 => 'required', 
+            'pembayaran_via'            => 'required',
+        ]);
+
+        $newKas                 = new KasMasukHeader();
+        $newKas->no_kas_masuk   = KasMasukHeader::no_kas_masuk();
+        
+        $request->merge([
+            'terima_dari'       => $request->terima_dari,
+            'keterangan'        => $request->keterangan,
+            'no_kas_masuk'      => $newKas->no_kas_masuk,
+            'status'            => 'O',
+            'created_by'        => Auth::user()->nama_user
+        ]);
+
+        $created = KasMasukHeader::create($request->all());
+
+        if ($created){
+            return redirect()->route('kas-masuk.details')->with('success','Kas masuhk berhasil ditambahkan');
+        } else{
+            return redirect()->route('kas-masuk.index')->with('danger','Kas masuk gagal ditambahkan');
+        }
+    }
+
     public function edit($id)
     {
-        $master_part_id  = KasMasukHeader::findOrFail($id);
-        $kode_rak = MasterKodeRak::where('status', 'A')->get();
+        $master_part_id = KasMasukHeader::findOrFail($id);
+        $kode_rak       = MasterKodeRak::where('status', 'A')->get();
 
         return view('kas-masuk.update',compact('master_part_id', 'kode_rak'));
     }
