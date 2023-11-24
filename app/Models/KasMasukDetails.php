@@ -11,7 +11,6 @@ class KasMasukDetails extends Model
 
     protected $table = 'kas_masuk_details';
     protected $primaryKey = 'id';
-    public $timestamps = false;
 
     protected $fillable = [ 
         'no_kas_masuk', 'perkiraan', 'akuntansi_to', 'total',

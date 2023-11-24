@@ -52,61 +52,66 @@
         </div>
     </div>
 
-    <div class="col-lg-12 p-1" id="main" data-loading="true">
-        <form action="{{ route('surat-pesanan.store_details')}}" method="POST">
-            @csrf
-            <div class="table-container">
-                <table class="table table-hover table-sm bg-light table-striped table-bordered" id="table">
-                    <thead>
-                        <tr style="background-color: #6082B6; color:white">
-                            <th class="text-center">Perkiraan</th>
-                            <th class="text-center">Akuntansi To</th>
-                            <th class="text-center">Total</th>
-                            <th class="text-center"></th>
-                        </tr>
-                    </thead>
-                    <tbody class="input-fields">
-                        <tr>
-                            <td class="text-center">
-                                <div class="form-group col-12">
-                                    <select name="inputs[0][part_no]" class="form-control mr-2 my-select">
-                                        <option value="">-- Pilih Perkiraan --</option>
-                                        @foreach($perkiraan as $k)
-                                            <option value="{{ $k->perkiraan }}">{{ $k->perkiraan }}.{{ $k->sub_perkiraan }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </td>
-                            <td class="text-center">
-                                <div class="form-group col-12">
-                                    <select name="inputs[0][part_no]" class="form-control mr-2">
-                                        <option value="">-- Pilih --</option>
-                                        <option value="D">DEBET</option>
-                                        <option value="K">KREDIT</option>
-                                    </select>
-                                </div>
-                            </td>
-                            <td class="text-center">
-                                <div class="form-group col-12">
-                                    <input type="text" name="stok" for="stok" id="stok-default" class="form-control">
-                                </div>
-                            </td>
-                            <td class="text-center">
-                                <div class="form-group col-12">
-                                    <a type="button" class="btn btn-primary m-1" id="add"><i class="fas fa-plus"></i></a>                                                                                  
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <div class="float-right">
-                    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Data</button>                           
+    <div class="card" style="padding: 10px;">
+        <div class="card-body">
+            <div class="col-lg-12 p-1" id="main" data-loading="true">
+                <form action="{{ route('kas-masuk.store-details')}}" method="POST">
+                    @csrf
+                    <div class="table-container">
+                        <table class="table table-hover table-sm bg-light table-striped table-bordered" id="table">
+                            <thead>
+                                <tr style="background-color: #6082B6; color:white">
+                                    <th class="text-center">Perkiraan</th>
+                                    <th class="text-center">Akuntansi To</th>
+                                    <th class="text-center">Total</th>
+                                    <th class="text-center"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="input-fields">
+                                <tr>
+                                    <td class="text-center">
+                                        <div class="form-group col-12">
+                                            <select name="inputs[0][perkiraan]" class="form-control mr-2 my-select">
+                                                <option value="">-- Pilih Perkiraan --</option>
+                                                @foreach($perkiraan as $k)
+                                                    <option value="{{ $k->id }}">{{ $k->perkiraan }}.{{ $k->sub_perkiraan }} - {{ $k->nm_perkiraan }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="form-group col-12">
+                                            <select name="inputs[0][akuntansi_to]" class="form-control mr-2">
+                                                <option value="">-- Pilih --</option>
+                                                <option value="D">DEBET</option>
+                                                <option value="K">KREDIT</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="form-group col-12">
+                                            <input type="hidden" name="inputs[0][no_kas_masuk]" value="{{ $kas_masuk->no_kas_masuk }}">
+                                            <input type="text" name="inputs[0][total]" class="form-control">
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="form-group col-12">
+                                            <a type="button" class="btn btn-primary m-1" id="add"><i class="fas fa-plus"></i></a>                                                                                  
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                            <div class="float-right">
+                                <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Data</button>                           
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
 @endsection
 
@@ -118,17 +123,17 @@
             $('#table').append(`<tr>
                 <td class="text-center">
                     <div class="form-group col-12">
-                        <select name="inputs[${i}][part_no]" class="form-control mr-2 my-select-1" id="package-${i}">
+                        <select name="inputs[${i}][perkiraan]" class="form-control mr-2 my-select-1">
                             <option value="">-- Pilih Perkiraan --</option>
                             @foreach($perkiraan as $k)
-                                <option value="{{ $k->perkiraan }}"> {{ $k->perkiraan }}.{{ $k->sub_perkiraan }}</option>
+                                <option value="{{ $k->id }}">{{ $k->perkiraan }}.{{ $k->sub_perkiraan }} - {{ $k->nm_perkiraan }}</option>
                             @endforeach
                         </select>
                     </div>
                 </td>
                 <td class="text-center">
                     <div class="form-group col-12">
-                        <select name="inputs[${i}][part_no]" class="form-control mr-2">
+                        <select name="inputs[${i}][akuntansi_to]" class="form-control mr-2">
                             <option value="">-- Pilih --</option>
                             <option value="D">DEBET</option>
                             <option value="K">KREDIT</option>
@@ -137,7 +142,8 @@
                 </td>
                 <td class="text-center">
                     <div class="form-group col-12">
-                        <input type="text" id="stok-${i}" name="stok" for="stok" class="form-control">
+                        <input type="hidden" name="inputs[${i}][no_kas_masuk]" value="{{ $kas_masuk->no_kas_masuk }}">
+                        <input type="text" name="inputs[${i}][total]" class="form-control">
                     </div>
                 </td>
                 <td class="text-center">

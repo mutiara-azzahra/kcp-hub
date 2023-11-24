@@ -6,6 +6,7 @@ use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\KasMasukHeader;
+use App\Models\KasMasukDetails;
 use App\Models\MasterKodeRak;
 use App\Models\MasterOutlet;
 use App\Models\MasterPerkiraan;
@@ -107,49 +108,30 @@ class KasMasukController extends Controller
         }
     }
 
-    public function edit($id)
-    {
-        $master_part_id = KasMasukHeader::findOrFail($id);
-        $kode_rak       = MasterKodeRak::where('status', 'A')->get();
+    public function store_details(Request $request){
 
-        return view('kas-masuk.update',compact('master_part_id', 'kode_rak'));
-    }
-
-    public function delete($id)
-    {
-        $updated = KasMasukHeader::where('id', $id)->update([
-                'status'         => 'N',
-                'updated_at'     => NOW(),
-                'updated_by'     => Auth::user()->nama_user
+        $request->validate([
+            'inputs.*.no_kas_masuk' => 'required',
+            'inputs.*.perkiraan'    => 'required',
+            'inputs.*.akuntansi_to' => 'required',
+            'inputs.*.total'        => 'required',
+        ]);
+        
+        foreach ($request->inputs as $key => $value) {
+            $perkiraan = MasterPerkiraan::findOrFail($value['perkiraan']);
+        
+            KasMasukDetails::create([
+                'no_kas_masuk'  => $value['no_kas_masuk'],
+                'perkiraan'     => $perkiraan ? $perkiraan->perkiraan . '.' . $perkiraan->sub_perkiraan : null,
+                'akuntansi_to'  => $value['akuntansi_to'],
+                'total'         => $value['total'],
+                'created_at'    => NOW(),
             ]);
-
-        if ($updated){
-            return redirect()->route('master-part.index')->with('success','Master part berhasil dihapus!');
-        } else{
-            return redirect()->route('master-part.index')->with('danger','Master part gagal dihapus');
         }
+            
+        
+        return redirect()->route('kas-masuk.index')->with('success','Data kas masuk baru berhasil ditambahkan!');
         
     }
-
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'part_no'       => 'required',
-            'part_nama'     => 'required',
-            'het'           => 'required|integer',
-            'satuan_dus'    => 'required|integer',
-        ]);
-
-        $masterPart = KasMasukHeader::find($id);
-
-        if (!$masterPart) {
-            return redirect()->route('master-part.index')->with('danger', 'Data master part tidak ditemukan');
-        }
-
-        $masterPart->update($request->all());
-
-        return redirect()->route('master-part.index')->with('success', 'Data master part berhasil diubah');
-    }
-
 
 }
