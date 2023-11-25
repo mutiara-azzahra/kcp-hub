@@ -17,9 +17,9 @@ class TransaksiKasKeluarDetails extends Model
         'no_keluar', 'perkiraan', 'akuntansi_to', 'total', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'
     ];
 
-    public function perkiraan()
+    public function details_perkiraan()
     {
-        return $this->hasOne(MasterPerkiraan::class, 'perkiraan', 'id_perkiraan');
+        return $this->belongsTo(MasterPerkiraan::class, 'perkiraan', 'id_perkiraan');
     }
 
 }

@@ -70,7 +70,7 @@
                                 @foreach($kas_keluar->details_keluar as $i)
                                 <tr>
                                     <td class="text-left">
-                                        {{ $i }} - {{ $i->perkiraan }}
+                                        {{ $i->details_perkiraan->id_perkiraan }} - {{ $i->details_perkiraan->nm_sub_perkiraan }}
                                     </td>
                                     <td class="text-center">
                                         @if($i->akuntansi_to == 'D')

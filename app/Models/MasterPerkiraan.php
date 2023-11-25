@@ -18,4 +18,9 @@ class MasterPerkiraan extends Model
         'head_kategori', 'kategori', 'keterangan', 'saldo', 'sts_perkiraan', 'status', 
         'crea_date', 'crea_by', 'modi_date', 'modi_by'
     ];
+
+    public function details_keluar()
+    {
+        return $this->hasMany(TransaksiKasKeluarDetails::class, 'id_perkiraan', 'perkiraan');
+    }
 }
