@@ -14,7 +14,7 @@ class MasterPerkiraan extends Model
 
 
     protected $fillable = [
-        'nm_perkiraan', 'perkiraan', 'nm_sub_perkiraan', 'sub_perkiraan', 'flag_head', 
+        'nm_perkiraan', 'id_perkiraan', 'perkiraan', 'nm_sub_perkiraan', 'sub_perkiraan', 'flag_head', 
         'head_kategori', 'kategori', 'keterangan', 'saldo', 'sts_perkiraan', 'status', 
         'crea_date', 'crea_by', 'modi_date', 'modi_by'
     ];

@@ -276,11 +276,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/kas-masuk/store-details', [KasMasukController::class, 'store_details'])->name('kas-masuk.store-details');
     Route::get('/kas-masuk/bukti-bayar', [KasMasukController::class, 'bukti_bayar'])->name('kas-masuk.bukti-bayar');
     Route::get('/kas-masuk/pembayaran-manual', [KasMasukController::class, 'pembayaran_manual'])->name('kas-masuk.bayar_manual');
+    Route::get('/kas-masuk/cetak/{no_kas_masuk}', [KasMasukController::class, 'cetak'])->name('kas-masuk.cetak');
 
     //KAS KELUAR
     Route::get('/kas-keluar', [KasKeluarController::class, 'index'])->name('kas-keluar.index');
     Route::get('/kas-keluar/create', [KasKeluarController::class, 'create'])->name('kas-keluar.create');
     Route::post('/kas-keluar/store', [KasKeluarController::class, 'store'])->name('kas-keluar.store');
+    Route::get('/kas-keluar/details/{no_keluar}', [KasKeluarController::class, 'details'])->name('kas-keluar.details');
+    Route::post('/kas-keluar/store-details', [KasKeluarController::class, 'store_details'])->name('kas-keluar.store-details');
+    Route::get('/kas-keluar/show/{no_keluar}', [KasKeluarController::class, 'show'])->name('kas-keluar.show');
 
     //KODE RAK LOKASI
     Route::get('/kode-rak-lokasi', [KodeRakLokasiController::class, 'index'])->name('kode-rak-lokasi.index');

@@ -33,11 +33,10 @@
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
                             <th class="text-center">No</th>
-                            <th class="text-center">Invoice Non AOP</th>
-                            <th class="text-center">Tanggal Nota</th>
-                            <th class="text-center">Customer To</th>
-                            <th class="text-center">Supplier</th>
-                            <th class="text-center">Total Harga</th>
+                            <th class="text-center">No. Kas Keluar</th>
+                            <th class="text-center">Pembayaran</th>
+                            <th class="text-center">Keterangan</th>
+                            <th class="text-center">Total</th>
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
@@ -49,10 +48,13 @@
                         @foreach($kas_keluar as $p)
                         <tr>
                             <td class="text-center">{{ $no++ }}.</td>
-                            <td class="text-left">{{ $p->no_kas_masuk }}</td>
-                            <td class="text-left">{{ $p->kd_outlet }}</td>
-                            <td class="text-left">{{ $p->pembayaran_via }}</td>
-                            <td class="text-left">Rp. {{ number_format($p->nominal, 0, ',', '.') }}</td>
+                            <td class="text-left">{{ $p->no_keluar }}</td>
+                            <td class="text-left">{{ $p->pembayaran }}</td>
+                            <td class="text-left">{{ $p->keterangan }}</td>
+                            <td class="text-left">Rp. {{ number_format($p->details_keluar->where('akuntansi_to', 'D')->sum('total'), 0, ',', '.') }}</td>
+                            <td class="text-center">
+                                <a class="btn btn-info btn-sm" href="{{ route('kas-keluar.show', $p->no_keluar)}}"><i class="fas fa-eye"></i></a>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

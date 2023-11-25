@@ -32,13 +32,13 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <strong>Tanggal Transaksi</strong>
-                            <input type="date" name="tanggal_rincian_tagihan" class="form-control">
+                            <input type="date" name="trx_date" class="form-control">
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <strong>Terima Dari</strong>
-                            <input type="text" name="terima_dari" class="form-control" placeholder="Isi terima dari">
+                            <strong>Pembayaran</strong>
+                            <input type="text" name="pembayaran" class="form-control" placeholder="Isi pembayaran">
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -62,49 +62,5 @@
 @endsection
 
 @section('script')
-
-    <script>
-      $(function () {
-        $("#example1")
-          .DataTable({
-            paging: true,
-            responsive: true,
-            lengthChange: false,
-            autoWidth: false,
-            buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
-          })
-          .buttons()
-          .container()
-          .appendTo("#example1_wrapper .col-md-6:eq(0)")
-                  
-        $("#example2").DataTable({
-          paging: true,
-          lengthChange: false,
-          searching: false,
-          ordering: true,
-          info: true,
-          autoWidth: false,
-          responsive: true,
-        });
-      });
-    </script>
-    
-    <script>
-    $(document).ready(function() {
-        $('#tanggal_awal').change(function() {
-            var selectedDate = $(this).val();
-            
-            if (selectedDate) {
-                // Get the year and month from the selected date
-                var year = selectedDate.split('-')[0];
-                var month = selectedDate.split('-')[1];
-                
-                // Set the date input to the first day of the selected month
-                var firstDayOfMonth = year + '-' + month + '-01';
-                $(this).val(firstDayOfMonth);
-            }
-        });
-    });
-    </script>
 
 @endsection

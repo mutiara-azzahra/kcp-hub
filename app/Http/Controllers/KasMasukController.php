@@ -33,14 +33,6 @@ class KasMasukController extends Controller
         return view('kas-masuk.bayar-manual', compact('master_outlet'));
     }
 
-    public function show($id){
-
-         $master_part_id = KasMasukHeader::findOrFail($id);
-
-        return view('kas-masuk.show', compact('master_part_id'));
-       
-    }
-
     public function store_bukti_bayar(Request $request){
 
         $request -> validate([
@@ -123,6 +115,7 @@ class KasMasukController extends Controller
             KasMasukDetails::create([
                 'no_kas_masuk'  => $value['no_kas_masuk'],
                 'perkiraan'     => $perkiraan ? $perkiraan->perkiraan . '.' . $perkiraan->sub_perkiraan : null,
+                'sub_perkiraan' => $perkiraan->sub_perkiraan,
                 'akuntansi_to'  => $value['akuntansi_to'],
                 'total'         => $value['total'],
                 'created_at'    => NOW(),
@@ -133,5 +126,7 @@ class KasMasukController extends Controller
         return redirect()->route('kas-masuk.index')->with('success','Data kas masuk baru berhasil ditambahkan!');
         
     }
+
+    
 
 }

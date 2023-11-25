@@ -39,6 +39,7 @@
                             <th class="text-center">Kode Toko</th>
                             <th class="text-center">Pembayaran Via</th>
                             <th class="text-center">Nominal</th>
+                            <th class="text-center"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -53,6 +54,9 @@
                         <td class="text-left">{{ $p->kd_outlet }}</td>
                         <td class="text-left">{{ $p->pembayaran_via }}</td>
                         <td class="text-left">Rp. {{ number_format($p->nominal, 0, ',', '.') }}</td>
+                        <td class="text-center">
+                            <a class="btn btn-warning btn-sm" href="{{ route('kas-masuk.cetak', $p->no_kas_masuk) }}"><i class="fas fa-print"></i></a>
+                        </td>
                     </tr>
                     @endforeach
                     </tbody>

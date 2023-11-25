@@ -14,8 +14,19 @@ class TransaksiKasKeluarHeader extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [ 
-        'no_keluar', 'divisi', 'pembayaran', 'keterangan', 'amount_total', 'flag_cetak', 'flag_batal', 'trx_date', 'status', 
-        'created_at', 'updated_at', 'created_by', 'updated_by'
+        'no_keluar',
+        'divisi',
+        'pembayaran',
+        'keterangan',
+        'amount_total',
+        'flag_cetak',
+        'flag_batal',
+        'trx_date',
+        'status', 
+        'created_at',
+        'updated_at',
+        'created_by',
+        'updated_by'
     ];
 
     public static function no_keluar()
@@ -44,5 +55,10 @@ class TransaksiKasKeluarHeader extends Model
         $newCustomId = 'KLR-' . $currentYear . $currentMonth . '-' . str_pad($newNumber, 5, '0', STR_PAD_LEFT);
 
         return $newCustomId;
+    }
+
+    public function details_keluar()
+    {
+        return $this->hasMany(TransaksiKasKeluarDetails::class, 'no_keluar', 'no_keluar');
     }
 }

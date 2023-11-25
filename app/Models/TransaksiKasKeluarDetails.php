@@ -16,4 +16,10 @@ class TransaksiKasKeluarDetails extends Model
     protected $fillable = [ 
         'no_keluar', 'perkiraan', 'akuntansi_to', 'total', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'
     ];
+
+    public function perkiraan()
+    {
+        return $this->hasOne(MasterPerkiraan::class, 'perkiraan', 'id_perkiraan');
+    }
+
 }
