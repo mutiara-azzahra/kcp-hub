@@ -152,6 +152,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/pembayaran-non-aop', [PembayaranController::class, 'index'])->name('pembayaran-non-aop.index');
     Route::get('/pembayaran-non-aop/pembayaran/{invoice_aop}', [PembayaranController::class, 'pembayaran'])->name('pembayaran-non-aop.pembayaran');
     Route::post('/pembayaran-non-aop/pembayaran', [PembayaranController::class, 'store_pembayaran'])->name('pembayaran-non-aop.pembayaran-store');
+    Route::get('/pembayaran-non-aop/pembayaran-nota/{invoice_aop}', [PembayaranController::class, 'pembayaran_nota'])->name('pembayaran-non-aop.pembayaran-nota');
+    Route::post('/pembayaran-non-aop/pembayaran-nota', [PembayaranController::class, 'store_pembayaran_balance'])->name('pembayaran-non-aop.pembayaran-store-balance');
 
     //ROUTE SP
     Route::get('/surat-pesanan', [SuratPesananController::class, 'index'])->name('surat-pesanan.index');
