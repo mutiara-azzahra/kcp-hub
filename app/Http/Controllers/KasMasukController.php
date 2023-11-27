@@ -15,7 +15,7 @@ class KasMasukController extends Controller
 {
     public function index(){
 
-        $kas_masuk = KasMasukHeader::all();
+        $kas_masuk = KasMasukHeader::orderBy('no_kas_masuk', 'desc')->get();
 
         return view('kas-masuk.index', compact('kas_masuk'));
     }
@@ -94,7 +94,7 @@ class KasMasukController extends Controller
         $created = KasMasukHeader::create($request->all());
 
         if ($created){
-            return redirect()->route('kas-masuk.details')->with('success','Kas masuhk berhasil ditambahkan');
+            return redirect()->route('kas-masuk.index')->with('success','Kas masuhk berhasil ditambahkan');
         } else{
             return redirect()->route('kas-masuk.index')->with('danger','Kas masuk gagal ditambahkan');
         }

@@ -15,7 +15,7 @@ class KasKeluarController extends Controller
 {
     public function index(){
 
-        $kas_keluar = TransaksiKasKeluarHeader::all();
+        $kas_keluar = TransaksiKasKeluarHeader::orderBy('no_keluar', 'desc')->get();
 
         return view('kas-keluar.index', compact('kas_keluar'));
     }
