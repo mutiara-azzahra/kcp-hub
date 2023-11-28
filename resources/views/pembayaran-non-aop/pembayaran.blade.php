@@ -40,6 +40,17 @@
                         </select>
                     </div>
                 </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="">Trx. From</label>
+                        <select name="trx_from" class="form-control my-select" >
+                            <option value="">---Pilih Kas Keluar--</option>
+                            @foreach($kas_keluar as $a)
+                                <option value="{{ $a->no_keluar }}">{{ $a->no_keluar }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                     <div class="float-right">
                         <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Data</button>                           

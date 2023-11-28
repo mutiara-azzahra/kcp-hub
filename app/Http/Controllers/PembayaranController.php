@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\InvoiceNonHeader;
 use App\Models\InvoiceNonDetails;
 use App\Models\NotaDetails;
+use App\Models\TransaksiKasKeluarHeader;
 
 class PembayaranController extends Controller
 {
@@ -21,14 +22,16 @@ class PembayaranController extends Controller
 
     public function pembayaran($invoice_non){
 
-        $bayar = InvoiceNonHeader::where('invoice_non', $invoice_non)->get();
+        $bayar      = InvoiceNonHeader::where('invoice_non', $invoice_non)->get();
+        $kas_keluar = TransaksiKasKeluarHeader::orderBy('no_keluar', 'desc')->get();
  
-        return view('pembayaran-non-aop.pembayaran',['invoice_non' => $invoice_non, 'bayar' => $bayar]);
+        return view('pembayaran-non-aop.pembayaran',['invoice_non' => $invoice_non, 'bayar' => $bayar,'kas_keluar' => $kas_keluar ]);
     }
 
     public function store_pembayaran(Request $request){
 
         $created = InvoiceNonHeader::where('invoice_non', $request->invoice_non)->update([
+            'trx_from'               => $request->trx_from,
             'flag_pembayaran_via'    => $request->flag_pembayaran_via,
             'flag_pembayaran'        => 'Y',
             'flag_pembayaran_date'   => NOW(),

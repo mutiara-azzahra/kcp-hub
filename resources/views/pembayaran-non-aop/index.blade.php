@@ -69,7 +69,7 @@
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
                             <th class="text-center">Tgl. Jatuh Tempo</th>
-                            <th class="text-center">Group Pembayaran</th>
+                            <!-- <th class="text-center">Group Pembayaran</th> -->
                             <th class="text-center">Customer To</th>
                             <th class="text-center">Supplier</th>
                             <th class="text-center">Amt. Nota</th>
@@ -85,11 +85,11 @@
                         @foreach($list_sudah_bayar as $s)
                         <tr>
                             <td class="text-left">{{ $s->tanggal_jatuh_tempo }}</td>
-                            <td class="text-left">{{ $s->grup_pembayaran }}</td>
+                            <!-- <td class="text-left">{{ $s->grup_pembayaran }}</td> -->
                             <td class="text-left">{{ $s->customer_to }}</td>
                             <td class="text-left">{{ $s->supplier }}</td>
                             <td class="text-left">Rp. {{ number_format($s->details_nota->sum('amount_nota'), 2, ',', '.') }}</td>
-                            <td class="text-center">{{ $s->flag_pembayaran_via }} | {{ $p->trx_from }}</td>
+                            <td class="text-center">{{ $s->flag_pembayaran_via }} | {{ $s->trx_from }}</td>
                             <td class="text-left">
                                 <a class="btn btn-warning btn-sm" href=""><i class="fas fa-print"></i></a>
                                 <a class="btn btn-primary btn-sm" href=""><i class="fas fa-info"></i></a>
