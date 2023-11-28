@@ -72,7 +72,7 @@
                             <th class="text-center">Group Pembayaran</th>
                             <th class="text-center">Customer To</th>
                             <th class="text-center">Supplier</th>
-                            <th class="text-center">Total Amount</th>
+                            <th class="text-center">Amt. Nota</th>
                             <th class="text-center">Pembayaran Via | Trx. From</th>
                             <th class="text-center">Aksi</th>
                         </tr>
@@ -88,7 +88,7 @@
                             <td class="text-left">{{ $s->grup_pembayaran }}</td>
                             <td class="text-left">{{ $s->customer_to }}</td>
                             <td class="text-left">{{ $s->supplier }}</td>
-                            <td class="text-left">{{ $s->total_amount }}</td>
+                            <td class="text-left">Rp. {{ number_format($s->details_nota->sum('amount_nota'), 2, ',', '.') }}</td>
                             <td class="text-center">{{ $s->flag_pembayaran_via }} | {{ $p->trx_from }}</td>
                             <td class="text-left">
                                 <a class="btn btn-warning btn-sm" href=""><i class="fas fa-print"></i></a>

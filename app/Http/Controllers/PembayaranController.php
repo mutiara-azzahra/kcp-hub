@@ -22,25 +22,34 @@ class PembayaranController extends Controller
     public function pembayaran($invoice_non){
 
         $bayar = InvoiceNonHeader::where('invoice_non', $invoice_non)->get();
-
-        return view('pembayaran-non-aop.pembayaran', compact('bayar'));
+ 
+        return view('pembayaran-non-aop.pembayaran',['invoice_non' => $invoice_non, 'bayar' => $bayar]);
     }
 
-    public function store_pembayaran($invoice_non){
+    public function store_pembayaran(Request $request){
 
-        $bayar = InvoiceNonHeader::where('invoice_non', $invoice_non)->first();
+        $created = InvoiceNonHeader::where('invoice_non', $request->invoice_non)->update([
+            'flag_pembayaran_via'    => $request->flag_pembayaran_via,
+            'flag_pembayaran'        => 'Y',
+            'flag_pembayaran_date'   => NOW(),
+            'updated_at'             => NOW(),
+            'updated_by'             => Auth::user()->nama_user
+        ]);
 
-        $bayar = InvoiceNonHeader::bayar();
-
-        return view('pembayaran-non-aop.index', compact('list_belum_bayar', 'list_sudah_bayar'));
+        if ($created){
+            return redirect()->route('pembayaran-non-aop.index')->with('success', 'Data pembayaran berhasil diubah!');
+        } else{
+            return redirect()->route('pembayaran-non-aop.index')->with('danger','Data pemabayaran gagal diubah');
+        }
     }
 
     public function pembayaran_nota($invoice_non){
 
         $header       = InvoiceNonHeader::where('invoice_non', $invoice_non)->first();
         $nota_details = InvoiceNonDetails::where('invoice_non', $invoice_non)->get();
+        $nota         = NotaDetails::where('invoice_non', $invoice_non)->first();
 
-        return view('pembayaran-non-aop.edit', compact('header', 'nota_details'));
+        return view('pembayaran-non-aop.edit', compact('header', 'nota_details', 'nota'));
     }
 
     public function store_pembayaran_balance(Request $request) {
@@ -79,7 +88,7 @@ class PembayaranController extends Controller
     
         $inserted = NotaDetails::insert($details);
     
-        if ($created){
+        if ($inserted){
             return redirect()->route('pembayaran-non-aop.index')->with('success', 'Data balancing nota pembayaran berhasil ditambahkan');
         } else{
             return redirect()->route('pembayaran-non-aop.index')->with('danger','Data baru gagal ditambahkan');

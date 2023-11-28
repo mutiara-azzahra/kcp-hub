@@ -8,7 +8,7 @@
                 <h4>Group Pembayaran Non AOP</h4>
             </div>
             <div class="float-right">
-                    <a class="btn btn-success" href="{{ route('pembayaran-non-aop.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
+                <a class="btn btn-success" href="{{ route('pembayaran-non-aop.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
             </div>
         </div>
     </div>
@@ -31,11 +31,12 @@
                 <div class="row">
                     <div class="form-group col-12">
                         <label for="">Pembayaran Via</label>
-                        <select name="customer_to" class="form-control mr-2">
+                        <input type="hidden" name="invoice_non" value="{{ $invoice_non }}">
+                        <select name="flag_pembayaran_via" class="form-control mr-2">
                             <option value="">-- Pilih Pembayaran --</option>
-                            <option value="">CASH</option>
-                            <option value="">TRANSFER</option>
-                            <option value="">BG</option>
+                            <option value="CASH">CASH</option>
+                            <option value="TRANSFER">TRANSFER</option>
+                            <option value="BG">BG</option>
                         </select>
                     </div>
                 </div>
@@ -75,8 +76,8 @@
                             <td class="text-left">{{ $b->customer_to }}</td>
                             <td class="text-left">{{ $b->supplier }}</td>
                             <td class="text-left">{{ $b->tanggal_jatuh_tempo }}</td>
-                            <td class="text-right">Rp. {{ number_format($b->details_pembelian->sum('total_amount'), 0, ',', '.') }}</td>
-                            <td class="text-right"></td>
+                            <td class="text-right">Rp. {{ number_format($b->details_pembelian->sum('total_amount'), 3, ',', '.') }}</td>
+                            <td class="text-right">Rp. {{ number_format($b->details_nota->sum('amount_nota'), 3, ',', '.') }}</td>
                         </tr>
                     @endforeach
                 </tbody>

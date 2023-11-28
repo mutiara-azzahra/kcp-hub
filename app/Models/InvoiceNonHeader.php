@@ -43,6 +43,11 @@ class InvoiceNonHeader extends Model
         return $this->hasMany(InvoiceNonDetails::class, 'invoice_non', 'invoice_non');
     }
 
+    public function details_nota()
+    {
+        return $this->hasMany(NotaDetails::class, 'invoice_non', 'invoice_non');
+    }
+
     public static function bayar()
     {
         $now = Carbon::now();

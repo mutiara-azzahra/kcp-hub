@@ -23,6 +23,8 @@
         </div>
     @endif
 
+
+    @if($nota === null)
     <div class="card" style="padding: 10px;">
         <div class="card-body">
             <div class="col-lg-12">
@@ -110,6 +112,47 @@
             </form>
         </div>
     </div>
+
+    @else
+
+    <div class="card" style="padding: 10px;">
+        <div class="card-body">
+            <div class="col-lg-12">  
+                <table class="table table-hover table-bordered table-sm bg-light table-striped">
+                    <thead>
+                        <tr style="background-color: #6082B6; color:white">
+                            <th class="text-center">Part No</th>
+                            <th class="text-center">Qty</th>
+                            <th class="text-center">Disc (%)</th>
+                            <th class="text-center">Amt. Nota</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                        $no=1;
+                        @endphp
+
+                        @foreach($header->details_nota as $s)
+                        <tr>
+                            <td class="text-left">{{ $s->part_no }}</td>
+                            <td class="text-right">{{ $s->qty }}</td>
+                            <td class="text-right">{{ $s->diskon_nominal }}</td>
+                            <td class="text-right">Rp. {{ number_format($s->amount_nota, 2, ',', '.') }}</td>
+                        </tr>
+                        @endforeach
+                        <tr>
+                            <td class="text-center" colspan="3"><b>TOTAL</b></td>
+                            <td class="text-right"><b>Rp. {{ number_format($s->sum('amount_nota'), 2, ',', '.') }}</b></td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    
+    @endif
 </div>
 @endsection
 
