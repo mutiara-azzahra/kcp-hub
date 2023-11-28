@@ -26,8 +26,8 @@ class NotaDetails extends Model
         'total_diskon_persen',
         'total_amount',
         'amount_nota',
-        'create_at',
-        'update_at',
+        'created_at',
+        'updated_at',
         'created_by', 
         'updated_by'
     ];

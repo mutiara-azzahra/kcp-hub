@@ -26,7 +26,7 @@
     <div class="card" style="padding: 10px;">
         <div class="card-body">
             <div class="col-lg-12">
-                <form action="{{ route('pembelian-non-aop.store_details', $header->invoice_non )}}" method="POST">
+                <form action="{{ route('pembayaran-non-aop.pembayaran-store-balance', $header->invoice_non )}}" method="POST">
                     @csrf
                     <table class="table table-hover table-bordered table-sm bg-light" id="table">
                         <thead>
@@ -50,7 +50,7 @@
                         <tr>
                             <td>
                                 <div class="form-group col-12">
-                                    <input type="hidden" name="invoice_non" value="{{ $header->invoice_non }}">
+                                    <input type="hidden" name="invoice_non[]" value="{{ $header->invoice_non }}">
                                     <input type="text" name="part_no[]" class="form-control" value="{{ $t->part_no }}" readonly>
                                 </div>
                             </td>

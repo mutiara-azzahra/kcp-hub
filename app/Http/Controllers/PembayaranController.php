@@ -43,32 +43,24 @@ class PembayaranController extends Controller
         return view('pembayaran-non-aop.edit', compact('header', 'nota_details'));
     }
 
-    // public function store_pembayaran_balance($invoice_non){
-
-    //     $bayar = InvoiceNonHeader::where('invoice_non', $invoice_non)->first();
-
-    //     $bayar = InvoiceNonHeader::bayar();
-
-    //     return view('pembayaran-non-aop.index', compact('list_belum_bayar', 'list_sudah_bayar'));
-    // }
-
     public function store_pembayaran_balance(Request $request) {
-        $invoice_non    = $request->input('invoice_non');
+
+        $invoice_nons   = $request->input('invoice_non');
         $part_nos       = $request->input('part_no');
         $qtys           = $request->input('qty');
-        $hets           = $request->input('harga');
-        $discs          = $request->input('disc');
+        $discs          = $request->input('diskon_nominal');
         $total_amounts  = $request->input('total_amount');
         $amount_notas   = $request->input('amount_nota');
     
         $details        = [];
-    
+
         foreach ($part_nos as $index => $part_no) {
+            $invoice_non  = $invoice_nons[$index];
+            $part_no      = $part_nos[$index];
             $qty          = $qtys[$index];
-            $het          = $hets[$index];
             $disc         = $discs[$index];
-            $total_amount = $discs[$index];
-            $amount_nota  = $amount_notas[$index];
+            $total_amount = $total_amounts[$index];
+            $amount_nota    = str_replace('.', '', $amount_notas[$index]);
     
             $detail = [
                 'invoice_non'    => $invoice_non,
@@ -76,15 +68,22 @@ class PembayaranController extends Controller
                 'qty'            => $qty,
                 'diskon_nominal' => $disc,
                 'total_amount'   => $total_amount,
-                'amount_nota'    => $amount_nota,
+                'amount_nota'    => str_replace(',', '.', $amount_nota),
+                'created_at'     => NOW(),
+                'updated_at'     => NOW(),
             ];
     
             $details[] = $detail;
+
         }
     
-        NotaDetails::insert($details);
+        $inserted = NotaDetails::insert($details);
     
-        return redirect()->route('pembelian-non-aop.index')->with('success', 'Data balancing berhasil ditambahkan');
+        if ($created){
+            return redirect()->route('pembayaran-non-aop.index')->with('success', 'Data balancing nota pembayaran berhasil ditambahkan');
+        } else{
+            return redirect()->route('pembayaran-non-aop.index')->with('danger','Data baru gagal ditambahkan');
+        }
     }
 
     
