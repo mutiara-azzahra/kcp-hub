@@ -117,38 +117,39 @@
 
 <script>
 
-function updateNominal(i) {
-    const amount  = parseFloat($('#amount-' + i).data('amount'));
-    const sign    = $('#sign-' + i).val();
-    const balance = parseFloat($('#balance-' + i).val());
+    function updateNominal(i) {
+        const amount  = parseFloat($('#amount-' + i).data('amount'));
+        const sign    = $('#sign-' + i).val();
+        const balance = parseFloat($('#balance-' + i).val());
 
-    let nominal = 0;
+        let nominal = 0;
 
-    if (sign === '+') {
-        nominal = amount + balance;
-    } else if (sign === '-') {
-        nominal = amount - balance;
-    } else {
-        console.error('Invalid sign');
-        return;
-    }
-
-    const formattedNominal = Number(nominal).toLocaleString('id-ID');
-    $('#nominal-' + i).val(formattedNominal);
-
-    let totalNominal = 0;
-
-    $('[id^=nominal-]').each(function () {
-        const value = $(this).val().replace(/,/g, '');
-        const parsedValue = parseFloat(value);
-        if (!isNaN(parsedValue)) {
-            totalNominal += parsedValue;
+        if (sign === '+') {
+            nominal = amount + balance;
+        } else if (sign === '-') {
+            nominal = amount - balance;
+        } else {
+            console.error('Invalid sign');
+            return;
         }
-    });
 
-    console.log(totalNominal)
+        const formattedNominal = Number(nominal).toLocaleString('id-ID');
+        $('#nominal-' + i).val(formattedNominal);
 
-    $('#totalNominal').val(Number(totalNominal).toLocaleString('id-ID'));
+        let totalNominal = 0;
+
+        $('[id^=nominal-]').each(function () {
+            const value         = $(this).val().replace(/,/g, '');
+            const parsedValue   = parseFloat(value.replace(/\./g, '').replace(/,/g, '.'));
+            if (!isNaN(parsedValue)) {
+                totalNominal += parsedValue;
+            }
+        });
+
+        console.log(totalNominal)
+
+        const totalDisplay = (Math.round(totalNominal) / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        $('#totalNominal').val(totalDisplay);
 
     }
 

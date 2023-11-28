@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\InvoiceNonHeader;
 use App\Models\InvoiceNonDetails;
+use App\Models\NotaDetails;
 
 class PembayaranController extends Controller
 {
@@ -83,7 +84,7 @@ class PembayaranController extends Controller
     
         NotaDetails::insert($details);
     
-        return redirect()->route('pembelian-non-aop.index')->with('success', 'Data baru berhasil ditambahkan');
+        return redirect()->route('pembelian-non-aop.index')->with('success', 'Data balancing berhasil ditambahkan');
     }
 
     
