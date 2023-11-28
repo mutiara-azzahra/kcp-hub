@@ -494,6 +494,7 @@
 
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- (Optional) Latest compiled and minified JavaScript translation files -->
   <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script> -->
   
@@ -510,6 +511,7 @@
   <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
   <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
   <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+  <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 
   <script>
       function closeAlertAfterTime(alertId, milliseconds) {
@@ -581,6 +583,7 @@
     $('.my-select').select2({
       width: '100%'
     });
+
   </script>
     
 

@@ -286,7 +286,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/kas-keluar/store', [KasKeluarController::class, 'store'])->name('kas-keluar.store');
     Route::get('/kas-keluar/details/{no_keluar}', [KasKeluarController::class, 'details'])->name('kas-keluar.details');
     Route::post('/kas-keluar/store-details', [KasKeluarController::class, 'store_details'])->name('kas-keluar.store-details');
+    Route::post('/kas-keluar/store-selesai', [KasKeluarController::class, 'store_kas_keluar'])->name('kas-keluar.store-selesai');
     Route::get('/kas-keluar/show/{no_keluar}', [KasKeluarController::class, 'show'])->name('kas-keluar.show');
+    Route::delete('/kas-keluar/delete/{id}', [KasKeluarController::class, 'delete'])->name('kas-keluar.delete');
 
     //KODE RAK LOKASI
     Route::get('/kode-rak-lokasi', [KodeRakLokasiController::class, 'index'])->name('kode-rak-lokasi.index');
@@ -300,7 +302,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/master-target', [MasterTargetController::class, 'store'])->name('master-target.store');
     Route::get('/master-target/create', [MasterTargetController::class, 'create'])->name('master-target.create');
     Route::get('/master-target/show/{id}', [MasterTargetController::class, 'show'])->name('master-target.show');
-    Route::get('/master-target/delete/{id}', [MasterTargetController::class, 'delete'])->name('master-target.delete');
+    Route::get('/master-target/delete/{id}/{no_keluar}', [MasterTargetController::class, 'delete'])->name('master-target.delete');
 
     //MST. SPV ACHIVEMENTS
     Route::get('/master-target-spv', [MasterTargetSpvController::class, 'index'])->name('master-target-spv.index');

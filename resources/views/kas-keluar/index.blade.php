@@ -54,6 +54,7 @@
                             <td class="text-left">Rp. {{ number_format($p->details_keluar->where('akuntansi_to', 'D')->sum('total'), 0, ',', '.') }}</td>
                             <td class="text-center">
                                 <a class="btn btn-info btn-sm" href="{{ route('kas-keluar.show', $p->no_keluar)}}"><i class="fas fa-eye"></i></a>
+                                <a class="btn btn-danger btn-sm" href="{{ route('kas-keluar.show', $p->no_keluar)}}"><i class="fas fa-times"></i></a>
                             </td>
                         </tr>
                         @endforeach

@@ -116,51 +116,71 @@
 @endsection
 
 @section('script')
-    <script>
-        var i = 0;
-        $('#add').click(function(){
-            ++i;
-            $('#table').append(`<tr>
-                <td class="text-center">
-                    <div class="form-group col-12">
-                        <select name="inputs[${i}][perkiraan]" class="form-control mr-2 my-select-1">
-                            <option value="">-- Pilih Perkiraan --</option>
-                            @foreach($perkiraan as $k)
-                                <option value="{{ $k->id }}">{{ $k->perkiraan }}.{{ $k->sub_perkiraan }} - {{ $k->nm_perkiraan }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </td>
-                <td class="text-center">
-                    <div class="form-group col-12">
-                        <select name="inputs[${i}][akuntansi_to]" class="form-control mr-2">
-                            <option value="">-- Pilih --</option>
-                            <option value="D">DEBET</option>
-                            <option value="K">KREDIT</option>
-                        </select>
-                    </div>
-                </td>
-                <td class="text-center">
-                    <div class="form-group col-12">
-                        <input type="hidden" name="inputs[${i}][no_keluar]" value="{{ $kas_keluar->no_keluar }}">
-                        <input type="text" name="inputs[${i}][total]" class="form-control">
-                    </div>
-                </td>
-                <td class="text-center">
-                    <div class="form-group col-12">
-                        <button type="submit" class="btn btn-danger remove-table-row"><i class="fas fa-minus"></i></button>
-                    </div>
-                </td>
-            </tr>
-            `);
-            $('.my-select-1').select2({
-                width: '100%'
-            });
-        });
 
-        $(document).on('click','.remove-table-row', function(){
-            $(this).parents('tr').remove();
-        })
-    </script>    
+<script>
+    var i = 0;
+    $('#add').click(function(){
+        ++i;
+        $('#table').append(`<tr>
+            <td class="text-center">
+                <div class="form-group col-12">
+                    <select name="inputs[${i}][perkiraan]" class="form-control mr-2 my-select-1">
+                        <option value="">-- Pilih Perkiraan --</option>
+                        @foreach($perkiraan as $k)
+                            <option value="{{ $k->id }}">{{ $k->perkiraan }}.{{ $k->sub_perkiraan }} - {{ $k->nm_perkiraan }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </td>
+            <td class="text-center">
+                <div class="form-group col-12">
+                    <select name="inputs[${i}][akuntansi_to]" class="form-control mr-2">
+                        <option value="">-- Pilih --</option>
+                        <option value="D">DEBET</option>
+                        <option value="K">KREDIT</option>
+                    </select>
+                </div>
+            </td>
+            <td class="text-center">
+                <div class="form-group col-12">
+                    <input type="hidden" name="inputs[${i}][no_keluar]" value="{{ $kas_keluar->no_keluar }}">
+                    <input type="text" name="inputs[${i}][total]" class="form-control">
+                </div>
+            </td>
+            <td class="text-center">
+                <div class="form-group col-12">
+                    <button type="submit" class="btn btn-danger remove-table-row"><i class="fas fa-minus"></i></button>
+                </div>
+            </td>
+        </tr>
+        `);
+        $('.my-select-1').select2({
+            width: '100%'
+        });
+    });
+
+    $(document).on('click','.remove-table-row', function(){
+        $(this).parents('tr').remove();
+    })
+
+
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success"
+            });
+        }
+    });
+</script>    
 
 @endsection
