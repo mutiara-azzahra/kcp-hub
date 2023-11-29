@@ -55,10 +55,12 @@ class MasterTargetSpvProdukController extends Controller
         }
     }
 
-    public function destroy($id)
+    public function delete($id)
     {
-        $deleted    = TargetSpvProduk::destroy($id);
+        dd($id);
+        //$deleted    = TargetSpvProduk::destroy($id);
 
-        return redirect()->route('master-target-spv-produk.index')->with('success', 'Data berhasil dihapus!');
+        return redirect()->route('master-target-spv-produk.index')->with('success', 'Data berhasil dihapus');
     }
+
 }

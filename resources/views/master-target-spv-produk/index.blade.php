@@ -47,15 +47,14 @@
                             <td class="text-center">{{ $no++ }}</td>
                             <td class="text-left">{{ $p->spv }}</td>
                             <td class="text-center">{{ $p->bulan }}</td>
-                            <td class="text-center">{{ $p->tahun }}</td>
+                            <td class="text-center">{{ $p->id }}</td>
                             <td class="text-right">Rp. {{ number_format($p->nominal, 0, ',', '.') }}</td>
                             <td class="text-center">
-                                <form action="{{ route('master-target-spv-produk.destroy',$p->id) }}" method="POST" id="form_delete">
-                                    <a class="btn btn-primary btn-sm" href="{{ route('master-target-spv-produk.edit',$p->id) }}"><i class="fas fa-edit"></i></a>
-                
+                                <form action="{{ route('master-target-spv-produk.delete', $p->id) }}" method="POST" id="form_delete">
+
                                     @csrf
                                     @method('DELETE')
-                
+                                    
                                     <a class="btn btn-danger btn-sm" onclick="Hapus('{{$p->id}}')"><i class="fas fa-times"></i></a>
                                 </form>
                             </td>
@@ -89,9 +88,8 @@
                 }
 
         })
-
-        console.log(id)
     }
 </script>
+
 
 @endsection
