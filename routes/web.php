@@ -35,6 +35,7 @@ use App\Http\Controllers\KodeRakLokasiController;
 use App\Http\Controllers\MonitoringController;
 use App\Http\Controllers\MasterTargetController;
 use App\Http\Controllers\MasterTargetSpvController;
+use App\Http\Controllers\MasterTargetSpvProdukController;
 use App\Http\Controllers\ReportLssController;
 use App\Http\Controllers\ModalDbpController;
 
@@ -310,6 +311,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/master-target-spv/create', [MasterTargetSpvController::class, 'create'])->name('master-target-spv.create');
     Route::get('/master-target-spv/show/{id}', [MasterTargetSpvController::class, 'show'])->name('master-target-spv.show');
     Route::get('/master-target-spv/delete/{id}', [MasterTargetSpvController::class, 'delete'])->name('master-target-spv.delete');
+
+    //MST. SPV BY PRDOCUT ACHIVEMENTS
+    Route::get('/master-target-spv-produk', [MasterTargetSpvProdukController::class, 'index'])->name('master-target-spv-produk.index');
+    Route::post('/master-target-spv-produk', [MasterTargetSpvProdukController::class, 'store'])->name('master-target-spv-produk.store');
+    Route::get('/master-target-spv-produk/create', [MasterTargetSpvProdukController::class, 'create'])->name('master-target-spv-produk.create');
+    Route::get('/master-target-spv-produk/show/{id}', [MasterTargetSpvProdukController::class, 'show'])->name('master-target-spv-produk.show');
+    Route::get('/master-target-spv-produk/delete/{id}', [MasterTargetSpvProdukController::class, 'delete'])->name('master-target-spv-produk.delete');
+    Route::get('/master-target-spv-produk/edit/{id}', [MasterTargetSpvProdukController::class, 'edit'])->name('master-target-spv-produk.edit');
 
     //MONITORING ACH. MARKETING
     Route::get('/monitoring', [MonitoringController::class, 'index'])->name('monitoring.index');

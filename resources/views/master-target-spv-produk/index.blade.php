@@ -8,10 +8,7 @@
                 <h4>Tambah Target SPV</h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-success m-1" href="{{ route('master-target-spv.create') }}"><i class="fas fa-plus"></i> Achievement SPV</a>
-            </div>
-            <div class="float-right">
-                <a class="btn btn-primary m-1" href="{{ route('master-target-spv-produk.index') }}"><i class="fas fa-plus"></i> Ach. Product SPV</a>
+                <a class="btn btn-success" href="{{ route('master-target-spv-produk.create') }}"><i class="fas fa-plus"></i> Tambah Achievement SPV</a>
             </div>
         </div>
     </div>
@@ -37,6 +34,7 @@
                             <th class="text-center">Bulan</th>
                             <th class="text-center">Tahun</th>
                             <th class="text-center">Nominal</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -51,6 +49,16 @@
                             <td class="text-center">{{ $p->bulan }}</td>
                             <td class="text-center">{{ $p->tahun }}</td>
                             <td class="text-right">Rp. {{ number_format($p->nominal, 0, ',', '.') }}</td>
+                            <td class="text-center">
+                                <form action="{{ route('master-target-spv-produk.destroy',$p->id) }}" method="POST">
+                                    <a class="btn btn-primary btn-sm" href="{{ route('master-target-spv-produk.edit',$p->id) }}"><i class="fas fa-edit"></i></a>
+                
+                                    @csrf
+                                    @method('DELETE')
+                
+                                    <a type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"><i class="fas fa-times"></i></a>
+                                </form>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

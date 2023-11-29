@@ -127,6 +127,236 @@
             </div>
         </div>
     </div>
+
+    <div class="card" style="padding: 2px;">
+        <div class="card-header">
+            <b>TARGET PRODUK ICHIDAI</b>
+        </div>
+        <div class="card-body table-responsive p-2">
+            <div class="col-lg-12">  
+                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example3" style="font-size: 12px;">
+                    <thead>
+                        <tr style="background-color: #6082B6; color:white">
+                            <th class="text-center"></th>
+                            <th class="text-center">Jan</th>
+                            <th class="text-center">Feb</th>
+                            <th class="text-center">Mar</th>
+                            <th class="text-center">Apr</th>
+                            <th class="text-center">Mei</th>
+                            <th class="text-center">Jun</th>
+                            <th class="text-center">Jul</th>
+                            <th class="text-center">Agt</th>
+                            <th class="text-center">Sep</th>
+                            <th class="text-center">Okt</th>
+                            <th class="text-center">Nov</th>
+                            <th class="text-center">Des</th>
+                        </tr>
+                    </thead>
+                    <tbody> 
+                        <tr>
+                            <td class="text-right" style="background-color: red; color:white">ACTUAL</td>
+                            <td class="text-right">{{ $jan_ich }}</td>
+                            <td class="text-right">{{ $feb_ich }}</td>
+                            <td class="text-right">{{ $mar_ich }}</td>
+                            <td class="text-right">{{ $apr_ich }}</td>
+                            <td class="text-right">{{ $may_ich }}</td>
+                            <td class="text-right">{{ $jun_ich }}</td>
+                            <td class="text-right">{{ $jul_ich }}</td>
+                            <td class="text-right">{{ $agu_ich }}</td>
+                            <td class="text-right">{{ $sep_ich }}</td>
+                            <td class="text-right">{{ $oct_ich }}</td>
+                            <td class="text-right">{{ $nov_ich }}</td>
+                            <td class="text-right">{{ $dec_ich }}</td>
+                        </tr> 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" style="padding: 2px;">
+        <div class="card-header">
+            <b>TARGET PRODUK BRIO</b>
+        </div>
+        <div class="card-body table-responsive p-2">
+            <div class="col-lg-12">  
+                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example3" style="font-size: 12px;">
+                    <thead>
+                        <tr style="background-color: #6082B6; color:white">
+                            <th class="text-center"></th>
+                            <th class="text-center">Jan</th>
+                            <th class="text-center">Feb</th>
+                            <th class="text-center">Mar</th>
+                            <th class="text-center">Apr</th>
+                            <th class="text-center">Mei</th>
+                            <th class="text-center">Jun</th>
+                            <th class="text-center">Jul</th>
+                            <th class="text-center">Agt</th>
+                            <th class="text-center">Sep</th>
+                            <th class="text-center">Okt</th>
+                            <th class="text-center">Nov</th>
+                            <th class="text-center">Des</th>
+                        </tr>
+                    </thead>
+                    <tbody>      
+                        <tr>
+                            <td class="text-right" style="background-color: red; color:white">ACTUAL</td>
+                            <td class="text-right">{{ $jan_bri }}</td>
+                            <td class="text-right">{{ $feb_bri }}</td>
+                            <td class="text-right">{{ $mar_bri }}</td>
+                            <td class="text-right">{{ $apr_bri }}</td>
+                            <td class="text-right">{{ $may_bri }}</td>
+                            <td class="text-right">{{ $jun_bri }}</td>
+                            <td class="text-right">{{ $jul_bri }}</td>
+                            <td class="text-right">{{ $agu_bri }}</td>
+                            <td class="text-right">{{ $sep_bri }}</td>
+                            <td class="text-right">{{ $oct_bri }}</td>
+                            <td class="text-right">{{ $nov_bri }}</td>
+                            <td class="text-right">{{ $dec_bri }}</td>
+                        </tr> 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" style="padding: 2px;">
+        <div class="card-header">
+            <b>TARGET PRODUK AIR ACCU</b>
+        </div>
+        <div class="card-body table-responsive p-2">
+            <div class="col-lg-12">  
+                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example3" style="font-size: 12px;">
+                    <thead>
+                        <tr style="background-color: #6082B6; color:white">
+                            <th class="text-center"></th>
+                            <th class="text-center">Jan</th>
+                            <th class="text-center">Feb</th>
+                            <th class="text-center">Mar</th>
+                            <th class="text-center">Apr</th>
+                            <th class="text-center">Mei</th>
+                            <th class="text-center">Jun</th>
+                            <th class="text-center">Jul</th>
+                            <th class="text-center">Agt</th>
+                            <th class="text-center">Sep</th>
+                            <th class="text-center">Okt</th>
+                            <th class="text-center">Nov</th>
+                            <th class="text-center">Des</th>
+                        </tr>
+                    </thead>
+                    <tbody>      
+                        <tr>
+                            <td class="text-right" style="background-color: red; color:white">ACTUAL</td>
+                            <td class="text-right">{{ $jan_acc }}</td>
+                            <td class="text-right">{{ $feb_acc }}</td>
+                            <td class="text-right">{{ $mar_acc }}</td>
+                            <td class="text-right">{{ $apr_acc }}</td>
+                            <td class="text-right">{{ $may_acc }}</td>
+                            <td class="text-right">{{ $jun_acc }}</td>
+                            <td class="text-right">{{ $jul_acc }}</td>
+                            <td class="text-right">{{ $agu_acc }}</td>
+                            <td class="text-right">{{ $sep_acc }}</td>
+                            <td class="text-right">{{ $oct_acc }}</td>
+                            <td class="text-right">{{ $nov_acc }}</td>
+                            <td class="text-right">{{ $dec_acc }}</td>
+                        </tr> 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" style="padding: 2px;">
+        <div class="card-header">
+            <b>TARGET PRODUK AIR COOLANT</b>
+        </div>
+        <div class="card-body table-responsive p-2">
+            <div class="col-lg-12">  
+                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example3" style="font-size: 12px;">
+                    <thead>
+                        <tr style="background-color: #6082B6; color:white">
+                            <th class="text-center"></th>
+                            <th class="text-center">Jan</th>
+                            <th class="text-center">Feb</th>
+                            <th class="text-center">Mar</th>
+                            <th class="text-center">Apr</th>
+                            <th class="text-center">Mei</th>
+                            <th class="text-center">Jun</th>
+                            <th class="text-center">Jul</th>
+                            <th class="text-center">Agt</th>
+                            <th class="text-center">Sep</th>
+                            <th class="text-center">Okt</th>
+                            <th class="text-center">Nov</th>
+                            <th class="text-center">Des</th>
+                        </tr>
+                    </thead>
+                    <tbody>      
+                        <tr>
+                            <td class="text-right" style="background-color: red; color:white">ACTUAL</td>
+                            <td class="text-right">{{ $jan_acl }}</td>
+                            <td class="text-right">{{ $feb_acl }}</td>
+                            <td class="text-right">{{ $mar_acl }}</td>
+                            <td class="text-right">{{ $apr_acl }}</td>
+                            <td class="text-right">{{ $may_acl }}</td>
+                            <td class="text-right">{{ $jun_acl }}</td>
+                            <td class="text-right">{{ $jul_acl }}</td>
+                            <td class="text-right">{{ $agu_acl }}</td>
+                            <td class="text-right">{{ $sep_acl }}</td>
+                            <td class="text-right">{{ $oct_acl }}</td>
+                            <td class="text-right">{{ $nov_acl }}</td>
+                            <td class="text-right">{{ $dec_acl }}</td>
+                        </tr> 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" style="padding: 2px;">
+        <div class="card-header">
+            <b>TARGET PRODUK PENTIL</b>
+        </div>
+        <div class="card-body table-responsive p-2">
+            <div class="col-lg-12">  
+                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example3" style="font-size: 12px;">
+                    <thead>
+                        <tr style="background-color: #6082B6; color:white">
+                            <th class="text-center"></th>
+                            <th class="text-center">Jan</th>
+                            <th class="text-center">Feb</th>
+                            <th class="text-center">Mar</th>
+                            <th class="text-center">Apr</th>
+                            <th class="text-center">Mei</th>
+                            <th class="text-center">Jun</th>
+                            <th class="text-center">Jul</th>
+                            <th class="text-center">Agt</th>
+                            <th class="text-center">Sep</th>
+                            <th class="text-center">Okt</th>
+                            <th class="text-center">Nov</th>
+                            <th class="text-center">Des</th>
+                        </tr>
+                    </thead>
+                    <tbody>      
+                        <tr>
+                            <td class="text-right" style="background-color: red; color:white">ACTUAL</td>
+                            <td class="text-right">{{ $jan_pen }}</td>
+                            <td class="text-right">{{ $feb_pen }}</td>
+                            <td class="text-right">{{ $mar_pen }}</td>
+                            <td class="text-right">{{ $apr_pen }}</td>
+                            <td class="text-right">{{ $may_pen }}</td>
+                            <td class="text-right">{{ $jun_pen }}</td>
+                            <td class="text-right">{{ $jul_pen }}</td>
+                            <td class="text-right">{{ $agu_pen }}</td>
+                            <td class="text-right">{{ $sep_pen }}</td>
+                            <td class="text-right">{{ $oct_pen }}</td>
+                            <td class="text-right">{{ $nov_pen }}</td>
+                            <td class="text-right">{{ $dec_pen }}</td>
+                        </tr> 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
 
