@@ -13,6 +13,6 @@ class TargetSpvProduk extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [ 
-        'spv', 'bulan', 'tahun', 'nominal', 'created_at', 'updated_at', 'created_by', 'updated_by'
+        'spv', 'kode_produk', 'bulan', 'tahun', 'nominal', 'created_at', 'updated_at', 'created_by', 'updated_by'
     ];
 }

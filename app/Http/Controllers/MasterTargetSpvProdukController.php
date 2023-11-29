@@ -40,6 +40,12 @@ class MasterTargetSpvProdukController extends Controller
             'nominal'    => 'required',
         ]);
 
+        // dd($request->all());
+
+        $nominal = str_replace('.', '', $request->input('nominal'));
+        $nominal = str_replace(',', '.', $nominal);
+        $request->merge(['nominal' => $nominal]);
+    
         $created = TargetSpvProduk::create($request->all());
 
         if ($created){
@@ -47,5 +53,12 @@ class MasterTargetSpvProdukController extends Controller
         } else{
             return redirect()->route('master-target-spv-produk.index')->with('danger','Data target produk SPV gagal ditambahkan');
         }
+    }
+
+    public function destroy($id)
+    {
+        $deleted    = TargetSpvProduk::destroy($id);
+
+        return redirect()->route('master-target-spv-produk.index')->with('success', 'Data berhasil dihapus!');
     }
 }

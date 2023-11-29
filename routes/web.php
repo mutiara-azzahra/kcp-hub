@@ -317,8 +317,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/master-target-spv-produk', [MasterTargetSpvProdukController::class, 'store'])->name('master-target-spv-produk.store');
     Route::get('/master-target-spv-produk/create', [MasterTargetSpvProdukController::class, 'create'])->name('master-target-spv-produk.create');
     Route::get('/master-target-spv-produk/show/{id}', [MasterTargetSpvProdukController::class, 'show'])->name('master-target-spv-produk.show');
-    Route::get('/master-target-spv-produk/delete/{id}', [MasterTargetSpvProdukController::class, 'delete'])->name('master-target-spv-produk.delete');
     Route::get('/master-target-spv-produk/edit/{id}', [MasterTargetSpvProdukController::class, 'edit'])->name('master-target-spv-produk.edit');
+    Route::delete('/master-target-spv-produk/destroy/{id}', [MasterTargetSpvProdukController::class, 'destroy'])->name('master-target-spv-produk.destroy');
 
     //MONITORING ACH. MARKETING
     Route::get('/monitoring', [MonitoringController::class, 'index'])->name('monitoring.index');

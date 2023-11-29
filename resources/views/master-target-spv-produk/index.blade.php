@@ -50,13 +50,13 @@
                             <td class="text-center">{{ $p->tahun }}</td>
                             <td class="text-right">Rp. {{ number_format($p->nominal, 0, ',', '.') }}</td>
                             <td class="text-center">
-                                <form action="{{ route('master-target-spv-produk.destroy',$p->id) }}" method="POST">
+                                <form action="{{ route('master-target-spv-produk.destroy',$p->id) }}" method="POST" id="form_delete">
                                     <a class="btn btn-primary btn-sm" href="{{ route('master-target-spv-produk.edit',$p->id) }}"><i class="fas fa-edit"></i></a>
                 
                                     @csrf
                                     @method('DELETE')
                 
-                                    <a type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')"><i class="fas fa-times"></i></a>
+                                    <a class="btn btn-danger btn-sm" onclick="Hapus('{{$p->id}}')"><i class="fas fa-times"></i></a>
                                 </form>
                             </td>
                         </tr>
@@ -70,5 +70,28 @@
 @endsection
 
 @section('script')
+
+
+<script>
+    Hapus = (id)=>{
+        Swal.fire({
+            title: 'Apa anda yakin menghapus data ini?',
+            text:  "menghapus notifikasi" ,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6' ,
+            cancelButtonColor: 'red' ,
+            confirmButtonText: 'hapus data' ,
+            cancelButtonText: 'batal' ,
+            reverseButtons: false
+            }).then((result) => {
+                if (result.value) {
+                    $('#form_delete').submit();
+                }
+
+        })
+
+        console.log(id)
+    }
+</script>
 
 @endsection
