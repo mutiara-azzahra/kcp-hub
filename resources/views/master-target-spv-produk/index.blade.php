@@ -5,7 +5,7 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4>Tambah Target SPV</h4>
+                <h4>Tambah Target SPV By Product</h4>
             </div>
             <div class="float-right">
                 <a class="btn btn-success" href="{{ route('master-target-spv-produk.create') }}"><i class="fas fa-plus"></i> Tambah Achievement SPV</a>
@@ -31,6 +31,7 @@
                         <tr style="background-color: #6082B6; color:white">
                             <th class="text-center">No</th>
                             <th class="text-center">SPV</th>
+                            <th class="text-center">Kode Produk</th>
                             <th class="text-center">Bulan</th>
                             <th class="text-center">Tahun</th>
                             <th class="text-center">Nominal</th>
@@ -46,14 +47,15 @@
                         <tr>
                             <td class="text-center">{{ $no++ }}</td>
                             <td class="text-left">{{ $p->spv }}</td>
+                            <td class="text-center">{{ $p->kode_produk }}</td>
                             <td class="text-center">{{ $p->bulan }}</td>
                             <td class="text-center">{{ $p->tahun }}</td>
                             <td class="text-right">Rp. {{ number_format($p->nominal, 0, ',', '.') }}</td>
                             <td class="text-center">
-                                <form action="{{ route('master-target-spv-produk.delete', ['id' => $p->id]) }}" method="POST" id="form_delete">
+                                <form action="{{ route('master-target-spv-produk.delete', $p->id) }}" method="POST" id="form_delete" data-id="{{ $p->id }}">
                                     @csrf
                                     @method('DELETE')
-                                    
+                                   
                                     <a class="btn btn-danger btn-sm" onclick="Hapus('{{ $p->id }}')"><i class="fas fa-times"></i></a>
                                 </form>
                             </td>
@@ -88,5 +90,7 @@
     }
 
 </script>
+
+
 
 @endsection
