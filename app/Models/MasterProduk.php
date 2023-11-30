@@ -5,24 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LssStok extends Model
+class MasterProduk extends Model
 {
     use HasFactory;
 
-    use HasFactory;
-
-    protected $table = 'lss_stok';
+    protected $table = 'master_produk';
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'bulan',
-        'tahun',
-        'produk_part',
-        'awal_stok',
-        'beli',
-        'jual',
-        'akhir_stok',
-        'status', 
+        'kode_part',
+        'keterangan', 
+        'status',
         'create_at',
         'update_at',
         'created_by', 
