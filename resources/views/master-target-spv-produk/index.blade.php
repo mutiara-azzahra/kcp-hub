@@ -47,15 +47,14 @@
                             <td class="text-center">{{ $no++ }}</td>
                             <td class="text-left">{{ $p->spv }}</td>
                             <td class="text-center">{{ $p->bulan }}</td>
-                            <td class="text-center">{{ $p->id }}</td>
+                            <td class="text-center">{{ $p->tahun }}</td>
                             <td class="text-right">Rp. {{ number_format($p->nominal, 0, ',', '.') }}</td>
                             <td class="text-center">
-                                <form action="{{ route('master-target-spv-produk.delete', $p->id) }}" method="POST" id="form_delete">
-
+                                <form action="{{ route('master-target-spv-produk.delete', ['id' => $p->id]) }}" method="POST" id="form_delete">
                                     @csrf
                                     @method('DELETE')
                                     
-                                    <a class="btn btn-danger btn-sm" onclick="Hapus('{{$p->id}}')"><i class="fas fa-times"></i></a>
+                                    <a class="btn btn-danger btn-sm" onclick="Hapus('{{ $p->id }}')"><i class="fas fa-times"></i></a>
                                 </form>
                             </td>
                         </tr>
@@ -70,12 +69,11 @@
 
 @section('script')
 
-
 <script>
     Hapus = (id)=>{
         Swal.fire({
             title: 'Apa anda yakin menghapus data ini?',
-            text:  "menghapus notifikasi" ,
+            text:  "Data tidak dapat kembali" ,
             showCancelButton: true,
             confirmButtonColor: '#3085d6' ,
             cancelButtonColor: 'red' ,
@@ -86,10 +84,9 @@
                 if (result.value) {
                     $('#form_delete').submit();
                 }
-
         })
     }
-</script>
 
+</script>
 
 @endsection

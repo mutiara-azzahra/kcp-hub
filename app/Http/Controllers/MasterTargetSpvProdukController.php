@@ -11,7 +11,7 @@ class MasterTargetSpvProdukController extends Controller
 {
     public function index(){
 
-        $target = TargetSpvProduk::all();
+        $target = TargetSpvProduk::orderBy('id', 'desc')->get();
 
         return view('master-target-spv-produk.index', compact('target'));
     }
@@ -55,10 +55,10 @@ class MasterTargetSpvProdukController extends Controller
         }
     }
 
-    public function delete($id)
+    public function delete( $id)
     {
-        dd($id);
-        //$deleted    = TargetSpvProduk::destroy($id);
+      
+        TargetSpvProduk::destroy($id);
 
         return redirect()->route('master-target-spv-produk.index')->with('success', 'Data berhasil dihapus');
     }

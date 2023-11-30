@@ -97,7 +97,8 @@ class KasKeluarController extends Controller
 
     public function delete($id, $no_keluar)
     {
-        $deleted    = TransaksiKasKeluarDetails::destroy($id);
+        dd($id);
+       // $deleted    = TransaksiKasKeluarDetails::destroy($id);
 
         return redirect()->route('kas-keluar.show', ['no_keluar' => $no_keluar])->with('success', 'Data berhasil dihapus');
     }
