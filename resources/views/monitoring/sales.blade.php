@@ -167,6 +167,21 @@
                             <td class="text-right">{{ $oct_ich }}</td>
                             <td class="text-right">{{ $nov_ich }}</td>
                             <td class="text-right">{{ $dec_ich }}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-right" style="background-color: yellow; color:black">TARGET</td>
+                            <td class="text-right">{{ $target_ich_jan }}</td>
+                            <td class="text-right">{{ $target_ich_feb }}</td>
+                            <td class="text-right">{{ $target_ich_mar }}</td>
+                            <td class="text-right">{{ $target_ich_apr }}</td>
+                            <td class="text-right">{{ $target_ich_may }}</td>
+                            <td class="text-right">{{ $target_ich_jun }}</td>
+                            <td class="text-right">{{ $target_ich_jul }}</td>
+                            <td class="text-right">{{ $target_ich_agu }}</td>
+                            <td class="text-right">{{ $target_ich_sep }}</td>
+                            <td class="text-right">{{ $target_ich_oct }}</td>
+                            <td class="text-right">{{ $target_ich_nov }}</td>
+                            <td class="text-right">{{ $target_ich_dec }}</td>
                         </tr> 
                     </tbody>
                 </table>
@@ -213,6 +228,21 @@
                             <td class="text-right">{{ $oct_bri }}</td>
                             <td class="text-right">{{ $nov_bri }}</td>
                             <td class="text-right">{{ $dec_bri }}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-right" style="background-color: yellow; color:black">TARGET</td>
+                            <td class="text-right">{{ $target_bri_jan }}</td>
+                            <td class="text-right">{{ $target_bri_feb }}</td>
+                            <td class="text-right">{{ $target_bri_mar }}</td>
+                            <td class="text-right">{{ $target_bri_apr }}</td>
+                            <td class="text-right">{{ $target_bri_may }}</td>
+                            <td class="text-right">{{ $target_bri_jun }}</td>
+                            <td class="text-right">{{ $target_bri_jul }}</td>
+                            <td class="text-right">{{ $target_bri_agu }}</td>
+                            <td class="text-right">{{ $target_bri_sep }}</td>
+                            <td class="text-right">{{ $target_bri_oct }}</td>
+                            <td class="text-right">{{ $target_bri_nov }}</td>
+                            <td class="text-right">{{ $target_bri_dec }}</td>
                         </tr> 
                     </tbody>
                 </table>
@@ -259,7 +289,22 @@
                             <td class="text-right">{{ $oct_acc }}</td>
                             <td class="text-right">{{ $nov_acc }}</td>
                             <td class="text-right">{{ $dec_acc }}</td>
-                        </tr> 
+                        </tr>
+                        <tr>
+                            <td class="text-right" style="background-color: yellow; color:black">TARGET</td>
+                            <td class="text-right">{{ $target_acc_jan }}</td>
+                            <td class="text-right">{{ $target_acc_feb }}</td>
+                            <td class="text-right">{{ $target_acc_mar }}</td>
+                            <td class="text-right">{{ $target_acc_apr }}</td>
+                            <td class="text-right">{{ $target_acc_may }}</td>
+                            <td class="text-right">{{ $target_acc_jun }}</td>
+                            <td class="text-right">{{ $target_acc_jul }}</td>
+                            <td class="text-right">{{ $target_acc_agu }}</td>
+                            <td class="text-right">{{ $target_acc_sep }}</td>
+                            <td class="text-right">{{ $target_acc_oct }}</td>
+                            <td class="text-right">{{ $target_acc_nov }}</td>
+                            <td class="text-right">{{ $target_acc_dec }}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -305,7 +350,22 @@
                             <td class="text-right">{{ $oct_acl }}</td>
                             <td class="text-right">{{ $nov_acl }}</td>
                             <td class="text-right">{{ $dec_acl }}</td>
-                        </tr> 
+                        </tr>
+                        <tr>
+                            <td class="text-right" style="background-color: yellow; color:black">TARGET</td>
+                            <td class="text-right">{{ $target_acl_jan }}</td>
+                            <td class="text-right">{{ $target_acl_feb }}</td>
+                            <td class="text-right">{{ $target_acl_mar }}</td>
+                            <td class="text-right">{{ $target_acl_apr }}</td>
+                            <td class="text-right">{{ $target_acl_may }}</td>
+                            <td class="text-right">{{ $target_acl_jun }}</td>
+                            <td class="text-right">{{ $target_acl_jul }}</td>
+                            <td class="text-right">{{ $target_acl_agu }}</td>
+                            <td class="text-right">{{ $target_acl_sep }}</td>
+                            <td class="text-right">{{ $target_acl_oct }}</td>
+                            <td class="text-right">{{ $target_acl_nov }}</td>
+                            <td class="text-right">{{ $target_acl_dec }}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -351,7 +411,22 @@
                             <td class="text-right">{{ $oct_pen }}</td>
                             <td class="text-right">{{ $nov_pen }}</td>
                             <td class="text-right">{{ $dec_pen }}</td>
-                        </tr> 
+                        </tr>
+                        <tr>
+                            <td class="text-right" style="background-color: yellow; color:black">TARGET</td>
+                            <td class="text-right">{{ $target_pen_jan }}</td>
+                            <td class="text-right">{{ $target_pen_feb }}</td>
+                            <td class="text-right">{{ $target_pen_mar }}</td>
+                            <td class="text-right">{{ $target_pen_apr }}</td>
+                            <td class="text-right">{{ $target_pen_may }}</td>
+                            <td class="text-right">{{ $target_pen_jun }}</td>
+                            <td class="text-right">{{ $target_pen_jul }}</td>
+                            <td class="text-right">{{ $target_pen_agu }}</td>
+                            <td class="text-right">{{ $target_pen_sep }}</td>
+                            <td class="text-right">{{ $target_pen_oct }}</td>
+                            <td class="text-right">{{ $target_pen_nov }}</td>
+                            <td class="text-right">{{ $target_pen_dec }}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

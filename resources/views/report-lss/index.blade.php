@@ -28,9 +28,17 @@
             <form action="{{ route('report-lss.store') }}"  method="GET">
                 <!-- @csrf -->
                 <div class="row">
-                    <div class="form-group col-lg-6 col-md-6">
+                    <div class="form-group col-lg-12 col-md-6">
+                        <label for="">Pilih Laporan</label>
+                        <select class="form-control mr-2 my-select" name="laporan">
+                            <option value="">-- Pilih Laporan --</option>
+                            <option value="1">Stok</option>
+                            <option value="2">Nilai</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-lg-12 col-md-6">
                         <label for="">Bulan</label>
-                        <select name="bulan" class="form-control mr-2">
+                        <select name="bulan" class="form-control mr-2 my-select">
                             <option value="">-- Pilih Bulan --</option>
                             <option value="01">Januari</option>
                             <option value="02">Februari</option>
@@ -46,9 +54,9 @@
                             <option value="12">Desember</option>
                         </select>
                     </div>
-                    <div class="form-group col-lg-6 col-md-6">
+                    <div class="form-group col-lg-12 col-md-6">
                         <label for="">Tahun</label>
-                        <select class="form-control mr-2" id="date-dropdown" name="tahun">
+                        <select class="form-control mr-2 my-select" id="date-dropdown" name="tahun">
                             <option value="">-- Pilih Tahun --</option>
                         </select>
                     </div>
