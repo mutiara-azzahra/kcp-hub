@@ -35,6 +35,7 @@
                 <table class="table table-hover table-bordered table-sm bg-light">
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
+                            <th class="text-center">Sub Kelompok Part</th>
                             <th class="text-center">Kode Produk</th>
                             <th class="text-center">Stok Awal</th>
                             <th class="text-center">Beli</th>
@@ -45,11 +46,12 @@
                     <tbody>
                     @foreach($data as $p)
                         <tr>
+                            <td class="text-left">{{ $p->sub_kelompok_part }}</td>
                             <td class="text-left">{{ $p->produk_part }}</td>
-                            <td class="text-right">{{ number_format($p->awal_stok, 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format($p->beli, 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format($p->jual, 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format($p->akhir_stok, 0, ',', '.') }}</td>
+                            <td class="text-right">{{ number_format($p->awal_stok, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($p->beli, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($p->jual, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($p->akhir_stok, 0, ',', ',') }}</td>
                         </tr>
                     @endforeach
                     </tbody>

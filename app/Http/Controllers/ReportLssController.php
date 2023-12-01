@@ -49,6 +49,9 @@ class ReportLssController extends Controller
                 $getProduk = MasterLevel4::where('status', 'A')->get();
         
                 foreach($getProduk as $i){
+
+                    $beli = 0;
+                    $jual = 0;
         
                     $getBeli = InvoiceNonHeader::where('created_at', '>=', $tahun.'-'.$bulan.'-01')
                         ->where('created_at', '<=', $tahun.'-'.$bulan.'-'.Carbon::createFromDate($tahun, $bulan, 1)->endOfMonth()->format('d'))
@@ -60,20 +63,26 @@ class ReportLssController extends Controller
         
                     $part       = MasterPart::where('level_2', $i->id_level_2)->where('level_4', $i->level_4)->pluck('part_no')->toArray();
                     $flattened  = collect($part)->flatten()->toArray();
-        
-                    $beli = 0;
-        
-                    foreach($getBeli as $s){
-                        $beli = $s->details_pembelian->whereIn('part_no', $flattened)->sum('qty');
+
+                    foreach($getBeli as $b){
+                        $beli += $b->details_pembelian->whereIn('part_no', $flattened)->sum('qty');
+                    }
+                    
+                    $jualByPart = [];
+
+                    foreach ($getJual as $s) {
+                        if (in_array($s->part_no, $flattened)) {
+                            if (!isset($jualByPart[$s->part_no])) {
+                                $jualByPart[$s->part_no] = 0;
+                            }
+                            $jualByPart[$s->part_no] += $s->qty;
+                        }
                     }
 
-                    $jual = 0;
-        
-                    foreach($getJual as $s){
-                        $jual = $s->whereIn('part_no', $flattened)->sum('qty');
-                    }
+                    $jual = array_sum($jualByPart);
 
-                    if($previousMonth = 10 && $tahun = 2023 ){
+
+                    if($previousMonth == 10 && $tahun == 2023 ){
                         $awal_amount = 0;
                     } else{
                         $awal_amount = LssStok::where('bulan', $previousMonth)->value('awal_stok');
@@ -146,7 +155,7 @@ class ReportLssController extends Controller
                     $beli = 0;
         
                     foreach($getBeli as $s){
-                        $beli += $s->details_pembelian->whereIn('part_no', $flattened)->sum('total_amount');
+                        $beli = $s->details_pembelian->whereIn('part_no', $flattened)->sum('total_amount');
                     }
         
                     $hpp     = $getHpp->whereIn('part_no', $flattened)->sum('nominal_total')/1.11;
