@@ -9,14 +9,13 @@ class LssStok extends Model
 {
     use HasFactory;
 
-    use HasFactory;
-
     protected $table = 'lss_stok';
     protected $primaryKey = 'id';
 
     protected $fillable = [
         'bulan',
         'tahun',
+        'sub_kelompok_part',
         'produk_part',
         'awal_stok',
         'beli',

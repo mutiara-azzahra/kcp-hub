@@ -46,7 +46,7 @@ class ReportLssController extends Controller
 
             if($lss == null){
         
-                $getProduk = MasterProduk::all();
+                $getProduk = MasterLevel4::where('status', 'A')->get();
         
                 foreach($getProduk as $i){
         
@@ -58,7 +58,7 @@ class ReportLssController extends Controller
                         ->where('created_at', '<=', $tahun.'-'.$bulan.'-'.Carbon::createFromDate($tahun, $bulan, 1)->endOfMonth()->format('d'))
                         ->get();
         
-                    $part       = MasterPart::where('kode_produk', $i->kode_produk)->pluck('part_no')->toArray();
+                    $part       = MasterPart::where('level_2', $i->id_level_2)->where('level_4', $i->level_4)->pluck('part_no')->toArray();
                     $flattened  = collect($part)->flatten()->toArray();
         
                     $beli = 0;
@@ -79,13 +79,12 @@ class ReportLssController extends Controller
                         $awal_amount = LssStok::where('bulan', $previousMonth)->value('awal_stok');
                     }
         
-                    
-        
                     //INSERT LSS TO DB
                     $value = [
                         'bulan'                 => $bulan,
                         'tahun'                 => $tahun,
-                        'produk_part'           => $i->kode_produk,
+                        'sub_kelompok_part'     => $i->level_4,
+                        'produk_part'           => $i->id_level_2,
                         'awal_stok'             => $awal_amount,
                         'beli'                  => $beli,
                         'jual'                  => $jual,
@@ -94,9 +93,6 @@ class ReportLssController extends Controller
                         'created_at'            => NOW(),
                         'created_by'            => Auth::user()->nama_user,
                     ];
-
-
-                    // dd($value);
         
                     $created = LssStok::create($value);
         
@@ -104,6 +100,8 @@ class ReportLssController extends Controller
             }
 
             $data = LssStok::where('bulan', $bulan)->where('tahun', $tahun)->get();
+
+            return view('report-lss.view-stok', compact('data', 'bulan', 'tahun'));
 
         } elseif($request->laporan == 2){
 
@@ -126,7 +124,7 @@ class ReportLssController extends Controller
                     $awal_amount = 0;
                 }
         
-                $getProduk = MasterProduk::where('status', 'A')->get();
+                $getProduk = MasterLevel4::where('status', 'A')->get();
         
                 foreach($getLevel4 as $i){
         
@@ -177,9 +175,9 @@ class ReportLssController extends Controller
 
             $data = LSS::where('bulan', $bulan)->where('tahun', $tahun)->get();
 
+            return view('report-lss.view', compact('data', 'bulan', 'tahun'));
+
         }
-    
-        return view('report-lss.view', compact('data', 'bulan', 'tahun'));
 
     }
 }
