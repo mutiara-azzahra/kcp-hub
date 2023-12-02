@@ -12,10 +12,9 @@ class TransaksiPembayaranPiutangHeader extends Model
 
     protected $table        = 'transaksi_pembayaran_piutang_header';
     protected $primaryKey   = 'id';
-    public $timestamps      = false;
 
     protected $fillable = [ 
-        'no_piutang', 'area_piutang', 'kd_outlet', 'nm_outlet', 'nominal_potong', 'nominal_total', 'pembayaran_via', 
+        'no_piutang', 'area_piutang', 'tanggal_piutang', 'kd_outlet', 'nm_outlet', 'nominal_potong', 'nominal_total', 'pembayaran_via', 
         'no_bg', 'jatuh_tempo_bg', 'id_bank', 'flag_cetak_penerimaan', 'flag_cetak_penerimaan_date', 'flag_terima_kasir', 
         'flag_terima_kasir_date', 'no_kasir_masuk', 'flag_batal', 'flag_batal_date', 'flag_batal_keterangan', 'status', 
         'created_at', 'updated_at', 'created_by', 'updated_by'
