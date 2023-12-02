@@ -27,17 +27,9 @@
         <div class="card-body">
             <div class="col-lg-12">
 
-                @foreach($invoice as $i)
-                        
-                <form action="{{ route('account-receivable.store', ['invoice' => $i->noinv ]) }}" method="POST">
-
-                @csrf
-                @endforeach
-
                 <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example1">
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
-                            <!-- <th></th> -->
                             <th class="text-center">No. Invoice</th>
                             <th class="text-center">Kode | Nama Toko</th>
                             <th class="text-center">Nominal Invoice</th>
@@ -51,11 +43,6 @@
                         
                         @foreach($invoice as $s)
                         <tr>
-                            <!-- <td>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="selected_items[]" value="{{ $s->noinv }}">
-                                </div>
-                            </td> -->
                             <td class="text-left">{{ $s->noinv }}</td>
                             <td class="text-left">{{ $s->kd_outlet }}/{{ $s->nm_outlet }}</td>
                             <td class="text-left">Rp. {{ number_format($s->details_invoice->sum('nominal_total'), 0, ',', '.') }}</td>

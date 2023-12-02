@@ -39,10 +39,10 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <strong>Pilih Toko</strong>
-                            <select name="id_kategori_part" class="form-control" >
+                            <select name="kd_outlet" class="form-control my-select">
                                 <option value="">---Pilih Toko--</option>
                                 @foreach($outlet as $k)
-                                    <option value=" {{ $k->kd_outlet }}"> {{ $k->nm_outlet }} </option>
+                                    <option value=" {{ $k->kd_outlet }}"> {{ $k->kd_outlet }} / {{ $k->nm_outlet }} </option>
                                 @endforeach
                             </select>
                         </div>

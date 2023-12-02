@@ -45,7 +45,7 @@
                     <tr>
                         <th class="text-left">Potongan</th>
                         <td>:</td>
-                        <td class="text-left">{{ $data->nominal_potong }}</td>
+                        <td class="text-left"><b>Rp. {{ $data->nominal_potong }}</b></td>
                     </tr>
                     <tr>
                         <th class="text-left">Pembayaran Via</th>
@@ -69,19 +69,18 @@
 
     <div class="card" style="padding: 10px;">
         <div class="card-body">
-            <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example1">
+            <table class="table table-hover table-bordered table-sm bg-light table-striped">
                 <thead>
-                    <tr>
-                        <th class="text-center">Invoice</th>
-                        <th class="text-center">Nominal Invoice</th>
-                        <th class="text-center">Nominal Potong</th>
-                        <th class="text-center">Amount Retur</th>
-                        <th class="text-center">Total Potong</th>
-                        <th></th>
+                        <tr style="background-color: #6082B6; color:white">
+                        <th class="text-center"></th>
+                        <th class="text-center">No. Invoice</th>
+                        <th class="text-center">Toko</th>
+                        <th class="text-center">Nominal Total</th>
+                        <th class="text-center">Tanggal Invoice</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($invoice as $s)
+                    @foreach($invoice_toko as $s)
                         <tr>
                             <td>
                                 <div class="form-check">
@@ -96,10 +95,10 @@
                     @endforeach
                 </tbody>
             </table>
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <div class="float-left">
-                    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Data</button>                            
-                </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+            <div class="float-left">
+                <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Data</button>                            
             </div>
         </div>
     </div>

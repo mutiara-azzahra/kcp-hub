@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Carbon\Carbon;
+
+
 class TransaksiPembayaranPiutangHeader extends Model
 {
    
@@ -22,9 +25,9 @@ class TransaksiPembayaranPiutangHeader extends Model
 
     public static function no_piutang()
     {
-        $now = Carbon::now();
-        $currentYear = $now->year;
-        $currentMonth = $now->format('m');
+        $now            = Carbon::now();
+        $currentYear    = $now->year;
+        $currentMonth   = $now->format('m');
 
         $latestRecord = static::orderBy('no_piutang', 'desc')->first();
 

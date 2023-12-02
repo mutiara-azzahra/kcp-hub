@@ -268,6 +268,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/account-receivable', [AccountReceivableController::class, 'index'])->name('account-receivable.index');
     Route::get('/account-receivable/create', [AccountReceivableController::class, 'create'])->name('account-receivable.create');
     Route::post('/account-receivable/store', [AccountReceivableController::class, 'store'])->name('account-receivable.store');
+    Route::get('/account-receivable/details/{no_piutang}', [AccountReceivableController::class, 'details'])->name('account-receivable.details');
 
     //KAS KELUAR
     Route::get('/kas-masuk', [KasMasukController::class, 'index'])->name('kas-masuk.index');

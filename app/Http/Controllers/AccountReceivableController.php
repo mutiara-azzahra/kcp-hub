@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-
 use App\Models\MasterOutlet;
 use App\Models\TransaksiInvoiceHeader;
 use App\Models\TransaksiPembayaranPiutangHeader;
@@ -13,7 +14,6 @@ class AccountReceivableController extends Controller
     public function index(){
 
         $piutang_header = TransaksiPembayaranPiutangHeader::all();
-
         $invoice        = TransaksiInvoiceHeader::orderBy('noinv', 'asc')->get();
 
         return view('account-receivable.index', compact('piutang_header', 'invoice'));
@@ -46,30 +46,31 @@ class AccountReceivableController extends Controller
         }
 
         $request->merge([
-            'no_piutang'      => $newPiutang,
+            'no_piutang'      => $newPiutang->no_piutang,
+            'tanggal_piutang' => $request->tanggal_piutang,
             'area_piutang'    => $area_piutang,
             'kd_outlet'       => $request->kd_outlet,
             'nm_outlet'       => $nama_outlet,
             'nominal_potong'  => $request->nominal,
             'status'          => 'O',
-            'created_by'     => Auth::user()->nama_user
+            'created_by'      => Auth::user()->nama_user
         ]);
 
-        $created = TransaksiPembayaranPiutang::create($request->all());
+        $created = TransaksiPembayaranPiutangHeader::create($request->all());
 
         if ($created){
-            return redirect()->route('account-receivable.details', ['no_piutang' => $created->no_piutang])->with('success','Invoice header Berhasil ditambahkan, silahkan input details Invoice');
+            return redirect()->route('account-receivable.details', ['no_piutang' => $newPiutang->no_piutang])->with('success','Invoice header Berhasil ditambahkan, silahkan input details Invoice');
         } else{
             return redirect()->route('account-receivable.index')->with('danger','Data baru gagal ditambahkan');
         }
     }
 
     public function details($no_piutang){
-        $data = TransaksiPembayaranPiutangHeader::where('no_piutang', $no_piutang)->first();
+        $data           = TransaksiPembayaranPiutangHeader::where('no_piutang', $no_piutang)->first();
+        $invoice_toko   = TransaksiInvoiceHeader::where('kd_outlet', $data->kd_outlet)->where('status', 'O')->get();
+        $invoice        = TransaksiInvoiceHeader::where('status', 'O')->get();
 
-        $invoice = TransaksiInvoiceHeader::where('status', 'O')->get();
-
-        return view('account-receivable.details', compact('data', 'invoice'));
+        return view('account-receivable.details', compact('data', 'invoice', 'invoice_toko'));
     }
 
     
