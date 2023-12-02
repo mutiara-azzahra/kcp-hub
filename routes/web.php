@@ -38,7 +38,7 @@ use App\Http\Controllers\MasterTargetSpvController;
 use App\Http\Controllers\MasterTargetSpvProdukController;
 use App\Http\Controllers\ReportLssController;
 use App\Http\Controllers\ModalDbpController;
-
+use App\Http\Controllers\PembayaranPiutangTokoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -270,6 +270,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/account-receivable/store', [AccountReceivableController::class, 'store'])->name('account-receivable.store');
     Route::get('/account-receivable/details/{no_piutang}', [AccountReceivableController::class, 'details'])->name('account-receivable.details');
     Route::post('/account-receivable/store-details', [AccountReceivableController::class, 'store_details'])->name('account-receivable.store-details');
+
+    //ROUTE PEMBAYARAN PIUTANG TOKO
+    Route::get('/piutang-toko', [PembayaranPiutangTokoController::class, 'index'])->name('piutang-toko.index');
+    Route::get('/piutang-toko/create', [PembayaranPiutangTokoController::class, 'create'])->name('piutang-toko.create');
+    Route::post('/piutang-toko/store', [PembayaranPiutangTokoController::class, 'store'])->name('piutang-toko.store');
+    Route::get('/piutang-toko/details/{no_piutang}', [PembayaranPiutangTokoController::class, 'details'])->name('piutang-toko.details');
+    Route::post('/piutang-toko/store-details', [PembayaranPiutangTokoController::class, 'store_details'])->name('piutang-toko.store-details');
 
     //KAS KELUAR
     Route::get('/kas-masuk', [KasMasukController::class, 'index'])->name('kas-masuk.index');

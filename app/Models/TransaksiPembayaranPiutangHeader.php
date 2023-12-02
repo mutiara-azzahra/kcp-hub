@@ -32,7 +32,7 @@ class TransaksiPembayaranPiutangHeader extends Model
         $latestRecord = static::orderBy('no_piutang', 'desc')->first();
 
         if ($latestRecord) {
-            $lastCustomId   = $latestRecord->no_lkh;
+            $lastCustomId   = $latestRecord->no_piutang;
             $lastYear       = substr($lastCustomId, 4, 4);
             $lastMonth      = substr($lastCustomId, 8, 2);
             $lastNumber     = (int)substr($lastCustomId, -5);
