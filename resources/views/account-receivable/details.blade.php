@@ -69,6 +69,15 @@
 
     <div class="card" style="padding: 10px;">
         <div class="card-body">
+
+        @foreach($invoice as $i)
+                        
+        <form action="{{ route('account-receivable.store-details', ['invoice' => $i->noinv ]) }}" method="POST">
+        <input type="hidden" name="no_piutang" value="{{ $data->no_piutang }}">
+        @csrf
+
+        @endforeach
+
             <table class="table table-hover table-bordered table-sm bg-light table-striped">
                 <thead>
                         <tr style="background-color: #6082B6; color:white">
@@ -101,6 +110,7 @@
                 <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Data</button>                            
             </div>
         </div>
+        </form>
     </div>
 </div>
 @endsection

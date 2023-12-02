@@ -59,7 +59,7 @@ class AccountReceivableController extends Controller
         $created = TransaksiPembayaranPiutangHeader::create($request->all());
 
         if ($created){
-            return redirect()->route('account-receivable.details', ['no_piutang' => $newPiutang->no_piutang])->with('success','Invoice header Berhasil ditambahkan, silahkan input details Invoice');
+            return redirect()->route('account-receivable.details', ['no_piutang' => $newPiutang->no_piutang])->with('success','Piutang baru berhasil ditambahkan, silahkan input details Invoice');
         } else{
             return redirect()->route('account-receivable.index')->with('danger','Data baru gagal ditambahkan');
         }
@@ -71,6 +71,31 @@ class AccountReceivableController extends Controller
         $invoice        = TransaksiInvoiceHeader::where('status', 'O')->get();
 
         return view('account-receivable.details', compact('data', 'invoice', 'invoice_toko'));
+    }
+
+    public function store_details(Request $request)
+    {
+
+        $selectedItems  = $request->input('selected_items', []);
+
+        for ($i = 0; $i < count($selectedItems); $i++) {
+            $itemInvoice = $selectedItems[$i];
+
+            $invoice  = TransaksiInvoiceHeader::where('noinv', $itemInvoice)->first();
+
+            $value = [
+                'noinv'                 => $invoice->noinv,
+                'no_piutang'            => $request->no_piutang,
+                'nominal'               => $invoice->details_invoice->sum('nominal_total'),
+                'status'                => 'O',
+                'created_at'            => NOW(),
+                'created_by'            => Auth::user()->nama_user,
+            ];
+
+            $created = TransaksiPembayaranPiutangHeader::create($value);
+        }
+
+        return redirect()->route('account-receivable.index')->with('success', 'Piutang baru berhasil ditambahkan, silahkan input details Invoice');
     }
 
     
