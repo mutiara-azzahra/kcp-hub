@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\KasMasukHeader;
@@ -125,6 +126,15 @@ class KasMasukController extends Controller
         
         return redirect()->route('kas-masuk.index')->with('success','Data kas masuk baru berhasil ditambahkan!');
         
+    }
+
+    public function cetak($no_kas_masuk)
+    {
+        $data  = KasMasukHeader::where('no_kas_masuk', $no_kas_masuk)->first();
+        $pdf   = PDF::loadView('reports.kas-masuk', ['data'=> $data]);
+        $pdf->setPaper('letter', 'potrait');
+
+        return $pdf->stream('kas-masuk.pdf');
     }
 
     

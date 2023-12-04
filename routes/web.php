@@ -234,9 +234,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/laporan-kiriman-harian/cetak/{no_lkh}', [LkhController::class, 'cetak'])->name('laporan-kiriman-harian.cetak');
     Route::post('/laporan-kiriman-harian/store-update/{no_lkh}', [LkhController::class, 'update'])->name('laporan-kiriman-harian.update');
 
-    //ROUTE SURAT JALAN
-    Route::get('/surat-jalan', [SuratJalanController::class, 'index'])->name('surat-jalan.index');
-
     //ROUTE STOK GUDANG
     Route::get('/stok-gudang', [StokGudangController::class, 'index'])->name('stok-gudang.index');
     Route::post('/stok-gudang', [StokGudangController::class, 'store'])->name('stok-gudang.store');

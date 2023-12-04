@@ -3,17 +3,13 @@
 @section('content')
 <div class="container" style="padding: 10px;">
     <div class="row mt-2">
-        <div class="col-lg-12 pb-3">
+        <div class="col-lg-12 pb-2">
              <div class="float-left">
                 <h4>Kas Masuk</h4>
             </div>
-        </div>
-        <div class="col-lg-12 pb-3">
-            <div class="float-right m-1">
-                <a class="btn btn-success" href="{{ route('kas-masuk.bukti-bayar') }}"><i class="fas fa-plus"></i> Bukti Terima Pembayaran</a>
-            </div>
-            <div class="float-right m-1">
-                <a class="btn btn-info" href="{{ route('kas-masuk.bayar-manual') }}"><i class="fas fa-plus"></i> Terima Pembayaran Manual</a>
+            <div class="float-right">
+                <a class="btn btn-success m-1" href="{{ route('kas-masuk.bukti-bayar') }}"><i class="fas fa-plus"></i> Bukti Terima Pembayaran</a>
+                <!-- <a class="btn btn-info m-1" href="{{ route('kas-masuk.bayar-manual') }}"><i class="fas fa-plus"></i> Terima Pembayaran Manual</a> -->
             </div>
         </div>
     </div>
@@ -37,6 +33,7 @@
                             <th class="text-center">No</th>
                             <th class="text-center">No. Kas Masuk</th>
                             <th class="text-center">Kode Toko</th>
+                            <th class="text-center">Nama Toko</th>
                             <th class="text-center">Pembayaran Via</th>
                             <th class="text-center">Nominal</th>
                             <th class="text-center"></th>
@@ -52,10 +49,11 @@
                         <td class="text-center">{{ $no++ }}.</td>
                         <td class="text-left">{{ $p->no_kas_masuk }}</td>
                         <td class="text-left">{{ $p->kd_outlet }}</td>
-                        <td class="text-left">{{ $p->pembayaran_via }}</td>
-                        <td class="text-left">Rp. {{ number_format($p->nominal, 0, ',', '.') }}</td>
+                        <td class="text-left">{{ $p->outlet->nm_outlet }}</td>
+                        <td class="text-center">{{ $p->pembayaran_via }}</td>
+                        <td class="text-right">Rp. {{ number_format($p->nominal, 0, ',', '.') }}</td>
                         <td class="text-center">
-                            <a class="btn btn-warning btn-sm" href="{{ route('kas-masuk.cetak', $p->no_kas_masuk) }}"><i class="fas fa-print"></i></a>
+                            <a class="btn btn-warning btn-sm" href="{{ route('kas-masuk.cetak', $p->no_kas_masuk) }}" target="_blank"><i class="fas fa-print"></i></a>
                         </td>
                     </tr>
                     @endforeach
