@@ -52,4 +52,14 @@ class KasMasukHeader extends Model
     {
         return $this->belongsTo(MasterPartNon::class, 'part_no', 'part_no');
     }
+
+    public function details()
+    {
+        return $this->hasMany(KasMasukDetails::class, 'no_kas_masuk', 'no_kas_masuk');
+    }
+
+    public function outlet()
+    {
+        return $this->hasOne(MasterOutlet::class, 'kd_outlet', 'kd_outlet');
+    }
 }

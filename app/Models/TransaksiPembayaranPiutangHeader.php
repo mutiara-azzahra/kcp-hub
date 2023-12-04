@@ -50,4 +50,10 @@ class TransaksiPembayaranPiutangHeader extends Model
 
         return $newCustomId;
     }
+
+
+    public function details()
+    {
+        return $this->hasMany(TransaksiPembayaranPiutang::class, 'no_piutang', 'no_piutang');
+    }
 }

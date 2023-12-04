@@ -295,7 +295,7 @@
                           </a>
                       </li>
                       <li class="nav-item">
-                          <a href="{{ route('account-receivable.index')}}" class="nav-link">
+                          <a href="{{ route('piutang-toko.index')}}" class="nav-link">
                             <p>Piutang Toko</p>
                           </a>
                       </li>

@@ -7,12 +7,22 @@ use Illuminate\Http\Request;
 
 use Auth;
 use Carbon\Carbon;
+use App\Models\KasMasukHeader;
 use App\Models\MasterOutlet;
 use App\Models\TransaksiInvoiceHeader;
+use App\Models\TransaksiPembayaranPiutang;
 use App\Models\TransaksiPembayaranPiutangHeader;
 
 class PembayaranPiutangTokoController extends Controller
 {
+    public function index(){
+
+        $piutang_header = TransaksiPembayaranPiutangHeader::orderBy('no_piutang', 'desc')->get();
+        $kas_masuk = KasMasukHeader::orderBy('no_kas_masuk', 'desc')->get();
+
+        return view('piutang-toko.index', compact('piutang_header', 'kas_masuk'));
+    }
+
     public function create(){
 
         $outlet = MasterOutlet::where('status', 'Y')->get();
@@ -60,11 +70,14 @@ class PembayaranPiutangTokoController extends Controller
     }
 
     public function details($no_piutang){
+
+        $check          = TransaksiPembayaranPiutang::where('no_piutang', $no_piutang)->first();
         $data           = TransaksiPembayaranPiutangHeader::where('no_piutang', $no_piutang)->first();
         $invoice_toko   = TransaksiInvoiceHeader::where('kd_outlet', $data->kd_outlet)->where('status', 'O')->get();
         $invoice        = TransaksiInvoiceHeader::where('status', 'O')->get();
 
-        return view('piutang-toko.details', compact('data', 'invoice', 'invoice_toko'));
+
+        return view('piutang-toko.details', compact('data', 'invoice', 'invoice_toko', 'check'));
     }
 
     public function store_details(Request $request)
@@ -86,9 +99,18 @@ class PembayaranPiutangTokoController extends Controller
                 'created_by'            => Auth::user()->nama_user,
             ];
 
-            $created = TransaksiPembayaranPiutangHeader::create($value);
+            $created = TransaksiPembayaranPiutang::create($value);
         }
 
         return redirect()->route('piutang-toko.index')->with('success', 'Piutang baru berhasil ditambahkan, silahkan input details Invoice');
+    }
+
+    public function cetak($no_piutang)
+    {
+        $data               = TransaksiPembayaranPiutang::where('no_piutang', $no_piutang)->first();
+        $pdf                = PDF::loadView('reports.bukti-terima-piutang', ['data'=>$data]);
+        $pdf->setPaper('letter', 'potrait');
+
+        return $pdf->stream('bukti-terima-piutang.pdf');
     }
 }

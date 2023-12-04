@@ -14,60 +14,25 @@
     </div>
 
     @if ($message = Session::get('success'))
-        <div class="alert alert-success">
+        <div class="alert alert-success" id="myAlert">
             <p>{{ $message }}</p>
         </div>
     @elseif ($message = Session::get('danger'))
-        <div class="alert alert-warning">
+        <div class="alert alert-warning" id="myAlert">
             <p>{{ $message }}</p>
         </div>
     @endif
 
     <div class="card" style="padding: 10px;">
         <div class="card-header">
-            List Pemotongan Belum Selesai
+            Pembayaran Piutang Toko
         </div>
-        <div class="card-body">
-            <div class="col-lg-12">
-                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example1">
-                    <thead>
-                        <tr style="background-color: #6082B6; color:white">
-                            <th class="text-center">No. Piutang</th>
-                            <th class="text-center">Kode / Nama Toko</th>
-                            <th class="text-center">Pembayaran Via</th>
-                            <th class="text-center">Nominal Potong</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                        $no=1;
-                        @endphp
-                        
-                        @foreach($piutang_header as $p)
-                        <tr>
-                            <td class="text-center">{{ $no++ }}</td>
-                            <td class="text-center">{{ $p->noinv }}</td>
-                            <td class="text-center">{{ $p->kd_outlet }} / {{ $p->nm_outlet }}</td>
-                            <td class="text-center">
-                                <a class="btn btn-info btn-sm" href="{{ route('piutang-toko.details', $p->no_piutang ) }}">
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        @endforeach
-                        
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <div class="card" style="padding: 10px;">
         <div class="card-body">
             <div class="col-lg-12">  
-                <table class="table table-hover table-bordered table-sm bg-light table-striped">
+                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example2">
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
+                            <th class="text-center">No.</th>
                             <th class="text-center">No. Kas Masuk</th>
                             <th class="text-center">Kode / Nama Toko</th>
                             <th class="text-center">Pembayaran Via</th>
@@ -81,6 +46,62 @@
                         $no=1;
                         @endphp
 
+                        @foreach($kas_masuk as $p)
+                        <tr>
+                            <td class="text-left">{{ $no++ }}</td>
+                            <td class="text-left">{{ $p->no_kas_masuk }}</td>
+                            <td class="text-left">{{ $p->kd_outlet }} / {{ $p->outlet->nm_outlet }}</td>
+                            <td class="text-left">{{ $p->pembayaran_via }}</td>
+                            <td></td>
+                            <td class="text-right">{{ $p->details->where('akuntansi_to', 'D')->sum('total') }}</td>
+
+                            <td></td>
+                        </tr>
+                        @endforeach
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" style="padding: 10px;">
+        <div class="card-header">
+            List Pemotongan Belum Selesai
+        </div>
+        <div class="card-body">
+            <div class="col-lg-12">
+                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example3">
+                    <thead>
+                        <tr style="background-color: #6082B6; color:white">
+                            <th class="text-center">No.</th>
+                            <th class="text-center">No. Piutang</th>
+                            <th class="text-center">Kode / Nama Toko</th>
+                            <th class="text-center">Pembayaran Via</th>
+                            <th class="text-center">Nominal Potong</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                        $no=1;
+                        @endphp
+                        
+                        @foreach($piutang_header as $p)
+                        <tr>
+                            <td class="text-center">{{ $no++ }}</td>
+                            <td class="text-left">{{ $p->no_piutang }}</td>
+                            <td class="text-left">{{ $p->kd_outlet }} / {{ $p->nm_outlet }}</td>
+                            <td class="text-left">{{ $p->pembayaran_via }}</td>
+                            <td class="text-right">{{ $p->nominal_potong }}</td>
+                            <td class="text-center">
+                                <a class="btn btn-info btn-sm" href="{{ route('piutang-toko.details', $p->no_piutang ) }}">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        @endforeach
+                        
                     </tbody>
                 </table>
             </div>

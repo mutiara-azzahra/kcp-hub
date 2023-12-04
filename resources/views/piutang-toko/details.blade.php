@@ -2,23 +2,24 @@
  
 @section('content')
 <div class="container" style="padding: 10px;">
-    <div class="row mt-5">
+    <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
                 <h4>Pemotongan Piutang Toko</h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-success" href="{{ route('piutang-toko.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
+                <a class="btn btn-warning m-1" href="{{ route('piutang-toko.index') }}"><i class="fas fa-print"></i> Cetak Bukti Penerimaan Piutang</a>
+                <a class="btn btn-success m-1" href="{{ route('piutang-toko.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
             </div>
         </div>
     </div>
 
     @if ($message = Session::get('success'))
-        <div class="alert alert-success">
+        <div class="alert alert-success" id="myAlert">
             <p>{{ $message }}</p>
         </div>
     @elseif ($message = Session::get('danger'))
-        <div class="alert alert-warning">
+        <div class="alert alert-warning" id="myAlert">
             <p>{{ $message }}</p>
         </div>
     @endif
@@ -67,7 +68,44 @@
         </div>
     </div>
 
+    @if($check !== null)
+
     <div class="card" style="padding: 10px;">
+        <div class="card-body">
+            <div class="col-lg-12">  
+                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example2">
+                    <thead>
+                        <tr style="background-color: #6082B6; color:white">
+                            <th class="text-center">No.</th>
+                            <th class="text-center">No. Kas Masuk</th>
+                            <th class="text-center">Kode / Nama Toko</th>
+                            <th class="text-center">Nominal</th>
+                            <th class="text-center"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                        $no=1;
+                        @endphp
+
+                        @foreach($data->details as $p)
+                        <tr>
+                            <td class="text-left">{{ $no++ }}</td>
+                            <td class="text-left">{{ $p->noinv }}</td>
+                            <td class="text-left">{{ $p->no_piutang }}</td>
+                            <td class="text-right">{{ $p->nominal }}</td>
+                            <td></td>
+                        </tr>
+                        @endforeach
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    @else
+        <div class="card" style="padding: 10px;">
         <div class="card-body">
 
         @foreach($invoice as $i)
@@ -112,6 +150,9 @@
         </div>
         </form>
     </div>
+
+    @endif
+
 </div>
 @endsection
 
