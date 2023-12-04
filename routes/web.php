@@ -296,7 +296,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/kas-keluar/store-details', [KasKeluarController::class, 'store_details'])->name('kas-keluar.store-details');
     Route::post('/kas-keluar/store-selesai', [KasKeluarController::class, 'store_kas_keluar'])->name('kas-keluar.store-selesai');
     Route::get('/kas-keluar/show/{no_keluar}', [KasKeluarController::class, 'show'])->name('kas-keluar.show');
-    Route::delete('/kas-keluar/delete/{id}/{no_keluar}', [KasKeluarController::class, 'delete'])->name('kas-keluar.delete');
+    Route::delete('/kas-keluar/delete/{no_keluar}', [KasKeluarController::class, 'delete'])->name('kas-keluar.delete');
 
     //KODE RAK LOKASI
     Route::get('/kode-rak-lokasi', [KodeRakLokasiController::class, 'index'])->name('kode-rak-lokasi.index');

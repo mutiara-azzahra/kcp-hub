@@ -53,8 +53,14 @@
                             <td class="text-left">{{ $p->keterangan }}</td>
                             <td class="text-left">Rp. {{ number_format($p->details_keluar->where('akuntansi_to', 'D')->sum('total'), 0, ',', '.') }}</td>
                             <td class="text-center">
-                                <a class="btn btn-info btn-sm" href="{{ route('kas-keluar.show', $p->no_keluar)}}"><i class="fas fa-eye"></i></a>
-                                <a class="btn btn-danger btn-sm" href="{{ route('kas-keluar.show', $p->no_keluar)}}"><i class="fas fa-times"></i></a>
+                                <form action="{{ route('kas-keluar.delete', $p->id) }}" method="POST" id="form_delete" data-id="{{ $p->id }}">
+                                    <a class="btn btn-info btn-sm" href="{{ route('kas-keluar.show', $p->no_keluar)}}"><i class="fas fa-eye"></i></a>
+
+                                    @csrf
+                                    @method('DELETE')
+                                   
+                                    <a class="btn btn-danger btn-sm" onclick="Hapus('{{ $p->id }}')"><i class="fas fa-times"></i></a>
+                                </form>
                             </td>
                         </tr>
                         @endforeach
@@ -67,23 +73,25 @@
 @endsection
 
 @section('script')
-    
-    <script>
-    $(document).ready(function() {
-        $('#tanggal_awal').change(function() {
-            var selectedDate = $(this).val();
-            
-            if (selectedDate) {
-                // Get the year and month from the selected date
-                var year = selectedDate.split('-')[0];
-                var month = selectedDate.split('-')[1];
-                
-                // Set the date input to the first day of the selected month
-                var firstDayOfMonth = year + '-' + month + '-01';
-                $(this).val(firstDayOfMonth);
-            }
-        });
-    });
-    </script>
+
+<script>
+    Hapus = ($id)=>{
+        Swal.fire({
+            title: 'Apa anda yakin menghapus data ini?',
+            text:  "Data tidak dapat kembali" ,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6' ,
+            cancelButtonColor: 'red' ,
+            confirmButtonText: 'hapus data' ,
+            cancelButtonText: 'batal' ,
+            reverseButtons: false
+            }).then((result) => {
+                if (result.value) {
+                    $('#form_delete').submit();
+                }
+        })
+    }
+
+</script>
 
 @endsection

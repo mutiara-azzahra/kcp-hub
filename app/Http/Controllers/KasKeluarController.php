@@ -15,7 +15,7 @@ class KasKeluarController extends Controller
 {
     public function index(){
 
-        $kas_keluar = TransaksiKasKeluarHeader::orderBy('no_keluar', 'desc')->get();
+        $kas_keluar = TransaksiKasKeluarHeader::orderBy('no_keluar', 'desc')->where('status', 'A')->get();
 
         return view('kas-keluar.index', compact('kas_keluar'));
     }
@@ -95,12 +95,19 @@ class KasKeluarController extends Controller
        return view('kas-keluar.view', compact('kas_keluar', 'perkiraan'));
     }
 
-    public function delete($id, $no_keluar)
-    {
-        dd($id);
-       // $deleted    = TransaksiKasKeluarDetails::destroy($id);
+    public function delete($id)
+{
+    $header = TransaksiKasKeluarHeader::findOrFail($id);
 
-        return redirect()->route('kas-keluar.show', ['no_keluar' => $no_keluar])->with('success', 'Data berhasil dihapus');
-    }
+    $no_keluar = $header->no_keluar;
+
+    TransaksiKasKeluarDetails::where('no_keluar', $no_keluar)->delete();
+
+    $header->delete();
+
+    return redirect()->route('kas-keluar.index')->with('success', 'Data berhasil dihapus');
+}
+
+
 
 }
