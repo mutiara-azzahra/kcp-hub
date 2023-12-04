@@ -83,7 +83,7 @@ class KasKeluarController extends Controller
             ]);
         }
             
-        return redirect()->route('kas-keluar.index')->with('success','Data kas masuk baru berhasil ditambahkan!');
+        return redirect()->route('kas-keluar.index')->with('success','Data kas keluar baru berhasil ditambahkan!');
     
     }
 
@@ -96,17 +96,17 @@ class KasKeluarController extends Controller
     }
 
     public function delete($id)
-{
-    $header = TransaksiKasKeluarHeader::findOrFail($id);
+    {
+        $header = TransaksiKasKeluarHeader::findOrFail($id);
 
-    $no_keluar = $header->no_keluar;
+        $no_keluar = $header->no_keluar;
 
-    TransaksiKasKeluarDetails::where('no_keluar', $no_keluar)->delete();
+        TransaksiKasKeluarDetails::where('no_keluar', $no_keluar)->delete();
 
-    $header->delete();
+        $header->delete();
 
-    return redirect()->route('kas-keluar.index')->with('success', 'Data berhasil dihapus');
-}
+        return redirect()->route('kas-keluar.index')->with('success', 'Data berhasil dihapus');
+    }
 
 
 
