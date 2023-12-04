@@ -123,70 +123,69 @@
           } 
      </style>
     <div class="header">
-                            <table class="atas">
-                                <tr>
-                                    <td class="atas" style="width: 350px;">
-                                        <table class="atas" style="line-height: 13px;">
-                                            <tr>
-                                                <td class="atas">PT. KCP</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="alamat-kcp">Jl. Sutoyo S. No. 144 Banjarmasin</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="alamat-kcp">Hp. 0811 517 1595, 0812 5156 2768</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="alamat-kcp">Telp. 4417127</td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                    <td class="atas">
-                                        <table class="atas" style="line-height: 13px;">
-                                            <tr>
-                                                <td class="atas"><b>SALES ORDER</b></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="atas"></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="atas">{{ $header->outlet->nm_outlet }} ({{ $header->outlet->kd_outlet }})</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="atas">{{ $header->outlet->almt_pengiriman }}, {{ $header->outlet->kode_area->provinsi->provinsi}}</td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
+        <table class="atas">
+            <tr>
+                <td class="atas" style="width: 350px;">
+                    <table class="atas" style="line-height: 13px;">
+                        <tr>
+                            <td class="atas">PT. KCP</td>
+                        </tr>
+                        <tr>
+                            <td class="alamat-kcp">Jl. Sutoyo S. No. 144 Banjarmasin</td>
+                        </tr>
+                        <tr>
+                            <td class="alamat-kcp">Hp. 0811 517 1595, 0812 5156 2768</td>
+                        </tr>
+                        <tr>
+                            <td class="alamat-kcp">Telp. 4417127</td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="atas">
+                    <table class="atas" style="line-height: 13px;">
+                        <tr>
+                            <td class="atas"><b>SALES ORDER</b></td>
+                        </tr>
+                        <tr>
+                            <td class="atas"></td>
+                        </tr>
+                        <tr>
+                            <td class="atas">{{ $header->outlet->nm_outlet }} ({{ $header->outlet->kd_outlet }})</td>
+                        </tr>
+                        <tr>
+                            <td class="atas">{{ $header->outlet->almt_pengiriman }}, {{ $header->outlet->kode_area->provinsi->provinsi}}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
 
-                                <tr style="line-height: 13px;">
-                                    <td class="nops">
-                                        <table class="atas">
-                                            <tr>
-                                                <td class="atas">No. SO</td>
-                                                <td class="atas">:</td>
-                                                @if($header->outlet->kode_area->provinsi->kode_prp == 6200)
-                                                <td class="atas">KCP/NON/{{ $header->area_so }}/{{ $header->noso }}</td>
+            <tr style="line-height: 13px;">
+                <td class="nops">
+                    <table class="atas">
+                        <tr>
+                            <td class="atas">No. SO</td>
+                            <td class="atas">:</td>
+                            @if($header->outlet->kode_area->provinsi->kode_prp == 6200)
+                            <td class="atas">KCP/NON/{{ $header->area_so }}/{{ $header->noso }}</td>
 
-                                                @else
-                                                <td class="atas">KCP/NON/{{ $header->area_so }}/{{ $header->noso }}</td>
-                                                @endif
-                                            </tr>
-                                        </table>
-                                    </td>
+                            @else
+                            <td class="atas">KCP/NON/{{ $header->area_so }}/{{ $header->noso }}</td>
+                            @endif
+                        </tr>
+                    </table>
+                </td>
 
-                                    <td class="nops">
-                                        <table class="atas">
-                                            <tr>
-                                                <td class="atas">Tanggal SO</td>
-                                                <td class="atas">:</td>
-                                                <td class="atas">{{ $header->crea_date }}</td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                </tr>
-                            </table>
-    
+                <td class="nops">
+                    <table class="atas">
+                        <tr>
+                            <td class="atas">Tanggal SO</td>
+                            <td class="atas">:</td>
+                            <td class="atas">{{ $header->crea_date }}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
     </div>
 
     <div class="container">

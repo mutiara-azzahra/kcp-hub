@@ -8,7 +8,7 @@
                 <h4>Pemotongan Piutang Toko</h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-warning m-1" href="{{ route('piutang-toko.index') }}"><i class="fas fa-print"></i> Cetak Bukti Penerimaan Piutang</a>
+                <a class="btn btn-warning m-1" href="{{ route('piutang-toko.cetak', $data->no_piutang ) }}" target="_blank"><i class="fas fa-print"></i> Cetak Bukti Penerimaan Piutang</a>
                 <a class="btn btn-success m-1" href="{{ route('piutang-toko.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
             </div>
         </div>

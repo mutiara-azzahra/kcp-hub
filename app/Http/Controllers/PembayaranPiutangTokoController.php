@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use PDF;
 use Auth;
 use Carbon\Carbon;
 use App\Models\KasMasukHeader;
@@ -107,10 +107,10 @@ class PembayaranPiutangTokoController extends Controller
 
     public function cetak($no_piutang)
     {
-        $data               = TransaksiPembayaranPiutang::where('no_piutang', $no_piutang)->first();
-        $pdf                = PDF::loadView('reports.bukti-terima-piutang', ['data'=>$data]);
+        $data  = TransaksiPembayaranPiutangHeader::where('no_piutang', $no_piutang)->first();
+        $pdf   = PDF::loadView('reports.bukti-terima-piutang', ['data'=> $data]);
         $pdf->setPaper('letter', 'potrait');
 
-        return $pdf->stream('bukti-terima-piutang.pdf');
+        return $pdf->stream('piutang.pdf');
     }
 }

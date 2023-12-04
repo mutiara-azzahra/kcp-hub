@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Invoice</title>
+    <title>Bukti Terima Piutang</title>
     <style>
     h4,h2{
         font-family: 'Times New Roman', Times;
@@ -127,13 +127,26 @@
                         <tr>
                             <td class="atas">PT. KCP</td>
                         </tr>
+                        <tr>
+                            <td class="alamat-kcp">Jl. Sutoyo S. No. 144 Banjarmasin</td>
+                        </tr>
+                        <tr>
+                            <td class="alamat-kcp">Hp. 0811 517 1595, 0812 5156 2768</td>
+                        </tr>
+                        <tr>
+                            <td class="alamat-kcp">Telp. 4417127</td>
+                        </tr>
                     </table>
                 </td>
                 <td class="atas">
                     <table class="atas" style="line-height: 13px;">
                         <tr>
-                            <td class="atas"><b>BUKTI PENERIMAAN PIUTANG</b></td>
+                            <td class="atas"><b>BUKTI TERIMA PIUTANG</b></td>
                         </tr>
+                        <tr>
+                            <td class="atas"></td>
+                        </tr>
+                        
                     </table>
                 </td>
             </tr>
@@ -143,17 +156,13 @@
                         <tr>
                             <td class="atas">No. Piutang</td>
                             <td class="atas">:</td>
-                            @if($data->outlet->kode_prp == 6200)
-                            <td class="atas">KCP/NON/KT/{{ $data->no_piutang }}</td>
 
-                            @else
+                            @if($data->area_piutang == 'KS')
                             <td class="atas">KCP/NON/KS/{{ $data->no_piutang }}</td>
-                            @endif
-                        </tr>
-                        <tr>
-                            <td class="atas">Telah Diterima Dari</td>
-                            <td class="atas">:</td>
-                            <td class="atas">{{ $data->outlet->nm_outlet }} [{{$data->kd_outlet}}]</td>
+
+                            @elseif($data->area_piutang == 'KT')
+                            <td class="atas">KCP/NON/KT/{{ $data->no_piutang }}</td>
+                      
                             @endif
                         </tr>
                     </table>
@@ -161,9 +170,9 @@
                 <td class="nops">
                     <table class="atas">
                         <tr>
-                            <td class="atas">Tanggal</td>
+                            <td class="atas">Tgl. Terima Piutang</td>
                             <td class="atas">:</td>
-                            <td class="atas">{{ Carbon\Carbon::parse($data->created_at)->format('d-m-Y') }}</td>
+                            <td class="atas">{{ $data->created_at }}</td>
                         </tr>
                     </table>
                 </td>
@@ -173,22 +182,46 @@
 
     <div class="container">
         <div class="isi">
+            <table class="table table-bawah">
+                <thead>
+                    <tr>
+                        <th class="th-header">No.</th>
+                        <th class="th-header">Part No</th>
+                        <th class="th-header">Nama Barang</th>
+                        <th class="th-header">Qty</th>
+                        <th class="th-header">Hrg/Pcs</th>
+                        <th class="th-header">Disc %</th>
+                        <th class="th-header">Jumlah</th>
+                    </tr>
+                </thead>
+            </table>
+            <br>
             <table class="atas">
                 <tr>
+                    <td class="atas">
+                        <table class="table atas" style="line-height: 11px;">
+                            <tr>
+                                <td class="alamat-kcp">- Pembayaran dianggap sah bila dicap LUNAS</td>
+                            </tr>
+                            <tr>
+                                <td class="alamat-kcp">- Pembayaran dengan giro/cheque dianggap sah bila telah diclearingkan</td>
+                            </tr>
+                        </table>
+                    </td>
                     <td class="nama-kcp" style="width: 250px">
                         <table class="atas">
                             <tr>
                                 <td class="atas">
                                     <div class="ttd">
                                         <br>
-                                        <h6 style="margin:0px; text-decoration:underline;" >Banjarmasin, </h6>
+                                        <h6 style="margin:0px; text-decoration:underline;" >Approve by System</h6>
                                     </div>
                                 </td>
                             </tr>
                         </table>
                     </td>
                 </tr>
-            </table>       
+            </table>
         </div>
     </div>
 </body>
