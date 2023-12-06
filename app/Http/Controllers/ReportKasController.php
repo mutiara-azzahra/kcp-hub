@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use PDF;
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\KasMasukHeader;
+use App\Models\TransaksiKasKeluarHeader;
 
 class ReportKasController extends Controller
 {
@@ -20,24 +25,29 @@ class ReportKasController extends Controller
             'tanggal_akhir' => 'required',
         ]);
 
-        dd($request->all());
-
         $tanggal_awal       = $request->tanggal_awal;
         $tanggal_akhir      = $request->tanggal_akhir;
     
-        if($kas == 1){
-            $getReport = KasMasukHeader::where('created_at', '>=', $tanggal_awal)->where('created_at', $tanggal_akhir)->get();
+        if($request->kas == 1){
+            $getReport = KasMasukHeader::whereBetween('created_at', [$tanggal_awal, $tanggal_akhir])->get();
 
-            $pdf   = PDF::loadView('reports.report-kas', ['getReport'=> $getReport, 'tanggal_awal'=> $tanggal_awal,'tanggal_akhir'=> $tanggal_akhir]);
-            $pdf->setPaper('letter', 'potrait');
+            $pdf   = PDF::loadView('reports.laporan-kas-masuk', ['getReport'=> $getReport, 'tanggal_awal'=> $tanggal_awal,'tanggal_akhir'=> $tanggal_akhir]);
+            $pdf->setPaper('letter', 'landscape');
 
             return $pdf->stream('report-kas.pdf');
 
-        } elseif($kas == 2){
-            $getReport = TransaksiKasKeluar::where('created_at', '>=', $tanggal_awal)->where('created_at', $tanggal_akhir)->get();
+        } elseif($request->kas == 2){
+            $getReport = TransaksiKasKeluarHeader::whereBetween('created_at', [$tanggal_awal, $tanggal_akhir])->get();
 
-            $pdf   = PDF::loadView('reports.report-kas', ['getReport'=> $getReport, 'tanggal_awal'=> $tanggal_awal, 'tanggal_akhir'=> $tanggal_akhir]);
-            $pdf->setPaper('letter', 'potrait');
+            $sumKasKeluar = 0;
+
+            foreach($getReport as $p){
+                $sumKasKeluar += $p->details_keluar->where('akuntansi_to', 'D')->sum('total');
+            }
+
+
+            $pdf   = PDF::loadView('reports.laporan-kas-keluar', ['getReport'=> $getReport, 'sumKasKeluar'=> $sumKasKeluar, 'tanggal_awal'=> $tanggal_awal, 'tanggal_akhir'=> $tanggal_akhir]);
+            $pdf->setPaper('letter', 'landscape');
 
             return $pdf->stream('report-kas.pdf');
         }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Laporan Kas Masuk</title>
+    <title>Laporan Kas Keluar</title>
     <style>
     h4,h2{
         font-family: 'Times New Roman', Times;
@@ -62,21 +62,30 @@
         text-align: center;
       }
       .td-part{
-        text-align: left;
-        border: none;
+        text-align: right;
+        border-top: 0.5px solid #000; 
+        border-bottom: 0.5px solid #000;
+        border-left: none;
+        border-right: none;
       }
       .td-qty{
-        text-align: center;
-        border: none;
+        text-align: left;
+        border-top: 0.5px solid #000; 
+        border-bottom: 0.5px solid #000;
+        border-left: none;
+        border-right: none;
       }
       .td-angka{
-        text-align: right;
-        border: none;
+        text-align: center;
+        border-top: 0.5px solid #000; 
+        border-bottom: 0.5px solid #000;
+        border-left: none;
+        border-right: none;
       }
       .th-header{
         text-align: center;
-        border-top: 1px solid #000; 
-        border-bottom: 1px solid #000;
+        border-top: 0.5px solid #000; 
+        border-bottom: 0.5px solid #000;
         border-left: none;
         border-right: none;
       }
@@ -101,7 +110,6 @@
          margin-bottom: 0;
          text-align: center;
          height: 10px;
-         padding-left: 200px;
      }
      .judul{
          margin-bottom: 0;
@@ -142,18 +150,16 @@
         </table>
     </div>
     <div class="judul">
-        <table class="table atas" style="line-height: 15px;">
+        <table class="atas" style="line-height: 15px;">
             <tr>
-                <td class="atas-header"><h5 style="text-decoration:underline; margin:0px">Laporan Kas Masuk</h5></td>
+                <td class="atas-header"><h4 style="text-decoration:underline; text-transform: uppercase; margin:0px">Laporan Kas Keluar</h4></td>
             </tr>
         </table>
-    </div>
-    <div class="header">
         <table class="atas">
             <tr>
                 <td class="atas">Periode</td>
                 <td class="atas">:</td>
-                <td class="atas"></td>
+                <td class="atas">{{ Carbon\Carbon::parse($tanggal_awal)->format('d-m-Y') }} s/d {{ Carbon\Carbon::parse($tanggal_akhir)->format('d-m-Y') }}</td>
             </tr>
             <tr>
                 <td class="atas">Cetak Oleh</td>
@@ -163,59 +169,34 @@
         </table>
     </div>
 
-    <div class="container">
-        <div class="isi">
-            <table class="table table-bawah" style="line-height: 13px;">
-                <thead>
-                    <tr>
-                        <th class="th-header">Tanggal</th>
-                        <th class="th-header">Kas Masuk</th>
-                        <th class="th-header">Bukti Potong</th>
-                        <th class="th-header">Terima Dari/Keterangan</th>
-                        <th class="th-header">Pembayaran Via</th>
-                        <th class="th-header">Nominal</th>
-                    </tr>
-                </thead>
-                <tbody style="line-height: 15px;">
-                    @foreach ($getReport as $p)
-                    <tr>
-                        <td class="td-qty" style="width: 6px;">{{$loop->iteration}}.</td>
-                        <td class="td-qty">{{$p->no_kas_masuk }}</td>
-                        <td class="td-qty"></td>
-                        <td class="td-qty"></td>
-                        <td class="td-qty"></td>
+    <div class="isi">
+        <table class="table table-bawah" style="line-height: 16px;">
+            <thead>
+                <tr>
+                    <th class="th-header">Tanggal</th>
+                    <th class="th-header">Kas Keluar</th>
+                    <th class="th-header">Pembayaran</th>
+                    <th class="th-header">Keterangan</th>
+                    <th class="th-header">Nominal</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($getReport as $p)
+                <tr>
+                    <td class="td-qty">{{ Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
+                    <td class="td-qty">{{$p->no_keluar }}</td>
+                    <td class="td-qty">{{$p->pembayaran }}</td>
+                    <td class="td-qty">{{$p->keterangan }}</td>
+                    <td class="td-part">{{ number_format($p->details_keluar->where('akuntansi_to', 'D')->sum('total'), 0, ',', '.') }}</td>
+                </tr>
+                @endforeach
+                <tr>
+                    <td colspan="4" class="td-angka"><b>TOTAL</b></td>
+                    <td class="td-part">{{ number_format($sumKasKeluar, 0, ',', '.') }}</td>
+                </tr>
+            </tbody>
+        </table>
 
-                        <td class="td-qty"></td>
-                        
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-
-            <div class="kanan col-6">
-                <table class="atas">
-                    <tr>
-                        <td class="atas">
-                            <div class="ttd">
-                                <br>
-                                <h6 style="text-decoration:underline; margin:0px; color:white">xxxx</h6>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="kanan col-6">
-                <table class="atas">
-                    <tr>
-                        <td class="atas">
-                            <div class="ttd">
-                                <br>
-                                <h6 style="text-decoration:underline; margin:0px">Approve by System</h6>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div> 
-        </div>
+    </div>
     </body>
 </html>
