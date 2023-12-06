@@ -304,7 +304,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //REPORT KAS
     Route::get('/report-kas', [ReportKasController::class, 'index'])->name('report-kas.index');
-    Route::post('/report-kas/store', [ReportKasController::class, 'store'])->name('report-kas.store');
+    Route::get('/report-kas/store', [ReportKasController::class, 'store'])->name('report-kas.store');
     
     //KODE RAK LOKASI
     Route::get('/kode-rak-lokasi', [KodeRakLokasiController::class, 'index'])->name('kode-rak-lokasi.index');

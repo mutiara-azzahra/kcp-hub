@@ -177,15 +177,23 @@
                     </tr>
                 </thead>
                 <tbody style="line-height: 15px;">
-                    @foreach ($getReport as $p)
+                    @foreach ($data_details as $p)
                     <tr>
                         <td class="td-qty" style="width: 6px;">{{$loop->iteration}}.</td>
-                        <td class="td-qty">{{$p->no_kas_masuk }}</td>
-                        <td class="td-qty"></td>
-                        <td class="td-qty"></td>
-                        <td class="td-qty"></td>
+                        <td class="td-qty">{{$p->part_no}}</td>
+                        <td class="td-qty">{{$p->nama_part->part_nama}}</td>
+                        <td class="td-qty">{{$p->qty}}</td>
+                        <td class="td-qty">{{$p->stok_ready->stok}}</td>
 
-                        <td class="td-qty"></td>
+                        @if($p->nama_part->rak != null)
+                        <td class="td-qty">{{$p->nama_part->rak->kode_rak}}</td>
+                        @else
+                        <td class="td-qty">-</td>
+                        @endif
+
+                        <td class="td-qty">
+                            
+                        </td>
                         
                     </tr>
                     @endforeach

@@ -25,7 +25,7 @@
             Pilih Report, Tanggal Awal dan Tanggal Akhir
         </div>
         <div class="card-body">
-            <form action="{{ route('report-kas.store') }}"  method="GET">
+            <form action="{{ route('report-kas.store') }}" method="GET">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-group mb-2">
