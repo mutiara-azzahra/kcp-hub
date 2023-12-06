@@ -54,14 +54,14 @@
                             <td class="text-left">{{ $p->keterangan }}</td>
                             <td class="text-right">{{ number_format($p->details_keluar->where('akuntansi_to', 'D')->sum('total'), 0, ',', '.') }}</td>
                             <td class="text-center">
-                                <form action="{{ route('kas-keluar.delete', $p->id) }}" method="POST" id="form_delete" data-id="{{ $p->id }}">
+                                <form action="{{ route('kas-keluar.delete', $p->id) }}" method="POST" id="form_hapus_{{ $p->id }}" data-id="{{ $p->id }}">
                                     <a class="btn btn-primary btn-sm" href="{{ route('kas-keluar.show', $p->no_keluar)}}"><i class="fas fa-eye"></i></a>
                                     <a class="btn btn-success btn-sm" href="{{ route('kas-keluar.update', $p->no_keluar)}}"><i class="fas fa-check"></i></a>
 
                                     @csrf
                                     @method('DELETE')
                                    
-                                    <a class="btn btn-danger btn-sm" onclick="Hapus('{{ $p->id }}')"><i class="fas fa-times"></i></a>
+                                    <a class="btn btn-danger btn-sm" onclick="Delete('{{ $p->id }}')"><i class="fas fa-times"></i></a>
                                 </form>
                             </td>
                         </tr>
@@ -142,7 +142,7 @@
 @section('script')
 
 <script>
-    Hapus = ($id)=>{
+    Hapus = (id)=>{
         Swal.fire({
             title: 'Apa anda yakin menghapus data ini?',
             text:  "Data tidak dapat kembali" ,
@@ -159,6 +159,24 @@
         })
     }
 
+    Delete = (id)=>{
+        Swal.fire({
+            title: 'Apa anda yakin menghapus data ini?',
+            text:  "Data tidak dapat kembali" ,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6' ,
+            cancelButtonColor: 'red' ,
+            confirmButtonText: 'hapus data' ,
+            cancelButtonText: 'batal' ,
+            reverseButtons: false
+            }).then((result) => {
+                if (result.value) {
+                    document.getElementById('form_hapus_' + id).submit();
+                }
+        })
+    }
 </script>
+
+
 
 @endsection
