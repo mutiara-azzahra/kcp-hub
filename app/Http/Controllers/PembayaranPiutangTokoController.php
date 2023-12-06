@@ -71,11 +71,10 @@ class PembayaranPiutangTokoController extends Controller
 
     public function details($no_piutang){
 
-        $check          = TransaksiPembayaranPiutang::where('no_piutang', $no_piutang)->first();
+        $check          = KasMasukHeader::where('no_piutang', $no_piutang)->first();
         $data           = TransaksiPembayaranPiutangHeader::where('no_piutang', $no_piutang)->first();
         $invoice_toko   = TransaksiInvoiceHeader::where('kd_outlet', $data->kd_outlet)->where('status', 'O')->get();
         $invoice        = TransaksiInvoiceHeader::where('status', 'O')->get();
-
 
         return view('piutang-toko.details', compact('data', 'invoice', 'invoice_toko', 'check'));
     }
@@ -83,10 +82,30 @@ class PembayaranPiutangTokoController extends Controller
 
     public function edit($no_piutang){
 
+        $check          = KasMasukHeader::where('no_piutang', $no_piutang)->first();
         $data           = TransaksiPembayaranPiutangHeader::where('no_piutang', $no_piutang)->first();
-        $kas_masuk      = KasMasukHeader::where('kd_outlet', $data->kd_outlet)->get();
+        $kas_masuk      = KasMasukHeader::where('kd_outlet', $data->kd_outlet)->where('status', 'C')->get();
 
-        return view('piutang-toko.edit', compact('data', 'kas_masuk'));
+        return view('piutang-toko.edit', compact('data', 'kas_masuk', 'check'));
+    }
+
+    public function store_kas(Request $request)
+    {
+
+        $selectedItems  = $request->input('selected_items', []);
+
+        for ($i = 0; $i < count($selectedItems); $i++) {
+            $itemKasMasuk = $selectedItems[$i];
+
+            KasMasukHeader::where('no_kas_masuk', $itemKasMasuk)->update([
+                'no_piutang'         => $request->no_piutang,
+                'updated_at'         => NOW(),
+                'updated_by'         => Auth::user()->nama_user
+            ]);
+
+        }
+
+        return redirect()->route('piutang-toko.index')->with('success', 'Kas masuk baru berhasil ditambahkan kedalam Piutang!');
     }
 
     public function store_details(Request $request)

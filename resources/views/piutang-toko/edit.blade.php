@@ -52,6 +52,38 @@
         </div>
     </div>
 
+    @if($check !== null)
+
+    <div class="card" style="padding: 10px;">
+        <div class="card-body">
+            <div class="col-lg-12">  
+                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example2">
+                    <thead>
+                        <tr style="background-color: #6082B6; color:white">
+                            <th class="text-center">No.</th>
+                            <th class="text-center">No. Invoice</th>
+                            <th class="text-center">Nominal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                        $no=1;
+                        @endphp
+
+                        <tr>
+                            <td class="text-left">{{ $no++ }}</td>
+                            <td class="text-left">{{ $check->no_kas_masuk }}</td>
+                            <td class="text-right">{{ number_format($check->nominal, 0, ',', '.') }}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    @else
+
     <div class="card" style="padding: 10px;">
         <div class="card-body">
 
@@ -77,7 +109,7 @@
                         <tr>
                             <td>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="selected_items[]" value="{{ $s->noinv }}">
+                                    <input class="form-check-input" type="checkbox" name="selected_items[]" value="{{ $s->no_kas_masuk }}">
                                 </div>
                             </td>
                             <td class="text-left">{{ $s->no_kas_masuk }}</td>
@@ -95,6 +127,8 @@
         </div>
         </form>
     </div>
+
+    @endif
 
 </div>
 @endsection

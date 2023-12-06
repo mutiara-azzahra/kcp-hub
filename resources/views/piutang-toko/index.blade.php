@@ -89,7 +89,13 @@
                             <td class="text-center">{{ $no++ }}</td>
                             <td class="text-left">{{ $p->no_piutang }}</td>
                             <td class="text-left">{{ $p->kd_outlet }} / {{ $p->nm_outlet }}</td>
-                            <td class="text-left">{{ $p->pembayaran_via }}</td>
+
+                            @if($p->kas_masuk != null)
+                            <td class="text-center">{{ $p->kas_masuk->pembayaran_via }}</td>
+                            @else
+                            <td></td>
+                            @endif
+
                             <td class="text-right">{{ number_format($p->nominal_potong, 0, ',', '.') }}</td>
                             <td class="text-center">
                                 <a class="btn btn-info btn-sm" href="{{ route('piutang-toko.details', $p->no_piutang ) }}">

@@ -7,9 +7,6 @@
              <div class="float-left">
                 <h4>Account Receiveable</h4>
             </div>
-            <div class="float-right">
-                <a class="btn btn-success" href="{{ route('account-receivable.create') }}"><i class="fas fa-plus"></i> Potong Titipan</a>
-            </div>
         </div>
     </div>
 
@@ -55,7 +52,7 @@
         </div>
     </div>
 
-    <div class="card" style="padding: 10px;">
+    <!-- <div class="card" style="padding: 10px;">
         <div class="card-body">
             <div class="col-lg-12">  
                 <table class="table table-hover table-bordered table-sm bg-light table-striped">
@@ -91,7 +88,7 @@
                 </table>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>
 @endsection
 

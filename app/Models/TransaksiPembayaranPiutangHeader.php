@@ -56,4 +56,9 @@ class TransaksiPembayaranPiutangHeader extends Model
     {
         return $this->hasMany(TransaksiPembayaranPiutang::class, 'no_piutang', 'no_piutang');
     }
+
+    public function kas_masuk()
+    {
+        return $this->belongsTo(KasMasukHeader::class, 'no_piutang', 'no_piutang');
+    }
 }
