@@ -97,9 +97,6 @@
         border-right: none;
         line-height: 14px;
       }
-     .judul{
-         text-align: center;
-     }
      .header{
          margin-bottom: 0;
          text-align: center;
@@ -114,7 +111,7 @@
      .judul{
          margin-bottom: 0;
          text-align: center;
-         height: 60px;
+         height: 110px;
      }
      hr{
          height: 3px;
@@ -157,72 +154,53 @@
         </table>
         <table class="atas">
             <tr>
-                <td class="atas">Periode</td>
+                <td class="atas">Tanggal Nota</td>
                 <td class="atas">:</td>
-                <td class="atas">{{ Carbon\Carbon::parse($tanggal_awal)->format('d-m-Y') }} s/d {{ Carbon\Carbon::parse($tanggal_akhir)->format('d-m-Y') }}</td>
+                <td class="atas">{{ Carbon\Carbon::parse($data->tanggal_nota)->format('d-m-Y') }}</td>
             </tr>
             <tr>
-                <td class="atas">Cetak Oleh</td>
+                <td class="atas">No. Nota</td>
                 <td class="atas">:</td>
-                <td class="atas"></td>
+                <td class="atas">{{ $data->invoice_non }}</td>
+            </tr>
+            <tr>
+                <td class="atas">Supplier</td>
+                <td class="atas">:</td>
+                <td class="atas">{{ $data->supplier }}</td>
+            </tr>
+            <tr>
+                <td class="atas">Jatuh Tempo</td>
+                <td class="atas">:</td>
+                <td class="atas">{{ $data->tanggal_jatuh_tempo }}</td>
             </tr>
         </table>
     </div>
 
     <div class="isi">
-        <table class="table table-bawah" style="line-height: 16px;">
+        <table class="table table-bawah" style="line-height: 20px;">
             <thead>
                 <tr>
+                    <th class="th-header">No.</th>
                     <th class="th-header">No Part</th>
                     <th class="th-header">Banyaknya</th>
-                    <th class="th-header">Penyelesaian Pembayaran</th>
-                    <th class="th-header">Total Harga</th>
-                    <th class="th-header">Diskon Nominal</th>
                     <th class="th-header">Total Amount</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($getReport as $p)
+                @foreach ($details as $p)
                 <tr>
-                    <td class="td-qty">{{ Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
-                    <td class="td-qty">{{$p->no_kas_masuk }}</td>
-                    <td class="td-qty"></td>
-                    <td class="td-qty">{{$p->terima_dari }} <b>{{$p->keterangan }}</b></td>
-                    <td class="td-angka">{{$p->pembayaran_via }}</td>
-                    <td class="td-part">{{ number_format($p->nominal, 0, ',', '.') }}</td>
+                    <td class="td-angka">{{ $loop->iteration }}.</td>
+                    <td class="td-qty">{{ $p->part_no }}</td>
+                    <td class="td-angka">{{ number_format($p->qty, 0, ',', '.') }}</td>
+                    <td class="td-part">{{ number_format($p->amount_nota, 2, ',', '.') }}</td>
                 </tr>
                 @endforeach
                 <tr>
-                    <td colspan="5" class="td-angka"><b>TOTAL</b></td>
-                    <td class="td-part">{{ number_format($getReport->sum('nominal'), 0, ',', '.') }}</td>
+                    <td colspan="3" class="td-angka"><b>GRAND TOTAL</b></td>
+                    <td class="td-part"><b>{{ number_format($details->sum('amount_nota'), 2, ',', '.') }}</b></td>
                 </tr>
             </tbody>
         </table>
-
-        <div class="kanan col-6">
-            <table class="atas">
-                <tr>
-                    <td class="atas">
-                        <div class="ttd">
-                            <br>
-                            <h6 style="text-decoration:underline; margin:0px; color:white">xxxx</h6>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="kanan col-6">
-            <table class="atas">
-                <tr>
-                    <td class="atas">
-                        <div class="ttd">
-                            <br>
-                            <h6 style="text-decoration:underline; margin:0px">Approve by System</h6>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
     </div>
     </body>
 </html>

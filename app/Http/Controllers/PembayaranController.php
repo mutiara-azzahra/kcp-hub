@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -96,6 +97,17 @@ class PembayaranController extends Controller
         } else{
             return redirect()->route('pembayaran-non-aop.index')->with('danger','Data baru gagal ditambahkan');
         }
+    }
+
+    public function cetak($invoice_non)
+    {
+        $data       = InvoiceNonHeader::where('invoice_non', $invoice_non)->first();
+        $details    = NotaDetails::where('invoice_non', $invoice_non)->get();
+
+        $pdf   = PDF::loadView('reports.rekap-pembelian', ['data'=> $data, 'details' => $details]);
+        $pdf->setPaper('letter', 'potrait');
+
+        return $pdf->stream('rekap-pembelian.pdf');
     }
 
     

@@ -138,6 +138,4 @@ class PembelianController extends Controller
         return redirect()->route('pembelian-non-aop.index')->with('success', 'Data baru berhasil ditambahkan');
     }
     
-    
-    
 }
