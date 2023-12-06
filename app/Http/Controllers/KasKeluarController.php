@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use Auth;
+use PDF;
 use Carbon\Carbon;
 use App\Models\TransaksiKasKeluarHeader;
 use App\Models\TransaksiKasKeluarDetails;
@@ -15,9 +15,11 @@ class KasKeluarController extends Controller
 {
     public function index(){
 
-        $kas_keluar = TransaksiKasKeluarHeader::orderBy('no_keluar', 'desc')->where('status', 'A')->get();
+        $belum_selesai = TransaksiKasKeluarHeader::orderBy('no_keluar', 'desc')->where('status', 'O')->get();
 
-        return view('kas-keluar.index', compact('kas_keluar'));
+        $selesai = TransaksiKasKeluarHeader::orderBy('no_keluar', 'desc')->where('status', 'C')->get();
+
+        return view('kas-keluar.index', compact('belum_selesai', 'selesai'));
     }
 
     public function create(){
@@ -40,7 +42,7 @@ class KasKeluarController extends Controller
             'trx_date'          => $request->trx_date,
             'pembayaran'        => $request->pembayaran,
             'keterangan'        => $request->keterangan,
-            'status'            => 'A',
+            'status'            => 'O',
             'created_by'        => Auth::user()->nama_user
         ]);
 
@@ -106,6 +108,37 @@ class KasKeluarController extends Controller
         $header->delete();
 
         return redirect()->route('kas-keluar.index')->with('success', 'Data berhasil dihapus');
+    }
+
+    public function cetak($no_keluar)
+    {
+        $data  = TransaksiKasKeluarHeader::where('no_keluar', $no_keluar)->first();
+        $pdf   = PDF::loadView('reports.kas-keluar', ['data'=> $data]);
+        $pdf->setPaper('letter', 'potrait');
+
+        return $pdf->stream('kas-keluar.pdf');
+    }
+
+    public function update($no_keluar)
+    {
+
+        $update_header = TransaksiKasKeluarHeader::where('no_keluar', $no_keluar)
+            ->update([
+            'status'        => 'C',
+            'updated_at'    => NOW(),
+            'updated_by'    => Auth::user()->nama_user
+        ]);
+
+        $update_details = TransaksiKasKeluarDetails::where('no_keluar', $no_keluar)
+            ->update([
+            'status'        => 'C',
+            'updated_at'    => NOW(),
+            'updated_by'    => Auth::user()->nama_user
+        ]);
+
+        return redirect()->route('kas-keluar.index')->with('success','Data kas keluar baru berhasil ditambahkan!');
+        
+
     }
 
 

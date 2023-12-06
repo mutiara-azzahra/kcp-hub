@@ -130,14 +130,12 @@ class KasMasukController extends Controller
             if ($value['akuntansi_to'] === 'D') {
                 $totalSum += $value['total'];
             }
-    
-            // Set no_kas_masuk value (if it's not set yet)
+
             if ($noKasMasuk === null) {
                 $noKasMasuk = $value['no_kas_masuk'];
             }
         }
     
-        // Update KasMasukHeader with the calculated sum for the specified no_kas_masuk
         if ($noKasMasuk !== null) {
             KasMasukHeader::where('no_kas_masuk', $noKasMasuk)->update([
                 'nominal' => $totalSum,
@@ -146,8 +144,6 @@ class KasMasukController extends Controller
             
         return redirect()->route('kas-masuk.index')->with('success','Data kas masuk baru berhasil ditambahkan!');
     }
-    
-    
 
     public function cetak_tanda_terima($no_kas_masuk)
     {
