@@ -287,6 +287,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/kas-masuk/bukti-bayar', [KasMasukController::class, 'bukti_bayar'])->name('kas-masuk.bukti-bayar');
     Route::get('/kas-masuk/pembayaran-manual', [KasMasukController::class, 'pembayaran_manual'])->name('kas-masuk.bayar_manual');
     Route::get('/kas-masuk/cetak/{no_kas_masuk}', [KasMasukController::class, 'cetak'])->name('kas-masuk.cetak');
+    Route::get('/kas-masuk/cetak-tanda-terima/{no_kas_masuk}', [KasMasukController::class, 'cetak_tanda_terima'])->name('kas-masuk.cetak-tanda-terima');
 
     //KAS KELUAR
     Route::get('/kas-keluar', [KasKeluarController::class, 'index'])->name('kas-keluar.index');

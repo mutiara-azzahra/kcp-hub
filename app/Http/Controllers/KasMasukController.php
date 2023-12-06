@@ -16,9 +16,11 @@ class KasMasukController extends Controller
 {
     public function index(){
 
-        $kas_masuk = KasMasukHeader::orderBy('no_kas_masuk', 'desc')->get();
+        $belum_selesai = KasMasukHeader::orderBy('no_kas_masuk', 'desc')->where('status', 'O')->get();
 
-        return view('kas-masuk.index', compact('kas_masuk'));
+        $selesai = KasMasukHeader::orderBy('no_kas_masuk', 'desc')->where('status', 'C')->get();
+
+        return view('kas-masuk.index', compact('belum_selesai', 'selesai'));
     }
 
     public function bukti_bayar(){
@@ -110,6 +112,9 @@ class KasMasukController extends Controller
             'inputs.*.total'        => 'required',
         ]);
         
+        $totalSum = 0;
+        $noKasMasuk = null; // Initialize the variable to hold no_kas_masuk value
+    
         foreach ($request->inputs as $key => $value) {
             $perkiraan = MasterPerkiraan::findOrFail($value['perkiraan']);
         
@@ -121,11 +126,51 @@ class KasMasukController extends Controller
                 'total'         => $value['total'],
                 'created_at'    => NOW(),
             ]);
+    
+            if ($value['akuntansi_to'] === 'D') {
+                $totalSum += $value['total'];
+            }
+    
+            // Set no_kas_masuk value (if it's not set yet)
+            if ($noKasMasuk === null) {
+                $noKasMasuk = $value['no_kas_masuk'];
+            }
+        }
+    
+        // Update KasMasukHeader with the calculated sum for the specified no_kas_masuk
+        if ($noKasMasuk !== null) {
+            KasMasukHeader::where('no_kas_masuk', $noKasMasuk)->update([
+                'nominal' => $totalSum,
+            ]);
         }
             
-        
         return redirect()->route('kas-masuk.index')->with('success','Data kas masuk baru berhasil ditambahkan!');
+    }
+    
+    
+
+    public function cetak_tanda_terima($no_kas_masuk)
+    {
+
+        $update_header = KasMasukHeader::where('no_kas_masuk', $no_kas_masuk)
+            ->update([
+            'status'        => 'C',
+            'updated_at'    => NOW(),
+            'updated_by'    => Auth::user()->nama_user
+        ]);
+
+        $update_details = KasMasukDetails::where('no_kas_masuk', $no_kas_masuk)
+            ->update([
+            'status'        => 'C',
+            'updated_at'    => NOW(),
+            'updated_by'    => Auth::user()->nama_user
+        ]);
         
+        $data  = KasMasukHeader::where('no_kas_masuk', $no_kas_masuk)->first();
+        $pdf   = PDF::loadView('reports.kas-masuk', ['data'=> $data]);
+        $pdf->setPaper('letter', 'potrait');
+
+        return $pdf->stream('kas-masuk.pdf');
     }
 
     public function cetak($no_kas_masuk)

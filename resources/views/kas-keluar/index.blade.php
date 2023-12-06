@@ -54,6 +54,54 @@
                             <td class="text-left">Rp. {{ number_format($p->details_keluar->where('akuntansi_to', 'D')->sum('total'), 0, ',', '.') }}</td>
                             <td class="text-center">
                                 <form action="{{ route('kas-keluar.delete', $p->id) }}" method="POST" id="form_delete" data-id="{{ $p->id }}">
+                                    <a class="btn btn-primary btn-sm" href="{{ route('kas-keluar.show', $p->no_keluar)}}"><i class="fas fa-eye"></i></a>
+                                    <a class="btn btn-success btn-sm" href="{{ route('kas-keluar.show', $p->no_keluar)}}"><i class="fas fa-check"></i></a>
+
+                                    @csrf
+                                    @method('DELETE')
+                                   
+                                    <a class="btn btn-danger btn-sm" onclick="Hapus('{{ $p->id }}')"><i class="fas fa-times"></i></a>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" style="padding: 10px;">
+        <div class="card-header">
+            Kas Keluar
+        </div>
+        <div class="card-body">
+            <div class="col-lg-12">  
+                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example2">
+                    <thead>
+                        <tr style="background-color: #6082B6; color:white">
+                            <th class="text-center">No</th>
+                            <th class="text-center">No. Kas Keluar</th>
+                            <th class="text-center">Pembayaran</th>
+                            <th class="text-center">Keterangan</th>
+                            <th class="text-center">Total</th>
+                            <th class="text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                        $no=1;
+                        @endphp
+
+                        @foreach($kas_keluar as $p)
+                        <tr>
+                            <td class="text-center">{{ $no++ }}.</td>
+                            <td class="text-left">{{ $p->no_keluar }}</td>
+                            <td class="text-left">{{ $p->pembayaran }}</td>
+                            <td class="text-left">{{ $p->keterangan }}</td>
+                            <td class="text-left">Rp. {{ number_format($p->details_keluar->where('akuntansi_to', 'D')->sum('total'), 0, ',', '.') }}</td>
+                            <td class="text-center">
+                                <form action="{{ route('kas-keluar.delete', $p->id) }}" method="POST" id="form_delete" data-id="{{ $p->id }}">
                                     <a class="btn btn-info btn-sm" href="{{ route('kas-keluar.show', $p->no_keluar)}}"><i class="fas fa-eye"></i></a>
 
                                     @csrf
@@ -69,6 +117,7 @@
             </div>
         </div>
     </div>
+
 </div>
 @endsection
 

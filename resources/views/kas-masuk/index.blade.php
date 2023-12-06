@@ -44,7 +44,7 @@
                     $no=1;
                     @endphp
 
-                    @foreach($kas_masuk as $p)
+                    @foreach($belum_selesai as $p)
                     <tr>
                         <td class="text-center">{{ $no++ }}.</td>
                         <td class="text-left">{{ $p->no_kas_masuk }}</td>
@@ -52,8 +52,8 @@
                         <td class="text-left">{{ $p->outlet->nm_outlet }}</td>
                         <td class="text-center">{{ $p->pembayaran_via }}</td>
                         <td class="text-right">Rp. {{ number_format($p->nominal, 0, ',', '.') }}</td>
-                        <td class="text-center">
-                            <a class="btn btn-warning btn-sm" href="{{ route('kas-masuk.cetak', $p->no_kas_masuk) }}" target="_blank"><i class="fas fa-print"></i></a>
+                        <td>
+                        <a class="btn btn-warning btn-sm" onClick="printAndRefresh('{{ route('kas-masuk.cetak-tanda-terima', $p->no_kas_masuk) }}')" href="{{ route('kas-masuk.cetak', $p->no_kas_masuk) }}" target="_blank"><i class="fas fa-print"></i></a>
                         </td>
                     </tr>
                     @endforeach
@@ -79,7 +79,7 @@
                     </thead>
 
                     <tbody>
-                    @foreach($kas_masuk as $p)
+                    @foreach($selesai as $p)
                     <tr>
                         <td class="text-left">{{ $p->no_kas_masuk }}</td>
                         <td class="text-center">{{ Carbon\Carbon::parse($p->tanggal_rincian_tagihan)->format('d-m-Y') }}</td>
@@ -103,5 +103,12 @@
 
 @section('script')
 
+<script>
+function printAndRefresh(url){
+    window.open(url, '_blank');
+    
+    window.location.reload();
+} 
+</script>
 
 @endsection

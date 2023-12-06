@@ -149,7 +149,7 @@
             </tr>
             <tr>
                 <td class="atas-isi">Uang Sejumlah</td>
-                <td class="atas"># #</td>
+                <td class="atas">Rp. {{ number_format($data->nominal, 0, ',', '.') }}</td>
             </tr>
             <tr>
                 <td class="atas-isi">Pembayaran Via</td>
@@ -204,7 +204,7 @@
             </tr>
             <tr>
                 <td class="atas-isi">Uang Sejumlah</td>
-                <td class="atas"># #</td>
+                <td class="atas">Rp. {{number_format( $data->nominal, 0, ',', '.') }}</td>
             </tr>
             <tr>
                 <td class="atas-isi">Untuk Pembayaran</td>

@@ -9,7 +9,6 @@
             </div>
             <div class="float-right">
                 <a class="btn btn-success m-1" href="{{ route('kas-keluar.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
-                <a class="btn btn-warning m-1" href="{{ route('kas-keluar.store-selesai') }}"><i class="fas fa-print"></i> Simpan Data</a>
             </div>
         </div>
     </div>
