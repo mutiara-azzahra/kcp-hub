@@ -80,6 +80,15 @@ class PembayaranPiutangTokoController extends Controller
         return view('piutang-toko.details', compact('data', 'invoice', 'invoice_toko', 'check'));
     }
 
+
+    public function edit($no_piutang){
+
+        $data           = TransaksiPembayaranPiutangHeader::where('no_piutang', $no_piutang)->first();
+        $kas_masuk      = KasMasukHeader::where('kd_outlet', $data->kd_outlet)->get();
+
+        return view('piutang-toko.edit', compact('data', 'kas_masuk'));
+    }
+
     public function store_details(Request $request)
     {
 

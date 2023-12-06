@@ -50,7 +50,7 @@
 
                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                     <div class="float-right pt-3">
-                        <button type="submit" class="btn btn-warning"><i class="fas fa-save"></i> Proses Data</button>                            
+                        <a type="submit" class="btn btn-warning" target="_blank"><i class="fas fa-save"></i> Proses Data</a>                            
                     </div>
                 </div>
             </form>

@@ -274,7 +274,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/piutang-toko/create', [PembayaranPiutangTokoController::class, 'create'])->name('piutang-toko.create');
     Route::post('/piutang-toko/store', [PembayaranPiutangTokoController::class, 'store'])->name('piutang-toko.store');
     Route::get('/piutang-toko/details/{no_piutang}', [PembayaranPiutangTokoController::class, 'details'])->name('piutang-toko.details');
+    Route::get('/piutang-toko/edit/{no_piutang}', [PembayaranPiutangTokoController::class, 'edit'])->name('piutang-toko.edit');
     Route::post('/piutang-toko/store-details', [PembayaranPiutangTokoController::class, 'store_details'])->name('piutang-toko.store-details');
+    Route::post('/piutang-toko/store-kas', [PembayaranPiutangTokoController::class, 'store_kas'])->name('piutang-toko.store-kas');
     Route::get('/piutang-toko/cetak/{no_piutang}', [PembayaranPiutangTokoController::class, 'cetak'])->name('piutang-toko.cetak');
 
     //KAS KELUAR

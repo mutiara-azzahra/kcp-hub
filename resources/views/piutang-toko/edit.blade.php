@@ -5,10 +5,9 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4>Pemotongan Piutang Toko</h4>
+                <h4>Piutang dan Kas Masuk</h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-warning m-1" href="{{ route('piutang-toko.cetak', $data->no_piutang ) }}" target="_blank"><i class="fas fa-print"></i> Cetak Bukti Penerimaan Piutang</a>
                 <a class="btn btn-success m-1" href="{{ route('piutang-toko.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
             </div>
         </div>
@@ -48,65 +47,17 @@
                         <td>:</td>
                         <td class="text-left"><b>Rp. {{ number_format($data->nominal_potong, 0, ',', '.') }}</b></td>
                     </tr>
-                    <tr>
-                        <th class="text-left">Pembayaran Via</th>
-                        <td>:</td>
-                        <td class="text-left"></td>
-                    </tr>
-                    <tr>
-                        <th class="text-left">No. BG</th>
-                        <td>:</td>
-                        <td class="text-left"></td>
-                    </tr>
-                    <tr>
-                        <th class="text-left">Bank</th>
-                        <td>:</td>
-                        <td class="text-left"></td>
-                    </tr>
                 </table>
             </div>
         </div>
     </div>
-
-    @if($check !== null)
 
     <div class="card" style="padding: 10px;">
         <div class="card-body">
-            <div class="col-lg-12">  
-                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example2">
-                    <thead>
-                        <tr style="background-color: #6082B6; color:white">
-                            <th class="text-center">No.</th>
-                            <th class="text-center">No. Invoice</th>
-                            <th class="text-center">Nominal</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                        $no=1;
-                        @endphp
 
-                        @foreach($data->details as $p)
-                        <tr>
-                            <td class="text-left">{{ $no++ }}</td>
-                            <td class="text-left">{{ $p->noinv }}</td>
-                            <td class="text-right">{{ number_format($p->nominal, 0, ',', '.') }}</td>
-                        </tr>
-                        @endforeach
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    @else
-        <div class="card" style="padding: 10px;">
-        <div class="card-body">
-
-        @foreach($invoice as $i)
+        @foreach($kas_masuk as $i)
                         
-        <form action="{{ route('piutang-toko.store-details', ['invoice' => $i->noinv ]) }}" method="POST">
+        <form action="{{ route('piutang-toko.store-kas', ['kas' => $i->no_kas_masuk ]) }}" method="POST">
         <input type="hidden" name="no_piutang" value="{{ $data->no_piutang }}">
         @csrf
 
@@ -116,24 +67,22 @@
                 <thead>
                         <tr style="background-color: #6082B6; color:white">
                         <th class="text-center"></th>
-                        <th class="text-center">No. Invoice</th>
-                        <th class="text-center">Toko</th>
-                        <th class="text-center">Nominal Total</th>
-                        <th class="text-center">Tanggal Invoice</th>
+                        <th class="text-center">No. Kas Masuk</th>
+                        <th class="text-center">Keterangan</th>
+                        <th class="text-center">Nominal</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($invoice_toko as $s)
+                    @foreach($kas_masuk as $s)
                         <tr>
                             <td>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="selected_items[]" value="{{ $s->noinv }}">
                                 </div>
                             </td>
-                            <td class="text-left">{{ $s->noinv }}</td>
-                            <td class="text-left">{{ $s->kd_outlet }}/{{ $s->nm_outlet }}</td>
-                            <td class="text-left">Rp. {{ number_format($s->details_invoice->sum('nominal_total'), 0, ',', '.') }}</td>
-                            <td class="text-left">{{ $s->created_at }}</td>
+                            <td class="text-left">{{ $s->no_kas_masuk }}</td>
+                            <td class="text-left">{{ $s->kd_outlet }} / {{ $s->outlet->nm_outlet }}</td>
+                            <td class="text-right">{{ number_format($s->nominal, 0, ',', '.') }}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -146,8 +95,6 @@
         </div>
         </form>
     </div>
-
-    @endif
 
 </div>
 @endsection

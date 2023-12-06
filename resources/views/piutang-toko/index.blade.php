@@ -38,7 +38,6 @@
                             <th class="text-center">Pembayaran Via</th>
                             <th class="text-center">Tgl. BG</th>
                             <th class="text-center">Nominal</th>
-                            <th class="text-center"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -51,11 +50,9 @@
                             <td class="text-left">{{ $no++ }}</td>
                             <td class="text-left">{{ $p->no_kas_masuk }}</td>
                             <td class="text-left">{{ $p->kd_outlet }} / {{ $p->outlet->nm_outlet }}</td>
-                            <td class="text-left">{{ $p->pembayaran_via }}</td>
-                            <td></td>
-                            <td class="text-right">{{ $p->details->where('akuntansi_to', 'D')->sum('total') }}</td>
-
-                            <td></td>
+                            <td class="text-center">{{ $p->pembayaran_via }}</td>
+                            <td class="text-center">{{ $p->no_bg }}</td>
+                            <td class="text-right">{{ number_format($p->details->where('akuntansi_to', 'D')->sum('total'), 0, ',', '.') }}</td>
                         </tr>
                         @endforeach
 
@@ -93,10 +90,13 @@
                             <td class="text-left">{{ $p->no_piutang }}</td>
                             <td class="text-left">{{ $p->kd_outlet }} / {{ $p->nm_outlet }}</td>
                             <td class="text-left">{{ $p->pembayaran_via }}</td>
-                            <td class="text-right">{{ $p->nominal_potong }}</td>
+                            <td class="text-right">{{ number_format($p->nominal_potong, 0, ',', '.') }}</td>
                             <td class="text-center">
                                 <a class="btn btn-info btn-sm" href="{{ route('piutang-toko.details', $p->no_piutang ) }}">
                                     <i class="fas fa-eye"></i>
+                                </a>
+                                <a class="btn btn-primary btn-sm" href="{{ route('piutang-toko.edit', $p->no_piutang ) }}">
+                                    <i class="fas fa-edit"></i>
                                 </a>
                             </td>
                         </tr>
