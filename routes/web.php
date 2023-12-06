@@ -39,6 +39,7 @@ use App\Http\Controllers\MasterTargetSpvProdukController;
 use App\Http\Controllers\ReportLssController;
 use App\Http\Controllers\ModalDbpController;
 use App\Http\Controllers\PembayaranPiutangTokoController;
+use App\Http\Controllers\ReportKasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -300,8 +301,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/kas-keluar/delete/{no_keluar}', [KasKeluarController::class, 'delete'])->name('kas-keluar.delete');
     Route::get('/kas-keluar/cetak/{no_keluar}', [KasKeluarController::class, 'cetak'])->name('kas-keluar.cetak');
     Route::get('/kas-keluar/update/{no_keluar}', [KasKeluarController::class, 'update'])->name('kas-keluar.update');
-    
 
+    //REPORT KAS
+    Route::get('/report-kas', [ReportKasController::class, 'index'])->name('report-kas.index');
+    Route::post('/report-kas/store', [ReportKasController::class, 'store'])->name('report-kas.store');
+    
     //KODE RAK LOKASI
     Route::get('/kode-rak-lokasi', [KodeRakLokasiController::class, 'index'])->name('kode-rak-lokasi.index');
     Route::post('/kode-rak-lokasi', [KodeRakLokasiController::class, 'store'])->name('kode-rak-lokasi.store');

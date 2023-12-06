@@ -408,7 +408,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('invoice.index')}}" class="nav-link">
+                    <a href="{{ route('report-kas.index')}}" class="nav-link">
                       <p>Report Kas</p>
                     </a>
                 </li>
