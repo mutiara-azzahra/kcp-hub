@@ -71,7 +71,7 @@ class PembayaranPiutangTokoController extends Controller
 
     public function details($no_piutang){
 
-        $check          = KasMasukHeader::where('no_piutang', $no_piutang)->first();
+        $check          = TransaksiPembayaranPiutang::where('no_piutang', $no_piutang)->first();
         $data           = TransaksiPembayaranPiutangHeader::where('no_piutang', $no_piutang)->first();
         $invoice_toko   = TransaksiInvoiceHeader::where('kd_outlet', $data->kd_outlet)->where('status', 'O')->get();
         $invoice        = TransaksiInvoiceHeader::where('status', 'O')->get();

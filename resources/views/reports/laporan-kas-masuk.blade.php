@@ -198,31 +198,6 @@
                 </tr>
             </tbody>
         </table>
-
-        <div class="kanan col-6">
-            <table class="atas">
-                <tr>
-                    <td class="atas">
-                        <div class="ttd">
-                            <br>
-                            <h6 style="text-decoration:underline; margin:0px; color:white">xxxx</h6>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div class="kanan col-6">
-            <table class="atas">
-                <tr>
-                    <td class="atas">
-                        <div class="ttd">
-                            <br>
-                            <h6 style="text-decoration:underline; margin:0px">Approve by System</h6>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
     </div>
     </body>
 </html>
