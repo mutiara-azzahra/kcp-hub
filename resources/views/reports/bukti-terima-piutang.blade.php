@@ -81,10 +81,12 @@
       br{
           margin-bottom: 2px !important;
       }
-      .table-bawah{
-        border-left: none; /* Remove left border */
-        border-right: none;
-        line-height: 14px;
+      .kotak{
+        border-left: 0.5px; /* Remove left border */
+        border-right: 0.5px;
+        border-top:none; /* Add a top border with a black color */
+        border-bottom: none;
+        text-align: left;
       }
      .judul{
          text-align: center;
@@ -129,7 +131,7 @@
                 <td class="atas-header">PT. KCP</td>  
             </tr>
             <tr>
-                <td class="atas-header"><b>BUKTI TERIMA PIUTANG</b></td>
+                <td class="atas-header"><b>BUKTI PENERIMAAN PIUTANG</b></td>
             </tr>
         </table>
         <table class="table atas" style="line-height: 12px;">
@@ -149,7 +151,7 @@
                             @endif
                         </tr>
                         <tr>
-                            <td class="atas">Telah Diterima Oleh</td>
+                            <td class="atas">Telah Diterima Dari</td>
                             <td class="atas">:</td>
                             <td class="atas">{{ $data->nm_outlet }} [{{ $data->kd_outlet }}]</td>
                         </tr>
@@ -169,32 +171,57 @@
     </div>
 
     <div class="container">
-        <div class="isi">
-            <table class="table">
+        <div class="row">
+            <table style="border: none;">
                 <tr>
-                    <td>Pembayaran Dalam Bentuk</td>
-                </tr>
-                <tr>
-                    <td><b>CASH</b></td>
-                </tr>
-            </table>
-            <br>
-            <table class="atas">
-                <tr>
-                    <td class="nama-kcp" style="width: 250px">
-                        <table class="atas">
+                    <td style="border: none;">
+                        <table>
                             <tr>
-                                <td class="atas">
-                                    <div class="ttd">
-                                        <br>
-                                        <h6 style="margin:0px; text-decoration:underline;" >Approve by System</h6>
-                                    </div>
+                                <td class="kotak">Pembayaran Dalam Bentuk</td>
+                                <td class="kotak"></td>
+                            </tr>
+                            <tr>
+                                <td class="kotak"><b>{{ $data->kas_masuk->pembayaran_via }}</b></td>
+                                <td class="kotak">Rp. {{ number_format($data->nominal_potong, 0, ',', '.')}}</td>
+                            </tr>
+                            <tr>
+                                <td class="kotak">Titipan Toko</td>
+                                <td class="kotak"></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="border: none;">
+                        <table>
+                            <tr>
+                                <td class="kotak">Untuk Pembayaran : </td>
+                                <td class="kotak"></td>
+                            </tr>
+                            <tr>
+                                <td class="kotak">
+                                    @foreach($data->details as $a)
+                                    {{ $a->noinv }},
+                                    @endforeach
                                 </td>
+                                <td class="kotak">Rp. {{ number_format($data->details->sum('nominal'), 0, ',', '.')}}</td>
+                            </tr>
+                            <tr>
+                                <td class="kotak" style="color:white">xxxxxx</td>
+                                <td class="kotak" style="color:white">xxxxxx</td>
                             </tr>
                         </table>
                     </td>
                 </tr>
             </table>
+        
+        </div>
+    </div>
+
+    <div>
+        <div class="atas-total" style="padding-right: 50px;">
+            <br>
+            <p>Banjarmasin, {{ \Carbon\Carbon::now()->format('d-m-Y') }}</p>
+            <br>
+            <h6 style="margin:0px; text-decoration:underline;text-transform: uppercase; padding-right: 20px;" >Approve by System</h6>
         </div>
     </div>
 </body>
