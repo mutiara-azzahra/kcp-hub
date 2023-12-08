@@ -8,8 +8,7 @@
                 <h4>Kas Masuk</h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-success m-1" href="{{ route('kas-masuk.bukti-bayar') }}"><i class="fas fa-plus"></i> Bukti Terima Pembayaran</a>
-                <a class="btn btn-info m-1" href="{{ route('kas-masuk.bayar-manual') }}"><i class="fas fa-plus"></i> Terima Pembayaran Manual</a>
+                <a class="btn btn-success m-1" href="{{ route('transfer-masuk.bukti-bayar') }}"><i class="fas fa-plus"></i> Tambah Transfer Masuk</a>
             </div>
         </div>
     </div>
@@ -53,7 +52,7 @@
                         <td class="text-center">{{ $p->pembayaran_via }}</td>
                         <td class="text-right">Rp. {{ number_format($p->nominal, 0, ',', '.') }}</td>
                         <td>
-                        <a class="btn btn-warning btn-sm" onClick="printAndRefresh('{{ route('kas-masuk.cetak-tanda-terima', $p->no_kas_masuk) }}')" href="{{ route('kas-masuk.cetak', $p->no_kas_masuk) }}" target="_blank"><i class="fas fa-print"></i></a>
+                            <a class="btn btn-warning btn-sm" onClick="printAndRefresh('{{ route('transfer-masuk.cetak-tanda-terima', $p->no_kas_masuk) }}')" href="{{ route('transfer-masuk.cetak', $p->no_kas_masuk) }}" target="_blank"><i class="fas fa-print"></i></a>
                         </td>
                     </tr>
                     @endforeach
@@ -112,9 +111,7 @@
                         <td class="text-center">{{ $p->pembayaran_via }}</td>
                         <td class="text-right">Rp. {{ number_format($p->nominal, 0, ',', '.') }}</td>
                         <td class="text-center">
-                            <a class="btn btn-info btn-sm" href="{{ route('kas-masuk.cetak', $p->no_kas_masuk) }}" target="_blank"><i class="fas fa-edit"></i></a>
-                            <a class="btn btn-warning btn-sm" href="{{ route('kas-masuk.cetak', $p->no_kas_masuk) }}" target="_blank"><i class="fas fa-print"></i></a>
-                            <a class="btn btn-danger btn-sm" href="{{ route('kas-masuk.cetak', $p->no_kas_masuk) }}" target="_blank"><i class="fas fa-times"></i></a>
+                            <a class="btn btn-info btn-sm" href="{{ route('transfer-masuk.cetak', $p->no_kas_masuk) }}" target="_blank"><i class="fas fa-edit"></i></a>
                         </td>
                     </tr>
                     @endforeach

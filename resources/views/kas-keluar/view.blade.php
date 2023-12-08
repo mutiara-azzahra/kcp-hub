@@ -155,7 +155,7 @@
                                     </td>
                                     @endif
                                     <td class="text-center">
-                                        <form action="{{ route('kas-keluar.delete', ['id' => $i->id, 'no_keluar' => $kas_keluar->no_keluar]) }}" method="POST" id="form_delete">
+                                        <form action="{{ route('kas-keluar.delete-details', ['id' => $i->id]) }}" method="POST" id="form_delete" data-id="{{$i->id}}">
 
                                             @csrf
                                             @method('DELETE')
