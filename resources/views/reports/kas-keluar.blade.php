@@ -158,24 +158,21 @@
         <table class="table atas">
             <tr>
                 <td class="atas-isi">Sudah Diterima Dari</td>
-                <td class="atas">{{ $data->pembayaran }}</td>
+                <td class="atas">PT. KCP</td>
             </tr>
             <tr>
                 <td class="atas-isi">Uang Sejumlah</td>
-                <td class="atas">Rp. {{ number_format($data->details_keluar->where('akuntansi_to', 'D')->sum('total'), 0, ',', '.') }}</td>
+                <td class="atas"><b> Rp. {{ number_format($data->details_keluar->where('akuntansi_to', 'D')->sum('total'), 0, ',', '.') }}</b></td>
             </tr>
             <tr>
                 <td class="atas-isi">Untuk Pembayaran</td>
-                <td class="atas"> {{ $data->keterangan }}</td>
+                <td class="atas">{{ $data->pembayaran }}</td>
             </tr>
             <tr>
                 <td class="atas-isi">Catatan</td>
-                <td class="atas"> </td>
+                <td class="atas">{{ $data->keterangan }}</td>
             </tr>
-            <tr>
-                <td class="atas-isi">Dengan Rincian</td>
-                <td class="atas"></td>
-            </tr>
+            
         </table>
     </div>
     <div>
@@ -191,11 +188,13 @@
                         <br>
                         <br>
                         <br>
+                        <br>
                         <h5 style="text-decoration:underline; margin:0px">Menyetujui,</h5>
                     </div>
                 </td>
                 <td class="atas">
                     <div class="ttd-biasa">
+                        <br>
                         <br>
                         <br>
                         <br>
@@ -209,7 +208,8 @@
                         <br>
                         <p>Banjarmasin, {{ \Carbon\Carbon::now()->format('d-m-Y') }}</p>
                         <br>
-                        <h5 style="margin:0px; text-decoration:underline; padding-right: 20px;" >Approve by System</h5>
+                        <br>
+                        <h5 style="margin:0px; text-decoration:underline; padding-right: 20px;" >{{ Auth::user()->nama_user }}</h5>
                     </div>
                 </td>
             </tr>

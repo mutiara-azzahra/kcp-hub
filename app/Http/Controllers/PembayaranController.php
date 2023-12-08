@@ -24,7 +24,7 @@ class PembayaranController extends Controller
     public function pembayaran($invoice_non){
 
         $bayar      = InvoiceNonHeader::where('invoice_non', $invoice_non)->get();
-        $kas_keluar = TransaksiKasKeluarHeader::orderBy('no_keluar', 'desc')->get();
+        $kas_keluar = TransaksiKasKeluarHeader::orderBy('no_keluar', 'desc')->where('status', 'O')->get();
  
         return view('pembayaran-non-aop.pembayaran',['invoice_non' => $invoice_non, 'bayar' => $bayar,'kas_keluar' => $kas_keluar ]);
     }
@@ -36,6 +36,12 @@ class PembayaranController extends Controller
             'flag_pembayaran_via'    => $request->flag_pembayaran_via,
             'flag_pembayaran'        => 'Y',
             'flag_pembayaran_date'   => NOW(),
+            'updated_at'             => NOW(),
+            'updated_by'             => Auth::user()->nama_user
+        ]);
+
+        $created = TransaksiKasKeluarHeader::where('no_keluar', $request->trx_from)->update([
+            'status'                 => 'C',
             'updated_at'             => NOW(),
             'updated_by'             => Auth::user()->nama_user
         ]);

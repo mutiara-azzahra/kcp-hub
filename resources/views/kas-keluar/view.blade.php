@@ -155,7 +155,7 @@
                                     </td>
                                     @endif
                                     <td class="text-center">
-                                        <form action="{{ route('kas-keluar.delete-details', ['id' => $i->id]) }}" method="POST" id="form_delete" data-id="{{$i->id}}">
+                                    <form action="{{ route('kas-keluar.delete-details', $i->id) }}" method="POST" id="form_delete_{{ $i->id }}" data-id="{{ $i->id }}">
 
                                             @csrf
                                             @method('DELETE')
@@ -222,10 +222,28 @@
         $(this).parents('tr').remove();
     })
 
+    // Hapus = (id)=>{
+    //     Swal.fire({
+    //         title: 'Apa anda yakin menghapus data ini?',
+    //         text:  "menghapus notifikasi" ,
+    //         showCancelButton: true,
+    //         confirmButtonColor: '#3085d6' ,
+    //         cancelButtonColor: 'red' ,
+    //         confirmButtonText: 'hapus data' ,
+    //         cancelButtonText: 'batal' ,
+    //         reverseButtons: false
+    //         }).then((result) => {
+    //             if (result.value) {
+    //                 $('#form_delete').submit();
+    //             }
+
+    //     })
+    // }
+
     Hapus = (id)=>{
         Swal.fire({
             title: 'Apa anda yakin menghapus data ini?',
-            text:  "menghapus notifikasi" ,
+            text:  "Data tidak dapat kembali" ,
             showCancelButton: true,
             confirmButtonColor: '#3085d6' ,
             cancelButtonColor: 'red' ,
@@ -234,9 +252,8 @@
             reverseButtons: false
             }).then((result) => {
                 if (result.value) {
-                    $('#form_delete').submit();
+                    document.getElementById('form_delete_' + id).submit();
                 }
-
         })
     }
 </script>

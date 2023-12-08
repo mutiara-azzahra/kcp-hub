@@ -96,14 +96,14 @@
                         @endphp
 
                         @endforeach
-                        <!-- <tr>
+                        <tr>
                             <td colspan="6" class="text-center"><b>TOTAL</b></td>
                             <td>
                                 <div class="form-group col-12">
                                     <input type="text" id="totalNominal" class="form-control" readonly>
                                 </div>
                             </td>
-                        </tr> -->
+                        </tr>
                         </tbody>
                     </table>
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">

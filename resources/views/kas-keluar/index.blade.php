@@ -111,7 +111,6 @@
                         </tr>
                     </thead>
                     <tbody>
-
                         @foreach($selesai as $p)
                         <tr>
                             <td class="text-left">{{ $p->no_keluar }}</td>
