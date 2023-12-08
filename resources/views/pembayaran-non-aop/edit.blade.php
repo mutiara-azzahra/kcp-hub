@@ -119,6 +119,9 @@
     @else
 
     <div class="card" style="padding: 10px;">
+        <div class="card-header">
+            No. Invoice : <b>{{ $header->invoice_non }}</b>
+        </div>
         <div class="card-body">
             <div class="col-lg-12">  
                 <table class="table table-hover table-bordered table-sm bg-light table-striped">
@@ -140,10 +143,10 @@
                             <td class="text-left">{{ $s->part_no }}</td>
                             <td class="text-right">{{ $s->qty }}</td>
                             <td class="text-right">{{ $s->diskon_nominal }}</td>
-                            <td class="text-right">Rp. {{ number_format($s->amount_nota, 2, ',', '.') }}</td>
+                            <td class="text-right">{{ number_format($s->amount_nota, 2, '.', ',') }}</td>
                         </tr>
                         @endforeach
-                        <tr>
+                        <tr style="background-color: #6082B6; color:white">
                             <td class="text-center" colspan="3"><b>TOTAL</b></td>
                             <td class="text-right"><b>Rp. {{ number_format($s->sum('amount_nota'), 2, ',', '.') }}</b></td>
                         </tr>

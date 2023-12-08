@@ -42,17 +42,17 @@
 
                         @foreach($list_belum_bayar as $p)
                         <tr>
-                            <td class="text-left">
+                            <td class="text-center">
                                 <a class="btn btn-success btn-sm" href="{{ route('pembayaran-non-aop.pembayaran-nota',$p->invoice_non) }}"><i class="fa fa-pencil"></i></a>
                                 <a class="btn btn-info btn-sm" href="{{ route('pembayaran-non-aop.pembayaran',$p->invoice_non) }}"><i class="fa fa-plus"></i></a>
                             </td>
                             
                             <td class="text-left">{{ $p->invoice_non }}</td>
-                            <td class="text-left">{{ $p->tanggal_nota }}</td>
-                            <td class="text-left">{{ $p->tanggal_jatuh_tempo }}</td>
+                            <td class="text-center">{{ Carbon\Carbon::parse($p->tanggal_nota)->format('d-m-Y') }}</td>
+                            <td class="text-center">{{ Carbon\Carbon::parse($p->tanggal_jatuh_tempo)->format('d-m-Y') }}</td>
                             <td class="text-left">{{ $p->customer_to }}</td>
                             <td class="text-left">{{ $p->supplier }}</td>
-                            <td class="text-left">Rp. {{ number_format($p->details_pembelian->sum('total_amount'), 0, ',', '.') }}</td>
+                            <td class="text-right">{{ number_format($p->details_pembelian->sum('total_amount'), 0, ',', ',') }}</td>
                         </tr>
                         @endforeach
                         
@@ -65,14 +65,16 @@
     <div class="card" style="padding: 10px;">
         <div class="card-body">
             <div class="col-lg-12">  
-                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example3">
+                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example1">
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
                             <th class="text-center">Tgl. Jatuh Tempo</th>
+                            <th class="text-center">Invoice Non</th>
                             <th class="text-center">Customer To</th>
                             <th class="text-center">Supplier</th>
                             <th class="text-center">Amt. Nota</th>
-                            <th class="text-center">Pembayaran Via | Trx. From</th>
+                            <th class="text-center">Pembayaran Via</th>
+                            <th class="text-center">Trx. From</th>
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
@@ -83,14 +85,15 @@
 
                         @foreach($list_sudah_bayar as $s)
                         <tr>
-                            <td class="text-left">{{ $s->tanggal_jatuh_tempo }}</td>
+                            <td class="text-center">{{ Carbon\Carbon::parse($s->tanggal_jatuh_tempo)->format('d-m-Y') }}</td>
+                            <td class="text-left">{{ $s->invoice_non }}</td>
                             <td class="text-left">{{ $s->customer_to }}</td>
                             <td class="text-left">{{ $s->supplier }}</td>
-                            <td class="text-left">Rp. {{ number_format($s->details_nota->sum('amount_nota'), 2, ',', '.') }}</td>
-                            <td class="text-center">{{ $s->flag_pembayaran_via }} | {{ $s->trx_from }}</td>
+                            <td class="text-right">{{ number_format($s->details_nota->sum('amount_nota'), 2, '.', ',') }}</td>
+                            <td class="text-left">{{ $s->flag_pembayaran_via }}</td>
+                            <td class="text-left">{{ $s->trx_from }}</td>
                             <td class="text-left">
                                 <a class="btn btn-warning btn-sm" href="{{ route('pembayaran-non-aop.cetak', $s->invoice_non) }}" target="_blank"><i class="fas fa-print"></i></a>
-                                <a class="btn btn-primary btn-sm" href=""><i class="fas fa-info"></i></a>
                             </td>
                         </tr>
                         @endforeach

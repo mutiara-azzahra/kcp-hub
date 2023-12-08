@@ -119,6 +119,9 @@
     @else
 
     <div class="card" style="padding: 10px;">
+        <div class="card-header">
+            No. Invoice : <b>{{ $header->invoice_non }}</b>
+        </div>
         <div class="card-body">
             <div class="col-lg-12">  
                 <table class="table table-hover table-bordered table-sm bg-light table-striped">
