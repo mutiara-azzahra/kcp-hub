@@ -5,10 +5,10 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-2">
              <div class="float-left">
-                <h4>Kas Masuk</h4>
+                <h4>Transfer Masuk</h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-success m-1" href="{{ route('transfer-masuk.bukti-bayar') }}"><i class="fas fa-plus"></i> Tambah Transfer Masuk</a>
+                <a class="btn btn-success m-1" href="{{ route('transfer-masuk.create') }}"><i class="fas fa-plus"></i> Tambah Transfer Masuk</a>
             </div>
         </div>
     </div>
@@ -30,11 +30,11 @@
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
                             <th class="text-center">No</th>
-                            <th class="text-center">No. Kas Masuk</th>
-                            <th class="text-center">Kode Toko</th>
-                            <th class="text-center">Nama Toko</th>
-                            <th class="text-center">Pembayaran Via</th>
+                            <th class="text-center">No. Transfer Masuk</th>
+                            <th class="text-center">Tgl. Bank</th>
+                            <th class="text-center">Bank</th>
                             <th class="text-center">Nominal</th>
+                            <th class="text-center">Keterangan</th>
                             <th class="text-center"></th>
                         </tr>
                     </thead>
@@ -64,37 +64,15 @@
 
     <div class="card" style="padding: 10px;">
         <div class="card-header">
-            Kas Masuk
-        </div>
-        <div class="card-body">
-            <form action=""  method="GET">
-                <!-- @csrf -->
-                <div class="row">
-                    <div class="form-group col-6">
-                        <label for="">Tanggal Awal</label>
-                        <input type="date" name="tanggal_awal" id="" class="form-control" placeholder="">
-                    </div>
-
-                    <div class="form-group col-6">
-                        <label for="">Tanggal Akhir</label>
-                        <input type="date" name="tanggal_akhir" id="" class="form-control" placeholder="">
-                    </div>
-                </div>
-
-                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                    <div class="float-right pt-3">
-                        <button type="submit" class="btn btn-info"><i class="fas fa-search"></i> Cari</button>                            
-                    </div>
-                </div>
-            </form>
+            Transfer Masuk
         </div>
         <div class="card-body">
             <div class="col-lg-12">  
                 <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example3">
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
-                            <th class="text-center">No. Kas Masuk</th>
-                            <th class="text-center">Tgl. Kas Masuk</th>
+                            <th class="text-center">No. Transfer Masuk</th>
+                            <th class="text-center">Tgl. Transfer Masuk</th>
                             <th class="text-center">Potong Faktur</th>
                             <th class="text-center">Keterangan</th>
                             <th class="text-center">Terima Dari</th>

@@ -146,9 +146,10 @@
                             <td class="text-right">{{ number_format($s->amount_nota, 2, '.', ',') }}</td>
                         </tr>
                         @endforeach
+
                         <tr style="background-color: #6082B6; color:white">
                             <td class="text-center" colspan="3"><b>TOTAL</b></td>
-                            <td class="text-right"><b>Rp. {{ number_format($s->sum('amount_nota'), 2, ',', '.') }}</b></td>
+                            <td class="text-right"><b>Rp. {{ number_format($header->details_nota->sum('amount_nota'), 2, ',', '.') }}</b></td>
                         </tr>
                         
                     </tbody>
