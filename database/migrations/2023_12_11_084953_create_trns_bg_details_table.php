@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('trns_transfer_details', function (Blueprint $table) {
+        Schema::create('trns_bg_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('id_transfer');
-            $table->string('status_transfer')->nullable();
+            $table->string('id_bg');
+            $table->string('status_bg')->nullable();
+            $table->string('from_bg')->nullable();
             $table->string('perkiraan')->nullable();
             $table->string('akuntansi_to')->nullable();
             $table->Integer('total')->default(0);
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('trns_transfer_details');
+        Schema::dropIfExists('trns_bg_details');
     }
 };

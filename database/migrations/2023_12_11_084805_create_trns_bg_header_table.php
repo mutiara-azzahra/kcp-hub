@@ -11,20 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('trns_transfer_header', function (Blueprint $table) {
+        Schema::create('trns_bg_header', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('id_transfer');
-            $table->string('status_tarnsfer')->nullable();
-            $table->date('tanggal_bank')->nullable();
-            $table->string('bank')->nullable();
+            $table->string('id_bg');
+            $table->string('status_bg')->nullable();
+            $table->string('from_bg')->nullable();
             $table->string('keterangan')->nullable();
-            $table->enum('flag_by_toko', ['Y', 'N'])->default('N');
-            $table->string('catatan')->nullable();
+            $table->Integer('nominal')->nullable();
             $table->enum('status', ['O', 'C'])->default('O');
-            $table->enum('flag_kas_ar', ['Y', 'N'])->default('N');
+            $table->enum('flag_balik', ['Y', 'N'])->default('N');
             $table->enum('flag_batal', ['Y', 'N'])->default('N');
-            $table->datetime('flag_batal_date');
-            $table->datetime('flag_batal_by');
+            $table->string('flag_batal_keterangan')->nullable();
             $table->timestamps();
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
@@ -36,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('trns_transfer_header');
+        Schema::dropIfExists('trns_bg_header');
     }
 };
