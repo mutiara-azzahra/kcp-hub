@@ -2,56 +2,81 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use PDF;
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\MasterPerkiraan;
+use App\Models\TransferMasukHeader;
 
 class TransferMasukController extends Controller
 {
     public function index(){
 
-        $sales = MasterSales::where('status', 'A')->get();
+        $tf_masuk = TransferMasukHeader::where('status', 'A')->get();
+        $tf_masuk_validated = TransferMasukHeader::where('flag_kas_ar', 'Y')->get();
 
-        return view('master-sales.index', compact('sales'));
+        return view('transfer-masuk.index', compact('tf_masuk', 'tf_masuk_validated'));
     }
 
     public function create(){
 
-        $username = User::where('id_role', 20)->get();
-
-        return view('master-sales.create', compact('username'));
+        return view('transfer-masuk.create');
     }
 
     public function store(Request $request){
 
-        $request -> validate([
-            'sales'      => 'required|unique:master_sales,sales',
+        $request->validate([
+            'tanggal_bank'      => 'required',
+            'bank'              => 'required',
+            'dari_toko'         => 'required',
+            'keterangan'        => 'required',
+            'status_transfer'   => 'required',
         ]);
-
-        $created = MasterSales::create($request->all());
-
-        if ($created){
-            return redirect()->route('master-sales.index')->with('success','Data sales baru berhasil ditambahkan');
-        } else{
-            return redirect()->route('master-sales.index')->with('danger','Data sales baru gagal ditambahkan');
+    
+        $newTransfer = new TransferMasukHeader();
+        $newTransfer->id_transfer = TransferMasukHeader::id_transfer();
+    
+        $status_transfer = '';
+        $flag_by_toko = '';
+    
+        if ($request->status_transfer == 1) {
+            $status_transfer = 'IN';
+            $flag_by_toko = ($request->dari_toko == 1) ? 'Y' : 'N';
+        } elseif ($request->status_transfer == 2) {
+            $status_transfer = 'OUT';
+            $flag_by_toko = 'N';
+        }
+    
+        $requestData = [
+            'id_transfer'       => $newTransfer->id_transfer,
+            'status_transfer'   => $status_transfer,
+            'tanggal_bank'      => $request->tanggal_bank,
+            'bank'              => $request->bank,
+            'flag_by_toko'      => $flag_by_toko,
+            'keterangan'        => $request->keterangan,
+            'status'            => 'O',
+            'created_by'        => Auth::user()->nama_user
+        ];
+    
+        $created = TransferMasukHeader::create($requestData);
+    
+        if ($created) {
+            return redirect()->route('transfer-masuk.details', ['id_transfer' => $newTransfer->id_transfer])
+                ->with('success', 'Transfer masuk berhasil ditambahkan. Tambahkan Details');
+        } else {
+            return redirect()->route('transfer-masuk.index')
+                ->with('danger', 'Transfer masuk gagal ditambahkan');
         }
     }
 
-    public function details($id){
+    public function details($id_transfer){
 
-        $sales  = MasterSales::findOrFail($id);
+        $perkiraan = MasterPerkiraan::all();
+        $transfer  = TransferMasukHeader::where('id_transfer', $id_transfer)->first();
 
-        return view('master-sales.details', compact('sales'));
-
-    }
-
-    public function tambah_wilayah($id){
-
-        $sales       = MasterSales::findOrFail($id);
-        $master_area = MasterAreaOutlet::where('status', 'Y')->get();
-        $area        = MasterAreaSales::where('id_sales', $id)->get();
-
-        return view('master-sales.details', compact('sales', 'master_area', 'area'));
-
+        return view('transfer-masuk.details', compact('perkiraan', 'transfer'));
     }
 
     public function store_details(Request $request){
@@ -71,7 +96,7 @@ class TransferMasukController extends Controller
            MasterAreaSales::create($value);
         }        
         
-        return redirect()->route('master-sales.index')->with('success','Data area sales berhasil ditambahkan!');
+        return redirect()->route('transfer-masuk.index')->with('success','Data area sales berhasil ditambahkan!');
 
     }
 
@@ -84,9 +109,9 @@ class TransferMasukController extends Controller
             ]);
 
         if ($updated){
-            return redirect()->route('master-sales.index')->with('success','Stok Gudang berhasil dihapus!');
+            return redirect()->route('transfer-masuk.index')->with('success','Stok Gudang berhasil dihapus!');
         } else{
-            return redirect()->route('master-sales.index')->with('danger','Stok Gudang gagal dihapus');
+            return redirect()->route('transfer-masuk.index')->with('danger','Stok Gudang gagal dihapus');
         }
         
     }

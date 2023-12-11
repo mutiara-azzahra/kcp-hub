@@ -8,7 +8,7 @@
                 <h4>Details Kas Masuk</h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-success" href="{{ route('kas-masuk.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
+                <a class="btn btn-success" href="{{ route('transfer-masuk.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
             </div>
         </div>
     </div>
@@ -30,22 +30,22 @@
                     <tr>
                         <th class="text-left">Tgl. Transaksi</th>
                         <td>:</td>
-                        <td class="text-left"><b>{{ $kas_masuk->tanggal_rincian_tagihan }}</b></td>
+                        <td class="text-left"><b>{{ $transfer->tanggal_bank }}</b></td>
                     </tr>
                     <tr>
-                        <th class="text-left">No. Kas Masuk</th>
+                        <th class="text-left">No. Transfer</th>
                         <td>:</td>
-                        <td class="text-left"><b>{{ $kas_masuk->no_kas_masuk }}</b></td>
+                        <td class="text-left"><b>{{ $transfer->id_transfer }}</b></td>
                     </tr>
                     <tr>
-                        <th class="text-left">Terima Dari</th>
+                        <th class="text-left">Bank</th>
                         <td>:</td>
-                        <td class="text-left"><b>{{ $kas_masuk->terima_dari }}</b></td>
+                        <td class="text-left"><b>{{ $transfer->bank }}</b></td>
                     </tr>
                     <tr>
                         <th class="text-left">Keterangan</th>
                         <td>:</td>
-                        <td class="text-left"><b>{{ $kas_masuk->keterangan }}</b></td>
+                        <td class="text-left"><b>{{ $transfer->keterangan }}</b></td>
                     </tr>
                 </table>
             </div>
@@ -55,7 +55,7 @@
     <div class="card" style="padding: 10px;">
         <div class="card-body">
             <div class="col-lg-12 p-1" id="main" data-loading="true">
-                <form action="{{ route('kas-masuk.store-details')}}" method="POST">
+                <form action="{{ route('transfer-masuk.store-details')}}" method="POST">
                     @csrf
                     <div class="table-container">
                         <table class="table table-hover table-sm bg-light table-striped table-bordered" id="table">
@@ -90,7 +90,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group col-12">
-                                            <input type="hidden" name="inputs[0][no_kas_masuk]" value="{{ $kas_masuk->no_kas_masuk }}">
+                                            <input type="hidden" name="inputs[0][id_transfer]" value="{{ $transfer->id_transfer }}">
                                             <input type="text" name="inputs[0][total]" class="form-control">
                                         </div>
                                     </td>
@@ -142,7 +142,7 @@
                 </td>
                 <td class="text-center">
                     <div class="form-group col-12">
-                        <input type="hidden" name="inputs[${i}][no_kas_masuk]" value="{{ $kas_masuk->no_kas_masuk }}">
+                        <input type="hidden" name="inputs[${i}][id_transfer]" value="{{ $transfer->id_transfer }}">
                         <input type="text" name="inputs[${i}][total]" class="form-control">
                     </div>
                 </td>

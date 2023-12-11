@@ -8,6 +8,7 @@
                 <h4>Transfer Masuk</h4>
             </div>
             <div class="float-right">
+                <a class="btn btn-primary m-1" href="{{ route('transfer-masuk.create') }}"><i class="fas fa-book"></i> Validasi Transfer Masuk</a>
                 <a class="btn btn-success m-1" href="{{ route('transfer-masuk.create') }}"><i class="fas fa-plus"></i> Tambah Transfer Masuk</a>
             </div>
         </div>
@@ -29,11 +30,9 @@
                 <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example2">
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
-                            <th class="text-center">No</th>
-                            <th class="text-center">No. Transfer Masuk</th>
+                            <th class="text-center">No. Transfer</th>
                             <th class="text-center">Tgl. Bank</th>
                             <th class="text-center">Bank</th>
-                            <th class="text-center">Nominal</th>
                             <th class="text-center">Keterangan</th>
                             <th class="text-center"></th>
                         </tr>
@@ -43,17 +42,9 @@
                     $no=1;
                     @endphp
 
-                    @foreach($belum_selesai as $p)
+                    @foreach($tf_masuk as $p)
                     <tr>
-                        <td class="text-center">{{ $no++ }}.</td>
-                        <td class="text-left">{{ $p->no_kas_masuk }}</td>
-                        <td class="text-left">{{ $p->kd_outlet }}</td>
-                        <td class="text-left">{{ $p->outlet->nm_outlet }}</td>
-                        <td class="text-center">{{ $p->pembayaran_via }}</td>
-                        <td class="text-right">Rp. {{ number_format($p->nominal, 0, ',', '.') }}</td>
-                        <td>
-                            <a class="btn btn-warning btn-sm" onClick="printAndRefresh('{{ route('transfer-masuk.cetak-tanda-terima', $p->no_kas_masuk) }}')" href="{{ route('transfer-masuk.cetak', $p->no_kas_masuk) }}" target="_blank"><i class="fas fa-print"></i></a>
-                        </td>
+                        
                     </tr>
                     @endforeach
                     </tbody>
@@ -71,26 +62,19 @@
                 <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example3">
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
-                            <th class="text-center">No. Transfer Masuk</th>
-                            <th class="text-center">Tgl. Transfer Masuk</th>
-                            <th class="text-center">Potong Faktur</th>
-                            <th class="text-center">Keterangan</th>
-                            <th class="text-center">Terima Dari</th>
+                            <th class="text-center">No. Transfer</th>
+                            <th class="text-center">Tgl. Bank</th>
+                            <th class="text-center">Bank</th>
                             <th class="text-center">Nominal</th>
+                            <th class="text-center">Keterangan</th>
+                            <th class="text-center"></th>
                         </tr>
                     </thead>
 
                     <tbody>
-                    @foreach($selesai as $p)
+                    @foreach($tf_masuk_validated as $p)
                     <tr>
-                        <td class="text-left">{{ $p->no_kas_masuk }}</td>
-                        <td class="text-center">{{ Carbon\Carbon::parse($p->tanggal_rincian_tagihan)->format('d-m-Y') }}</td>
-                        <td class="text-left">{{ $p->keterangan }}</td>
-                        <td class="text-center">{{ $p->pembayaran_via }}</td>
-                        <td class="text-right">Rp. {{ number_format($p->nominal, 0, ',', '.') }}</td>
-                        <td class="text-center">
-                            <a class="btn btn-info btn-sm" href="{{ route('transfer-masuk.cetak', $p->no_kas_masuk) }}" target="_blank"><i class="fas fa-edit"></i></a>
-                        </td>
+                        
                     </tr>
                     @endforeach
                     </tbody>

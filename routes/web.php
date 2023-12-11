@@ -40,6 +40,7 @@ use App\Http\Controllers\ReportLssController;
 use App\Http\Controllers\ModalDbpController;
 use App\Http\Controllers\PembayaranPiutangTokoController;
 use App\Http\Controllers\ReportKasController;
+use App\Http\Controllers\TransferMasukController;
 
 /*
 |--------------------------------------------------------------------------
@@ -309,6 +310,17 @@ Route::group(['middleware' => 'auth'], function () {
     //REPORT KAS
     Route::get('/report-kas', [ReportKasController::class, 'index'])->name('report-kas.index');
     Route::get('/report-kas/store', [ReportKasController::class, 'store'])->name('report-kas.store');
+
+    //TRANSFER
+    Route::get('/transfer-masuk', [TransferMasukController::class, 'index'])->name('transfer-masuk.index');
+    Route::get('/transfer-masuk/create', [TransferMasukController::class, 'create'])->name('transfer-masuk.create');
+    Route::post('/transfer-masuk/store', [TransferMasukController::class, 'store'])->name('transfer-masuk.store');
+    Route::get('/transfer-masuk/details/{id_transfer}', [TransferMasukController::class, 'details'])->name('transfer-masuk.details');
+    Route::post('/transfer-masuk/store-details', [TransferMasukController::class, 'store_details'])->name('transfer-masuk.store-details');
+    Route::get('/transfer-masuk/bukti-bayar', [TransferMasukController::class, 'bukti_bayar'])->name('transfer-masuk.bukti-bayar');
+    Route::get('/transfer-masuk/pembayaran-manual', [TransferMasukController::class, 'pembayaran_manual'])->name('transfer-masuk.bayar_manual');
+    Route::get('/transfer-masuk/cetak/{no_kas_masuk}', [TransferMasukController::class, 'cetak'])->name('transfer-masuk.cetak');
+    Route::get('/transfer-masuk/cetak-tanda-terima/{no_kas_masuk}', [TransferMasukController::class, 'cetak_tanda_terima'])->name('transfer-masuk.cetak-tanda-terima');
     
     //KODE RAK LOKASI
     Route::get('/kode-rak-lokasi', [KodeRakLokasiController::class, 'index'])->name('kode-rak-lokasi.index');

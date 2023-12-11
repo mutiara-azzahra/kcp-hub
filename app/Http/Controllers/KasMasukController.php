@@ -73,7 +73,7 @@ class KasMasukController extends Controller
 
        return view('kas-masuk.details', compact('kas_masuk', 'perkiraan'));
       
-   }
+    }
 
    public function store(Request $request){
 
