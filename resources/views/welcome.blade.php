@@ -295,7 +295,7 @@
                           </a>
                       </li>
                       <li class="nav-item">
-                          <a href="{{ route('piutang-toko.index')}}" class="nav-link">
+                          <a href="{{ route('transfer-keluar.index')}}" class="nav-link">
                             <p>Transfer Keluar</p>
                           </a>
                       </li>

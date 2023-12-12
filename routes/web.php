@@ -41,6 +41,7 @@ use App\Http\Controllers\ModalDbpController;
 use App\Http\Controllers\PembayaranPiutangTokoController;
 use App\Http\Controllers\ReportKasController;
 use App\Http\Controllers\TransferMasukController;
+use App\Http\Controllers\TransferKeluarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -311,7 +312,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/report-kas', [ReportKasController::class, 'index'])->name('report-kas.index');
     Route::get('/report-kas/store', [ReportKasController::class, 'store'])->name('report-kas.store');
 
-    //TRANSFER
+    //TRANSFER MASUK
     Route::get('/transfer-masuk', [TransferMasukController::class, 'index'])->name('transfer-masuk.index');
     Route::get('/transfer-masuk/create', [TransferMasukController::class, 'create'])->name('transfer-masuk.create');
     Route::post('/transfer-masuk/store', [TransferMasukController::class, 'store'])->name('transfer-masuk.store');
@@ -322,6 +323,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/transfer-masuk/store-validasi/{id_transfer}', [TransferMasukController::class, 'store_validasi'])->name('transfer-masuk.store-validasi');
     Route::get('/transfer-masuk/edit/{id_transfer}', [TransferMasukController::class, 'edit'])->name('transfer-masuk.edit');
     Route::post('/transfer-masuk/store-transfer', [TransferMasukController::class, 'store_transfer'])->name('transfer-masuk.store-transfer');
+
+    //TRANSFER
+    Route::get('/transfer-keluar', [TransferKeluarController::class, 'index'])->name('transfer-keluar.index');
+    Route::get('/transfer-keluar/create', [TransferKeluarController::class, 'create'])->name('transfer-keluar.create');
+    Route::post('/transfer-keluar/store', [TransferKeluarController::class, 'store'])->name('transfer-keluar.store');
+    Route::get('/transfer-keluar/list-validasi', [TransferKeluarController::class, 'validasi'])->name('transfer-keluar.validasi');
+    Route::get('/transfer-keluar/validasi/{id_transfer}', [TransferKeluarController::class, 'validasi_data'])->name('transfer-keluar.validasi-data');
+    Route::get('/transfer-keluar/details/{id_transfer}', [TransferKeluarController::class, 'details'])->name('transfer-keluar.details');
+    Route::post('/transfer-keluar/store-details', [TransferKeluarController::class, 'store_details'])->name('transfer-keluar.store-details');
+    Route::post('/transfer-keluar/store-validasi/{id_transfer}', [TransferKeluarController::class, 'store_validasi'])->name('transfer-keluar.store-validasi');
+    Route::get('/transfer-keluar/edit/{id_transfer}', [TransferKeluarController::class, 'edit'])->name('transfer-keluar.edit');
+    Route::post('/transfer-keluar/store-transfer', [TransferKeluarController::class, 'store_transfer'])->name('transfer-keluar.store-transfer');
     
     //KODE RAK LOKASI
     Route::get('/kode-rak-lokasi', [KodeRakLokasiController::class, 'index'])->name('kode-rak-lokasi.index');
