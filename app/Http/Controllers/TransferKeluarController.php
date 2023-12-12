@@ -47,15 +47,10 @@ class TransferKeluarController extends Controller
     
         $newTransfer = new TransferMasukHeader();
         $newTransfer->id_transfer = TransferMasukHeader::id_transfer();
-    
-        $status_transfer = '';
-        $flag_by_toko = '';
-    
-        if ($request->status_transfer == 1) {
-            $status_transfer = 'IN';
-            $flag_by_toko = ($request->dari_toko == 1) ? 'Y' : 'N';
-        }
-    
+        
+        $status_transfer = 'OUT';
+        $flag_by_toko = ($request->dari_toko == 1) ? 'Y' : 'N';
+       
         $requestData = [
             'id_transfer'       => $newTransfer->id_transfer,
             'status_transfer'   => $status_transfer,

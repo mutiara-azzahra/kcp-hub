@@ -5,10 +5,10 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4>Tambah Transfer Masuk</h4>
+                <h4>Tambah Transfer Keluar</h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-success" href="{{ route('transfer-masuk.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
+                <a class="btn btn-success" href="{{ route('transfer-keluar.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
             </div>
         </div>
     </div>
@@ -26,12 +26,12 @@
     <div class="card" style="padding: 10px;">
         <div class="card-body">
             <div class="col-lg-12">
-                <form action="{{ route('transfer-masuk.store') }}" method="POST">
+                <form action="{{ route('transfer-keluar.store') }}" method="POST">
                 @csrf
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <strong>Tanggal Transfer Masuk</strong>
+                            <strong>Tanggal Transfer Keluar</strong>
                             <input type="date" name="tanggal_bank" class="form-control">
                         </div>
                     </div>

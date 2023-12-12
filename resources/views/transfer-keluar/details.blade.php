@@ -5,10 +5,10 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4>Details Kas Masuk</h4>
+                <h4>Details Kas Keluar</h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-success" href="{{ route('transfer-masuk.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
+                <a class="btn btn-success" href="{{ route('transfer-keluar.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
             </div>
         </div>
     </div>
@@ -55,7 +55,7 @@
     <div class="card" style="padding: 10px;">
         <div class="card-body">
             <div class="col-lg-12 p-1" id="main" data-loading="true">
-                <form action="{{ route('transfer-masuk.store-details')}}" method="POST">
+                <form action="{{ route('transfer-keluar.store-details')}}" method="POST">
                     @csrf
                     <div class="table-container">
                         <table class="table table-hover table-sm bg-light table-striped table-bordered" id="table">

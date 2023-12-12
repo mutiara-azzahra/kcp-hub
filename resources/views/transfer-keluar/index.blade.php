@@ -32,8 +32,9 @@
                             <th class="text-center">No. Transfer</th>
                             <th class="text-center">Tgl. Bank</th>
                             <th class="text-center">Bank</th>
+                            <th class="text-center">Nominal</th>
                             <th class="text-center">Keterangan</th>
-                            <th class="text-center"></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,6 +47,7 @@
                         <td class="text-center">{{ $p->id_transfer }}</td>
                         <td class="text-center">{{ $p->tanggal_bank }}</td>
                         <td class="text-center">{{ $p->bank }}</td>
+                        <td class="text-right">{{ number_format($p->details->where('akuntansi_to', 'D')->sum('total'), 0, ',', ',') }}</td>
                         <td class="text-left">{{ $p->keterangan }}</td>
                         <td class="text-center">
                             <a class="btn btn-info btn-sm" href="{{ route('transfer-keluar.edit', $p->id_transfer ) }}">
