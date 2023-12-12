@@ -17,8 +17,8 @@ class TransferMasukController extends Controller
 {
     public function index(){
 
-        $tf_masuk = TransferMasukHeader::where('status_transfer', 'IN')->orderBy('id_transfer', 'desc')->get();
-        $tf_masuk_validated = TransferMasukHeader::where('flag_kas_ar', 'Y')->get();
+        $tf_masuk = TransferMasukHeader::where('status_transfer', 'IN')->orderBy('created_at', 'desc')->get();
+        $tf_masuk_validated = TransferMasukHeader::where('flag_kas_ar', 'Y')->orderBy('created_at', 'desc')->get();
 
         return view('transfer-masuk.index', compact('tf_masuk', 'tf_masuk_validated'));
     }
@@ -86,6 +86,14 @@ class TransferMasukController extends Controller
         return view('transfer-masuk.details', compact('perkiraan', 'transfer'));
     }
 
+    public function validasi_data($id_transfer){
+
+        $transfer   = TransferMasukHeader::where('id_transfer', $id_transfer)->first();
+        $kas_masuk  = KasMasukHeader::where('id_transfer', $id_transfer)->get();
+
+        return view('transfer-masuk.view', compact('transfer', 'kas_masuk'));
+    }
+
     public function store_details(Request $request){
 
         $request->validate([
@@ -94,8 +102,6 @@ class TransferMasukController extends Controller
             'inputs.*.akuntansi_to' => 'required',
             'inputs.*.total'        => 'required',
         ]);
-
-        // dd($request->all());
         
         $totalSum = 0;
         $id_transfer = null;
@@ -152,11 +158,17 @@ class TransferMasukController extends Controller
 
         }
 
-        // TransferMasukHeader::where('id_transfer', $id_transfer)->update([
-        //     'flag_kas_ar'        => 'Y',
-        //     'updated_at'         => NOW(),
-        //     'updated_by'         => Auth::user()->nama_user
-        // ]);
+        return redirect()->route('transfer-masuk.index')->with('success', 'Transfer masuk baru berhasil ditambahkan kedalam kas masuk');
+    }
+
+    public function store_validasi($id_transfer)
+    {
+
+        TransferMasukHeader::where('id_transfer', $id_transfer)->update([
+            'flag_kas_ar'        => 'Y',
+            'updated_at'         => NOW(),
+            'updated_by'         => Auth::user()->nama_user
+        ]);
 
         return redirect()->route('transfer-masuk.index')->with('success', 'Transfer masuk baru berhasil ditambahkan kedalam kas masuk');
     }

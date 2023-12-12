@@ -315,9 +315,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/transfer-masuk', [TransferMasukController::class, 'index'])->name('transfer-masuk.index');
     Route::get('/transfer-masuk/create', [TransferMasukController::class, 'create'])->name('transfer-masuk.create');
     Route::post('/transfer-masuk/store', [TransferMasukController::class, 'store'])->name('transfer-masuk.store');
-    Route::get('/transfer-masuk/validasi', [TransferMasukController::class, 'validasi'])->name('transfer-masuk.validasi');
+    Route::get('/transfer-masuk/list-validasi', [TransferMasukController::class, 'validasi'])->name('transfer-masuk.validasi');
+    Route::get('/transfer-masuk/validasi/{id_transfer}', [TransferMasukController::class, 'validasi_data'])->name('transfer-masuk.validasi-data');
     Route::get('/transfer-masuk/details/{id_transfer}', [TransferMasukController::class, 'details'])->name('transfer-masuk.details');
     Route::post('/transfer-masuk/store-details', [TransferMasukController::class, 'store_details'])->name('transfer-masuk.store-details');
+    Route::post('/transfer-masuk/store-validasi/{id_transfer}', [TransferMasukController::class, 'store_validasi'])->name('transfer-masuk.store-validasi');
     Route::get('/transfer-masuk/edit/{id_transfer}', [TransferMasukController::class, 'edit'])->name('transfer-masuk.edit');
     Route::post('/transfer-masuk/store-transfer', [TransferMasukController::class, 'store_transfer'])->name('transfer-masuk.store-transfer');
     

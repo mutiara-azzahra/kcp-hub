@@ -8,7 +8,7 @@
                 <h4>Transfer Masuk</h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-primary m-1" href="{{ route('transfer-masuk.create') }}"><i class="fas fa-book"></i> Validasi Transfer Masuk</a>
+                <a class="btn btn-primary m-1" href="{{ route('transfer-masuk.validasi') }}"><i class="fas fa-book"></i> Validasi Transfer Masuk</a>
                 <a class="btn btn-success m-1" href="{{ route('transfer-masuk.create') }}"><i class="fas fa-plus"></i> Tambah Transfer Masuk</a>
             </div>
         </div>
@@ -44,9 +44,9 @@
 
                     @foreach($tf_masuk as $p)
                     <tr>
-                        <td class="text-left">{{ $p->id_transfer }}</td>
-                        <td class="text-left">{{ $p->tanggal_bank }}</td>
-                        <td class="text-left">{{ $p->bank }}</td>
+                        <td class="text-center">{{ $p->id_transfer }}</td>
+                        <td class="text-center">{{ $p->tanggal_bank }}</td>
+                        <td class="text-center">{{ $p->bank }}</td>
                         <td class="text-left">{{ $p->keterangan }}</td>
                         <td class="text-center">
                             <a class="btn btn-info btn-sm" href="{{ route('transfer-masuk.edit', $p->id_transfer ) }}">
@@ -63,7 +63,7 @@
 
     <div class="card" style="padding: 10px;">
         <div class="card-header">
-            Transfer Masuk
+            List Transfer Masuk
         </div>
         <div class="card-body">
             <div class="col-lg-12">  
@@ -73,9 +73,8 @@
                             <th class="text-center">No. Transfer</th>
                             <th class="text-center">Tgl. Bank</th>
                             <th class="text-center">Bank</th>
-                            <th class="text-center">Nominal</th>
                             <th class="text-center">Keterangan</th>
-                            <th class="text-center"></th>
+                            <th class="text-center">Nominal</th>
                         </tr>
                     </thead>
 
@@ -89,9 +88,8 @@
                         <td class="text-left">{{ $p->id_transfer }}</td>
                         <td class="text-left">{{ $p->tanggal_bank }}</td>
                         <td class="text-center">{{ $p->bank }}</td>
-                        <td class="text-right">{{ number_format($p->details->where('akuntansi_to', 'D')->sum('total'), 0, ',', ',') }}</td>
                         <td class="text-right">{{ $p->keterangan }}</td>
-                        <td></td>
+                        <td class="text-right">{{ number_format($p->details->where('akuntansi_to', 'D')->sum('total'), 0, ',', ',') }}</td>
                     </tr>
                     @endforeach
                     </tbody>

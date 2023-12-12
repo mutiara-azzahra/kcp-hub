@@ -8,8 +8,7 @@
                 <h4>Validasi Transfer Masuk</h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-primary m-1" href="{{ route('transfer-masuk.create') }}"><i class="fas fa-book"></i> Reset Validasi</a>
-                <a class="btn btn-success m-1" href="{{ route('transfer-masuk.create') }}"><i class="fas fa-plus"></i> Tambah Transfer Masuk</a>
+                <a class="btn btn-success m-1" href="{{ route('transfer-masuk.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
             </div>
         </div>
     </div>
@@ -35,7 +34,6 @@
                             <th class="text-center">Tgl. Bank</th>
                             <th class="text-center">Bank</th>
                             <th class="text-center">Total</th>
-                            <th class="text-center"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,56 +41,23 @@
                     $no=1;
                     @endphp
 
-                    @foreach($tf_masuk as $p)
+                    @foreach($tf_kas as $p)
                     <tr>
                         <td class="text-left">{{ $p->id_transfer }}</td>
-                        <td class="text-left">{{ $p->kas_masuk }}</td>
+                        <td class="text-left">
+                            @if($p->kas_masuk == null)
+
+                            @else
+                            {{ $p->kas_masuk->kd_outlet }}
+                            @endif
+                        </td>
                         <td class="text-left">{{ $p->bank }}</td>
                         <td class="text-left">{{ $p->keterangan }}</td>
                         <td class="text-center">
-                            <a class="btn btn-info btn-sm" href="{{ route('transfer-masuk.edit', $p->id_transfer ) }}">
-                                <i class="fas fa-edit"></i>
+                            <a class="btn btn-primary btn-sm" href="{{ route('transfer-masuk.validasi-data', $p->id_transfer ) }}">
+                                <i class="fas fa-check"></i>
                             </a>
                         </td>
-                    </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <div class="card" style="padding: 10px;">
-        <div class="card-header">
-            Transfer Masuk
-        </div>
-        <div class="card-body">
-            <div class="col-lg-12">  
-                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example3">
-                    <thead>
-                        <tr style="background-color: #6082B6; color:white">
-                            <th class="text-center">No. Transfer</th>
-                            <th class="text-center">Tgl. Bank</th>
-                            <th class="text-center">Bank</th>
-                            <th class="text-center">Nominal</th>
-                            <th class="text-center">Keterangan</th>
-                            <th class="text-center"></th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                    @php
-                    $no=1;
-                    @endphp
-
-                    @foreach($tf_masuk_validated as $p)
-                    <tr>
-                        <td class="text-left">{{ $p->id_transfer }}</td>
-                        <td class="text-left">{{ $p->tanggal_bank }}</td>
-                        <td class="text-center">{{ $p->bank }}</td>
-                        <td class="text-right">{{ number_format($p->details->where('akuntansi_to', 'D')->sum('total'), 0, ',', ',') }}</td>
-                        <td class="text-right">{{ $p->keterangan }}</td>
-                        <td></td>
                     </tr>
                     @endforeach
                     </tbody>
