@@ -317,10 +317,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/transfer-masuk/store', [TransferMasukController::class, 'store'])->name('transfer-masuk.store');
     Route::get('/transfer-masuk/details/{id_transfer}', [TransferMasukController::class, 'details'])->name('transfer-masuk.details');
     Route::post('/transfer-masuk/store-details', [TransferMasukController::class, 'store_details'])->name('transfer-masuk.store-details');
-    Route::get('/transfer-masuk/bukti-bayar', [TransferMasukController::class, 'bukti_bayar'])->name('transfer-masuk.bukti-bayar');
-    Route::get('/transfer-masuk/pembayaran-manual', [TransferMasukController::class, 'pembayaran_manual'])->name('transfer-masuk.bayar_manual');
-    Route::get('/transfer-masuk/cetak/{no_kas_masuk}', [TransferMasukController::class, 'cetak'])->name('transfer-masuk.cetak');
-    Route::get('/transfer-masuk/cetak-tanda-terima/{no_kas_masuk}', [TransferMasukController::class, 'cetak_tanda_terima'])->name('transfer-masuk.cetak-tanda-terima');
+    Route::get('/transfer-masuk/edit/{id_transfer}', [TransferMasukController::class, 'edit'])->name('transfer-masuk.edit');
+    Route::post('/transfer-masuk/store-transfer', [TransferMasukController::class, 'store_transfer'])->name('transfer-masuk.store-transfer');
     
     //KODE RAK LOKASI
     Route::get('/kode-rak-lokasi', [KodeRakLokasiController::class, 'index'])->name('kode-rak-lokasi.index');

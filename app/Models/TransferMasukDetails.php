@@ -13,6 +13,6 @@ class TransferMasukDetails extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [ 
-        'id_header', 'status_transfer', 'perkiraan', 'akuntansi_to', 'total', 'status','created_at', 'updated_at', 'created_by', 'updated_by'
+        'id_transfer', 'status_transfer', 'perkiraan', 'akuntansi_to', 'total', 'status','created_at', 'updated_at', 'created_by', 'updated_by'
     ];
 }

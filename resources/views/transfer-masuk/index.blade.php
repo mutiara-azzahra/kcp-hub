@@ -44,7 +44,15 @@
 
                     @foreach($tf_masuk as $p)
                     <tr>
-                        
+                        <td class="text-left">{{ $p->id_transfer }}</td>
+                        <td class="text-left">{{ $p->tanggal_bank }}</td>
+                        <td class="text-left">{{ $p->bank }}</td>
+                        <td class="text-left">{{ $p->keterangan }}</td>
+                        <td class="text-center">
+                            <a class="btn btn-info btn-sm" href="{{ route('transfer-masuk.edit', $p->id_transfer ) }}">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </td>
                     </tr>
                     @endforeach
                     </tbody>
@@ -72,9 +80,19 @@
                     </thead>
 
                     <tbody>
+                    @php
+                    $no=1;
+                    @endphp
+
                     @foreach($tf_masuk_validated as $p)
                     <tr>
+                        <td class="text-center">{{ $no++ }}</td>
+                        <td class="text-left">{{ $p->id_transfer }}</td>
+                        <td class="text-left">{{ $p->tanggal_bank }}</td>
                         
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     @endforeach
                     </tbody>
