@@ -5,10 +5,10 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-2">
              <div class="float-left">
-                <h4>Transfer Masuk</h4>
+                <h4>Validasi Transfer Masuk</h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-primary m-1" href="{{ route('transfer-masuk.create') }}"><i class="fas fa-book"></i> Validasi Transfer Masuk</a>
+                <a class="btn btn-primary m-1" href="{{ route('transfer-masuk.create') }}"><i class="fas fa-book"></i> Reset Validasi</a>
                 <a class="btn btn-success m-1" href="{{ route('transfer-masuk.create') }}"><i class="fas fa-plus"></i> Tambah Transfer Masuk</a>
             </div>
         </div>
@@ -31,9 +31,10 @@
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
                             <th class="text-center">No. Transfer</th>
+                            <th class="text-center">Keterangan</th>
                             <th class="text-center">Tgl. Bank</th>
                             <th class="text-center">Bank</th>
-                            <th class="text-center">Keterangan</th>
+                            <th class="text-center">Total</th>
                             <th class="text-center"></th>
                         </tr>
                     </thead>
@@ -45,7 +46,7 @@
                     @foreach($tf_masuk as $p)
                     <tr>
                         <td class="text-left">{{ $p->id_transfer }}</td>
-                        <td class="text-left">{{ $p->tanggal_bank }}</td>
+                        <td class="text-left">{{ $p->kas_masuk }}</td>
                         <td class="text-left">{{ $p->bank }}</td>
                         <td class="text-left">{{ $p->keterangan }}</td>
                         <td class="text-center">

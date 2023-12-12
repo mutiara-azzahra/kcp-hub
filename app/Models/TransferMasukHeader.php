@@ -50,4 +50,9 @@ class TransferMasukHeader extends Model
     {
         return $this->hasMany(TransferMasukDetails::class, 'id_transfer', 'id_transfer');
     }
+
+    public function kas_masuk()
+    {
+        return $this->hasMany(KasMasukHeader::class, 'id_transfer', 'id_transfer');
+    }
 }

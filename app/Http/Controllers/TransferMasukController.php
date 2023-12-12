@@ -28,6 +28,13 @@ class TransferMasukController extends Controller
         return view('transfer-masuk.create');
     }
 
+    public function validasi(){
+
+        $tf_kas = TransferMasukHeader::where('status_transfer', 'IN')->orderBy('id_transfer', 'desc')->get();
+
+        return view('transfer-masuk.validasi', compact('tf_kas'));
+    }
+
     public function store(Request $request){
 
         $request->validate([
