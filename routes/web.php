@@ -42,6 +42,7 @@ use App\Http\Controllers\PembayaranPiutangTokoController;
 use App\Http\Controllers\ReportKasController;
 use App\Http\Controllers\TransferMasukController;
 use App\Http\Controllers\TransferKeluarController;
+use App\Http\Controllers\BgMasukController;
 
 /*
 |--------------------------------------------------------------------------
@@ -294,6 +295,19 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/kas-masuk/pembayaran-manual', [KasMasukController::class, 'pembayaran_manual'])->name('kas-masuk.bayar_manual');
     Route::get('/kas-masuk/cetak/{no_kas_masuk}', [KasMasukController::class, 'cetak'])->name('kas-masuk.cetak');
     Route::get('/kas-masuk/cetak-tanda-terima/{no_kas_masuk}', [KasMasukController::class, 'cetak_tanda_terima'])->name('kas-masuk.cetak-tanda-terima');
+
+    //KAS KELUAR
+    Route::get('/bg-masuk', [BgMasukController::class, 'index'])->name('bg-masuk.index');
+    Route::get('/bg-masuk/bukti-bayar', [BgMasukController::class, 'bukti_bayar'])->name('bg-masuk.bukti-bayar');
+    Route::get('/bg-masuk/bayar-manual', [BgMasukController::class, 'bayar_manual'])->name('bg-masuk.bayar-manual');
+    Route::get('/bg-masuk/bayar-manual/details/{no_kas_masuk}', [BgMasukController::class, 'details'])->name('bg-masuk.details');
+    Route::post('/bg-masuk/store-bukti-bayar', [BgMasukController::class, 'store_bukti_bayar'])->name('bg-masuk.store-bukti-bayar');
+    Route::post('/bg-masuk/store', [BgMasukController::class, 'store'])->name('bg-masuk.store');
+    Route::post('/bg-masuk/store-details', [BgMasukController::class, 'store_details'])->name('bg-masuk.store-details');
+    Route::get('/bg-masuk/bukti-bayar', [BgMasukController::class, 'bukti_bayar'])->name('bg-masuk.bukti-bayar');
+    Route::get('/bg-masuk/pembayaran-manual', [BgMasukController::class, 'pembayaran_manual'])->name('bg-masuk.bayar_manual');
+    Route::get('/bg-masuk/cetak/{no_kas_masuk}', [BgMasukController::class, 'cetak'])->name('bg-masuk.cetak');
+    Route::get('/bg-masuk/cetak-tanda-terima/{no_kas_masuk}', [BgMasukController::class, 'cetak_tanda_terima'])->name('bg-masuk.cetak-tanda-terima');
 
     //KAS KELUAR
     Route::get('/kas-keluar', [KasKeluarController::class, 'index'])->name('kas-keluar.index');
