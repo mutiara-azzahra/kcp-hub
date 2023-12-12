@@ -15,4 +15,9 @@ class TransferMasukDetails extends Model
     protected $fillable = [ 
         'id_transfer', 'status_transfer', 'perkiraan', 'akuntansi_to', 'total', 'status','created_at', 'updated_at', 'created_by', 'updated_by'
     ];
+
+    public function header()
+    {
+        return $this->belongsTo(TransferMasukHeader::class, 'id_transfer', 'id_transfer');
+    }
 }

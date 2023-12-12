@@ -130,20 +130,28 @@ class TransferMasukController extends Controller
     public function store_transfer(Request $request)
     {
 
+        $id_transfer     = $request->input('id_transfer');
+
         $selectedItems  = $request->input('selected_items', []);
 
         for ($i = 0; $i < count($selectedItems); $i++) {
             $itemKasMasuk = $selectedItems[$i];
 
             KasMasukHeader::where('no_kas_masuk', $itemKasMasuk)->update([
-                'no_piutang'         => $request->no_piutang,
+                'id_transfer'        => $request->id_transfer,
                 'updated_at'         => NOW(),
                 'updated_by'         => Auth::user()->nama_user
             ]);
 
         }
 
-        return redirect()->route('piutang-toko.index')->with('success', 'Kas masuk baru berhasil ditambahkan kedalam Piutang!');
+        // TransferMasukHeader::where('id_transfer', $id_transfer)->update([
+        //     'flag_kas_ar'        => 'Y',
+        //     'updated_at'         => NOW(),
+        //     'updated_by'         => Auth::user()->nama_user
+        // ]);
+
+        return redirect()->route('transfer-masuk.index')->with('success', 'Transfer masuk baru berhasil ditambahkan kedalam kas masuk');
     }
 
     public function delete($id)

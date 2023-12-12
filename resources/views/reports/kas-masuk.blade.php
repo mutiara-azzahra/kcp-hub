@@ -208,7 +208,7 @@
             </tr>
             <tr>
                 <td class="atas-isi">Untuk Pembayaran</td>
-                <td class="atas">{{ $data->keterangan }} A/N {{ $data->outlet->nm_outlet }} </td>
+                <td class="atas">{{ $data->keterangan }} A/N {{ $data->outlet->nm_outlet }} / {{ $data->no_piutang }} / {{ $data->id_transfer }} </td>
             </tr>
         </table>
     </div>

@@ -86,12 +86,11 @@
 
                     @foreach($tf_masuk_validated as $p)
                     <tr>
-                        <td class="text-center">{{ $no++ }}</td>
                         <td class="text-left">{{ $p->id_transfer }}</td>
                         <td class="text-left">{{ $p->tanggal_bank }}</td>
-                        
-                        <td></td>
-                        <td></td>
+                        <td class="text-left">{{ $p->bank }}</td>
+                        <td class="text-right">{{ number_format($p->details->where('akuntansi_to', 'D')->sum('total'), 0, ',', ',') }}</td>
+                        <td class="text-right">{{ $p->keterangan }}</td>
                         <td></td>
                     </tr>
                     @endforeach

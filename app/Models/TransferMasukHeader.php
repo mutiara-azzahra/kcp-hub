@@ -45,4 +45,9 @@ class TransferMasukHeader extends Model
 
         return $newCustomId;
     }
+
+    public function details()
+    {
+        return $this->hasMany(TransferMasukDetails::class, 'id_transfer', 'id_transfer');
+    }
 }

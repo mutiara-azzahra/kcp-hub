@@ -32,6 +32,21 @@
                         <td>:</td>
                         <td class="text-left"><b>{{ $transfer->id_transfer }}</b></td>
                     </tr>
+                    <tr>
+                        <th class="text-left">Transfer Via</th>
+                        <td>:</td>
+                        <td class="text-left"><b>{{ $transfer->bank }}</b></td>
+                    </tr>
+                    <tr>
+                        <th class="text-left">Keterangan</th>
+                        <td>:</td>
+                        <td class="text-left"><b>{{ $transfer->keterangan }}</b></td>
+                    </tr>
+                    <tr>
+                        <th class="text-left">Nominal</th>
+                        <td>:</td>
+                        <td class="text-left"><b>{{ number_format($transfer->details->where('akuntansi_to', 'D')->sum('total'), 0, ',', ',') }}</b></td>
+                    </tr>
                 </table>
             </div>
         </div>
@@ -99,7 +114,7 @@
                             </td>
                             <td class="text-left">{{ $s->no_kas_masuk }}</td>
                             <td class="text-left">{{ $s->kd_outlet }} / {{ $s->outlet->nm_outlet }}</td>
-                            <td class="text-right">{{ number_format($s->nominal, 0, ',', '.') }}</td>
+                            <td class="text-right">{{ number_format($s->nominal, 0, ',', ',') }}</td>
                         </tr>
                     @endforeach
                 </tbody>
