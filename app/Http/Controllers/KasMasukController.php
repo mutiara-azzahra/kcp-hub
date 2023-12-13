@@ -16,9 +16,9 @@ class KasMasukController extends Controller
 {
     public function index(){
 
-        $belum_selesai = KasMasukHeader::orderBy('no_kas_masuk', 'desc')->where('status', 'O')->get();
+        $belum_selesai = KasMasukHeader::orderBy('created_at', 'desc')->where('status', 'O')->get();
 
-        $selesai = KasMasukHeader::orderBy('no_kas_masuk', 'desc')->where('status', 'C')->get();
+        $selesai = KasMasukHeader::orderBy('created_at', 'desc')->where('status', 'C')->get();
 
         return view('kas-masuk.index', compact('belum_selesai', 'selesai'));
     }
@@ -77,6 +77,8 @@ class KasMasukController extends Controller
 
    public function store(Request $request){
 
+    // dd($request->all());
+
         $request -> validate([
             'tanggal_rincian_tagihan'   => 'required', 
             'kd_outlet'                 => 'required', 
@@ -89,6 +91,8 @@ class KasMasukController extends Controller
         $request->merge([
             'terima_dari'       => $request->terima_dari,
             'keterangan'        => $request->keterangan,
+            'no_bg'             => $request->no_bg,
+            'jatuh_tempo_bg'    => $request->jatuh_tempo_bg,
             'no_kas_masuk'      => $newKas->no_kas_masuk,
             'status'            => 'O',
             'created_by'        => Auth::user()->nama_user
@@ -97,7 +101,7 @@ class KasMasukController extends Controller
         $created = KasMasukHeader::create($request->all());
 
         if ($created){
-            return redirect()->route('kas-masuk.index')->with('success','Kas masuhk berhasil ditambahkan');
+            return redirect()->route('kas-masuk.index')->with('success','Kas masuk berhasil ditambahkan');
         } else{
             return redirect()->route('kas-masuk.index')->with('danger','Kas masuk gagal ditambahkan');
         }

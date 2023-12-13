@@ -10,8 +10,8 @@ use Illuminate\Http\Request;
 use App\Models\MasterPerkiraan;
 use App\Models\KasMasukHeader;
 use App\Models\MasterOutlet;
-use App\Models\TransferMasukHeader;
-use App\Models\TransferMasukDetails;
+use App\Models\BgMasukHeader;
+use App\Models\BgMasukDetails;
 
 
 class BGMasukController extends Controller

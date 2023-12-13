@@ -41,7 +41,7 @@
                             <select name="kd_outlet" class="form-control my-select">
                                 <option value="">--Pilih Toko--</option>
                                 @foreach($master_outlet as $a)
-                                    <option value="{{ $a->kd_outlet }}">{{ $a->kd_outlet }} | {{ $a->nm_outlet }}</option>
+                                    <option value="{{ $a->kd_outlet }}">{{ $a->kd_outlet }} / {{ $a->nm_outlet }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -52,7 +52,7 @@
                             <select name="pembayaran_via" class="form-control my-select" >
                                 <option value="">--Pilih Pembayaran--</option>
                                 <option value="CASH">CASH</option>
-                                <option value="TRANSFER">TRANSFER</option>
+                                <!-- <option value="TRANSFER">TRANSFER</option> -->
                                 <option value="BG">BG</option>
                             </select>
                         </div>

@@ -299,6 +299,17 @@
                             <p>Transfer Keluar</p>
                           </a>
                       </li>
+                      <li class="nav-item">
+                          <a href="{{ route('bg-masuk.index')}}" class="nav-link">
+                            <p>BG Masuk</p>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a href="{{ route('transfer-keluar.index')}}" class="nav-link">
+                            <p>BG Keluar</p>
+                          </a>
+                      </li>
+                      
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -402,6 +413,33 @@
                 <li class="nav-item">
                     <a href="{{ route('modal.index')}}" class="nav-link">
                       <p>Modal</p>
+                    </a>
+                </li>
+              </ul>
+            </li>
+            @endif
+
+            @if(in_array(Auth::user()->id_role, [4, 5, 6, 7, 9, 11, 12, 17, 20, 24]))
+            <!-- {{-- MONITORING --}} -->
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon"></i>
+                <p>
+                  Pajak
+                  <i class="right fas fa-angle-right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('report-lss.index')}}" class="nav-link">
+                      <p>Export Pajak</p>
+                    </a>
+                </li>
+              </ul>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('modal.index')}}" class="nav-link">
+                      <p>Laporan Pajak</p>
                     </a>
                 </li>
               </ul>
