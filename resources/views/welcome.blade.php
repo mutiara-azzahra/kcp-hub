@@ -431,7 +431,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="{{ route('report-lss.index')}}" class="nav-link">
+                    <a href="{{ route('export-pajak.index')}}" class="nav-link">
                       <p>Export Pajak</p>
                     </a>
                 </li>

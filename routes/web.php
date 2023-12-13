@@ -43,6 +43,8 @@ use App\Http\Controllers\ReportKasController;
 use App\Http\Controllers\TransferMasukController;
 use App\Http\Controllers\TransferKeluarController;
 use App\Http\Controllers\BgMasukController;
+use App\Http\Controllers\ExportPajakController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -391,6 +393,10 @@ Route::group(['middleware' => 'auth'], function () {
     //LSS
     Route::get('/report-lss', [ReportLssController::class, 'index'])->name('report-lss.index');
     Route::get('/report-lss/view', [ReportLssController::class, 'store'])->name('report-lss.store');
+
+    //EXPORT PAJAK
+    Route::get('/export-pajak', [ExportPajakController::class, 'index'])->name('export-pajak.index');
+    Route::get('/export-pajak/view', [ExportPajakController::class, 'store'])->name('export-pajak.store');
 
     //MODAL PENJUALAN
     Route::get('/modal', [ModalDbpController::class, 'index'])->name('modal.index');
