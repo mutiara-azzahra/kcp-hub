@@ -13,7 +13,6 @@
         </div>
         <div class="col-lg-12 pb-3">
             <div class="float-left">
-                <h5>{{ \Carbon\Carbon::create()->month($bulan)->format('F') }} {{ $tahun }}</h5>
             </div>
         </div>
     </div>
@@ -32,28 +31,41 @@
     <div class="card" style="padding: 2px;">
         <div class="card-body p-2">
             <div class="col-lg-12">  
-                <table class="table table-hover table-bordered table-sm bg-light">
+                <table class="table table-hover table-bordered table-sm bg-light" id="example1">
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
-                            <th class="text-center">Sub. Kel. Part</th>
-                            <th class="text-center">Produk Part</th>
-                            <th class="text-center">Awal Amount</th>
-                            <th class="text-center">Beli</th>
-                            <th class="text-center">Jual RBP</th>
-                            <th class="text-center">Jual DBP</th>
-                            <th class="text-center">Akhir Amount</th>
+                            <th class="text-center">Invoice</th>
+                            <th class="text-center">Toko</th>
+                            <th class="text-center">Sales</th>
+                            <th class="text-center">Tgl. Jatuh Tempo</th>
+                            <th class="text-center">Tgl. Buat</th>
+                            <th class="text-center">Amount Dpp</th>
+                            <th class="text-center">Amount Disc</th>
+                            <th class="text-center">Amount Dpp. Disc</th>
+                            <th class="text-center">Amount PPn. Disc</th>
+                            <th class="text-center">Amount Total</th>
+                            <th class="text-center"></th>
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($data as $p)
+
+
+                    
+                    @foreach($invoice as $p)
                         <tr>
-                            <td class="text-left">{{ $p->sub_kelompok_part }}</td>
-                            <td class="text-left">{{ $p->produk_part }}</td>
-                            <td class="text-right">{{ number_format($p->awal_amount, 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format($p->beli, 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format($p->jual_rbp, 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format($p->jual_dbp, 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format($p->akhir_amount, 0, ',', '.') }}</td>
+                            <td class="text-left">{{ $p->noinv }}</td>
+                            <td class="text-left">{{ $p->nm_outlet }}</td>
+                            <td class="text-left">{{ $p->user_sales }}</td>
+                            <td class="text-left">{{ $p->tgl_jatuh_tempo }}</td>
+                            <td class="text-left">{{ $p->created_at }}</td>
+
+                            <td class="text-right">{{ number_format(($p->details_invoice->sum('nominal_total')/1.11), 0, ',', '.') }}</td>
+                            <td class="text-right">{{ number_format(($p->details_invoice->sum('nominal_disc')/1.11), 0, ',', '.') }}</td>
+                            <td class="text-right">{{ number_format( ($p->details_invoice->sum('nominal_total')-($p->details_invoice->sum('nominal_disc'))/1.11 ), 0, ',', '.') }}</td>
+                            <td class="text-right">{{ number_format(($p->details_invoice->sum('nominal_disc') * 0.11), 0, ',', '.') }}</td>
+                            <td class="text-right">{{ number_format(($p->details_invoice->sum('nominal_total')/1.11), 0, ',', '.') }}</td>
+                            <td class="text-left">{{ $no_faktur_pajak++ }}</td>
+                            
                         </tr>
                     @endforeach
                     </tbody>

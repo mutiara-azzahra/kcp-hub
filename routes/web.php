@@ -396,7 +396,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //EXPORT PAJAK
     Route::get('/export-pajak', [ExportPajakController::class, 'index'])->name('export-pajak.index');
-    Route::get('/export-pajak/view', [ExportPajakController::class, 'store'])->name('export-pajak.store');
+    Route::post('/export-pajak/store', [ExportPajakController::class, 'store'])->name('export-pajak.store');
 
     //MODAL PENJUALAN
     Route::get('/modal', [ModalDbpController::class, 'index'])->name('modal.index');

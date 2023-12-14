@@ -30,15 +30,17 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <strong>ID Faktur Pajak</strong>
-                            <input type="text" name="id_faktur_pajak" class="form-control" placeholder="Isi ID Faktur Pajak">
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
                             <strong>No. Faktur Pajak</strong>
                             <input type="text" name="no_faktur_pajak" class="form-control" placeholder="Isi Nomor Faktur Pajak">
                         </div>
+                    </div>
+                    <div class="form-group col-lg-12 col-md-6">
+                        <label for="">Jenis Data</label>
+                        <select name="jenis_data" class="form-control mr-2 my-select">
+                            <option value="">-- Pilih Jenis --</option>
+                            <option value="FK">FK</option>
+                            <option value="OF">OF</option>
+                        </select>
                     </div>
                     <div class="form-group col-6">
                         <label for="">Tanggal Awal</label>
