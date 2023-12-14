@@ -31,8 +31,12 @@ class ExportPajakController extends Controller
 
         if($jenis_data == 'FK'){
             $invoice = TransaksiInvoiceHeader::whereBetween('created_at', [$tanggal_awal, $tanggal_akhir])->get();
+
+            return view('export-pajak.view-fk', compact('invoice', 'no_faktur_pajak'));
         }
 
-        return view('export-pajak.view', compact('invoice', 'no_faktur_pajak'));
+        // dd($invoice);
+
+        // return view('export-pajak.view', compact('invoice', 'no_faktur_pajak'));
     }
 }
