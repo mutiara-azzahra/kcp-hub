@@ -26,6 +26,7 @@ use function substr;
 use function trim;
 use DOMDocument;
 use DOMElement;
+use DOMNode;
 use DOMXPath;
 use PHPUnit\Runner\TestSuiteSorter;
 use PHPUnit\Runner\Version;
@@ -210,6 +211,9 @@ final class Loader
         return ExtensionBootstrapCollection::fromArray($extensionBootstrappers);
     }
 
+    /**
+     * @psalm-return non-empty-string
+     */
     private function toAbsolutePath(string $filename, string $path): string
     {
         $path = trim($path);
@@ -227,6 +231,7 @@ final class Loader
         //  - C:/windows
         //  - c:/windows
         if (defined('PHP_WINDOWS_VERSION_BUILD') &&
+            !empty($path) &&
             ($path[0] === '\\' || (strlen($path) >= 3 && preg_match('#^[A-Z]:[/\\\]#i', substr($path, 0, 3))))) {
             return $path;
         }
@@ -240,6 +245,7 @@ final class Loader
 
     private function source(string $filename, DOMXPath $xpath): Source
     {
+        $baseline                           = null;
         $restrictDeprecations               = false;
         $restrictNotices                    = false;
         $restrictWarnings                   = false;
@@ -254,6 +260,12 @@ final class Loader
         $element = $this->element($xpath, 'source');
 
         if ($element) {
+            $baseline = $this->getStringAttribute($element, 'baseline');
+
+            if ($baseline !== null) {
+                $baseline = $this->toAbsolutePath($filename, $baseline);
+            }
+
             $restrictDeprecations               = $this->getBooleanAttribute($element, 'restrictDeprecations', false);
             $restrictNotices                    = $this->getBooleanAttribute($element, 'restrictNotices', false);
             $restrictWarnings                   = $this->getBooleanAttribute($element, 'restrictWarnings', false);
@@ -267,6 +279,8 @@ final class Loader
         }
 
         return new Source(
+            $baseline,
+            false,
             $this->readFilterDirectories($filename, $xpath, 'source/include/directory'),
             $this->readFilterFiles($filename, $xpath, 'source/include/file'),
             $this->readFilterDirectories($filename, $xpath, 'source/exclude/directory'),
@@ -501,6 +515,8 @@ final class Loader
         $files = [];
 
         foreach ($xpath->query($query) as $file) {
+            assert($file instanceof DOMNode);
+
             $filePath = $file->textContent;
 
             if ($filePath) {
@@ -517,10 +533,14 @@ final class Loader
         $exclude = [];
 
         foreach ($xpath->query('groups/include/group') as $group) {
+            assert($group instanceof DOMNode);
+
             $include[] = new Group($group->textContent);
         }
 
         foreach ($xpath->query('groups/exclude/group') as $group) {
+            assert($group instanceof DOMNode);
+
             $exclude[] = new Group($group->textContent);
         }
 
@@ -586,6 +606,8 @@ final class Loader
         $includePaths = [];
 
         foreach ($xpath->query('php/includePath') as $includePath) {
+            assert($includePath instanceof DOMNode);
+
             $path = $includePath->textContent;
 
             if ($path) {
