@@ -27,23 +27,30 @@
         </div>
     @endif
 
-    
     <div class="card" style="padding: 2px;">
         <div class="card-body p-2">
             <div class="col-lg-12">  
                 <table class="table table-hover table-bordered table-sm bg-light" id="example1">
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
-                            <th class="text-center">Invoice</th>
-                            <th class="text-center">Toko</th>
-                            <th class="text-center">Sales</th>
-                            <th class="text-center">Tgl. Jatuh Tempo</th>
-                            <th class="text-center">Tgl. Buat</th>
-                            <th class="text-center">Amount Dpp</th>
-                            <th class="text-center">Amount Disc</th>
-                            <th class="text-center">Amount Dpp. Disc</th>
-                            <th class="text-center">Amount PPn. Disc</th>
-                            <th class="text-center">Amount Total</th>
+                            <th class="text-center">OF</th>
+                            <th class="text-center">KODE_OBJEK</th>
+                            <th class="text-center">NAMA</th>
+                            <th class="text-center">HARGA_SATUAN</th>
+                            <th class="text-center">JUMLAH_BARANG</th>
+                            <th class="text-center">HARGA_TOTAL</th>
+                            <th class="text-center">DISKON</th>
+                            <th class="text-center">DPP</th>
+                            <th class="text-center">PPN</th>
+                            <th class="text-center">TARIF_PPNBM</th>
+                            <th class="text-center">PPNBM</th>
+                            <th class="text-center"></th>
+                            <th class="text-center"></th>
+                            <th class="text-center"></th>
+                            <th class="text-center"></th>
+                            <th class="text-center"></th>
+                            <th class="text-center"></th>
+                            <th class="text-center"></th>
                             <th class="text-center"></th>
                         </tr>
                     </thead>
@@ -51,20 +58,20 @@
 
 
                     
-                    @foreach($invoice as $p)
+                    @foreach($details as $p)
                         <tr>
-                            <td class="text-left">{{ $p->noinv }}</td>
-                            <td class="text-left">{{ $p->nm_outlet }}</td>
-                            <td class="text-left">{{ $p->user_sales }}</td>
-                            <td class="text-left">{{ $p->tgl_jatuh_tempo }}</td>
-                            <td class="text-left">{{ $p->created_at }}</td>
+                            <td class="text-left">OF</td>
+                            <td class="text-left">{{ $p->part_no }}</td>
+                            <td class="text-left">{{ $p->nama_part->nm_part }}</td>
+                            <td class="text-left">{{ $p->hrg_pcs }}</td>
+                            <td class="text-left">{{ $p->qty }}</td>
 
-                            <td class="text-right">{{ number_format(($p->details_invoice->sum('nominal_total')/1.11), 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format(($p->details_invoice->sum('nominal_disc')/1.11), 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format( ($p->details_invoice->sum('nominal_total')-($p->details_invoice->sum('nominal_disc'))/1.11 ), 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format(($p->details_invoice->sum('nominal_disc') * 0.11), 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format(($p->details_invoice->sum('nominal_total')/1.11), 0, ',', '.') }}</td>
-                            <td class="text-left">{{ $no_faktur_pajak++ }}</td>
+                            <td class="text-right">{{ number_format(($p->nominal_total), 0, ',', '.') }}</td>
+                            <td class="text-right">{{ number_format(($p->nominal_disc), 0, ',', '.') }}</td>
+                            <td class="text-right">{{ number_format( ($p->nominal_total/1.11 ), 0, ',', '.') }}</td>
+                            <td class="text-right">{{ number_format(($p->nominal_total * 0.11), 0, ',', '.') }}</td>
+                            <td class="text-right">0</td>
+                            <td class="text-left">0</td>
                             
                         </tr>
                     @endforeach
