@@ -24,67 +24,39 @@ class BGMasukController extends Controller
         return view('bg-masuk.index', compact('bg_gantung', 'bg_cair'));
     }
 
-    public function create(){
+    public function store($no_bg){
 
-        return view('bg-masuk.create');
-    }
-
-    public function validasi(){
-
-        $tf_kas = TransferMasukHeader::where('status_transfer', 'IN')->orderBy('id_transfer', 'desc')->get();
-
-        return view('bg-masuk.validasi', compact('tf_kas'));
-    }
-
-    public function store(Request $request){
-
-        $request->validate([
-            'tanggal_bank'      => 'required',
-            'bank'              => 'required',
-            'dari_toko'         => 'required',
-            'keterangan'        => 'required',
-            'status_transfer'   => 'required',
-        ]);
-    
-        $newTransfer = new TransferMasukHeader();
-        $newTransfer->id_transfer = TransferMasukHeader::id_transfer();
-    
-        $status_transfer = '';
-        $flag_by_toko = '';
-    
-        if ($request->status_transfer == 1) {
-            $status_transfer = 'IN';
-            $flag_by_toko = ($request->dari_toko == 1) ? 'Y' : 'N';
-        }
+        $bg             = KasMasukHeader::where('no_bg', $no_bg)->first();
+        $newBg          = new BgMasukHeader();
+        $newBg->id_bg   = BgMasukHeader::id_bg();
     
         $requestData = [
-            'id_transfer'       => $newTransfer->id_transfer,
-            'status_transfer'   => $status_transfer,
-            'tanggal_bank'      => $request->tanggal_bank,
-            'bank'              => $request->bank,
-            'flag_by_toko'      => $flag_by_toko,
-            'keterangan'        => $request->keterangan,
-            'status'            => 'O',
-            'created_by'        => Auth::user()->nama_user
+            'id_bg'                 => $newBg->id_bg,
+            'status_bg'             => 'IN',
+            'from_bg'               => $bg->no_bg,
+            'keterangan'            => $bg->no_bg.'/'.$bg->bank,
+            'nominal'               => $bg->nominal,
+            'status'                => 'C',
+            'flag_balik'            => 'N',
+            'flag_batal'            => 'N',
+            'created_by'            => Auth::user()->nama_user
         ];
     
-        $created = TransferMasukHeader::create($requestData);
+        $created = BgMasukHeader::create($requestData);
     
         if ($created) {
-            return redirect()->route('bg-masuk.details', ['id_transfer' => $newTransfer->id_transfer])
-                ->with('success', 'Transfer masuk berhasil ditambahkan. Tambahkan Details');
+            return redirect()->route('bg-masuk.index')->with('success', 'BG masuk berhasil dicairkan');
         } else {
-            return redirect()->route('bg-masuk.index')
-                ->with('danger', 'Transfer masuk gagal ditambahkan');
+            return redirect()->route('bg-masuk.index')->with('danger', 'BG masuk gagal ditambahkan');
         }
     }
 
-    public function details($id_transfer){
+    public function details($id){
 
-        $perkiraan = MasterPerkiraan::all();
-        $transfer  = TransferMasukHeader::where('id_transfer', $id_transfer)->first();
+        $perkiraan  = MasterPerkiraan::all();
+        $header     = BgMasukHeader::where('id', $id)->first();
 
-        return view('bg-masuk.details', compact('perkiraan', 'transfer'));
+        return view('bg-masuk.details', compact('perkiraan', 'header'));
     }
 
     public function validasi_data($id_transfer){

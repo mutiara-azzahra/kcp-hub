@@ -648,6 +648,10 @@
       width: '100%'
     });
 
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+
   </script>
     
 

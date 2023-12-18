@@ -298,14 +298,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/kas-masuk/cetak/{no_kas_masuk}', [KasMasukController::class, 'cetak'])->name('kas-masuk.cetak');
     Route::get('/kas-masuk/cetak-tanda-terima/{no_kas_masuk}', [KasMasukController::class, 'cetak_tanda_terima'])->name('kas-masuk.cetak-tanda-terima');
 
-    //KAS KELUAR
+    //BG MASUK
     Route::get('/bg-masuk', [BgMasukController::class, 'index'])->name('bg-masuk.index');
-    Route::get('/bg-masuk/bukti-bayar', [BgMasukController::class, 'bukti_bayar'])->name('bg-masuk.bukti-bayar');
-    Route::get('/bg-masuk/bayar-manual', [BgMasukController::class, 'bayar_manual'])->name('bg-masuk.bayar-manual');
+    Route::get('/bg-masuk/cair/{no_bg}', [BgMasukController::class, 'store'])->name('bg-masuk.store');
+    Route::get('/bg-masuk/details/{id}', [BgMasukController::class, 'details'])->name('bg-masuk.details');
+
     Route::get('/bg-masuk/bayar-manual/details/{no_kas_masuk}', [BgMasukController::class, 'details'])->name('bg-masuk.details');
-    Route::post('/bg-masuk/store-bukti-bayar', [BgMasukController::class, 'store_bukti_bayar'])->name('bg-masuk.store-bukti-bayar');
-    Route::post('/bg-masuk/store', [BgMasukController::class, 'store'])->name('bg-masuk.store');
-    Route::post('/bg-masuk/store-details', [BgMasukController::class, 'store_details'])->name('bg-masuk.store-details');
     Route::get('/bg-masuk/bukti-bayar', [BgMasukController::class, 'bukti_bayar'])->name('bg-masuk.bukti-bayar');
     Route::get('/bg-masuk/pembayaran-manual', [BgMasukController::class, 'pembayaran_manual'])->name('bg-masuk.bayar_manual');
     Route::get('/bg-masuk/cetak/{no_kas_masuk}', [BgMasukController::class, 'cetak'])->name('bg-masuk.cetak');
@@ -380,7 +378,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/master-target-spv-produk/show/{id}', [MasterTargetSpvProdukController::class, 'show'])->name('master-target-spv-produk.show');
     Route::get('/master-target-spv-produk/edit/{id}', [MasterTargetSpvProdukController::class, 'edit'])->name('master-target-spv-produk.edit');
     Route::delete('/master-target-spv-produk/delete/{id}', [MasterTargetSpvProdukController::class, 'delete'])->name('master-target-spv-produk.delete');
-    
 
     //MONITORING ACH. MARKETING
     Route::get('/monitoring', [MonitoringController::class, 'index'])->name('monitoring.index');
