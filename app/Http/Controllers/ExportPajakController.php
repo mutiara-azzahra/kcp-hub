@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\TransaksiInvoiceHeader;
@@ -17,7 +17,7 @@ class ExportPajakController extends Controller
     public function store(Request $request){
 
         $request->validate([
-            'jenis_data'      => 'required',
+            'jenis_data'           => 'required',
             'no_faktur_pajak'      => 'required',
             'tanggal_awal'         => 'required',
             'tanggal_akhir'        => 'required',
@@ -28,7 +28,6 @@ class ExportPajakController extends Controller
         $tanggal_awal       = $request->tanggal_awal;
         $tanggal_akhir      = $request->tanggal_akhir;
 
-
         $invoice = null; 
         $details = null; 
 
@@ -37,7 +36,6 @@ class ExportPajakController extends Controller
 
         }
 
-
         if($jenis_data == 'OF'){
             $details = TransaksiInvoiceDetails::whereBetween('created_at', [$tanggal_awal, $tanggal_akhir])->get();
         }
@@ -45,5 +43,13 @@ class ExportPajakController extends Controller
         return view('export-pajak.view-fk', compact('invoice', 'details', 'no_faktur_pajak', 'jenis_data'));
 
         
+    }
+
+
+    public function cetak(Request $request)
+    {
+        $data= TransaksiInvoiceHeader::whereBetween('created_at', [$request->tanggal_awal, $request->tanggal_akhir])->get();
+
+        return Excel::download(new TransaksiPembayaranExport($tanggal_awal, $tanggal_akhir), 'export-pajak.xlsx');
     }
 }

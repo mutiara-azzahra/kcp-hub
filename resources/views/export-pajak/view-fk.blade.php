@@ -30,6 +30,9 @@
 
     @if($jenis_data == 'FK')
     <div class="card" style="padding: 2px;">
+        <div class="card-header">
+            FK
+        </div>
         <div class="card-body p-2">
             <div class="col-lg-12">  
                 <table class="table table-hover table-bordered table-sm bg-light" id="example1">
@@ -62,7 +65,7 @@
                             <td class="text-left">FK</td>
                             <td class="text-right">1</td>
                             <td class="text-right">0</td>
-                            <td class="text-left">{{ $no_faktur_pajak++ }}</td>
+                            <td class="text-left">0{{ $no_faktur_pajak++ }}</td>
                             <td class="text-right">12</td>
                             <td class="text-right">{{ Carbon\Carbon::parse($p->created_at)->format('d/m/Y') }}</td>
                             <td class="text-right">{{ Carbon\Carbon::parse($p->created_at)->year }}</td>
@@ -79,39 +82,8 @@
                             </td>
                             <td class="text-left">{{ $p->outlet->nik }}#NIK#NAMA#{{ $p->outlet->nm_outlet }}</td>
                             <td class="text-left">{{ $p->outlet->almt_outlet }}</td>
-                            <td class="text-right">{{ number_format(($p->details_invoice->sum('nominal_total')/1.11), 0, ',', '') }}</td>
-                            <td class="text-right">{{ number_format(($p->details_invoice->sum('nominal_total')*11/100), 0, ',', '') }}</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-right">0</td>
-                            <td class="text-left">{{ $p->noinv }}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-left">FK</td>
-                            <td class="text-right">1</td>
-                            <td class="text-right">0</td>
-                            <td class="text-left">{{ $no_faktur_pajak++ }}</td>
-                            <td class="text-right">12</td>
-                            <td class="text-right">{{ Carbon\Carbon::parse($p->created_at)->format('d/m/Y') }}</td>
-                            <td class="text-right">{{ Carbon\Carbon::parse($p->created_at)->year }}</td>
-                            <td class="text-right">
-                                @if($p->outlet->no_npwp == 000000000000000 )
-                                
-                                0
-
-                                @else
-
-                                {{ $p->outlet->no_npwp }}
-
-                                @endif
-                            </td>
-                            <td class="text-left">{{ $p->outlet->nik }}#NIK#NAMA#{{ $p->outlet->nm_outlet }}</td>
-                            <td class="text-left">{{ $p->outlet->almt_outlet }}</td>
-                            <td class="text-right">{{ number_format(($p->details_invoice->sum('nominal_total')/1.11), 0, ',', '') }}</td>
-                            <td class="text-right">{{ number_format(($p->details_invoice->sum('nominal_total')*11/100), 0, ',', '') }}</td>
+                            <td class="text-right">{{ number_format( (($p->details_invoice->sum('nominal_total')/1.11 )), 0, ',', '') }}</td>
+                            <td class="text-right">{{ number_format( (($p->details_invoice->sum('nominal_total')/1.11 *0.11)), 0, ',', '') }}</td>
                             <td class="text-right">0</td>
                             <td class="text-right">0</td>
                             <td class="text-right">0</td>
@@ -130,6 +102,9 @@
     @else
 
     <div class="card" style="padding: 2px;">
+        <div class="card-header">
+         OF
+        </div>
         <div class="card-body p-2">
             <div class="col-lg-12">  
                 <table class="table table-hover table-bordered table-sm bg-light" id="example1">
@@ -141,8 +116,9 @@
                             <th class="text-center">HARGA_SATUAN</th>
                             <th class="text-center">JUMLAH_BARANG</th>
                             <th class="text-center">HARGA_TOTAL</th>
-                            <th class="text-center">DISKON</th>
                             <th class="text-center">DPP</th>
+                            <th class="text-center">DISKON</th>
+
                             <th class="text-center">PPN</th>
                             <th class="text-center">TARIF_PPNBM</th>
                             <th class="text-center">PPNBM</th>
@@ -160,11 +136,13 @@
                             <td class="text-left">{{ $p->nama_part->part_nama }}</td>
                             <td class="text-left">{{ $p->hrg_pcs }}</td>
                             <td class="text-left">{{ $p->qty }}</td>
+                            <td class="text-right">{{ number_format((($p->qty * $p->hrg_pcs)/1.11), 0, ',', '') }}</td>
 
-                            <td class="text-right">{{ number_format(($p->nominal_total), 0, ',', '') }}</td>
-                            <td class="text-right">{{ number_format(($p->nominal_disc), 0, ',', '') }}</td>
-                            <td class="text-right">{{ number_format( ($p->nominal_total/1.11 ), 0, ',', '') }}</td>
-                            <td class="text-right">{{ number_format(($p->nominal_total * 0.11), 0, ',', '') }}</td>
+                            <td class="text-right">{{ number_format(($p->nominal_total)/1.11, 0, ',', '') }}</td>
+                            
+                            <td class="text-right">{{ number_format((($p->qty * $p->hrg_pcs * $p->disc)/100 /1.11), 0, ',', '') }}</td>
+                            
+                            <td class="text-right">{{ number_format(($p->nominal_total)/1.11 *0.11, 0, ',', '') }}</td>
                             <td class="text-right">0</td>
                             <td class="text-right">0</td>
                             <td class="text-left">{{ $p->noinv }}</td>
