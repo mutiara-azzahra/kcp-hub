@@ -51,10 +51,10 @@ class BGMasukController extends Controller
         }
     }
 
-    public function details($id){
+    public function details($id_bg){
 
         $perkiraan  = MasterPerkiraan::all();
-        $header     = BgMasukHeader::where('id', $id)->first();
+        $header     = BgMasukHeader::where('id_bg', $id_bg)->first();
 
         return view('bg-masuk.details', compact('perkiraan', 'header'));
     }

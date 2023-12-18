@@ -14,7 +14,7 @@ class BgMasukHeader extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [ 
-        'id_bg', 'status_bg', 'from_bg', 'keterangan', 'nominal', 'status','flag_balik', 'flag_batal', 'fla_batal_keterangan','created_at', 'updated_at', 'created_by', 'updated_by'
+        'id_bg', 'status_bg', 'from_bg', 'keterangan', 'nominal', 'status','flag_balik', 'flag_batal', 'flag_batal_keterangan','created_at', 'updated_at', 'created_by', 'updated_by'
     ];
 
 
@@ -48,5 +48,10 @@ class BgMasukHeader extends Model
         $newCustomId = 'BG-' . $currentYear . $currentMonth . '-' . str_pad($newNumber, 5, '0', STR_PAD_LEFT);
 
         return $newCustomId;
+    }
+
+    public function kas_masuk()
+    {
+        return $this->hasOne(KasMasukHeader::class, 'no_bg', 'from_bg');
     }
 }

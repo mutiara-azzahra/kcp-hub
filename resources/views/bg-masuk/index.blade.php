@@ -52,7 +52,6 @@
                         <td class="text-center">{{ Carbon\Carbon::parse($p->tanggal_rincian_tagihan)->format('d-m-Y') }}</td>
                         <td class="text-center">{{ Carbon\Carbon::parse($p->jatuh_tempo_bg)->format('d-m-Y') }}</td>
                         <td class="text-center">
-                            <a class="btn btn-warning btn-sm" href="{{ route('bg-masuk.details', ['id' => $p->id]) }}"><i class="fas fa-random" data-toggle="tooltip" data-placement="top" title="Koreksi"></i></a>
                             <a class="btn btn-success btn-sm" href="{{ route('bg-masuk.store', ['no_bg' => $p->no_bg]) }}"><i class="fas fa fa-check-square-o" data-toggle="tooltip" data-placement="top" title="Cair"></i></a>
                         </td>
                     </tr>
@@ -102,7 +101,7 @@
                                 <th class="text-center">Tgl. Balik</th>
                                 <th class="text-center">Keterangan</th>
                                 <th class="text-center">Nominal</th>
-                                <!-- <th class="text-center"></th> -->
+                                <th class="text-center"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -117,11 +116,10 @@
                             <td class="text-center"></td>
                             <td class="text-left">{{ $p->keterangan }}</td>
                             <td class="text-right">{{ number_format($p->nominal, 0, ',', ',') }}</td>
-                            <!-- <td class="text-center">
-                                <a class="btn btn-info btn-sm" href="">
-                                    <i class="fas fa-edit"></i>
+                            <td class="text-center">
+                                <a class="btn btn-warning btn-sm" href="{{ route('bg-masuk.details', ['id_bg' => $p->id_bg]) }}"><i class="fas fa-random" data-toggle="tooltip" data-placement="top" title="Koreksi"></i>
                                 </a>
-                            </td> -->
+                            </td>
                         </tr>
                         @endforeach
                         </tbody>

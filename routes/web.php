@@ -301,9 +301,8 @@ Route::group(['middleware' => 'auth'], function () {
     //BG MASUK
     Route::get('/bg-masuk', [BgMasukController::class, 'index'])->name('bg-masuk.index');
     Route::get('/bg-masuk/cair/{no_bg}', [BgMasukController::class, 'store'])->name('bg-masuk.store');
-    Route::get('/bg-masuk/details/{id}', [BgMasukController::class, 'details'])->name('bg-masuk.details');
+    Route::get('/bg-masuk/details/{id_bg}', [BgMasukController::class, 'details'])->name('bg-masuk.details');
 
-    Route::get('/bg-masuk/bayar-manual/details/{no_kas_masuk}', [BgMasukController::class, 'details'])->name('bg-masuk.details');
     Route::get('/bg-masuk/bukti-bayar', [BgMasukController::class, 'bukti_bayar'])->name('bg-masuk.bukti-bayar');
     Route::get('/bg-masuk/pembayaran-manual', [BgMasukController::class, 'pembayaran_manual'])->name('bg-masuk.bayar_manual');
     Route::get('/bg-masuk/cetak/{no_kas_masuk}', [BgMasukController::class, 'cetak'])->name('bg-masuk.cetak');

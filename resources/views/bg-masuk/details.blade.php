@@ -28,24 +28,29 @@
             <div class="col-lg-8 p-1">
                 <table class="table table-borderless">
                     <tr>
-                        <th class="text-left">Tgl. Transaksi</th>
+                        <th class="text-left">BG Masuk</th>
                         <td>:</td>
-                        <td class="text-left"><b>{{ $transfer->tanggal_bank }}</b></td>
+                        <td class="text-left"><b>{{ $header->id_bg }}</b></td>
                     </tr>
                     <tr>
-                        <th class="text-left">No. Transfer</th>
+                        <th class="text-left">Kode / Toko</th>
                         <td>:</td>
-                        <td class="text-left"><b>{{ $transfer->id_transfer }}</b></td>
+                        <td class="text-left"><b>{{ $header->kas_masuk->outlet->nm_outlet }}</b></td>
                     </tr>
                     <tr>
-                        <th class="text-left">Bank</th>
+                        <th class="text-left">Provinsi</th>
                         <td>:</td>
-                        <td class="text-left"><b>{{ $transfer->bank }}</b></td>
+                        <td class="text-left"><b>Kalimantan Selatan</b></td>
+                    </tr>
+                    <tr>
+                        <th class="text-left">Nominal</th>
+                        <td>:</td>
+                        <td class="text-left"><b>Rp. {{ $header->nominal }}</b></td>
                     </tr>
                     <tr>
                         <th class="text-left">Keterangan</th>
                         <td>:</td>
-                        <td class="text-left"><b>{{ $transfer->keterangan }}</b></td>
+                        <td class="text-left"><b>{{ $header->keterangan }}</b></td>
                     </tr>
                 </table>
             </div>
@@ -90,7 +95,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group col-12">
-                                            <input type="hidden" name="inputs[0][id_transfer]" value="{{ $transfer->id_transfer }}">
+                                            <input type="hidden" name="inputs[0][id_bg]" value="{{ $header->id_bg }}">
                                             <input type="text" name="inputs[0][total]" class="form-control">
                                         </div>
                                     </td>
@@ -142,7 +147,7 @@
                 </td>
                 <td class="text-center">
                     <div class="form-group col-12">
-                        <input type="hidden" name="inputs[${i}][id_transfer]" value="{{ $transfer->id_transfer }}">
+                        <input type="hidden" name="inputs[${i}][id_bg]" value="{{ $header->id_bg }}">
                         <input type="text" name="inputs[${i}][total]" class="form-control">
                     </div>
                 </td>
