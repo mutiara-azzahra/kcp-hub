@@ -70,20 +70,20 @@ class BGMasukController extends Controller
     public function store_details(Request $request){
 
         $request->validate([
-            'inputs.*.id_transfer'  => 'required',
+            'inputs.*.id_bg'        => 'required',
             'inputs.*.perkiraan'    => 'required',
             'inputs.*.akuntansi_to' => 'required',
             'inputs.*.total'        => 'required',
         ]);
         
         $totalSum = 0;
-        $id_transfer = null;
+        $id_bg    = null;
     
         foreach ($request->inputs as $key => $value) {
             $perkiraan = MasterPerkiraan::findOrFail($value['perkiraan']);
         
-            TransferMasukDetails::create([
-                'id_transfer'  => $value['id_transfer'],
+            BgMasukDetails::create([
+                'id_bg'  => $value['id_bg'],
                 'perkiraan'     => $perkiraan ? $perkiraan->perkiraan . '.' . $perkiraan->sub_perkiraan : null,
                 'sub_perkiraan' => $perkiraan->sub_perkiraan,
                 'akuntansi_to'  => $value['akuntansi_to'],
@@ -95,8 +95,8 @@ class BGMasukController extends Controller
                 $totalSum += $value['total'];
             }
 
-            if ($id_transfer === null) {
-                $id_transfer = $value['id_transfer'];
+            if ($id_bg === null) {
+                $id_bg = $value['id_bg'];
             }
         }
             

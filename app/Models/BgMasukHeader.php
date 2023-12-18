@@ -17,7 +17,6 @@ class BgMasukHeader extends Model
         'id_bg', 'status_bg', 'from_bg', 'keterangan', 'nominal', 'status','flag_balik', 'flag_batal', 'flag_batal_keterangan','created_at', 'updated_at', 'created_by', 'updated_by'
     ];
 
-
     public static function id_bg()
     {
 

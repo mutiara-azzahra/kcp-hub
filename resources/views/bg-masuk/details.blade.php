@@ -60,7 +60,7 @@
     <div class="card" style="padding: 10px;">
         <div class="card-body">
             <div class="col-lg-12 p-1" id="main" data-loading="true">
-                <form action="{{ route('transfer-keluar.store-details')}}" method="POST">
+                <form action="{{ route('bg-masuk.store-details')}}" method="POST">
                     @csrf
                     <div class="table-container">
                         <table class="table table-hover table-sm bg-light table-striped table-bordered" id="table">
