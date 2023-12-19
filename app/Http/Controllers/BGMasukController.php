@@ -83,7 +83,7 @@ class BGMasukController extends Controller
             $perkiraan = MasterPerkiraan::findOrFail($value['perkiraan']);
         
             BgMasukDetails::create([
-                'id_bg'  => $value['id_bg'],
+                'id_bg'         => $value['id_bg'],
                 'perkiraan'     => $perkiraan ? $perkiraan->perkiraan . '.' . $perkiraan->sub_perkiraan : null,
                 'sub_perkiraan' => $perkiraan->sub_perkiraan,
                 'akuntansi_to'  => $value['akuntansi_to'],

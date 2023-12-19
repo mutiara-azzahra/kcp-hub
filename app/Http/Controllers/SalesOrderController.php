@@ -64,6 +64,26 @@ class SalesOrderController extends Controller
     public function approve($nosp){
 
         $approve_so = TransaksiSpHeader::where('nosp', $nosp)->get();
+        $check_sp   = TransaksiSpDetails::where('nosp', $nosp)->get();
+
+        $hasZeroQty = false;
+
+        foreach ($check_sp as $i) {
+            if ($i->qty == 0) {
+
+                $hasZeroQty = true;
+                break;
+            }
+        }
+
+        if ($hasZeroQty) {
+            $transaksiBOHeader = new TransaksiBOHeader();
+            $transaksiBOHeader->field_name = value;
+            $transaksiBOHeader->save();
+        } else {
+            
+        }
+
 
         TransaksiSpHeader::where('nosp', $nosp)->update([
             'status'    => 'C',
@@ -85,6 +105,8 @@ class SalesOrderController extends Controller
 
             TransaksiSOHeader::create($data);
         }
+
+
 
         foreach ($approve_so as $a) {
             foreach ($a->details_sp as $d) {

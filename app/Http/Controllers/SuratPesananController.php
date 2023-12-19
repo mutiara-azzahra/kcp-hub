@@ -101,9 +101,9 @@ class SuratPesananController extends Controller
     public function store_details(Request $request){
 
         $request->validate([
-                'inputs.*.nosp'    => 'required',
-                'inputs.*.part_no' => 'required',
-                'inputs.*.qty'     => 'required',
+            'inputs.*.nosp'    => 'required',
+            'inputs.*.part_no' => 'required',
+            'inputs.*.qty'     => 'required',
         ]);
 
         foreach($request->inputs as $key => $value){
@@ -149,6 +149,7 @@ class SuratPesananController extends Controller
 
                     TransaksiSpDetails::create($value);
             }
+
             
         }        
         

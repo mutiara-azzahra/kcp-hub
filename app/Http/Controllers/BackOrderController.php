@@ -19,4 +19,6 @@ class BackOrderController extends Controller
         return redirect()->route('back-order.index')->with('succes','Data baru berhasil ditambahkan');
 
     }
+
+    
 }
