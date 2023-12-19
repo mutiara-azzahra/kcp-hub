@@ -10,6 +10,8 @@ use App\Models\TransaksiSpHeader;
 use App\Models\TransaksiSpDetails;
 use App\Models\TransaksiSOHeader;
 use App\Models\TransaksiSODetails;
+use App\Models\TransaksiBackOrderHeader;
+use App\Models\TransaksiBackOrderDetails;
 use App\Models\MasterStokGudang;
 use App\Models\MasterPart;
 use App\Models\MasterDiskonPart;
@@ -64,37 +66,37 @@ class SalesOrderController extends Controller
     public function approve($nosp){
 
         $approve_so = TransaksiSpHeader::where('nosp', $nosp)->get();
-        $check_sp   = TransaksiSpDetails::where('nosp', $nosp)->get();
         $header_so  = TransaksiSpHeader::where('nosp', $nosp)->first();
-
         $hasZeroQty = false;
+        $check_sp   = TransaksiSpDetails::where('nosp', $nosp)->get();
 
         foreach ($check_sp as $i) {
-            if ($i->qty == 0) {
+            $stok_ready = MasterStokGudang::where('part_no', $i->part_no)->value('stok');
+
+            if ($stok_ready == 0) {
 
                 $hasZeroQty = true;
                 break;
             }
         }
 
-        $newBoNobo = null;
-
         if ($hasZeroQty) {
-            $transaksiBOHeader = new TransaksiBackOrderHeader();
-            $newBo->nobo       = TransaksiBackOrderHeader::noso();
-            $newBoNobo         = $newBo->nobo;
+            $newBo             = new TransaksiBackOrderHeader();
+            $newBo->nobo       = TransaksiBackOrderHeader::nobo();
+            $nobo              = $newBo->nobo;
 
-            $transaksiBOHeader->nobo        = $newBoNobo;
-            $transaksiBOHeader->kd_outlet   = $header_so->kd_outlet;
-            $transaksiBOHeader->nm_outlet   = $header_so->nm_outlet;
-            $transaksiBOHeader->keterangan  = $header_so->keterangan;
-            $transaksiBOHeader->status      = 'C';
-            $transaksiBOHeader->ket_batal   = 'N';
-            $transaksiBOHeader->noso_out    = $header_so->noso;
-            $transaksiBOHeader->user_sales  = $header_so->user_sales;
-            $transaksiBOHeader->created_by  = Auth::user()->nama_user;
+            $value['nobo']       = $newBo->nobo;
+            $value['kd_outlet']  = $header_so->kd_outlet;
+            $value['nm_outlet']  = $header_so->nm_outlet;
+            $value['keterangan'] = $header_so->keterangan;
+            $value['status']     = 'C';
+            $value['ket_batal']  = 'N';
+            $value['noso_out']   = $header_so->noso;
+            $value['user_sales'] = $header_so->user_sales;
+            $value['created_by'] = Auth::user()->nama_user;
+            $value['created_at']     = NOW();
 
-            $transaksiBOHeader->save();
+            TransaksiBackOrderHeader::create($value);
             
         } else {
             
@@ -128,7 +130,7 @@ class SalesOrderController extends Controller
                 if ($stok_ready == 0) {
 
                     $details = [
-                        'nobo'          => $newBoNobo,
+                        'nobo'          => $nobo,
                         'area_bo'       => $a->area_sp,
                         'kd_outlet'     => $a->kd_outlet,
                         'part_no'       => $d->part_no,
