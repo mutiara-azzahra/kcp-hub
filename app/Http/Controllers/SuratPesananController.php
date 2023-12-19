@@ -83,6 +83,8 @@ class SuratPesananController extends Controller
         $details     = TransaksiSpHeader::where('nosp', $nosp)->first();
         $total       = TransaksiSpDetails::where('nosp', $nosp)->get();
         $master_part = MasterPart::where('status', 'A')->get();
+
+        // dd($master_part);
         $check       = TransaksiSpDetails::where('nosp', $nosp)->first();
 
         $totalSum = 0;

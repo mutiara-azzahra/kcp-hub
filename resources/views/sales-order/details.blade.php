@@ -24,7 +24,7 @@
                 Sales Order
             </div>
             <div class="float-right">
-                @if(Auth::user()->id_role == 11)
+                @if(Auth::user()->id_role == 24)
                     @foreach($surat_pesanan_id as $s)
 
                         @if(isset($s->so))
