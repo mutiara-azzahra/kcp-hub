@@ -87,7 +87,6 @@ class TransaksiSpHeader extends Model
                 $newNumber = $lastNumber + 1;
             } else {
                 $newNumber = 1;
-                dd($newNumber);
             }
         } else {
             $newNumber = 1;

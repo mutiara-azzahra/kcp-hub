@@ -65,6 +65,7 @@ class SalesOrderController extends Controller
 
         $approve_so = TransaksiSpHeader::where('nosp', $nosp)->get();
         $check_sp   = TransaksiSpDetails::where('nosp', $nosp)->get();
+        $header_so  = TransaksiSpHeader::where('nosp', $nosp)->first();
 
         $hasZeroQty = false;
 
@@ -76,14 +77,28 @@ class SalesOrderController extends Controller
             }
         }
 
+        $newBoNobo = null;
+
         if ($hasZeroQty) {
-            $transaksiBOHeader = new TransaksiBOHeader();
-            $transaksiBOHeader->field_name = value;
+            $transaksiBOHeader = new TransaksiBackOrderHeader();
+            $newBo->nobo       = TransaksiBackOrderHeader::noso();
+            $newBoNobo         = $newBo->nobo;
+
+            $transaksiBOHeader->nobo        = $newBoNobo;
+            $transaksiBOHeader->kd_outlet   = $header_so->kd_outlet;
+            $transaksiBOHeader->nm_outlet   = $header_so->nm_outlet;
+            $transaksiBOHeader->keterangan  = $header_so->keterangan;
+            $transaksiBOHeader->status      = 'C';
+            $transaksiBOHeader->ket_batal   = 'N';
+            $transaksiBOHeader->noso_out    = $header_so->noso;
+            $transaksiBOHeader->user_sales  = $header_so->user_sales;
+            $transaksiBOHeader->created_by  = Auth::user()->nama_user;
+
             $transaksiBOHeader->save();
+            
         } else {
             
         }
-
 
         TransaksiSpHeader::where('nosp', $nosp)->update([
             'status'    => 'C',
@@ -106,14 +121,26 @@ class SalesOrderController extends Controller
             TransaksiSOHeader::create($data);
         }
 
-
-
         foreach ($approve_so as $a) {
             foreach ($a->details_sp as $d) {
                 $stok_ready = MasterStokGudang::where('part_no', $d->part_no)->value('stok');
         
                 if ($stok_ready == 0) {
-                    continue;
+
+                    $details = [
+                        'nobo'          => $newBoNobo,
+                        'area_bo'       => $a->area_sp,
+                        'kd_outlet'     => $a->kd_outlet,
+                        'part_no'       => $d->part_no,
+                        'qty'           => $d->qty,
+                        'hrg_pcs'       => $d->hrg_pcs,
+                        'disc'          => $d->disc,
+                        'status'        => 'O',
+                        'created_at'    => now(),
+                        'created_by'    => Auth::user()->nama_user,
+                    ];
+            
+                    TransaksiBackOrderDetails::create($details);
                 }
         
                 $details = [
@@ -138,7 +165,6 @@ class SalesOrderController extends Controller
                 TransaksiSODetails::create($details);
             }
         }
-        
         
         return redirect()->route('sales-order.index')->with('success','Data SO berhasil di Approve!');
 
