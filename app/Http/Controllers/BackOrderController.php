@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\MasterOutlet;
+
 class BackOrderController extends Controller
 {
     public function index(){
 
-        return view('back-order.index');
+        $outlet = MasterOutlet::where('status', 'Y')->get();
+
+        return view('back-order.index', compact('outlet'));
     }
     public function create(){
 

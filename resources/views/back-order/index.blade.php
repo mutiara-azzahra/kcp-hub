@@ -2,91 +2,57 @@
  
 @section('content')
 <div class="container" style="padding: 10px;">
-    <div class="row mt-5">
+    <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4><b>List Back Order / BO</b></h4>
+                <h4>Back Order / BO</h4>
              </div>
         </div>
     </div>
-            @if ($message = Session::get('success'))
-                <div class="alert alert-success" id="myAlert">
-                    <p>{{ $message }}</p>
-                </div>  
-            @endif
 
-            <div class="card" style="padding: 10px;">
-                <div class="card-body">
-                    <div class="col-lg-12">  
-                        <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example1">
-                            <thead>
-                                <tr>
-                                    <th class="text-center">Area Back Order</th>
-                                    <th class="text-center">Kode Toko</th>
-                                    <th class="text-center">Nama Toko</th>
-                                    <th class="text-center">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php
-                                $no=1;
-                                @endphp
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success" id="myAlert">
+            <p>{{ $message }}</p>
+        </div>  
+    @elseif ($message = Session::get('danger'))
+        <div class="alert alert-warning" id="myAlert">
+            <p>{{ $message }}</p>
+        </div>  
+    @endif
 
-                               
-                                <tr>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center">
-                                        <a class="btn btn-danger btn-sm"><i class="fas fa-times-circle"></i> </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+    <div class="card" style="padding: 10px;">
+        <div class="card-body">
+            <div class="col-lg-12">  
+                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example1">
+                    <thead style="background-color: #6082B6; color:white">
+                        <tr>
+                            <th class="text-center">Kode Toko</th>
+                            <th class="text-center">Nama Toko</th>
+                            <th class="text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                        $no=1;
+                        @endphp
+
+                        @foreach($outlet as $i)
+                        <tr>
+                            <td class="text-left">{{ $i->kd_outlet }}</td>
+                            <td class="text-left">{{ $i->nm_outlet }}</td>
+                            <td class="text-center">
+                                <a class="btn btn-primary btn-sm"><i class="fas fa-list"></i> </a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
+        </div>
+    </div>
 </div>
 @endsection
 
 @section('script')
-
-    <script>
-      $(function () {
-        $("#example1")
-          .DataTable({
-            paging: true,
-            responsive: true,
-            lengthChange: false,
-            autoWidth: false,
-            buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
-          })
-          .buttons()
-          .container()
-          .appendTo("#example1_wrapper .col-md-6:eq(0)")
-                  
-        $("#example2").DataTable({
-          paging: true,
-          lengthChange: false,
-          searching: false,
-          ordering: true,
-          info: true,
-          autoWidth: false,
-          responsive: true,
-        });
-      });
-    </script>
-
-    <script>
-        function closeAlertAfterTime(alertId, milliseconds) {
-            setTimeout(function () {
-                var alertElement = document.getElementById(alertId);
-                if (alertElement) {
-                    alertElement.style.display = 'none'; 
-                }
-            }, milliseconds);
-        }
-        closeAlertAfterTime('myAlert', 4000);
-    </script>
 
 @endsection
