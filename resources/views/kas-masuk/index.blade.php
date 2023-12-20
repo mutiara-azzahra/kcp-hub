@@ -48,8 +48,15 @@
                     <tr>
                         <td class="text-center">{{ $no++ }}.</td>
                         <td class="text-left">{{ $p->no_kas_masuk }}</td>
+
+                        @if( $p->kd_outlet == null)
+                        <td></td>
+                        <td></td>
+                        @else
                         <td class="text-left">{{ $p->kd_outlet }}</td>
                         <td class="text-left">{{ $p->outlet->nm_outlet }}</td>
+                        @endif
+
                         <td class="text-center">{{ $p->pembayaran_via }}</td>
                         <td class="text-right">Rp. {{ number_format($p->nominal, 0, ',', '.') }}</td>
                         <td>

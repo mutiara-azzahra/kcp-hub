@@ -40,7 +40,7 @@ class KasMasukController extends Controller
 
         $request -> validate([
             'tanggal_rincian_tagihan'   => 'required', 
-            'kd_outlet'                 => 'required', 
+            // 'kd_outlet'                 => 'required', 
             'pembayaran_via'            => 'required',
         ]);
 
