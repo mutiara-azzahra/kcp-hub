@@ -31,13 +31,16 @@
     @if($jenis_data == 'FK')
     <div class="card" style="padding: 2px;">
         <div class="card-header">
-            FK
+            EXPORT PAJAK FK
         </div>
         <div class="card-body p-2">
             <div class="col-lg-12">  
                 <table class="table table-hover table-bordered table-sm bg-light" id="example1">
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
+
+                        FK;KD_JENIS_TRANSAKSI;FG_PENGGANTI;NOMOR_FAKTUR;MASA_PAJAK;TAHUN_PAJAK;TANGGAL_FAKTUR;NPWP;NAMA;ALAMAT_LENGKAP;JUMLAH_DPP;JUMLAH_PPN;JUMLAH_PPNBM;ID_KETERANGAN_TAMBAHAN;FG_UANG_MUKA;UANG_MUKA_DPP;UANG_MUKA_PPN;UANG_MUKA_PPNBM;REFERENSI;KODE_DOKUMEN_PENDUKUNG
+
                             <th class="text-center">FK</th>
                             <th class="text-center">KD_JENIS_TRANSAKSI</th>
                             <th class="text-center">FG_PENGGANTI</th>
@@ -57,6 +60,7 @@
                             <th class="text-center">UANG_MUKA_PPN</th>
                             <th class="text-center">UANG_MUKA_PPNBM</th>
                             <th class="text-center">REFERENSI</th>
+                            <th class="text-center">KODE_DOKUMEN_PENDUKUNG</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -91,6 +95,7 @@
                             <td class="text-right">0</td>
                             <td class="text-right">0</td>
                             <td class="text-left">{{ $p->noinv }}</td>
+                            <td class="text-right">0</td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -103,7 +108,7 @@
 
     <div class="card" style="padding: 2px;">
         <div class="card-header">
-         OF
+        EXPORT PAJAK OF
         </div>
         <div class="card-body p-2">
             <div class="col-lg-12">  
@@ -116,9 +121,8 @@
                             <th class="text-center">HARGA_SATUAN</th>
                             <th class="text-center">JUMLAH_BARANG</th>
                             <th class="text-center">HARGA_TOTAL</th>
-                            <th class="text-center">DPP</th>
                             <th class="text-center">DISKON</th>
-
+                            <th class="text-center">DPP</th>
                             <th class="text-center">PPN</th>
                             <th class="text-center">TARIF_PPNBM</th>
                             <th class="text-center">PPNBM</th>
@@ -126,9 +130,6 @@
                         </tr>
                     </thead>
                     <tbody>
-
-
-                    
                     @foreach($details as $p)
                         <tr>
                             <td class="text-left">OF</td>
@@ -137,16 +138,12 @@
                             <td class="text-left">{{ $p->hrg_pcs }}</td>
                             <td class="text-left">{{ $p->qty }}</td>
                             <td class="text-right">{{ number_format((($p->qty * $p->hrg_pcs)/1.11), 0, ',', '') }}</td>
-
-                            <td class="text-right">{{ number_format(($p->nominal_total)/1.11, 0, ',', '') }}</td>
-                            
                             <td class="text-right">{{ number_format((($p->qty * $p->hrg_pcs * $p->disc)/100 /1.11), 0, ',', '') }}</td>
-                            
+                            <td class="text-right">{{ number_format(($p->nominal_total)/1.11, 0, ',', '') }}</td>  
                             <td class="text-right">{{ number_format(($p->nominal_total)/1.11 *0.11, 0, ',', '') }}</td>
                             <td class="text-right">0</td>
                             <td class="text-right">0</td>
                             <td class="text-left">{{ $p->noinv }}</td>
-                            
                         </tr>
                     @endforeach
                     </tbody>

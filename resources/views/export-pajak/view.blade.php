@@ -5,7 +5,7 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
             <div class="float-left">
-                <h4>Report LSS</h4>
+                <h4>EXPORT PAJAK OF</h4>
             </div>
             <div class="float-right">
                 <a class="btn btn-success" href="{{ route('export-pajak.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
@@ -44,14 +44,7 @@
                             <th class="text-center">PPN</th>
                             <th class="text-center">TARIF_PPNBM</th>
                             <th class="text-center">PPNBM</th>
-                            <th class="text-center"></th>
-                            <th class="text-center"></th>
-                            <th class="text-center"></th>
-                            <th class="text-center"></th>
-                            <th class="text-center"></th>
-                            <th class="text-center"></th>
-                            <th class="text-center"></th>
-                            <th class="text-center"></th>
+                            <th class="text-center">Reff</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,17 +55,16 @@
                         <tr>
                             <td class="text-left">OF</td>
                             <td class="text-left">{{ $p->part_no }}</td>
-                            <td class="text-left">{{ $p->nama_part->nm_part }}</td>
+                            <td class="text-left">{{ $p->nama_part->part_nama }}</td>
                             <td class="text-left">{{ $p->hrg_pcs }}</td>
                             <td class="text-left">{{ $p->qty }}</td>
-
-                            <td class="text-right">{{ number_format(($p->nominal_total), 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format(($p->nominal_disc), 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format( ($p->nominal_total/1.11 ), 0, ',', '.') }}</td>
-                            <td class="text-right">{{ number_format(($p->nominal_total * 0.11), 0, ',', '.') }}</td>
+                            <td class="text-right">{{ number_format((($p->qty * $p->hrg_pcs)/1.11), 0, ',', '') }}</td>
+                            <td class="text-right">{{ number_format((($p->qty * $p->hrg_pcs * $p->disc)/100 /1.11), 0, ',', '') }}</td>
+                            <td class="text-right">{{ number_format(($p->nominal_total)/1.11, 0, ',', '') }}</td>  
+                            <td class="text-right">{{ number_format(($p->nominal_total)/1.11 *0.11, 0, ',', '') }}</td>
                             <td class="text-right">0</td>
-                            <td class="text-left">0</td>
-                            
+                            <td class="text-right">0</td>
+                            <td class="text-left">{{ $p->noinv }}</td>
                         </tr>
                     @endforeach
                     </tbody>

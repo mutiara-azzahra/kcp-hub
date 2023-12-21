@@ -45,7 +45,6 @@ class ExportPajakController extends Controller
         
     }
 
-
     public function cetak(Request $request)
     {
         $data= TransaksiInvoiceHeader::whereBetween('created_at', [$request->tanggal_awal, $request->tanggal_akhir])->get();
