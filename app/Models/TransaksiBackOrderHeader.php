@@ -49,4 +49,9 @@ class TransaksiBackOrderHeader extends Model
 
         return $newCustomBO;
     }
+
+    public function details()
+    {
+        return $this->hasMany(TransaksiBackOrderDetails::class, 'nobo', 'nobo');
+    }
 }

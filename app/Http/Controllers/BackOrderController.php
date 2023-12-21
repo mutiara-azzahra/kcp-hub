@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\MasterOutlet;
+use App\Models\TransaksiBackOrderHeader;
 
 class BackOrderController extends Controller
 {
@@ -14,9 +15,11 @@ class BackOrderController extends Controller
 
         return view('back-order.index', compact('outlet'));
     }
-    public function create(){
+    public function details($kd_outlet){
 
-        return view('back-order.create');
+        $back_order = TransaksiBackOrderHeader::where('kd_outlet', $kd_outlet)->get();
+
+        return view('back-order.details', compact('back_order'));
     }
     public function store(Request $request){
 

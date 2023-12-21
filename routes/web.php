@@ -185,8 +185,9 @@ Route::group(['middleware' => 'auth'], function () {
     
     //ROUTE BO
     Route::get('/back-order', [BackOrderController::class, 'index'])->name('back-order.index');
-    Route::get('/back-order/create', [BackOrderController::class, 'create'])->name('back-order.create');
-    Route::post('/back-order/store', [BackOrderController::class, 'store'])->name('back-order.store');
+    Route::get('/back-order/details/{kd_outlet}', [BackOrderController::class, 'details'])->name('back-order.details');
+    Route::get('/back-order/show/{nobo}', [BackOrderController::class, 'show'])->name('back-order.show');
+    // Route::post('/back-order/store', [BackOrderController::class, 'store'])->name('back-order.store');
 
     //ROUTE VALIDASI SO
     Route::get('/validasi-so', [ValidasiSOController::class, 'index'])->name('validasi-so.index');
