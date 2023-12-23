@@ -31,10 +31,11 @@ class SuratPesananController extends Controller
     public function create(){
 
         $sales      = MasterSales::where('sales', Auth::user()->username)->value('id');
+        $all_sales  = MasterSales::where('status', 'A')->get();
         $toko       = MasterAreaSales::where('id_sales', $sales)->get();
         $all_toko   = MasterOutlet::where('status', 'Y')->get();
 
-        return view('surat-pesanan.create', compact('sales', 'toko', 'all_toko'));
+        return view('surat-pesanan.create', compact('sales', 'toko', 'all_toko', 'all_sales'));
     }
 
     public function store(Request $request){
@@ -43,7 +44,15 @@ class SuratPesananController extends Controller
         $newSo          = new TransaksiSpHeader();
         $newSp->nosp    = TransaksiSpHeader::nosp();
         $newSo->noso    = TransaksiSpHeader::noso();
-        $nama_sales     = MasterSales::where('sales', Auth::user()->username)->value('sales');
+
+        $nama_sales ='';
+
+        if($request->sales != null){
+            $nama_sales     = MasterSales::where('sales', $request->sales)->value('sales');
+
+        } else {
+            $nama_sales     = MasterSales::where('sales', Auth::user()->username)->value('sales');
+        }
 
         $request -> validate([
             'kd_outlet' => 'required',
@@ -83,8 +92,6 @@ class SuratPesananController extends Controller
         $details     = TransaksiSpHeader::where('nosp', $nosp)->first();
         $total       = TransaksiSpDetails::where('nosp', $nosp)->get();
         $master_part = MasterPart::where('status', 'A')->get();
-
-        // dd($master_part);
         $check       = TransaksiSpDetails::where('nosp', $nosp)->first();
 
         $totalSum = 0;

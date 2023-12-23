@@ -24,7 +24,13 @@
                 Back Order Toko
             </div>
             <div class="float-right">
-                <a class="btn btn-success btn-md m-1" href="{{ route('back-order.store', $s->nobo) }}"><i class="fas fa-plus"></i> Teruskan Menjadi BO</a>
+                <form action="{{ route('back-order.store') }}" method="POST" id="form_forward_{{ $back_order->id }}" data-id="{{ $back_order->id }}">
+
+                    @csrf
+                    @method('POST')
+                    
+                    <a class="btn btn-warning btn-sm" onclick="Teruskan('{{$back_order->id}}')"><i class="fas fa-plus"></i> Teruskan Menjadi BO</a>
+                </form>
             </div>
         </div>
         <div class="card-body">
@@ -34,12 +40,12 @@
                         <tr>
                             <th class="text-left">No. Back Order / BO</th>
                             <td>:</td>
-                            <td class="text-left"><b>{{ $nobo }}</b></td>
+                            <td class="text-left"><b>{{ $back_order->nobo }}</b></td>
                         </tr>
                         <tr>
                             <th class="text-left">Kode / Nama Toko</th>
                             <td>:</td>
-                            <td class="text-left"><b>{{ $s->kd_outlet }} / {{ $s->nm_outlet }}</b></td>
+                            <td class="text-left"><b>{{ $back_order->kd_outlet }} / {{ $back_order->nm_outlet }}</b></td>
                         </tr>
                     </table>
                 </div>
@@ -49,7 +55,7 @@
                             <thead>
                                 <tr style="background-color: #6082B6; color:white">
                                     <th class="text-center">Part No</th>
-                                    <th class="text-center">Nama Part</th>
+                                    <th class="text-center">Harga/Pcs</th>
                                     <th class="text-center">Qty BO</th>
                                     <th class="text-center">Stock</th>
                                     <th class="text-center">Disc (%)</th>
@@ -57,18 +63,20 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($back_order->details as $d)
                                 <tr>
                                     <td class="text-left">{{ $d->part_no }}</td>
                                     <td class="text-right">Rp. {{ number_format($d->hrg_pcs, 0, ',', '.') }}</td>
                                     <td class="text-center">{{ $d->qty }}</td>
+                                    <td class="text-center" style="background-color: yellow; color:black">{{ $d->stok_ready->stok }}</td>
                                     <td class="text-center">{{ $d->disc }} %</td>
-                                    <td class="text-right">Rp. {{ number_format($d->nominal_total, 0, ',', '.') }}</td>
                                     <td class="text-center">
                                         <a class="btn btn-danger btn-sm" href="">
                                             <i class="fa fa-times"></i>
                                         </a>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                 </div>
@@ -80,5 +88,24 @@
 @endsection
 
 @section('script')
+
+<script>
+    Teruskan = (id)=>{
+        Swal.fire({
+            title: 'Apakah anda yakin meneruskan BO menjadi SO?',
+            text:  "Data tidak dapat kembali" ,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6' ,
+            cancelButtonColor: 'red' ,
+            confirmButtonText: 'Teruskan' ,
+            cancelButtonText: 'Batal' ,
+            reverseButtons: false
+            }).then((result) => {
+                if (result.value) {
+                    document.getElementById('form_forward_' + id).submit();
+                }
+        })
+    }
+</script>
 
 @endsection

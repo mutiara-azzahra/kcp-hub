@@ -35,8 +35,19 @@
                     @if(Auth::user()->id_role == 24)
                         <form action="{{ route('surat-pesanan.store') }}" method="POST">
                         @csrf
-                            <div class="col">                        
-                                <div class="col-lg-12">
+                            <div class="col">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <strong>Pilih Sales</strong><br>
+                                        <select name="sales" class="form-control mb-2 my-select">     
+                                            <option value="">-- Pilih Sales --</option>
+                                            @foreach($all_sales as $s)
+                                                <option value="{{ $s->sales }}">{{ $s->sales }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>                        
+                                <div class="col-lg-6">
                                     <div class="form-group">
                                         <strong>Toko</strong><br>
                                         <select name="kd_outlet" class="form-control mb-2 my-select">     
@@ -47,7 +58,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-lg-12">
+                                <div class="col-lg-6">
                                     <div class="form-group">
                                         <strong>Keterangan</strong>
                                         <input type="text" name="keterangan" class="form-control" placeholder="Isi Keterangan">

@@ -17,4 +17,11 @@ class TransaksiBackOrderDetails extends Model
         'nobo', 'area_bo', 'kd_outlet', 'part_no', 'nm_part', 'qty', 'hrg_pcs', 'disc', 'status', 'created_at', 'created_by', 'updated_at', 'updated_by'
        
     ];
+
+    // MasterStokGudang
+
+    public function stok_ready()
+    {
+        return $this->hasOne(MasterStokGudang::class, 'part_no', 'part_no');
+    }
 }

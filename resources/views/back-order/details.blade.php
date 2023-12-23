@@ -7,6 +7,9 @@
              <div class="float-left">
                 <h4>Back Order Toko A</h4>
              </div>
+             <div class="float-right">
+             <a class="btn btn-success" href="{{ route('back-order.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
+             </div>
         </div>
     </div>
 
