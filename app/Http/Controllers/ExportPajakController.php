@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Excel;
+use App\Exports\ExportPajak;
 use App\Models\TransaksiInvoiceHeader;
 use App\Models\TransaksiInvoiceDetails;
 
@@ -44,13 +46,13 @@ class ExportPajakController extends Controller
         
     }
 
-    // public function cetak(Request $request)
-    // {
-    //     $tanggal_awal   = $request->tanggal_awal;
-    //     $tanggal_akhir  = $request->tanggal_akhir;
+    public function cetak(Request $request)
+    {
+        $tanggal_awal   = $request->tanggal_awal;
+        $tanggal_akhir  = $request->tanggal_akhir;
 
-    //     return Excel::download(new ExportPajak($tanggal_awal, $tanggal_akhir), 'users.xls');
+        return Excel::download(new ExportPajak($tanggal_awal, $tanggal_akhir), 'users.csv');
 
-    // }
+    }
 
 }
