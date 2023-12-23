@@ -25,7 +25,7 @@
             Pilih Periode
         </div>
         <div class="card-body">
-            <form action="{{ route('export-pajak.store') }}"  method="GET">
+            <form action="{{ route('export-pajak.cetak') }}"  method="GET">
                 <!-- @csrf -->
                 <div class="row">
                     <div class="col-md-12">
@@ -65,20 +65,5 @@
 @endsection
 
 @section('script')
-
-<script>
-  let dateDropdown = document.getElementById('date-dropdown'); 
-       
-  let currentYear = new Date().getFullYear();    
-  let earliestYear = 2022;     
-  while (currentYear >= earliestYear) {      
-    let dateOption = document.createElement('option');          
-    dateOption.text = currentYear;      
-    dateOption.value = currentYear;        
-    dateDropdown.add(dateOption);      
-    currentYear -= 1;    
-  }
-
-</script>
 
 @endsection
