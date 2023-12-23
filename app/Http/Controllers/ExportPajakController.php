@@ -48,10 +48,14 @@ class ExportPajakController extends Controller
 
     public function cetak(Request $request)
     {
-        $tanggal_awal   = $request->tanggal_awal;
-        $tanggal_akhir  = $request->tanggal_akhir;
+        $tanggal_awal       = $request->tanggal_awal;
+        $tanggal_akhir      = $request->tanggal_akhir;
+        $no_faktur_pajak    = $request->no_faktur_pajak;
 
-        return Excel::download(new ExportPajak($tanggal_awal, $tanggal_akhir), 'users.csv');
+
+        // dd($no_faktur_pajak);
+
+        return Excel::download(new ExportPajak($tanggal_awal, $tanggal_akhir, $no_faktur_pajak), 'users.xlsx');
 
     }
 

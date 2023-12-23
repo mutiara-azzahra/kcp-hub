@@ -23,7 +23,8 @@ class ExportPajak implements FromCollection
 
     public function collection()
     {
-        $header = TransaksiInvoiceHeader::whereBetween('created_at', [$this->tanggal_awal, $this->tanggal_akhir])->get()->map(function($item){
+        
+        return TransaksiInvoiceHeader::whereBetween('created_at', [$this->tanggal_awal, $this->tanggal_akhir])->get()->map(function($item){
             $item->fk                       = 'FK';
             $item->kd_jenis_transaksi       = '01';
             $item->fg_pengganti             = '0';
@@ -50,20 +51,6 @@ class ExportPajak implements FromCollection
                 'uang_muka_ppn', 'uang_muka_ppnbm', 'referensi', 'kode_dokumen_pendukung'
             ]);
         });
-
-
-        $details = TransaksiInvoiceHeader::with('details_invoice')
-            ->whereBetween('created_at', [$this->tanggal_awal, $this->tanggal_akhir])
-            ->get()
-            ->map(function($item) {
-              
-                $detailsInvoice = $item->details_invoice;
-
-                return [
-                    'header'            => $item,
-                    'details_invoice'   => $detailsInvoice
-                ];
-            });
 
     }
 
