@@ -38,12 +38,12 @@ return [
         | CSV Settings
         |--------------------------------------------------------------------------
         |
-        | Configure e.g. delimiter, enclosure and line ending for CSV exports.
+        | Configure e.g. delimiter, enclosure and line ending for CSV exports.  
         |
         */
         'csv'                    => [
-            'delimiter'              => ',',
-            'enclosure'              => '"',
+            'delimiter'              => ';',
+            'enclosure'              => '',
             'line_ending'            => PHP_EOL,
             'use_bom'                => false,
             'include_separator_line' => false,
