@@ -23,7 +23,7 @@
     <div class="card" style="padding: 10px;">
         <div class="card-body">
             <div class="col-lg-12">  
-                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example1">
+                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example2">
                     <thead style="background-color: #6082B6; color:white">
                         <tr>
                             <th class="text-center">Kode Toko</th>
@@ -38,7 +38,7 @@
 
                         @foreach($outlet as $i)
                         <tr>
-                            <td class="text-left">{{ $i->kd_outlet }}</td>
+                            <td class="text-center">{{ $i->kd_outlet }}</td>
                             <td class="text-left">{{ $i->nm_outlet }}</td>
                             <td class="text-center">
                                 <a class="btn btn-primary btn-sm" href="{{ route('back-order.details', $i->kd_outlet) }}"><i class="fas fa-list"></i></a>

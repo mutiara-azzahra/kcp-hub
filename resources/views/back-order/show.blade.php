@@ -24,10 +24,10 @@
                 Back Order Toko
             </div>
             <div class="float-right">
-                <form action="{{ route('back-order.store') }}" method="POST" id="form_forward_{{ $back_order->id }}" data-id="{{ $back_order->id }}">
+                <form action="{{ route('back-order.store', ['id' => $back_order->id ]) }}" method="POST" id="form_forward_{{ $back_order->id }}" data-id="{{ $back_order->id }}">
 
                     @csrf
-                    @method('POST')
+                    @method('GET')
                     
                     <a class="btn btn-warning btn-sm" onclick="Teruskan('{{$back_order->id}}')"><i class="fas fa-plus"></i> Teruskan Menjadi BO</a>
                 </form>
@@ -71,9 +71,12 @@
                                     <td class="text-center" style="background-color: yellow; color:black">{{ $d->stok_ready->stok }}</td>
                                     <td class="text-center">{{ $d->disc }} %</td>
                                     <td class="text-center">
-                                        <a class="btn btn-danger btn-sm" href="">
-                                            <i class="fa fa-times"></i>
-                                        </a>
+                                        <form action="{{ route('back-order.delete', $d->id) }}" method="POST" id="form_delete_{{ $d->id }}" data-id="{{ $d->id }}">
+                                            @csrf
+                                            @method('DELETE')
+                                        
+                                            <a class="btn btn-danger btn-sm" onclick="Hapus('{{ $d->id }}')"><i class="fas fa-times"></i></a>
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -106,6 +109,26 @@
                 }
         })
     }
+
+
+    Hapus = (id)=>{
+        Swal.fire({
+            title: 'Apakah anda yakin mengahpus detail BO ini?',
+            text:  "Data tidak dapat kembali" ,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6' ,
+            cancelButtonColor: 'red' ,
+            confirmButtonText: 'Teruskan' ,
+            cancelButtonText: 'Batal' ,
+            reverseButtons: false
+            }).then((result) => {
+                if (result.value) {
+                    document.getElementById('form_delete_' + id).submit();
+                }
+        })
+    }
+
+    
 </script>
 
 @endsection
