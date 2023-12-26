@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TargetSalesProduk;
+use App\Models\User;
 use Illuminate\Http\Request;
+
 
 class MasterTargetSalesProductController extends Controller
 {
@@ -18,13 +21,6 @@ class MasterTargetSalesProductController extends Controller
         $username = User::where('id_role', 24)->get();
 
         return view('master-target-sales-produk.create', compact('username'));
-    }
-
-    public function update(Request $request, TargetSalesProduk $target_spv)
-    {
-        $target_spv->update($request->all());
-         
-        return redirect()->route('master-target-sales-produk.index')->with('success','Data Transaksi Pembayaran berhasil diubah!');
     }
 
     public function store(Request $request){
@@ -48,6 +44,13 @@ class MasterTargetSalesProductController extends Controller
         } else{
             return redirect()->route('master-target-sales-produk.index')->with('danger','Data target produk SPV gagal ditambahkan');
         }
+    }
+
+    public function update(Request $request, TargetSalesProduk $target_spv)
+    {
+        $target_spv->update($request->all());
+         
+        return redirect()->route('master-target-sales-produk.index')->with('success','Data Transaksi Pembayaran berhasil diubah!');
     }
 
     public function delete( $id)
