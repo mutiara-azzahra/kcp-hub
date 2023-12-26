@@ -75,6 +75,7 @@ class BackOrderController extends Controller
 
                 $nominal      = $i->qty * $i->hrg_pcs;
                 $nominal_disc = $i->qty * $i->hrg_pcs * $i->disc / 100;
+                $stok_ready   = MasterStokGudang::where('part_no', $i->part_no)->value('stok');
 
                 $details = [
                     'noso'              => $created_header->noso,
@@ -87,8 +88,8 @@ class BackOrderController extends Controller
                     'nominal'           => $nominal,
                     'nominal_disc'      => $nominal_disc,
                     'nominal_total'     => $nominal - $nominal_disc,
-                    // 'qty_gudang'       
-                    'status'            => 'O',
+                    'qty_gudang'        => $stok_ready,
+                    'status'            => 'O', 
                     'ket_status'        => 'OPEN',
                     'user_sales'        => $store_bo->user_sales,
                     'flag_approve_date' => NOW(),

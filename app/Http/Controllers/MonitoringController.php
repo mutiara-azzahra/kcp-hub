@@ -22,6 +22,7 @@ class MonitoringController extends Controller
         return view('monitoring.index', compact('username'));
     }
 
+    //sales
     public function store(Request $request){
 
         $request->validate([
@@ -206,7 +207,7 @@ class MonitoringController extends Controller
         ));
     }
 
-
+    //spv
     public function spv(){
 
         $username = User::where('id_role', 24)->get();

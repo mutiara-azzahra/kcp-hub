@@ -42,19 +42,19 @@
                             <div class="col-md-12 col-lg-12">
                                 <div class="form-group">
                                     <strong>Bulan</strong>
-                                    <input type="number" name="bulan" class="form-control">
+                                    <input type="number" name="bulan" class="form-control" placeholder="Isi Bulan">
                                 </div>
                             </div>
                             <div class="col-md-12 col-lg-12">
                                 <div class="form-group">
                                     <strong>Tahun</strong>
-                                    <input type="number" name="tahun" class="form-control">
+                                    <input type="number" name="tahun" class="form-control" placeholder="Isi Tahun">
                                 </div>
                             </div>
                             <div class="col-md-12 col-lg-12">
                                 <div class="form-group">
                                     <strong>Nominal Target</strong>
-                                    <input type="number" name="nominal" class="form-control">
+                                    <input type="number" name="nominal" class="form-control" placeholder="0">
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
