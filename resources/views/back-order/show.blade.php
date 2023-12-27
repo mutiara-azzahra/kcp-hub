@@ -29,7 +29,7 @@
                     @csrf
                     @method('GET')
                     
-                    <a class="btn btn-warning btn-sm" onclick="Teruskan('{{$back_order->id}}')"><i class="fas fa-plus"></i> Teruskan Menjadi BO</a>
+                    <a class="btn btn-warning btn-sm" onclick="Teruskan('{{$back_order->id}}')"><i class="fas fa-plus"></i> Teruskan Menjadi SO</a>
                 </form>
             </div>
         </div>
@@ -66,7 +66,7 @@
                                 @foreach($back_order->details as $d)
                                 <tr>
                                     <td class="text-left">{{ $d->part_no }}</td>
-                                    <td class="text-right">Rp. {{ number_format($d->hrg_pcs, 0, ',', '.') }}</td>
+                                    <td class="text-right">{{ number_format($d->hrg_pcs, 0, ',', ',') }}</td>
                                     <td class="text-center">{{ $d->qty }}</td>
                                     <td class="text-center" style="background-color: yellow; color:black">{{ $d->stok_ready->stok }}</td>
                                     <td class="text-center">{{ $d->disc }} %</td>

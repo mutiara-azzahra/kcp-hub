@@ -15,7 +15,7 @@ class BackOrderController extends Controller
 {
     public function index(){
 
-        $outlet = MasterOutlet::where('status', 'Y')->get();
+        $outlet = MasterOutlet::all();
 
         return view('back-order.index', compact('outlet'));
     }
@@ -71,7 +71,7 @@ class BackOrderController extends Controller
 
         foreach($store_bo->details as $i){
 
-            dd($i);
+            // dd($i);
 
             $nominal      = $i->qty * $i->hrg_pcs;
             $nominal_disc = $i->qty * $i->hrg_pcs * $i->disc / 100;

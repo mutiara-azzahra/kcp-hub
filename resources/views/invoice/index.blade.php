@@ -43,7 +43,7 @@
                                     <td class="text-left">KCP/NON/{{ $s->noso }}</td>
                                     <td class="text-center">{{ $s->kd_outlet}} </td>
                                     <td class="text-left">{{ $s->nm_outlet }}</td>
-                                    <td class="text-left" style="background-color: yellow;">Rp. {{ number_format($s->details_so->sum('nominal_total'), 0, ',', '.')  }}</td>
+                                    <td class="text-left" style="background-color: yellow;">{{ number_format($s->details_so->sum('nominal_total'), 0, ',', ',')  }}</td>
                                     <td class="text-center">{{ $s->user_sales}}</td>
                                     <td class="text-center">
                                         <a class="btn btn-success btn-sm" href="{{ route('invoice.approve', $s->noso) }}"><i class="fas fa-check"></i></a>

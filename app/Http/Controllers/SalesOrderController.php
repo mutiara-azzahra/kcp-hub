@@ -73,6 +73,8 @@ class SalesOrderController extends Controller
         foreach ($check_sp as $i) {
             $stok_ready = MasterStokGudang::where('part_no', $i->part_no)->value('stok');
 
+            // dd($stok_ready);
+
             if ($stok_ready == 0) {
 
                 $hasZeroQty = true;
@@ -89,7 +91,7 @@ class SalesOrderController extends Controller
             $value['kd_outlet']  = $header_so->kd_outlet;
             $value['nm_outlet']  = $header_so->nm_outlet;
             $value['keterangan'] = $header_so->keterangan;
-            $value['status']     = 'C';
+            $value['status']     = 'O';
             $value['ket_batal']  = 'N';
             $value['noso_out']   = $header_so->noso;
             $value['user_sales'] = $header_so->user_sales;
@@ -97,9 +99,7 @@ class SalesOrderController extends Controller
             $value['created_at']     = NOW();
 
             TransaksiBackOrderHeader::create($value);
-            
-        } else {
-            
+        
         }
 
         TransaksiSpHeader::where('nosp', $nosp)->update([
@@ -123,52 +123,52 @@ class SalesOrderController extends Controller
             TransaksiSOHeader::create($data);
         }
 
-        foreach ($approve_so as $a) {
-            foreach ($a->details_sp as $d) {
-                $stok_ready = MasterStokGudang::where('part_no', $d->part_no)->value('stok');
         
-                if ($stok_ready == 0) {
+        foreach ($header_so->details_sp as $d) {
+            $stok_ready = MasterStokGudang::where('part_no', $d->part_no)->value('stok');
+    
+            if ($stok_ready == 0) {
 
-                    $details = [
-                        'nobo'          => $nobo,
-                        'area_bo'       => $a->area_sp,
-                        'kd_outlet'     => $a->kd_outlet,
-                        'part_no'       => $d->part_no,
-                        'qty'           => $d->qty,
-                        'hrg_pcs'       => $d->hrg_pcs,
-                        'disc'          => $d->disc,
-                        'status'        => 'O',
-                        'created_at'    => now(),
-                        'created_by'    => Auth::user()->nama_user,
-                    ];
-            
-                    TransaksiBackOrderDetails::create($details);
-                } else {
-
-                    $details = [
-                        'noso'          => $a->noso,
-                        'area_so'       => $a->area_sp,
-                        'kd_outlet'     => $a->kd_outlet,
-                        'part_no'       => $d->part_no,
-                        'qty'           => $d->qty,
-                        'hrg_pcs'       => $d->hrg_pcs,
-                        'disc'          => $d->disc,
-                        'nominal'       => $d->nominal,
-                        'nominal_disc'  => $d->nominal_disc,
-                        'nominal_total' => $d->nominal_total,
-                        'status'        => 'O',
-                        'ket_status'    => 'OPEN',
-                        'user_sales'    => $d->user_sales,
-                        'flag_approve_date' => now(),
-                        'crea_date'     => now(),
-                        'crea_by'       => Auth::user()->nama_user,
-                    ];
-            
-                    TransaksiSODetails::create($details);
-
-                }
+                $details = [
+                    'nobo'          => $nobo,
+                    'area_bo'       => $header_so->area_sp,
+                    'kd_outlet'     => $header_so->kd_outlet,
+                    'part_no'       => $d->part_no,
+                    'qty'           => $d->qty,
+                    'hrg_pcs'       => $d->hrg_pcs,
+                    'disc'          => $d->disc,
+                    'status'        => 'O',
+                    'created_at'    => now(),
+                    'created_by'    => Auth::user()->nama_user,
+                ];
         
+                TransaksiBackOrderDetails::create($details);
+
+            } elseif($stok_ready != 0) {
+
+                $details = [
+                    'noso'          => $header_so->noso,
+                    'area_so'       => $header_so->area_sp,
+                    'kd_outlet'     => $header_so->kd_outlet,
+                    'part_no'       => $d->part_no,
+                    'qty'           => $d->qty,
+                    'hrg_pcs'       => $d->hrg_pcs,
+                    'disc'          => $d->disc,
+                    'nominal'       => $d->nominal,
+                    'nominal_disc'  => $d->nominal_disc,
+                    'nominal_total' => $d->nominal_total,
+                    'status'        => 'O',
+                    'ket_status'    => 'OPEN',
+                    'user_sales'    => $d->user_sales,
+                    'flag_approve_date' => now(),
+                    'crea_date'     => now(),
+                    'crea_by'       => Auth::user()->nama_user,
+                ];
+        
+                TransaksiSODetails::create($details);
+
             }
+    
         }
         
         return redirect()->route('sales-order.index')->with('success','Data SO berhasil di Approve!');
