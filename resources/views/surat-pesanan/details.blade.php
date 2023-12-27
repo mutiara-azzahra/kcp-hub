@@ -170,7 +170,7 @@
             $('#table').append(`<tr>
                 <td class="text-center">
                     <div class="form-group col-12">
-                        <select name="inputs[${i}][part_no]" class="form-control mr-2" id="package-${i}" onchange="updateData(${i})">
+                        <select name="inputs[${i}][part_no]" class="form-control mr-2 my-select" id="package-${i}" onchange="updateData(${i})">
                             <option value="">-- Pilih --</option>
                             @foreach($master_part as $k)
                                 <option value="{{ $k->part_no }}" data-het="{{ $k->het }}"> {{ $k->part_no }} | {{ $k->part_nama }}</option>

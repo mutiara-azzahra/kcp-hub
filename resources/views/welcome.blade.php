@@ -424,7 +424,7 @@
             </li>
             @endif
 
-            @if(in_array(Auth::user()->id_role, [4, 5, 6, 7, 9, 11, 12, 17, 20, 24]))
+            @if(in_array(Auth::user()->id_role, [4, 5, 6, 7, 9, 11, 12, 17]))
             <!-- {{-- MONITORING --}} -->
             <li class="nav-item">
               <a href="#" class="nav-link">
