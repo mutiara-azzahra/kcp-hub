@@ -26,6 +26,12 @@
           text-align: left;
           border: none;
       }
+
+      .atas-kanan{
+          text-align: left;
+          border: none;
+          padding-right: 50px;
+      }
       .atas-isi{
           text-align: left;
           width: 150px;
@@ -104,7 +110,7 @@
          margin-bottom: 0;
          text-align: center;
          height: 10px;
-         padding-left: 200px;
+         padding-left: 150px;
      }
      .judul{
          margin-bottom: 0;
@@ -125,6 +131,10 @@
      }
      .ttd-biasa{
         text-align: center;
+     }
+     .ttd-kanan{
+        text-align: center;
+        padding-right: 20px;
      }
 
     </style>
@@ -162,7 +172,8 @@
             </tr>
             <tr>
                 <td class="atas-isi">Uang Sejumlah</td>
-                <td class="atas"><b> Rp. {{ number_format($data->details_keluar->where('akuntansi_to', 'D')->sum('total'), 0, ',', '.') }}</b></td>
+                <td class="atas"><b> {{ Terbilang::make($data->details_keluar->where('akuntansi_to', 'D')->sum('total'), ' rupiah') }}</b></td>
+                <!-- 123456; -->
             </tr>
             <tr>
                 <td class="atas-isi">Untuk Pembayaran</td>
@@ -172,16 +183,20 @@
                 <td class="atas-isi">Catatan</td>
                 <td class="atas">{{ $data->keterangan }}</td>
             </tr>
-            
+            <tr style="padding: 15px;">
+                <td>Rp. {{ number_format($data->details_keluar->where('akuntansi_to', 'D')->sum('total'), 0, ',', '.') }}</td>
+                <td class="atas"></td>
+            </tr>
         </table>
     </div>
-    <div>
+
+    <div style="padding-left: 150px;">
         <br>
         <br>
         <br>
         <table class="atas">
             <tr>
-                <td class="atas">
+                <td class="atas" style="padding-right:70px;">
                     <div class="ttd-biasa">
                         <br>
                         <br>
@@ -204,7 +219,7 @@
                     </div>
                 </td>
                 <td class="atas">
-                    <div class="ttd-biasa">
+                    <div class="ttd-kanan">
                         <br>
                         <p>Banjarmasin, {{ \Carbon\Carbon::now()->format('d-m-Y') }}</p>
                         <br>

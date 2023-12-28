@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use PDF;
+use Terbilang;
+use Config;
 use Carbon\Carbon;
 use App\Models\TransaksiKasKeluarHeader;
 use App\Models\TransaksiKasKeluarDetails;
@@ -121,6 +123,7 @@ class KasKeluarController extends Controller
 
     public function cetak($no_keluar)
     {
+        Config::set('terbilang.locale', 'id');
         $data  = TransaksiKasKeluarHeader::where('no_keluar', $no_keluar)->first();
         $pdf   = PDF::loadView('reports.kas-keluar', ['data'=> $data]);
         $pdf->setPaper('letter', 'potrait');
