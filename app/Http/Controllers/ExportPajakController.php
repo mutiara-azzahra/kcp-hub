@@ -51,7 +51,7 @@ class ExportPajakController extends Controller
         $tanggal_akhir      = $request->tanggal_akhir;
         $no_faktur_pajak    = $request->no_faktur_pajak;
 
-        return Excel::download(new ExportPajak($tanggal_awal, $tanggal_akhir, $no_faktur_pajak), 'ICH_FakturPajakKeluaran_'.$request->tanggal_awal.'_'.$request->tanggal_akhir.'.csv');
+        return Excel::download(new ExportPajak($tanggal_awal, $tanggal_akhir, $no_faktur_pajak), 'ICH_FakturPajakKeluaran_'.$request->tanggal_awal.'_'.$request->tanggal_akhir.'.xlsx');
 
     }
 

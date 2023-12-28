@@ -53,11 +53,13 @@ class ExportPajak implements FromCollection, WithCustomCsvSettings
             }
 
             $headerData = [
-                'FK;01;0;' . $this->no_faktur_pajak++ . ';' . Carbon::parse($header->created_at)->format('m') . ';' .
+                'FK;01;0;0' . $this->no_faktur_pajak++ . ';' . Carbon::parse($header->created_at)->format('m') . ';' .
                 Carbon::parse($header->created_at)->format('Y') . ';' . Carbon::parse($header->created_at)->format('d/m/Y') . ';'.
                 $no_npwp . ';' . $header->outlet->nik . '#NIK#NAMA#' . $header->outlet->nm_outlet . ';' .
-                $header->outlet->almt_outlet . ';' . $header->details_invoice->sum('nominal_total') / 1.11 . ';' .
-                ($header->details_invoice->sum('nominal_total') / 1.11 * 0.11) . ';0;0;0;0;0;0;' . $header->noinv
+                $header->outlet->almt_outlet . ';' .
+                number_format(($header->details_invoice->sum('nominal_total') / 1.11), 0, ',', '') . ';' .
+                number_format(($header->details_invoice->sum('nominal_total') / 1.11 * 11 /100), 0, ',', '')  .
+                 ';0;0;0;0;0;0;' . $header->noinv
             ];
 
             $data[] = $headerData;
@@ -65,8 +67,10 @@ class ExportPajak implements FromCollection, WithCustomCsvSettings
             foreach ($header->details_invoice as $detail) {
                 $detailData = [
                     'OF;' . $detail->part_no . ';' . $detail->nama_part->part_nama . ';' . $detail->hrg_pcs . ';'. $detail->qty .';'.
-                     $detail->qty * $detail->hrg_pcs/1.11 .';'. $detail->qty * $detail->hrg_pcs * $detail->disc/100 /1.11 . ';'.
-                      $detail->nominal_total/1.11 . ';'. $detail->nominal_total/1.11 * 0.11
+                    number_format(($detail->qty * $detail->hrg_pcs/1.11), 0, ',', '') .';'.
+                    number_format(($detail->qty * $detail->hrg_pcs * $detail->disc/100 /1.11), 0, ',', '') . ';'.
+                    number_format(($detail->nominal_total/1.11), 0, ',', '') .';'.
+                    number_format(($detail->nominal_total/1.11 * 0.11), 0, ',', '')
                 ];
                 
                 $data[] = $detailData;
