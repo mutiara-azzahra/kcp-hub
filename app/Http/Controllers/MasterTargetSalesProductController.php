@@ -46,9 +46,17 @@ class MasterTargetSalesProductController extends Controller
         }
     }
 
-    public function update(Request $request, TargetSalesProduk $target_spv)
+    public function edit($id){
+
+        $target_sales = TargetSalesProduk::findOrFail($id);
+
+        return view('master-target-sales-produk.edit', compact('target_sales'));
+
+    }
+
+    public function update(Request $request, TargetSalesProduk $target_sales)
     {
-        $target_spv->update($request->all());
+        $target_sales->update($request->all());
          
         return redirect()->route('master-target-sales-produk.index')->with('success','Data Transaksi Pembayaran berhasil diubah!');
     }
