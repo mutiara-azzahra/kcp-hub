@@ -11,9 +11,7 @@ class TransaksiSpHeader extends Model
 {
     use HasFactory;
 
-    protected $table = 'trns_sp_header';
-    public $timestamps = false;
-    public $incrementing = false;
+    protected $table= 'trns_sp_header';
 
     protected $fillable = [
         'nosp', 

@@ -21,9 +21,7 @@ class SuratPesananController extends Controller
 {
     public function index(){
 
-        $surat_pesanan = TransaksiSpHeader::orderBy('crea_date', 'desc')
-            ->where('status', 'O')
-            ->get();
+        $surat_pesanan = TransaksiSpHeader::orderBy('crea_date', 'desc')->where('status', 'O')->get();
 
         return view('surat-pesanan.index', compact('surat_pesanan'));
     }
