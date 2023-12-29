@@ -5,10 +5,10 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4>Tambah Target Sales By Product</h4>
+                <h4>Target Sales By Produk</h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-success" href="{{ route('master-target-sales-produk.create') }}"><i class="fas fa-plus"></i> Tambah Achievement sales</a>
+                <a class="btn btn-success" href="{{ route('master-target-sales-produk.create') }}"><i class="fas fa-plus"></i> Tambah Data</a>
             </div>
         </div>
     </div>
@@ -30,7 +30,7 @@
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
                             <th class="text-center">No</th>
-                            <th class="text-center">sales</th>
+                            <th class="text-center">Sales</th>
                             <th class="text-center">Kode Produk</th>
                             <th class="text-center">Bulan</th>
                             <th class="text-center">Tahun</th>
@@ -84,7 +84,7 @@
             reverseButtons: false
             }).then((result) => {
                 if (result.value) {
-                    $('#form_delete').submit();
+                    document.getElementById('form_delete_' + id).submit();
                 }
         })
     }

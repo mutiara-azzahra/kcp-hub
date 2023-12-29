@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\TargetSalesProduk;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 
 class MasterTargetSalesProductController extends Controller
