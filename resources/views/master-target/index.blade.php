@@ -8,7 +8,7 @@
                 <h4>Tambah Target Sales</h4>
             </div>
             <div class="float-right">
-                <a class="btn m-1 btn-success" href="{{ route('master-target-sales-produk.create') }}"><i class="fas fa-plus"></i> Ach. Produk</a>
+                <a class="btn m-1 btn-success" href="{{ route('master-target-sales-produk.index') }}"><i class="fas fa-plus"></i> Ach. Produk</a>
                 <a class="btn m-1 btn-primary" href="{{ route('master-target.create') }}"><i class="fas fa-plus"></i> Tambah Achievement</a>
             </div>
         </div>
