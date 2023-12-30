@@ -99,20 +99,20 @@
 @section('script')
 
 <script>
-  let dateDropdown = document.getElementById('date-dropdown'); 
-       
-  let currentYear = new Date().getFullYear();    
-  let earliestYear = 2022;     
-  while (currentYear >= earliestYear) {      
-    let dateOption = document.createElement('option');          
-    dateOption.text = currentYear;      
-    dateOption.value = currentYear;        
-    dateDropdown.add(dateOption);      
-    currentYear -= 1;    
-  }
+    //tahun
+    let dateDropdown = document.getElementById('date-dropdown'); 
+        
+    let currentYear = new Date().getFullYear();    
+    let earliestYear = 2022;     
+    while (currentYear >= earliestYear) {      
+        let dateOption = document.createElement('option');          
+        dateOption.text = currentYear;      
+        dateOption.value = currentYear;        
+        dateDropdown.add(dateOption);      
+        currentYear -= 1;    
+    }
 
-
-
+    //separator rupiah
     var rupiah = document.getElementById("rupiah");
 
     rupiah.addEventListener("keyup", function(e) {

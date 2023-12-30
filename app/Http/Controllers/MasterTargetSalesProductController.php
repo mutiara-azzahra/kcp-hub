@@ -54,11 +54,26 @@ class MasterTargetSalesProductController extends Controller
 
     }
 
-    public function update(Request $request, TargetSalesProduk $target_sales)
+    public function update(Request $request, $id)
     {
-        $target_sales->update($request->all());
+
+        $nominal = str_replace('.', '', $request->nominal);
+        $nominal = str_replace(',', '.', $nominal);
+
+        $updated = TargetSalesProduk::where('id', $id)->update([
+            'sales'         => $request->sales,
+            'kode_produk'   => $request->kode_produk,
+            'bulan'         => $request->bulan,
+            'tahun'         => $request->tahun,
+            'nominal'       => $nominal
+        ]);
+
+        if ($updated){
+            return redirect()->route('master-target-sales-produk.index')->with('success','Master part berhasil dihapus!');
+        } else{
+            return redirect()->route('master-target-sales-produk.index')->with('danger','Master part gagal dihapus');
+        }
          
-        return redirect()->route('master-target-sales-produk.index')->with('success','Data Transaksi Pembayaran berhasil diubah!');
     }
 
     public function delete( $id)

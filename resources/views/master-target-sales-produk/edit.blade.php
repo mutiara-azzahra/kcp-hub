@@ -27,7 +27,7 @@
     <div class="card" style="padding: 10px;">
         <div class="card-body">
             <div class="col-lg-12">
-                <form action="{{ route('master-target-sales-produk.update', $target_sales->id) }}" method="POST">
+                <form action="{{ route('master-target-sales-produk.update', $target_sales->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="row">

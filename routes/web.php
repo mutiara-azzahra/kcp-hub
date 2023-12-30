@@ -389,7 +389,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/master-target-sales-produk/show/{id}', [MasterTargetSalesProductController::class, 'show'])->name('master-target-sales-produk.show');
     Route::get('/master-target-sales-produk/edit/{id}', [MasterTargetSalesProductController::class, 'edit'])->name('master-target-sales-produk.edit');
     Route::delete('/master-target-sales-produk/delete/{id}', [MasterTargetSalesProductController::class, 'delete'])->name('master-target-sales-produk.delete');
-    Route::post('/master-target-sales-produk/update/{id}', [MasterTargetSalesProductController::class, 'update'])->name('master-target-sales-produk.update');
+    Route::put('/master-target-sales-produk/update/{id}', [MasterTargetSalesProductController::class, 'update'])->name('master-target-sales-produk.update');
 
     //MONITORING ACH. MARKETING
     Route::get('/monitoring', [MonitoringController::class, 'index'])->name('monitoring.index');
