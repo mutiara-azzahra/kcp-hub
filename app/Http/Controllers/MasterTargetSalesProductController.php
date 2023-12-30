@@ -40,9 +40,9 @@ class MasterTargetSalesProductController extends Controller
         $created = TargetSalesProduk::create($request->all());
 
         if ($created){
-            return redirect()->route('master-target-sales-produk.index')->with('success','Data target produk SPV berhasil ditambahkan');
+            return redirect()->route('master-target-sales-produk.index')->with('success','Data target produk Sales berhasil ditambahkan');
         } else{
-            return redirect()->route('master-target-sales-produk.index')->with('danger','Data target produk SPV gagal ditambahkan');
+            return redirect()->route('master-target-sales-produk.index')->with('danger','Data target produk Sales gagal ditambahkan');
         }
     }
 
@@ -69,9 +69,9 @@ class MasterTargetSalesProductController extends Controller
         ]);
 
         if ($updated){
-            return redirect()->route('master-target-sales-produk.index')->with('success','Master part berhasil dihapus!');
+            return redirect()->route('master-target-sales-produk.index')->with('success','Data berhasil dihapus!');
         } else{
-            return redirect()->route('master-target-sales-produk.index')->with('danger','Master part gagal dihapus');
+            return redirect()->route('master-target-sales-produk.index')->with('danger','Data gagal diubah');
         }
          
     }

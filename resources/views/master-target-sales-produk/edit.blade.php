@@ -83,7 +83,7 @@
                     <div class="form-group mb-2 col-md-12 col-lg-12">
                         <div class="form-group">
                             <strong>Nominal Target</strong>
-                            <input type="text" id="rupiah" name="nominal" class="form-control" value= "{{ $target_sales->nominal }}">
+                            <input type="text" id="rupiah" name="nominal" class="form-control" value= "{{ number_format($target_sales->nominal, 0, ',', '.') }}">
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">

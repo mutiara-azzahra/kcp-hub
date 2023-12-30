@@ -32,6 +32,10 @@ class MasterTargetController extends Controller
             'nominal'    => 'required',
         ]);
 
+        $nominal = str_replace('.', '', $request->input('nominal'));
+        $nominal = str_replace(',', '.', $nominal);
+        $request->merge(['nominal' => $nominal]);
+
         $created = TargetSales::create($request->all());
 
         if ($created){
