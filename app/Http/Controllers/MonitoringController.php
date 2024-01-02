@@ -183,7 +183,8 @@ class MonitoringController extends Controller
             ->where('sales', $sales)
             ->value('nominal');
 
-        $getTargetActual    = TargetSales::where('sales', $sales)->get();
+        $getTargetActual  = TargetSales::where('sales', $sales)->get();
+
         // TARGET EACH MONTH
         $target_jan = number_format($getTargetActual->where('tahun', $tahun)->where('bulan', 1)->value('nominal'), 0, ',', '.');
         $target_feb = number_format($getTargetActual->where('tahun', $tahun)->where('bulan', 2)->value('nominal'), 0, ',', '.');
@@ -201,13 +202,104 @@ class MonitoringController extends Controller
         $selisih            = $target - $getTarget;
         $pencapaian_persen  = ($target / $getTarget) * 100;
 
+
+        //DETAILS PENCAPAIAN PRODUK
+
+        $getTargetProdukSales = TargetSalesProduk::where('sales', $sales)->get();
+
+        // TARGET EACH MONTH, EACH PRODUCT SALES
+        $target_ich_jan = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 1)->value('nominal'), 0, ',', '.');
+        $target_ich_feb = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 2)->value('nominal'), 0, ',', '.');
+        $target_ich_mar = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 3)->value('nominal'), 0, ',', '.');
+        $target_ich_apr = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 4)->value('nominal'), 0, ',', '.');
+        $target_ich_may = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 5)->value('nominal'), 0, ',', '.');
+        $target_ich_jun = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 6)->value('nominal'), 0, ',', '.');
+        $target_ich_jul = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 7)->value('nominal'), 0, ',', '.');
+        $target_ich_agu = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 8)->value('nominal'), 0, ',', '.');
+        $target_ich_sep = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 9)->value('nominal'), 0, ',', '.');
+        $target_ich_oct = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 10)->value('nominal'), 0, ',', '.');
+        $target_ich_nov = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 11)->value('nominal'), 0, ',', '.');
+        $target_ich_dec = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 12)->value('nominal'), 0, ',', '.');
+
+        $target_bri_jan = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 1)->value('nominal'), 0, ',', '.');
+        $target_bri_feb = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 2)->value('nominal'), 0, ',', '.');
+        $target_bri_mar = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 3)->value('nominal'), 0, ',', '.');
+        $target_bri_apr = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 4)->value('nominal'), 0, ',', '.');
+        $target_bri_may = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 5)->value('nominal'), 0, ',', '.');
+        $target_bri_jun = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 6)->value('nominal'), 0, ',', '.');
+        $target_bri_jul = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 7)->value('nominal'), 0, ',', '.');
+        $target_bri_agu = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 8)->value('nominal'), 0, ',', '.');
+        $target_bri_sep = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 9)->value('nominal'), 0, ',', '.');
+        $target_bri_oct = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 10)->value('nominal'), 0, ',', '.');
+        $target_bri_nov = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 11)->value('nominal'), 0, ',', '.');
+        $target_bri_dec = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 12)->value('nominal'), 0, ',', '.');
+
+        $target_acc_jan = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 1)->value('nominal'), 0, ',', '.');
+        $target_acc_feb = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 2)->value('nominal'), 0, ',', '.');
+        $target_acc_mar = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 3)->value('nominal'), 0, ',', '.');
+        $target_acc_apr = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 4)->value('nominal'), 0, ',', '.');
+        $target_acc_may = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 5)->value('nominal'), 0, ',', '.');
+        $target_acc_jun = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 6)->value('nominal'), 0, ',', '.');
+        $target_acc_jul = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 7)->value('nominal'), 0, ',', '.');
+        $target_acc_agu = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 8)->value('nominal'), 0, ',', '.');
+        $target_acc_sep = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 9)->value('nominal'), 0, ',', '.');
+        $target_acc_oct = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 10)->value('nominal'), 0, ',', '.');
+        $target_acc_nov = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 11)->value('nominal'), 0, ',', '.');
+        $target_acc_dec = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 12)->value('nominal'), 0, ',', '.');
+
+        $target_pen_jan = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 1)->value('nominal'), 0, ',', '.');
+        $target_pen_feb = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 2)->value('nominal'), 0, ',', '.');
+        $target_pen_mar = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 3)->value('nominal'), 0, ',', '.');
+        $target_pen_apr = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 4)->value('nominal'), 0, ',', '.');
+        $target_pen_may = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 5)->value('nominal'), 0, ',', '.');
+        $target_pen_jun = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 6)->value('nominal'), 0, ',', '.');
+        $target_pen_jul = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 7)->value('nominal'), 0, ',', '.');
+        $target_pen_agu = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 8)->value('nominal'), 0, ',', '.');
+        $target_pen_sep = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 9)->value('nominal'), 0, ',', '.');
+        $target_pen_oct = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 10)->value('nominal'), 0, ',', '.');
+        $target_pen_nov = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 11)->value('nominal'), 0, ',', '.');
+        $target_pen_dec = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 12)->value('nominal'), 0, ',', '.');
+
+        $target_acl_jan = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 1)->value('nominal'), 0, ',', '.');
+        $target_acl_feb = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 2)->value('nominal'), 0, ',', '.');
+        $target_acl_mar = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 3)->value('nominal'), 0, ',', '.');
+        $target_acl_apr = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 4)->value('nominal'), 0, ',', '.');
+        $target_acl_may = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 5)->value('nominal'), 0, ',', '.');
+        $target_acl_jun = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 6)->value('nominal'), 0, ',', '.');
+        $target_acl_jul = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 7)->value('nominal'), 0, ',', '.');
+        $target_acl_agu = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 8)->value('nominal'), 0, ',', '.');
+        $target_acl_sep = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 9)->value('nominal'), 0, ',', '.');
+        $target_acl_oct = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 10)->value('nominal'), 0, ',', '.');
+        $target_acl_nov = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 11)->value('nominal'), 0, ',', '.');
+        $target_acl_dec = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 12)->value('nominal'), 0, ',', '.');
+
+        //VIEW PEMBELIAN BY PRODUK SALES
+        //ICHIDAI
+
+        $achJanuari = TransaksiInvoiceHeader::where('created_at', '>=', $tahun.'-01-01')->where('created_at', '<=', $tahun.'-01-'.Carbon::createFromDate($tahun, 1, 1)->endOfMonth()->format('d'))
+            ->where('user_sales', $sales)
+            ->get();
+
+        dd($achJanuari);
+
+        $ich_jan_sales = 0;
+        foreach($achJanuari as $g){
+            $ich_jan_sales = $g->details_invoice::whereIn('part_no', function ($query) {
+                    $query->select('part_no')
+                        ->from('master_part')
+                        ->where('kode_produk', 'ICH');
+                    })->sum('nominal_total');
+        }
+
+
+
         return view('monitoring.spv', compact('target', 'monthName','sales', 'getTarget', 'getTargetActual', 'selisih', 'pencapaian_persen', 
         'getTargetBulanan', 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'agu', 'sep', 'oct', 'nov', 'dec', 
         'target_jan', 'target_feb', 'target_mar', 'target_apr', 'target_may', 'target_jun', 'target_jul', 'target_agu', 'target_sep', 'target_oct', 'target_nov', 'target_dec'    
         ));
     }
 
-    //spv
+    //VIEW MONITORING SPV
     public function spv(){
 
         $username = User::where('id_role', 24)->get();

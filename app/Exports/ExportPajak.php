@@ -32,7 +32,7 @@ class ExportPajak implements FromCollection, WithCustomCsvSettings
 
         $data = [
             [
-                'FK;KD_JENIS_TRANSAKSI;FG_PENGGANTI;NOMOR_FAKTUR;MASA_PAJAK;TAHUN_PAJAK;TANGGAL_FAKTUR;NPWP;NAMA;ALAMAT_LENGKAP;JUMLAH_DPP;JUMLAH_PPN;JUMLAH_PPNBM;ID_KETERANGAN_TAMBAHAN;FG_UANG_MUKA;UANG_MUKA_DPP;UANG_MUKA_PPN;UANG_MUKA_PPNBM;REFERENSI',
+                'FK;KD_JENIS_TRANSAKSI;FG_PENGGANTI;NOMOR_FAKTUR;MASA_PAJAK;TAHUN_PAJAK;TANGGAL_FAKTUR;NPWP;NAMA;ALAMAT_LENGKAP;JUMLAH_DPP;JUMLAH_PPN;JUMLAH_PPNBM;ID_KETERANGAN_TAMBAHAN;FG_UANG_MUKA;UANG_MUKA_DPP;UANG_MUKA_PPN;UANG_MUKA_PPNBM;REFERENSI;KODE_DOKUMEN_PENDUKUNG',
             ],
             [
                 'LT;NPWP;NAMA;JALAN;BLOK;NOMOR;RT;RW;KECAMATAN;KELURAHAN;KABUPATEN;PROPINSI;KODE_POS;NOMOR_TELEPON',
@@ -59,7 +59,7 @@ class ExportPajak implements FromCollection, WithCustomCsvSettings
                 $header->outlet->almt_outlet . ';' .
                 number_format(($header->details_invoice->sum('nominal_total') / 1.11), 0, ',', '') . ';' .
                 number_format(($header->details_invoice->sum('nominal_total') / 1.11 * 11 /100), 0, ',', '')  .
-                 ';0;0;0;0;0;0;' . $header->noinv
+                 ';0;0;0;0;0;0;' . $header->noinv . ';0'
             ];
 
             $data[] = $headerData;
@@ -70,7 +70,7 @@ class ExportPajak implements FromCollection, WithCustomCsvSettings
                     number_format(($detail->qty * $detail->hrg_pcs/1.11), 0, ',', '') .';'.
                     number_format(($detail->qty * $detail->hrg_pcs * $detail->disc/100 /1.11), 0, ',', '') . ';'.
                     number_format(($detail->nominal_total/1.11), 0, ',', '') .';'.
-                    number_format(($detail->nominal_total/1.11 * 0.11), 0, ',', '')
+                    number_format(($detail->nominal_total/1.11 * 0.11), 0, ',', '') . ';0;0'
                 ];
                 
                 $data[] = $detailData;
