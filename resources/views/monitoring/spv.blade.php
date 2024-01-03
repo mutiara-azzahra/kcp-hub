@@ -152,33 +152,33 @@
                     <tbody> 
                         <tr>
                             <td class="text-right" style="background-color: red; color:white">ACTUAL</td>
-                            <td class="text-right">{{ $jan_ich }}</td>
-                            <td class="text-right">{{ $feb_ich }}</td>
-                            <td class="text-right">{{ $mar_ich }}</td>
-                            <td class="text-right">{{ $apr_ich }}</td>
-                            <td class="text-right">{{ $may_ich }}</td>
-                            <td class="text-right">{{ $jun_ich }}</td>
-                            <td class="text-right">{{ $jul_ich }}</td>
-                            <td class="text-right">{{ $agu_ich }}</td>
-                            <td class="text-right">{{ $sep_ich }}</td>
-                            <td class="text-right">{{ $oct_ich }}</td>
-                            <td class="text-right">{{ $nov_ich }}</td>
-                            <td class="text-right">{{ $dec_ich }}</td>
+                            <td class="text-right">{{ $achIchS01 }}</td>
+                            <td class="text-right">{{ $achIchS02 }}</td>
+                            <td class="text-right">{{ $achIchS03 }}</td>
+                            <td class="text-right">{{ $achIchS04 }}</td>
+                            <td class="text-right">{{ $achIchS05 }}</td>
+                            <td class="text-right">{{ $achIchS06 }}</td>
+                            <td class="text-right">{{ $achIchS07 }}</td>
+                            <td class="text-right">{{ $achIchS08 }}</td>
+                            <td class="text-right">{{ $achIchS09 }}</td>
+                            <td class="text-right">{{ $achIchS10 }}</td>
+                            <td class="text-right">{{ $achIchS11 }}</td>
+                            <td class="text-right">{{ $achIchS12 }}</td>
                         </tr>
                         <tr>
                             <td class="text-right" style="background-color: yellow; color:black">TARGET</td>
-                            <td class="text-right">{{ $target_ich_jan }}</td>
-                            <td class="text-right">{{ $target_ich_feb }}</td>
-                            <td class="text-right">{{ $target_ich_mar }}</td>
-                            <td class="text-right">{{ $target_ich_apr }}</td>
-                            <td class="text-right">{{ $target_ich_may }}</td>
-                            <td class="text-right">{{ $target_ich_jun }}</td>
-                            <td class="text-right">{{ $target_ich_jul }}</td>
-                            <td class="text-right">{{ $target_ich_agu }}</td>
-                            <td class="text-right">{{ $target_ich_sep }}</td>
-                            <td class="text-right">{{ $target_ich_oct }}</td>
-                            <td class="text-right">{{ $target_ich_nov }}</td>
-                            <td class="text-right">{{ $target_ich_dec }}</td>
+                            <td class="text-right">{{ $target_s_ich_jan }}</td>
+                            <td class="text-right">{{ $target_s_ich_feb }}</td>
+                            <td class="text-right">{{ $target_s_ich_mar }}</td>
+                            <td class="text-right">{{ $target_s_ich_apr }}</td>
+                            <td class="text-right">{{ $target_s_ich_may }}</td>
+                            <td class="text-right">{{ $target_s_ich_jun }}</td>
+                            <td class="text-right">{{ $target_s_ich_jul }}</td>
+                            <td class="text-right">{{ $target_s_ich_agu }}</td>
+                            <td class="text-right">{{ $target_s_ich_sep }}</td>
+                            <td class="text-right">{{ $target_s_ich_oct }}</td>
+                            <td class="text-right">{{ $target_s_ich_nov }}</td>
+                            <td class="text-right">{{ $target_s_ich_dec }}</td>
                         </tr> 
                     </tbody>
                 </table>
@@ -213,33 +213,33 @@
                     <tbody>      
                         <tr>
                             <td class="text-right" style="background-color: red; color:white">ACTUAL</td>
-                            <td class="text-right">{{ $jan_bri }}</td>
-                            <td class="text-right">{{ $feb_bri }}</td>
-                            <td class="text-right">{{ $mar_bri }}</td>
-                            <td class="text-right">{{ $apr_bri }}</td>
-                            <td class="text-right">{{ $may_bri }}</td>
-                            <td class="text-right">{{ $jun_bri }}</td>
-                            <td class="text-right">{{ $jul_bri }}</td>
-                            <td class="text-right">{{ $agu_bri }}</td>
-                            <td class="text-right">{{ $sep_bri }}</td>
-                            <td class="text-right">{{ $oct_bri }}</td>
-                            <td class="text-right">{{ $nov_bri }}</td>
-                            <td class="text-right">{{ $dec_bri }}</td>
+                            <td class="text-right">{{ $achBriS01 }}</td>
+                            <td class="text-right">{{ $achBriS02 }}</td>
+                            <td class="text-right">{{ $achBriS03 }}</td>
+                            <td class="text-right">{{ $achBriS04 }}</td>
+                            <td class="text-right">{{ $achBriS05 }}</td>
+                            <td class="text-right">{{ $achBriS06 }}</td>
+                            <td class="text-right">{{ $achBriS07 }}</td>
+                            <td class="text-right">{{ $achBriS08 }}</td>
+                            <td class="text-right">{{ $achBriS09 }}</td>
+                            <td class="text-right">{{ $achBriS10 }}</td>
+                            <td class="text-right">{{ $achBriS11 }}</td>
+                            <td class="text-right">{{ $achBriS12 }}</td>
                         </tr>
                         <tr>
                             <td class="text-right" style="background-color: yellow; color:black">TARGET</td>
-                            <td class="text-right">{{ $target_bri_jan }}</td>
-                            <td class="text-right">{{ $target_bri_feb }}</td>
-                            <td class="text-right">{{ $target_bri_mar }}</td>
-                            <td class="text-right">{{ $target_bri_apr }}</td>
-                            <td class="text-right">{{ $target_bri_may }}</td>
-                            <td class="text-right">{{ $target_bri_jun }}</td>
-                            <td class="text-right">{{ $target_bri_jul }}</td>
-                            <td class="text-right">{{ $target_bri_agu }}</td>
-                            <td class="text-right">{{ $target_bri_sep }}</td>
-                            <td class="text-right">{{ $target_bri_oct }}</td>
-                            <td class="text-right">{{ $target_bri_nov }}</td>
-                            <td class="text-right">{{ $target_bri_dec }}</td>
+                            <td class="text-right">{{ $target_s_bri_jan }}</td>
+                            <td class="text-right">{{ $target_s_bri_feb }}</td>
+                            <td class="text-right">{{ $target_s_bri_mar }}</td>
+                            <td class="text-right">{{ $target_s_bri_apr }}</td>
+                            <td class="text-right">{{ $target_s_bri_may }}</td>
+                            <td class="text-right">{{ $target_s_bri_jun }}</td>
+                            <td class="text-right">{{ $target_s_bri_jul }}</td>
+                            <td class="text-right">{{ $target_s_bri_agu }}</td>
+                            <td class="text-right">{{ $target_s_bri_sep }}</td>
+                            <td class="text-right">{{ $target_s_bri_oct }}</td>
+                            <td class="text-right">{{ $target_s_bri_nov }}</td>
+                            <td class="text-right">{{ $target_s_bri_dec }}</td>
                         </tr> 
                     </tbody>
                 </table>
@@ -274,33 +274,33 @@
                     <tbody>      
                         <tr>
                             <td class="text-right" style="background-color: red; color:white">ACTUAL</td>
-                            <td class="text-right">{{ $jan_acc }}</td>
-                            <td class="text-right">{{ $feb_acc }}</td>
-                            <td class="text-right">{{ $mar_acc }}</td>
-                            <td class="text-right">{{ $apr_acc }}</td>
-                            <td class="text-right">{{ $may_acc }}</td>
-                            <td class="text-right">{{ $jun_acc }}</td>
-                            <td class="text-right">{{ $jul_acc }}</td>
-                            <td class="text-right">{{ $agu_acc }}</td>
-                            <td class="text-right">{{ $sep_acc }}</td>
-                            <td class="text-right">{{ $oct_acc }}</td>
-                            <td class="text-right">{{ $nov_acc }}</td>
-                            <td class="text-right">{{ $dec_acc }}</td>
+                            <td class="text-right">{{ $achAccS01 }}</td>
+                            <td class="text-right">{{ $achAccS02 }}</td>
+                            <td class="text-right">{{ $achAccS03 }}</td>
+                            <td class="text-right">{{ $achAccS04 }}</td>
+                            <td class="text-right">{{ $achAccS05 }}</td>
+                            <td class="text-right">{{ $achAccS06 }}</td>
+                            <td class="text-right">{{ $achAccS07 }}</td>
+                            <td class="text-right">{{ $achAccS08 }}</td>
+                            <td class="text-right">{{ $achAccS09 }}</td>
+                            <td class="text-right">{{ $achAccS10 }}</td>
+                            <td class="text-right">{{ $achAccS11 }}</td>
+                            <td class="text-right">{{ $achAccS12 }}</td>
                         </tr>
                         <tr>
                             <td class="text-right" style="background-color: yellow; color:black">TARGET</td>
-                            <td class="text-right">{{ $target_acc_jan }}</td>
-                            <td class="text-right">{{ $target_acc_feb }}</td>
-                            <td class="text-right">{{ $target_acc_mar }}</td>
-                            <td class="text-right">{{ $target_acc_apr }}</td>
-                            <td class="text-right">{{ $target_acc_may }}</td>
-                            <td class="text-right">{{ $target_acc_jun }}</td>
-                            <td class="text-right">{{ $target_acc_jul }}</td>
-                            <td class="text-right">{{ $target_acc_agu }}</td>
-                            <td class="text-right">{{ $target_acc_sep }}</td>
-                            <td class="text-right">{{ $target_acc_oct }}</td>
-                            <td class="text-right">{{ $target_acc_nov }}</td>
-                            <td class="text-right">{{ $target_acc_dec }}</td>
+                            <td class="text-right">{{ $target_s_acc_jan }}</td>
+                            <td class="text-right">{{ $target_s_acc_feb }}</td>
+                            <td class="text-right">{{ $target_s_acc_mar }}</td>
+                            <td class="text-right">{{ $target_s_acc_apr }}</td>
+                            <td class="text-right">{{ $target_s_acc_may }}</td>
+                            <td class="text-right">{{ $target_s_acc_jun }}</td>
+                            <td class="text-right">{{ $target_s_acc_jul }}</td>
+                            <td class="text-right">{{ $target_s_acc_agu }}</td>
+                            <td class="text-right">{{ $target_s_acc_sep }}</td>
+                            <td class="text-right">{{ $target_s_acc_oct }}</td>
+                            <td class="text-right">{{ $target_s_acc_nov }}</td>
+                            <td class="text-right">{{ $target_s_acc_dec }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -335,33 +335,33 @@
                     <tbody>      
                         <tr>
                             <td class="text-right" style="background-color: red; color:white">ACTUAL</td>
-                            <td class="text-right">{{ $jan_acl }}</td>
-                            <td class="text-right">{{ $feb_acl }}</td>
-                            <td class="text-right">{{ $mar_acl }}</td>
-                            <td class="text-right">{{ $apr_acl }}</td>
-                            <td class="text-right">{{ $may_acl }}</td>
-                            <td class="text-right">{{ $jun_acl }}</td>
-                            <td class="text-right">{{ $jul_acl }}</td>
-                            <td class="text-right">{{ $agu_acl }}</td>
-                            <td class="text-right">{{ $sep_acl }}</td>
-                            <td class="text-right">{{ $oct_acl }}</td>
-                            <td class="text-right">{{ $nov_acl }}</td>
-                            <td class="text-right">{{ $dec_acl }}</td>
+                            <td class="text-right">{{ $achAclS01 }}</td>
+                            <td class="text-right">{{ $achAclS02 }}</td>
+                            <td class="text-right">{{ $achAclS03 }}</td>
+                            <td class="text-right">{{ $achAclS04 }}</td>
+                            <td class="text-right">{{ $achAclS05 }}</td>
+                            <td class="text-right">{{ $achAclS06 }}</td>
+                            <td class="text-right">{{ $achAclS07 }}</td>
+                            <td class="text-right">{{ $achAclS08 }}</td>
+                            <td class="text-right">{{ $achAclS09 }}</td>
+                            <td class="text-right">{{ $achAclS10 }}</td>
+                            <td class="text-right">{{ $achAclS11 }}</td>
+                            <td class="text-right">{{ $achAclS12 }}</td>
                         </tr>
                         <tr>
                             <td class="text-right" style="background-color: yellow; color:black">TARGET</td>
-                            <td class="text-right">{{ $target_acl_jan }}</td>
-                            <td class="text-right">{{ $target_acl_feb }}</td>
-                            <td class="text-right">{{ $target_acl_mar }}</td>
-                            <td class="text-right">{{ $target_acl_apr }}</td>
-                            <td class="text-right">{{ $target_acl_may }}</td>
-                            <td class="text-right">{{ $target_acl_jun }}</td>
-                            <td class="text-right">{{ $target_acl_jul }}</td>
-                            <td class="text-right">{{ $target_acl_agu }}</td>
-                            <td class="text-right">{{ $target_acl_sep }}</td>
-                            <td class="text-right">{{ $target_acl_oct }}</td>
-                            <td class="text-right">{{ $target_acl_nov }}</td>
-                            <td class="text-right">{{ $target_acl_dec }}</td>
+                            <td class="text-right">{{ $target_s_acl_jan }}</td>
+                            <td class="text-right">{{ $target_s_acl_feb }}</td>
+                            <td class="text-right">{{ $target_s_acl_mar }}</td>
+                            <td class="text-right">{{ $target_s_acl_apr }}</td>
+                            <td class="text-right">{{ $target_s_acl_may }}</td>
+                            <td class="text-right">{{ $target_s_acl_jun }}</td>
+                            <td class="text-right">{{ $target_s_acl_jul }}</td>
+                            <td class="text-right">{{ $target_s_acl_agu }}</td>
+                            <td class="text-right">{{ $target_s_acl_sep }}</td>
+                            <td class="text-right">{{ $target_s_acl_oct }}</td>
+                            <td class="text-right">{{ $target_s_acl_nov }}</td>
+                            <td class="text-right">{{ $target_s_acl_dec }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -396,33 +396,33 @@
                     <tbody>      
                         <tr>
                             <td class="text-right" style="background-color: red; color:white">ACTUAL</td>
-                            <td class="text-right">{{ $jan_pen }}</td>
-                            <td class="text-right">{{ $feb_pen }}</td>
-                            <td class="text-right">{{ $mar_pen }}</td>
-                            <td class="text-right">{{ $apr_pen }}</td>
-                            <td class="text-right">{{ $may_pen }}</td>
-                            <td class="text-right">{{ $jun_pen }}</td>
-                            <td class="text-right">{{ $jul_pen }}</td>
-                            <td class="text-right">{{ $agu_pen }}</td>
-                            <td class="text-right">{{ $sep_pen }}</td>
-                            <td class="text-right">{{ $oct_pen }}</td>
-                            <td class="text-right">{{ $nov_pen }}</td>
-                            <td class="text-right">{{ $dec_pen }}</td>
+                            <td class="text-right">{{ $achPenS01 }}</td>
+                            <td class="text-right">{{ $achPenS02 }}</td>
+                            <td class="text-right">{{ $achPenS03 }}</td>
+                            <td class="text-right">{{ $achPenS04 }}</td>
+                            <td class="text-right">{{ $achPenS05 }}</td>
+                            <td class="text-right">{{ $achPenS06 }}</td>
+                            <td class="text-right">{{ $achPenS07 }}</td>
+                            <td class="text-right">{{ $achPenS08 }}</td>
+                            <td class="text-right">{{ $achPenS09 }}</td>
+                            <td class="text-right">{{ $achPenS10 }}</td>
+                            <td class="text-right">{{ $achPenS11 }}</td>
+                            <td class="text-right">{{ $achPenS12 }}</td>
                         </tr>
                         <tr>
                             <td class="text-right" style="background-color: yellow; color:black">TARGET</td>
-                            <td class="text-right">{{ $target_pen_jan }}</td>
-                            <td class="text-right">{{ $target_pen_feb }}</td>
-                            <td class="text-right">{{ $target_pen_mar }}</td>
-                            <td class="text-right">{{ $target_pen_apr }}</td>
-                            <td class="text-right">{{ $target_pen_may }}</td>
-                            <td class="text-right">{{ $target_pen_jun }}</td>
-                            <td class="text-right">{{ $target_pen_jul }}</td>
-                            <td class="text-right">{{ $target_pen_agu }}</td>
-                            <td class="text-right">{{ $target_pen_sep }}</td>
-                            <td class="text-right">{{ $target_pen_oct }}</td>
-                            <td class="text-right">{{ $target_pen_nov }}</td>
-                            <td class="text-right">{{ $target_pen_dec }}</td>
+                            <td class="text-right">{{ $target_s_pen_jan }}</td>
+                            <td class="text-right">{{ $target_s_pen_feb }}</td>
+                            <td class="text-right">{{ $target_s_pen_mar }}</td>
+                            <td class="text-right">{{ $target_s_pen_apr }}</td>
+                            <td class="text-right">{{ $target_s_pen_may }}</td>
+                            <td class="text-right">{{ $target_s_pen_jun }}</td>
+                            <td class="text-right">{{ $target_s_pen_jul }}</td>
+                            <td class="text-right">{{ $target_s_pen_agu }}</td>
+                            <td class="text-right">{{ $target_s_pen_sep }}</td>
+                            <td class="text-right">{{ $target_s_pen_oct }}</td>
+                            <td class="text-right">{{ $target_s_pen_nov }}</td>
+                            <td class="text-right">{{ $target_s_pen_dec }}</td>
                         </tr>
                     </tbody>
                 </table>

@@ -791,7 +791,6 @@ class MonitoringController extends Controller
                 })->sum('nominal_total');
         }
 
-
         return view('monitoring.spv', compact('target', 'monthName','sales', 'getTarget', 'getTargetActual', 'selisih', 'pencapaian_persen', 
         'getTargetBulanan', 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'agu', 'sep', 'oct', 'nov', 'dec', 
         'target_jan', 'target_feb', 'target_mar', 'target_apr', 'target_may', 'target_jun', 'target_jul', 'target_agu', 'target_sep', 'target_oct', 'target_nov', 'target_dec',
@@ -799,7 +798,12 @@ class MonitoringController extends Controller
         'target_s_bri_jan', 'target_s_bri_feb', 'target_s_bri_mar', 'target_s_bri_apr', 'target_s_bri_may', 'target_s_bri_jun', 'target_s_bri_jul', 'target_s_bri_agu', 'target_s_bri_sep', 'target_s_bri_oct', 'target_s_bri_nov', 'target_s_bri_dec',
         'target_s_acc_jan', 'target_s_acc_feb', 'target_s_acc_mar', 'target_s_acc_apr', 'target_s_acc_may', 'target_s_acc_jun', 'target_s_acc_jul', 'target_s_acc_agu', 'target_s_acc_sep', 'target_s_acc_oct', 'target_s_acc_nov', 'target_s_acc_dec',
         'target_s_acl_jan', 'target_s_acl_feb', 'target_s_acl_mar', 'target_s_acl_apr', 'target_s_acl_may', 'target_s_acl_jun', 'target_s_acl_jul', 'target_s_acl_agu', 'target_s_acl_sep', 'target_s_acl_oct', 'target_s_acl_nov', 'target_s_acl_dec',
-        'target_s_pen_jan', 'target_s_pen_feb', 'target_s_pen_mar', 'target_s_pen_apr', 'target_s_pen_may', 'target_s_pen_jun', 'target_s_pen_jul', 'target_s_pen_agu', 'target_s_pen_sep', 'target_s_pen_oct', 'target_s_pen_nov', 'target_s_pen_dec'    
+        'target_s_pen_jan', 'target_s_pen_feb', 'target_s_pen_mar', 'target_s_pen_apr', 'target_s_pen_may', 'target_s_pen_jun', 'target_s_pen_jul', 'target_s_pen_agu', 'target_s_pen_sep', 'target_s_pen_oct', 'target_s_pen_nov', 'target_s_pen_dec',
+        'achIchS01','achIchS02','achIchS03','achIchS04','achIchS05','achIchS06','achIchS07','achIchS08','achIchS09','achIchS10','achIchS11','achIchS12',
+        'achBriS01','achBriS02','achBriS03','achBriS04','achBriS05','achBriS06','achBriS07','achBriS08','achBriS09','achBriS10','achBriS11','achBriS12',
+        'achAccS01','achAccS02','achAccS03','achAccS04','achAccS05','achAccS06','achAccS07','achAccS08','achAccS09','achAccS10','achAccS11','achAccS12',
+        'achAclS01','achAclS02','achAclS03','achAclS04','achAclS05','achAclS06','achAclS07','achAclS08','achAclS09','achAclS10','achAclS11','achAclS12',
+        'achPenS01','achPenS02','achPenS03','achPenS04','achPenS05','achPenS06','achPenS07','achPenS08','achPenS09','achPenS10','achPenS11','achPenS12'
         ));
     }
 
