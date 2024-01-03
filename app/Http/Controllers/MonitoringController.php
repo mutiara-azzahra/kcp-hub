@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\TargetSpv;
 use App\Models\TargetSpvProduk;
 use App\Models\TargetSales;
+use App\Models\TargetSalesProduk;
 use App\Models\TransaksiInvoiceHeader;
 use App\Models\TransaksiInvoiceDetails;
 use App\Models\User;
@@ -208,94 +209,597 @@ class MonitoringController extends Controller
         $getTargetProdukSales = TargetSalesProduk::where('sales', $sales)->get();
 
         // TARGET EACH MONTH, EACH PRODUCT SALES
-        $target_ich_jan = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 1)->value('nominal'), 0, ',', '.');
-        $target_ich_feb = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 2)->value('nominal'), 0, ',', '.');
-        $target_ich_mar = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 3)->value('nominal'), 0, ',', '.');
-        $target_ich_apr = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 4)->value('nominal'), 0, ',', '.');
-        $target_ich_may = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 5)->value('nominal'), 0, ',', '.');
-        $target_ich_jun = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 6)->value('nominal'), 0, ',', '.');
-        $target_ich_jul = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 7)->value('nominal'), 0, ',', '.');
-        $target_ich_agu = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 8)->value('nominal'), 0, ',', '.');
-        $target_ich_sep = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 9)->value('nominal'), 0, ',', '.');
-        $target_ich_oct = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 10)->value('nominal'), 0, ',', '.');
-        $target_ich_nov = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 11)->value('nominal'), 0, ',', '.');
-        $target_ich_dec = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 12)->value('nominal'), 0, ',', '.');
+        // TARGET_S -> target sales 
+        $target_s_ich_jan = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 1)->value('nominal'), 0, ',', '.');
+        $target_s_ich_feb = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 2)->value('nominal'), 0, ',', '.');
+        $target_s_ich_mar = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 3)->value('nominal'), 0, ',', '.');
+        $target_s_ich_apr = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 4)->value('nominal'), 0, ',', '.');
+        $target_s_ich_may = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 5)->value('nominal'), 0, ',', '.');
+        $target_s_ich_jun = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 6)->value('nominal'), 0, ',', '.');
+        $target_s_ich_jul = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 7)->value('nominal'), 0, ',', '.');
+        $target_s_ich_agu = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 8)->value('nominal'), 0, ',', '.');
+        $target_s_ich_sep = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 9)->value('nominal'), 0, ',', '.');
+        $target_s_ich_oct = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 10)->value('nominal'), 0, ',', '.');
+        $target_s_ich_nov = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 11)->value('nominal'), 0, ',', '.');
+        $target_s_ich_dec = number_format($getTargetProdukSales->where('kode_produk', 'ICH')->where('tahun', $tahun)->where('bulan', 12)->value('nominal'), 0, ',', '.');
 
-        $target_bri_jan = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 1)->value('nominal'), 0, ',', '.');
-        $target_bri_feb = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 2)->value('nominal'), 0, ',', '.');
-        $target_bri_mar = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 3)->value('nominal'), 0, ',', '.');
-        $target_bri_apr = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 4)->value('nominal'), 0, ',', '.');
-        $target_bri_may = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 5)->value('nominal'), 0, ',', '.');
-        $target_bri_jun = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 6)->value('nominal'), 0, ',', '.');
-        $target_bri_jul = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 7)->value('nominal'), 0, ',', '.');
-        $target_bri_agu = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 8)->value('nominal'), 0, ',', '.');
-        $target_bri_sep = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 9)->value('nominal'), 0, ',', '.');
-        $target_bri_oct = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 10)->value('nominal'), 0, ',', '.');
-        $target_bri_nov = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 11)->value('nominal'), 0, ',', '.');
-        $target_bri_dec = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 12)->value('nominal'), 0, ',', '.');
+        $target_s_bri_jan = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 1)->value('nominal'), 0, ',', '.');
+        $target_s_bri_feb = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 2)->value('nominal'), 0, ',', '.');
+        $target_s_bri_mar = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 3)->value('nominal'), 0, ',', '.');
+        $target_s_bri_apr = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 4)->value('nominal'), 0, ',', '.');
+        $target_s_bri_may = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 5)->value('nominal'), 0, ',', '.');
+        $target_s_bri_jun = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 6)->value('nominal'), 0, ',', '.');
+        $target_s_bri_jul = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 7)->value('nominal'), 0, ',', '.');
+        $target_s_bri_agu = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 8)->value('nominal'), 0, ',', '.');
+        $target_s_bri_sep = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 9)->value('nominal'), 0, ',', '.');
+        $target_s_bri_oct = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 10)->value('nominal'), 0, ',', '.');
+        $target_s_bri_nov = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 11)->value('nominal'), 0, ',', '.');
+        $target_s_bri_dec = number_format($getTargetProdukSales->where('kode_produk', 'BRI')->where('tahun', $tahun)->where('bulan', 12)->value('nominal'), 0, ',', '.');
 
-        $target_acc_jan = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 1)->value('nominal'), 0, ',', '.');
-        $target_acc_feb = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 2)->value('nominal'), 0, ',', '.');
-        $target_acc_mar = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 3)->value('nominal'), 0, ',', '.');
-        $target_acc_apr = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 4)->value('nominal'), 0, ',', '.');
-        $target_acc_may = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 5)->value('nominal'), 0, ',', '.');
-        $target_acc_jun = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 6)->value('nominal'), 0, ',', '.');
-        $target_acc_jul = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 7)->value('nominal'), 0, ',', '.');
-        $target_acc_agu = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 8)->value('nominal'), 0, ',', '.');
-        $target_acc_sep = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 9)->value('nominal'), 0, ',', '.');
-        $target_acc_oct = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 10)->value('nominal'), 0, ',', '.');
-        $target_acc_nov = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 11)->value('nominal'), 0, ',', '.');
-        $target_acc_dec = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 12)->value('nominal'), 0, ',', '.');
+        $target_s_acc_jan = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 1)->value('nominal'), 0, ',', '.');
+        $target_s_acc_feb = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 2)->value('nominal'), 0, ',', '.');
+        $target_s_acc_mar = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 3)->value('nominal'), 0, ',', '.');
+        $target_s_acc_apr = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 4)->value('nominal'), 0, ',', '.');
+        $target_s_acc_may = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 5)->value('nominal'), 0, ',', '.');
+        $target_s_acc_jun = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 6)->value('nominal'), 0, ',', '.');
+        $target_s_acc_jul = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 7)->value('nominal'), 0, ',', '.');
+        $target_s_acc_agu = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 8)->value('nominal'), 0, ',', '.');
+        $target_s_acc_sep = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 9)->value('nominal'), 0, ',', '.');
+        $target_s_acc_oct = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 10)->value('nominal'), 0, ',', '.');
+        $target_s_acc_nov = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 11)->value('nominal'), 0, ',', '.');
+        $target_s_acc_dec = number_format($getTargetProdukSales->where('kode_produk', 'ACC')->where('tahun', $tahun)->where('bulan', 12)->value('nominal'), 0, ',', '.');
 
-        $target_pen_jan = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 1)->value('nominal'), 0, ',', '.');
-        $target_pen_feb = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 2)->value('nominal'), 0, ',', '.');
-        $target_pen_mar = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 3)->value('nominal'), 0, ',', '.');
-        $target_pen_apr = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 4)->value('nominal'), 0, ',', '.');
-        $target_pen_may = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 5)->value('nominal'), 0, ',', '.');
-        $target_pen_jun = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 6)->value('nominal'), 0, ',', '.');
-        $target_pen_jul = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 7)->value('nominal'), 0, ',', '.');
-        $target_pen_agu = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 8)->value('nominal'), 0, ',', '.');
-        $target_pen_sep = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 9)->value('nominal'), 0, ',', '.');
-        $target_pen_oct = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 10)->value('nominal'), 0, ',', '.');
-        $target_pen_nov = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 11)->value('nominal'), 0, ',', '.');
-        $target_pen_dec = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 12)->value('nominal'), 0, ',', '.');
+        $target_s_pen_jan = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 1)->value('nominal'), 0, ',', '.');
+        $target_s_pen_feb = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 2)->value('nominal'), 0, ',', '.');
+        $target_s_pen_mar = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 3)->value('nominal'), 0, ',', '.');
+        $target_s_pen_apr = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 4)->value('nominal'), 0, ',', '.');
+        $target_s_pen_may = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 5)->value('nominal'), 0, ',', '.');
+        $target_s_pen_jun = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 6)->value('nominal'), 0, ',', '.');
+        $target_s_pen_jul = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 7)->value('nominal'), 0, ',', '.');
+        $target_s_pen_agu = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 8)->value('nominal'), 0, ',', '.');
+        $target_s_pen_sep = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 9)->value('nominal'), 0, ',', '.');
+        $target_s_pen_oct = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 10)->value('nominal'), 0, ',', '.');
+        $target_s_pen_nov = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 11)->value('nominal'), 0, ',', '.');
+        $target_s_pen_dec = number_format($getTargetProdukSales->where('kode_produk', 'PEN')->where('tahun', $tahun)->where('bulan', 12)->value('nominal'), 0, ',', '.');
 
-        $target_acl_jan = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 1)->value('nominal'), 0, ',', '.');
-        $target_acl_feb = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 2)->value('nominal'), 0, ',', '.');
-        $target_acl_mar = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 3)->value('nominal'), 0, ',', '.');
-        $target_acl_apr = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 4)->value('nominal'), 0, ',', '.');
-        $target_acl_may = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 5)->value('nominal'), 0, ',', '.');
-        $target_acl_jun = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 6)->value('nominal'), 0, ',', '.');
-        $target_acl_jul = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 7)->value('nominal'), 0, ',', '.');
-        $target_acl_agu = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 8)->value('nominal'), 0, ',', '.');
-        $target_acl_sep = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 9)->value('nominal'), 0, ',', '.');
-        $target_acl_oct = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 10)->value('nominal'), 0, ',', '.');
-        $target_acl_nov = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 11)->value('nominal'), 0, ',', '.');
-        $target_acl_dec = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 12)->value('nominal'), 0, ',', '.');
+        $target_s_acl_jan = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 1)->value('nominal'), 0, ',', '.');
+        $target_s_acl_feb = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 2)->value('nominal'), 0, ',', '.');
+        $target_s_acl_mar = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 3)->value('nominal'), 0, ',', '.');
+        $target_s_acl_apr = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 4)->value('nominal'), 0, ',', '.');
+        $target_s_acl_may = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 5)->value('nominal'), 0, ',', '.');
+        $target_s_acl_jun = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 6)->value('nominal'), 0, ',', '.');
+        $target_s_acl_jul = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 7)->value('nominal'), 0, ',', '.');
+        $target_s_acl_agu = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 8)->value('nominal'), 0, ',', '.');
+        $target_s_acl_sep = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 9)->value('nominal'), 0, ',', '.');
+        $target_s_acl_oct = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 10)->value('nominal'), 0, ',', '.');
+        $target_s_acl_nov = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 11)->value('nominal'), 0, ',', '.');
+        $target_s_acl_dec = number_format($getTargetProdukSales->where('kode_produk', 'ACL')->where('tahun', $tahun)->where('bulan', 12)->value('nominal'), 0, ',', '.');
 
-        //VIEW PEMBELIAN BY PRODUK SALES
-        //ICHIDAI
+        //VIEW ACHIEVEMENT SALES BY PRODUK
+        $ach_s_jan = TransaksiInvoiceHeader::where('user_sales', $sales)->where('created_at', '>=', $tahun.'-01-01')->where('created_at', '<=', $tahun.'-01-'.Carbon::createFromDate($tahun, 1, 1)->endOfMonth()->format('d'))->get();
+        $ach_s_feb = TransaksiInvoiceHeader::where('user_sales', $sales)->where('created_at', '>=', $tahun.'-02-01')->where('created_at', '<=', $tahun.'-02-'.Carbon::createFromDate($tahun, 2, 1)->endOfMonth()->format('d'))->get();
+        $ach_s_mar = TransaksiInvoiceHeader::where('user_sales', $sales)->where('created_at', '>=', $tahun.'-03-01')->where('created_at', '<=', $tahun.'-03-'.Carbon::createFromDate($tahun, 3, 1)->endOfMonth()->format('d'))->get();
+        $ach_s_apr = TransaksiInvoiceHeader::where('user_sales', $sales)->where('created_at', '>=', $tahun.'-04-01')->where('created_at', '<=', $tahun.'-04-'.Carbon::createFromDate($tahun, 4, 1)->endOfMonth()->format('d'))->get();
+        $ach_s_may = TransaksiInvoiceHeader::where('user_sales', $sales)->where('created_at', '>=', $tahun.'-05-01')->where('created_at', '<=', $tahun.'-05-'.Carbon::createFromDate($tahun, 5, 1)->endOfMonth()->format('d'))->get();
+        $ach_s_jun = TransaksiInvoiceHeader::where('user_sales', $sales)->where('created_at', '>=', $tahun.'-06-01')->where('created_at', '<=', $tahun.'-06-'.Carbon::createFromDate($tahun, 6, 1)->endOfMonth()->format('d'))->get();
+        $ach_s_jul = TransaksiInvoiceHeader::where('user_sales', $sales)->where('created_at', '>=', $tahun.'-07-01')->where('created_at', '<=', $tahun.'-07-'.Carbon::createFromDate($tahun, 7, 1)->endOfMonth()->format('d'))->get();
+        $ach_s_aug = TransaksiInvoiceHeader::where('user_sales', $sales)->where('created_at', '>=', $tahun.'-08-01')->where('created_at', '<=', $tahun.'-08-'.Carbon::createFromDate($tahun, 8, 1)->endOfMonth()->format('d'))->get();
+        $ach_s_sep = TransaksiInvoiceHeader::where('user_sales', $sales)->where('created_at', '>=', $tahun.'-09-01')->where('created_at', '<=', $tahun.'-09-'.Carbon::createFromDate($tahun, 9, 1)->endOfMonth()->format('d'))->get();
+        $ach_s_oct = TransaksiInvoiceHeader::where('user_sales', $sales)->where('created_at', '>=', $tahun.'-10-01')->where('created_at', '<=', $tahun.'-10-'.Carbon::createFromDate($tahun, 10, 1)->endOfMonth()->format('d'))->get();
+        $ach_s_nov = TransaksiInvoiceHeader::where('user_sales', $sales)->where('created_at', '>=', $tahun.'-11-01')->where('created_at', '<=', $tahun.'-11-'.Carbon::createFromDate($tahun, 11, 1)->endOfMonth()->format('d'))->get();
+        $ach_s_dec = TransaksiInvoiceHeader::where('user_sales', $sales)->where('created_at', '>=', $tahun.'-12-01')->where('created_at', '<=', $tahun.'-12-'.Carbon::createFromDate($tahun, 12, 1)->endOfMonth()->format('d'))->get();
 
-        $achJanuari = TransaksiInvoiceHeader::where('created_at', '>=', $tahun.'-01-01')->where('created_at', '<=', $tahun.'-01-'.Carbon::createFromDate($tahun, 1, 1)->endOfMonth()->format('d'))
-            ->where('user_sales', $sales)
-            ->get();
+        //ACHIEVEMENT SALES ICHIDAI
+        $achIchS01 = 0;
+        $achIchS02 = 0;
+        $achIchS03 = 0;
+        $achIchS04 = 0;
+        $achIchS05 = 0;
+        $achIchS06 = 0;
+        $achIchS07 = 0;
+        $achIchS08 = 0;
+        $achIchS09 = 0;
+        $achIchS10 = 0;
+        $achIchS11 = 0;
+        $achIchS12 = 0;
 
-        dd($achJanuari);
-
-        $ich_jan_sales = 0;
-        foreach($achJanuari as $g){
-            $ich_jan_sales = $g->details_invoice::whereIn('part_no', function ($query) {
-                    $query->select('part_no')
-                        ->from('master_part')
-                        ->where('kode_produk', 'ICH');
-                    })->sum('nominal_total');
+        //achievement sales ichidai per bulan
+        foreach ($ach_s_jan as $i) {
+            $achIchS01 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ICH');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_feb as $i) {
+            $achIchS02 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ICH');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_mar as $i) {
+            $achIchS03 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ICH');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_apr as $i) {
+            $achIchS04 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ICH');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_may as $i) {
+            $achIchS05 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ICH');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_jun as $i) {
+            $achIchS06 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ICH');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_jul as $i) {
+            $achIchS07 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ICH');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_aug as $i) {
+            $achIchS08 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ICH');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_sep as $i) {
+            $achIchS09 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ICH');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_oct as $i) {
+            $achIchS10 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ICH');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_nov as $i) {
+            $achIchS11 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ICH');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_dec as $i) {
+            $achIchS12 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ICH');
+                })->sum('nominal_total');
         }
 
+
+        //ACHIEVEMENT SALES BRIO
+        $achBriS01 = 0;
+        $achBriS02 = 0;
+        $achBriS03 = 0;
+        $achBriS04 = 0;
+        $achBriS05 = 0;
+        $achBriS06 = 0;
+        $achBriS07 = 0;
+        $achBriS08 = 0;
+        $achBriS09 = 0;
+        $achBriS10 = 0;
+        $achBriS11 = 0;
+        $achBriS12 = 0;
+
+        //achievement sales brio per bulan
+        foreach ($ach_s_jan as $i) {
+            $achBriS01 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'BRI');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_feb as $i) {
+            $achBriS02 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'BRI');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_mar as $i) {
+            $achBriS03 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'BRI');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_apr as $i) {
+            $achBriS04 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'BRI');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_may as $i) {
+            $achBriS05 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'BRI');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_jun as $i) {
+            $achBriS06 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'BRI');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_jul as $i) {
+            $achBriS07 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'BRI');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_aug as $i) {
+            $achBriS08 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'BRI');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_sep as $i) {
+            $achBriS09 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'BRI');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_oct as $i) {
+            $achBriS10 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'BRI');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_nov as $i) {
+            $achBriS11 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'BRI');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_dec as $i) {
+            $achBriS12 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'BRI');
+                })->sum('nominal_total');
+        }
+
+        //ACHIEVEMENT SALES ACCU
+        $achAccS01 = 0;
+        $achAccS02 = 0;
+        $achAccS03 = 0;
+        $achAccS04 = 0;
+        $achAccS05 = 0;
+        $achAccS06 = 0;
+        $achAccS07 = 0;
+        $achAccS08 = 0;
+        $achAccS09 = 0;
+        $achAccS10 = 0;
+        $achAccS11 = 0;
+        $achAccS12 = 0;
+
+        //achievement sales brio per bulan
+        foreach ($ach_s_jan as $i) {
+            $achAccS01 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ACC');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_feb as $i) {
+            $achAccS02 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ACC');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_mar as $i) {
+            $achAccS03 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ACC');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_apr as $i) {
+            $achAccS04 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ACC');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_may as $i) {
+            $achAccS05 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ACC');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_jun as $i) {
+            $achAccS06 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ACC');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_jul as $i) {
+            $achAccS07 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ACC');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_aug as $i) {
+            $achAccS08 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ACC');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_sep as $i) {
+            $achAccS09 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ACC');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_oct as $i) {
+            $achAccS10 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ACC');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_nov as $i) {
+            $achAccS11 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ACC');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_dec as $i) {
+            $achAccS12 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ACC');
+                })->sum('nominal_total');
+        }
+
+
+        //ACHIEVEMENT SALES AIR COOLANT
+        $achAclS01 = 0;
+        $achAclS02 = 0;
+        $achAclS03 = 0;
+        $achAclS04 = 0;
+        $achAclS05 = 0;
+        $achAclS06 = 0;
+        $achAclS07 = 0;
+        $achAclS08 = 0;
+        $achAclS09 = 0;
+        $achAclS10 = 0;
+        $achAclS11 = 0;
+        $achAclS12 = 0;
+
+        //achievement sales air coolant per bulan
+        foreach ($ach_s_jan as $i) {
+            $achAclS01 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ACL');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_feb as $i) {
+            $achAclS02 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ACL');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_mar as $i) {
+            $achAclS03 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ACL');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_apr as $i) {
+            $achAclS04 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ACL');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_may as $i) {
+            $achAclS05 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ACL');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_jun as $i) {
+            $achAclS06 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ACL');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_jul as $i) {
+            $achAclS07 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ACL');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_aug as $i) {
+            $achAclS08 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ACL');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_sep as $i) {
+            $achAclS09 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ACL');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_oct as $i) {
+            $achAclS10 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ACL');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_nov as $i) {
+            $achAclS11 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ACL');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_dec as $i) {
+            $achAclS12 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'ACL');
+                })->sum('nominal_total');
+        }
+
+        //ACHIEVEMENT SALES ACCU
+        $achPenS01 = 0;
+        $achPenS02 = 0;
+        $achPenS03 = 0;
+        $achPenS04 = 0;
+        $achPenS05 = 0;
+        $achPenS06 = 0;
+        $achPenS07 = 0;
+        $achPenS08 = 0;
+        $achPenS09 = 0;
+        $achPenS10 = 0;
+        $achPenS11 = 0;
+        $achPenS12 = 0;
+
+        //achievement sales brio per bulan
+        foreach ($ach_s_jan as $i) {
+            $achPenS01 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'PEN');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_feb as $i) {
+            $achPenS02 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'PEN');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_mar as $i) {
+            $achPenS03 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'PEN');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_apr as $i) {
+            $achPenS04 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'PEN');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_may as $i) {
+            $achPenS05 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'PEN');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_jun as $i) {
+            $achPenS06 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'PEN');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_jul as $i) {
+            $achPenS07 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'PEN');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_aug as $i) {
+            $achPenS08 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'PEN');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_sep as $i) {
+            $achPenS09 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'PEN');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_oct as $i) {
+            $achPenS10 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'PEN');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_nov as $i) {
+            $achPenS11 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'PEN');
+                })->sum('nominal_total');
+        }
+        foreach ($ach_s_dec as $i) {
+            $achPenS12 += $i->details_invoice()->whereIn('part_no', function ($query) {
+                $query->select('part_no')
+                    ->from('master_part')
+                    ->where('kode_produk', 'PEN');
+                })->sum('nominal_total');
+        }
 
 
         return view('monitoring.spv', compact('target', 'monthName','sales', 'getTarget', 'getTargetActual', 'selisih', 'pencapaian_persen', 
         'getTargetBulanan', 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'agu', 'sep', 'oct', 'nov', 'dec', 
-        'target_jan', 'target_feb', 'target_mar', 'target_apr', 'target_may', 'target_jun', 'target_jul', 'target_agu', 'target_sep', 'target_oct', 'target_nov', 'target_dec'    
+        'target_jan', 'target_feb', 'target_mar', 'target_apr', 'target_may', 'target_jun', 'target_jul', 'target_agu', 'target_sep', 'target_oct', 'target_nov', 'target_dec',
+        'target_s_ich_jan', 'target_s_ich_feb', 'target_s_ich_mar', 'target_s_ich_apr', 'target_s_ich_may', 'target_s_ich_jun', 'target_s_ich_jul', 'target_s_ich_agu', 'target_s_ich_sep', 'target_s_ich_oct', 'target_s_ich_nov', 'target_s_ich_dec',
+        'target_s_bri_jan', 'target_s_bri_feb', 'target_s_bri_mar', 'target_s_bri_apr', 'target_s_bri_may', 'target_s_bri_jun', 'target_s_bri_jul', 'target_s_bri_agu', 'target_s_bri_sep', 'target_s_bri_oct', 'target_s_bri_nov', 'target_s_bri_dec',
+        'target_s_acc_jan', 'target_s_acc_feb', 'target_s_acc_mar', 'target_s_acc_apr', 'target_s_acc_may', 'target_s_acc_jun', 'target_s_acc_jul', 'target_s_acc_agu', 'target_s_acc_sep', 'target_s_acc_oct', 'target_s_acc_nov', 'target_s_acc_dec',
+        'target_s_acl_jan', 'target_s_acl_feb', 'target_s_acl_mar', 'target_s_acl_apr', 'target_s_acl_may', 'target_s_acl_jun', 'target_s_acl_jul', 'target_s_acl_agu', 'target_s_acl_sep', 'target_s_acl_oct', 'target_s_acl_nov', 'target_s_acl_dec',
+        'target_s_pen_jan', 'target_s_pen_feb', 'target_s_pen_mar', 'target_s_pen_apr', 'target_s_pen_may', 'target_s_pen_jun', 'target_s_pen_jul', 'target_s_pen_agu', 'target_s_pen_sep', 'target_s_pen_oct', 'target_s_pen_nov', 'target_s_pen_dec'    
         ));
     }
 
