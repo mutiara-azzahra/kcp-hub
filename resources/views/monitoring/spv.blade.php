@@ -23,6 +23,21 @@
         </div>
     @endif
 
+
+    @if(isset($dataTargetTahun))
+    <div class="card" style="padding: 2px;">
+        <div class="card-body">
+            <div class="card-header">
+                <b>Pemberitahuan</b>
+            </div>
+            <div class="card-body">
+                <p>Maaf, anda belum menambahkan Target Sales Tahun {{ $tahun }}, tambahkan target sales <a href="{{ route('master-target.index')}}">disini.</a></li>
+            </div>
+        </div>
+    </div>
+
+    @else
+
     <div class="card" style="padding: 2px;">
         <div class="card-body">
             <div class="col-lg-4">
@@ -54,9 +69,9 @@
                         @endphp
                         
                         <tr>
-                            <td class="text-center">Rp. {{ number_format($getTarget, 0, ',', '.') }}</td>
-                            <td class="text-center">Rp. {{ number_format($target, 0, ',', '.') }}, <p style="color:red;">({{ number_format($selisih, 0, ',', '.') }})</p></td>
-                            <td class="text-center">{{ number_format($pencapaian_persen, 3, ',', '.') }} %</td>
+                            <td class="text-center">Rp. {{ number_format($getTarget, 0, ',', ',') }}</td>
+                            <td class="text-center">Rp. {{ number_format($target, 0, ',', ',') }}, <p style="color:red;">({{ number_format($selisih, 0, ',', ',') }})</p></td>
+                            <td class="text-center">{{ number_format($pencapaian_persen, 3, ',', ',') }} %</td>
                         </tr>
                         
                     </tbody>
@@ -152,18 +167,18 @@
                     <tbody> 
                         <tr>
                             <td class="text-right" style="background-color: red; color:white">ACTUAL</td>
-                            <td class="text-right">{{ $achIchS01 }}</td>
-                            <td class="text-right">{{ $achIchS02 }}</td>
-                            <td class="text-right">{{ $achIchS03 }}</td>
-                            <td class="text-right">{{ $achIchS04 }}</td>
-                            <td class="text-right">{{ $achIchS05 }}</td>
-                            <td class="text-right">{{ $achIchS06 }}</td>
-                            <td class="text-right">{{ $achIchS07 }}</td>
-                            <td class="text-right">{{ $achIchS08 }}</td>
-                            <td class="text-right">{{ $achIchS09 }}</td>
-                            <td class="text-right">{{ $achIchS10 }}</td>
-                            <td class="text-right">{{ $achIchS11 }}</td>
-                            <td class="text-right">{{ $achIchS12 }}</td>
+                            <td class="text-right">{{ number_format($achIchS01, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achIchS02, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achIchS03, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achIchS04, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achIchS05, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achIchS06, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achIchS07, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achIchS08, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achIchS09, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achIchS10, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achIchS11, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achIchS12, 0, ',', ',') }}</td>
                         </tr>
                         <tr>
                             <td class="text-right" style="background-color: yellow; color:black">TARGET</td>
@@ -213,18 +228,18 @@
                     <tbody>      
                         <tr>
                             <td class="text-right" style="background-color: red; color:white">ACTUAL</td>
-                            <td class="text-right">{{ $achBriS01 }}</td>
-                            <td class="text-right">{{ $achBriS02 }}</td>
-                            <td class="text-right">{{ $achBriS03 }}</td>
-                            <td class="text-right">{{ $achBriS04 }}</td>
-                            <td class="text-right">{{ $achBriS05 }}</td>
-                            <td class="text-right">{{ $achBriS06 }}</td>
-                            <td class="text-right">{{ $achBriS07 }}</td>
-                            <td class="text-right">{{ $achBriS08 }}</td>
-                            <td class="text-right">{{ $achBriS09 }}</td>
-                            <td class="text-right">{{ $achBriS10 }}</td>
-                            <td class="text-right">{{ $achBriS11 }}</td>
-                            <td class="text-right">{{ $achBriS12 }}</td>
+                            <td class="text-right">{{ number_format($achBriS01, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achBriS02, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achBriS03, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achBriS04, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achBriS05, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achBriS06, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achBriS07, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achBriS08, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achBriS09, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achBriS10, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achBriS11, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achBriS12, 0, ',', ',') }}</td>
                         </tr>
                         <tr>
                             <td class="text-right" style="background-color: yellow; color:black">TARGET</td>
@@ -274,18 +289,18 @@
                     <tbody>      
                         <tr>
                             <td class="text-right" style="background-color: red; color:white">ACTUAL</td>
-                            <td class="text-right">{{ $achAccS01 }}</td>
-                            <td class="text-right">{{ $achAccS02 }}</td>
-                            <td class="text-right">{{ $achAccS03 }}</td>
-                            <td class="text-right">{{ $achAccS04 }}</td>
-                            <td class="text-right">{{ $achAccS05 }}</td>
-                            <td class="text-right">{{ $achAccS06 }}</td>
-                            <td class="text-right">{{ $achAccS07 }}</td>
-                            <td class="text-right">{{ $achAccS08 }}</td>
-                            <td class="text-right">{{ $achAccS09 }}</td>
-                            <td class="text-right">{{ $achAccS10 }}</td>
-                            <td class="text-right">{{ $achAccS11 }}</td>
-                            <td class="text-right">{{ $achAccS12 }}</td>
+                            <td class="text-right">{{ number_format($achAccS01, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achAccS02, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achAccS03, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achAccS04, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achAccS05, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achAccS06, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achAccS07, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achAccS08, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achAccS09, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achAccS10, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achAccS11, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achAccS12, 0, ',', ',') }}</td>
                         </tr>
                         <tr>
                             <td class="text-right" style="background-color: yellow; color:black">TARGET</td>
@@ -335,18 +350,18 @@
                     <tbody>      
                         <tr>
                             <td class="text-right" style="background-color: red; color:white">ACTUAL</td>
-                            <td class="text-right">{{ $achAclS01 }}</td>
-                            <td class="text-right">{{ $achAclS02 }}</td>
-                            <td class="text-right">{{ $achAclS03 }}</td>
-                            <td class="text-right">{{ $achAclS04 }}</td>
-                            <td class="text-right">{{ $achAclS05 }}</td>
-                            <td class="text-right">{{ $achAclS06 }}</td>
-                            <td class="text-right">{{ $achAclS07 }}</td>
-                            <td class="text-right">{{ $achAclS08 }}</td>
-                            <td class="text-right">{{ $achAclS09 }}</td>
-                            <td class="text-right">{{ $achAclS10 }}</td>
-                            <td class="text-right">{{ $achAclS11 }}</td>
-                            <td class="text-right">{{ $achAclS12 }}</td>
+                            <td class="text-right">{{ number_format($achAclS01, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achAclS02, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achAclS03, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achAclS04, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achAclS05, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achAclS06, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achAclS07, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achAclS08, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achAclS09, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achAclS10, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achAclS11, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achAclS12, 0, ',', ',') }}</td>
                         </tr>
                         <tr>
                             <td class="text-right" style="background-color: yellow; color:black">TARGET</td>
@@ -396,18 +411,18 @@
                     <tbody>      
                         <tr>
                             <td class="text-right" style="background-color: red; color:white">ACTUAL</td>
-                            <td class="text-right">{{ $achPenS01 }}</td>
-                            <td class="text-right">{{ $achPenS02 }}</td>
-                            <td class="text-right">{{ $achPenS03 }}</td>
-                            <td class="text-right">{{ $achPenS04 }}</td>
-                            <td class="text-right">{{ $achPenS05 }}</td>
-                            <td class="text-right">{{ $achPenS06 }}</td>
-                            <td class="text-right">{{ $achPenS07 }}</td>
-                            <td class="text-right">{{ $achPenS08 }}</td>
-                            <td class="text-right">{{ $achPenS09 }}</td>
-                            <td class="text-right">{{ $achPenS10 }}</td>
-                            <td class="text-right">{{ $achPenS11 }}</td>
-                            <td class="text-right">{{ $achPenS12 }}</td>
+                            <td class="text-right">{{ number_format($achPenS01, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achPenS02, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achPenS03, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achPenS04, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achPenS05, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achPenS06, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achPenS07, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achPenS08, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achPenS09, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achPenS10, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achPenS11, 0, ',', ',') }}</td>
+                            <td class="text-right">{{ number_format($achPenS12, 0, ',', ',') }}</td>
                         </tr>
                         <tr>
                             <td class="text-right" style="background-color: yellow; color:black">TARGET</td>
@@ -429,6 +444,8 @@
             </div>
         </div>
     </div>
+
+    @endif
 </div>
 @endsection
 
