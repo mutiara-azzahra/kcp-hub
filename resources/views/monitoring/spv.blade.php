@@ -80,7 +80,6 @@
         </div>
     </div>
 
-
     <div class="card" style="padding: 2px;">
         <div class="card-body table-responsive p-2">
             <div class="col-lg-12">  
