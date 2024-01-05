@@ -8,7 +8,8 @@
                 <h4>Tambah Target SPV By Product</h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-success" href="{{ route('master-target-spv-produk.create') }}"><i class="fas fa-plus"></i> Tambah Achievement SPV</a>
+                <a class="btn btn-primary m-1" href="{{ route('master-target-spv-produk.create') }}"><i class="fas fa-plus"></i> Tambah Achievement SPV</a>
+                <a class="btn btn-success m-1" href="{{ route('master-target.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
             </div>
         </div>
     </div>
@@ -50,7 +51,7 @@
                             <td class="text-center">{{ $p->kode_produk }}</td>
                             <td class="text-center">{{ $p->bulan }}</td>
                             <td class="text-center">{{ $p->tahun }}</td>
-                            <td class="text-right">Rp. {{ number_format($p->nominal, 0, ',', '.') }}</td>
+                            <td class="text-right">{{ number_format($p->nominal, 0, ',', ',') }}</td>
                             <td class="text-center">
                                 <form action="{{ route('master-target-spv-produk.delete', $p->id) }}" method="POST" id="form_delete" data-id="{{ $p->id }}">
                                     @csrf

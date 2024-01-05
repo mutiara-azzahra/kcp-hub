@@ -23,20 +23,7 @@
         </div>
     @endif
 
-
     @if(isset($dataTargetTahun))
-    <div class="card" style="padding: 2px;">
-        <div class="card-body">
-            <div class="card-header">
-                <b>Pemberitahuan</b>
-            </div>
-            <div class="card-body">
-                <p>Maaf, anda belum menambahkan Target Sales Tahun {{ $tahun }}, tambahkan target sales <a href="{{ route('master-target.index')}}">disini.</a></li>
-            </div>
-        </div>
-    </div>
-
-    @else
 
     <div class="card" style="padding: 2px;">
         <div class="card-body">
@@ -440,6 +427,17 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+    @else
+    <div class="card" style="padding: 2px;">
+        <div class="card-body">
+            <div class="card-header">
+                <b>Pemberitahuan</b>
+            </div>
+            <div class="card-body">
+                <p>Maaf, anda belum menambahkan Target Sales Tahun {{ $tahun }}, tambahkan target sales <a href="{{ route('master-target.index')}}">disini.</a></li>
             </div>
         </div>
     </div>

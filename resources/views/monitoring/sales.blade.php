@@ -22,19 +22,7 @@
         </div>
     @endif
 
-    @if(isset($dataTargetTahun))
-    <div class="card" style="padding: 2px;">
-        <div class="card-body">
-            <div class="card-header">
-                <b>Pemberitahuan</b>
-            </div>
-            <div class="card-body">
-                <p>Maaf, anda belum menambahkan target SPV Tahun {{ $tahun }}, tambahkan target SPV <a href="{{ route('master-target-spv.index')}}">disini.</a></li>
-            </div>
-        </div>
-    </div>
-
-    @else
+    @if(isset($targetSpv))
 
     <div class="card" style="padding: 10px;">
         <div class="card-body">
@@ -447,7 +435,21 @@
         </div>
     </div>
 
+    @else
+
+    <div class="card" style="padding: 2px;">
+        <div class="card-body">
+            <div class="card-header">
+                <b>Pemberitahuan</b>
+            </div>
+            <div class="card-body">
+                <p>Maaf, anda belum menambahkan target SPV Tahun {{ $tahun }}, tambahkan target SPV <a href="{{ route('master-target-spv.index')}}">disini.</a></li>
+            </div>
+        </div>
+    </div>
+    
     @endif
+
 </div>
 @endsection
 

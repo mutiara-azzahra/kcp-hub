@@ -50,7 +50,7 @@
                             <td class="text-left">{{ $p->spv }}</td>
                             <td class="text-center">{{ $p->bulan }}</td>
                             <td class="text-center">{{ $p->tahun }}</td>
-                            <td class="text-right">Rp. {{ number_format($p->nominal, 0, ',', '.') }}</td>
+                            <td class="text-right">{{ number_format($p->nominal, 0, ',', ',') }}</td>
                         </tr>
                         @endforeach
                     </tbody>

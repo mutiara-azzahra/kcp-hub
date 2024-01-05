@@ -46,10 +46,6 @@ class MonitoringController extends Controller
 
         if(isset($dataTargetTahun)){
 
-            return view('monitoring.spv', compact('dataTargetTahun', 'tahun'));
-
-        } else {
-
             $target = 0;
             
             $getTargetBulanan = TransaksiInvoiceHeader::whereBetween('created_at', [$tanggal_awal, $tanggal_akhir])
@@ -797,7 +793,7 @@ class MonitoringController extends Controller
                     })->sum('nominal_total');
             }
 
-            return view('monitoring.spv', compact('target', 'monthName','sales', 'getTarget', 'getTargetActual', 'selisih', 'pencapaian_persen', 
+            return view('monitoring.spv', compact('target', 'monthName','sales', 'getTarget', 'getTargetActual', 'selisih', 'pencapaian_persen', 'tahun',
             'getTargetBulanan', 'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'agu', 'sep', 'oct', 'nov', 'dec', 'dataTargetTahun',
             'target_jan', 'target_feb', 'target_mar', 'target_apr', 'target_may', 'target_jun', 'target_jul', 'target_agu', 'target_sep', 'target_oct', 'target_nov', 'target_dec',
             'target_s_ich_jan', 'target_s_ich_feb', 'target_s_ich_mar', 'target_s_ich_apr', 'target_s_ich_may', 'target_s_ich_jun', 'target_s_ich_jul', 'target_s_ich_agu', 'target_s_ich_sep', 'target_s_ich_oct', 'target_s_ich_nov', 'target_s_ich_dec',
@@ -811,6 +807,10 @@ class MonitoringController extends Controller
             'achAclS01','achAclS02','achAclS03','achAclS04','achAclS05','achAclS06','achAclS07','achAclS08','achAclS09','achAclS10','achAclS11','achAclS12',
             'achPenS01','achPenS02','achPenS03','achPenS04','achPenS05','achPenS06','achPenS07','achPenS08','achPenS09','achPenS10','achPenS11','achPenS12'
             ));
+
+        } else {
+
+            return view('monitoring.spv', compact('dataTargetTahun', 'tahun'));
 
         }
     }
@@ -841,14 +841,9 @@ class MonitoringController extends Controller
         $tahun          = Carbon::parse($awal)->year;
         $monthName      = Carbon::parse($awal)->month($bulan)->format('F');
 
-        $dataTargetTahun = TargetSales::where('tahun', $tahun)->where('bulan', 12)->get();
+        $targetSpv = TargetSpv::where('tahun', $tahun)->where('bulan', 12)->get();
 
-
-        if(isset($dataTargetTahun)){
-
-            return view('monitoring.sales', compact('dataTargetTahun', 'tahun'));
-
-        } else {
+        if(isset($targetSpv)){
 
             $getTargetBulanan = TransaksiInvoiceDetails::whereBetween('created_at', [$tanggal_awal, $tanggal_akhir])
                 ->get();
@@ -1071,7 +1066,7 @@ class MonitoringController extends Controller
             $dec_pen = number_format($getActualPentil->where('created_at', '>=', $tahun.'-12-01')->where('created_at', '<=', $tahun.'-12-'.Carbon::createFromDate($tahun, 12, 1)->endOfMonth()->format('d'))->sum('nominal_total'), 0, ',', ',');
 
             return view('monitoring.sales', compact('target', 'tahun', 'monthName','spv', 'getActual','getTarget', 'getTargetActual', 'getTargetBulanan',
-            'selisih', 'pencapaian_persen', 
+            'selisih', 'pencapaian_persen', 'targetSpv', 
             'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'agu', 'sep', 'oct', 'nov', 'dec',
             'jan_ich', 'feb_ich', 'mar_ich', 'apr_ich', 'may_ich', 'jun_ich', 'jul_ich', 'agu_ich', 'sep_ich', 'oct_ich', 'nov_ich', 'dec_ich',
             'jan_bri', 'feb_bri', 'mar_bri', 'apr_bri', 'may_bri', 'jun_bri', 'jul_bri', 'agu_bri', 'sep_bri', 'oct_bri', 'nov_bri', 'dec_bri',
@@ -1085,6 +1080,10 @@ class MonitoringController extends Controller
             'target_acl_jan', 'target_acl_feb', 'target_acl_mar', 'target_acl_apr', 'target_acl_may', 'target_acl_jun', 'target_acl_jul', 'target_acl_agu', 'target_acl_sep', 'target_acl_oct', 'target_acl_nov', 'target_acl_dec',
             'target_pen_jan', 'target_pen_feb', 'target_pen_mar', 'target_pen_apr', 'target_pen_may', 'target_pen_jun', 'target_pen_jul', 'target_pen_agu', 'target_pen_sep', 'target_pen_oct', 'target_pen_nov', 'target_pen_dec'
             ));
+
+        } else {
+
+            return view('monitoring.sales', compact('targetSpv', 'tahun'));
         }
     }
 
