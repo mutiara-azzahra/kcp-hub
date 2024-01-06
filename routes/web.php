@@ -84,7 +84,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/master-part', [MasterPartController::class, 'index'])->name('master-part.index');
     Route::get('/master-part/create', [MasterPartController::class, 'create'])->name('master-part.create');
     Route::get('/master-part/update/{id}', [MasterPartController::class, 'edit'])->name('master-part.edit');
-    Route::get('/master-part/delete/{id}', [MasterPartController::class, 'delete'])->name('master-part.delete');
+    Route::delete('/master-part/delete/{id}', [MasterPartController::class, 'delete'])->name('master-part.delete');
     Route::get('/master-part/show/{id}', [MasterPartController::class, 'show'])->name('master-part.show');
     Route::post('/master-part/store', [MasterPartController::class, 'store'])->name('master-part.store');
     Route::post('/master-part/update/{id}', [MasterPartController::class, 'update'])->name('master-part.update');

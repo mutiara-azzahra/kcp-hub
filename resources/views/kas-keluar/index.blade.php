@@ -176,6 +176,4 @@
     }
 </script>
 
-
-
 @endsection
