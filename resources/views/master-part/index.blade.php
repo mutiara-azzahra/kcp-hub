@@ -22,18 +22,17 @@
     <div class="card" style="padding: 10px;">
         <div class="card-body">
             <div class="col-lg-12">  
-                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example2">
+                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example1">
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
                             <th class="text-center">No</th>
                             <th class="text-center">Part Nomor</th>
                             <th class="text-center">Part Nama</th>
-                            @if(in_array(Auth::user()->id_role, [10]))
-
-                            @else
-                            <th class="text-center">HET</th>
-
-                            @endif
+                                @if(in_array(Auth::user()->id_role, [10]))
+                                @else
+                                <th class="text-center">HET</th>
+                                @endif
+                            <th class="text-center">Kode Produk</th>
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
@@ -47,10 +46,11 @@
                             <td class="text-center">{{ $no++ }}.</td>
                             <td class="text-left">{{ $p->part_no }}</td>
                             <td class="text-left">{{ $p->part_nama }}</td>
-                            @if(in_array(Auth::user()->id_role, [10]))
-                            @else
-                            <td class="text-left">Rp. {{ number_format($p->het, 0, ',', '.') }}</td>
-                            @endif
+                                @if(in_array(Auth::user()->id_role, [10]))
+                                @else
+                                <td class="text-right">{{ number_format($p->het, 0, ',', ',') }}</td>
+                                @endif
+                            <td class="text-center">{{ $p->kode_produk }}</td>
                             <td class="text-center">                                        
                                 <a class="btn btn-info btn-sm" href="{{ route('master-part.edit',$p->id) }}"><i class="fas fa-edit"></i></a>
                                 <a class="btn btn-warning btn-sm" href="{{ route('master-part.delete',$p->id) }}"><i class="fas fa-times-circle"></i></a>

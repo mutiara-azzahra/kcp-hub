@@ -42,7 +42,7 @@ class MonitoringController extends Controller
         $tahun          = Carbon::parse($awal)->year;
         $monthName      = Carbon::parse($awal)->month($bulan)->format('F');
 
-        $dataTargetTahun = TargetSales::where('tahun', $tahun)->where('bulan', 12)->get();
+        $dataTargetTahun = TargetSales::where('tahun', $tahun)->where('bulan', 12)->first();
 
         if(isset($dataTargetTahun)){
 
@@ -841,7 +841,7 @@ class MonitoringController extends Controller
         $tahun          = Carbon::parse($awal)->year;
         $monthName      = Carbon::parse($awal)->month($bulan)->format('F');
 
-        $targetSpv = TargetSpv::where('tahun', $tahun)->where('bulan', 12)->get();
+        $targetSpv = TargetSpv::where('tahun', $tahun)->where('bulan', 12)->first();
 
         if(isset($targetSpv)){
 
@@ -851,7 +851,7 @@ class MonitoringController extends Controller
             $getTarget = TargetSpv::where('bulan', $bulan)
                 ->where('tahun', $tahun)
                 ->where('spv', $spv)
-                ->value('nominal');
+                ->first();
         
                 $target             = $getTargetBulanan->sum('nominal_total');
                 $selisih            = $target - $getTarget;
