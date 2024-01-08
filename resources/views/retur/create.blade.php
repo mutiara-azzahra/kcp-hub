@@ -32,7 +32,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <strong>Pilih Invoice</strong>
-                            <select name="part_no" class="form-control my-select">
+                            <select name="noinv" class="form-control my-select">
                                 <option value="">---Pilih Invoice--</option>
                                 @foreach($invoice as $a)
                                     <option value="{{ $a->noinv }}">{{ $a->noinv }}</option>
