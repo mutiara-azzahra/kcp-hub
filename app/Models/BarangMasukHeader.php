@@ -17,4 +17,9 @@ class BarangMasukHeader extends Model
         'invoice_non', 'customer_to', 'supplier', 'tanggal_nota', 'status', 
         'created_at', 'updated_at', 'created_by', 'updated_by'
     ];
+
+    public function details()
+    {
+        return $this->hasMany(BarangMasukDetails::class, 'invoice_non', 'invoice_non');
+    }
 }

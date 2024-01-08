@@ -256,6 +256,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/stok-gudang/create-barang-masuk', [StokGudangController::class, 'store_barang_masuk'])->name('stok-gudang.store-barang-masuk');
     Route::get('/stok-gudang/details-barang-masuk/{id}', [StokGudangController::class, 'add_details'])->name('stok-gudang.add-details');
     Route::post('/stok-gudang/details-barang-masuk', [StokGudangController::class, 'store_add_details'])->name('stok-gudang.store_add_details');
+    Route::get('/stok-gudang/list-barang-masuk', [StokGudangController::class, 'list'])->name('stok-gudang.list');
+    Route::get('/stok-gudang/details-barang-masuk/{id}', [StokGudangController::class, 'list_details'])->name('stok-gudang.list-details');
+    Route::post('/stok-gudang/store-details-barang-masuk', [StokGudangController::class, 'store_list_details'])->name('stok-gudang.store_list_details');
 
     //ROUTE STOK GUDANG
     Route::get('/master-sales', [MasterSalesController::class, 'index'])->name('master-sales.index');

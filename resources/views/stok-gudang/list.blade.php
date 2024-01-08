@@ -5,11 +5,10 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4>Stok Gudang</h4>
+                <h4>List Nota Barang Masuk</h4>
             </div>
             <div class="float-right m-1">
-                <a class="btn btn-success m-1" href="{{ route('stok-gudang.tambah') }}"><i class="fas fa-plus"></i> Tambah Stok</a>
-                <a class="btn btn-primary m-1" href="{{ route('stok-gudang.list') }}"><i class="fas fa-list"></i> List Barang Masuk</a>
+                <a class="btn btn-success m-1" href="{{ route('stok-gudang.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
             </div>
         </div>
     </div>
@@ -31,9 +30,9 @@
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
                             <th class="text-center">No</th>
-                            <th class="text-center">Part No</th>
-                            <th class="text-center">Nama Part</th>
-                            <th class="text-center">Stok Gudang</th>
+                            <th class="text-center">Invoice No</th>
+                            <th class="text-center">Supplier</th>
+                            <th class="text-center">Tanggal Nota</th>
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
@@ -42,14 +41,14 @@
                         $no=1;
                         @endphp
 
-                        @foreach($stok_gudang as $p)
+                        @foreach($list_barang_masuk as $p)
                         <tr>
                             <td class="text-center">{{ $no++ }}</td>
-                            <td class="text-left">{{ $p->part_no }}</td>
-                            <td class="text-left">{{ $p->master_part->part_nama }}</td>
-                            <td class="text-right">{{ number_format($p->stok, 0, ',', '.') }}</td>
+                            <td class="text-left">{{ $p->invoice_non }}</td>
+                            <td class="text-center">{{ $p->supplier }}</td>
+                            <td class="text-center">{{ Carbon\Carbon::parse($p->created_at )->format('d-m-Y') }}</td>
                             <td class="text-center">
-                                <a class="btn btn-info btn-sm" href="{{ route('stok-gudang.show',$p->id) }}"><i class="fas fa-eye"></i></a>
+                                <a class="btn btn-info btn-sm" href="{{ route('stok-gudang.list-details',$p->id) }}"><i class="fas fa-eye"></i></a>
                             </td>
                         </tr>
                         @endforeach

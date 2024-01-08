@@ -95,7 +95,6 @@ class StokGudangController extends Controller
         
     }
     
-
     public function store(Request $request){
 
         $request -> validate([
@@ -159,6 +158,51 @@ class StokGudangController extends Controller
         $barang_masuk   = BarangMasukDetails::where('part_no', $stok_id->part_no)->get();
 
         return view('stok-gudang.show',compact('stok_id', 'barang_masuk', 'barang_terjual'));
+    }
+
+
+    public function list(){
+
+        $list_barang_masuk = BarangMasukHeader::orderBy('created_at', 'desc')->get();
+
+        return view('stok-gudang.list', compact('list_barang_masuk'));
+    }
+
+    public function list_details($id)
+    {
+        $header         = BarangMasukHeader::findOrFail($id);
+        $master_part    = MasterPart::where('status', 'A')->get();
+        $rak            = MasterKodeRak::where('status', 'A')->get();
+
+        return view('stok-gudang.list-details',compact('header', 'master_part', 'rak'));
+    }
+
+    public function store_list_details(Request $request){
+
+        $request->validate([
+            'inputs.*.invoice_non' => 'required',
+            'inputs.*.part_no'     => 'required',
+            'inputs.*.qty'         => 'required',
+            'inputs.*.id_rak'      => 'required',
+        ]);
+
+        foreach($request->inputs as $key => $value){
+            $value['invoice_non']   = $value['invoice_non'];
+            $value['part_no']       = $value['part_no'];
+            $value['qty']           = $value['qty'];
+            $value['id_rak']        = $value['id_rak'];
+            $value['created_by']    = Auth::user()->nama_user;
+            $value['created_at']    = NOW();
+
+            $created = BarangMasukDetails::create($value);
+        }       
+                    
+        if ($created){
+            return redirect()->route('stok-gudang.list')->with('success','Silahkan Validasi Barang Masuk pada Menu Intransit!');
+        } else{
+            return redirect()->route('stok-gudang.index')->with('danger','Data stok gudang baru gagal ditambahkan');
+        }
+        
     }
 
     
