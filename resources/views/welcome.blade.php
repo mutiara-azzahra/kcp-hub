@@ -478,8 +478,37 @@
                 </li>
               </ul>
             </li>
-
             @endif
+
+            @if(in_array(Auth::user()->id_role, [2, 5, 6, 7, 12, 16, 17]))
+            <li class="nav-item">
+              <a href="#" class="nav-link">
+                <i class="nav-icon"></i>
+                <p>
+                  History
+                  <i class="right fas fa-angle-right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('history-pesanan.index')}}" class="nav-link">
+                      <p>History Pesanan</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                      <p>History Retur</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                      <p>History Claim</p>
+                    </a>
+                </li>
+              </ul>
+            </li>
+            @endif
+
             <li class="nav-item">
               <a href="{{ route('logout')}}" class="nav-link">
                 <i class="nav-icon fa fa-sign-out"></i>
