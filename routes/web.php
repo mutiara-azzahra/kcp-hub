@@ -46,7 +46,7 @@ use App\Http\Controllers\TransferKeluarController;
 use App\Http\Controllers\BgMasukController;
 use App\Http\Controllers\ExportPajakController;
 use App\Http\Controllers\HistoryPesananController;
-
+use App\Http\Controllers\ReturController;
 
 /*
 |--------------------------------------------------------------------------
@@ -416,8 +416,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/modal', [ModalDbpController::class, 'index'])->name('modal.index');
     Route::post('/modal/store', [ModalDbpController::class, 'store'])->name('modal.store');
 
-    //MODAL PENJUALAN
+    //HISTORY PESANAN
     Route::get('/history-pesanan', [HistoryPesananController::class, 'index'])->name('history-pesanan.index');
+
+    //RETUR
+    Route::get('/retur', [ReturController::class, 'index'])->name('retur.index');
 
 });
 
