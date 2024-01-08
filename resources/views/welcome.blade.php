@@ -363,6 +363,11 @@
                       <p>Back Order/BO</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('retur.index')}}" class="nav-link">
+                      <p>Retur</p>
+                    </a>
+                </li>
               </ul>
             </li>
             @endif

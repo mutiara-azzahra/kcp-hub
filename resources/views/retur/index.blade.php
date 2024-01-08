@@ -7,6 +7,9 @@
              <div class="float-left">
                 <h4>Retur</h4>
             </div>
+            <div class="float-right m-1">
+                 <a class="btn btn-success m-1" href="{{ route('retur.create') }}"><i class="fas fa-plus"></i> Tambah Retur</a>
+            </div>
         </div>
     </div>
     
@@ -48,7 +51,7 @@
                             <td class="text-left">{{ $p->kd_toko }}</td>
                             <td class="text-left">{{ $p->nm_toko }}</td>
                             <td class="text-center">
-                                <a class="btn btn-danger btn-sm" href="{{ route('retur.details', $p->no_retur) }}"><i class="fas fa-eye"></i>
+                                <a class="btn btn-danger btn-sm" href=""><i class="fas fa-eye"></i>
                                 </a>
                             </td>
                         </tr>

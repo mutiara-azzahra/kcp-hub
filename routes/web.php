@@ -421,6 +421,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     //RETUR
     Route::get('/retur', [ReturController::class, 'index'])->name('retur.index');
+    Route::get('/retur/create', [ReturController::class, 'create'])->name('retur.create');
+    Route::post('/retur/store', [ReturController::class, 'store'])->name('retur.store');
 
 });
 
