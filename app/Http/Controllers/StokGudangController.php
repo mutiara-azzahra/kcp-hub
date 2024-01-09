@@ -45,17 +45,31 @@ class StokGudangController extends Controller
 
         $existingRecord = BarangMasukHeader::where('invoice_non', $request->invoice_non)->first();
 
-        if($existingRecord){
+        if(isset($existingRecord)){
+
             return redirect()->route('stok-gudang.index')->with('danger','Nomor Nota '. $request->invoice_non .' sudah terdata! ');
-        }
 
-        $created = BarangMasukHeader::create($request->all());
-        $created->update(['created_by' => Auth::user()->nama_user]);
+        } else {
 
-        if ($created){
-            return redirect()->route('stok-gudang.add-details',['id' => $created->id])->with('success','Data stok gudang baru berhasil ditambahkan');
-        } else{
-            return redirect()->route('stok-gudang.index')->with('danger','Data stok gudang baru gagal ditambahkan');
+            $value['invoice_non']   = $request->invoice_non;
+            $value['customer_to']   = $request->customer_to;
+            $value['supplier']      = $request->supplier;
+            $value['tanggal_nota']  = $request->tanggal_nota;
+            $value['created_at']    = NOW();
+            $value['created_by']    = Auth::user()->nama_user;
+
+            $created = BarangMasukHeader::create($value);
+
+            if ($created){
+
+                $id = $created->id;
+
+                return redirect()->route('stok-gudang.add-details', ['id' => $id])->with('success', 'Data stok gudang baru berhasil ditambahkan');
+
+            } else{
+                return redirect()->route('stok-gudang.index')->with('danger','Data stok gudang baru gagal ditambahkan');
+            }
+
         }
 
     }

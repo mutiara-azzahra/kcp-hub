@@ -6,6 +6,7 @@ use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\ReturHeader;
+use App\Models\ReturDetails;
 use App\Models\TransaksiInvoiceHeader;
 
 class ReturController extends Controller
@@ -54,11 +55,13 @@ class ReturController extends Controller
 
     public function detail($no_retur)
     {
-        $header     = ReturHeader::where('no_retur', $no_retur)->first();
-        // $total       = TransaksiSpDetails::where('nosp', $nosp)->get();
-        // $master_part = MasterPart::where('status', 'A')->get();
-        // $check       = TransaksiSpDetails::where('nosp', $nosp)->first();
+
+        dd($no_retur);
         
-        return view('surat-pesanan.details', ['header' => $header] ,compact('header'));
+        $header      = ReturHeader::where('no_retur', $no_retur)->first();
+        $master_part = TransaksiInvoiceDetails::where('noinv', $header->noinv)->get();
+        $check       = ReturDetails::where('no_retur', $no_retur)->get();
+        
+        return view('surat-pesanan.details', ['header' => $header] ,compact('header', 'check', 'master_part'));
     }
 }

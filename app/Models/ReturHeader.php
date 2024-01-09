@@ -14,7 +14,7 @@ class ReturHeader extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [ 
-        'no_retur', 'noinv', 'kd_toko', 'nm_toko', 'created_at', 'updated_at', 'created_by', 'updated_by'
+        'no_retur', 'noinv', 'kd_outlet', 'nm_outlet', 'created_at', 'updated_at', 'created_by', 'updated_by'
     ];
 
     public static function no_retur()
