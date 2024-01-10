@@ -43,13 +43,14 @@
 
                 @if(isset($check))
                     <div class="col-lg-12 p-1">
-                        <table class="table table-hover table-bordered table-sm bg-light table-striped" id="table">
+                        <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example2">
                             <thead>
                                 <tr style="background-color: #6082B6; color:white">
                                     <th class="text-center">Part No</th>
                                     <th class="text-center">Qty Invoice</th>
                                     <th class="text-center">Qty Retur</th>
                                     <th class="text-center">Nominal</th>
+                                    <th class="text-center">Keterangan</th>
                                 </tr>
                             </thead>
                             <tbody class="input-fields">
@@ -58,7 +59,8 @@
                                     <td class="text-left">{{ $d->part_no }}</td>
                                     <td class="text-right">{{ number_format($d->qty_invoice, 0, ',', ',') }}</td>
                                     <td class="text-right">{{ number_format($d->qty_retur, 0, ',', ',') }}</td>
-                                    <td class="text-left">{{ $d->keterangan }}%</td>
+                                    <td class="text-right">{{ number_format($d->nominal_retur, 0, ',', ',') }}</td>
+                                    <td class="text-left">{{ $d->keterangan }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -96,14 +98,15 @@
                                     {{-- qty-invoice --}}
                                     <td class="text-center">
                                         <div class="form-group col-12">
-                                            <input type="number" name="qty_invoice" id="qty-default" class="form-control" readonly>
+                                            <input type="number" name="inputs[0][qty_invoice]" id="qty-default" class="form-control" readonly>
                                         </div>
                                     </td>
                                     {{-- qty-retur --}}
                                     <td class="text-center">
                                         <div class="form-group col-12">
                                             <input type="hidden" name="inputs[0][no_retur]" value="{{ $header->no_retur }}">
-                                            <input type="text" name="inputs[0][qty]" class="form-control" placeholder="0">
+                                            <input type="hidden" name="inputs[0][noinv]" value="{{ $header->noinv }}">
+                                            <input type="text" name="inputs[0][qty_retur]" class="form-control" placeholder="0">
                                         </div>
                                     </td>
                                     {{-- keterangan --}}
@@ -146,20 +149,21 @@
                     <select name="inputs[${i}][part_no]" class="form-control mr-2 my-select-1" id="package-${i}" onchange="updateData(${i})">
                         <option value="">-- Pilih --</option>
                         @foreach($invoice_details as $k)
-                            <option value="{{ $k->part_no }}"> {{ $k->part_no }} </option>
+                            <option value="{{ $k->part_no }}" data-qty="{{ $k->qty }}"> {{ $k->part_no }} </option>
                         @endforeach
                     </select>
                 </div>
             </td>
             <td class="text-center">
                 <div class="form-group col-12">
-                    <input type="number" name="qty_invoice" id="qty-${i}" class="form-control" readonly>
+                    <input type="number" name="inputs[${i}][qty_invoice]" id="qty-${i}" class="form-control" readonly>
                 </div>
             </td>
             <td class="text-center">
                 <div class="form-group col-12">
                     <input type="hidden" name="inputs[${i}][no_retur]" value="{{ $header->no_retur }}">
-                    <input type="text" name="inputs[${i}][qty]" class="form-control" placeholder="0">
+                    <input type="hidden" name="inputs[${i}][noinv]" value="{{ $header->noinv }}">
+                    <input type="text" name="inputs[${i}][qty_retur]" class="form-control" placeholder="0">
                 </div>
             </td>
             <td class="text-center">

@@ -44,4 +44,9 @@ class ReturHeader extends Model
 
         return $newCustomId;
     }
+
+    public function details()
+    {
+        return $this->hasMany(ReturDetails::class, 'no_retur', 'no_retur');
+    }
 }

@@ -63,7 +63,6 @@ class ReturController extends Controller
         return view('retur.details', ['header' => $header] ,compact('header', 'check', 'invoice_details'));
     }
 
-
      public function store_details(Request $request){
 
         $request->validate([
@@ -76,25 +75,36 @@ class ReturController extends Controller
 
         foreach($request->inputs as $key => $value){
 
+            $success = true;
+
             $invoice = TransaksiInvoiceDetails::where('noinv', $value['noinv'])->where('part_no', $value['part_no'])->first();
 
-            $value['no_retur']        = $value['no_retur'];
-            $value['part_no']         = $value['part_no'];
-            $value['qty_invoice']     = $value['qty_invoice'];
-            $value['qty_retur']       = $value['qty_retur'];
-            $value['hrg_pcs_invoice'] = $invoice->hrg_pcs;
-            $value['disc_invoice']    = $invoice->disc;
-            $value['nominal_retur']   = $value['id_rak'];
-            $value['created_by']      = Auth::user()->nama_user;
-            $value['created_at']      = NOW();
+            if($invoice){
 
-            $created = BarangMasukDetails::create($value);
+                $returDetail = new ReturDetails();
+                $returDetail->no_retur        = $value['no_retur'];
+                $returDetail->part_no         = $value['part_no'];
+                $returDetail->qty_invoice     = $value['qty_invoice'];
+                $returDetail->qty_retur       = $value['qty_retur'];
+                $returDetail->hrg_pcs_invoice = $invoice->hrg_pcs;
+                $returDetail->disc_invoice    = $invoice->disc;
+                $returDetail->keterangan      = $value['keterangan'];
+                $returDetail->nominal_retur   = $invoice->nominal_total / $invoice->qty * $value['qty_retur'];
+                $returDetail->created_by      = Auth::user()->nama_user;
+                $returDetail->created_at      = now();
+                $returDetail->updated_at      = now();
+
+                $returDetail->save();
+
+            } else {
+                $success = false;
+            }
         }       
                     
-        if ($created){
-            return redirect()->route('retur.list')->with('success','Silahkan Validasi Barang Masuk pada Menu Intransit!');
+        if ($success){
+            return redirect()->route('retur.list')->with('success','Data list retur baru berhasil ditambahkan!');
         } else{
-            return redirect()->route('retur.index')->with('danger','Data stok gudang baru gagal ditambahkan');
+            return redirect()->route('retur.index')->with('danger','Data list retur baru gagal ditambahkan');
         }
         
     }
