@@ -56,7 +56,6 @@ class ReturController extends Controller
 
     public function details($no_retur)
     {
-        
         $header             = ReturHeader::where('no_retur', $no_retur)->first();
         $invoice_details    = TransaksiInvoiceDetails::where('noinv', $header->noinv)->get();
         $check              = ReturDetails::where('no_retur', $no_retur)->first();

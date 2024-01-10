@@ -8,7 +8,7 @@
                 <h4>Tambah Retur</h4>
             </div>
             <div class="float-right">
-                    <a class="btn btn-success" href="{{ route('stok-gudang.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
+                    <a class="btn btn-success" href="{{ route('retur.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
             </div>
         </div>
     </div>

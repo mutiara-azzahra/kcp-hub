@@ -46,12 +46,12 @@
 
                         @foreach($retur as $p)
                         <tr>
-                            <td class="text-center">{{ $p->no_retur }}</td>
-                            <td class="text-center">{{ $p->noinv }}</td>
-                            <td class="text-left">{{ $p->kd_toko }}</td>
-                            <td class="text-left">{{ $p->nm_toko }}</td>
+                            <td class="text-left">{{ $p->no_retur }}</td>
+                            <td class="text-left">{{ $p->noinv }}</td>
+                            <td class="text-center">{{ $p->kd_outlet }}</td>
+                            <td class="text-left">{{ $p->nm_outlet }}</td>
                             <td class="text-center">
-                                <a class="btn btn-danger btn-sm" href=""><i class="fas fa-eye"></i>
+                                <a class="btn btn-danger btn-sm" href="{{ route('retur.details', $p->no_retur )}}"><i class="fas fa-eye"></i>
                                 </a>
                             </td>
                         </tr>
