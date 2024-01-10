@@ -261,7 +261,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/stok-gudang/list-details-barang-masuk/{id}', [StokGudangController::class, 'list_details'])->name('stok-gudang.list-details');
     Route::post('/stok-gudang/store-details-barang-masuk', [StokGudangController::class, 'store_list_details'])->name('stok-gudang.store_list_details');
 
-    //ROUTE STOK GUDANG
+    //ROUTE MASTER SALES
     Route::get('/master-sales', [MasterSalesController::class, 'index'])->name('master-sales.index');
     Route::post('/master-sales/details', [MasterSalesController::class, 'store'])->name('master-sales.store');
     Route::post('/master-sales/store-details', [MasterSalesController::class, 'store_details'])->name('master-sales.store-details');
@@ -423,6 +423,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/retur', [ReturController::class, 'index'])->name('retur.index');
     Route::get('/retur/create', [ReturController::class, 'create'])->name('retur.create');
     Route::post('/retur/store', [ReturController::class, 'store'])->name('retur.store');
+    Route::get('/retur/details/{no_retur}', [ReturController::class, 'details'])->name('retur.details');
+    Route::post('/retur/store-details', [ReturController::class, 'store_details'])->name('retur.store-details');
 
 });
 

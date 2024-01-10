@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\ReturHeader;
 use App\Models\ReturDetails;
 use App\Models\TransaksiInvoiceHeader;
+use App\Models\TransaksiInvoiceDetails;
 
 class ReturController extends Controller
 {
@@ -53,15 +54,50 @@ class ReturController extends Controller
         }
     }
 
-    public function detail($no_retur)
+    public function details($no_retur)
     {
-
-        dd($no_retur);
         
-        $header      = ReturHeader::where('no_retur', $no_retur)->first();
-        $master_part = TransaksiInvoiceDetails::where('noinv', $header->noinv)->get();
-        $check       = ReturDetails::where('no_retur', $no_retur)->get();
+        $header             = ReturHeader::where('no_retur', $no_retur)->first();
+        $invoice_details    = TransaksiInvoiceDetails::where('noinv', $header->noinv)->get();
+        $check              = ReturDetails::where('no_retur', $no_retur)->first();
         
-        return view('surat-pesanan.details', ['header' => $header] ,compact('header', 'check', 'master_part'));
+        return view('retur.details', ['header' => $header] ,compact('header', 'check', 'invoice_details'));
     }
+
+
+     public function store_details(Request $request){
+
+        $request->validate([
+            'inputs.*.no_retur'    => 'required',
+            'inputs.*.noinv'       => 'required',
+            'inputs.*.part_no'     => 'required',
+            'inputs.*.qty_invoice' => 'required',
+            'inputs.*.qty_retur'   => 'required',
+        ]);
+
+        foreach($request->inputs as $key => $value){
+
+            $invoice = TransaksiInvoiceDetails::where('noinv', $value['noinv'])->where('part_no', $value['part_no'])->first();
+
+            $value['no_retur']        = $value['no_retur'];
+            $value['part_no']         = $value['part_no'];
+            $value['qty_invoice']     = $value['qty_invoice'];
+            $value['qty_retur']       = $value['qty_retur'];
+            $value['hrg_pcs_invoice'] = $invoice->hrg_pcs;
+            $value['disc_invoice']    = $invoice->disc;
+            $value['nominal_retur']   = $value['id_rak'];
+            $value['created_by']      = Auth::user()->nama_user;
+            $value['created_at']      = NOW();
+
+            $created = BarangMasukDetails::create($value);
+        }       
+                    
+        if ($created){
+            return redirect()->route('retur.list')->with('success','Silahkan Validasi Barang Masuk pada Menu Intransit!');
+        } else{
+            return redirect()->route('retur.index')->with('danger','Data stok gudang baru gagal ditambahkan');
+        }
+        
+    }
+
 }
