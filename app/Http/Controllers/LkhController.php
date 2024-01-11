@@ -108,11 +108,20 @@ class LkhController extends Controller
         TransaksiLkhHeader::where('no_lkh', $no_lkh)->update([
             'jam_kembali'       => $request->jam_kembali,
             'km_kembali_mobil'  => $request->km_kembali_mobil,
+            'status'            => 'C',
             'updated_at'        => NOW(),
             'updated_by'        => Auth::user()->nama_user
         ]);
         
         return redirect()->route('laporan-kiriman-harian.index')->with('success','Details LKH berhasil diubah!');
+    }
+
+
+    public function history(){
+
+        $history = TransaksiLkhHeader::where('status', 'C')->get();
+
+        return view('laporan-kiriman-harian.history', compact('history'));
     }
 
 }

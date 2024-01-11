@@ -244,6 +244,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/laporan-kiriman-harian/details/{no_lkh}', [LkhController::class, 'store_details'])->name('laporan-kiriman-harian.store-details');
     Route::get('/laporan-kiriman-harian/cetak/{no_lkh}', [LkhController::class, 'cetak'])->name('laporan-kiriman-harian.cetak');
     Route::post('/laporan-kiriman-harian/store-update/{no_lkh}', [LkhController::class, 'update'])->name('laporan-kiriman-harian.update');
+    Route::get('/laporan-kiriman-harian/history', [LkhController::class, 'history'])->name('laporan-kiriman-harian.history');
 
     //ROUTE STOK GUDANG
     Route::get('/stok-gudang', [StokGudangController::class, 'index'])->name('stok-gudang.index');

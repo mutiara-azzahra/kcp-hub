@@ -854,10 +854,6 @@ class MonitoringController extends Controller
                 ->first();
         
                 $target             = $getTargetBulanan->sum('nominal_total');
-
-                // dd($target);
-
-                // dd($getTarget);
                 $selisih            = $target - $getTarget->nominal;
                 $pencapaian_persen  = ($target / $getTarget->nominal)/ 100;
 
