@@ -40,7 +40,7 @@
                             <select name="driver" class="form-control mr-2">
                                 <option value="">-- Pilih Driver --</option>
                                 @foreach($driver as $s)
-                                    <option value="{{ $s->username }}" {{ $s->username == $s->username ? 'selected' : '' }}>{{ $s->nama_user }}</option>
+                                    <option value="{{ $s->username }}" {{ $s->username == $s->username ? 'selected' : '' }}>{{ $s->username }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -51,7 +51,7 @@
                             <select name="helper" class="form-control mr-2">
                                 <option value="{{ $details->helper }}">-- Pilih Helper --</option>
                                 @foreach($helper as $s)
-                                    <option value="{{ $s->username }}" {{ $s->username == $s->username ? 'selected' : '' }}>{{ $s->nama_user }}</option>
+                                    <option value="{{ $s->username }}" {{ $s->username == $s->username ? 'selected' : '' }}>{{ $s->username }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -83,7 +83,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>KM. Kembali</strong>
-                        <input type="text" name="km_kembali_mobil" class="form-control" value="{{ $details->km_berangkat_kembali }}" placeholder="Contoh: 30.000">
+                        <input type="text" name="km_kembali_mobil" class="form-control" value="{{ $details->km_kembali_mobil }}" placeholder="Contoh: 30.000">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
