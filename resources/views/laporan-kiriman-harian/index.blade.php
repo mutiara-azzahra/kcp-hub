@@ -8,7 +8,7 @@
                 <h4>Kiriman Harian</h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-warning" href="{{ route('laporan-kiriman-harian.history') }}"><i class="fa-solid fa-hourglass"></i> Histori LKH</a>
+                <a class="btn btn-warning" href="{{ route('laporan-kiriman-harian.history') }}"><i class="fa-sp fa-hourglass"></i> Histori LKH</a>
             </div>
         </div>
     </div>
