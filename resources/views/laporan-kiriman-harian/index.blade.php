@@ -5,10 +5,10 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4>Kiriman Harian</h4>
+                <h4>Laporan Kiriman Harian</h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-warning" href="{{ route('laporan-kiriman-harian.history') }}"><i class="fa-sp fa-hourglass"></i> Histori LKH</a>
+                <a class="btn btn-warning" href="{{ route('laporan-kiriman-harian.history') }}"><i class="fas fa-refresh"></i> Histori LKH</a>
             </div>
         </div>
     </div>

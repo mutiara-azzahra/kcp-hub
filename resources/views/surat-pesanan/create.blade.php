@@ -81,11 +81,9 @@
                                     <select name="kd_outlet" class="form-control mb-2 my-select">     
                                         <option value="">-- Pilih Toko --</option>
                                         @foreach($toko as $i)
-
-                                        @foreach($i->outlet as $s)
-                                            <option value="{{ $s->kd_outlet }}">{{ $s->kd_outlet }} / {{ $s->nm_outlet }}</option>
-                                        @endforeach
-
+                                            @foreach($i->outlet as $s)
+                                                <option value="{{ $s->kd_outlet }}">{{ $s->kd_outlet }} / {{ $s->nm_outlet }}</option>
+                                            @endforeach
                                         @endforeach
                                     </select>
                                 </div>

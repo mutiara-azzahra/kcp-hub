@@ -39,8 +39,10 @@
                         <strong>Driver</strong> *wajib diisi
                         <select name="driver" class="form-control mr-2">
                             <option value="">-- Pilih Driver --</option>
-                            @foreach($driver as $s)
-                                <option value="{{ $s->username }}">{{ $s->nama_user }}</option>
+                            @foreach($drivers as $driver)
+                                <option value="{{ $driver->username }}" {{ old('driver') == $driver->username ? 'selected' : '' }}>
+                                    {{ $driver->nama_user }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -50,10 +52,13 @@
                         <strong>Helper</strong>
                         <select name="helper" class="form-control mr-2">
                             <option value="">-- Pilih Helper --</option>
-                            @foreach($helper as $s)
-                                <option value="{{ $s->username }}">{{ $s->nama_user }}</option>
+                            @foreach($helpers as $helper)
+                                <option value="{{ $helper->username }}" {{ old('helper') == $helper->username ? 'selected' : '' }}>
+                                    {{ $helper->nama_user }}
+                                </option>
                             @endforeach
                         </select>
+
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
