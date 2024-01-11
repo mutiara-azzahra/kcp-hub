@@ -55,14 +55,14 @@
                         @endphp
                         
                         <tr>
-                            <td class="text-center">Rp. {{ number_format($getTarget, 0, ',', '.') }}</td>
+                            <td class="text-center">Rp. {{ number_format($getTarget->nominal, 0, ',', '.') }}</td>
 
                             @if($target == null)
 
                             @else
                             <td class="text-center">Rp. {{ number_format($target, 0, ',', '.') }}, <p style="color:red;">({{ number_format($selisih, 0, ',', '.') }})</p></td>
                             @endif
-                            <td class="text-center">{{ number_format((($target/$getTarget) * 100), 3, ',', '.') }} %</td>
+                            <td class="text-center">{{ number_format((($target/$getTarget->nominal) * 100), 3, ',', '.') }} %</td>
                         </tr>
                         
                     </tbody>
