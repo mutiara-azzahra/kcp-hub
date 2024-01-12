@@ -146,6 +146,69 @@ class SalesOrderController extends Controller
 
             } elseif($stok_ready != 0) {
 
+                if($d->qty >= $stok_ready){
+
+                    $back_order = [
+                        'nobo'          => $nobo,
+                        'area_bo'       => $header_so->area_sp,
+                        'kd_outlet'     => $header_so->kd_outlet,
+                        'part_no'       => $d->part_no,
+                        'qty'           => $d->qty - $stok_ready,
+                        'hrg_pcs'       => $d->hrg_pcs,
+                        'disc'          => $d->disc,
+                        'status'        => 'O',
+                        'created_at'    => now(),
+                        'created_by'    => Auth::user()->nama_user,
+                    ];
+        
+                    TransaksiBackOrderDetails::create($back_order);
+
+                    $details = [
+                        'noso'              => $header_so->noso,
+                        'area_so'           => $header_so->area_sp,
+                        'kd_outlet'         => $header_so->kd_outlet,
+                        'part_no'           => $d->part_no,
+                        'qty'               => $d->stok_ready,
+                        'hrg_pcs'           => $d->hrg_pcs,
+                        'disc'              => $d->disc,
+                        'nominal'           => $d->nominal,
+                        'nominal_disc'      => $d->nominal_disc,
+                        'nominal_total'     => $d->nominal_total,
+                        'status'            => 'O',
+                        'ket_status'        => 'OPEN',
+                        'user_sales'        => $d->user_sales,
+                        'flag_approve_date' => now(),
+                        'crea_date'         => now(),
+                        'crea_by'           => Auth::user()->nama_user,
+                    ];
+        
+                    TransaksiSODetails::create($details);
+
+                } elseif( $d->qty == $stok_ready ){
+
+                    $details = [
+                        'noso'          => $header_so->noso,
+                        'area_so'       => $header_so->area_sp,
+                        'kd_outlet'     => $header_so->kd_outlet,
+                        'part_no'       => $d->part_no,
+                        'qty'           => $d->qty,
+                        'hrg_pcs'       => $d->hrg_pcs,
+                        'disc'          => $d->disc,
+                        'nominal'       => $d->nominal,
+                        'nominal_disc'  => $d->nominal_disc,
+                        'nominal_total' => $d->nominal_total,
+                        'status'        => 'O',
+                        'ket_status'    => 'OPEN',
+                        'user_sales'    => $d->user_sales,
+                        'flag_approve_date' => now(),
+                        'crea_date'     => now(),
+                        'crea_by'       => Auth::user()->nama_user,
+                    ];
+        
+                    TransaksiSODetails::create($details);
+
+                }
+
                 $details = [
                     'noso'          => $header_so->noso,
                     'area_so'       => $header_so->area_sp,

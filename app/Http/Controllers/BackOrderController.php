@@ -71,8 +71,6 @@ class BackOrderController extends Controller
 
         foreach($store_bo->details as $i){
 
-            // dd($i);
-
             $nominal      = $i->qty * $i->hrg_pcs;
             $nominal_disc = $i->qty * $i->hrg_pcs * $i->disc / 100;
             $stok_ready   = MasterStokGudang::where('part_no', $i->part_no)->value('stok');
@@ -102,7 +100,6 @@ class BackOrderController extends Controller
         }
 
         return redirect()->route('back-order.index')->with('success','Data Back Order berhasil diteruskan menjadi SO!');
-        // return redirect()->route('back-order.index')->with('danger','Data Back Order gagal diteruskan menjadi SO');
         
     }
 
