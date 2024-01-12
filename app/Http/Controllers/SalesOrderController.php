@@ -65,11 +65,11 @@ class SalesOrderController extends Controller
 
     public function approve($nosp){
 
-        $approve_so = TransaksiSpHeader::where('nosp', $nosp)->get();
         $header_so  = TransaksiSpHeader::where('nosp', $nosp)->first();
         $hasZeroQty = false;
         $check_sp   = TransaksiSpDetails::where('nosp', $nosp)->get();
 
+        //Periksa stok
         foreach ($check_sp as $i) {
             $stok_ready = MasterStokGudang::where('part_no', $i->part_no)->value('stok');
 
@@ -80,6 +80,7 @@ class SalesOrderController extends Controller
             }
         }
 
+        //Apabila ada stok ready = 0, create BO
         if ($hasZeroQty) {
             $newBo             = new TransaksiBackOrderHeader();
             $newBo->nobo       = TransaksiBackOrderHeader::nobo();
@@ -94,78 +95,102 @@ class SalesOrderController extends Controller
             $value['noso_out']   = $header_so->noso;
             $value['user_sales'] = $header_so->user_sales;
             $value['created_by'] = Auth::user()->nama_user;
-            $value['created_at']     = NOW();
+            $value['created_at'] = NOW();
 
             TransaksiBackOrderHeader::create($value);
-        
-        }
 
-        TransaksiSpHeader::where('nosp', $nosp)->update([
-            'status'    => 'C',
-            'modi_date' => NOW()
-        ]);
+            foreach ($header_so->details_sp as $d) {
 
-        foreach($approve_so as $a){
-            $data['noso']               = $a->noso;
-            $data['area_so']            = $a->area_sp;
-            $data['kd_outlet']          = $a->kd_outlet;
-            $data['nm_outlet']          = $a->nm_outlet;
-            $data['status']             = 'O';
-            $data['ket_status']         = 'OPEN';
-            $data['user_sales']         = $a->user_sales;
-            $data['flag_approve']       = 'Y';
-            $data['flag_approve_date']  = NOW();
-            $data['crea_date']          = NOW();
-            $data['crea_by']            = Auth::user()->nama_user;
-
-            TransaksiSOHeader::create($data);
-        }
-        
-        foreach ($header_so->details_sp as $d) {
             $stok_ready = MasterStokGudang::where('part_no', $d->part_no)->value('stok');
     
-            if ($stok_ready == 0) {
-
-                $details = [
-                    'nobo'          => $nobo,
-                    'area_bo'       => $header_so->area_sp,
-                    'kd_outlet'     => $header_so->kd_outlet,
-                    'part_no'       => $d->part_no,
-                    'qty'           => $d->qty,
-                    'hrg_pcs'       => $d->hrg_pcs,
-                    'disc'          => $d->disc,
-                    'status'        => 'O',
-                    'created_at'    => now(),
-                    'created_by'    => Auth::user()->nama_user,
-                ];
-        
-                TransaksiBackOrderDetails::create($details);
-
-            } elseif($stok_ready != 0) {
-
-                if($d->qty >= $stok_ready){
+                if ($stok_ready == 0) {
 
                     $back_order = [
                         'nobo'          => $nobo,
                         'area_bo'       => $header_so->area_sp,
                         'kd_outlet'     => $header_so->kd_outlet,
                         'part_no'       => $d->part_no,
-                        'qty'           => $d->qty - $stok_ready,
+                        'qty'           => $d->qty,
                         'hrg_pcs'       => $d->hrg_pcs,
                         'disc'          => $d->disc,
                         'status'        => 'O',
                         'created_at'    => now(),
                         'created_by'    => Auth::user()->nama_user,
                     ];
-        
+            
                     TransaksiBackOrderDetails::create($back_order);
+
+                } elseif($stok_ready != 0) {
+
+                    if($d->qty >= $stok_ready){
+
+                        $back_order = [
+                            'nobo'          => $nobo,
+                            'area_bo'       => $header_so->area_sp,
+                            'kd_outlet'     => $header_so->kd_outlet,
+                            'part_no'       => $d->part_no,
+                            'qty'           => $d->qty - $stok_ready,
+                            'hrg_pcs'       => $d->hrg_pcs,
+                            'disc'          => $d->disc,
+                            'status'        => 'O',
+                            'created_at'    => now(),
+                            'created_by'    => Auth::user()->nama_user,
+                        ];
+            
+                        TransaksiBackOrderDetails::create($back_order);
+
+
+                    } elseif($d->qty == $stok_ready ){
+
+
+                    } elseif($d->qty < $stok_ready ){
+                       
+                    }
+
+                }
+        
+            }
+        
+        }
+
+        //Ubah status SP
+        TransaksiSpHeader::where('nosp', $nosp)->update([
+            'status'        => 'C',
+            'ket_status'    => 'CLOSE',
+            'modi_date'     => NOW()
+        ]);
+
+        //Create SO Header
+        $header = [
+            'noso'              => $header_so->noso,
+            'area_so'           => $header_so->area_sp,
+            'kd_outlet'         => $header_so->kd_outlet,
+            'nm_outlet'         => $header_so->nm_outlet,
+            'status'            => 'O',
+            'ket_status'        => 'OPEN',
+            'user_sales'        => $header_so->user_sales,
+            'flag_approve'      => 'Y',
+            'flag_approve_date' => now(),
+            'crea_date'         => now(),
+            'crea_by'           => Auth::user()->nama_user,
+        ];
+
+        TransaksiSOHeader::create($header);
+        
+        foreach ($header_so->details_sp as $d) {
+
+            $stok_ready = MasterStokGudang::where('part_no', $d->part_no)->value('stok');
+            
+            if($stok_ready != 0) {
+
+                if($d->qty >= $stok_ready){
 
                     $details = [
                         'noso'              => $header_so->noso,
                         'area_so'           => $header_so->area_sp,
                         'kd_outlet'         => $header_so->kd_outlet,
                         'part_no'           => $d->part_no,
-                        'qty'               => $d->stok_ready,
+                        'qty'               => $stok_ready,
                         'hrg_pcs'           => $d->hrg_pcs,
                         'disc'              => $d->disc,
                         'nominal'           => $d->nominal,
@@ -204,7 +229,8 @@ class SalesOrderController extends Controller
         
                     TransaksiSODetails::create($details);
 
-                } elseif($d->qty <= $stok_ready ){
+                } elseif($d->qty < $stok_ready ){
+
                     $details = [
                         'noso'          => $header_so->noso,
                         'area_so'       => $header_so->area_sp,
