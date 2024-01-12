@@ -35,4 +35,9 @@ class TransaksiSODetails extends Model
         return $this->belongsTo(MasterStokGudang::class, 'part_no', 'part_no');
     }
 
+    public function rak()
+    {
+        return $this->hasMany(BarangMasukDetails::class, 'part_no', 'part_no');
+    }
+
 }

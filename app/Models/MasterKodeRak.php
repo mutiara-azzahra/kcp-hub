@@ -18,4 +18,5 @@ class MasterKodeRak extends Model
     public function master_part(){
         return $this->hasMany(MasterPart::class, 'id_rak', 'id');
     }
+
 }

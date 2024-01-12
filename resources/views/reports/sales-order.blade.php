@@ -212,12 +212,13 @@
                         <td class="td-qty">{{$p->nama_part->part_nama}}</td>
                         <td class="td-qty">{{$p->qty}}</td>
                         <td class="td-qty">{{$p->stok_ready->stok}}</td>
+                        <td class="td-qty">{{$p->rak->first()->rak->kode_rak_lokasi }}</td>
 
-                        @if($p->nama_part->rak != null)
+                        {{-- @if($p->nama_part->rak != null)
                         <td class="td-qty">{{$p->nama_part->rak->kode_rak}}</td>
                         @else
                         <td class="td-qty">-</td>
-                        @endif
+                        @endif --}}
 
                         <td class="td-qty">
                             
