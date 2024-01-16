@@ -23,7 +23,6 @@
         </div>
     @endif
 
-
     @if($nota === null)
     <div class="card" style="padding: 10px;">
         <div class="card-header">

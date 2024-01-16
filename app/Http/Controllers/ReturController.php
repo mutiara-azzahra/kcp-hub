@@ -81,7 +81,7 @@ class ReturController extends Controller
 
             if($invoice){
 
-                $returDetail = new ReturDetails();
+                $returDetail                  = new ReturDetails();
                 $returDetail->no_retur        = $value['no_retur'];
                 $returDetail->part_no         = $value['part_no'];
                 $returDetail->qty_invoice     = $value['qty_invoice'];
@@ -102,7 +102,7 @@ class ReturController extends Controller
         }       
                     
         if ($success){
-            return redirect()->route('retur.list')->with('success','Data list retur baru berhasil ditambahkan!');
+            return redirect()->route('retur.details', ['no_retur' => $returDetail->no_retur])->with('success','Data retur baru berhasil ditambahkan');
         } else{
             return redirect()->route('retur.index')->with('danger','Data list retur baru gagal ditambahkan');
         }

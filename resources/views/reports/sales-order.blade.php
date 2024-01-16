@@ -200,8 +200,6 @@
                         <th class="th-header">Qty Gudang</th>
                         <th class="th-header">Rak</th>
                         <th class="th-header">Check</th>
-
-                        
                     </tr>
                 </thead>
                 <tbody style="line-height: 15px;">

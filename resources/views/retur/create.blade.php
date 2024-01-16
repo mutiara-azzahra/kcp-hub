@@ -35,7 +35,7 @@
                             <select name="noinv" class="form-control my-select">
                                 <option value="">---Pilih Invoice--</option>
                                 @foreach($invoice as $a)
-                                    <option value="{{ $a->noinv }}">{{ $a->noinv }}</option>
+                                    <option value="{{ $a->noinv }}">{{ $a->noinv }} - {{ $a->kd_outlet }} / {{ $a->nm_outlet }}</option>
                                 @endforeach
                             </select>
                         </div>

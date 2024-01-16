@@ -43,7 +43,7 @@
 
                 @if(isset($check))
                     <div class="col-lg-12 p-1">
-                        <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example2">
+                        <table class="table table-hover table-bordered table-sm bg-light" id="example2">
                             <thead>
                                 <tr style="background-color: #6082B6; color:white">
                                     <th class="text-center">Part No</th>
@@ -63,6 +63,12 @@
                                     <td class="text-left">{{ $d->keterangan }}</td>
                                 </tr>
                                 @endforeach
+
+                                <tr>
+                                    <td colspan="3" class="text-center"><b>TOTAL</b></td>
+                                    <td class="text-right"><b>{{ number_format($header->details->sum('nominal_retur'), 0, ',', ',') }}</b></td>
+                                    <td></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
