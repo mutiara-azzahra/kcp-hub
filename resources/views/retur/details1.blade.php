@@ -8,14 +8,10 @@
                 <h4>Details Retur</h4>
             </div>
             <div class="float-right">
-
-                <form action="{{ route('retur.approve', $header->id) }}" method="POST" id="approve_{{ $header->id }}" data-id="{{ $header->id }}">
-                    <a class="btn m-1 btn-success" href="{{ route('retur.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
-                    @csrf
-                    @method('GET')
-                
-                    <a class="btn m-1 btn-warning" onclick="Approve('{{ $header->id }}')"><i class="fas fa-check"></i>Approve</a>
-                </form>
+                <a class="btn m-1 btn-success" href="{{ route('retur.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
+            </div>
+            <div class="float-right">
+                <a class="btn m-1 btn-warning" href=""><i class="fas fa-check"></i> Approve</a>
             </div>
         </div>
     </div>

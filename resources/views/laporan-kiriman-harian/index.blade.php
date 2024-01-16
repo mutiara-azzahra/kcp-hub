@@ -132,21 +132,28 @@
                                 <a class="btn btn-info btn-sm" href="{{ route('laporan-kiriman-harian.details',$s->no_lkh) }}">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a class="btn btn-warning btn-sm" href="{{ route('laporan-kiriman-harian.cetak', $s->no_lkh) }}" target="_blank">
+                                <a class="btn btn-warning btn-sm" onClick="printAndRefresh('{{ route('laporan-kiriman-harian.cetak', $s->no_lkh) }}')" target="_blank">
                                     <i class="fas fa-print"></i>
                                 </a>
                             </td>
                         </tr>
-                            @endforeach
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-
 </div>
 @endsection
 
 @section('script')
+
+<script>
+    function printAndRefresh(url){
+        window.open(url, '_blank');
+        
+        window.location.reload();
+    }
+</script>
 
 @endsection

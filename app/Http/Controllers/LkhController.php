@@ -15,7 +15,7 @@ class LkhController extends Controller
     public function index(){
 
         $packingsheet = TransaksiPackingsheetHeader::where('flag_lkh', 'N')->get();
-        $lkh          = TransaksiLkhHeader::where('status', 'O')->get();
+        $lkh          = TransaksiLkhHeader::where('status', 'O')->orderBy('id', 'desc')->get();
 
         return view('laporan-kiriman-harian.index', compact('packingsheet', 'lkh'));
     }
@@ -93,6 +93,13 @@ class LkhController extends Controller
     {
         $data           = TransaksiLkhHeader::where('no_lkh', $no_lkh)->get();
         $data_no_lkh    = TransaksiLkhHeader::where('no_lkh', $no_lkh)->first();
+
+        TransaksiLkhHeader::where('no_lkh', $no_lkh)->update([
+            'status'            => 'C',
+            'updated_at'        => NOW(),
+            'updated_by'        => Auth::user()->nama_user
+        ]);
+
         $pdf            = PDF::loadView('reports.lkh', ['data'=>$data, 'data_no_lkh' => $data_no_lkh]);
         $pdf->setPaper('a4', 'potrait');
 

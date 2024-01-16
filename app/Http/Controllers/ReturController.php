@@ -109,4 +109,8 @@ class ReturController extends Controller
         
     }
 
+    public function approve($id){
+        dd('retur');
+    }
+
 }
