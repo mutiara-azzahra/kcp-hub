@@ -5,28 +5,29 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4>Retur</h4>
+                <h4>History Retur</h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-success m-1" href="{{ route('retur.create') }}"><i class="fas fa-plus"></i> Tambah Retur</a>
-                <a class="btn btn-primary m-1" href="{{ route('retur.history') }}"><i class="fas fa-list"></i> History Retur</a>
+                <a class="btn btn-success" href="{{ route('laporan-kiriman-harian.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
             </div>
         </div>
     </div>
-    
+
     @if ($message = Session::get('success'))
         <div class="alert alert-success" id="myAlert">
             <p>{{ $message }}</p>
         </div>
-    @elseif ($message = Session::get('danger'))
-        <div class="alert alert-warning" id="myAlert">
+    @elseif ($message = Session::get('success'))
+        <div class="alert alert-success" id="myAlert">
             <p>{{ $message }}</p>
-        </div>
+        </div>  
     @endif
 
     <div class="card" style="padding: 10px;">
         <div class="card-header">
-            List Retur Toko
+            <div class="col-lg-12">
+                List Retur Selesai
+            </div>
         </div>
         <div class="card-body">
             <div class="col-lg-12">  
@@ -45,14 +46,14 @@
                         $no=1;
                         @endphp
 
-                        @foreach($retur as $p)
+                        @foreach($history_retur as $p)
                         <tr>
                             <td class="text-left">{{ $p->no_retur }}</td>
                             <td class="text-left">{{ $p->noinv }}</td>
                             <td class="text-center">{{ $p->kd_outlet }}</td>
                             <td class="text-left">{{ $p->nm_outlet }}</td>
                             <td class="text-center">
-                                <a class="btn btn-info btn-sm" href="{{ route('retur.details', $p->no_retur )}}"><i class="fas fa-eye"></i>
+                                <a class="btn btn-warning btn-sm" href="{{ route('retur.details', $p->no_retur )}}"><i class="fas fa-eye"></i>
                                 </a>
                             </td>
                         </tr>
@@ -62,6 +63,7 @@
             </div>
         </div>
     </div>
+
 </div>
 @endsection
 

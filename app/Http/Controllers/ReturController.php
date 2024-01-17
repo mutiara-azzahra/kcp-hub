@@ -147,4 +147,11 @@ class ReturController extends Controller
 
     }
 
+    public function history(){
+
+        $history_retur = ReturHeader::orderBy('created_at', 'desc')->where('status', 'C')->get();
+
+        return view('retur.history', compact('history_retur'));
+    }
+
 }

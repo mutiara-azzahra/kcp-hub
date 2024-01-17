@@ -502,11 +502,6 @@
                 </li>
                 <li class="nav-item">
                     <a href="" class="nav-link">
-                      <p>History Retur</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="" class="nav-link">
                       <p>History Claim</p>
                     </a>
                 </li>

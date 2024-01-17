@@ -13,8 +13,12 @@
                     <a class="btn m-1 btn-success" href="{{ route('retur.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
                     @csrf
                     @method('GET')
-                
+                    
+                    @if($header->status == 'O')
                     <a class="btn m-1 btn-warning" onclick="Approve('{{ $header->id }}')"><i class="fas fa-check"></i>Approve</a>
+                    @else
+
+                    @endif
                 </form>
             </div>
         </div>

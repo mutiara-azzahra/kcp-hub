@@ -433,6 +433,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/retur/details/{no_retur}', [ReturController::class, 'details'])->name('retur.details');
     Route::post('/retur/store-details', [ReturController::class, 'store_details'])->name('retur.store-details');
     Route::get('/retur/approve/{id}', [ReturController::class, 'approve'])->name('retur.approve');
+    Route::get('/retur/history', [ReturController::class, 'history'])->name('retur.history');
 
 });
 
