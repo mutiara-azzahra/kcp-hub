@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Models\FlowStokGudang;
+use App\Models\MasterStokGudang;
 use App\Models\ReturHeader;
 use App\Models\ReturDetails;
 use App\Models\TransaksiInvoiceHeader;
@@ -14,7 +16,7 @@ class ReturController extends Controller
 {
     public function index(){
 
-        $retur = ReturHeader::orderBy('created_at', 'desc')->get();
+        $retur = ReturHeader::orderBy('created_at', 'desc')->where('status', 'O')->get();
 
         return view('retur.index', compact('retur'));
     }
@@ -110,7 +112,39 @@ class ReturController extends Controller
     }
 
     public function approve($id){
-        dd('retur');
+
+        $retur_approved = ReturHeader::where('id', $id)->first();
+
+        foreach($retur_approved->details as $i){
+
+            $stok_akhir = FlowStokGudang::where('part_no', $i->part_no)->first();
+
+            if(isset($stok_akhir)){
+                $stok_awal = $stok_akhir->stok_akhir;
+            } else{
+                $stok_awal = 0;
+            }
+
+            $flow_stok                          = new FlowStokGudang();
+            $flow_stok->tanggal_barang_masuk    = now();
+            $flow_stok->tanggal_barang_keluar   = null;
+            $flow_stok->part_no                 = $i->part_no;
+            $flow_stok->stok_awal               = $stok_awal;
+            $flow_stok->stok_masuk              = $i->qty_retur;
+            $flow_stok->stok_keluar             = 0;
+            $flow_stok->stok_akhir              = $flow_stok->stok_awal + $flow_stok->stok_masuk - $flow_stok->stok_keluar;
+            $flow_stok->created_by              = Auth::user()->nama_user;
+            $flow_stok->save();
+            
+        }
+
+        ReturHeader::where('id', $id)->update([
+            'status'        => 'C',
+            'updated_at'    => NOW()
+        ]);
+
+        return redirect()->route('retur.index')->with('success','Data retur berhasil diapprove');
+
     }
 
 }

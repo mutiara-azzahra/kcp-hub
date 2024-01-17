@@ -15,9 +15,16 @@ class BackOrderController extends Controller
 {
     public function index(){
 
-        $back_order = TransaksiBackOrderHeader::all();
+        $outlet = MasterOutlet::all();
 
-        return view('back-order.index', compact('back_order'));
+        return view('back-order.index', compact('outlet'));
+    }
+
+    public function details($kd_outlet){
+
+        $back_order = TransaksiBackOrderHeader::where('kd_outlet', $kd_outlet)->where('status', 'O')->get();
+
+        return view('back-order.details', compact('back_order'));
     }
 
     public function show($nobo){

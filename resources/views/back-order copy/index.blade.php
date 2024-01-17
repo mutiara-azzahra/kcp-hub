@@ -5,35 +5,27 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4>Retur</h4>
-            </div>
-            <div class="float-right m-1">
-                 <a class="btn btn-success m-1" href="{{ route('retur.create') }}"><i class="fas fa-plus"></i> Tambah Retur</a>
-            </div>
+                <h4>Back Order / BO</h4>
+             </div>
         </div>
     </div>
-    
+
     @if ($message = Session::get('success'))
         <div class="alert alert-success" id="myAlert">
             <p>{{ $message }}</p>
-        </div>
+        </div>  
     @elseif ($message = Session::get('danger'))
         <div class="alert alert-warning" id="myAlert">
             <p>{{ $message }}</p>
-        </div>
+        </div>  
     @endif
 
     <div class="card" style="padding: 10px;">
-        <div class="card-header">
-            List Retur Toko
-        </div>
         <div class="card-body">
             <div class="col-lg-12">  
                 <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example2">
-                    <thead>
-                        <tr style="background-color: #6082B6; color:white">
-                            <th class="text-center">No. Retur</th>
-                            <th class="text-center">No. Invoice</th>
+                    <thead style="background-color: #6082B6; color:white">
+                        <tr>
                             <th class="text-center">Kode Toko</th>
                             <th class="text-center">Nama Toko</th>
                             <th class="text-center">Aksi</th>
@@ -44,15 +36,12 @@
                         $no=1;
                         @endphp
 
-                        @foreach($retur as $p)
+                        @foreach($outlet as $i)
                         <tr>
-                            <td class="text-left">{{ $p->no_retur }}</td>
-                            <td class="text-left">{{ $p->noinv }}</td>
-                            <td class="text-center">{{ $p->kd_outlet }}</td>
-                            <td class="text-left">{{ $p->nm_outlet }}</td>
+                            <td class="text-center">{{ $i->kd_outlet }}</td>
+                            <td class="text-left">{{ $i->nm_outlet }}</td>
                             <td class="text-center">
-                                <a class="btn btn-warning btn-sm" href="{{ route('retur.details', $p->no_retur )}}"><i class="fas fa-eye"></i>
-                                </a>
+                                <a class="btn btn-primary btn-sm" href="{{ route('back-order.details', $i->kd_outlet) }}"><i class="fas fa-list"></i></a>
                             </td>
                         </tr>
                         @endforeach
