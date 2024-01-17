@@ -110,10 +110,9 @@
         })
     }
 
-
     Hapus = (id)=>{
         Swal.fire({
-            title: 'Apakah anda yakin mengahpus detail BO ini?',
+            title: 'Apakah anda yakin menghapus detail BO ini?',
             text:  "Data tidak dapat kembali" ,
             showCancelButton: true,
             confirmButtonColor: '#3085d6' ,
@@ -128,7 +127,6 @@
         })
     }
 
-    
 </script>
 
 @endsection

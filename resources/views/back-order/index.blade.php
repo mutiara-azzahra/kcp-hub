@@ -47,7 +47,7 @@
                             <td class="text-left">{{ $i->noso_out }}</td>
                             <td class="text-left">{{ $i->noso_in }}</td>
                             <td class="text-center">
-                                <a class="btn btn-primary btn-sm" href="{{ route('back-order.show', $i->nobo) }}"><i class="fas fa-list"></i></a>
+                                <a class="btn btn-info btn-sm" href="{{ route('back-order.show', $i->nobo) }}"><i class="fas fa-eye"></i></a>
                             </td>
                         </tr>
                         @endforeach
