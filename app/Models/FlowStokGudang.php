@@ -16,6 +16,8 @@ class FlowStokGudang extends Model
         'part_no',
         'tanggal_barang_masuk',
         'tanggal_barang_keluar',
+        'keterangan',
+        'referensi',
         'stok_awal',
         'stok_masuk',
         'stok_keluar',
@@ -25,5 +27,8 @@ class FlowStokGudang extends Model
         'updated_at',
         'updated_by'
     ];
+
+    //keterangan => RETUR (+) / BARANG_MASUK (+) / BARANG_KELUAR atau INVOICE (-) / CLAIM (-)
+    //referensi =>trx from
 
 }
