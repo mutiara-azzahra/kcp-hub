@@ -48,7 +48,7 @@
                                     <tr>
                                         <td>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" name="selected_items[]" value="{{ $i->part_no }}">
+                                                <input class="form-check-input" type="checkbox" name="selected_items[]" value="{{ $i->part_no }}" checked>
                                                 <input type="hidden" name="no_surat_pesanan[]" value="{{ $i->no_surat_pesanan }}">
                                             </div>
                                         </td>
