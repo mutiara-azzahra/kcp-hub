@@ -35,7 +35,6 @@
 
                         <table class="table table-hover table-sm bg-light table-bordered table-striped" id="table">
                             <thead>
-
                                 <tr style="background-color: #6082B6; color:white">
                                     <th></th>
                                     <th class="text-center">No. SP</th>
