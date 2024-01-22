@@ -11,6 +11,7 @@ use App\Models\MasterPart;
 use App\Models\MasterStokGudang;
 use App\Models\BarangMasukHeader;
 use App\Models\BarangMasukDetails;
+use App\Models\FlowStokGudang;
 
 
 class IntransitController extends Controller
@@ -138,7 +139,31 @@ class IntransitController extends Controller
                 ->where('no_surat_pesanan', $no_surat_pesanan)
                 ->value('qty');
  
-           MasterStokGudang::where('part_no', $itemPartNo)->update(['stok' => $stok_lama + $stok_masuk]);
+            MasterStokGudang::where('part_no', $itemPartNo)->update(['stok' => $stok_lama + $stok_masuk]);
+
+
+            $stok_akhir = FlowStokGudang::where('part_no', $itemPartNo)->first();
+
+            if(isset($stok_akhir)){
+                $stok_awal = $stok_akhir->stok_akhir;
+            } else{
+                $stok_awal = 0;
+            }
+
+            //Intransit, barang masuk ke flow stok gudang
+            $flow_stok                          = new FlowStokGudang();
+            $flow_stok->part_no                 = $itemPartNo;
+            $flow_stok->tanggal_barang_masuk    = now();
+            $flow_stok->tanggal_barang_keluar   = null;
+            $flow_stok->keterangan              = 'BARANG_MASUK';
+            $flow_stok->referensi               = $no_surat_pesanan;
+            $flow_stok->stok_awal               = $stok_awal;
+            $flow_stok->stok_masuk              = $stok_masuk;
+            $flow_stok->stok_keluar             = 0;
+            $flow_stok->stok_akhir              = $flow_stok->stok_awal + $flow_stok->stok_masuk - $flow_stok->stok_keluar;
+            $flow_stok->created_by              = Auth::user()->nama_user;
+            $flow_stok->save();
+
         }
 
         return redirect()->route('intransit.index')->with('success', 'Barang berhasil dimasukkan ke gudang');
