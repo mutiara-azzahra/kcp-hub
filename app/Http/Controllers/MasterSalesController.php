@@ -33,6 +33,8 @@ class MasterSalesController extends Controller
             'sales'      => 'required|unique:master_sales,sales',
         ]);
 
+        
+
         $created = MasterSales::create($request->all());
 
         if ($created){

@@ -17,7 +17,12 @@
         <div class="alert alert-success" id="myAlert">
             <p>{{ $message }}</p>
         </div>
+    @elseif ($message = Session::get('danger'))
+        <div class="alert alert-warning" id="myAlert">
+            <p>{{ $message }}</p>
+        </div>
     @endif
+
     <div class="card" style="padding: 10px;">
         <div class="card-body">
             <div class="col-lg-12">  
@@ -40,11 +45,10 @@
                             <td class="text-left">{{ $p->sales }}</td>
                             <td class="text-center">
                                 <a class="btn btn-info btn-sm" href="{{ route('master-sales.tambah-wilayah',$p->id) }}"><i class="fas fa-plus"></i></a>
-                                <a class="btn btn-warning btn-sm" href="{{ route('master-sales.delete',$p->id) }}"><i class="fas fa-times-circle"></i></a>
+                                <a class="btn btn-danger btn-sm" href="{{ route('master-sales.delete',$p->id) }}"><i class="fas fa-times-circle"></i></a>
                             </td>
                         </tr>
                         @endforeach
-                        
                     </tbody>
                 </table>
             </div>

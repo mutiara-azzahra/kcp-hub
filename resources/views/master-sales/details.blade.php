@@ -17,6 +17,10 @@
         <div class="alert alert-success" id="myAlert">
             <p>{{ $message }}</p>
         </div>
+    @elseif ($message = Session::get('danger'))
+        <div class="alert alert-warning" id="myAlert">
+            <p>{{ $message }}</p>
+        </div>
     @endif
 
     <div class="card" style="padding: 10px;">
@@ -35,7 +39,7 @@
                                     <tr>
                                         <td>
                                             <div class="form-group col-md-12">
-                                                <select name="inputs[0][kode_kabupaten]" class="form-control">
+                                                <select name="inputs[0][kode_kabupaten]" class="form-control my-select">
                                                     <option value="">---Pilih Area--</option>
                                                     @foreach($master_area as $a)
                                                         <option value="{{ $a->kode_kab }}">{{ $a->nm_area }}</option>
@@ -105,38 +109,43 @@
 @section('script')
 
 <script>
-        var i = 0;
-        $('#add').click(function(){
-            ++i;
-            $('#table').append(`<tr>
-                <td>
-                    <div class="form-group col-md-12">
-                        <select name="inputs[${i}][kode_kabupaten]" class="form-control">
-                            <option value="">---Pilih Area--</option>
-                            @foreach($master_area as $a)
-                                <option value="{{ $a->kode_kab }}">{{ $a->nm_area }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </td>
-                <td class="text-center">
-                    <div class="form-group col-12">
-                        <input type="hidden" name="inputs[${i}][id_sales]" value="{{ $sales->id }}">
-                    </div>
-                </td>
-                <td class="text-center">
-                    <div class="form-group col-12">
-                        <button type="submit" class="btn btn-danger remove-table-row"><i class="fas fa-minus"></i></button>
-                    </div>
-                </td>
-            </tr>
-            `);
-        });
 
-    $(document).on('click','.remove-table-row', function(){
-        $(this).parents('tr').remove();
-    })
+var i = 0;
 
-    </script>
+$('#add').click(function(){
+    ++i;
+    $('#table').append(`<tr>
+        <td>
+            <div class="form-group col-md-12">
+                <select name="inputs[${i}][kode_kabupaten]" class="form-control my-select-1">
+                    <option value="">---Pilih Area--</option>
+                    @foreach($master_area as $a)
+                        <option value="{{ $a->kode_kab }}">{{ $a->nm_area }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </td>
+        <td class="text-center">
+            <div class="form-group col-12">
+                <input type="hidden" name="inputs[${i}][id_sales]" value="{{ $sales->id }}">
+            </div>
+        </td>
+        <td class="text-center">
+            <div class="form-group col-12">
+                <button type="submit" class="btn btn-danger remove-table-row"><i class="fas fa-minus"></i></button>
+            </div>
+        </td>
+    </tr>
+    `);
+    $('.my-select-1').select2({
+        width: '100%'
+    });
+});
+
+$(document).on('click','.remove-table-row', function(){
+    $(this).parents('tr').remove();
+})
+
+</script>
 
 @endsection

@@ -156,7 +156,7 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a href="{{ route('master-target.index')}}" class="nav-link">
+                      <a href="{{ route('master-sales.index')}}" class="nav-link">
                         <p>Toko Sales</p>
                       </a>
                   </li>

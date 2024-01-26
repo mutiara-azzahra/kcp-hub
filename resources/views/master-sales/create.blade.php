@@ -12,45 +12,45 @@
             </div>
         </div>
     </div>
-            @if ($message = Session::get('success'))
-                <div class="alert alert-success">
-                    <p>{{ $message }}</p>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                
-            @endif
 
-        <div class="card" style="padding: 10px;">
-                <div class="card-body">
-                    <div class="col-lg-12">
-                        <form action="{{ route('master-sales.store') }}" method="POST">
-                        @csrf
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+    @elseif ($message = Session::get('danger'))
+        <div class="alert alert-warning">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group mb-2">
-                                    <strong>Pilih User</strong>
-                                    <select name="sales" class="form-control my-select" >
-                                        <option value="">---Pilih User--</option>
-                                        @foreach($username as $a)
-                                            <option value="{{ $a->username }}">{{ $a->username }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                                <div class="float-right pt-3">
-                                    <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Data</button>                            
-                                </div>
-                            </div>
+    <div class="card" style="padding: 10px;">
+        <div class="card-body">
+            <div class="col-lg-12">
+                <form action="{{ route('master-sales.store') }}" method="POST">
+                @csrf
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group mb-2">
+                            <strong>Pilih User</strong>
+                            <select name="sales" class="form-control my-select" >
+                                <option value="">---Pilih User--</option>
+                                @foreach($username as $a)
+                                    <option value="{{ $a->username }}">{{ $a->username }}</option>
+                                @endforeach
+                            </select>
                         </div>
-                    </form>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                        <div class="float-right pt-3">
+                            <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Data</button>                            
+                        </div>
                     </div>
                 </div>
+            </form>
+            </div>
         </div>
-
+    </div>
 </div>
 @endsection
 
