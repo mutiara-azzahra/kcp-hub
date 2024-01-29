@@ -60,7 +60,11 @@
                             <td class="text-center">{{ $no++ }}</td>
                             <td class="text-left">{{ $p->part_no }}</td>
                             <td class="text-right">{{ $p->qty }}</td>
-                            <td class="text-center"><a class="btn btn-warning btn-sm"><i class="fas fa-share-square"></i></a></td>
+                            <td class="text-center">
+                                <a class="btn btn-warning btn-sm" href="{{ route('kode-rak-lokasi.mutasi',$p->id) }}">
+                                    <i class="fas fa-share-square"></i>
+                                </a>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

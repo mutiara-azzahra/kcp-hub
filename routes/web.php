@@ -372,6 +372,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/kode-rak-lokasi/edit/{id}', [KodeRakLokasiController::class, 'edit'])->name('kode-rak-lokasi.edit');
     Route::get('/kode-rak-lokasi/show/{id}', [KodeRakLokasiController::class, 'show'])->name('kode-rak-lokasi.show');
     Route::get('/kode-rak-lokasi/delete/{id}', [KodeRakLokasiController::class, 'delete'])->name('kode-rak-lokasi.delete');
+    Route::get('/kode-rak-lokasi/mutasi/{id}', [KodeRakLokasiController::class, 'mutasi'])->name('kode-rak-lokasi.mutasi');
 
     //MST. SALES ACHIVEMENTS
     Route::get('/master-target', [MasterTargetController::class, 'index'])->name('master-target.index');

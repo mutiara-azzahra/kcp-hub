@@ -140,7 +140,6 @@ class IntransitController extends Controller
  
             MasterStokGudang::where('part_no', $itemPartNo)->update(['stok' => $stok_lama + $stok_masuk]);
 
-
             $stok_akhir = FlowStokGudang::where('part_no', $itemPartNo)->first();
 
             if(isset($stok_akhir)){

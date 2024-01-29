@@ -6,6 +6,7 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Models\MasterKodeRak;
 use App\Models\BarangMasukDetails;
+use App\Models\IntransitDetails;
 
 class KodeRakLokasiController extends Controller
 {
@@ -61,6 +62,16 @@ class KodeRakLokasiController extends Controller
 
         return view('kode-rak-lokasi.edit', compact('kode_rak'));
 
+    }
+
+    public function mutasi($id){
+
+        $barang_rak = IntransitDetails::findOrFail($id);
+
+        dd($barang_rak);
+
+
+        
     }
 
 
