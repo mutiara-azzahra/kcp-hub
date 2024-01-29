@@ -65,7 +65,7 @@ class ReturController extends Controller
         return view('retur.details', ['header' => $header] ,compact('header', 'check', 'invoice_details'));
     }
 
-     public function store_details(Request $request){
+    public function store_details(Request $request){
 
         $request->validate([
             'inputs.*.no_retur'    => 'required',

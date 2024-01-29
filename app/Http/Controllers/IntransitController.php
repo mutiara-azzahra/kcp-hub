@@ -13,7 +13,6 @@ use App\Models\BarangMasukHeader;
 use App\Models\BarangMasukDetails;
 use App\Models\FlowStokGudang;
 
-
 class IntransitController extends Controller
 {
     public function index(){
@@ -59,25 +58,25 @@ class IntransitController extends Controller
 
     public function store_details(Request $request){
 
-        $no_surat_pesanan = $request->input('no_surat_pesanan');
-
-        $details_intransit = BarangMasukDetails::where('invoice_non', $no_surat_pesanan)->get();
+        $no_surat_pesanan   = $request->input('no_surat_pesanan');
+        $details_intransit  = BarangMasukDetails::where('invoice_non', $no_surat_pesanan)->get();
     
         try {
             foreach ($details_intransit as $value) {
                 $value->no_surat_pesanan = $no_surat_pesanan;
-                $value->status = 'I';
-                $value->created_at = now();
-                $value->created_by = Auth::user()->nama_user;
+                $value->status           = 'I';
+                $value->created_at       = now();
+                $value->created_by       = Auth::user()->nama_user;
     
                 IntransitDetails::create([
                     'no_surat_pesanan' => $value->no_surat_pesanan,
-                    'part_no' => $value->part_no,
-                    'qty' => $value->qty,
-                    'status' => $value->status,
-                    'created_at' => $value->created_at,
-                    'created_by' => $value->created_by,
+                    'part_no'          => $value->part_no,
+                    'qty'              => $value->qty,
+                    'status'           => $value->status,
+                    'created_at'       => $value->created_at,
+                    'created_by'       => $value->created_by,
                 ]);
+
             }
     
             return redirect()->route('intransit.index')->with('success', 'Barang intransit berhasil ditambahkan!');
@@ -150,11 +149,16 @@ class IntransitController extends Controller
                 $stok_awal = 0;
             }
 
+            $rak = BarangMasukDetails::where('part_no', $itemPartNo)
+                ->where('invoice_non', $no_surat_pesanan)
+                ->value('id_rak');
+
             //Intransit, barang masuk ke flow stok gudang
             $flow_stok                          = new FlowStokGudang();
             $flow_stok->part_no                 = $itemPartNo;
             $flow_stok->tanggal_barang_masuk    = now();
             $flow_stok->tanggal_barang_keluar   = null;
+            $flow_stok->id_rak                  = $rak;
             $flow_stok->keterangan              = 'BARANG_MASUK';
             $flow_stok->referensi               = $no_surat_pesanan;
             $flow_stok->stok_awal               = $stok_awal;

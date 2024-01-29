@@ -16,9 +16,8 @@ class KasMasukController extends Controller
 {
     public function index(){
 
-        $belum_selesai = KasMasukHeader::orderBy('created_at', 'desc')->where('status', 'O')->get();
-
-        $selesai = KasMasukHeader::orderBy('created_at', 'desc')->where('status', 'C')->get();
+        $belum_selesai  = KasMasukHeader::orderBy('created_at', 'desc')->where('status', 'O')->get();
+        $selesai        = KasMasukHeader::orderBy('created_at', 'desc')->where('status', 'C')->get();
 
         return view('kas-masuk.index', compact('belum_selesai', 'selesai'));
     }
@@ -39,8 +38,7 @@ class KasMasukController extends Controller
     public function store_bukti_bayar(Request $request){
 
         $request -> validate([
-            'tanggal_rincian_tagihan'   => 'required', 
-            // 'kd_outlet'                 => 'required', 
+            'tanggal_rincian_tagihan'   => 'required',
             'pembayaran_via'            => 'required',
         ]);
 

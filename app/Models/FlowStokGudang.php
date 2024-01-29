@@ -16,6 +16,7 @@ class FlowStokGudang extends Model
         'part_no',
         'tanggal_barang_masuk',
         'tanggal_barang_keluar',
+        'id_rak',
         'keterangan',
         'referensi',
         'stok_awal',

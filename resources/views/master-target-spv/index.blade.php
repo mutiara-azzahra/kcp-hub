@@ -52,7 +52,7 @@
                             <td class="text-center">{{ $p->bulan }}</td>
                             <td class="text-center">{{ $p->tahun }}</td>
                             <td class="text-right">{{ number_format($p->nominal, 0, ',', ',') }}</td>
-                            <td class="text-center">{{ $p->tahun }}</td>
+                            <td class="text-center"></td>
                         </tr>
                         @endforeach
                     </tbody>
