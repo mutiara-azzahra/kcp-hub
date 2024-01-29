@@ -15,9 +15,11 @@ return new class extends Migration
             $table->increments('id');
             $table->string('no_mutasi');
             $table->string('part_no');
-            $table->string('qty');
-            $table->string('created_by')->nullable();
-            $table->string('updated_by')->nullable();
+            $table->Integer('qty');
+            $table->string('keterangan');
+            $table->timestamps();
+            $table->datetime('created_by')->nullable();
+            $table->datetime('updated_by')->nullable();
         });
     }
 

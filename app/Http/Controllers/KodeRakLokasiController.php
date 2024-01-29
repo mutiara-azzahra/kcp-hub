@@ -68,9 +68,7 @@ class KodeRakLokasiController extends Controller
 
         $barang_rak = IntransitDetails::findOrFail($id);
 
-        dd($barang_rak);
-
-
+        return view('kode-rak-lokasi.mutasi', compact('barang_rak'));
         
     }
 

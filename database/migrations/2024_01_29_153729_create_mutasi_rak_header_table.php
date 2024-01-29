@@ -16,9 +16,12 @@ return new class extends Migration
             $table->string('no_mutasi');
             $table->string('rak_asal');
             $table->string('rak_tujuan');
-            $table->string('approval_head_gudang');
+            $table->enum('approval_head_gudang', ['Y', 'N'])->default('N');
+            $table->datetime('tanggal_approval');
+            $table->enum('cetak_sj_mutasi', ['Y', 'N'])->default('N');
             $table->datetime('tanggal_cetak_sj_mutasi');
-            $table->string('status');
+            $table->enum('status', ['Y', 'N'])->default('Y');
+            $table->timestamps();
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
         });
