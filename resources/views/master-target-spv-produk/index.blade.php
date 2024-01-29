@@ -36,7 +36,7 @@
                             <th class="text-center">Bulan</th>
                             <th class="text-center">Tahun</th>
                             <th class="text-center">Nominal</th>
-                            <th></th>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -84,20 +84,41 @@ class MasterTargetController extends Controller
 
     }
 
-    public function delete($id)
+    public function edit($id){
+
+        $target_sales = TargetSales::findOrFail($id);
+
+        return view('master-target.edit', compact('target_sales'));
+
+    }
+
+    public function update(Request $request, $id)
     {
-        $updated = MasterSales::where('id', $id)->update([
-                'status'         => 'N',
-                'updated_at'     => NOW(),
-                'updated_by'     => Auth::user()->nama_user
-            ]);
+
+        $nominal = str_replace('.', '', $request->nominal);
+        $nominal = str_replace(',', '.', $nominal);
+
+        $updated = TargetSales::where('id', $id)->update([
+            'sales'         => $request->sales,
+            'bulan'         => $request->bulan,
+            'tahun'         => $request->tahun,
+            'nominal'       => $nominal
+        ]);
 
         if ($updated){
-            return redirect()->route('master-target.index')->with('success','Stok Gudang berhasil dihapus!');
+            return redirect()->route('master-target.index')->with('success','Data berhasil dihapus!');
         } else{
-            return redirect()->route('master-target.index')->with('danger','Stok Gudang gagal dihapus');
+            return redirect()->route('master-target.index')->with('danger','Data gagal diubah');
         }
-        
+         
+    }
+
+    public function delete( $id)
+    {
+      
+        TargetSales::destroy($id);
+
+        return redirect()->route('master-target.index')->with('success', 'Data berhasil dihapus');
     }
 
     

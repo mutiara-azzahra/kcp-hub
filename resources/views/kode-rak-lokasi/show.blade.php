@@ -12,26 +12,62 @@
             </div>
         </div>
     </div>
-            @if ($message = Session::get('success'))
-                <div class="alert alert-success" id="myAlert">
-                    <p>{{ $message }}</p>
-                </div>
-            @endif
 
-            <div class="card" style="padding: 10px;">
-                <div class="card-body">
-                    <div class="col-lg-12">
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12">
-                                <div class="form-group">
-                                    <strong>Kode Rak Lokasi</strong><br>
-                                    {{ $kode_rak_lokasi->kode_rak_lokasi }}
-                                </div>
-                            </div>
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success" id="myAlert">
+            <p>{{ $message }}</p>
+        </div>
+    @elseif ($message = Session::get('danger'))
+        <div class="alert alert-warning" id="myAlert">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
+
+    <div class="card" style="padding: 10px;">
+        <div class="card-body">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Kode Rak Lokasi</strong><br>
+                            {{ $kode_rak->kode_rak_lokasi }}
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="card" style="padding: 10px;">
+        <div class="card-body">
+            <div class="col-lg-12">  
+                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example2">
+                    <thead>
+                        <tr style="background-color: #6082B6; color:white">
+                            <th class="text-center">No</th>
+                            <th class="text-center">Part No</th>
+                            <th class="text-center">Qty</th>
+                            <th class="text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                        $no=1;
+                        @endphp
+
+                        @foreach($barang_rak as $p)
+                        <tr>
+                            <td class="text-center">{{ $no++ }}</td>
+                            <td class="text-left">{{ $p->part_no }}</td>
+                            <td class="text-right">{{ $p->qty }}</td>
+                            <td class="text-center"><a class="btn btn-warning btn-sm"><i class="fas fa-share-square"></i></a></td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
 

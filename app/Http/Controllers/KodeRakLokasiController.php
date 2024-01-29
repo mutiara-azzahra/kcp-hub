@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use Illuminate\Http\Request;
 use App\Models\MasterKodeRak;
+use App\Models\BarangMasukDetails;
 
 class KodeRakLokasiController extends Controller
 {
@@ -18,6 +19,16 @@ class KodeRakLokasiController extends Controller
     public function create(){
 
         return view('kode-rak-lokasi.create');
+    }
+
+    public function show($id){
+
+        $kode_rak   = MasterKodeRak::findOrFail($id);
+
+        $barang_rak = BarangMasukDetails::where('id', $kode_rak->id)->get();
+
+        return view('kode-rak-lokasi.show', compact('kode_rak', 'barang_rak'));
+
     }
 
     public function store(Request $request)
@@ -40,6 +51,16 @@ class KodeRakLokasiController extends Controller
             ]);
          
         return redirect()->route('kode-rak-lokasi.index')->with('success','Kode Rak berhasil dihapus!');
+    }
+
+    public function edit($id){
+
+        $kode_rak   = MasterKodeRak::findOrFail($id);
+
+        dd($kode_rak);
+
+        return view('kode-rak-lokasi.edit', compact('kode_rak'));
+
     }
 
 
