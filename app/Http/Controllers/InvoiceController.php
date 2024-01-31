@@ -9,6 +9,7 @@ use App\Models\MasterStokGudang;
 use App\Models\TransaksiSOHeader;
 use App\Models\TransaksiInvoiceHeader;
 use App\Models\TransaksiInvoiceDetails;
+use App\Models\FlowStokGudang;
 
 class InvoiceController extends Controller
 {
@@ -85,6 +86,32 @@ class InvoiceController extends Controller
                     $details['nominal_total']      = $s->nominal_total;
 
                     TransaksiInvoiceDetails::create($details);
+
+                    $retur_approved = ReturHeader::where('id', $id)->first();
+
+                    //FLOW STOK GUDANG
+                    $stok_akhir     = FlowStokGudang::where('part_no', $s->part_no)->first();
+
+                    if(isset($stok_akhir)){
+                        $stok_awal = $stok_akhir->stok_akhir;
+                    } else{
+                        $stok_awal = 0;
+                    }
+
+                    $flow_stok                          = new FlowStokGudang();
+                    $flow_stok->tanggal_barang_masuk    = null;
+                    $flow_stok->tanggal_barang_keluar   = now();
+                    $flow_stok->id_rak                  = null;
+                    $flow_stok->keterangan              = $a->kd_toko;
+                    $flow_stok->referensi               = $header->noinv;
+                    $flow_stok->part_no                 = $s->part_no;
+                    $flow_stok->stok_awal               = $stok_awal;
+                    $flow_stok->stok_masuk              = null;
+                    $flow_stok->stok_keluar             = $s->qty;
+                    $flow_stok->stok_akhir              = $flow_stok->stok_awal + $flow_stok->stok_masuk - $flow_stok->stok_keluar;
+                    $flow_stok->created_by              = Auth::user()->nama_user;
+                    $flow_stok->save();
+
                 }
             }
         }
