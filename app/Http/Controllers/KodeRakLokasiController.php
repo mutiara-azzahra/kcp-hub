@@ -66,10 +66,26 @@ class KodeRakLokasiController extends Controller
 
     public function mutasi($id){
 
-        $barang_rak = IntransitDetails::findOrFail($id);
+        $barang_rak = BarangMasukDetails::findOrFail($id);
 
         return view('kode-rak-lokasi.mutasi', compact('barang_rak'));
         
+    }
+
+
+    public function store_mutasi(Request $request)
+    {
+        $request -> validate([
+            'part_no' => 'required',
+            'qty'     => 'required',
+        ]);
+
+        $newSp          = new TransaksiSpHeader();
+        $newSp->nosp    = TransaksiSpHeader::nosp();
+
+        // MutasiDetails::create($request->all());
+
+        return redirect()->route('kode-rak-lokasi.index')->with('success','Data baru berhasil ditambahkan!');
     }
 
 

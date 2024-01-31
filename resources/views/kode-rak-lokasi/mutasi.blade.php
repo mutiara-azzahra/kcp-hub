@@ -30,72 +30,38 @@
                 <div class="col-lg-8 p-1">
                     <table class="table table-borderless">
                         <tr>
-                            <th class="text-left">Part No</th>
-                            <td>:</td>
-                            <td class="text-left"><b></b></td>
-                        </tr>
-                        <tr>
                             <th class="text-left">Kode Rak</th>
                             <td>:</td>
-                            <td class="text-left"><b></b></td>
+                            <td class="text-left"><b>{{ $barang_rak->id_rak }}</b></td>
                         </tr>
                     </table>
                 </div>
 
                 <div class="col-lg-12 p-1" id="main" data-loading="true">
-                    <form action="{{ route('surat-pesanan.store_details')}}" method="POST">
+                    <form action="{{ route('kode-rak-lokasi.store_mutasi')}}" method="POST">
                         @csrf
                         <table class="table table-hover table-sm bg-light table-striped table-bordered" id="table">
                             <thead>
                                 <tr style="background-color: #6082B6; color:white">
                                     <th class="text-center">Part No</th>
                                     <th class="text-center">Qty</th>
-                                    <th class="text-center">Keterangan Mutasi</th>
-                                    <th class="text-center">Nominal</th>
-                                    <th class="text-center">Tambah</th>
                                 </tr>
                             </thead>
                             <tbody class="input-fields">
-                                <tr>
-                                    <td class="text-center">
-                                        <div class="form-group col-12">
-                                            <select name="inputs[0][part_no]" class="form-control mr-2 my-select" id="package-default" onchange="updateData(`default`)">
-                                                <option value="">-- Pilih --</option>
-                                                @foreach($master_part as $k)
-                                                    <option value="{{ $k->part_no }}" data-het="{{ $k->het }}"> {{ $k->part_no }} | {{ $k->part_nama }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td class="text-center">
-                                        <div class="form-group col-12">
-                                            <input type="text" name="het" for="het" id="het-default" class="form-control" readonly>
-                                        </div>
-                                    </td>
-                                    <td class="text-center">
-                                        <div class="form-group col-12">
-                                            <input type="hidden" name="inputs[0][nosp]" value="{{ $nosp }}">
-                                            <input type="text" id="qty-default" name="inputs[0][qty]" class="form-control" placeholder="0" onkeyup="updateNominal(`default`)">
-                                        </div>
-                                    </td>
-                                    <td class="text-center">
-                                        <div class="form-group col-12">
-                                            <input type="text" id="disc-default" name="inputs[0][disc]" class="form-control" placeholder="0" onkeyup="updateNominal(`default`)">
-                                        </div>
-                                    </td>
-                                    <td class="text-center" id="nominal">
-                                        <div class="form-group col-12">
-                                            <input type="text" id="nominal-default" name="nominal" for="nominal" class="form-control" readonly>
-                                        </div>
-                                    </td>
-                                    <td class="text-center">
-                                        <div class="form-group col-12">
-                                            <a type="button" class="btn btn-primary m-1" id="add"><i class="fas fa-plus"></i></a>                                                                                  
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                    <tr>
+                                        <td class="text-center">
+                                            <div class="form-group col-12">
+                                                <input type="text" name="part_no" class="form-control" value="{{ $barang_rak->part_no }}" readonly>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="form-group col-12">
+                                                <input type="text" name="qty" class="form-control" value="{{ $barang_rak->qty }}">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                                 <div class="float-right">
                                     <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Data</button>                           

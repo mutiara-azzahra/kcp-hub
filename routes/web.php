@@ -47,6 +47,7 @@ use App\Http\Controllers\BgMasukController;
 use App\Http\Controllers\ExportPajakController;
 use App\Http\Controllers\HistoryPesananController;
 use App\Http\Controllers\ReturController;
+use App\Http\Controllers\MutasiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -373,6 +374,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/kode-rak-lokasi/show/{id}', [KodeRakLokasiController::class, 'show'])->name('kode-rak-lokasi.show');
     Route::get('/kode-rak-lokasi/delete/{id}', [KodeRakLokasiController::class, 'delete'])->name('kode-rak-lokasi.delete');
     Route::get('/kode-rak-lokasi/mutasi/{id}', [KodeRakLokasiController::class, 'mutasi'])->name('kode-rak-lokasi.mutasi');
+    Route::post('/kode-rak-lokasi/mutasi/store', [KodeRakLokasiController::class, 'store_mutasi'])->name('kode-rak-lokasi.store_mutasi');
 
     //MST. SALES ACHIVEMENTS
     Route::get('/master-target', [MasterTargetController::class, 'index'])->name('master-target.index');
