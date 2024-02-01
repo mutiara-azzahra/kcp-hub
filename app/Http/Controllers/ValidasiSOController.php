@@ -8,6 +8,7 @@ use Auth;
 use PDF;
 use Carbon\Carbon;
 use App\Models\MasterPart;
+use App\Models\StokGudang;
 use App\Models\MasterDiskonPart;
 use App\Models\TransaksiSOHeader;
 use App\Models\TransaksiSODetails;
@@ -89,9 +90,10 @@ class ValidasiSOController extends Controller
 
     public function edit_details($id){
 
-        $details       = TransaksiSODetails::findOrFail($id);
+        $details  = TransaksiSODetails::findOrFail($id);
+        $rak      = StokGudang::all();
 
-        return view('validasi-so.edit', compact('details'));
+        return view('validasi-so.edit', compact('details', 'rak'));
     }
 
     public function store_edit($id, Request $request)

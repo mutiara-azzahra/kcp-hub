@@ -12,11 +12,17 @@
             </div>
         </div>
     </div>
+
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
+    @elseif ($message = Session::get('danger'))
+        <div class="alert alert-warning">
+            <p>{{ $message }}</p>
+        </div>
     @endif
+
     <form action="{{ route('sales-order.store_edit', $details->id)}}" method="POST">
         @csrf
         <div class="card" style="padding: 10px;">
@@ -44,7 +50,7 @@
                                 </td>
                                 <td class="text-center">
                                     <div class="form-group col-12">
-                                        <input type="number" name="disc" class="form-control" value="{{ $details->disc }}">
+                                        <input type="text" name="disc" class="form-control" value="{{ $details->disc }}">
                                     </div>
                                 </td>
                             </tbody>

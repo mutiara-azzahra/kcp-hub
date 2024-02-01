@@ -19,4 +19,8 @@ class MasterKodeRak extends Model
         return $this->hasMany(MasterPart::class, 'id_rak', 'id');
     }
 
+    public function rak_gudang(){
+        return $this->hasMany(StokGudang::class, 'id_rak', 'id_rak');
+    }
+
 }
