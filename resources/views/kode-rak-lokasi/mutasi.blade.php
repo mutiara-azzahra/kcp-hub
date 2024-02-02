@@ -55,6 +55,8 @@
                                         <div class="form-group col-12">
                                             <input type="text" name="part_no" class="form-control" value="{{ $barang_rak->part_no }}" readonly>
                                             <input type="hidden" name="rak_asal" class="form-control" value="{{ $barang_rak->id_rak }}" readonly>
+                                            <input type="hidden" name="invoice_non" class="form-control" value="{{ $barang_rak->invoice_non }}" readonly>
+                                            <input type="hidden" name="keterangan" class="form-control" value="Barang Mutasi" readonly>
                                         </div>
                                     </td>
                                     <td class="text-center">

@@ -379,6 +379,8 @@ Route::group(['middleware' => 'auth'], function () {
     //KODE RAK LOKASI
     Route::get('/mutasi-part', [MutasiPartController::class, 'index'])->name('mutasi-part.index');
     Route::get('/mutasi-part/details/{no_mutasi}', [MutasiPartController::class, 'details'])->name('mutasi-part.details');
+    Route::get('/mutasi-part/approve/{no_mutasi}', [MutasiPartController::class, 'approve'])->name('mutasi-part.approve');
+    Route::get('/mutasi-part/reject/{no_mutasi}', [MutasiPartController::class, 'reject'])->name('mutasi-part.reject');
 
     //MST. SALES ACHIVEMENTS
     Route::get('/master-target', [MasterTargetController::class, 'index'])->name('master-target.index');

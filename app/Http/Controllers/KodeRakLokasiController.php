@@ -82,6 +82,7 @@ class KodeRakLokasiController extends Controller
             'qty_mutasi' => 'required',
             'rak_asal'   => 'required',
             'rak_tujuan' => 'required',
+            'invoice_non' => 'required',
         ]);
 
         $newMut             = new MutasiHeader();
@@ -90,6 +91,8 @@ class KodeRakLokasiController extends Controller
         $value['no_mutasi']    = $newMut->no_mutasi;
         $value['rak_asal']     = $request->rak_asal;
         $value['rak_tujuan']   = $request->rak_tujuan;
+        $value['invoice_non']  = $request->invoice_non;
+        $value['keterangan']   = $request->keterangan;
         $value['created_at']   = NOW();
         $value['created_by']   = Auth::user()->nama_user;
 

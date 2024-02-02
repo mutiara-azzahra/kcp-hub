@@ -13,6 +13,6 @@ class MutasiDetails extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [ 
-        'no_mutasi', 'part_no', 'qty', 'keterangan', 'created_at', 'updated_at', 'created_by', 'updated_by'
+        'no_mutasi', 'part_no', 'qty','invoice_non', 'keterangan', 'created_at', 'updated_at', 'created_by', 'updated_by'
     ];
 }
