@@ -14,4 +14,11 @@ class MutasiPartController extends Controller
 
         return view('mutasi-part.index', compact('mutasi_approved', 'mutasi'));
     }
+
+    public function details($no_mutasi){
+
+        $header = MutasiHeader::where('no_mutasi', $no_mutasi)->first();
+
+        return view('mutasi-part.details', compact('header'));
+    }
 }

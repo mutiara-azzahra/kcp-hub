@@ -60,7 +60,7 @@
                             <td class="text-center">{{ Carbon\Carbon::parse($m->tanggal_approval)->format('d-m-Y') }}</td>
                             <td class="text-center">{{ Carbon\Carbon::parse($m->tanggal_cetak_sj_mutasi)->format('d-m-Y') }}</td>
                             <td class="text-center">{{ $m->cetak_sj_mutasi }}</td>
-                            <td class="text-center"><a class="btn btn-info btn-sm" href="{{ route('mutasi-part.show', $m->id) }}"><i class="fas fa-eye"></i></a></td>
+                            <td class="text-center"><a class="btn btn-info btn-sm" href="{{ route('mutasi-part.details', $m->no_mutasi) }}"><i class="fas fa-eye"></i></a></td>
                         </tr>
                         @endforeach
                     </tbody>

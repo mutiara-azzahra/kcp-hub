@@ -30,6 +30,7 @@
             <div class="float-left">
                 Details Mutasi
             </div>
+        </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-lg-12 p-1">
@@ -37,7 +38,17 @@
                         <tr>
                             <th class="text-left">No. Mutasi</th>
                             <td>:</td>
-                            <td class="text-left"><b></b></td>
+                            <td class="text-left"><b>{{ $header->no_mutasi }}</b></td>
+                        </tr>
+                        <tr>
+                            <th class="text-left">Rak Asal</th>
+                            <td>:</td>
+                            <td class="text-left"><b>{{ $header->rak1->kode_rak_lokasi }}</b></td>
+                        </tr>
+                        <tr>
+                            <th class="text-left">Rak Tujuan</th>
+                            <td>:</td>
+                            <td class="text-left"><b>{{ $header->rak2->kode_rak_lokasi }}</b></td>
                         </tr>
                     </table>
                 </div>
@@ -47,31 +58,22 @@
                         <thead>
                             <tr style="background-color: #6082B6; color:white">
                                 <th class="text-center">Part No</th>
-                                <th class="text-center">Rak Asal</th>
-                                <th class="text-center">Rak Tujuan</th>
-                                <th class="text-center">Aksi</th>
+                                <th class="text-center">Qty Mutasi</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($header->details as $i)
                             <tr>
-                                <td class="text-left">{{ $d->part_no }}</td>
-                                <td class="text-right">Rp. {{ number_format($d->hrg_pcs, 0, ',', '.') }}</td>
-                                <td class="text-center">{{ $d->qty }}</td>
-                                <td class="text-center">{{ $d->disc }} %</td>
-                                <td class="text-right">Rp. {{ number_format($d->nominal_total, 0, ',', '.') }}</td>
-                                <td class="text-center">
-                                    <a class="btn btn-info btn-sm" href="{{ route('sales-order.edit', $d->id) }}">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                </td>
+                                <td class="text-left">{{ $i->part_no }}</td>
+                                <td class="text-right">{{ $i->qty }}</td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 @endsection
 
