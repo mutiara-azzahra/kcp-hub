@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,7 +9,7 @@ class MutasiHeader extends Model
 {
     use HasFactory;
 
-    protected $table = 'mutasi_header';
+    protected $table = 'mutasi_rak_header';
     protected $primaryKey = 'id';
 
     protected $fillable = [ 
@@ -49,5 +49,15 @@ class MutasiHeader extends Model
     public function details()
     {
         return $this->hasMany(MutasiDetails::class, 'no_mutasi', 'no_mutasi');
+    }
+
+    public function rak1()
+    {
+        return $this->belongsTo(MasterKodeRak::class, 'rak_asal','id');
+    }
+
+    public function rak2()
+    {
+        return $this->belongsTo(MasterKodeRak::class, 'rak_tujuan', 'id');
     }
 }

@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\MasterKodeRak;
+use App\Models\MutasiHeader;
+use App\Models\MutasiDetails;
+use App\Models\StokGudang;
 use App\Models\BarangMasukDetails;
 use App\Models\IntransitDetails;
 
@@ -57,15 +61,13 @@ class KodeRakLokasiController extends Controller
 
         $kode_rak   = MasterKodeRak::findOrFail($id);
 
-        dd($kode_rak);
-
         return view('kode-rak-lokasi.edit', compact('kode_rak'));
 
     }
 
     public function mutasi($id){
 
-        $barang_rak = BarangMasukDetails::findOrFail($id);
+        $barang_rak = StokGudang::findOrFail($id);
         $all_rak    = MasterKodeRak::all();
 
         return view('kode-rak-lokasi.mutasi', compact('barang_rak', 'all_rak'));
@@ -74,16 +76,32 @@ class KodeRakLokasiController extends Controller
 
     public function store_mutasi(Request $request)
     {
+
         $request -> validate([
             'part_no'    => 'required',
             'qty_mutasi' => 'required',
-            'id_rak'     => 'required',
+            'rak_asal'   => 'required',
+            'rak_tujuan' => 'required',
         ]);
 
         $newMut             = new MutasiHeader();
         $newMut->no_mutasi  = MutasiHeader::no_mutasi();
 
-        MutasiHeader::create($request->all());
+        $value['no_mutasi']    = $newMut->no_mutasi;
+        $value['rak_asal']     = $request->rak_asal;
+        $value['rak_tujuan']   = $request->rak_tujuan;
+        $value['created_at']   = NOW();
+        $value['created_by']   = Auth::user()->nama_user;
+
+        MutasiHeader::create($value);
+
+        $details['no_mutasi']    = $newMut->no_mutasi;
+        $details['part_no']      = $request->part_no;
+        $details['qty']          = $request->qty_mutasi;
+        $details['created_at']   = NOW();
+        $details['created_by']   = Auth::user()->nama_user;
+
+        MutasiDetails::create($details);
 
         return redirect()->route('kode-rak-lokasi.index')->with('success','Stok gudang berhasil ditambahkan pada mutasi.
             Silahkan lakukan approval mutasi!');

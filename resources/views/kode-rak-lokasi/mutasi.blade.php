@@ -30,9 +30,9 @@
                 <div class="col-lg-8 p-1">
                     <table class="table table-borderless">
                         <tr>
-                            <th class="text-left">Kode Rak</th>
+                            <th class="text-left">Rak Asal</th>
                             <td>:</td>
-                            <td class="text-left"><b>{{ $barang_rak->id_rak }}</b></td>
+                            <td class="text-left"><b>{{ $barang_rak->rak->kode_rak_lokasi }}</b></td>
                         </tr>
                     </table>
                 </div>
@@ -54,24 +54,25 @@
                                     <td class="text-center">
                                         <div class="form-group col-12">
                                             <input type="text" name="part_no" class="form-control" value="{{ $barang_rak->part_no }}" readonly>
+                                            <input type="hidden" name="rak_asal" class="form-control" value="{{ $barang_rak->id_rak }}" readonly>
                                         </div>
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group col-12">
-                                            <input type="text" class="form-control" value="{{ $barang_rak->qty }}" readonly>
+                                            <input type="text" class="form-control" value="{{ $barang_rak->stok }}" readonly>
                                         </div>
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group col-12">
-                                            <input type="text" name="qty_mutasi" class="form-control" value="{{ $barang_rak->qty }}">
+                                            <input type="text" name="qty_mutasi" class="form-control" placeholder="0">
                                         </div>
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group col-12">
-                                            <select name="id_rak" class="form-control mr-2 my-select">
+                                            <select name="rak_tujuan" class="form-control mr-2 my-select">
                                                 <option value="">-- Pilih --</option>
                                                 @foreach($all_rak as $k)
-                                                    <option value="{{ $k->id_rak }}"> {{ $k->kode_rak_lokasi }}</option>
+                                                    <option value="{{ $k->id }}"> {{ $k->kode_rak_lokasi }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

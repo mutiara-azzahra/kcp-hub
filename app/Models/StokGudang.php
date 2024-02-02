@@ -16,4 +16,8 @@ class StokGudang extends Model
         'invoice_non', 'id_rak','part_no' ,'stok' ,'status', 'created_at', 'updated_at', 'created_by', 'updated_by'
     ];
 
+    public function rak()
+    {
+        return $this->belongsTo(MasterKodeRak::class, 'id_rak', 'id');
+    }
 }

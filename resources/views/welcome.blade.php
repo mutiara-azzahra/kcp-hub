@@ -232,6 +232,11 @@
                         <p>Stok Gudang</p>
                       </a>
                   </li>
+                  <li class="nav-item">
+                      <a href="{{ route('mutasi-part.index')}}" class="nav-link">
+                        <p>Mutasi Part</p>
+                      </a>
+                  </li>
                   @endif
                   @if(in_array(Auth::user()->id_role, [3,5,7,8,10,13,17,18,19,21,23]))
                   <li class="nav-item">
