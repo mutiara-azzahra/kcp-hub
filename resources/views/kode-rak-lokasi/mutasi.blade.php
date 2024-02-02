@@ -44,24 +44,41 @@
                             <thead>
                                 <tr style="background-color: #6082B6; color:white">
                                     <th class="text-center">Part No</th>
-                                    <th class="text-center">Qty</th>
+                                    <th class="text-center">Qty Awal</th>
+                                    <th class="text-center">Qty Mutasi</th>
+                                    <th class="text-center">Rak Tujuan</th>
                                 </tr>
                             </thead>
                             <tbody class="input-fields">
-                                    <tr>
-                                        <td class="text-center">
-                                            <div class="form-group col-12">
-                                                <input type="text" name="part_no" class="form-control" value="{{ $barang_rak->part_no }}" readonly>
-                                            </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="form-group col-12">
-                                                <input type="text" name="qty" class="form-control" value="{{ $barang_rak->qty }}">
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                <tr>
+                                    <td class="text-center">
+                                        <div class="form-group col-12">
+                                            <input type="text" name="part_no" class="form-control" value="{{ $barang_rak->part_no }}" readonly>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="form-group col-12">
+                                            <input type="text" class="form-control" value="{{ $barang_rak->qty }}" readonly>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="form-group col-12">
+                                            <input type="text" name="qty_mutasi" class="form-control" value="{{ $barang_rak->qty }}">
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="form-group col-12">
+                                            <select name="id_rak" class="form-control mr-2 my-select">
+                                                <option value="">-- Pilih --</option>
+                                                @foreach($all_rak as $k)
+                                                    <option value="{{ $k->id_rak }}"> {{ $k->kode_rak_lokasi }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                                 <div class="float-right">
                                     <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Data</button>                           

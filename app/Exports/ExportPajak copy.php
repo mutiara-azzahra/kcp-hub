@@ -27,6 +27,7 @@ class ExportPajak implements FromCollection, WithCustomCsvSettings
     public function collection()
     {
         $headers = TransaksiInvoiceHeader::whereBetween('created_at', [$this->tanggal_awal, $this->tanggal_akhir])->get();
+
         $data = [];
 
         $data = [
@@ -53,22 +54,6 @@ class ExportPajak implements FromCollection, WithCustomCsvSettings
                 $no_npwp = '000000000000000';
             }
 
-            $header->detail_dpp = $header->details_invoice->map(function($detail){
-                return number_format($detail->nominal_total / 1.11, 0, ',', '');
-            });
-
-            $header->detail_diskon = $header->details_invoice->map(function($detail){
-                return number_format($detail->nominal_total / 1.11 * 11/ 100 , 0, ',', '');
-            });
-
-            // if($header->noinv  == 'INV-202311-00005')
-            // {
-            //     dd($header->detail_dpp);
-            // }
-
-            $total_dpp = array_sum($header->detail_dpp->toArray());
-            $total_diskon = array_sum($header->detail_diskon->toArray());
-
             $headerData = [
                 'FK;01;0;0' . $this->no_faktur_pajak++ . ';' .
                 Carbon::parse($header->created_at)->format('m') . ';' .
@@ -76,9 +61,9 @@ class ExportPajak implements FromCollection, WithCustomCsvSettings
                 Carbon::parse($header->created_at)->format('d/m/Y') . ';'.
                 $no_npwp . ';' .
                 $header->outlet->nik . '#NIK#NAMA#' . $header->outlet->nm_outlet . ';' .
-                $header->outlet->almt_outlet . ';' .              
-                $total_dpp . ';' .
-                $total_diskon .
+                $header->outlet->almt_outlet . ';' .
+                number_format(($header->details_invoice->sum('nominal_total')) / 1.11, 0, ',', '') . ';' .
+                number_format(($header->details_invoice->sum('nominal_total')) / 1.11 * 11 /100, 0, ',', '')  .
                 ';0;0;0;0;0;0;' . $header->noinv .';0'
             ];
 
@@ -89,14 +74,14 @@ class ExportPajak implements FromCollection, WithCustomCsvSettings
                     'OF;' . $detail->part_no . ';' . $detail->nama_part->part_nama . ';' . $detail->hrg_pcs . ';'. $detail->qty .';'.
                     number_format(($detail->qty * $detail->hrg_pcs/1.11), 0, ',', '') .';'.
                     number_format(($detail->qty * $detail->hrg_pcs * $detail->disc/100 /1.11), 0, ',', '') . ';'.
-                    
                     number_format(($detail->nominal_total/1.11), 0, ',', '') .';'.
-                    number_format(($detail->nominal_total/1.11 * 11/100), 0, ',', '' ).';0;0'
+                    number_format(($detail->nominal_total/1.11 * 0.11), 0, ',', '') . ';0;0'
                 ];
                 
                 $data[] = $detailData;
             }
         }
+
         return collect($data);
     }
 

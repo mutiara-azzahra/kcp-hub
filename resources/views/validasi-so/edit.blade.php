@@ -54,7 +54,7 @@
                                     <select name="rak" class="form-control mr-2 my-select" id="package-default" onchange="updateData(`default`)">
                                         <option value="">-- Pilih --</option>
                                         @foreach($rak as $k)
-                                            <option value="{{ $k->id_rak }}">{{ $k->rak_gudang->kode_rak_lokasi }}</option>
+                                            <option value="{{ $k->id_rak }}">{{ $k->id_rak }}</option>
                                         @endforeach
                                     </select>
                                 </td>

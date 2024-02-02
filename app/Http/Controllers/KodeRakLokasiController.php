@@ -25,10 +25,9 @@ class KodeRakLokasiController extends Controller
     public function show($id){
 
         $kode_rak   = MasterKodeRak::findOrFail($id);
+        $rak_gudang = BarangMasukDetails::where('id', $kode_rak->id)->get();
 
-        $barang_rak = BarangMasukDetails::where('id', $kode_rak->id)->get();
-
-        return view('kode-rak-lokasi.show', compact('kode_rak', 'barang_rak'));
+        return view('kode-rak-lokasi.show', compact('kode_rak', 'rak_gudang'));
 
     }
 
@@ -67,25 +66,27 @@ class KodeRakLokasiController extends Controller
     public function mutasi($id){
 
         $barang_rak = BarangMasukDetails::findOrFail($id);
+        $all_rak    = MasterKodeRak::all();
 
-        return view('kode-rak-lokasi.mutasi', compact('barang_rak'));
+        return view('kode-rak-lokasi.mutasi', compact('barang_rak', 'all_rak'));
         
     }
-
 
     public function store_mutasi(Request $request)
     {
         $request -> validate([
-            'part_no' => 'required',
-            'qty'     => 'required',
+            'part_no'    => 'required',
+            'qty_mutasi' => 'required',
+            'id_rak'     => 'required',
         ]);
 
-        $newSp          = new TransaksiSpHeader();
-        $newSp->nosp    = TransaksiSpHeader::nosp();
+        $newMut             = new MutasiHeader();
+        $newMut->no_mutasi  = MutasiHeader::no_mutasi();
 
-        // MutasiDetails::create($request->all());
+        MutasiHeader::create($request->all());
 
-        return redirect()->route('kode-rak-lokasi.index')->with('success','Data baru berhasil ditambahkan!');
+        return redirect()->route('kode-rak-lokasi.index')->with('success','Stok gudang berhasil ditambahkan pada mutasi.
+            Silahkan lakukan approval mutasi!');
     }
 
 
