@@ -75,7 +75,7 @@
         </div>
         <div class="card-body">
             <div class="col-lg-12">  
-                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example2">
+                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example3s">
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
                             <th class="text-center">No</th>
@@ -92,13 +92,18 @@
                         @php
                         $no=1;
                         @endphp
+                        @foreach($mutasi_approved as $m)
                         <tr>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
+                            <td class="text-center">{{ $no++ }}</td>
+                            <td class="text-left">{{ $m->no_mutasi }}</td>
+                            <td class="text-left">{{ Carbon\Carbon::parse($m->created_at)->format('d-m-Y') }}</td>
+                            <td class="text-center">{{ $m->rak1->kode_rak_lokasi }}</td>
+                            <td class="text-center">{{ $m->rak2->kode_rak_lokasi }}</td>
+                            <td class="text-center">{{ $m->approval_head_gudang }}</td>
+                            <td class="text-center">{{ Carbon\Carbon::parse($m->tanggal_cetak_sj_mutasi)->format('d-m-Y') }}</td>
+                            <td class="text-center"><a class="btn btn-info btn-sm" href="{{ route('mutasi-part.details', $m->no_mutasi) }}"><i class="fas fa-eye"></i></a></td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

@@ -39,6 +39,8 @@ class MutasiPartController extends Controller
         $data          = MutasiHeader::where('no_mutasi', $no_mutasi)->get();
         $check_details = MutasiDetails::where('no_mutasi', $no_mutasi)->first();
 
+        // dd($check_details);
+
         if ($check_details->part_no && $check_details->id_rak && StokGudang::where('part_no', $check_details->part_no)->where('id_rak', $check_details->id_rak)->exists()) {
 
             $sumStock = StokGudang::where('part_no', $check_details->part_no)->where('id_rak', $check_details->id_rak)->sum('stok');
@@ -47,9 +49,9 @@ class MutasiPartController extends Controller
 
             $value = [
                 'invoice_non'       => $check_details->invoice_non,
-                'part_non'          => $check_details->part_non,
-                'stok'              => $check_details->stok,
-                'id_rak'            => $check_details->rak_tujuan,
+                'part_no'           => $check_details->part_no,
+                'stok'              => $check_details->qty,
+                'id_rak'            => $check_details->header->rak_tujuan,
                 'status'            => 'A',
                 'created_at'        => now(),
                 'created_by'        => Auth::user()->nama_user,
@@ -57,6 +59,18 @@ class MutasiPartController extends Controller
             ];
         
             StokGudang::create($value);
+
+            $stok_awal = StokGudang::where('part_no', $check_details->part_no)->where('id_rak', $check_details->header->rak_asal)
+            ->value('stok');
+
+            StokGudang::where('part_no', $check_details->part_no)->where('id_rak', $check_details->header->rak_asal)
+                ->update([
+                'stok'          => $stok_awal - $check_details->qty,
+                'updated_at'    => now(),
+                'updated_by'    => Auth::user()->nama_user
+            ]);
+
+
         }   
 
         return redirect()->route('mutasi-part.index')->with('success','Mutasi part berhasil dijalankan!');

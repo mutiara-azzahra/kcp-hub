@@ -29,7 +29,9 @@ class KodeRakLokasiController extends Controller
     public function show($id){
 
         $kode_rak   = MasterKodeRak::findOrFail($id);
-        $rak_gudang = BarangMasukDetails::where('id', $kode_rak->id)->get();
+        // $rak_gudang = BarangMasukDetails::where('id', $kode_rak->id)->get();
+        $rak_gudang = StokGudang::where('id_rak', $kode_rak->id)->get();
+        // dd($rak_gudang);
 
         return view('kode-rak-lokasi.show', compact('kode_rak', 'rak_gudang'));
 
@@ -101,6 +103,8 @@ class KodeRakLokasiController extends Controller
         $details['no_mutasi']    = $newMut->no_mutasi;
         $details['part_no']      = $request->part_no;
         $details['qty']          = $request->qty_mutasi;
+        $details['invoice_non']  = $request->invoice_non;
+        $details['keterangan']   = $request->keterangan;
         $details['created_at']   = NOW();
         $details['created_by']   = Auth::user()->nama_user;
 

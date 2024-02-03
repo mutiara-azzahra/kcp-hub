@@ -15,4 +15,10 @@ class MutasiDetails extends Model
     protected $fillable = [ 
         'no_mutasi', 'part_no', 'qty','invoice_non', 'keterangan', 'created_at', 'updated_at', 'created_by', 'updated_by'
     ];
+
+    public function header()
+    {
+        return $this->hasOne(MutasiHeader::class, 'no_mutasi', 'no_mutasi');
+    }
+    
 }
