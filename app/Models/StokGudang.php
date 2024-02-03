@@ -20,4 +20,9 @@ class StokGudang extends Model
     {
         return $this->belongsTo(MasterKodeRak::class, 'id_rak', 'id');
     }
+
+    public function part_rak()
+    {
+        return $this->hasOne(MasterPart::class, 'part_no', 'part_no');
+    }
 }

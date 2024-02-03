@@ -84,7 +84,7 @@
                                             <select name="inputs[0][part_no]" class="form-control mr-2 my-select" id="package-default" onchange="updateData(`default`)">
                                                 <option value="">-- Pilih --</option>
                                                 @foreach($part_kanvasan as $k)
-                                                    <option value="{{ $k->part_no }}" data-het1="{{ $k->het }}"> {{ $k->part_no }}</option>
+                                                    <option value="{{ $k->part_no }}" data-het="{{ $k->part_rak->het }}">{{ $k->part_no }} | {{ $k->part_rak->part_nama }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -206,6 +206,89 @@
 @endsection
 
 @section('script')
+
+    @if($details->user_sales == 'nursehan')
+
+    <script>
+        var i = 0;
+        $('#add').click(function(){
+            ++i;
+            $('#table').append(`<tr>
+                <td class="text-center">
+                    <div class="form-group col-12">
+                        <select name="inputs[${i}][part_no]" class="form-control mr-2 my-select-1" id="package-${i}" onchange="updateData(${i})">
+                            <option value="">-- Pilih --</option>
+                            @foreach($part_kanvasan as $k)
+                                <option value="{{ $k->part_no }}" data-het="{{ $k->part_rak->het }}">{{ $k->part_no }} | {{ $k->part_rak->part_nama }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <div class="form-group col-12">
+                        <input type="text" id="het-${i}" name="het" for="het" class="form-control" readonly>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <div class="form-group col-12">
+                        <input type="hidden" name="inputs[${i}][nosp]" value="{{ $nosp }}">
+                        <input type="text" id="qty-${i}" name="inputs[${i}][qty]" class="form-control" placeholder="0" onkeyup="updateNominal(${i})">
+                    </div>
+                </td>
+                <td class="text-center">
+                    <div class="form-group col-12">
+                        <input type="text" id="disc-${i}" name="inputs[${i}][disc]" class="form-control" placeholder="0" onkeyup="updateNominal(${i})">
+                    </div>
+                </td>
+                <td class="text-center" id="nominal">
+                    <div class="form-group col-12">
+                        <input type="text" name="nominal" id="nominal-${i}" for="nominal" class="form-control" readonly>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <div class="form-group col-12">
+                        <button type="submit" class="btn btn-danger remove-table-row"><i class="fas fa-minus"></i></button>
+                    </div>
+                </td>
+            </tr>
+            `);
+            $('.my-select-1').select2({
+                width: '100%'
+            });
+        });
+
+    $(document).on('click','.remove-table-row', function(){
+        $(this).parents('tr').remove();
+    })
+
+
+    //HET MUNCUL
+    const data = $('#main').data('loading');
+
+    function updateData(i){
+        const het = $(`#package-${i} option:selected`).data('het');
+
+        const formattedHet = Number(het).toLocaleString('id-ID');
+
+        $(`#het-${i}`).val(formattedHet);
+    }
+
+    function updateNominal(i){
+        const het = $(`#package-${i} option:selected`).data('het');
+        const qty = Number($(`#qty-${i}`).val());
+        const disc = Number($(`#disc-${i}`).val());
+        const nominal = (het *qty ) - (het *qty * disc/100);
+
+        const formattedNominal = Number(nominal).toLocaleString('id-ID');
+
+        $(`#nominal-${i}`).val(formattedNominal);
+
+    }
+
+    </script>   
+
+    @else
+
     <script>
         var i = 0;
         $('#add').click(function(){
@@ -282,6 +365,9 @@
 
     }
 
-    </script>    
+    </script>  
+
+    @endif
+     
 
 @endsection
