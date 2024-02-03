@@ -76,7 +76,7 @@
                                     <th class="text-center">Tambah</th>
                                 </tr>
                             </thead>
-                            @if($deetails->user_sales == 'nursehan')
+                            @if($details->user_sales == 'nursehan')
                             <tbody class="input-fields">
                                 <tr>
                                     <td class="text-center">
@@ -84,12 +84,11 @@
                                             <select name="inputs[0][part_no]" class="form-control mr-2 my-select" id="package-default" onchange="updateData(`default`)">
                                                 <option value="">-- Pilih --</option>
                                                 @foreach($part_kanvasan as $k)
-                                                    <option value="{{ $k->part_no }}" data-het1="{{ $k->het }}"> {{ $k->part_no }} | {{ $k->part_nama }}</option>
+                                                    <option value="{{ $k->part_no }}" data-het1="{{ $k->het }}"> {{ $k->part_no }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </td>
-                                    @endif
                                     <td class="text-center">
                                         <div class="form-group col-12">
                                             <input type="text" name="het" for="het" id="het-default" class="form-control" readonly>
@@ -132,7 +131,6 @@
                                             </select>
                                         </div>
                                     </td>
-                                    @endif
                                     <td class="text-center">
                                         <div class="form-group col-12">
                                             <input type="text" name="het" for="het" id="het-default" class="form-control" readonly>

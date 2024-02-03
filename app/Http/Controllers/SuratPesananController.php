@@ -94,10 +94,6 @@ class SuratPesananController extends Controller
         $part_kanvasan = StokGudang::where('id_rak', '33')->get();
         $check       = TransaksiSpDetails::where('nosp', $nosp)->first();
 
-        if($details->user_sales == 'nursehan'){
-
-        }
-
         $totalSum = 0;
         
         return view('surat-pesanan.details', ['nosp' => $nosp] ,compact('master_part', 'details', 'check', 'part_kanvasan'));
