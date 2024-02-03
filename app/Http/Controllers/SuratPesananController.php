@@ -94,17 +94,6 @@ class SuratPesananController extends Controller
         $part_kanvasan = StokGudang::where('id_rak', '33')->get();
         $check       = TransaksiSpDetails::where('nosp', $nosp)->first();
 
-        // foreach ($ach_s_jan as $i) {
-        //     $achIchS01 += $i->details_invoice()->whereIn('part_no', function ($query) {
-        //         $query->select('part_no')
-        //             ->from('master_part')
-        //             ->where('kode_produk', 'ICH');
-        //         })->sum('nominal_total');
-        // }
-
-
-    
-
         if($details->user_sales == 'nursehan'){
 
         }
