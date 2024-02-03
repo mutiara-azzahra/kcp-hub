@@ -12,7 +12,6 @@
             </div>
         </div>
     </div>
-
     @if ($message = Session::get('success'))
         <div class="alert alert-success" id="myAlert">
             <p>{{ $message }}</p>
@@ -22,7 +21,6 @@
             <p>{{ $message }}</p>
         </div>
     @endif
-
     <div class="card" >
         <div class="card-body">
             <div class="row">
@@ -57,14 +55,10 @@
                         </tr>
                     </table>
                 </div>
-
-
                 @if($check === null)
-
                 <div class="col-lg-12 p-1" id="main" data-loading="true">
                     <form action="{{ route('surat-pesanan.store_details')}}" method="POST">
                         @csrf
-
                         <table class="table table-hover table-sm bg-light table-striped table-bordered" id="table">
                             <thead>
                                 <tr style="background-color: #6082B6; color:white">
@@ -117,7 +111,6 @@
                                     </td>
                                 </tr>
                             </tbody>
-
                             @else
                             <tbody class="input-fields">
                                 <tr>
@@ -172,36 +165,35 @@
 
                 @else
 
-                    <div class="col-lg-12 p-1">
-                        <table class="table table-hover table-bordered table-sm bg-light table-striped" id="table">
-                            <thead>
-                                <tr style="background-color: #6082B6; color:white">
-                                    <th class="text-center">Part No</th>
-                                    <th class="text-center">HET</th>
-                                    <th class="text-center">Qty</th>
-                                    <th class="text-center">Nominal Diskon</th>
-                                    <th class="text-center">Nominal</th>
-                                </tr>
-                            </thead>
-                            <tbody class="input-fields">
-                                @foreach($details->details_sp as $d)
-                                <tr>
-                                    <td class="text-left">{{ $d->part_no }}</td>
-                                    <td class="text-left">Rp. {{ number_format($d->hrg_pcs, 0, ',', '.') }}</td>
-                                    <td class="text-center">{{ $d->qty }}</td>
-                                    <td class="text-center">{{ $d->disc }}%</td>
-                                    <td class="text-right">Rp. {{ number_format($d->nominal_total, 0, ',', '.') }}</td>
-                                </tr>
-                                @endforeach
-                                    
-                            </tbody>
-                        </table>
-                    </div>
-                @endif
+                <div class="col-lg-12 p-1">
+                    <table class="table table-hover table-bordered table-sm bg-light table-striped" id="table">
+                        <thead>
+                            <tr style="background-color: #6082B6; color:white">
+                                <th class="text-center">Part No</th>
+                                <th class="text-center">HET</th>
+                                <th class="text-center">Qty</th>
+                                <th class="text-center">Nominal Diskon</th>
+                                <th class="text-center">Nominal</th>
+                            </tr>
+                        </thead>
+                        <tbody class="input-fields">
+                            @foreach($details->details_sp as $d)
+                            <tr>
+                                <td class="text-left">{{ $d->part_no }}</td>
+                                <td class="text-left">Rp. {{ number_format($d->hrg_pcs, 0, ',', '.') }}</td>
+                                <td class="text-center">{{ $d->qty }}</td>
+                                <td class="text-center">{{ $d->disc }}%</td>
+                                <td class="text-right">Rp. {{ number_format($d->nominal_total, 0, ',', '.') }}</td>
+                            </tr>
+                            @endforeach
+                                
+                        </tbody>
+                    </table>
                 </div>
+            @endif
+            </div>
         </div>
     </div>
-
 </div>
 @endsection
 
