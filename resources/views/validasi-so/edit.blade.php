@@ -51,15 +51,17 @@
                                     </div>
                                 </td>
                                 <td class="text-center">
-                                    <select name="rak" class="form-control mr-2 my-select" id="package-default" onchange="updateData(`default`)">
+                                    <select name="rak" class="form-control mr-2 my-select" id="package" onchange="updateData()">
                                         <option value="">-- Pilih --</option>
                                         @foreach($rak as $k)
-                                            <option value="{{ $k->id_rak }}">{{ $k->id_rak }}</option>
+                                            <option value="{{ $k->id_rak }}" data-rak="{{ $k->stok }}">{{ $k->rak->kode_rak_lokasi }}</option>
                                         @endforeach
                                     </select>
                                 </td>
                                 <td class="text-center">
-                                    
+                                    <div class="form-group col-12">
+                                        <input type="text" name="rak" for="rak" id="rak" class="form-control" readonly>
+                                    </div>
                                 </td>
                                 <td class="text-center">
                                     <div class="form-group col-12">
@@ -84,12 +86,12 @@
 @section('script')
 
 <script>
-    function updateData(i){
-        const het = $(`#package-${i} option:selected`).data('het');
+    function updateData(){
+        const rak = $(`#package option:selected`).data('rak');
 
-        // const formattedHet = Number(het).toLocaleString('id-ID');
+        const formattedRak = Number(rak).toLocaleString('id-ID');
 
-        $(`#het-${i}`).val(formattedHet);
+        $(`#rak`).val(formattedRak);
     }
 </script>
 

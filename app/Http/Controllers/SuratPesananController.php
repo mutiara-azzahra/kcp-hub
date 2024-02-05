@@ -13,6 +13,7 @@ use App\Models\MasterSales;
 use App\Models\MasterOutlet;
 use App\Models\MasterStokGudang;
 use App\Models\TransaksiSpDetails;
+use App\Models\StokGudang;
 use App\Models\MasterAreaSales;
 use App\Models\MasterDiskonPart;
 
@@ -90,11 +91,12 @@ class SuratPesananController extends Controller
         $details     = TransaksiSpHeader::where('nosp', $nosp)->first();
         $total       = TransaksiSpDetails::where('nosp', $nosp)->get();
         $master_part = MasterPart::where('status', 'A')->get();
+        $part_kanvasan = StokGudang::where('id_rak', '33')->get();
         $check       = TransaksiSpDetails::where('nosp', $nosp)->first();
 
         $totalSum = 0;
         
-        return view('surat-pesanan.details', ['nosp' => $nosp] ,compact('master_part', 'details', 'check'));
+        return view('surat-pesanan.details', ['nosp' => $nosp] ,compact('master_part', 'details', 'check', 'part_kanvasan'));
     }
 
     public function detail_sp($nosp)

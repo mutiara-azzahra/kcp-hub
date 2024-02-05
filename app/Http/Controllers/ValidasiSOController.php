@@ -91,7 +91,9 @@ class ValidasiSOController extends Controller
     public function edit_details($id){
 
         $details  = TransaksiSODetails::findOrFail($id);
-        $rak      = StokGudang::all();
+        $rak      = StokGudang::where('part_no', $details->part_no)->get();
+
+        // dd($rak);
 
         return view('validasi-so.edit', compact('details', 'rak'));
     }
