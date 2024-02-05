@@ -197,8 +197,8 @@
                         <th class="th-header">Part No</th>
                         <th class="th-header">Nama Barang</th>
                         <th class="th-header">Qty</th>
-                        <th class="th-header">Qty Gudang</th>
                         <th class="th-header">Rak</th>
+                        <th class="th-header">Qty Rak</th>
                         <th class="th-header">Check</th>
                     </tr>
                 </thead>
@@ -209,8 +209,8 @@
                         <td class="td-qty">{{$p->part_no}}</td>
                         <td class="td-qty">{{$p->nama_part->part_nama}}</td>
                         <td class="td-qty">{{$p->qty}}</td>
-                        <td class="td-qty">{{$p->stok_ready->stok}}</td>
-                        <td class="td-qty">{{$p->rak->first()->rak->kode_rak_lokasi }}</td>
+                        <td class="td-qty">{{$p->stok_rak->kode_rak_lokasi }}</td>
+                        <td class="td-qty">{{$p->qty_gudang }}</td>
                         <td class="td-qty"></td>
                     </tr>
                     @endforeach

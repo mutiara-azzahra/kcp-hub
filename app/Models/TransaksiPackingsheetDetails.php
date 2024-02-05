@@ -35,5 +35,9 @@ class TransaksiPackingsheetDetails extends Model
     {
         return $this->hasOne(TransaksiInvoiceHeader::class, 'noso', 'noso');
     }
+    public function so()
+    {
+        return $this->belongsTo(TransaksiSOHeader::class, 'noso', 'noso');
+    }
     
 }
