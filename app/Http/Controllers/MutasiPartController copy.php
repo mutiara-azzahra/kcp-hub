@@ -7,7 +7,6 @@ use Carbon\Carbon;
 use App\Models\StokGudang;
 use App\Models\MutasiHeader;
 use App\Models\MutasiDetails;
-use App\Models\FlowStokGudang;
 use Illuminate\Http\Request;
 
 class MutasiPartController extends Controller
@@ -62,7 +61,6 @@ class MutasiPartController extends Controller
             $stok_awal = StokGudang::where('part_no', $check_details->part_no)->where('id_rak', $check_details->header->rak_asal)
             ->value('stok');
 
-            //Potong stok sebelumnya
             StokGudang::where('part_no', $check_details->part_no)->where('id_rak', $check_details->header->rak_asal)
                 ->update([
                 'stok'          => $stok_awal - $check_details->qty,
@@ -108,7 +106,7 @@ class MutasiPartController extends Controller
             $flow_stok_masuk->created_by              = Auth::user()->nama_user;
             $flow_stok_masuk->save();
 
-        }
+        }   
 
         return redirect()->route('mutasi-part.index')->with('success','Mutasi part berhasil dijalankan!');
     } 

@@ -79,12 +79,14 @@ class KodeRakLokasiController extends Controller
     public function store_mutasi(Request $request)
     {
 
+        // dd($request->all());
+
         $request -> validate([
-            'part_no'    => 'required',
-            'qty_mutasi' => 'required',
-            'rak_asal'   => 'required',
-            'rak_tujuan' => 'required',
-            'invoice_non' => 'required',
+            'part_no'       => 'required',
+            'qty_mutasi'    => 'required',
+            'rak_asal'      => 'required',
+            'rak_tujuan'    => 'required',
+            'invoice_non'   => 'required',
         ]);
 
         $newMut             = new MutasiHeader();
