@@ -14,7 +14,7 @@ class TransaksiSODetails extends Model
     public $timestamps = false;
 
     protected $fillable = [ 
-        'noso', 'area_so', 'kd_outlet', 'part_no', 'nm_part', 'qty', 'hrg_pcs', 'disc', 'nominal', 
+        'noso', 'area_so', 'kd_outlet', 'part_no', 'nm_part', 'qty', 'hrg_pcs', 'disc', 'nominal', 'id_rak',
         'nominal_disc', 'nominal_total', 'qty_gudang', 'ket_gudang', 'flag_stock_tt', 'nominal_gudang', 
         'nominal_disc_gudang', 'nominal_total_gudang', 'status', 'crea_date', 'crea_by', 'modi_date', 'modi_by'
     
@@ -38,6 +38,11 @@ class TransaksiSODetails extends Model
     public function rak()
     {
         return $this->hasMany(BarangMasukDetails::class, 'part_no', 'part_no');
+    }
+
+    public function stok_rak()
+    {
+        return $this->hasOne(MasterKodeRak::class, 'id', 'id_rak');
     }
 
 }

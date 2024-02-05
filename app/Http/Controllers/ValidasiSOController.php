@@ -31,10 +31,8 @@ class ValidasiSOController extends Controller
 
     public function details($noso){
 
-        $so         = TransaksiSOHeader::where('noso', $noso)->first();
-
-        $validasi_id = TransaksiSOHeader::where('noso', $noso)->first();
-        // dd($validasi_id);
+        $so             = TransaksiSOHeader::where('noso', $noso)->first();
+        $validasi_id    = TransaksiSOHeader::where('noso', $noso)->first();
 
         return view('validasi-so.details', compact('validasi_id', 'so'));
     }
@@ -93,8 +91,6 @@ class ValidasiSOController extends Controller
         $details  = TransaksiSODetails::findOrFail($id);
         $rak      = StokGudang::where('part_no', $details->part_no)->get();
 
-        // dd($rak);
-
         return view('validasi-so.edit', compact('details', 'rak'));
     }
 
@@ -113,6 +109,8 @@ class ValidasiSOController extends Controller
                 } else{
 
                     $updated = TransaksiSODetails::where('id', $id)->update([
+                        'id_rak'        => $request->id_rak,
+                        'qty_gudang'    => $request->qty_gudang,
                         'qty'           => $request->qty,
                         'disc'          => $request->disc,
                         'nominal'       => $request->qty * $het,

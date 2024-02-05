@@ -59,8 +59,8 @@
                                         <th class="text-center">Part No</th>
                                         <th class="text-center">Nama Part</th>
                                         <th class="text-center">Qty SO</th>
-                                        <th class="text-center">Stok Gudang</th>
                                         <th class="text-center">Rak</th>
+                                        <th class="text-center">Stok Rak</th>
                                         <th class="text-center">Diskon</th>
                                         <th class="text-center">Keterangan</th>
                                         <th class="text-center">Edit</th>
@@ -76,16 +76,16 @@
                                             <td class="text-left">{{ $s->part_no }}</td>
                                             <td class="text-left">{{ $s->nama_part->part_nama }}</td>
                                             <td class="text-right">{{ $s->qty }}</td>
-                                            <td class="text-right">{{ $s->stok_ready->stok }}</td>
                                             <td class="text-center">
                                                 @if(isset($s->id_rak))
-                                                {{ $s->id_rak }}
+                                                {{ $s->stok_rak->kode_rak_lokasi }}
 
                                                 @else
-                                                Pilih Rak
+                                                <b>Pilih Rak</b>
 
                                                 @endif
                                             </td>
+                                            <td class="text-right">{{ $s->qty_gudang }}</td>
                                             <td class="text-center">{{ $s->disc }}%</td>
 
                                             @if( $s->flag_vald_gudang == null)

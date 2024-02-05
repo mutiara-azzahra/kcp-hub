@@ -8,9 +8,13 @@
                 <h4>Details Mutasi</h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-success" href="{{ route('mutasi-part.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
+                <a class="btn btn-success btn-md m-1" href="{{ route('mutasi-part.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
+
+                @if($header->approval_head_gudang == 'Y')
+
+                @elseif($header->approval_head_gudang == 'N')
                 <a class="btn btn-warning btn-md m-1" href="{{ route('mutasi-part.approve', $header->no_mutasi) }}"><i class="fas fa-check"></i> Approve</a>
-                <!-- <a class="btn btn-danger btn-md m-1" href=""><i class="fas fa-ban"></i> Tolak</a> -->
+                @endif
             </div>
         </div>
     </div>

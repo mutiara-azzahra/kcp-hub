@@ -56,11 +56,28 @@
                             <td class="text-left">{{ Carbon\Carbon::parse($m->created_at)->format('d-m-Y') }}</td>
                             <td class="text-center">{{ $m->rak1->kode_rak_lokasi }}</td>
                             <td class="text-center">{{ $m->rak2->kode_rak_lokasi }}</td>
-                            <td class="text-center">{{ $m->approval_head_gudang }}</td>
-                            <td class="text-center">{{ Carbon\Carbon::parse($m->tanggal_approval)->format('d-m-Y') }}</td>
-                            <td class="text-center">{{ Carbon\Carbon::parse($m->tanggal_cetak_sj_mutasi)->format('d-m-Y') }}</td>
-                            <td class="text-center">{{ $m->cetak_sj_mutasi }}</td>
-                            <td class="text-center"><a class="btn btn-info btn-sm" href="{{ route('mutasi-part.details', $m->no_mutasi) }}"><i class="fas fa-eye"></i></a></td>
+
+                            @if($m->approval_head_gudang == 'Y')
+                            <td class="text-center">Diterima</td>
+
+                            @elseif($m->approval_head_gudang == 'N')
+
+                            <td class="text-center">Belum diterima</td>
+                            @endif
+                            <td class="text-center">{{ $m->tanggal_approval }}</td>
+                            <td class="text-center">{{ $m->tanggal_cetak_sj_mutasi }}</td>
+
+                            @if($m->cetak_sj_mutasi == 'Y')
+                            <td class="text-center">Dicetak</td>
+
+                            @elseif($m->cetak_sj_mutasi == 'N')
+                            <td class="text-center">Belum dicetak</td>
+
+                            @endif
+                            <td class="text-center">
+                                <a class="btn btn-warning btn-sm m-1" href="{{ route('mutasi-part.details', $m->no_mutasi) }}"><i class="fas fa-print"></i></a>
+                                <a class="btn btn-info btn-sm m-1" href="{{ route('mutasi-part.details', $m->no_mutasi) }}"><i class="fas fa-eye"></i></a>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -99,8 +116,14 @@
                             <td class="text-left">{{ Carbon\Carbon::parse($m->created_at)->format('d-m-Y') }}</td>
                             <td class="text-center">{{ $m->rak1->kode_rak_lokasi }}</td>
                             <td class="text-center">{{ $m->rak2->kode_rak_lokasi }}</td>
-                            <td class="text-center">{{ $m->approval_head_gudang }}</td>
-                            <td class="text-center">{{ Carbon\Carbon::parse($m->tanggal_cetak_sj_mutasi)->format('d-m-Y') }}</td>
+
+                            @if($m->approval_head_gudang == 'Y')
+                            <td class="text-center">Diterima</td>
+
+                            @elseif($m->approval_head_gudang == 'N')
+
+                            @endif
+                            <td class="text-center">{{ $m->tanggal_cetak_sj_mutasi }}</td>
                             <td class="text-center"><a class="btn btn-info btn-sm" href="{{ route('mutasi-part.details', $m->no_mutasi) }}"><i class="fas fa-eye"></i></a></td>
                         </tr>
                         @endforeach
