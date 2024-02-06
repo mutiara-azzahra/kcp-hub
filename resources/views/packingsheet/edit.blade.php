@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    @if ($message = Session::get('success'))
+        @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
@@ -34,7 +34,8 @@
                                 <thead>
                                     <tr style="background-color: #6082B6; color:white">
                                         <th class="text-center">Part No</th>
-                                        <th class="text-center">Stok Gudang</th>
+                                        <th class="text-center">Rak</th>
+                                        <th class="text-center">Stok Rak</th>
                                         <th class="text-center">Qty</th>
                                     </tr>
                                 </thead>
@@ -45,7 +46,14 @@
                                         </div>
                                     </td>
                                     <td class="text-center">
-
+                                        <div class="form-group col-12">
+                                            <input type="text" name="part_no" class="form-control" value="{{ $details->part_no }}" readonly>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="form-group col-12">
+                                            <input type="text" name="part_no" class="form-control" value="{{ $details->part_no }}" readonly>
+                                        </div>
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group col-12">

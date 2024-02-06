@@ -39,5 +39,9 @@ class TransaksiPackingsheetDetails extends Model
     {
         return $this->belongsTo(TransaksiSOHeader::class, 'noso', 'noso');
     }
+    public function rak()
+    {
+        return $this->hasMany(StokGudang::class, 'id_rak', 'id_rak');
+    }
     
 }

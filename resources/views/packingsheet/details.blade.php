@@ -57,7 +57,7 @@
                                 <th class="text-center">Part No</th>
                                 <th class="text-center">Nama Part</th>
                                 <th class="text-center">Qty SO</th>
-                                <th class="text-center">Stok Gudang</th>
+                                <th class="text-center">Stok Rak</th>
                                 <th class="text-center">Dus</th>
                             </tr>
                         </thead>
@@ -66,19 +66,16 @@
                             $no=1;
                             @endphp
 
-                            @foreach($header_ps_details as $v)
-                                @foreach($v->details_ps as $d)
-                                <tr>
-                                    <td class="text-left">{{ $d->part_no }}</td>
-                                    <td class="text-left">{{ $d->master_part->part_nama }}</td>
-                                    <td class="text-center" style="color: red">{{ $d->qty }}</td>
-                                    <td class="text-center">{{ $d }}</td>
-                                    <td class="text-center">{{ $d->so }}</td>
-                                    <td class="text-center">
-                                        <a class="btn btn-info btn-sm" href="{{ route('packingsheet.edit_details', $d->id) }}"><i class="fas fa-edit"></i></a>
-                                    </td>
-                                </tr>
-                                @endforeach
+                            @foreach($header_ps->details_ps as $d)
+                            <tr>
+                                <td class="text-left">{{ $d->part_no }}</td>
+                                <td class="text-left">{{ $d->master_part->part_nama }}</td>
+                                <td class="text-right">{{ $d->qty }}</td>
+                                <td class="text-right" style="color: red">{{ $d->rak->where('part_no', $d->part_no)->value('stok') }}</td>
+                                <td class="text-center">
+                                    <a class="btn btn-info btn-sm" href="{{ route('packingsheet.edit_details', $d->id) }}"><i class="fas fa-edit"></i></a>
+                                </td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>

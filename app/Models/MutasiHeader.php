@@ -45,7 +45,6 @@ class MutasiHeader extends Model
         return $newCustomId;
     }
 
-
     public function details()
     {
         return $this->hasMany(MutasiDetails::class, 'no_mutasi', 'no_mutasi');
