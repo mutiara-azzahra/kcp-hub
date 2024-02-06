@@ -154,9 +154,9 @@ class PackingSheetController extends Controller
         $ps_details = TransaksiPackingsheetDetails::where('nops', $nops)->get();
 
         $pdf = PDF::loadView('reports.packingsheet', [
-            'data' => $data,
-            'ps_details' => $ps_details,
-            'data_details' => $data_details
+            'data'          => $data,
+            'ps_details'    => $ps_details,
+            'data_details'  => $data_details
         ]);
         
         $pdf->setPaper('letter', 'potrait');
