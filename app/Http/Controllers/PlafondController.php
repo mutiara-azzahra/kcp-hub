@@ -16,4 +16,11 @@ class PlafondController extends Controller
 
         return view('master-plafond.index', compact('plafond'));
     }
+
+    public function tambah($id){
+
+        $plafond_details = TransaksiPlafond::findOrFail($id);
+
+        return view('master-plafond.tambah', compact('plafond_details'));
+    }
 }

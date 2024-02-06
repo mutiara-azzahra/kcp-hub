@@ -2,10 +2,10 @@
  
 @section('content')
 <div class="container" style="padding: 10px;">
-    <div class="row mt-5">
+    <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4><b>Master Plafond Toko</b></h4>
+                <h4>Master Plafond Toko</h4>
             </div>
             <div class="float-right">
                 <a class="btn btn-success" href="{{ route('master-plafond.create') }}"><i class="fas fa-plus"></i> Tambah Plafond</a>
