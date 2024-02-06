@@ -14,7 +14,7 @@ class TransaksiPackingsheetDetails extends Model
     public $timestamps = false;
 
     protected $fillable = [ 
-        'nops', 'area_ps', 'noso', 'kd_outlet', 'part_no', 'qty', 'dus', 'no_dus', 
+        'nops', 'area_ps', 'noso', 'kd_outlet', 'part_no', 'qty','id_rak', 'dus', 'no_dus', 
         'status', 'created_at', 'updated_at', 'created_by', 'updated_by'
     ];
 

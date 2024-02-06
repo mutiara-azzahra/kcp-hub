@@ -72,7 +72,7 @@
                                     <td class="text-left">{{ $d->part_no }}</td>
                                     <td class="text-left">{{ $d->master_part->part_nama }}</td>
                                     <td class="text-center" style="color: red">{{ $d->qty }}</td>
-                                    <td class="text-center">{{ $d->stok->stok }}</td>
+                                    <td class="text-center">{{ $d }}</td>
                                     <td class="text-center">{{ $d->so }}</td>
                                     <td class="text-center">
                                         <a class="btn btn-info btn-sm" href="{{ route('packingsheet.edit_details', $d->id) }}"><i class="fas fa-edit"></i></a>

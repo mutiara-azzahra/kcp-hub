@@ -67,6 +67,7 @@ class PackingSheetController extends Controller
                         $details['kd_outlet']  = $s->kd_outlet;
                         $details['part_no']    = $s->part_no;
                         $details['qty']        = $s->qty;
+                        $details['id_rak']     = $s->id_rak;
                         $details['created_at'] = NOW();
                         $details['created_by'] = Auth::user()->nama_user;
 
