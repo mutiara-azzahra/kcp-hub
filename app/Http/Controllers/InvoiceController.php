@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use PDF;
 use Illuminate\Http\Request;
+use App\Models\StokGudang;
 use App\Models\MasterStokGudang;
 use App\Models\TransaksiSOHeader;
 use App\Models\TransaksiInvoiceHeader;
@@ -96,7 +97,7 @@ class InvoiceController extends Controller
 
                     TransaksiInvoiceDetails::create($details);
 
-                    $retur_approved = ReturHeader::where('id', $id)->first();
+                    // $retur_approved = ReturHeader::where('id', $id)->first();
 
                     //FLOW STOK GUDANG
                     $stok_akhir     = FlowStokGudang::where('part_no', $s->part_no)->first();
@@ -110,12 +111,12 @@ class InvoiceController extends Controller
                     $flow_stok                          = new FlowStokGudang();
                     $flow_stok->tanggal_barang_masuk    = null;
                     $flow_stok->tanggal_barang_keluar   = now();
-                    $flow_stok->id_rak                  = null;
-                    $flow_stok->keterangan              = $a->kd_toko;
+                    $flow_stok->id_rak                  = $s->id_rak;
+                    $flow_stok->keterangan              = $s->kd_toko;
                     $flow_stok->referensi               = $header->noinv;
                     $flow_stok->part_no                 = $s->part_no;
                     $flow_stok->stok_awal               = $stok_awal;
-                    $flow_stok->stok_masuk              = null;
+                    $flow_stok->stok_masuk              = 0;
                     $flow_stok->stok_keluar             = $s->qty;
                     $flow_stok->stok_akhir              = $flow_stok->stok_awal + $flow_stok->stok_masuk - $flow_stok->stok_keluar;
                     $flow_stok->created_by              = Auth::user()->nama_user;
