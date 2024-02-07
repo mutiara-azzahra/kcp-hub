@@ -26,63 +26,31 @@
     <div class="card" style="padding: 10px;">
         <div class="card-body">
             <div class="col-lg-12">
-                <form action="{{ route('master-part.store') }}" method="POST">
+                <form action="{{ route('master-part.store_tambah') }}" method="POST">
                 @csrf
                 <div class="row">
                     <div class="col-6">
                         <div class="form-group">
-                            <strong>Part No</strong>
-                            <input type="text" name="part_no" class="form-control" placeholder="contoh: 12-ABCD-XD">
+                            <strong>Kode Toko</strong>
+                            <input type="text" name="kd_outlet" class="form-control" placeholder="{{ $plafond->kd_outlet }}">
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <strong>Nama Part</strong>
-                            <input type="text" name="part_nama" class="form-control" placeholder="contoh: AIR AKI">
+                            <strong>Nama Toko</strong>
+                            <input type="text" name="nm_outlet" class="form-control" placeholder="{{ $plafond->nm_outlet }}">
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <strong>Kategori Part</strong>
-                            <select name="id_kategori_part" class="form-control" >
-                                <option value="">---Pilih Kategori Part--</option>
-                                @foreach($kategori as $k)
-                                    <option value=" {{ $k->id }}"> {{ $k->kategori_part }} </option>
-                                @endforeach
-                            </select>
+                            <strong>Limit Plafond</strong>
+                            <input type="text" name="nominal_plafond" class="form-control" value="" placeholder="">
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="form-group">
-                            <strong>Group Part</strong>
-                            <select name="id_group_part" class="form-control" >
-                                <option value="">---Pilih Group Part--</option>
-                                @foreach($group as $k)
-                                    <option value=" {{ $k->id }}"> {{ $k->group_part }} </option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <strong>Produk Part</strong>
-                            <select name="id_produk_part" class="form-control" >
-                                <option value="">---Pilih Produk Part--</option>
-                                @foreach($produk as $k)
-                                    <option value=" {{ $k->id }}"> {{ $k->produk_part }} </option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="form-group">
-                            <strong>Kelompok Part</strong>
-                            <select name="id_kelompok_part" class="form-control" >
-                                <option value="">---Pilih Kelompok Part--</option>
-                                @foreach($kelompok as $k)
-                                    <option value=" {{ $k->id }}"> {{ $k->kelompok_part }} </option>
-                                @endforeach
-                            </select>
+                            <strong>Sisa Plafond</strong>
+                            <input type="text" name="limit_plafond" class="form-control" value="" placeholder="">
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">

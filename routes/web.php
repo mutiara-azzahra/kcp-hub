@@ -112,9 +112,13 @@ Route::group(['middleware' => 'auth'], function () {
     //MASTER PLAFOND
     Route::get('/master-plafond', [PlafondController::class, 'index'])->name('master-plafond.index');
     Route::get('/master-plafond/details', [PlafondController::class, 'detail'])->name('master-plafond.detail');
+    Route::get('/master-plafond/tambah/{id}', [PlafondController::class, 'tambah'])->name('master-plafond.tambah');
+    Route::get('/master-plafond/kurang/{id}', [PlafondController::class, 'kurang'])->name('master-plafond.kurang');
     Route::get('/master-plafond/create', [PlafondController::class, 'create'])->name('master-plafond.create');
     Route::get('/master-plafond/show/{id}', [PlafondController::class, 'show'])->name('master-plafond.show');
     Route::post('/master-plafond/store', [PlafondController::class, 'store'])->name('master-plafond.store');
+    Route::post('/master-plafond/store_tambah', [PlafondController::class, 'store_tambah'])->name('master-plafond.store_tambah');
+    Route::post('/master-plafond/store_kurang', [PlafondController::class, 'store_kurang'])->name('master-plafond.store_kurang');
 
     Route::get('/part-kelompok', [MasterPartKelompokController::class, 'index'])->name('part-kelompok.index');
     Route::get('/part-kelompok/create', [MasterPartKelompokController::class, 'create'])->name('part-kelompok.create');
