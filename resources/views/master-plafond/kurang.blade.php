@@ -5,7 +5,7 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4>Tambah Plafond Toko</h4>
+                <h4>Kurang Plafond Toko</h4>
             </div>
             <div class="float-right">
                     <a class="btn btn-success" href="{{ route('master-plafond.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
@@ -56,7 +56,7 @@
 
                     <div class="col-lg-12 col-md-12">
                         <div class="form-group">
-                            <strong>Tambah Plafond</strong>
+                            <strong>Kurang Plafond</strong>
                             <input type="text" name="limit_plafond" class="form-control" value="" placeholder="">
                         </div>
                     </div>
