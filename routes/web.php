@@ -365,7 +365,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/transfer-keluar/edit/{id_transfer}', [TransferKeluarController::class, 'edit'])->name('transfer-keluar.edit');
     Route::post('/transfer-keluar/store-transfer', [TransferKeluarController::class, 'store_transfer'])->name('transfer-keluar.store-transfer');
     
-    //KODE RAK LOKASI
+    //MUTASI
     Route::get('/kode-rak-lokasi', [KodeRakLokasiController::class, 'index'])->name('kode-rak-lokasi.index');
     Route::post('/kode-rak-lokasi', [KodeRakLokasiController::class, 'store'])->name('kode-rak-lokasi.store');
     Route::get('/kode-rak-lokasi/create', [KodeRakLokasiController::class, 'create'])->name('kode-rak-lokasi.create');
@@ -376,7 +376,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/kode-rak-lokasi/mutasi/{id}', [KodeRakLokasiController::class, 'mutasi'])->name('kode-rak-lokasi.mutasi');
     Route::post('/kode-rak-lokasi/mutasi/store', [KodeRakLokasiController::class, 'store_mutasi'])->name('kode-rak-lokasi.store_mutasi');
 
-    //KODE RAK LOKASI
+    //MUTASI
     Route::get('/mutasi-part', [MutasiPartController::class, 'index'])->name('mutasi-part.index');
     Route::get('/mutasi-part/details/{no_mutasi}', [MutasiPartController::class, 'details'])->name('mutasi-part.details');
     Route::get('/mutasi-part/approve/{no_mutasi}', [MutasiPartController::class, 'approve'])->name('mutasi-part.approve');
