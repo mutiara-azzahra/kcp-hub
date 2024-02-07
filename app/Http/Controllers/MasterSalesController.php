@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
 use App\Models\User;
 use App\Models\MasterSales;
 use App\Models\MasterAreaOutlet;
