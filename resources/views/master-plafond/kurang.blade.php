@@ -50,7 +50,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Sisa Plafond</strong><br>
-                            Rp. {{ $plafond->nominal_plafond }}<br>
+                            Rp. {{ $sisa_plafond }}<br>
                         </div>
                     </div>
 

@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Models\TransaksiPlafond;
+use App\Models\TransaksiInvoiceHeader;
 
 class PlafondController extends Controller
 {
@@ -21,13 +22,44 @@ class PlafondController extends Controller
 
         $plafond = TransaksiPlafond::findOrFail($id);
 
-        return view('master-plafond.tambah', compact('plafond'));
+        //Invoice Toko All, lunas Y, belum lunas N
+        $invoice_toko   = TransaksiInvoiceHeader::where('kd_outlet', $plafond->kd_outlet)->where('flag_pembayaran_lunas', 'N')->get();
+
+        $plafond_used = 0;
+        foreach($invoice_toko as $i){
+            $plafond_used += $i->details_invoice->sum('nominal_total');
+        }
+
+        $sisa_plafond = $plafond->nominal_plafond - $plafond_used;
+
+        return view('master-plafond.tambah', compact('plafond', 'sisa_plafond'));
     }
 
     public function kurang($id){
 
         $plafond = TransaksiPlafond::findOrFail($id);
 
-        return view('master-plafond.tambah', compact('plafond'));
+        //Invoice Toko All, lunas Y, belum lunas N
+        $invoice_toko   = TransaksiInvoiceHeader::where('kd_outlet', $plafond->kd_outlet)->where('flag_pembayaran_lunas', 'N')->get();
+
+        $plafond_used = 0;
+        foreach($invoice_toko as $i){
+            $plafond_used += $i->details_invoice->sum('nominal_total');
+        }
+
+        $sisa_plafond = $plafond->nominal_plafond - $plafond_used;
+
+        return view('master-plafond.kurang', compact('plafond', 'sisa_plafond'));
+    }
+
+    public function store_tambah(Request $request){
+
+        $request -> validate([
+            'invoice_non'  => 'required', 
+            'customer_to'  => 'required',
+            'supplier'     => 'required',
+            'tanggal_nota' => 'required',
+        ]);
+
     }
 }

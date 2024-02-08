@@ -50,14 +50,14 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <strong>Sisa Plafond</strong><br>
-                            Rp. {{ $plafond->nominal_plafond }}<br>
+                            Rp. {{ $sisa_plafond }}<br>
                         </div>
                     </div>
 
                     <div class="col-lg-12 col-md-12">
                         <div class="form-group">
-                            <strong>Tambah Plafond</strong>
-                            <input type="text" name="limit_plafond" class="form-control" value="" placeholder="">
+                            <strong>Tambah Limit Plafond</strong>
+                            <input type="text" name="limit_plafond" class="form-control" value="" placeholder="0">
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
