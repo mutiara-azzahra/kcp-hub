@@ -48,6 +48,7 @@ use App\Http\Controllers\ExportPajakController;
 use App\Http\Controllers\HistoryPesananController;
 use App\Http\Controllers\ReturController;
 use App\Http\Controllers\MutasiPartController;
+use App\Http\Controllers\RincianTagihanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -293,6 +294,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/account-receivable/store', [AccountReceivableController::class, 'store'])->name('account-receivable.store');
     Route::get('/account-receivable/details/{no_piutang}', [AccountReceivableController::class, 'details'])->name('account-receivable.details');
     Route::post('/account-receivable/store-details', [AccountReceivableController::class, 'store_details'])->name('account-receivable.store-details');
+
+    //ROUTE AR
+    Route::get('/rincian-tagihan', [RincianTagihanController::class, 'index'])->name('rincian-tagihan.index');
 
     //ROUTE PEMBAYARAN PIUTANG TOKO
     Route::get('/piutang-toko', [PembayaranPiutangTokoController::class, 'index'])->name('piutang-toko.index');
