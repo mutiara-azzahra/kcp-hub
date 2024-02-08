@@ -52,7 +52,7 @@
                             <td class="text-left">{{ $p->kd_outlet }} / {{ $p->outlet->nm_outlet }}</td>
                             <td class="text-center">{{ $p->pembayaran_via }}</td>
                             <td class="text-center">{{ $p->no_bg }}</td>
-                            <td class="text-right">{{ number_format($p->details->where('akuntansi_to', 'D')->sum('total'), 0, ',', '.') }}</td>
+                            <td class="text-right">{{ number_format($p->nominal, 0, '.', ',') }}</td>
                         </tr>
                         @endforeach
 

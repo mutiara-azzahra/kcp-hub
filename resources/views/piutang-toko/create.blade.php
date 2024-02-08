@@ -50,7 +50,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <strong>Nominal</strong>
-                            <input type="text" name="nominal" class="form-control" placeholder="Isi keterangan">
+                            <input type="text" name="nominal" class="form-control" placeholder="0">
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
