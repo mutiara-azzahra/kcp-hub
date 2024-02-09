@@ -62,7 +62,6 @@
         </div>
     </div>
 
-    
     <div class="card" style="padding: 10px;">
         <div class="card-header">
             BG Cair
