@@ -5,11 +5,10 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4>Target Sales By Produk</h4>
+                <h4>Master Provinsi</h4>
             </div>
             <div class="float-right">
-                <a class="btn m-1 btn-primary" href="{{ route('master-target-sales-produk.create') }}"><i class="fas fa-plus"></i> Tambah Data</a>
-                <a class="btn m-1 btn-success" href="{{ route('master-target.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
+                <a class="btn m-1 btn-primary" href="{{ route('master-provinsi.create') }}"><i class="fas fa-plus"></i> Tambah Data</a>
             </div>
         </div>
     </div>
@@ -31,11 +30,8 @@
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
                             <th class="text-center">No</th>
-                            <th class="text-center">Sales</th>
-                            <th class="text-center">Kode Produk</th>
-                            <th class="text-center">Bulan</th>
-                            <th class="text-center">Tahun</th>
-                            <th class="text-center">Nominal</th>
+                            <th class="text-center">Kode Provinsi</th>
+                            <th class="text-center">Provinsi</th>
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
@@ -44,7 +40,7 @@
                         $no=1;
                         @endphp
                         
-                        @foreach($target as $p)
+                        @foreach($provinsi as $p)
                         <tr>
                             <td class="text-center">{{ $no++ }}</td>
                             <td class="text-left">{{ $p->sales }}</td>
