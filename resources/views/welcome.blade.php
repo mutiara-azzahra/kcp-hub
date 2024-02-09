@@ -342,7 +342,7 @@
                           </a>
                       </li>
                       <li class="nav-item">
-                          <a href="" class="nav-link">
+                          <a href="{{ route('pembayaran-toko.index')}}" class="nav-link">
                             <p>Pembayaran Toko</p>
                           </a>
                       </li>

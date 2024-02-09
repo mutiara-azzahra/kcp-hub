@@ -8,6 +8,9 @@
                 <h4>BG Keluar</h4>
             </div>
         </div>
+        <div class="float-right">
+            <a class="btn btn-success" href="{{ route('bg-keluar.create') }}"><i class="fas fa-plus"></i> Tambah BG Keluar</a>
+        </div>
     </div>
 
     @if ($message = Session::get('success'))
@@ -22,7 +25,7 @@
 
     <div class="card" style="padding: 10px;">
         <div class="card-header">
-            BG Gantung
+            BG Keluar
         </div>
         <div class="card-body">
             <div class="col-lg-12">  
@@ -30,11 +33,8 @@
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
                             <th class="text-center">No. BG</th>
-                            <th class="text-center">Kode Toko</th>
-                            <th class="text-center">Nama Toko</th>
                             <th class="text-center">Nominal BG</th>
-                            <th class="text-center">Tgl. Masuk BG</th>
-                            <th class="text-center">Tgl. Jatuh Tempo</th>
+                            <th class="text-center">Keterangan</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -43,19 +43,12 @@
                     $no=1;
                     @endphp
 
-                    @foreach($bg_gantung as $p)
                     <tr>
-                        <td class="text-left">{{ $p->no_bg }}/{{$p->bank}}</td>
-                        <td class="text-center">{{ $p->kd_outlet }}</td>
-                        <td class="text-left">{{ $p->outlet->nm_outlet }}</td>
-                        <td class="text-right">{{ number_format($p->nominal, 0, ',', ',') }}</td>
-                        <td class="text-center">{{ Carbon\Carbon::parse($p->tanggal_rincian_tagihan)->format('d-m-Y') }}</td>
-                        <td class="text-center">{{ Carbon\Carbon::parse($p->jatuh_tempo_bg)->format('d-m-Y') }}</td>
-                        <td class="text-center">
-                            <a class="btn btn-success btn-sm" href="{{ route('bg-masuk.store', ['no_bg' => $p->no_bg]) }}"><i class="fas fa fa-check-square-o" data-toggle="tooltip" data-placement="top" title="Cair"></i></a>
-                        </td>
+                        <td class="text-center"></td>
+                        <td class="text-center"></td>
+                        <td class="text-center"></td>
+                        <td class="text-center"></td>
                     </tr>
-                    @endforeach
                     </tbody>
                 </table>
             </div>
@@ -65,7 +58,7 @@
     
     <div class="card" style="padding: 10px;">
         <div class="card-header">
-            BG Cair
+            Details BG Keluar
         </div>
         
         <div class="card-body">
@@ -97,7 +90,7 @@
                         <thead>
                             <tr style="background-color: #6082B6; color:white">
                                 <th class="text-center">ID. BG</th>
-                                <th class="text-center">Tgl. Cair</th>
+                                <th class="text-center">Tgl. Buat</th>
                                 <th class="text-center">Tgl. Balik</th>
                                 <th class="text-center">Keterangan</th>
                                 <th class="text-center">Nominal</th>
@@ -109,19 +102,14 @@
                         $no=1;
                         @endphp
 
-                        @foreach($bg_cair as $p)
-                        <tr>
-                            <td class="text-center">{{ $p->id_bg }}</td>
-                            <td class="text-center">{{ Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
-                            <td class="text-center"></td>
-                            <td class="text-left">{{ $p->keterangan }}</td>
-                            <td class="text-right">{{ number_format($p->nominal, 0, ',', ',') }}</td>
-                            <td class="text-center">
-                                <a class="btn btn-warning btn-sm" href="{{ route('bg-masuk.details', ['id_bg' => $p->id_bg]) }}"><i class="fas fa-random" data-toggle="tooltip" data-placement="top" title="Koreksi"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        @endforeach
+                            <tr>
+                                <td class="text-center"></td>
+                                <td class="text-center"></td>
+                                <td class="text-center"></td>
+                                <td class="text-center"></td>
+                                <td class="text-center"></td>
+                                <td class="text-center"></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

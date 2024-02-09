@@ -69,58 +69,6 @@
             </div>
         </div>
     </div>
-
-    <div class="card" style="padding: 10px;">
-        <div class="card-header">
-            List Pemotongan Belum Selesai
-        </div>
-        <div class="card-body">
-            <div class="col-lg-12">
-                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example3">
-                    <thead>
-                        <tr style="background-color: #6082B6; color:white">
-                            <th class="text-center">No.</th>
-                            <th class="text-center">No. Piutang</th>
-                            <th class="text-center">Kode / Nama Toko</th>
-                            <th class="text-center">Pembayaran Via</th>
-                            <th class="text-center">Nominal Potong</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                        $no=1;
-                        @endphp
-                        
-                        @foreach($piutang_header as $p)
-                        <tr>
-                            <td class="text-center">{{ $no++ }}</td>
-                            <td class="text-left">{{ $p->no_piutang }}</td>
-                            <td class="text-left">{{ $p->kd_outlet }} / {{ $p->nm_outlet }}</td>
-
-                            @if($p->kas_masuk != null)
-                            <td class="text-center">{{ $p->kas_masuk->pembayaran_via }}</td>
-                            @else
-                            <td></td>
-                            @endif
-
-                            <td class="text-right">{{ number_format($p->nominal_potong, 0, ',', '.') }}</td>
-                            <td class="text-center">
-                                <a class="btn btn-info btn-sm" href="{{ route('piutang-toko.details', $p->no_piutang ) }}">
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                                <a class="btn btn-primary btn-sm" href="{{ route('piutang-toko.edit', $p->no_piutang ) }}">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        @endforeach
-                        
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
 </div>
 @endsection
 
