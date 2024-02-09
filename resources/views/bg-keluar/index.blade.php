@@ -3,13 +3,13 @@
 @section('content')
 <div class="container" style="padding: 10px;">
     <div class="row mt-2">
-        <div class="col-lg-12 pb-2">
-             <div class="float-left">
+        <div class="col-lg-12 pb-3">
+            <div class="float-left">
                 <h4>BG Keluar</h4>
             </div>
-        </div>
-        <div class="float-right">
-            <a class="btn btn-success" href="{{ route('bg-keluar.create') }}"><i class="fas fa-plus"></i> Tambah BG Keluar</a>
+            <div class="float-right">
+                <a class="btn btn-success" href="{{ route('bg-keluar.create') }}"><i class="fas fa-plus"></i> Tambah BG Keluar</a>
+            </div>
         </div>
     </div>
 

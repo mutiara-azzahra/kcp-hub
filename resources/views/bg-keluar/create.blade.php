@@ -5,10 +5,10 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4>Tambah Transfer Keluar</h4>
+                <h4>Details BG Keluar</h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-success" href="{{ route('transfer-keluar.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
+                <a class="btn btn-success" href="{{ route('bg-masuk.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
             </div>
         </div>
     </div>
@@ -25,60 +25,140 @@
 
     <div class="card" style="padding: 10px;">
         <div class="card-body">
-            <div class="col-lg-12">
-                <form action="{{ route('transfer-keluar.store') }}" method="POST">
-                @csrf
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <strong>Tanggal Transfer Keluar</strong>
-                            <input type="date" name="tanggal_bank" class="form-control">
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <strong>Bank</strong>
-                            <select name="bank" class="form-control my-select" >
-                                <option value="">--Pilih Bank--</option>
-                                <option value="BRI">BRI</option>
-                                <option value="BNI">BNI</option>
-                                <option value="MANDIRI">MANDIRI</option>
-                                <option value="BCA">BCA</option>
-                                <option value="DANAMON">DANAMON</option>
-                                <option value="BANK_KALSEL">BANK KALSEL</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <strong>Dari Toko</strong>
-                            <select name="dari_toko" class="form-control my-select" >
-                                <option value="">--Pilih--</option>
-                                <option value="1">YA</option>
-                                <option value="2">TIDAK</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <strong>Keterangan</strong>
-                            <input type="hidden" name="status_transfer" value="1">
-                            <input type="text" name="keterangan" class="form-control" placeholder="Isi Keterangan">
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <div class="float-right">
-                            <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Data</button>                            
+            <div class="col-lg-8 p-1">
+                <table class="table table-borderless">
+                    <tr>
+                        <th class="text-left">No. BG</th>
+                        <td>:</td>
+                        <td class="text-left">
+                            <div class="form-group col-12">
+                                <input type="text" name="no_bg" class="form-control" placeholder="Isi no. BG">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="text-left">Keterangan</th>
+                        <td>:</td>
+                        <td class="text-left">
+                            <div class="form-group col-12">
+                                <input type="text" name="keterangan" class="form-control" placeholder="Isi keterangan">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" style="padding: 10px;">
+        <div class="card-body">
+            <div class="col-lg-12 p-1" id="main" data-loading="true">
+                <form action="{{ route('bg-keluar.store')}}" method="POST">
+                    @csrf
+                    <div class="table-container">
+                        <table class="table table-hover table-sm bg-light table-striped table-bordered" id="table">
+                            <thead>
+                                <tr style="background-color: #6082B6; color:white">
+                                    <th class="text-center">Perkiraan</th>
+                                    <th class="text-center">Akuntansi To</th>
+                                    <th class="text-center">Total</th>
+                                    <th class="text-center"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="input-fields">
+                                <tr>
+                                    <td class="text-center">
+                                        <div class="form-group col-12">
+                                            <select name="inputs[0][perkiraan]" class="form-control mr-2 my-select">
+                                                <option value="">-- Pilih Perkiraan --</option>
+                                                @foreach($perkiraan as $k)
+                                                    <option value="{{ $k->id }}">{{ $k->perkiraan }}.{{ $k->sub_perkiraan }} - {{ $k->nm_perkiraan }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="form-group col-12">
+                                            <select name="inputs[0][akuntansi_to]" class="form-control mr-2">
+                                                <option value="">-- Pilih --</option>
+                                                <option value="D">DEBET</option>
+                                                <option value="K">KREDIT</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="form-group col-12">
+                                            <input type="hidden" name="inputs[0][id_bg]" value="">
+                                            <input type="text" name="inputs[0][total]" class="form-control">
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="form-group col-12">
+                                            <a type="button" class="btn btn-primary m-1" id="add"><i class="fas fa-plus"></i></a>                                                                                  
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                            <div class="float-right">
+                                <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Data</button>                           
+                            </div>
                         </div>
                     </div>
                 </div>
             </form>
-            </div>
         </div>
     </div>
 </div>
 @endsection
 
 @section('script')
+    <script>
+        var i = 0;
+        $('#add').click(function(){
+            ++i;
+            $('#table').append(`<tr>
+                <td class="text-center">
+                    <div class="form-group col-12">
+                        <select name="inputs[${i}][perkiraan]" class="form-control mr-2 my-select-1">
+                            <option value="">-- Pilih Perkiraan --</option>
+                            @foreach($perkiraan as $k)
+                                <option value="{{ $k->id }}">{{ $k->perkiraan }}.{{ $k->sub_perkiraan }} - {{ $k->nm_perkiraan }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <div class="form-group col-12">
+                        <select name="inputs[${i}][akuntansi_to]" class="form-control mr-2">
+                            <option value="">-- Pilih --</option>
+                            <option value="D">DEBET</option>
+                            <option value="K">KREDIT</option>
+                        </select>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <div class="form-group col-12">
+                        <input type="hidden" name="inputs[${i}][id_bg]" value="">
+                        <input type="text" name="inputs[${i}][total]" class="form-control">
+                    </div>
+                </td>
+                <td class="text-center">
+                    <div class="form-group col-12">
+                        <button type="submit" class="btn btn-danger remove-table-row"><i class="fas fa-minus"></i></button>
+                    </div>
+                </td>
+            </tr>
+            `);
+            $('.my-select-1').select2({
+                width: '100%'
+            });
+        });
+
+        $(document).on('click','.remove-table-row', function(){
+            $(this).parents('tr').remove();
+        })
+    </script>    
 
 @endsection

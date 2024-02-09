@@ -354,7 +354,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/bg-masuk/cetak-tanda-terima/{no_kas_masuk}', [BgMasukController::class, 'cetak_tanda_terima'])->name('bg-masuk.cetak-tanda-terima');
 
      //BG Keluar
-     Route::get('/bg-keluar', [BgKeluarController::class, 'index'])->name('bg-keluar.index');
+    Route::get('/bg-keluar', [BgKeluarController::class, 'index'])->name('bg-keluar.index');
+    Route::get('/bg-keluar/create', [BgKeluarController::class, 'create'])->name('bg-keluar.create');
+    Route::get('/bg-keluar/store', [BgKeluarController::class, 'store'])->name('bg-keluar.store');
 
     //TRANSFER MASUK
     Route::get('/transfer-masuk', [TransferMasukController::class, 'index'])->name('transfer-masuk.index');
