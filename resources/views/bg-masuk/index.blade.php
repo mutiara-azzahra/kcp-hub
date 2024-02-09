@@ -5,7 +5,7 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-2">
              <div class="float-left">
-                <h4>BG Keluar</h4>
+                <h4>BG Masuk</h4>
             </div>
         </div>
     </div>
