@@ -18,7 +18,8 @@ class BGMasukController extends Controller
 {
     public function index(){
 
-        $bg_gantung = KasMasukHeader::where('pembayaran_via', 'BG')->orderBy('created_at', 'desc')->get();
+        $bg_gantung = KasMasukHeader::where('pembayaran_via', 'BG')->orderBy('created_at', 'desc')->
+                    where('status', 'O')->get();
         $bg_cair    = BgMasukHeader::orderBy('created_at', 'desc')->get();
 
         return view('bg-masuk.index', compact('bg_gantung', 'bg_cair'));
