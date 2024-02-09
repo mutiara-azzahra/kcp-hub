@@ -310,7 +310,7 @@
                           </a>
                       </li>
                       <li class="nav-item">
-                          <a href="{{ route('transfer-keluar.index')}}" class="nav-link">
+                          <a href="{{ route('bg-keluar.index')}}" class="nav-link">
                             <p>BG Keluar</p>
                           </a>
                       </li>

@@ -44,6 +44,7 @@ use App\Http\Controllers\ReportKasController;
 use App\Http\Controllers\TransferMasukController;
 use App\Http\Controllers\TransferKeluarController;
 use App\Http\Controllers\BgMasukController;
+use App\Http\Controllers\BGKeluarController;
 use App\Http\Controllers\ExportPajakController;
 use App\Http\Controllers\HistoryPesananController;
 use App\Http\Controllers\ReturController;
@@ -347,11 +348,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/bg-masuk/cair/{no_bg}', [BgMasukController::class, 'store'])->name('bg-masuk.store');
     Route::get('/bg-masuk/details/{id_bg}', [BgMasukController::class, 'details'])->name('bg-masuk.details');
     Route::post('/bg-masuk/store-details', [BgMasukController::class, 'store_details'])->name('bg-masuk.store-details');
-
     Route::get('/bg-masuk/bukti-bayar', [BgMasukController::class, 'bukti_bayar'])->name('bg-masuk.bukti-bayar');
     Route::get('/bg-masuk/pembayaran-manual', [BgMasukController::class, 'pembayaran_manual'])->name('bg-masuk.bayar_manual');
     Route::get('/bg-masuk/cetak/{no_kas_masuk}', [BgMasukController::class, 'cetak'])->name('bg-masuk.cetak');
     Route::get('/bg-masuk/cetak-tanda-terima/{no_kas_masuk}', [BgMasukController::class, 'cetak_tanda_terima'])->name('bg-masuk.cetak-tanda-terima');
+
+     //BG Keluar
+     Route::get('/bg-keluar', [BgKeluarController::class, 'index'])->name('bg-keluar.index');
 
     //TRANSFER MASUK
     Route::get('/transfer-masuk', [TransferMasukController::class, 'index'])->name('transfer-masuk.index');
