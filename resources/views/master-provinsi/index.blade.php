@@ -43,14 +43,11 @@
                         @foreach($provinsi as $p)
                         <tr>
                             <td class="text-center">{{ $no++ }}</td>
-                            <td class="text-left">{{ $p->sales }}</td>
-                            <td class="text-center">{{ $p->kode_produk }}</td>
-                            <td class="text-center">{{ $p->bulan }}</td>
-                            <td class="text-center">{{ $p->tahun }}</td>
-                            <td class="text-right">{{ number_format($p->nominal, 0, ',', ',') }}</td>
+                            <td class="text-center">{{ $p->sales }}</td>
+                            <td class="text-right">{{ $p->kode_produk }}</td>
                             <td class="text-center">
-                                <form action="{{ route('master-target-sales-produk.delete', $p->id) }}" method="POST" id="form_delete_{{ $p->id }}" data-id="{{ $p->id }}">
-                                    <a class="btn btn-info btn-sm" href="{{ route('master-target-sales-produk.edit',$p->id) }}"><i class="fas fa-edit"></i></a>
+                                <form action="{{ route('master-provinsi.delete', $p->id) }}" method="POST" id="form_delete_{{ $p->id }}" data-id="{{ $p->id }}">
+                                    <a class="btn btn-info btn-sm" href="{{ route('master-provinsi.edit',$p->id) }}"><i class="fas fa-edit"></i></a>
 
                                     @csrf
                                     @method('DELETE')
@@ -72,7 +69,7 @@
 <script>
     Hapus = (id)=>{
         Swal.fire({
-            title: 'Apa anda yakin menghapus data ini?',
+            title: 'Apa anda yakin menghapus data provinsi ini?',
             text:  "Data tidak dapat kembali" ,
             showCancelButton: true,
             confirmButtonColor: '#3085d6' ,
