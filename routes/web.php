@@ -49,6 +49,7 @@ use App\Http\Controllers\HistoryPesananController;
 use App\Http\Controllers\ReturController;
 use App\Http\Controllers\MutasiPartController;
 use App\Http\Controllers\RincianTagihanController;
+use App\Http\Controllers\PembayaranTokoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -307,6 +308,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/piutang-toko/store-details', [PembayaranPiutangTokoController::class, 'store_details'])->name('piutang-toko.store-details');
     Route::post('/piutang-toko/store-kas', [PembayaranPiutangTokoController::class, 'store_kas'])->name('piutang-toko.store-kas');
     Route::get('/piutang-toko/cetak/{no_piutang}', [PembayaranPiutangTokoController::class, 'cetak'])->name('piutang-toko.cetak');
+
+    //ROUTE PEMBAYARAN PIUTANG TOKO
+    Route::get('/pembayaran-toko', [PembayaranTokoController::class, 'index'])->name('pembayaran-toko.index');
 
     //KAS KELUAR
     Route::get('/kas-masuk', [KasMasukController::class, 'index'])->name('kas-masuk.index');

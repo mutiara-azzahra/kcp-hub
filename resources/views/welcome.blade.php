@@ -341,6 +341,11 @@
                             <p>Piutang Toko</p>
                           </a>
                       </li>
+                      <li class="nav-item">
+                          <a href="" class="nav-link">
+                            <p>Pembayaran Toko</p>
+                          </a>
+                      </li>
                     </ul>
                 </li>
               </ul>
