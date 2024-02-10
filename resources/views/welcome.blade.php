@@ -146,6 +146,11 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
+                      <a href="{{ route('master-provinsi.index')}}" class="nav-link">
+                        <p>Provinsi</p>
+                      </a>
+                  </li>
+                  <li class="nav-item">
                       <a href="{{ route('master-part.index')}}" class="nav-link">
                         <p>Part</p>
                       </a>

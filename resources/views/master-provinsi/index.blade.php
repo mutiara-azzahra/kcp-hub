@@ -8,7 +8,7 @@
                 <h4>Master Provinsi</h4>
             </div>
             <div class="float-right">
-                <a class="btn m-1 btn-primary" href="{{ route('master-provinsi.create') }}"><i class="fas fa-plus"></i> Tambah Data</a>
+                <a class="btn m-1 btn-success" href="{{ route('master-provinsi.create') }}"><i class="fas fa-plus"></i> Tambah Provinsi</a>
             </div>
         </div>
     </div>
@@ -40,20 +40,12 @@
                         $no=1;
                         @endphp
                         
-                        @foreach($provinsi as $p)
+                        @foreach($list_provinsi as $p)
                         <tr>
                             <td class="text-center">{{ $no++ }}</td>
-                            <td class="text-center">{{ $p->sales }}</td>
-                            <td class="text-right">{{ $p->kode_produk }}</td>
-                            <td class="text-center">
-                                <form action="{{ route('master-provinsi.delete', $p->id) }}" method="POST" id="form_delete_{{ $p->id }}" data-id="{{ $p->id }}">
-                                    <a class="btn btn-info btn-sm" href="{{ route('master-provinsi.edit',$p->id) }}"><i class="fas fa-edit"></i></a>
-
-                                    @csrf
-                                    @method('DELETE')
-                                    <a class="btn btn-danger btn-sm" onclick="Hapus('{{ $p->id }}')"><i class="fas fa-times"></i></a>
-                                </form>
-                            </td>
+                            <td class="text-center">{{ $p->kode_prp }}</td>
+                            <td class="text-left">{{ $p->provinsi }}</td>
+                            <td class="text-center"></td>
                         </tr>
                         @endforeach
                     </tbody>

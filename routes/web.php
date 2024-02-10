@@ -51,6 +51,7 @@ use App\Http\Controllers\ReturController;
 use App\Http\Controllers\MutasiPartController;
 use App\Http\Controllers\RincianTagihanController;
 use App\Http\Controllers\PembayaranTokoController;
+use App\Http\Controllers\MasterProvinsiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,6 +85,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/inventaris', [InventarisController::class, 'store'])->name('inventaris.store');
     Route::get('/inventaris/create', [InventarisController::class, 'create'])->name('inventaris.create');
     Route::get('/inventaris/show/{id}', [InventarisController::class, 'show'])->name('inventaris.show');
+
+    //MASTER PROVINSI
+    Route::get('/master-provinsi', [MasterProvinsiController::class, 'index'])->name('master-provinsi.index');
+    Route::get('/master-provinsi/create', [MasterProvinsiController::class, 'create'])->name('master-provinsi.create');
+    Route::post('/master-provinsi/store', [MasterProvinsiController::class, 'store'])->name('master-provinsi.store');
 
     //MASTER PART
     Route::get('/master-part', [MasterPartController::class, 'index'])->name('master-part.index');
