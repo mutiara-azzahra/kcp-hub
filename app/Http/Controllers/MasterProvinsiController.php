@@ -26,6 +26,8 @@ class MasterProvinsiController extends Controller
             'provinsi'    => 'required',
         ]);
 
+        // dd($request->all());
+
         MasterProvinsi::create($request->all());
         
         return redirect()->route('master-provinsi.index')->with('success','Data provinsi baru berhasil ditambahkan!');

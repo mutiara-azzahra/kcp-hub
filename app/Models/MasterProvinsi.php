@@ -13,6 +13,15 @@ class MasterProvinsi extends Model
     protected $table = 'mst_provinsi';
     public $primaryKey = 'kode_prp';
 
+    protected $fillable = [
+        'kode_prp', 
+        'provinsi',
+        'crea_by',
+        'modi_by',
+        'crea_date', 
+        'modi_date'
+    ];
+
 
     public function invoice()
     {
