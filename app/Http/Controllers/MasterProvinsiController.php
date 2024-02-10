@@ -19,18 +19,25 @@ class MasterProvinsiController extends Controller
         return view('master-provinsi.create');
     }
 
-     public function store(Request $request)
+    public function store(Request $request)
     {
         $request -> validate([
             'kode_prp'    => 'required',
             'provinsi'    => 'required',
         ]);
 
-        // dd($request->all());
+        try {
 
-        MasterProvinsi::create($request->all());
+            MasterProvinsi::create($request->all());
+
+            return redirect()->route('master-provinsi.index')->with('success','Data provinsi baru berhasil ditambahkan!');
+
+        } catch (Throwable $e) {
+            report($e);
+    
+            return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data provinsi. Data sudah ada');
+        }
         
-        return redirect()->route('master-provinsi.index')->with('success','Data provinsi baru berhasil ditambahkan!');
     }
 
 }
