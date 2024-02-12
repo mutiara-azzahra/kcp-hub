@@ -40,8 +40,6 @@ class MasterTargetSpvProdukController extends Controller
             'nominal'    => 'required',
         ]);
 
-        // dd($request->all());
-
         $nominal = str_replace('.', '', $request->input('nominal'));
         $nominal = str_replace(',', '.', $nominal);
         $request->merge(['nominal' => $nominal]);
