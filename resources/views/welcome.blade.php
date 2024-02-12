@@ -151,6 +151,11 @@
                       </a>
                   </li>
                   <li class="nav-item">
+                      <a href="{{ route('master-area-outlet.index')}}" class="nav-link">
+                        <p>Area Outlet</p>
+                      </a>
+                  </li>
+                  <li class="nav-item">
                       <a href="{{ route('master-part.index')}}" class="nav-link">
                         <p>Part</p>
                       </a>

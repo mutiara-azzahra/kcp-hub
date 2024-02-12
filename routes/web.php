@@ -52,6 +52,7 @@ use App\Http\Controllers\MutasiPartController;
 use App\Http\Controllers\RincianTagihanController;
 use App\Http\Controllers\PembayaranTokoController;
 use App\Http\Controllers\MasterProvinsiController;
+use App\Http\Controllers\MasterAreaOutletController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,6 +91,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/master-provinsi', [MasterProvinsiController::class, 'index'])->name('master-provinsi.index');
     Route::get('/master-provinsi/create', [MasterProvinsiController::class, 'create'])->name('master-provinsi.create');
     Route::post('/master-provinsi/store', [MasterProvinsiController::class, 'store'])->name('master-provinsi.store');
+
+    //MASTER AREA OUTLET
+    Route::get('/master-area-outlet', [MasterAreaOutletController::class, 'index'])->name('master-area-outlet.index');
+    Route::get('/master-area-outlet/create', [MasterAreaOutletController::class, 'create'])->name('master-area-outlet.create');
+    Route::post('/master-area-outlet/store', [MasterAreaOutletController::class, 'store'])->name('master-area-outlet.store');
 
     //MASTER PART
     Route::get('/master-part', [MasterPartController::class, 'index'])->name('master-part.index');
