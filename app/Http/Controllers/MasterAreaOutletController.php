@@ -19,12 +19,19 @@ class MasterAreaOutletController extends Controller
         return view('master-area-outlet.create');
     }
 
+    public function edit($id){
+
+        $area_outlet = MasterAreaOutlet::findOrFail($id);
+
+        return view('master-area-outlet.edit', compact('area_outlet'));
+    }
+
     public function store(Request $request)
     {
         $request->validate([
             'kode_prp'    => 'required',
             'kode_kab'    => 'required',
-            'provinsi'    => 'required',
+            'nm_area'     => 'required',
         ]);
 
         try {
@@ -34,19 +41,33 @@ class MasterAreaOutletController extends Controller
 
             if ($existingArea) {
             
-                return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data provinsi. Data sudah ada');
+                return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data area. Data sudah ada');
             }
 
-            MasterProvinsi::create($request->all());
+            MasterAreaOutlet::create($request->all());
 
-            return redirect()->route('master-area-outlet.index')->with('success','Data provinsi baru berhasil ditambahkan!');
+            return redirect()->route('master-area-outlet.index')->with('success','Data area baru berhasil ditambahkan!');
             
         } catch (Throwable $e) {
 
             report($e);
 
-            return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data provinsi. Terjadi kesalahan.');
+            return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data area. Terjadi kesalahan.');
         }
     }
+
+    public function update(Request $request, MasterAreaOutlet $master_area)
+    {
+        $request->validate([
+            'kode_prp'    => 'required',
+            'kode_kab'    => 'required',
+            'nm_area'     => 'required',
+        ]);
+         
+        $master_area->update($request->all());
+         
+        return redirect()->route('master-area-outlet.index')->with('success','Data master area berhasil diubah!');
+    }
+  
 
 }

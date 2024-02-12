@@ -95,7 +95,10 @@ Route::group(['middleware' => 'auth'], function () {
     //MASTER AREA OUTLET
     Route::get('/master-area-outlet', [MasterAreaOutletController::class, 'index'])->name('master-area-outlet.index');
     Route::get('/master-area-outlet/create', [MasterAreaOutletController::class, 'create'])->name('master-area-outlet.create');
+    Route::get('/master-area-outlet/edit/{id}', [MasterAreaOutletController::class, 'edit'])->name('master-area-outlet.edit');
     Route::post('/master-area-outlet/store', [MasterAreaOutletController::class, 'store'])->name('master-area-outlet.store');
+    Route::post('/master-area-outlet/update', [MasterAreaOutletController::class, 'update'])->name('master-area-outlet.update');
+    Route::delete('/master-area-outlet/delete/{id}', [MasterAreaOutletController::class, 'delete'])->name('master-area-outlet.delete');
 
     //MASTER PART
     Route::get('/master-part', [MasterPartController::class, 'index'])->name('master-part.index');

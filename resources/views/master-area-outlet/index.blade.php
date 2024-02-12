@@ -8,7 +8,7 @@
                 <h4>Master Area Outlet</h4>
             </div>
             <div class="float-right">
-                <a class="btn m-1 btn-success" href="{{ route('master-area-outlet.create') }}"><i class="fas fa-plus"></i> Tambah area-outlet</a>
+                <a class="btn m-1 btn-success" href="{{ route('master-area-outlet.create') }}"><i class="fas fa-plus"></i> Tambah Area Outlet</a>
             </div>
         </div>
     </div>
@@ -48,12 +48,17 @@
                             <td class="text-center">{{ $p->kode_kab }}</td>
                             <td class="text-left">{{ $p->nm_area }}</td>
                             <td class="text-center">
-                                <a class="btn btn-warning btn-sm" href="">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a class="btn btn-danger btn-sm" href="">
-                                    <i class="fas fa-trash"></i>
-                                </a>
+                                <form action="{{ route('master-area-outlet.delete', $p->id) }}" method="POST" id="form_delete" data-id="{{ $p->id }}">
+
+                                    <a class="btn btn-warning btn-sm" href="{{ route('master-area-outlet.edit',$p->id) }}">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+
+                                    @csrf
+                                    @method('DELETE')
+                                   
+                                    <a class="btn btn-danger btn-sm" onclick="Hapus('{{ $p->id }}')"><i class="fas fa-times"></i></a>
+                                </form>
                             </td>
                         </tr>
                         @endforeach
