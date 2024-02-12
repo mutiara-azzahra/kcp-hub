@@ -58,16 +58,27 @@ class MasterAreaOutletController extends Controller
 
     public function update(Request $request, MasterAreaOutlet $master_area)
     {
+
         $request->validate([
             'kode_prp'    => 'required',
             'kode_kab'    => 'required',
             'nm_area'     => 'required',
         ]);
-         
-        $master_area->update($request->all());
-         
-        return redirect()->route('master-area-outlet.index')->with('success','Data master area berhasil diubah!');
+
+        try {
+
+            $master_area->update($request->all());
+
+            return redirect()->route('master-area-outlet.index')->with('success', 'Data master area berhasil diubah!');
+
+        } catch (\Exception $e) {
+
+            report($e);
+
+            return redirect()->back()->withInput()->with('error', 'Gagal mengubah data master area. Terjadi kesalahan.');
+        }
     }
+
 
     public function delete($id)
     {
