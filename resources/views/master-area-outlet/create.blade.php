@@ -26,7 +26,7 @@
     <div class="card" style="padding: 10px;">
         <div class="card-body">
             <div class="col-lg-12">
-                <form action="{{ route('master-provinsi.store') }}" method="POST">
+                <form action="{{ route('master-area-outlet.store') }}" method="POST">
                 @csrf
                 <div class="row">
                     <div class="form-group mb-2 col-md-12 col-lg-12">

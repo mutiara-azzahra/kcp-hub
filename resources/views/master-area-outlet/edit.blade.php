@@ -29,7 +29,7 @@
             <div class="col-lg-12">
                 <form action="{{ route('master-area-outlet.update', $area_outlet->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('PUT')
+                @method('POST')
                 <div class="row">
                     <div class="form-group mb-2 col-md-12 col-lg-12">
                         <div class="form-group">

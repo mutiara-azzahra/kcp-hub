@@ -14,10 +14,10 @@ class MasterArea extends Model
         'kode_provinsi',
         'kode_kabupaten',
         'status', 
-        'create_at',
-        'update_at',
-        'created_by', 
-        'updated_by'
+        'crea_date',
+        'modi_date',
+        'crea_by', 
+        'modi_by'
     ];
 
     public function area_sales()

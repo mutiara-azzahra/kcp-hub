@@ -9,17 +9,18 @@ class MasterAreaOutlet extends Model
 {
     use HasFactory;
 
-    protected $table = 'master_area_outlet';
+    protected $table      = 'master_area_outlet';
     protected $primaryKey = 'id';
+    public $timestamps    = false;
 
     protected $fillable = [
         'kode_prp',
         'kode_kab',
         'nm_area',
         'status', 
-        'create_at',
-        'update_at',
-        'created_by', 
-        'updated_by'
+        'crea_date',
+        'modi_date',
+        'crea_by', 
+        'modi_by'
     ];
 }

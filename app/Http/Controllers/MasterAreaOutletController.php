@@ -28,6 +28,7 @@ class MasterAreaOutletController extends Controller
 
     public function store(Request $request)
     {
+
         $request->validate([
             'kode_prp'    => 'required',
             'kode_kab'    => 'required',
@@ -36,8 +37,7 @@ class MasterAreaOutletController extends Controller
 
         try {
         
-            $existingArea = MasterAreaOutlet::where('kode_prp', $request->kode_prp)
-                ->where('kode_kab', $request->kode_kab)->first();
+            $existingArea = MasterAreaOutlet::where('kode_prp', $request->kode_prp)->where('kode_kab', $request->kode_kab)->first();
 
             if ($existingArea) {
             
@@ -67,6 +67,15 @@ class MasterAreaOutletController extends Controller
         $master_area->update($request->all());
          
         return redirect()->route('master-area-outlet.index')->with('success','Data master area berhasil diubah!');
+    }
+
+    public function delete($id)
+    {
+        $area_outlet    = MasterAreaOutlet::findOrFail($id);
+
+        $area_outlet->delete();
+
+        return redirect()->route('back-order.index')->with('success', 'Data detail BO berhasil dihapus');
     }
   
 
