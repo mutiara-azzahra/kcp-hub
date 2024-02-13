@@ -70,7 +70,7 @@ class MutasiPartController extends Controller
                 'updated_by'    => Auth::user()->nama_user
             ]);
 
-            $stok_akhir = FlowStokGudang::where('part_no', $check_details->part_no)->latest()->first();
+            $stok_akhir = MasterStokGudang::where('part_no', $check_details->part_no)->latest()->first();
 
             if(isset($stok_akhir)){
                 $stok_awal = $stok_akhir->stok_akhir;
