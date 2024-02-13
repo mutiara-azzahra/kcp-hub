@@ -8,6 +8,7 @@ use App\Models\StokGudang;
 use App\Models\MutasiHeader;
 use App\Models\MutasiDetails;
 use App\Models\FlowStokGudang;
+use App\Models\MasterStokGudang;
 use Illuminate\Http\Request;
 
 class MutasiPartController extends Controller
