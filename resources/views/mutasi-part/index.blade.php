@@ -75,8 +75,8 @@
 
                             @endif
                             <td class="text-center">
-                                <a class="btn btn-warning btn-sm m-1" href="{{ route('mutasi-part.details', $m->no_mutasi) }}"><i class="fas fa-print"></i></a>
-                                <a class="btn btn-info btn-sm m-1" href="{{ route('mutasi-part.details', $m->no_mutasi) }}"><i class="fas fa-eye"></i></a>
+                                <!-- <a class="btn btn-warning btn-sm m-1" href="{{ route('mutasi-part.details', $m->no_mutasi) }}" data-toggle="tooltip" title="Cetak"><i class="fas fa-print"></i></a> -->
+                                <a class="btn btn-primary btn-sm m-1" href="{{ route('mutasi-part.details', $m->no_mutasi) }}" data-toggle="tooltip" title="Details"><i class="fas fa-eye"></i></a>
                             </td>
                         </tr>
                         @endforeach
@@ -124,7 +124,7 @@
 
                             @endif
                             <td class="text-center">{{ $m->tanggal_cetak_sj_mutasi }}</td>
-                            <td class="text-center"><a class="btn btn-info btn-sm" href="{{ route('mutasi-part.details', $m->no_mutasi) }}"><i class="fas fa-eye"></i></a></td>
+                            <td class="text-center"><a class="btn btn-info btn-sm" href="{{ route('mutasi-part.details', $m->no_mutasi) }}" data-toggle="tooltip" title="Details"><i class="fas fa-eye"></i></a></td>
                         </tr>
                         @endforeach
                     </tbody>
