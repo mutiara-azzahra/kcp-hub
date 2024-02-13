@@ -47,7 +47,7 @@
                             <th class="text-center">No</th>
                             <th class="text-center">Part No</th>
                             <th class="text-center">Qty</th>
-                            <th class="text-center">Aksi</th>
+                            <th class="text-center">Mutasi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,7 +62,7 @@
                             <td class="text-right">{{ $p->stok }}</td> 
                             <td class="text-center">
                                 <a class="btn btn-warning btn-sm" href="{{ route('kode-rak-lokasi.mutasi',$p->id) }}">
-                                    <i class="nav-icon fas fa-share" data-bs-toggle="tooltip" data-bs-placement="top" title="Mutasi"></i>
+                                    <i class="nav-icon fas fa-share" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Mutasi"></i>
                                 </a>
                             </td>
                         </tr>

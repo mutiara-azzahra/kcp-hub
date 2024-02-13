@@ -44,9 +44,16 @@
                             <td class="text-center">{{ $no++ }}</td>
                             <td class="text-center">{{ $p->kode_rak_lokasi }}</td>
                             <td class="text-center">
-                                <a class="btn btn-primary btn-sm" href="{{ route('kode-rak-lokasi.show',$p->id) }}"><i class="fas fa-eye"></i></a>
-                                <a class="btn btn-warning btn-sm" href="{{ route('kode-rak-lokasi.edit',$p->id) }}"><i class="fas fa-edit"></i></a>
-                                <a class="btn btn-danger btn-sm" href="{{ route('kode-rak-lokasi.delete',$p->id) }}"><i class="fas fa-times-circle"></i></a>
+                                <form action="{{ route('kode-rak-lokasi.delete', $p->id) }}" method="GET" id="form_hapus_{{ $p->id }}" data-id="{{ $p->id }}" data-toggle="tooltip" title="Hapus">
+
+                                    <a class="btn btn-primary btn-sm" href="{{ route('kode-rak-lokasi.show',$p->id) }}" data-toggle="tooltip" title="Details"><i class="fas fa-eye"></i></a>
+                                    <a class="btn btn-warning btn-sm" href="{{ route('kode-rak-lokasi.edit',$p->id) }}" data-toggle="tooltip" title="Ubah"><i class="fas fa-edit"></i></a>
+
+                                    @csrf
+                                    @method('GET')
+                                   
+                                    <a class="btn btn-danger btn-sm" onclick="Hapus('{{ $p->id }}')"><i class="fas fa-times"></i></a>
+                                </form>
                             </td>
                         </tr>
                         @endforeach
@@ -59,6 +66,25 @@
 @endsection
 
 @section('script')
+
+<script>
+    Hapus = (id)=>{
+        Swal.fire({
+            title: 'Apa anda yakin menghapus data rak?',
+            text:  "Data tidak dapat kembali" ,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6' ,
+            cancelButtonColor: 'red' ,
+            confirmButtonText: 'hapus data' ,
+            cancelButtonText: 'batal' ,
+            reverseButtons: false
+            }).then((result) => {
+                if (result.value) {
+                    document.getElementById('form_hapus_' + id).submit();
+                }
+        })
+    }
+</script>
 
 
 @endsection

@@ -29,9 +29,7 @@ class KodeRakLokasiController extends Controller
     public function show($id){
 
         $kode_rak   = MasterKodeRak::findOrFail($id);
-        // $rak_gudang = BarangMasukDetails::where('id', $kode_rak->id)->get();
         $rak_gudang = StokGudang::where('id_rak', $kode_rak->id)->get();
-        // dd($rak_gudang);
 
         return view('kode-rak-lokasi.show', compact('kode_rak', 'rak_gudang'));
 
@@ -70,7 +68,7 @@ class KodeRakLokasiController extends Controller
     public function mutasi($id){
 
         $barang_rak = StokGudang::findOrFail($id);
-        $all_rak    = MasterKodeRak::all();
+        $all_rak    = MasterKodeRak::where('status', 'A')->get();
 
         return view('kode-rak-lokasi.mutasi', compact('barang_rak', 'all_rak'));
         
@@ -78,8 +76,6 @@ class KodeRakLokasiController extends Controller
 
     public function store_mutasi(Request $request)
     {
-
-        // dd($request->all());
 
         $request -> validate([
             'part_no'       => 'required',
@@ -112,8 +108,7 @@ class KodeRakLokasiController extends Controller
 
         MutasiDetails::create($details);
 
-        return redirect()->route('kode-rak-lokasi.index')->with('success','Stok gudang berhasil ditambahkan pada mutasi.
-            Silahkan lakukan approval mutasi!');
+        return redirect()->route('kode-rak-lokasi.index')->with('success','Stok gudang berhasil ditambahkan pada mutasi. Silahkan lakukan approval mutasi!');
     }
 
 
