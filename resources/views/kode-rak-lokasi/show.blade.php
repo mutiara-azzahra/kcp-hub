@@ -62,7 +62,7 @@
                             <td class="text-right">{{ $p->stok }}</td> 
                             <td class="text-center">
                                 <a class="btn btn-warning btn-sm" href="{{ route('kode-rak-lokasi.mutasi',$p->id) }}">
-                                    <i class="nav-icon fas fa-share" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Mutasi"></i>
+                                    <i class="nav-icon fas fa-share" data-toggle="tooltip" title="Mutasi"></i>
                                 </a>
                             </td>
                         </tr>
