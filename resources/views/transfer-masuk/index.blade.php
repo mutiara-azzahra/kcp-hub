@@ -27,13 +27,14 @@
     <div class="card" style="padding: 10px;">
         <div class="card-body">
             <div class="col-lg-12">  
-                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example2">
+                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example1">
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
                             <th class="text-center">No. Transfer</th>
                             <th class="text-center">Tgl. Bank</th>
                             <th class="text-center">Bank</th>
                             <th class="text-center">Keterangan</th>
+                            <th class="text-center">Nominal</th>
                             <th class="text-center"></th>
                         </tr>
                     </thead>
@@ -48,12 +49,10 @@
                         <td class="text-center">{{ Carbon\Carbon::parse($p->tanggal_bank)->format('d-m-Y') }}</td>
                         <td class="text-center">{{ $p->bank }}</td>
                         <td class="text-left">{{ $p->keterangan }}</td>
+                        <td class="text-right">{{ number_format($p->details->where('akuntansi_to', 'D')->sum('total'), 0, '.', ',') }}</td>
                         <td class="text-center">
-                            <a class="btn btn-primary btn-sm" href="{{ route('transfer-masuk.edit', $p->id_transfer ) }}">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                            <a class="btn btn-primary btn-sm" href="{{ route('transfer-masuk.edit', $p->id_transfer ) }}">
-                                <i class="fas fa-pencil"></i>
+                            <a class="btn btn-info btn-sm" href="{{ route('transfer-masuk.edit', $p->id_transfer ) }}">
+                                <i class="fas fa-edit"></i>
                             </a>
                         </td>
                     </tr>

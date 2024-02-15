@@ -59,7 +59,7 @@ class AccountReceivableController extends Controller
         $created = TransaksiPembayaranPiutangHeader::create($request->all());
 
         if ($created){
-            return redirect()->route('account-receivable.details', ['no_piutang' => $newPiutang->no_piutang])->with('success','Piutang baru berhasil ditambahkan, silahkan input details Invoice');
+            return redirect()->route('account-receivable.details', ['no_piutang' => $newPiutang->no_piutang])->with('success','Piutang baru berhasil ditambahkan, silahkan input detail piutang!');
         } else{
             return redirect()->route('account-receivable.index')->with('danger','Data baru gagal ditambahkan');
         }
@@ -95,7 +95,7 @@ class AccountReceivableController extends Controller
             $created = TransaksiPembayaranPiutangHeader::create($value);
         }
 
-        return redirect()->route('account-receivable.index')->with('success', 'Piutang baru berhasil ditambahkan, silahkan input details Invoice');
+        return redirect()->route('account-receivable.index')->with('success', 'Detail piutang baru berhasil ditambahkan!');
     }
 
     

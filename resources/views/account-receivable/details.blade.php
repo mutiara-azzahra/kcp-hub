@@ -14,11 +14,11 @@
     </div>
 
     @if ($message = Session::get('success'))
-        <div class="alert alert-success">
+        <div class="alert alert-success" id="myAlert">
             <p>{{ $message }}</p>
         </div>
     @elseif ($message = Session::get('danger'))
-        <div class="alert alert-warning">
+        <div class="alert alert-warning" id="myAlert">
             <p>{{ $message }}</p>
         </div>
     @endif
@@ -38,14 +38,9 @@
                         <td class="text-left"><b>{{ $data->kd_outlet }} / {{ $data->nm_outlet }}</b></td>
                     </tr>
                     <tr>
-                        <th class="text-left">Amount Potong</th>
-                        <td>:</td>
-                        <td class="text-left"><b>{{ $data->kd_outlet }} / {{ $data->nm_outlet }}</b></td>
-                    </tr>
-                    <tr>
                         <th class="text-left">Potongan</th>
                         <td>:</td>
-                        <td class="text-left"><b>Rp. {{ $data->nominal_potong }}</b></td>
+                        <td class="text-left"><b>Rp. {{ $data->nominal_potong }} ,-</b></td>
                     </tr>
                     <tr>
                         <th class="text-left">Pembayaran Via</th>
@@ -83,7 +78,8 @@
                         <tr style="background-color: #6082B6; color:white">
                         <th class="text-center"></th>
                         <th class="text-center">No. Invoice</th>
-                        <th class="text-center">Toko</th>
+                        <th class="text-center">Kode Toko</th>
+                        <th class="text-center">Nama Toko</th>
                         <th class="text-center">Nominal Total</th>
                         <th class="text-center">Tanggal Invoice</th>
                     </tr>
@@ -97,9 +93,10 @@
                                 </div>
                             </td>
                             <td class="text-left">{{ $s->noinv }}</td>
-                            <td class="text-left">{{ $s->kd_outlet }}/{{ $s->nm_outlet }}</td>
-                            <td class="text-left">Rp. {{ number_format($s->details_invoice->sum('nominal_total'), 0, ',', '.') }}</td>
-                            <td class="text-left">{{ $s->created_at }}</td>
+                            <td class="text-center">{{ $s->kd_outlet }}</td>
+                            <td class="text-left">{{ $s->nm_outlet }}</td>
+                            <td class="text-right">{{ number_format($s->details_invoice->sum('nominal_total'), 0, '.', ',') }}</td>
+                            <td class="text-center">{{ Carbon\Carbon::parse($s->created_at)->format('d-m-Y') }}</td>
                         </tr>
                     @endforeach
                 </tbody>
