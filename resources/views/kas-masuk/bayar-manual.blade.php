@@ -37,17 +37,6 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <strong>Toko</strong>
-                            <select name="kd_outlet" class="form-control my-select">
-                                <option value="">--Pilih Toko--</option>
-                                @foreach($master_outlet as $a)
-                                    <option value="{{ $a->kd_outlet }}">{{ $a->kd_outlet }} | {{ $a->nm_outlet }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
                             <strong>Pembayaran Via</strong>
                             <select name="pembayaran_via" class="form-control my-select">
                                 <option value="">---Pilih Pembayaran--</option>

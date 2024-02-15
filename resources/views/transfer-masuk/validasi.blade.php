@@ -30,10 +30,10 @@
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
                             <th class="text-center">No. Transfer</th>
-                            <th class="text-center">Keterangan</th>
-                            <th class="text-center">Tgl. Bank</th>
+                            <th class="text-center">Kode Toko</th>
                             <th class="text-center">Bank</th>
-                            <th class="text-center">Total</th>
+                            <th class="text-center">Keterangan</th>
+                            <th class="text-center">Validasi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -44,7 +44,7 @@
                     @foreach($tf_kas as $p)
                     <tr>
                         <td class="text-left">{{ $p->id_transfer }}</td>
-                        <td class="text-left">
+                        <td class="text-center">
                             @if($p->kas_masuk == null)
 
                             @else
@@ -54,7 +54,7 @@
                         <td class="text-left">{{ $p->bank }}</td>
                         <td class="text-left">{{ $p->keterangan }}</td>
                         <td class="text-center">
-                            <a class="btn btn-primary btn-sm" href="{{ route('transfer-masuk.validasi-data', $p->id_transfer ) }}">
+                            <a class="btn btn-success btn-sm" href="{{ route('transfer-masuk.validasi-data', $p->id_transfer ) }}">
                                 <i class="fas fa-check"></i>
                             </a>
                         </td>

@@ -36,7 +36,7 @@
                             <th class="text-center">Nama Toko</th>
                             <th class="text-center">Pembayaran Via</th>
                             <th class="text-center">Nominal</th>
-                            <th class="text-center"></th>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -53,14 +53,14 @@
                         <td></td>
                         <td></td>
                         @else
-                        <td class="text-left">{{ $p->kd_outlet }}</td>
+                        <td class="text-center">{{ $p->kd_outlet }}</td>
                         <td class="text-left">{{ $p->outlet->nm_outlet }}</td>
                         @endif
 
-                        <td class="text-center">{{ $p->pembayaran_via }}</td>
-                        <td class="text-right">Rp. {{ number_format($p->nominal, 0, ',', '.') }}</td>
-                        <td>
-                        <a class="btn btn-warning btn-sm" onClick="printAndRefresh('{{ route('kas-masuk.cetak-tanda-terima', $p->no_kas_masuk) }}')" href="{{ route('kas-masuk.cetak', $p->no_kas_masuk) }}" target="_blank"><i class="fas fa-print"></i></a>
+                        <td class="text-left">{{ $p->pembayaran_via }}</td>
+                        <td class="text-right">{{ number_format($p->nominal, 0, '.', ',') }}</td>
+                        <td class="text-center">
+                            <a class="btn btn-warning btn-sm" onClick="printAndRefresh('{{ route('kas-masuk.cetak-tanda-terima', $p->no_kas_masuk) }}')" href="{{ route('kas-masuk.cetak', $p->no_kas_masuk) }}" target="_blank"><i class="fas fa-print"></i></a>
                         </td>
                     </tr>
                     @endforeach
@@ -116,8 +116,8 @@
                         <td class="text-left">{{ $p->no_kas_masuk }}</td>
                         <td class="text-center">{{ Carbon\Carbon::parse($p->tanggal_rincian_tagihan)->format('d-m-Y') }}</td>
                         <td class="text-left">{{ $p->keterangan }}</td>
-                        <td class="text-center">{{ $p->pembayaran_via }}</td>
-                        <td class="text-right">Rp. {{ number_format($p->nominal, 0, ',', '.') }}</td>
+                        <td class="text-left">{{ $p->pembayaran_via }}</td>
+                        <td class="text-right">{{ number_format($p->nominal, 0, '.', ',') }}</td>
                         <td class="text-center">
                             <a class="btn btn-info btn-sm" href="{{ route('kas-masuk.cetak', $p->no_kas_masuk) }}" target="_blank"><i class="fas fa-edit"></i></a>
                             <a class="btn btn-warning btn-sm" href="{{ route('kas-masuk.cetak', $p->no_kas_masuk) }}" target="_blank"><i class="fas fa-print"></i></a>
