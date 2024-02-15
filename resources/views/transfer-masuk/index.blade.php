@@ -45,12 +45,15 @@
                     @foreach($tf_masuk as $p)
                     <tr>
                         <td class="text-center">{{ $p->id_transfer }}</td>
-                        <td class="text-center">{{ $p->tanggal_bank }}</td>
+                        <td class="text-center">{{ Carbon\Carbon::parse($p->tanggal_bank)->format('d-m-Y') }}</td>
                         <td class="text-center">{{ $p->bank }}</td>
                         <td class="text-left">{{ $p->keterangan }}</td>
                         <td class="text-center">
-                            <a class="btn btn-info btn-sm" href="{{ route('transfer-masuk.edit', $p->id_transfer ) }}">
-                                <i class="fas fa-edit"></i>
+                            <a class="btn btn-primary btn-sm" href="{{ route('transfer-masuk.edit', $p->id_transfer ) }}">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a class="btn btn-primary btn-sm" href="{{ route('transfer-masuk.edit', $p->id_transfer ) }}">
+                                <i class="fas fa-pencil"></i>
                             </a>
                         </td>
                     </tr>
