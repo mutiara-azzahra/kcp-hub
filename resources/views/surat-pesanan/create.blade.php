@@ -135,21 +135,18 @@
             options.remove(0);
         }
 
-        // Add new options based on the condition
         if (dataId == 'rezky') {
-            // Add options from $all_toko2
             @foreach($toko_kanvas as $s)
-                var option = document.createElement('option');
-                option.value = "{{ $s->kd_outlet }}";
-                option.text = "{{ $s->kd_outlet }} / {{ $s->nm_outlet }}";
+                var option      = document.createElement('option');
+                option.value    = "{{ $s->kd_outlet }}";
+                option.text     = "{{ $s->kd_outlet }} / {{ $s->nm_outlet }}";
                 kdOutletDropdown.add(option);
             @endforeach
         } else {
-            // Add options from $all_toko
             @foreach($all_toko as $s)
-                var option = document.createElement('option');
-                option.value = "{{ $s->kd_outlet }}";
-                option.text = "{{ $s->kd_outlet }} / {{ $s->nm_outlet }}";
+                var option      = document.createElement('option');
+                option.value    = "{{ $s->kd_outlet }}";
+                option.text     = "{{ $s->kd_outlet }} / {{ $s->nm_outlet }}";
                 kdOutletDropdown.add(option);
             @endforeach
         }
