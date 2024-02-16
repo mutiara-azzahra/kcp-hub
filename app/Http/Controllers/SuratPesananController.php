@@ -30,7 +30,7 @@ class SuratPesananController extends Controller
     public function create(){
 
         // sales 1 : normal sales, sales 2 : kanvasing sales
-        
+
         $sales      = MasterSales::where('sales', Auth::user()->username)->value('id');
         $all_sales  = MasterSales::where('status', 'A')->get();
         $toko       = MasterAreaSales::where('id_sales', $sales)->get();
@@ -91,11 +91,11 @@ class SuratPesananController extends Controller
 
     public function detail($nosp)
     {
-        $details     = TransaksiSpHeader::where('nosp', $nosp)->first();
-        $total       = TransaksiSpDetails::where('nosp', $nosp)->get();
-        $master_part = MasterPart::where('status', 'A')->get();
-        $part_kanvasan = StokGudang::where('id_rak', '33')->get();
-        $check       = TransaksiSpDetails::where('nosp', $nosp)->first();
+        $details        = TransaksiSpHeader::where('nosp', $nosp)->first();
+        $total          = TransaksiSpDetails::where('nosp', $nosp)->get();
+        $master_part    = MasterPart::where('status', 'A')->get();
+        $part_kanvasan  = StokGudang::where('id_rak', '33')->get();
+        $check          = TransaksiSpDetails::where('nosp', $nosp)->first();
 
         $totalSum = 0;
         

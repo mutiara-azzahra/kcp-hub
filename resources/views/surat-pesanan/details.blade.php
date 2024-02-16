@@ -80,7 +80,7 @@
                                         <div class="form-group col-12">
                                             <select name="inputs[0][part_no]" class="form-control mr-2 my-select" id="package-default" onchange="updateData(`default`)">
                                                 <option value="">-- Pilih --</option>
-                                                @foreach($part_kanvasan as $k)
+                                                @foreach($part_kanvasan->groupBy('part_no') as $k)
                                                     <option value="{{ $k->part_no }}" data-het="{{ $k->part_rak->het }}">{{ $k->part_no }} | {{ $k->part_rak->part_nama }}</option>
                                                 @endforeach
                                             </select>
