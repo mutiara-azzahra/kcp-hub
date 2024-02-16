@@ -5,15 +5,14 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
             <div class="float-left">
-            @if(Auth::user()->id_role == 24)
-            <h4>Buat Surat Pesanan/SP by Office</h4>
-            @else
-            <h4>Buat Surat Pesanan/SP by Sales</h4>
-            @endif
-                
+                @if(Auth::user()->id_role == 24)
+                    <h4>Buat Surat Pesanan/SP by Office</h4>
+                @else
+                    <h4>Buat Surat Pesanan/SP by Sales</h4>
+                @endif
             </div>
             <div class="float-right">
-                    <a class="btn btn-success" href="{{ route('surat-pesanan.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
+                <a class="btn btn-success" href="{{ route('surat-pesanan.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
             </div>
         </div>
     </div>
