@@ -41,7 +41,7 @@
                                         <select name="sales" class="form-control mb-2 my-select" onchange="updateData()">     
                                             <option value="">-- Pilih Sales --</option>
                                             @foreach($all_sales as $s)
-                                                <option value="{{ $s->sales }}" data-id="{{ $s->sales }}">{{ $s->sales }}</option>
+                                                <option value="{{ $s->sales }}" data-id="{{ $s->kode_sales }}">{{ $s->sales }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -134,7 +134,7 @@
             options.remove(0);
         }
 
-        if (dataId == 'rezky') {
+        if (dataId == 2) {
             @foreach($toko_kanvas as $s)
                 var option      = document.createElement('option');
                 option.value    = "{{ $s->kd_outlet }}";
