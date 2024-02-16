@@ -29,6 +29,8 @@ class SuratPesananController extends Controller
 
     public function create(){
 
+        // sales 1 : normal sales, sales 2 : kanvasing sales
+        
         $sales      = MasterSales::where('sales', Auth::user()->username)->value('id');
         $all_sales  = MasterSales::where('status', 'A')->get();
         $toko       = MasterAreaSales::where('id_sales', $sales)->get();
@@ -39,9 +41,6 @@ class SuratPesananController extends Controller
     }
 
     public function store(Request $request){
-
-
-        dd($request->all());
 
         $newSp          = new TransaksiSpHeader();
         $newSo          = new TransaksiSpHeader();
