@@ -119,7 +119,7 @@
                         <td class="text-left">{{ $p->pembayaran_via }}</td>
                         <td class="text-right">{{ number_format($p->nominal, 0, '.', ',') }}</td>
                         <td class="text-center">
-                            <a class="btn btn-info btn-sm" href="{{ route('kas-masuk.cetak', $p->no_kas_masuk) }}" target="_blank"><i class="fas fa-edit"></i></a>
+                            <a class="btn btn-info btn-sm" href="{{ route('kas-masuk.details', $p->no_kas_masuk) }}" target="_blank"><i class="fas fa-edit"></i></a>
                             <a class="btn btn-warning btn-sm" href="{{ route('kas-masuk.cetak', $p->no_kas_masuk) }}" target="_blank"><i class="fas fa-print"></i></a>
                             <a class="btn btn-danger btn-sm" href="{{ route('kas-masuk.cetak', $p->no_kas_masuk) }}" target="_blank"><i class="fas fa-times"></i></a>
                         </td>
