@@ -40,6 +40,9 @@ class SuratPesananController extends Controller
 
     public function store(Request $request){
 
+
+        dd($request->all());
+
         $newSp          = new TransaksiSpHeader();
         $newSo          = new TransaksiSpHeader();
         $newSp->nosp    = TransaksiSpHeader::nosp();
