@@ -33,8 +33,9 @@ class SuratPesananController extends Controller
         $all_sales  = MasterSales::where('status', 'A')->get();
         $toko       = MasterAreaSales::where('id_sales', $sales)->get();
         $all_toko   = MasterOutlet::where('status', 'Y')->get();
+        $toko_kanvas= MasterOutlet::whereIn('kd_outlet', ['NW', 'VK'])->get();
 
-        return view('surat-pesanan.create', compact('sales', 'toko', 'all_toko', 'all_sales'));
+        return view('surat-pesanan.create', compact('sales', 'toko', 'all_toko', 'all_sales', 'toko_kanvas'));
     }
 
     public function store(Request $request){

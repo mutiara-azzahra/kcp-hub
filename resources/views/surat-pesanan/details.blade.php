@@ -12,6 +12,7 @@
             </div>
         </div>
     </div>
+
     @if ($message = Session::get('success'))
         <div class="alert alert-success" id="myAlert">
             <p>{{ $message }}</p>
@@ -21,6 +22,7 @@
             <p>{{ $message }}</p>
         </div>
     @endif
+
     <div class="card" >
         <div class="card-body">
             <div class="row">
@@ -55,6 +57,7 @@
                         </tr>
                     </table>
                 </div>
+                
                 @if($check === null)
                 <div class="col-lg-12 p-1" id="main" data-loading="true">
                     <form action="{{ route('surat-pesanan.store_details')}}" method="POST">
