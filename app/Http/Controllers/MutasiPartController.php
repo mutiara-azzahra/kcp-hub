@@ -61,7 +61,7 @@ class MutasiPartController extends Controller
             StokGudang::create($value);
 
             $stok_awal = StokGudang::where('part_no', $check_details->part_no)->where('id_rak', $check_details->header->rak_asal)
-            ->value('stok');
+                ->value('stok');
 
             //Potong stok sebelumnya
             StokGudang::where('part_no', $check_details->part_no)->where('id_rak', $check_details->header->rak_asal)
@@ -71,10 +71,10 @@ class MutasiPartController extends Controller
                 'updated_by'    => Auth::user()->nama_user
             ]);
 
-            $stok_akhir = MasterStokGudang::where('part_no', $check_details->part_no)->latest()->first();
+            $stok_akhir = MasterStokGudang::where('part_no', $check_details->part_no)->value('stok');
 
             if(isset($stok_akhir)){
-                $stok_awal = $stok_akhir->stok_akhir;
+                $stok_awal = $stok_akhir;
             } else{
                 $stok_awal = 0;
             }

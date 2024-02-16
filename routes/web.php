@@ -314,6 +314,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     //RINCIAN TAGIHAN
     Route::get('/rincian-tagihan', [RincianTagihanController::class, 'index'])->name('rincian-tagihan.index');
+    Route::post('/rincian-tagihan/approve/{id}', [RincianTagihanController::class, 'approve'])->name('rincian-tagihan.approve');
 
     //ROUTE PEMBAYARAN PIUTANG TOKO
     Route::get('/piutang-toko', [PembayaranPiutangTokoController::class, 'index'])->name('piutang-toko.index');

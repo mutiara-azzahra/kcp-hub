@@ -244,9 +244,6 @@
                                 $valueMap = [
                                     'A' => 'AIR AKI',
                                     'SP' => 'SPAREPART',
-                                    'B' => 'BAN LUAR TRUCK',
-                                    'R' => 'AIR RADIATOR',
-                                    'AC' => 'AIR AKI',
                                 ];
                                 @endphp
 
