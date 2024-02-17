@@ -9,6 +9,7 @@
             </div>
             <div class="float-right">
                 <a class="btn btn-success" href="{{ route('account-receivable.create') }}"><i class="fas fa-plus"></i> Tambah Piutang</a>
+                <a class="btn btn-warning" href="{{ route('account-receivable.cetak') }}"><i class="fas fa-plus"></i> Cetak Tagihan Toko</a>
             </div>
         </div>
     </div>

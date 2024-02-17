@@ -49,32 +49,32 @@
                                     </tr>
                                 </thead>
                                 <tbody class="input-fields">
-                                            <tr>
-                                                <td class="text-center">
-                                                    <div class="form-group col-12">
-                                                        <select name="inputs[0][kd_kategori]" class="form-control mr-2">
-                                                            <option value="">-- Pilih --</option>
-                                                            @foreach($kategori as $a)  
-                                                                <option value="{{ $a->kd_kategori }}">{{ $a->kategori }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="form-group col-12">
-                                                        <input type="hidden" name="inputs[0][nops]" value="{{ $header_ps->nops }}" class="form-control" placeholder="0">
-                                                        <input type="number" name="inputs[0][koli]" class="form-control" placeholder="0">
-                                                    </div>
-                                                </td>
-                                                
-                                                <td class="text-center">
-                                                    <div class="form-group col-12">
-                                                        <a type="button" class="btn btn-primary m-1" id="add"><i class="fas fa-plus"></i></a>                                                                                  
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                </table>
+                                    <tr>
+                                        <td class="text-center">
+                                            <div class="form-group col-12">
+                                                <select name="inputs[0][kd_kategori]" class="form-control mr-2">
+                                                    <option value="">-- Pilih --</option>
+                                                    @foreach($kategori as $a)  
+                                                        <option value="{{ $a->kd_kategori }}">{{ $a->kategori }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="form-group col-12">
+                                                <input type="hidden" name="inputs[0][nops]" value="{{ $header_ps->nops }}" class="form-control" placeholder="0">
+                                                <input type="number" name="inputs[0][koli]" class="form-control" placeholder="0">
+                                            </div>
+                                        </td>
+                                        
+                                        <td class="text-center">
+                                            <div class="form-group col-12">
+                                                <a type="button" class="btn btn-primary m-1" id="add"><i class="fas fa-plus"></i></a>                                                                                  
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                                 <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                                     <div class="float-right">
                                         <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Data</button>                           

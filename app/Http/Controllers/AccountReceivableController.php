@@ -98,5 +98,21 @@ class AccountReceivableController extends Controller
         return redirect()->route('account-receivable.index')->with('success', 'Detail piutang baru berhasil ditambahkan!');
     }
 
+    public function cetak(){
+
+        $invoice_selected  = TransaksiInvoiceHeader::orderBy('noinv', 'asc')->get();
+
+        return view('account-receivable.daftar-piutang-toko', compact('invoice_selected'));
+    }
+
+    public function cetak_pdf()
+    {
+        $data               = TransaksiInvoiceHeader::where('noinv', $noinv)->first();
+        $pdf                = PDF::loadView('reports.piutang-toko', ['data'=>$data], ['invoice_details'=>$invoice_details]);
+        $pdf->setPaper('letter', 'potrait');
+
+        return $pdf->stream('piutang-toko.pdf');
+    }
+
     
 }
