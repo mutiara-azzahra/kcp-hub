@@ -23,7 +23,7 @@
         </div>
     @endif
 
-    <form action="{{ route('account-receiveable.search')}}" method="POST">
+    <form action="{{ route('account-receivable.search')}}" method="POST">
         @csrf
         <div class="card" style="padding: 10px;">
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
@@ -40,6 +40,7 @@
                 <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example1">
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
+                            <th></th>
                             <th class="text-center">No. Invoice</th>
                             <th class="text-center">Kode Toko</th>
                             <th class="text-center">Nama Toko</th>
@@ -55,6 +56,11 @@
                         
                         @foreach($invoice as $s)
                         <tr>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="selected_items[]" value="{{ $s->noinv }}" checked>
+                                </div>
+                            </td>
                             <td class="text-left">{{ $s->noinv }}</td>
                             <td class="text-center">{{ $s->kd_outlet }}</td>
                             <td class="text-left">{{ $s->nm_outlet }}</td>
@@ -65,6 +71,12 @@
                         @endforeach
                     </tbody>
                 </table>
+
+                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                    <div class="float-left">
+                        <button type="submit" class="btn btn-warning"><i class="fas fa-print"></i> Cetak Daftar Piutang PDF</button>                            
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -100,9 +100,20 @@ class AccountReceivableController extends Controller
 
     public function cetak(){
 
-        $invoice_selected  = TransaksiInvoiceHeader::orderBy('noinv', 'asc')->get();
+        $outlet  = MasterOutlet::where('status', 'Y')->get();
 
-        return view('account-receivable.daftar-piutang-toko', compact('invoice_selected'));
+        return view('account-receivable.search', compact('outlet'));
+    }
+
+    public function search(Request $request){
+
+        $request -> validate([
+            'kd_outlet' => 'required',
+        ]);
+
+        $invoice_selected  = TransaksiInvoiceHeader::where('kd_outlet', $request->kd_outlet)->get();
+
+        return view('account-receivable.dpt', compact('invoice_selected'));
     }
 
     public function cetak_pdf()
