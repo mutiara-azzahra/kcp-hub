@@ -8,7 +8,7 @@
                 <h4>Daftar Piutang Toko</h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-success" href="{{ route('account-receivable.index') }}"><i class="fas fa-plus"></i> Kembali</a>
+                <a class="btn btn-success" href="{{ route('account-receivable.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
             </div>
         </div>
     </div>
@@ -23,21 +23,17 @@
         </div>
     @endif
 
-    <form action="{{ route('account-receivable.search')}}" method="POST">
-        @csrf
-        <div class="card" style="padding: 10px;">
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <div class="float-right pt-3">
-                    <button type="submit" class="btn btn-info"><i class="fas fa-search"></i> Cari Toko</button>                            
-                </div>
-            </div>
-        </div>
-    </form>
-
     <div class="card" style="padding: 10px;">
         <div class="card-body">
-            <div class="col-lg-12">  
-                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example1">
+            <div class="col-lg-12">
+                @foreach($invoice_selected as $i)
+                        
+                <form action="{{ route('account-receivable.cetak-pdf', ['noinv' => $i->noinv]) }}" method="POST">
+                @csrf
+                
+                @endforeach
+
+                <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example2">
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
                             <th></th>
@@ -49,12 +45,13 @@
                             <th class="text-center">Tanggal Jatuh Tempo</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="input-fields">
+
                         @php
                         $no=1;
                         @endphp
                         
-                        @foreach($invoice as $s)
+                        @foreach($invoice_selected as $s)
                         <tr>
                             <td>
                                 <div class="form-check">
@@ -72,13 +69,14 @@
                     </tbody>
                 </table>
 
-                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                    <div class="float-left">
-                        <button type="submit" class="btn btn-warning"><i class="fas fa-print"></i> Cetak Daftar Piutang PDF</button>                            
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                        <div class="float-left">
+                            <button type="submit" class="btn btn-warning"><i class="fas fa-print"></i> Cetak Daftar Piutang PDF</button>                            
+                        </div>
                     </div>
-                </div>
             </div>
         </div>
+        </form>
     </div>
 </div>
 @endsection

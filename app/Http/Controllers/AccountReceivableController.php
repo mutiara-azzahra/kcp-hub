@@ -116,10 +116,13 @@ class AccountReceivableController extends Controller
         return view('account-receivable.dpt', compact('invoice_selected'));
     }
 
-    public function cetak_pdf()
+    public function cetak_pdf(Request $request)
     {
-        $data               = TransaksiInvoiceHeader::where('noinv', $noinv)->first();
-        $pdf                = PDF::loadView('reports.piutang-toko', ['data'=>$data], ['invoice_details'=>$invoice_details]);
+
+
+        $selectedItems      = $request->input('selected_items', []);
+        $data               = TransaksiInvoiceHeader::whereIn('noinv', $selectedItems)->get();
+        $pdf                = PDF::loadView('reports.piutang-toko', ['data'=>$data]);
         $pdf->setPaper('letter', 'potrait');
 
         return $pdf->stream('piutang-toko.pdf');

@@ -308,7 +308,7 @@ Route::group(['middleware' => 'auth'], function () {
     //ROUTE AR
     Route::get('/account-receivable', [AccountReceivableController::class, 'index'])->name('account-receivable.index');
     Route::get('/account-receivable/cetak', [AccountReceivableController::class, 'cetak'])->name('account-receivable.cetak');
-    Route::get('/account-receivable/cetak-pdf', [AccountReceivableController::class, 'cetak_pdf'])->name('account-receivable.cetak-pdf');
+    Route::post('/account-receivable/cetak-pdf', [AccountReceivableController::class, 'cetak_pdf'])->name('account-receivable.cetak-pdf');
     Route::get('/account-receivable/create', [AccountReceivableController::class, 'create'])->name('account-receivable.create');
     Route::post('/account-receivable/store', [AccountReceivableController::class, 'store'])->name('account-receivable.store');
     Route::post('/account-receivable/search', [AccountReceivableController::class, 'search'])->name('account-receivable.search');
