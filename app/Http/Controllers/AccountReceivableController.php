@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -119,11 +120,10 @@ class AccountReceivableController extends Controller
     public function cetak_pdf(Request $request)
     {
 
-
         $selectedItems      = $request->input('selected_items', []);
         $data               = TransaksiInvoiceHeader::whereIn('noinv', $selectedItems)->get();
-        $pdf                = PDF::loadView('reports.piutang-toko', ['data'=>$data]);
-        $pdf->setPaper('letter', 'potrait');
+        $pdf                = PDF::loadView('reports.daftar-piutang-toko', ['data'=>$data]);
+        $pdf->setPaper('letter', 'landscape');
 
         return $pdf->stream('piutang-toko.pdf');
     }
