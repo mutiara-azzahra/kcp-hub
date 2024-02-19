@@ -157,6 +157,22 @@
                     </tr>
                 </thead>
                 <tbody>
+                <tbody>
+                    @foreach ($data as $p)
+                    <tr>
+                        <td class="td-qty">{{$loop->iteration}}.</td>
+                        <td class="td-part">{{ $p->created_at }}</td>
+                        <td class="td-part">{{ $p->noinv }}</td>
+                        <td class="td-qty">{{ $p->tgl_jatuh_tempo }}</td>
+                        <td class="td-angka">{{ number_format($p->details_invoice->sum('nominal_total'), 0, ',', '.') }}</td>
+                        <td class="td-angka"> - </td>
+                        <td class="td-angka"> - </td>
+                        <td class="td-angka"> - </td>
+                        <td class="td-angka"> - </td>
+                        <td class="td-angka"> - </td>
+                    </tr>
+                    @endforeach
+                </tbody>
                    
                 </tbody>
             </table>
