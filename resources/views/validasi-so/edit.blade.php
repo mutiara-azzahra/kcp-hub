@@ -23,7 +23,7 @@
         </div>
     @endif
 
-    <form action="{{ route('validasi-so.store_edit', $details->id)}}" method="POST">
+    <form action="{{ route('validasi-so.store_edit', ['id' => $details->id]) }}" method="POST">
         @csrf
         <div class="card" style="padding: 10px;">
             <div class="card-body">

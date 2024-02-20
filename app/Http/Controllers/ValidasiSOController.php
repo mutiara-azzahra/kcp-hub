@@ -97,37 +97,48 @@ class ValidasiSOController extends Controller
     public function store_edit($id, Request $request)
     {
 
-        $update         = TransaksiSODetails::where('id', $id)->first();
+        $update         = TransaksiSODetails::findOrFail($id);
         $het            = MasterPart::where('part_no', $update->part_no)->value('het');
         $diskon_maks    = MasterDiskonPart::where('part_no', $update->part_no)->value('diskon_maksimal');
 
-            if($diskon_maks != null){
-                if($request->disc > $diskon_maks){
+        if($diskon_maks != null){
+            if($request->disc > $diskon_maks){
 
-                    return redirect()->route('validasi-so.index')->with('danger','Nilai diskon part melebihi diskon maskimal! Silahkan input kembali');
-                
-                } else{
+                return redirect()->route('validasi-so.index')->with('danger','Nilai diskon part melebihi diskon maskimal! Silahkan input kembali');
+            
+            } else{
 
-                    $updated = TransaksiSODetails::where('id', $id)->update([
-                        'id_rak'        => $request->id_rak,
-                        'qty_gudang'    => $request->qty_gudang,
-                        'qty'           => $request->qty,
-                        'disc'          => $request->disc,
-                        'nominal'       => $request->qty * $het,
-                        'nominal_disc'  => $request->qty * $het * $request->disc/100,
-                        'nominal_total' => ($request->qty * $het) - $request->qty * $het * $request->disc/100,
-                        'modi_date'     => NOW(),
-                        'modi_by'       => Auth::user()->nama_user
-                    ]);
+                TransaksiSODetails::where('id', $id)->update([
+                    'id_rak'        => $request->id_rak,
+                    'qty_gudang'    => $request->qty_gudang,
+                    'qty'           => $request->qty,
+                    'disc'          => $request->disc,
+                    'nominal'       => $request->qty * $het,
+                    'nominal_disc'  => $request->qty * $het * $request->disc/100,
+                    'nominal_total' => ($request->qty * $het) - $request->qty * $het * $request->disc/100,
+                    'modi_date'     => NOW(),
+                    'modi_by'       => Auth::user()->nama_user
+                ]);
 
+                return redirect()->route('validasi-so.index')->with('success','Data SO berhasil diubah!');
 
-                    if ($updated){
-                        return redirect()->route('validasi-so.index')->with('success','Data SO berhasil diubah!');
-                    } else{
-                        return redirect()->route('validasi-so.index')->with('danger','Data SO gagal diubah');
-                    }
-
-                }
             }
+
+        } else {
+
+            TransaksiSODetails::where('id', $id)->update([
+                'id_rak'        => $request->id_rak,
+                'qty_gudang'    => $request->qty_gudang,
+                'qty'           => $request->qty,
+                'disc'          => $request->disc,
+                'nominal'       => $request->qty * $het,
+                'nominal_disc'  => $request->qty * $het * $request->disc/100,
+                'nominal_total' => ($request->qty * $het),
+                'modi_date'     => NOW(),
+                'modi_by'       => Auth::user()->nama_user
+            ]);
+
+            return redirect()->route('validasi-so.index')->with('success','Data SO berhasil diubah!');
         }
+    }
 }

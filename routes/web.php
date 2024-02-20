@@ -205,7 +205,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/sales-order/list-approved-so', [SalesOrderController::class, 'so_approved'])->name('sales-order.approved');
     Route::get('/sales-order/list-rejected-so', [SalesOrderController::class, 'so_rejected'])->name('sales-order.rejected');
     Route::get('/sales-order/edit/{id}', [SalesOrderController::class, 'edit'])->name('sales-order.edit');
-    Route::post('/sales-order/update/{id}', [SalesOrderController::class, 'store_edit'])->name('sales-order.store_edit');
+    Route::post('/sales-order/update', [SalesOrderController::class, 'store_edit'])->name('sales-order.store_edit');
     Route::get('/sales-order/tolak/{noso}', [SalesOrderController::class, 'tolak'])->name('sales-order.tolak');
     
     //ROUTE BO
@@ -231,7 +231,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/validasi-so/validasi/{noso}', [ValidasiSOController::class, 'validasi'])->name('validasi-so.validasi');
     Route::get('/validasi-so/cetak/{noso}', [ValidasiSOController::class, 'cetak'])->name('validasi-so.cetak');
     Route::get('/validasi-so/edit/{id}', [ValidasiSOController::class, 'edit_details'])->name('validasi-so.edit_details');
-    Route::post('/validasi-so/update/{id}', [ValidasiSOController::class, 'store_edit'])->name('validasi-so.store_edit');
+    Route::post('/validasi-so/store-update/{id}', [ValidasiSOController::class, 'store_edit'])->name('validasi-so.store_edit');
 
     //ROUTE PACKINGSHEET
     Route::get('/packingsheet', [PackingSheetController::class, 'index'])->name('packingsheet.index');

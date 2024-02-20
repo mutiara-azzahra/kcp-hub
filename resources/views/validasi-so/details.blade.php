@@ -76,15 +76,6 @@
                                             <td class="text-left">{{ $s->part_no }}</td>
                                             <td class="text-left">{{ $s->nama_part->part_nama }}</td>
                                             <td class="text-right">{{ $s->qty }}</td>
-                                            <td class="text-center">
-                                                @if(isset($s->id_rak))
-                                                {{ $s->stok_rak->kode_rak_lokasi }}
-
-                                                @else
-                                                <b>Pilih Rak</b>
-
-                                                @endif
-                                            </td>
                                             <td class="text-right">{{ $s->qty_gudang }}</td>
                                             <td class="text-center">{{ $s->disc }}%</td>
 
