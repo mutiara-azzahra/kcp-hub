@@ -5,10 +5,10 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4>Ubah Target Sales</h4>
+                <h4>Ubah Target Sales by Produk</h4>
             </div>
             <div class="float-right">
-                    <a class="btn btn-success" href="{{ route('master-target.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
+                    <a class="btn btn-success" href="{{ route('master-target-sales-produk.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
             </div>
         </div>
     </div>
@@ -27,8 +27,9 @@
     <div class="card" style="padding: 10px;">
         <div class="card-body">
             <div class="col-lg-12">
-                <form action="{{ route('master-target.update', $target_sales->id) }}" method="GET" enctype="multipart/form-data">
+                <form action="{{ route('master-target-sales-produk.update', $target_sales->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group mb-2">
@@ -38,6 +39,19 @@
                                 <option value="muhammad" {{ $target_sales->sales == 'muhammad' ? 'selected' : '' }}>Muhammad</option>
                                 <option value="nursehan" {{ $target_sales->sales == 'nursehan' ? 'selected' : '' }}>Nursehan</option>
                                 <option value="juliandari" {{ $target_sales->sales == 'juliandari' ? 'selected' : '' }}>Juliandari</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group mb-2">
+                            <strong>Pilih Produk</strong>
+                            <select name="kode_produk" class="form-control my-select" value="{{ $target_sales->kode_produk }}">
+                                <option value="">---Pilih Produk--</option>
+                                <option value="ICH" {{ $target_sales->kode_produk == 'ICH' ? 'selected' : '' }}>ICHIDAI</option>
+                                <option value="BRI" {{ $target_sales->kode_produk == 'BRI' ? 'selected' : '' }}>BRIO</option>
+                                <option value="ACC" {{ $target_sales->kode_produk == 'ACC' ? 'selected' : '' }}>AIR ACCU</option>
+                                <option value="ACL" {{ $target_sales->kode_produk == 'ACL' ? 'selected' : '' }}>AIR COOLANT</option>
+                                <option value="PEN" {{ $target_sales->kode_produk == 'PEN' ? 'selected' : '' }}>PENTIL</option>
                             </select>
                         </div>
                     </div>
@@ -75,7 +89,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                         <div class="float-right pt-3">
-                            <button type="submit" class="btn btn-warning"><i class="fas fa-save"></i> Simpan Data</button>                            
+                            <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Data</button>                            
                         </div>
                     </div>
                 </div>

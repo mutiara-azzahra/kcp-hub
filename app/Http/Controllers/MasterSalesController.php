@@ -32,8 +32,6 @@ class MasterSalesController extends Controller
             'sales'      => 'required|unique:master_sales,sales',
         ]);
 
-        
-
         $created = MasterSales::create($request->all());
 
         if ($created){
@@ -54,7 +52,7 @@ class MasterSalesController extends Controller
     public function tambah_wilayah($id){
 
         $sales       = MasterSales::findOrFail($id);
-        $master_area = MasterAreaOutlet::where('status', 'Y')->get();
+        $master_area = MasterAreaOutlet::where('status', 'A')->get();
         $area        = MasterAreaSales::where('id_sales', $id)->get();
 
         return view('master-sales.details', compact('sales', 'master_area', 'area'));
@@ -72,8 +70,8 @@ class MasterSalesController extends Controller
 
             $value['kode_kabupaten']    = $value['kode_kabupaten'];
             $value['id_sales']          = $value['id_sales'];
-            $value['crea_date']         = NOW();
-            $value['crea_by']           = Auth::user()->nama_user;
+            $value['created_at']        = NOW();
+            $value['created_by']        = Auth::user()->nama_user;
 
            MasterAreaSales::create($value);
         }        
@@ -82,21 +80,36 @@ class MasterSalesController extends Controller
 
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
-        $updated = MasterSales::where('id', $id)->update([
-                'status'         => 'N',
-                'updated_at'     => NOW(),
-                'updated_by'     => Auth::user()->nama_user
-            ]);
+        try {
+            $master_area_outlet = MasterAreaSales::findOrFail($id);
+            $master_area_outlet->delete();
 
-        if ($updated){
-            return redirect()->route('master-sales.index')->with('success','Stok Gudang berhasil dihapus!');
-        } else{
-            return redirect()->route('master-sales.index')->with('danger','Stok Gudang gagal dihapus');
+            return redirect()->route('master-sales.tambah-wilayah', ['id' => $master_area_outlet->id_sales])->with('success', 'Data area outlet sales berhasil dihapus!');
+
+        } catch (\Exception $e) {
+
+            return redirect()->route('master-sales.tambah-wilayah', ['id' => $master_area_outlet->id_sales])->with('danger', 'Terjadi kesalahan saat menghapus data area outlet sales.');
         }
-        
     }
 
-    
+    public function nonaktif_area($id){
+
+        try {
+            
+            MasterAreaSales::where('id', $id)->update([
+                'status'        => 'N',
+                'updated_at'    => NOW(),
+                'updated_by'    => NOW()
+            ]);
+
+            return redirect()->route('master-sales.tambah-wilayah', ['id' => $master_area_outlet->id_sales])->with('success', 'Data area outlet sales berhasil dinonaktifkan!');
+
+        } catch (\Exception $e) {
+
+            return redirect()->route('master-sales.tambah-wilayah', ['id' => $master_area_outlet->id_sales])->with('danger', 'Terjadi kesalahan saat menonaktifkan data area outlet sales.');
+        }
+    }
+
 }

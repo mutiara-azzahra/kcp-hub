@@ -40,5 +40,35 @@ class MasterTargetSpvController extends Controller
             return redirect()->route('master-target-spv.index')->with('danger','Data target sales gagal ditambahkan');
         }
     }
+
+
+    public function edit($id){
+
+        $target_spv = TargetSpv::findOrFail($id);
+
+        return view('master-target-spv.edit', compact('target_spv'));
+
+    }
+
+    public function update(Request $request, $id)
+    {
+
+        $nominal = str_replace('.', '', $request->nominal);
+        $nominal = str_replace(',', '.', $nominal);
+
+        $updated = TargetSpv::where('id', $id)->update([
+            'spv'           => $request->spv,
+            'bulan'         => $request->bulan,
+            'tahun'         => $request->tahun,
+            'nominal'       => $nominal
+        ]);
+
+        if ($updated){
+            return redirect()->route('master-target-spv.index')->with('success','Data target spv berhasil diubah!');
+        } else{
+            return redirect()->route('master-target-spv.index')->with('danger','Data target spv gagal diubah');
+        }
+         
+    }
     
 }

@@ -297,8 +297,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/master-sales/store-details', [MasterSalesController::class, 'store_details'])->name('master-sales.store-details');
     Route::get('/master-sales/create', [MasterSalesController::class, 'create'])->name('master-sales.create');
     Route::get('/master-sales/show/{id}', [MasterSalesController::class, 'show'])->name('master-sales.show');
-    Route::get('/master-sales/delete/{id}', [MasterSalesController::class, 'delete'])->name('master-sales.delete');
     Route::get('/master-sales/tambah-wilayah/{id}', [MasterSalesController::class, 'tambah_wilayah'])->name('master-sales.tambah-wilayah');
+    Route::delete('/master-sales/destroy/{id}', [MasterSalesController::class, 'destroy'])->name('master-sales.destroy');
+    Route::post('/master-sales/delete/{id}', [MasterSalesController::class, 'delete'])->name('master-sales.delete');
 
     //ROUTE MASTER PART HET
     Route::get('/master-part-het', [MasterPartHetController::class, 'index'])->name('master-part-het.index');
@@ -424,13 +425,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/master-target/create', [MasterTargetController::class, 'create'])->name('master-target.create');
     Route::get('/master-target/show/{id}', [MasterTargetController::class, 'show'])->name('master-target.show');
     Route::get('/master-target/delete/{id}', [MasterTargetController::class, 'delete'])->name('master-target.delete');
+    Route::get('/master-target/edit/{id}', [MasterTargetController::class, 'edit'])->name('master-target.edit');
+    Route::get('/master-target/update/{id}', [MasterTargetController::class, 'update'])->name('master-target.update');
 
     //MST. SPV ACHIVEMENTS
     Route::get('/master-target-spv', [MasterTargetSpvController::class, 'index'])->name('master-target-spv.index');
     Route::post('/master-target-spv', [MasterTargetSpvController::class, 'store'])->name('master-target-spv.store');
     Route::get('/master-target-spv/create', [MasterTargetSpvController::class, 'create'])->name('master-target-spv.create');
     Route::get('/master-target-spv/show/{id}', [MasterTargetSpvController::class, 'show'])->name('master-target-spv.show');
-    Route::get('/master-target-spv/delete/{id}', [MasterTargetSpvController::class, 'delete'])->name('master-target-spv.delete');
+    Route::get('/master-target-spv/edit/{id}', [MasterTargetSpvController::class, 'edit'])->name('master-target-spv.edit');
+    Route::post('/master-target-spv/update/{id}', [MasterTargetSpvController::class, 'update'])->name('master-target-spv.update');
+    Route::delete('/master-target-spv/destroy/{id}', [MasterTargetSpvController::class, 'destroy'])->name('master-target-spv.destroy');
 
     //MST. SPV BY PRODUCT ACHIVEMENTS
     Route::get('/master-target-spv-produk', [MasterTargetSpvProdukController::class, 'index'])->name('master-target-spv-produk.index');
@@ -438,7 +443,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/master-target-spv-produk/create', [MasterTargetSpvProdukController::class, 'create'])->name('master-target-spv-produk.create');
     Route::get('/master-target-spv-produk/show/{id}', [MasterTargetSpvProdukController::class, 'show'])->name('master-target-spv-produk.show');
     Route::get('/master-target-spv-produk/edit/{id}', [MasterTargetSpvProdukController::class, 'edit'])->name('master-target-spv-produk.edit');
-    Route::delete('/master-target-spv-produk/delete/{id}', [MasterTargetSpvProdukController::class, 'delete'])->name('master-target-spv-produk.delete');
+    Route::post('/master-target-spv-produk/update/{id}', [MasterTargetSpvProdukController::class, 'update'])->name('master-target-spv-produk.update');
+    Route::delete('/master-target-spv-produk/destroy/{id}', [MasterTargetSpvProdukController::class, 'destroy'])->name('master-target-spv-produk.destroy');
 
     //MST. SALES BY PRODUCT ACHIVEMENTS
     Route::get('/master-target-sales-produk', [MasterTargetSalesProductController::class, 'index'])->name('master-target-sales-produk.index');

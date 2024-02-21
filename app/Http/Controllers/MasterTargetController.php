@@ -106,7 +106,7 @@ class MasterTargetController extends Controller
         ]);
 
         if ($updated){
-            return redirect()->route('master-target.index')->with('success','Data berhasil dihapus!');
+            return redirect()->route('master-target.index')->with('success','Data berhasil diubah!');
         } else{
             return redirect()->route('master-target.index')->with('danger','Data gagal diubah');
         }

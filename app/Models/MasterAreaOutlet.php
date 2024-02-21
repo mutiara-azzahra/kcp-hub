@@ -10,7 +10,6 @@ class MasterAreaOutlet extends Model
     use HasFactory;
 
     protected $table      = 'master_area_outlet';
-    protected $primaryKey = 'id';
     public $timestamps    = false;
 
     protected $fillable = [

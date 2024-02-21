@@ -31,35 +31,34 @@
             <div class="col-lg-12">
                 <form action="{{ route('master-sales.store-details') }}" method="POST">
                 @csrf
-
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <table id="table">
-                                <tbody class="input-fields">
-                                    <tr>
-                                        <td>
-                                            <div class="form-group col-md-12">
-                                                <select name="inputs[0][kode_kabupaten]" class="form-control my-select">
-                                                    <option value="">---Pilih Area--</option>
-                                                    @foreach($master_area as $a)
-                                                        <option value="{{ $a->kode_kab }}">{{ $a->nm_area }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="form-group col-12">
-                                                <input type="hidden" name="inputs[0][id_sales]" value="{{ $sales->id }}">
-                                            </div>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="form-group col-md-12">
-                                                <a type="button" class="btn btn-primary m-1" id="add"><i class="fas fa-plus"></i></a>                                                                                  
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <table id="table">
+                            <tbody class="input-fields">
+                                <tr>
+                                    <td>
+                                        <div class="form-group col-md-12">
+                                            <select name="inputs[0][kode_kabupaten]" class="form-control my-select">
+                                                <option value="">---Pilih Area--</option>
+                                                @foreach($master_area as $a)
+                                                    <option value="{{ $a->kode_kab }}">{{ $a->nm_area }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="form-group col-12">
+                                            <input type="hidden" name="inputs[0][id_sales]" value="{{ $sales->id }}">
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="form-group col-md-12">
+                                            <a type="button" class="btn btn-primary m-1" id="add"><i class="fas fa-plus"></i></a>                                                                                  
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                         <div class="float-right">
@@ -84,6 +83,7 @@
                         <th class="text-center">No</th>
                         <th class="text-center">Kode Area</th>
                         <th class="text-center">Nama Area Sales</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -96,6 +96,15 @@
                         <td class="text-center">{{ $no++ }}</td>
                         <td class="text-left">{{ $p->kode_kabupaten }}</td>
                         <td class="text-left">{{ $p->area_outlet->nm_area }}</td>
+                        <td class="text-center">
+                            <form action="{{ route('master-sales.destroy', $p->id ) }}" method="POST" id="form_delete_{{ $p->id }}" data-id="{{ $p->id }}">
+
+                                @csrf
+                                @method('DELETE')
+                                
+                                <a class="btn btn-danger btn-sm" onclick="Delete('{{ $p->id }}')"><i class="fas fa-times"></i></a>
+                            </form>
+                        </td>
                     </tr>
                     @endforeach
                     
@@ -110,41 +119,59 @@
 
 <script>
 
-var i = 0;
+    var i = 0;
 
-$('#add').click(function(){
-    ++i;
-    $('#table').append(`<tr>
-        <td>
-            <div class="form-group col-md-12">
-                <select name="inputs[${i}][kode_kabupaten]" class="form-control my-select-1">
-                    <option value="">---Pilih Area--</option>
-                    @foreach($master_area as $a)
-                        <option value="{{ $a->kode_kab }}">{{ $a->nm_area }}</option>
-                    @endforeach
-                </select>
-            </div>
-        </td>
-        <td class="text-center">
-            <div class="form-group col-12">
-                <input type="hidden" name="inputs[${i}][id_sales]" value="{{ $sales->id }}">
-            </div>
-        </td>
-        <td class="text-center">
-            <div class="form-group col-12">
-                <button type="submit" class="btn btn-danger remove-table-row"><i class="fas fa-minus"></i></button>
-            </div>
-        </td>
-    </tr>
-    `);
-    $('.my-select-1').select2({
-        width: '100%'
+    $('#add').click(function(){
+        ++i;
+        $('#table').append(`<tr>
+            <td>
+                <div class="form-group col-md-12">
+                    <select name="inputs[${i}][kode_kabupaten]" class="form-control my-select-1">
+                        <option value="">---Pilih Area--</option>
+                        @foreach($master_area as $a)
+                            <option value="{{ $a->kode_kab }}">{{ $a->nm_area }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </td>
+            <td class="text-center">
+                <div class="form-group col-12">
+                    <input type="hidden" name="inputs[${i}][id_sales]" value="{{ $sales->id }}">
+                </div>
+            </td>
+            <td class="text-center">
+                <div class="form-group col-12">
+                    <button type="submit" class="btn btn-danger remove-table-row"><i class="fas fa-minus"></i></button>
+                </div>
+            </td>
+        </tr>
+        `);
+        $('.my-select-1').select2({
+            width: '100%'
+        });
     });
-});
 
-$(document).on('click','.remove-table-row', function(){
-    $(this).parents('tr').remove();
-})
+    $(document).on('click','.remove-table-row', function(){
+        $(this).parents('tr').remove();
+    })
+
+
+    Delete = (id) =>{
+        Swal.fire({
+            title: 'Apa anda yakin menghapus data area sales ini?',
+            text:  "Data tidak dapat kembali" ,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6' ,
+            cancelButtonColor: 'red' ,
+            confirmButtonText: 'hapus data' ,
+            cancelButtonText: 'batal' ,
+            reverseButtons: false
+            }).then((result) => {
+                if (result.value) {
+                    document.getElementById('form_delete_' + id).submit();
+                }
+        })
+    }
 
 </script>
 

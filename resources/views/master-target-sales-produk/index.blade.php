@@ -5,11 +5,11 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4>Tambah Target Sales</h4>
+                <h4>Target Sales By Produk</h4>
             </div>
             <div class="float-right">
-                <a class="btn m-1 btn-success" href="{{ route('master-target-sales-produk.index') }}"><i class="fas fa-plus"></i> Ach. Produk</a>
-                <a class="btn m-1 btn-primary" href="{{ route('master-target.create') }}"><i class="fas fa-plus"></i> Tambah Achievement</a>
+                <a class="btn m-1 btn-primary" href="{{ route('master-target-sales-produk.create') }}"><i class="fas fa-plus"></i> Tambah Data</a>
+                <a class="btn m-1 btn-success" href="{{ route('master-target.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
             </div>
         </div>
     </div>
@@ -32,10 +32,11 @@
                         <tr style="background-color: #6082B6; color:white">
                             <th class="text-center">No</th>
                             <th class="text-center">Sales</th>
+                            <th class="text-center">Kode Produk</th>
                             <th class="text-center">Bulan</th>
                             <th class="text-center">Tahun</th>
                             <th class="text-center">Nominal</th>
-                            <th class="text-center">Aksi</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,18 +48,18 @@
                         <tr>
                             <td class="text-center">{{ $no++ }}</td>
                             <td class="text-left">{{ $p->sales }}</td>
+                            <td class="text-center">{{ $p->kode_produk }}</td>
                             <td class="text-center">{{ $p->bulan }}</td>
                             <td class="text-center">{{ $p->tahun }}</td>
                             <td class="text-right">{{ number_format($p->nominal, 0, ',', ',') }}</td>
                             <td class="text-center">
-                            <form action="{{ route('master-target.delete', $p->id) }}" method="POST" id="form_delete_{{ $p->id }}" data-id="{{ $p->id }}">
-                                    <a class="btn btn-info btn-sm" href="{{ route('master-target.edit',$p->id) }}"><i class="fas fa-edit"></i></a>
+                                <form action="{{ route('master-target-sales-produk.delete', $p->id) }}" method="POST" id="form_delete_{{ $p->id }}" data-id="{{ $p->id }}">
+                                    <a class="btn btn-info btn-sm" href="{{ route('master-target-sales-produk.edit',$p->id) }}"><i class="fas fa-edit"></i></a>
 
                                     @csrf
                                     @method('DELETE')
                                     <a class="btn btn-danger btn-sm" onclick="Hapus('{{ $p->id }}')"><i class="fas fa-times"></i></a>
                                 </form>
-
                             </td>
                         </tr>
                         @endforeach

@@ -5,10 +5,10 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
-                <h4>Ubah Target Sales</h4>
+                <h4>Ubah Target SPV</h4>
             </div>
             <div class="float-right">
-                    <a class="btn btn-success" href="{{ route('master-target.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
+                    <a class="btn btn-success" href="{{ route('master-target-spv.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
             </div>
         </div>
     </div>
@@ -27,50 +27,48 @@
     <div class="card" style="padding: 10px;">
         <div class="card-body">
             <div class="col-lg-12">
-                <form action="{{ route('master-target.update', $target_sales->id) }}" method="GET" enctype="multipart/form-data">
+                <form action="{{ route('master-target-spv.update', $target_spv->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group mb-2">
-                            <strong>Pilih sales</strong>
-                            <select name="sales" class="form-control my-select" value="{{ $target_sales->sales }}">
-                                <option value="">---Pilih sales--</option>
-                                <option value="muhammad" {{ $target_sales->sales == 'muhammad' ? 'selected' : '' }}>Muhammad</option>
-                                <option value="nursehan" {{ $target_sales->sales == 'nursehan' ? 'selected' : '' }}>Nursehan</option>
-                                <option value="juliandari" {{ $target_sales->sales == 'juliandari' ? 'selected' : '' }}>Juliandari</option>
+                            <strong>Pilih SPV</strong>
+                            <select name="spv" class="form-control my-select" value="{{ $target_spv->spv }}">
+                                <option value="">---Pilih SPV--</option>
+                                <option value="yana" {{ $target_spv->spv == 'yana' ? 'selected' : '' }}>Yana</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group mb-2 col-md-12 col-lg-12">
                         <label for="">Bulan</label>
-                        <select name="bulan" class="form-control mr-2 my-select" value= "{{ $target_sales->bulan }}">
+                        <select name="bulan" class="form-control mr-2 my-select" value= "{{ $target_spv->bulan }}">
                             <option value="">-- Pilih Bulan --</option>
-                            <option value="1" {{ $target_sales->bulan == 1 ? 'selected' : '' }}>Januari</option>
-                            <option value="2" {{ $target_sales->bulan == 2 ? 'selected' : '' }}>Februari</option>
-                            <option value="3" {{ $target_sales->bulan == 3 ? 'selected' : '' }}>Maret</option>
-                            <option value="4" {{ $target_sales->bulan == 4 ? 'selected' : '' }}>April</option>
-                            <option value="5" {{ $target_sales->bulan == 5 ? 'selected' : '' }}>Mei</option>
-                            <option value="6" {{ $target_sales->bulan == 6 ? 'selected' : '' }}>Juni</option>
-                            <option value="7" {{ $target_sales->bulan == 7 ? 'selected' : '' }}>Juli</option>
-                            <option value="8" {{ $target_sales->bulan == 8 ? 'selected' : '' }}>Agustus</option>
-                            <option value="9" {{ $target_sales->bulan == 9 ? 'selected' : '' }}>September</option>
-                            <option value="10" {{ $target_sales->bulan == 10 ? 'selected' : '' }}>Oktober</option>
-                            <option value="11" {{ $target_sales->bulan == 11 ? 'selected' : '' }}>November</option>
-                            <option value="12" {{ $target_sales->bulan == 12 ? 'selected' : '' }}>Desember</option>
+                            <option value="1" {{ $target_spv->bulan == 1 ? 'selected' : '' }}>Januari</option>
+                            <option value="2" {{ $target_spv->bulan == 2 ? 'selected' : '' }}>Februari</option>
+                            <option value="3" {{ $target_spv->bulan == 3 ? 'selected' : '' }}>Maret</option>
+                            <option value="4" {{ $target_spv->bulan == 4 ? 'selected' : '' }}>April</option>
+                            <option value="5" {{ $target_spv->bulan == 5 ? 'selected' : '' }}>Mei</option>
+                            <option value="6" {{ $target_spv->bulan == 6 ? 'selected' : '' }}>Juni</option>
+                            <option value="7" {{ $target_spv->bulan == 7 ? 'selected' : '' }}>Juli</option>
+                            <option value="8" {{ $target_spv->bulan == 8 ? 'selected' : '' }}>Agustus</option>
+                            <option value="9" {{ $target_spv->bulan == 9 ? 'selected' : '' }}>September</option>
+                            <option value="10" {{ $target_spv->bulan == 10 ? 'selected' : '' }}>Oktober</option>
+                            <option value="11" {{ $target_spv->bulan == 11 ? 'selected' : '' }}>November</option>
+                            <option value="12" {{ $target_spv->bulan == 12 ? 'selected' : '' }}>Desember</option>
                         </select>
                     </div>
                     <div class="form-group mb-2 col-md-12 col-lg-12">
                         <label for="">Tahun</label>
                         <select class="form-control mr-2 my-select" id="date-dropdown" name="tahun">
-                            @if(isset($target_sales->tahun))
-                                <option value="{{ $target_sales->tahun }}" selected>{{ $target_sales->tahun }}</option>
+                            @if(isset($target_spv->tahun))
+                                <option value="{{ $target_spv->tahun }}" selected>{{ $target_spv->tahun }}</option>
                             @endif
                         </select>
                     </div>
                     <div class="form-group mb-2 col-md-12 col-lg-12">
                         <div class="form-group">
                             <strong>Nominal Target</strong>
-                            <input type="text" id="rupiah" name="nominal" class="form-control" value= "{{ number_format($target_sales->nominal, 0, ',', '.') }}">
+                            <input type="text" id="rupiah" name="nominal" class="form-control" value= "{{ number_format($target_spv->nominal, 0, ',', '.') }}">
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
@@ -102,7 +100,7 @@
         dateOption.value = currentYear;
 
     
-        if (dateOption.value === "{{ $target_sales->tahun }}") {
+        if (dateOption.value === "{{ $target_spv->tahun }}") {
             dateOption.selected = true;
         }
 
