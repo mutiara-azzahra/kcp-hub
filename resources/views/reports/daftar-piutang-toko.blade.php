@@ -23,7 +23,7 @@
         text-align: center;
       }
       .atas{
-          text-align: left;
+          text-align: right;
           border: none;
       }
       .atas-total{
@@ -125,13 +125,44 @@
                 <td class="atas" style="width: 350px;">
                     <table class="atas" style="line-height: 13px;">
                         <tr>
-                            <td class="atas">PT. KCP</td>
+                            <td class="atas"><b>PT. KCP</b></td>
                         </tr>
                         <tr>
-                            <td class="alamat-kcp">Jl. Sutoyo S. No. 144 Banjarmasin, Hp. 0811 517 1595, 0812 5156 2768</td>
+                            <td class="atas"><i>Jl. Sutoyo S. No. 144 Banjarmasin, Hp. 0811 517 1595, 0812 5156 2768</i></td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="atas">
+                </td>
+            </tr>
+
+            <tr>
+                <td class="atas" style="width: 350px;">
+                    <table class="atas" style="line-height: 13px;">
+                        <tr>
+                            <td class="atas" style="margin:0px; text-decoration:underline;"><b><i>Daftar Piutang Toko</i></b></td>
                         </tr>
                         <tr>
-                            <td class="atas" style="margin:0px; text-decoration:underline;"><b>Daftar Piutang Toko</b></td>
+                            <td class="atas"><b>Tanggal :</b></td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="atas" style="width: 350px;">
+                    <table class="atas" style="line-height: 13px;">
+                        <tr>
+                            <td class="atas">Kepada : <b>{{ $data->first()->nm_outlet }} - {{ $data->first()->kd_outlet }}</b></td>
+                        </tr>
+                        <tr>
+                            <td class="atas"><b>{{ $data->first()->outlet->almt_outlet }}</b></td>
+                        </tr>
+                        <tr>
+                            @if($data->first()->outlet->kode_prp == 6300)
+                            <td class="atas"><b>KALIMANTAN SELATAN</b></td>
+
+                            @elseif($data->first()->outlet->kode_prp == 6200)
+                            <td class="atas"><b>KALIMANTAN TENGAH</b></td>
+
+                            @endif
                         </tr>
                     </table>
                 </td>
@@ -157,7 +188,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                <tbody>
                     @foreach ($data as $p)
                     <tr>
                         <td class="td-qty">{{$loop->iteration}}.</td>
@@ -166,19 +196,17 @@
                         <td class="td-qty">{{ $p->tgl_jatuh_tempo }}</td>
                         <td class="td-angka">{{ number_format($p->details_invoice->sum('nominal_total'), 0, ',', '.') }}</td>
                         <td class="td-angka"> - </td>
-                        <td class="td-angka"> - </td>
-                        <td class="td-angka"> - </td>
+                        <td class="td-angka">{{ number_format($p->piutang_details->sum('nominal'), 0, ',', '.') }}</td> piutang_details
+                        <td class="td-angka">{{ $p->first()->piutang_details->sortByDesc('created_at')->first()->created_at }}</td>
                         <td class="td-angka"> - </td>
                         <td class="td-angka"> - </td>
                     </tr>
                     @endforeach
                 </tbody>
-                   
-                </tbody>
             </table>
             <table class="atas" style="line-height: 15px;">
                 <tr>
-                    <td class="atas">Harap dibayar pada tangal</td>
+                    <td class="atas"><b>Harap dibayar pada tangal:</b></td>
                     <td class="atas-total"><b>TOTAL :</b></td>
                 </tr>
             </table>

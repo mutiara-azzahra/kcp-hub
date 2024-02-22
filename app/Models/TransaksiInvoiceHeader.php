@@ -70,6 +70,10 @@ class TransaksiInvoiceHeader extends Model
         return $this->hasMany(TransaksiSuratJalan::class, 'noso', 'noso');
     }
 
+    public function piutang_details()
+    {
+        return $this->hasMany(TransaksiPembayaranPiutang::class, 'noinv', 'noinv');
+    }
 
 
     

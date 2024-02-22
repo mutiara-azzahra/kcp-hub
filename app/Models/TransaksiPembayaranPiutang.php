@@ -25,6 +25,4 @@ class TransaksiPembayaranPiutang extends Model
         return $this->hasMany(TransaksiInvoiceHeader::class, 'noinv', 'noinv');
     }
 
-
-
 }
