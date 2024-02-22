@@ -56,6 +56,7 @@
                                 <form action="{{ route('master-target-spv.destroy', $p->id ) }}" method="POST" id="form_delete_{{ $p->id }}" data-id="{{ $p->id }}">
 
                                 <a class="btn btn-info btn-sm" href="{{ route('master-target-spv.edit',$p->id) }}"><i class="fas fa-edit"></i></a>
+                                
                                 @csrf
                                 @method('DELETE')
                                 
@@ -73,5 +74,27 @@
 @endsection
 
 @section('script')
+
+
+<script>
+
+    Delete = (id)=>{
+        Swal.fire({
+            title: 'Apa anda yakin menghapus data ini?',
+            text:  "Data tidak dapat kembali" ,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6' ,
+            cancelButtonColor: 'red' ,
+            confirmButtonText: 'hapus data' ,
+            cancelButtonText: 'batal' ,
+            reverseButtons: false
+            }).then((result) => {
+                if (result.value) {
+                    document.getElementById('form_delete_' + id).submit();
+                }
+        })
+    }
+    
+</script>
 
 @endsection

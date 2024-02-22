@@ -427,6 +427,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/master-target/delete/{id}', [MasterTargetController::class, 'delete'])->name('master-target.delete');
     Route::get('/master-target/edit/{id}', [MasterTargetController::class, 'edit'])->name('master-target.edit');
     Route::get('/master-target/update/{id}', [MasterTargetController::class, 'update'])->name('master-target.update');
+    Route::delete('/master-target/destroy/{id}', [MasterTargetController::class, 'destroy'])->name('master-target.destroy');
 
     //MST. SPV ACHIVEMENTS
     Route::get('/master-target-spv', [MasterTargetSpvController::class, 'index'])->name('master-target-spv.index');
@@ -452,8 +453,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/master-target-sales-produk/create', [MasterTargetSalesProductController::class, 'create'])->name('master-target-sales-produk.create');
     Route::get('/master-target-sales-produk/show/{id}', [MasterTargetSalesProductController::class, 'show'])->name('master-target-sales-produk.show');
     Route::get('/master-target-sales-produk/edit/{id}', [MasterTargetSalesProductController::class, 'edit'])->name('master-target-sales-produk.edit');
-    Route::delete('/master-target-sales-produk/delete/{id}', [MasterTargetSalesProductController::class, 'delete'])->name('master-target-sales-produk.delete');
-    Route::put('/master-target-sales-produk/update/{id}', [MasterTargetSalesProductController::class, 'update'])->name('master-target-sales-produk.update');
+    Route::post('/master-target-sales-produk/update/{id}', [MasterTargetSalesProductController::class, 'update'])->name('master-target-sales-produk.update');
+    Route::delete('/master-target-sales-produk/destroy/{id}', [MasterTargetSalesProductController::class, 'destroy'])->name('master-target.destroy');
 
     //MONITORING ACH. MARKETING
     Route::get('/monitoring', [MonitoringController::class, 'index'])->name('monitoring.index');

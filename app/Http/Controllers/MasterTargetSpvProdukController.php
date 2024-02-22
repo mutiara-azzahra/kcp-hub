@@ -47,18 +47,33 @@ class MasterTargetSpvProdukController extends Controller
         $created = TargetSpvProduk::create($request->all());
 
         if ($created){
-            return redirect()->route('master-target-spv-produk.index')->with('success','Data target produk SPV berhasil ditambahkan');
+            return redirect()->route('master-target-spv-produk.index')->with('success','Data target produk SPV berhasil diubah!');
         } else{
-            return redirect()->route('master-target-spv-produk.index')->with('danger','Data target produk SPV gagal ditambahkan');
+            return redirect()->route('master-target-spv-produk.index')->with('danger','Data target produk SPV gagal diubah');
         }
     }
 
-    public function delete( $id)
-    {
-      
-        TargetSpvProduk::destroy($id);
+    public function edit($id){
 
-        return redirect()->route('master-target-spv-produk.index')->with('success', 'Data berhasil dihapus');
+        $target_spv = TargetSpvProduk::findOrFail($id);
+
+        return view('master-target-spv-produk.edit', compact('target_spv'));
+
+    }
+
+    public function destroy($id)
+    {
+        try {
+
+            $target_spv_produk = TargetSpvProduk::findOrFail($id);
+            $target_spv_produk->delete();
+
+            return redirect()->route('master-target-spv-produk.index')->with('success', 'Data target SPV by Produk berhasil dihapus!');
+
+        } catch (\Exception $e) {
+
+            return redirect()->route('master-target-spv-produk.index')->with('danger', 'Terjadi kesalahan saat menghapus data target SPV by Produk.');
+        }
     }
 
 }

@@ -70,5 +70,20 @@ class MasterTargetSpvController extends Controller
         }
          
     }
+
+    public function destroy($id)
+    {
+        try {
+
+            $target_spv = TargetSpv::findOrFail($id);
+            $target_spv->delete();
+
+            return redirect()->route('master-target-spv.index')->with('success', 'Data target SPV berhasil dihapus!');
+
+        } catch (\Exception $e) {
+
+            return redirect()->route('master-target-spv.index')->with('danger', 'Terjadi kesalahan saat menghapus data target SPV.');
+        }
+    }
     
 }

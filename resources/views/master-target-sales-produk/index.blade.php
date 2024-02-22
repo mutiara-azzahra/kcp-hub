@@ -53,12 +53,13 @@
                             <td class="text-center">{{ $p->tahun }}</td>
                             <td class="text-right">{{ number_format($p->nominal, 0, ',', ',') }}</td>
                             <td class="text-center">
-                                <form action="{{ route('master-target-sales-produk.delete', $p->id) }}" method="POST" id="form_delete_{{ $p->id }}" data-id="{{ $p->id }}">
+                                <form action="{{ route('master-target-sales-produk.destroy', $p->id) }}" method="POST" id="form_delete_{{ $p->id }}" data-id="{{ $p->id }}">
+                                    
                                     <a class="btn btn-info btn-sm" href="{{ route('master-target-sales-produk.edit',$p->id) }}"><i class="fas fa-edit"></i></a>
 
                                     @csrf
                                     @method('DELETE')
-                                    <a class="btn btn-danger btn-sm" onclick="Hapus('{{ $p->id }}')"><i class="fas fa-times"></i></a>
+                                    <a class="btn btn-danger btn-sm" onclick="Delete('{{ $p->id }}')"><i class="fas fa-times"></i></a>
                                 </form>
                             </td>
                         </tr>
@@ -74,7 +75,7 @@
 @section('script')
 
 <script>
-    Hapus = (id)=>{
+    Delete = (id)=>{
         Swal.fire({
             title: 'Apa anda yakin menghapus data ini?',
             text:  "Data tidak dapat kembali" ,

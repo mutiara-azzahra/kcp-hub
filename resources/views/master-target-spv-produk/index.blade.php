@@ -9,7 +9,7 @@
             </div>
             <div class="float-right">
                 <a class="btn btn-primary m-1" href="{{ route('master-target-spv-produk.create') }}"><i class="fas fa-plus"></i> Tambah Achievement SPV</a>
-                <a class="btn btn-success m-1" href="{{ route('master-target.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
+                <a class="btn btn-success m-1" href="{{ route('master-target-spv.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
             </div>
         </div>
     </div>
@@ -53,11 +53,14 @@
                             <td class="text-center">{{ $p->tahun }}</td>
                             <td class="text-right">{{ number_format($p->nominal, 0, ',', ',') }}</td>
                             <td class="text-center">
-                                <form action="{{ route('master-target-spv-produk.delete', $p->id) }}" method="POST" id="form_delete" data-id="{{ $p->id }}">
+                                <form action="{{ route('master-target-spv-produk.destroy', $p->id) }}" method="POST" id="form_delete_{{ $p->id }}" data-id="{{ $p->id }}">
+
+                                    <a class="btn btn-info btn-sm" href="{{ route('master-target-spv-produk.edit',$p->id) }}"><i class="fas fa-edit"></i></a>
+
                                     @csrf
                                     @method('DELETE')
                                    
-                                    <a class="btn btn-danger btn-sm" onclick="Hapus('{{ $p->id }}')"><i class="fas fa-times"></i></a>
+                                    <a class="btn btn-danger btn-sm" onclick="Delete('{{ $p->id }}')"><i class="fas fa-times"></i></a>
                                 </form>
                             </td>
                         </tr>
@@ -73,9 +76,10 @@
 @section('script')
 
 <script>
-    Hapus = (id)=>{
+    
+    Delete = (id) =>{
         Swal.fire({
-            title: 'Apa anda yakin menghapus data ini?',
+            title: 'Apa anda yakin menghapus target SPV by Produk ini?',
             text:  "Data tidak dapat kembali" ,
             showCancelButton: true,
             confirmButtonColor: '#3085d6' ,
@@ -85,7 +89,7 @@
             reverseButtons: false
             }).then((result) => {
                 if (result.value) {
-                    $('#form_delete').submit();
+                    document.getElementById('form_delete_' + id).submit();
                 }
         })
     }

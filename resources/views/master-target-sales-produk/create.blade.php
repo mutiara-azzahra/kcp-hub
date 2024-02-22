@@ -36,7 +36,7 @@
                                 <option value="">---Pilih sales--</option>
                                 <option value="muhammad">Muhammad</option>
                                 <option value="nursehan">Nursehan</option>
-                                <option value="rezky">Rezky</option>
+                                <option value="yana2">Yana</option>
                             </select>
                         </div>
                     </div>

@@ -113,12 +113,20 @@ class MasterTargetController extends Controller
          
     }
 
-    public function delete( $id)
+    public function destroy($id)
     {
-      
-        TargetSales::destroy($id);
 
-        return redirect()->route('master-target.index')->with('success', 'Data berhasil dihapus');
+        try {
+
+            $target_sales = TargetSales::findOrFail($id);
+            $target_sales->delete();
+
+            return redirect()->route('master-target.index')->with('success', 'Data target sales berhasil dihapus!');
+
+        } catch (\Exception $e) {
+
+            return redirect()->route('master-target.index')->with('danger', 'Terjadi kesalahan saat menghapus data target sales.');
+        }
     }
 
     
