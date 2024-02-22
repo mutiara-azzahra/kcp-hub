@@ -68,12 +68,11 @@
                         @endforeach
                     </tbody>
                 </table>
-
-                    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                        <div class="float-left">
-                            <button type="submit" class="btn btn-warning"><i class="fas fa-print"></i> Cetak Daftar Piutang PDF</button>                            
-                        </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                    <div class="float-left">
+                        <button type="submit" class="btn btn-warning" target="_blank"><i class="fas fa-print"></i> Cetak Daftar Piutang PDF</button>                            
                     </div>
+                </div>
             </div>
         </div>
         </form>

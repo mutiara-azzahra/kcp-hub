@@ -23,7 +23,7 @@
         text-align: center;
       }
       .atas{
-          text-align: right;
+          text-align: left;
           border: none;
       }
       .atas-total{
@@ -43,6 +43,11 @@
           text-align: left;
           border: none;
           font-size: 12px;
+      }
+      .rekening{
+          text-align: left;
+          border: none;
+          font-size: 14px;
       }
       .nops{
           padding-top:10px;
@@ -98,7 +103,6 @@
      }
      .ttd{
         text-align: center;
-        text-transform: uppercase;
      }
      .text-right{
          text-align:right;
@@ -190,90 +194,111 @@
                 <tbody>
                     @foreach ($data as $p)
                     <tr>
+                        @php
+
+                        $nominal_invoice    = $p->details_invoice->sum('nominal_total');
+                        $piutang_terbayar   = $p->piutang_details->sum('nominal');
+                        $sisa               = $p->details_invoice->sum('nominal_total') - $p->piutang_details->sum('nominal');
+
+                        $sum_sisa = 0;
+                        $sum_sisa += $sisa;
+
+                        @endphp
                         <td class="td-qty">{{$loop->iteration}}.</td>
-                        <td class="td-part">{{ $p->created_at }}</td>
+                        <td class="td-qty">{{ Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
                         <td class="td-part">{{ $p->noinv }}</td>
-                        <td class="td-qty">{{ $p->tgl_jatuh_tempo }}</td>
-                        <td class="td-angka">{{ number_format($p->details_invoice->sum('nominal_total'), 0, ',', '.') }}</td>
+                        <td class="td-qty">{{ Carbon\Carbon::parse($p->tgl_jatuh_tempo)->format('d-m-Y') }}</td>
+                        <td class="td-angka">{{ number_format($nominal_invoice, 0, ',', '.') }}</td>
                         <td class="td-angka"> - </td>
-                        <td class="td-angka">{{ number_format($p->piutang_details->sum('nominal'), 0, ',', '.') }}</td> piutang_details
-                        <td class="td-angka">{{ $p->first()->piutang_details->sortByDesc('created_at')->first()->created_at }}</td>
-                        <td class="td-angka"> - </td>
+                        <td class="td-angka">{{ number_format($piutang_terbayar, 0, ',', '.') }}</td> piutang_details
+                        <td class="td-qty">{{ Carbon\Carbon::parse($p->first()->piutang_details->sortByDesc('created_at')->first()->created_at)->format('d-m-Y') }}</td>
+                        <td class="td-angka">{{ number_format($sisa, 0, ',', '.') }}</td>
                         <td class="td-angka"> - </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
+
             <table class="atas" style="line-height: 15px;">
                 <tr>
-                    <td class="atas"><b>Harap dibayar pada tangal:</b></td>
-                    <td class="atas-total"><b>TOTAL :</b></td>
+                    <td class="atas-total"><b>Harap dibayar pada tangal:</b></td>
+                    <td class="atas-total"><b>Rp. {{ $sum_sisa }}</b></td>
                 </tr>
             </table>
 
             <br>
-            <table class="atas">
-                <tr>
-                    <td class="atas">
-                        <table class="table atas" style="line-height: 11px;">
-                            <tr>
-                                <td class="alamat-kcp">- Nota Asli Menyusul Setelah Pembayaran Lunas</td>
-                            </tr>
-                            <tr>
-                                <td class="alamat-kcp">- Harap melakukan transfer kepada Rekening:</td>
-                            </tr>
-                            <tr>
-                                <td class="alamat-kcp">PT. KUMALA CENTRAL PARTINDO</td>
-                            </tr>
-                            <tr>
-                                <td class="alamat-kcp">BANK MANDIRI</td>
-                                <td class="alamat-kcp">:</td>
-                            </tr>
-                            <tr>
-                                <td class="alamat-kcp">BANK BCA</td>
-                                <td class="alamat-kcp">:</td>
-                            </tr>
-                            <tr>
-                                <td class="alamat-kcp">BANK BNI</td>
-                                <td class="alamat-kcp">:</td>
-                            </tr>
-                            <tr>
-                                <td class="alamat-kcp">BANK BRI</td>
-                                <td class="alamat-kcp">:</td>
-                            </tr>
-                            <tr>
-                                <td class="alamat-kcp">BANK DANAMON</td>
-                                <td class="alamat-kcp">:</td>
-                            </tr>
-                        </table>
-                    </td>
-                    <td class="nama-kcp" style="width: 250px">
-                        <table class="atas">
-                            <tr>
-                                <td class="atas">
-                                    <div class="ttd">
-                                        <h6 >Diterima Oleh,</h6>
-                                        <br>
-                                        <h6 style="margin:0px; text-decoration:underline;" >TTD, NAMA & STEMPEL TOKO</h6>
-                                    </div>
-                                    <div class="ttd">
-                                        <h6 >Dibuat Oleh,</h6>
-                                        <br>
-                                        <h6 style="margin:0px; text-decoration:underline;" ></h6>
-                                    </div>
-                                    <div class="ttd">
-                                        <h6 >Diketahui Oleh,</h6>
-                                        <br>
-                                        <h6 style="margin:0px; text-decoration:underline;" ></h6>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                
+
+            <table style="border: none">
+                <td class="td-angka">
+                    <table class="atas" style="padding-bottom: 10px">
+                        <tr>
+                            <td class="rekening" style="margin:0px;"><b>Catatan :</b></td>
+                        </tr>
+                        <tr>
+                            <td class="rekening" style="margin:0px;"><b>- Untuk nota asli menyusul setelah pembayaran lunas</b></td>
+                        </tr>
+                        <br>
+                        <tr>
+                            <td class="rekening" style="margin:0px; text-decoration:underline;"><b>Harap melakukan Transfer ke Rekening :</b></td>
+                        </tr>
+                    </table>
+                    <table style="width:100%">
+                        <tr>
+                            <td class="rekening"><b>BANK MANDIRI</b></td>
+                            <td class="rekening"><b>:</b></td>
+                            <td class="rekening"><b>031-0004265081</b></td>
+                        </tr>
+                        <tr>
+                            <td class="rekening"><b>BANK BCA</b></td>
+                            <td class="rekening"><b>:</b></td>
+                            <td class="rekening"><b>051-0583698</b></td>
+                        </tr>
+                        <tr>
+                            <td class="rekening"><b>BANK BNI</b></td>
+                            <td class="rekening"><b>:</b></td>
+                            <td class="rekening"><b>0065946746</b></td>
+                        </tr>
+                        <tr>
+                            <td class="rekening"><b>BANK BRI</b></td>
+                            <td class="rekening"><b>:</b></td>
+                            <td class="rekening"><b>0003010021753004</b></td>
+                        </tr>
+                        <tr>
+                            <td class="rekening"><b>BANK DANAMON</b></td>
+                            <td class="rekening"><b>:</b></td>
+                            <td class="rekening"><b>007700173805</b></td>
+                        </tr>
+                    </table>
+                </td>
+
+                <td class="td-angka">
+                    <table class="td-angka" style="width:100%">
+                        <tr>
+                            <td class="atas">
+                                <div class="ttd">
+                                    <h5 style="margin:0px">Diterima Oleh,</h5>
+                                    <br><br>
+                                    <h5 style="text-decoration:underline;">TTD, Nama & Stempel Toko,</h5>
+                                </div>
+                            </td>
+                            <td class="atas">
+                                <div class="ttd">
+                                    <h5 style="margin:0px">Dibuat Oleh,</h5>
+                                    <br><br>
+                                    <h5>______________________</h5>
+                                </div>
+                            </td>
+                            <td class="atas">
+                                <div class="ttd">
+                                    <h5 style="margin:0px">Diketahui Oleh,</h5>
+                                    <br><br>
+                                    <h5>_____________________</h5>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
             </table>
-                
         </div>
     </div>
 </body>
