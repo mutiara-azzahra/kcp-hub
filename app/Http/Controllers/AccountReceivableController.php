@@ -112,7 +112,12 @@ class AccountReceivableController extends Controller
             'kd_outlet' => 'required',
         ]);
 
-        $invoice_selected  = TransaksiInvoiceHeader::where('kd_outlet', $request->kd_outlet)->get();
+        return redirect()->route('account-receivable.dpt' , ['kd_outlet' => $request->kd_outlet])->with('success', 'Menampilkan Daftar Piutang Toko');
+    }
+
+    public function dpt($kd_outlet){
+
+        $invoice_selected  = TransaksiInvoiceHeader::where('kd_outlet', $kd_outlet)->get();
 
         return view('account-receivable.dpt', compact('invoice_selected'));
     }

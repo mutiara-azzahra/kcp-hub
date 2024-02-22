@@ -312,7 +312,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/account-receivable/cetak-pdf', [AccountReceivableController::class, 'cetak_pdf'])->name('account-receivable.cetak-pdf');
     Route::get('/account-receivable/create', [AccountReceivableController::class, 'create'])->name('account-receivable.create');
     Route::post('/account-receivable/store', [AccountReceivableController::class, 'store'])->name('account-receivable.store');
-    Route::post('/account-receivable/search', [AccountReceivableController::class, 'search'])->name('account-receivable.search');
+    Route::post('/account-receivable/daftar-piutang-toko', [AccountReceivableController::class, 'search'])->name('account-receivable.search');
+    Route::get('/account-receivable/daftar-piutang-toko/{kd_outlet}', [AccountReceivableController::class, 'dpt'])->name('account-receivable.dpt');
     Route::get('/account-receivable/details/{no_piutang}', [AccountReceivableController::class, 'details'])->name('account-receivable.details');
     Route::post('/account-receivable/store-details', [AccountReceivableController::class, 'store_details'])->name('account-receivable.store-details');
 
