@@ -115,6 +115,8 @@ class KasKeluarController extends Controller
             $header_kas_keluar = TransaksiKasKeluarHeader::findOrFail($id);
             $header_kas_keluar->delete();
 
+            $details_kas_keluar = TransaksiKasKeluarDetails::where('no_keluar', $header_kas_keluar->no_keluar)->delete();
+
             return redirect()->route('kas-keluar.index')->with('success', 'Data kas keluar berhasil dihapus!');
 
         } catch (\Exception $e) {
@@ -148,24 +150,26 @@ class KasKeluarController extends Controller
         return $pdf->stream('kas-keluar.pdf');
     }
 
-    public function update($no_keluar)
+    public function update($id)
     {
 
-        $update_header = TransaksiKasKeluarHeader::where('no_keluar', $no_keluar)
+        $no_keluar = TransaksiKasKeluarHeader::findOrFail($id);
+
+        $update_header = TransaksiKasKeluarHeader::where('no_keluar', $no_keluar->no_keluar)
             ->update([
             'status'        => 'C',
             'updated_at'    => NOW(),
             'updated_by'    => Auth::user()->nama_user
         ]);
 
-        $update_details = TransaksiKasKeluarDetails::where('no_keluar', $no_keluar)
+        $update_details = TransaksiKasKeluarDetails::where('no_keluar', $no_keluar->no_keluar)
             ->update([
             'status'        => 'C',
             'updated_at'    => NOW(),
             'updated_by'    => Auth::user()->nama_user
         ]);
 
-        return redirect()->route('kas-keluar.index')->with('success','Data kas keluar baru berhasil ditambahkan!');
+        return redirect()->route('kas-keluar.index')->with('success','Data kas keluar baru berhasil diselesaikan!');
         
 
     }

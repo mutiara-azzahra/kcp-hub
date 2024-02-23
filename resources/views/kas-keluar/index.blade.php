@@ -54,15 +54,19 @@
                             <td class="text-left">{{ $p->keterangan }}</td>
                             <td class="text-right">{{ number_format($p->details_keluar->where('akuntansi_to', 'D')->sum('total'), 0, ',', '.') }}</td>
                             <td class="text-center">
-                                <form action="{{ route('kas-keluar.delete', $p->id) }}" method="POST" id="form_hapus_{{ $p->id }}" data-id="{{ $p->id }}">
-                                    <a class="btn btn-primary btn-sm" href="{{ route('kas-keluar.show', $p->no_keluar)}}"><i class="fas fa-eye"></i></a>
-                                    <a class="btn btn-success btn-sm" href="{{ route('kas-keluar.update', $p->no_keluar)}}"><i class="fas fa-check"></i></a>
+                                <form action="{{ route('kas-keluar.update', $p->id) }}" method="GET" id="form_selesai_{{ $p->id }}" data-selesai="{{ $p->id }}">
+                                    @csrf
+                                    @method('GET')
+                                </form>
 
+                                <form action="{{ route('kas-keluar.delete', $p->id) }}" method="POST" id="form_hapus_{{ $p->id }}" data-id="{{ $p->id }}">
                                     @csrf
                                     @method('DELETE')
-                                   
-                                    <a class="btn btn-danger btn-sm" onclick="Delete('{{ $p->id }}')"><i class="fas fa-times"></i></a>
                                 </form>
+
+                                <a class="btn btn-primary btn-sm" href="{{ route('kas-keluar.show', $p->no_keluar)}}"><i class="fas fa-eye"></i></a>
+                                <a class="btn btn-success btn-sm" onclick="Selesai('{{ $p->id }}')"><i class="fas fa-check"></i></a>
+                                <a class="btn btn-danger btn-sm" onclick="Delete('{{ $p->id }}')"><i class="fas fa-times"></i></a>
                             </td>
                         </tr>
                         @endforeach
@@ -136,7 +140,6 @@
             </div>
         </div>
     </div>
-
 </div>
 @endsection
 
@@ -176,6 +179,28 @@
                 }
         })
     }
+
+    Selesai = (selesai)=>{
+
+
+        console.log(selesai)
+
+        Swal.fire({
+            title: 'Selesaikan kas keluar ini?',
+            text:  "" ,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6' ,
+            cancelButtonColor: 'red' ,
+            confirmButtonText: 'selesai' ,
+            cancelButtonText: 'batal' ,
+            reverseButtons: false
+            }).then((result) => {
+                if (result.value) {
+                    document.getElementById('form_selesai_' + selesai).submit();
+                }
+        })
+    }
+
 </script>
 
 @endsection
