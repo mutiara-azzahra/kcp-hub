@@ -110,14 +110,17 @@ class KasKeluarController extends Controller
 
     public function delete($id)
     {
-        $header     = TransaksiKasKeluarHeader::findOrFail($id);
-        $no_keluar  = $header->no_keluar;
+        try {
 
-        TransaksiKasKeluarDetails::where('no_keluar', $no_keluar)->delete();
+            $header_kas_keluar = TransaksiKasKeluarHeader::findOrFail($id);
+            $header_kas_keluar->delete();
 
-        $header->delete();
+            return redirect()->route('kas-keluar.index')->with('success', 'Data kas keluar berhasil dihapus!');
 
-        return redirect()->route('kas-keluar.index')->with('success', 'Data berhasil dihapus');
+        } catch (\Exception $e) {
+
+            return redirect()->route('kas-keluar.index')->with('danger', 'Terjadi kesalahan saat menghapus data Kas Keluar.');
+        }
     }
 
     public function delete_details($id)
