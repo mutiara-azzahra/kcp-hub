@@ -72,11 +72,8 @@ class KasKeluarController extends Controller
         $balance_kredit = $kas_keluar->details_keluar->where('akuntansi_to', 'K')->sum('total');
 
         $balancing = $balance_debet - $balance_kredit;
-        if ($balancing != 0) {
-            return view('kas-keluar.details', compact('kas_keluar', 'debet', 'kredit'))->with('warning', 'Nominal Kas Keluar tidak seimbang. Periksa kembali data.');
-        }
 
-        return view('kas-keluar.details', compact('kas_keluar', 'debet', 'kredit'));
+        return view('kas-keluar.details', compact('kas_keluar', 'debet', 'kredit', 'balancing'));
     }
 
 
@@ -99,7 +96,7 @@ class KasKeluarController extends Controller
             'created_at'    => NOW(),
         ]);
             
-        return redirect()->route('kas-keluar.index')->with('success','Data kas keluar baru berhasil ditambahkan!');
+        return redirect()->route('kas-keluar.details' , ['no_keluar' => $request->no_keluar])->with('success','Data kas keluar baru berhasil ditambahkan!');
     
     }
 
@@ -125,12 +122,17 @@ class KasKeluarController extends Controller
 
     public function delete_details($id)
     {
-        $details    = TransaksiKasKeluarDetails::findOrFail($id);
-        $no_keluar  = TransaksiKasKeluarHeader::where('no_keluar', $details->no_keluar)->value('no_keluar');
+        try {
 
-        $details->delete();
+            $detail_kas_keluar = TransaksiKasKeluarDetails::findOrFail($id);
+            $detail_kas_keluar->delete();
 
-        return redirect()->route('kas-keluar.show', $no_keluar)->with('success', 'Data berhasil dihapus');
+            return redirect()->route('kas-keluar.details', ['no_keluar' => $detail_kas_keluar->no_keluar])->with('success', 'Data kas keluar berhasil dihapus!');
+
+        } catch (\Exception $e) {
+
+            return redirect()->route('kas-keluar.details', ['no_keluar' => $detail_kas_keluar->no_keluar])->with('danger', 'Terjadi kesalahan saat menghapus data Kas Keluar.');
+        }
     }
 
     public function cetak($no_keluar)

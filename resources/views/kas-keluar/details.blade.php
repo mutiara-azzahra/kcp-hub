@@ -7,9 +7,11 @@
              <div class="float-left">
                 <h4>Details Kas Keluar</h4>
             </div>
-            <div class="float-right">
-                <a class="btn btn-success" href="{{ route('kas-keluar.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
-            </div>
+            @if ($balancing == 0)
+                <div class="float-right">
+                    <a class="btn btn-success" href="{{ route('kas-keluar.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
+                </div>
+            @endif
         </div>
     </div>
 
@@ -18,8 +20,14 @@
             <p>{{ $message }}</p>
         </div>
     @elseif ($message = Session::get('warning'))
-        <div class="alert alert-success" id="myAlert">
+        <div class="alert alert-danger" id="myAlert">
             <p>{{ $message }}</p>
+        </div>
+    @endif
+
+    @if ($balancing != 0)
+        <div class="alert alert-danger text-center">
+            <p style="color:white; text-transform: uppercase;"><b>Kas Keluar Tidak Balance, Periksa Kembali Data Anda!</b></p>
         </div>
     @endif
 
@@ -199,6 +207,25 @@
                 kdOutletDropdown.add(option);
             @endforeach
         }
+    }
+
+    //HAPUS
+
+    Hapus = (id)=>{
+        Swal.fire({
+            title: 'Apa anda yakin menghapus data detail kas keluar ini?',
+            text:  "Data tidak dapat kembali" ,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6' ,
+            cancelButtonColor: 'red' ,
+            confirmButtonText: 'hapus data' ,
+            cancelButtonText: 'batal' ,
+            reverseButtons: false
+            }).then((result) => {
+                if (result.value) {
+                    document.getElementById('form_delete_' + id).submit();
+                }
+        })
     }
 
 
