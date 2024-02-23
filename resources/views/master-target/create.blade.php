@@ -35,8 +35,9 @@
                             <strong>Pilih Sales</strong>
                             <select name="sales" class="form-control my-select" >
                                 <option value="">---Pilih Sales--</option>
-                                <option value="rezky">Rezky</option>
                                 <option value="muhammad">Muhammad</option>
+                                <option value="juliandari">Juliandari</option>
+                                <option value="yana2">Yana</option>
                             </select>
                         </div>
                     </div>
