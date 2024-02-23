@@ -29,7 +29,7 @@
             <div class="col-lg-12">
                 <form action="{{ route('master-target-sales-produk.update', $target_sales->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('PUT')
+                @method('POST')
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group mb-2">
@@ -39,6 +39,7 @@
                                 <option value="muhammad" {{ $target_sales->sales == 'muhammad' ? 'selected' : '' }}>Muhammad</option>
                                 <option value="nursehan" {{ $target_sales->sales == 'nursehan' ? 'selected' : '' }}>Nursehan</option>
                                 <option value="juliandari" {{ $target_sales->sales == 'juliandari' ? 'selected' : '' }}>Juliandari</option>
+                                <option value="yana2" {{ $target_sales->sales == 'yana2' ? 'selected' : '' }}>Yana</option>
                             </select>
                         </div>
                     </div>

@@ -455,7 +455,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/master-target-sales-produk/show/{id}', [MasterTargetSalesProductController::class, 'show'])->name('master-target-sales-produk.show');
     Route::get('/master-target-sales-produk/edit/{id}', [MasterTargetSalesProductController::class, 'edit'])->name('master-target-sales-produk.edit');
     Route::post('/master-target-sales-produk/update/{id}', [MasterTargetSalesProductController::class, 'update'])->name('master-target-sales-produk.update');
-    Route::delete('/master-target-sales-produk/destroy/{id}', [MasterTargetSalesProductController::class, 'destroy'])->name('master-target.destroy');
+    Route::delete('/master-target-sales-produk/destroy/{id}', [MasterTargetSalesProductController::class, 'destroy'])->name('master-target-sales-produk.destroy');
 
     //MONITORING ACH. MARKETING
     Route::get('/monitoring', [MonitoringController::class, 'index'])->name('monitoring.index');

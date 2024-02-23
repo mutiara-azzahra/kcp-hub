@@ -59,45 +59,34 @@ class KasKeluarController extends Controller
 
     public function details($no_keluar){
 
-        $debet = MasterPerkiraan::where('sts_perkiraan', 'D')->get();
+        $debet  = MasterPerkiraan::where('sts_perkiraan', 'D')->get();
         $kredit = MasterPerkiraan::where('sts_perkiraan', 'K')->get();
-
         $kas_keluar = TransaksiKasKeluarHeader::where('no_keluar', $no_keluar)->first();
 
-        if (!$kas_keluar) {
-            return redirect()->back()->with('warning', 'Nomor Kas Keluar tidak ditemukan');
-        }
-
-        $balance_debet = $kas_keluar->details_keluar->where('akuntansi_to', 'D')->sum('total');
-        $balance_kredit = $kas_keluar->details_keluar->where('akuntansi_to', 'K')->sum('total');
-
-        $balancing = $balance_debet - $balance_kredit;
-        if ($balancing != 0) {
-            return view('kas-keluar.details', compact('kas_keluar', 'debet', 'kredit'))->with('warning', 'Nominal Kas Keluar tidak seimbang. Periksa kembali data.');
-        }
-
-        return view('kas-keluar.details', compact('kas_keluar', 'debet', 'kredit'));
-    }
-
+       return view('kas-keluar.details', compact('kas_keluar', 'debet', 'kredit'));
+      
+   }
 
    public function store_details(Request $request){
 
         $request->validate([
-            'no_keluar'    => 'required',
-            'perkiraan'    => 'required',
-            'akuntansi_to' => 'required',
-            'total'        => 'required',
+            'inputs.*.no_keluar'    => 'required',
+            'inputs.*.perkiraan'    => 'required',
+            'inputs.*.akuntansi_to' => 'required',
+            'inputs.*.total'        => 'required',
         ]);
         
-        $perkiraan = MasterPerkiraan::findOrFail($request['perkiraan']);
-    
-        TransaksiKasKeluarDetails::create([
-            'no_keluar'     => $request['no_keluar'],
-            'perkiraan'     => $perkiraan ? $perkiraan->perkiraan . '.' . $perkiraan->sub_perkiraan : null,
-            'akuntansi_to'  => $request['akuntansi_to'],
-            'total'         => $request['total'],
-            'created_at'    => NOW(),
-        ]);
+        foreach ($request->inputs as $key => $value) {
+            $perkiraan = MasterPerkiraan::findOrFail($value['perkiraan']);
+        
+            TransaksiKasKeluarDetails::create([
+                'no_keluar'     => $value['no_keluar'],
+                'perkiraan'     => $perkiraan ? $perkiraan->perkiraan . '.' . $perkiraan->sub_perkiraan : null,
+                'akuntansi_to'  => $value['akuntansi_to'],
+                'total'         => $value['total'],
+                'created_at'    => NOW(),
+            ]);
+        }
             
         return redirect()->route('kas-keluar.index')->with('success','Data kas keluar baru berhasil ditambahkan!');
     

@@ -119,6 +119,8 @@
                             <td class="text-right">{{ number_format($p->details_keluar->where('akuntansi_to', 'D')->sum('total'), 0, '.', ',') }}</td>
                             <td class="text-center">
                                 <form action="{{ route('kas-keluar.delete', $p->id) }}" method="POST" id="form_delete_{{ $p->id }}" data-id="{{ $p->id }}">
+                                    
+                                    <a class="btn btn-info btn-sm" href="{{ route('kas-keluar.details', $p->no_keluar)}}"><i class="fas fa-eye"></i></a>
                                     <a class="btn btn-warning btn-sm" href="{{ route('kas-keluar.cetak', $p->no_keluar)}}" target="_blank"><i class="fas fa-print"></i></a>
 
                                     @csrf
