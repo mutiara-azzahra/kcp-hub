@@ -12,8 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('transaksi_akuntansi_jurnal_details', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->integer('id_header');
+            $table->string('perkiraan')->nullable();
+            $table->text('keterangan')->nullable();
+            $table->text('kategori')->nullable();
+            $table->decimal('debet')->nullable();
+            $table->decimal('kredit')->nullable();
+            $table->enum('status', ['Y', 'N'])->default('Y');
             $table->timestamps();
+            $table->datetime('created_by')->nullable();
+            $table->datetime('updated_by')->nullable();
         });
     }
 
