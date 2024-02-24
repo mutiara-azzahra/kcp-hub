@@ -110,6 +110,24 @@ class KasMasukController extends Controller
 
         $created = KasMasukHeader::create($request->all());
 
+        //KAS MASUK DEBET
+        KasMasukDetails::create([
+            'no_kas_masuk'  => $request->no_kas_masuk,
+            'perkiraan'     => 1.1101,
+            'akuntansi_to'  => 'D',
+            'total'         => $request->nominal,
+            'created_at'    => NOW(),
+        ]);
+
+        //KAS MASUK DEBET
+        KasMasukDetails::create([
+            'no_kas_masuk'  => $request->no_kas_masuk,
+            'perkiraan'     => 2.1702,
+            'akuntansi_to'  => 'K',
+            'total'         => $request->nominal,
+            'created_at'    => NOW(),
+        ]);
+
         //JURNAL HEADER KAS MASUK CASH
         $data['trx_date']   = now();
         $data['trx_from']   = $request->no_kas_masuk;
