@@ -117,7 +117,7 @@
                         <td class="text-center">{{ Carbon\Carbon::parse($p->tanggal_rincian_tagihan)->format('d-m-Y') }}</td>
                         <td class="text-left">{{ $p->keterangan }}</td>
                         <td class="text-left">{{ $p->pembayaran_via }}</td>
-                        <td class="text-right">{{ number_format($p->nominal, 0, '.', ',') }}</td>
+                        <td class="text-right">{{ number_format($p->details->where('akuntansi_to', 'D')->sum('total'), 0, '.', ',') }}</td>
                         <td class="text-center">
                             <form action="{{ route('kas-masuk.delete', $p->id) }}" method="POST" id="form_delete_{{ $p->id }}" data-id="{{ $p->id }}">
                                 
