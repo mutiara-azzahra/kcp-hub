@@ -86,8 +86,6 @@ class KasMasukController extends Controller
 
    public function store(Request $request){
 
-    // dd($request->all());
-
         $request -> validate([
             'tanggal_rincian_tagihan'   => 'required', 
             'kd_outlet'                 => 'required', 
