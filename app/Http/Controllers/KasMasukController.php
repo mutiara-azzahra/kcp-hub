@@ -77,7 +77,7 @@ class KasMasukController extends Controller
             return redirect()->back()->with('warning', 'Nomor Kas masuk tidak ditemukan');
         }
 
-        $balance_debet = $kas_masuk->details->where('akuntansi_to', 'D')->sum('total');
+        $balance_debet  = $kas_masuk->details->where('akuntansi_to', 'D')->sum('total');
         $balance_kredit = $kas_masuk->details->where('akuntansi_to', 'K')->sum('total');
 
         $balancing = $balance_debet - $balance_kredit;
@@ -197,6 +197,23 @@ class KasMasukController extends Controller
         return $pdf->stream('kas-masuk.pdf');
     }
 
+    public function delete($id)
+    {
+        try {
+
+            $kas_masuk = KasMasukHeader::findOrFail($id);
+            $kas_masuk->delete();
+
+            $details_kas_masuk = KasMasukDetails::where('no_kas_masuk', $kas_masuk->no_kas_masuk)->delete();
+
+            return redirect()->route('kas-masuk.details', ['no_kas_masuk' => $kas_masuk->no_kas_masuk])->with('success', 'Data kas masuk berhasil dihapus!');
+
+        } catch (\Exception $e) {
+
+            return redirect()->route('kas-masuk.details', ['no_kas_masuk' => $kas_masuk->no_kas_masuk])->with('danger', 'Terjadi kesalahan saat menghapus data Kas masuk.');
+        }
+    }
+
     public function delete_details($id)
     {
         try {
@@ -211,7 +228,5 @@ class KasMasukController extends Controller
             return redirect()->route('kas-masuk.details', ['no_kas_masuk' => $detail_kas_masuk->no_kas_masuk])->with('danger', 'Terjadi kesalahan saat menghapus data Kas masuk.');
         }
     }
-
-    
 
 }

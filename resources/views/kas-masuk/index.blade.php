@@ -119,9 +119,16 @@
                         <td class="text-left">{{ $p->pembayaran_via }}</td>
                         <td class="text-right">{{ number_format($p->nominal, 0, '.', ',') }}</td>
                         <td class="text-center">
-                            <a class="btn btn-info btn-sm" href="{{ route('kas-masuk.details', $p->no_kas_masuk) }}" target="_blank"><i class="fas fa-edit"></i></a>
-                            <a class="btn btn-warning btn-sm" href="{{ route('kas-masuk.cetak', $p->no_kas_masuk) }}" target="_blank"><i class="fas fa-print"></i></a>
-                            <a class="btn btn-danger btn-sm" href="{{ route('kas-masuk.cetak', $p->no_kas_masuk) }}" target="_blank"><i class="fas fa-times"></i></a>
+                            <form action="{{ route('kas-masuk.delete', $p->id) }}" method="POST" id="form_delete_{{ $p->id }}" data-id="{{ $p->id }}">
+                                
+                                <a class="btn btn-info btn-sm" href="{{ route('kas-masuk.details', $p->no_kas_masuk) }}" target="_blank"><i class="fas fa-edit"></i></a>
+                                <a class="btn btn-warning btn-sm" href="{{ route('kas-masuk.cetak', $p->no_kas_masuk) }}" target="_blank"><i class="fas fa-print"></i></a>
+
+                                @csrf
+                                @method('DELETE')
+                                
+                                <a class="btn btn-danger btn-sm" onclick="Delete('{{ $p->id }}')"><i class="fas fa-times"></i></a>
+                            </form>
                         </td>
                     </tr>
                     @endforeach
@@ -136,11 +143,28 @@
 @section('script')
 
 <script>
-function printAndRefresh(url){
-    window.open(url, '_blank');
-    
-    window.location.reload();
-} 
+    function printAndRefresh(url){
+        window.open(url, '_blank');
+        
+        window.location.reload();
+    } 
+
+    Delete = (id)=>{
+        Swal.fire({
+            title: 'Apa anda yakin menghapus data ini?',
+            text:  "Data tidak dapat kembali" ,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6' ,
+            cancelButtonColor: 'red' ,
+            confirmButtonText: 'hapus data' ,
+            cancelButtonText: 'batal' ,
+            reverseButtons: false
+            }).then((result) => {
+                if (result.value) {
+                    document.getElementById('form_delete_' + id).submit();
+                }
+        })
+    }
 </script>
 
 @endsection

@@ -347,6 +347,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/kas-masuk/cetak/{no_kas_masuk}', [KasMasukController::class, 'cetak'])->name('kas-masuk.cetak');
     Route::get('/kas-masuk/cetak-tanda-terima/{no_kas_masuk}', [KasMasukController::class, 'cetak_tanda_terima'])->name('kas-masuk.cetak-tanda-terima');
     Route::delete('/kas-masuk/delete-details/{id}', [KasMasukController::class, 'delete_details'])->name('kas-masuk.delete-details');
+    Route::delete('/kas-masuk/delete/{id}', [KasMasukController::class, 'delete'])->name('kas-masuk.delete');
 
     //KAS KELUAR
     Route::get('/kas-keluar', [KasKeluarController::class, 'index'])->name('kas-keluar.index');
