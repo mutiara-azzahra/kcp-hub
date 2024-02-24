@@ -20,4 +20,9 @@ class TransferMasukDetails extends Model
     {
         return $this->belongsTo(TransferMasukHeader::class, 'id_transfer', 'id_transfer');
     }
+
+    public function details_perkiraan()
+    {
+        return $this->belongsTo(MasterPerkiraan::class, 'perkiraan', 'id_perkiraan');
+    }
 }

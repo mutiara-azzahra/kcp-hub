@@ -80,10 +80,22 @@ class TransferMasukController extends Controller
 
     public function details($id_transfer){
 
-        $perkiraan = MasterPerkiraan::all();
-        $transfer  = TransferMasukHeader::where('id_transfer', $id_transfer)->first();
+        $debet  = MasterPerkiraan::where('sts_perkiraan', 'D')->get();
+        $kredit = MasterPerkiraan::where('sts_perkiraan', 'K')->get();
 
-        return view('transfer-masuk.details', compact('perkiraan', 'transfer'));
+        $transfer  = TransferMasukHeader::where('id_transfer
+        ', $id_transfer)->first();
+
+        if (!$transfer) {
+            return redirect()->back()->with('warning', 'Nomor Kas masuk tidak ditemukan');
+        }
+
+        $balance_debet  = $transfer->details->where('akuntansi_to', 'D')->sum('total');
+        $balance_kredit = $transfer->details->where('akuntansi_to', 'K')->sum('total');
+
+        $balancing = $balance_debet - $balance_kredit;
+
+        return view('transfer-masuk.details', compact('transfer', 'debet', 'kredit', 'balancing'));
     }
 
     public function validasi_data($id_transfer){
@@ -97,35 +109,25 @@ class TransferMasukController extends Controller
     public function store_details(Request $request){
 
         $request->validate([
-            'inputs.*.id_transfer'  => 'required',
-            'inputs.*.perkiraan'    => 'required',
-            'inputs.*.akuntansi_to' => 'required',
-            'inputs.*.total'        => 'required',
+            'id_transfer'  => 'required',
+            'perkiraan'    => 'required',
+            'akuntansi_to' => 'required',
+            'total'        => 'required',
         ]);
         
         $totalSum = 0;
         $id_transfer = null;
     
-        foreach ($request->inputs as $key => $value) {
-            $perkiraan = MasterPerkiraan::findOrFail($value['perkiraan']);
-        
-            TransferMasukDetails::create([
-                'id_transfer'  => $value['id_transfer'],
-                'perkiraan'     => $perkiraan ? $perkiraan->perkiraan . '.' . $perkiraan->sub_perkiraan : null,
-                'sub_perkiraan' => $perkiraan->sub_perkiraan,
-                'akuntansi_to'  => $value['akuntansi_to'],
-                'total'         => $value['total'],
-                'created_by'    => Auth::user()->nama_user,
-            ]);
+        $perkiraan = MasterPerkiraan::findOrFail($request['perkiraan']);
     
-            if ($value['akuntansi_to'] === 'D') {
-                $totalSum += $value['total'];
-            }
-
-            if ($id_transfer === null) {
-                $id_transfer = $value['id_transfer'];
-            }
-        }
+        TransferMasukDetails::create([
+            'id_transfer'  => $request['id_transfer'],
+            'perkiraan'     => $perkiraan ? $perkiraan->perkiraan . '.' . $perkiraan->sub_perkiraan : null,
+            'sub_perkiraan' => $perkiraan->sub_perkiraan,
+            'akuntansi_to'  => $request['akuntansi_to'],
+            'total'         => $request['total'],
+            'created_by'    => Auth::user()->nama_user,
+        ]);
             
         return redirect()->route('transfer-masuk.index')->with('success','Data transfer baru berhasil ditambahkan!');
     }
