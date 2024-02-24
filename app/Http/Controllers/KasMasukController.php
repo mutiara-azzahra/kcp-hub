@@ -11,6 +11,8 @@ use App\Models\KasMasukDetails;
 use App\Models\MasterKodeRak;
 use App\Models\MasterOutlet;
 use App\Models\MasterPerkiraan;
+use App\Models\TransaksiAkuntansiJurnalHeader;
+use App\Models\TransaksiAkuntansiJurnalDetails;
 
 class KasMasukController extends Controller
 {
@@ -45,7 +47,6 @@ class KasMasukController extends Controller
         $newKas                 = new KasMasukHeader();
         $newKas->no_kas_masuk   = KasMasukHeader::no_kas_masuk();
 
-        
         $request->merge([
             'terima_dari'       => $request->terima_dari,
             'keterangan'        => $request->keterangan,
@@ -73,7 +74,7 @@ class KasMasukController extends Controller
         $kas_masuk = KasMasukHeader::where('no_kas_masuk', $no_kas_masuk)->first();
 
         if (!$kas_masuk) {
-            return redirect()->back()->with('warning', 'Nomor Kas Keluar tidak ditemukan');
+            return redirect()->back()->with('warning', 'Nomor Kas masuk tidak ditemukan');
         }
 
         $balance_debet = $kas_masuk->details->where('akuntansi_to', 'D')->sum('total');
@@ -90,6 +91,7 @@ class KasMasukController extends Controller
             'tanggal_rincian_tagihan'   => 'required', 
             'kd_outlet'                 => 'required', 
             'pembayaran_via'            => 'required',
+            'nominal'                   => 'required',
         ]);
 
         $newKas                 = new KasMasukHeader();
@@ -101,11 +103,36 @@ class KasMasukController extends Controller
             'no_bg'             => $request->no_bg,
             'jatuh_tempo_bg'    => $request->jatuh_tempo_bg,
             'no_kas_masuk'      => $newKas->no_kas_masuk,
+            'nominal'           => $request->nominal,
             'status'            => 'O',
             'created_by'        => Auth::user()->nama_user
         ]);
 
         $created = KasMasukHeader::create($request->all());
+
+        //JURNAL HEADER KAS MASUK CASH
+        $data['trx_date']   = now();
+        $data['trx_from']   = $request->no_kas_masuk;
+        $data['keterangan'] = $request->keterangan;
+        $data['trx_from']   = $request->no_kas_masuk;
+
+        $created = TransaksiAkuntansiJurnalHeader::create($data);
+
+        //DEBET
+        $debet['id_header']  = $created->id;
+        $debet['perkiraan']  = 1.1101;
+        $debet['debet']      = $request->nominal;
+        $debet['kredit']     = 0;
+
+        $created = TransaksiAkuntansiJurnalDetails::create($debet);
+
+        //KREDIT
+        $debet['id_header']  = $created->id;
+        $debet['perkiraan']  = 2.1702;
+        $debet['debet']      = 0;
+        $debet['kredit']     = $request->nominal;
+
+        $created = TransaksiAkuntansiJurnalDetails::create($debet);
 
         if ($created){
             return redirect()->route('kas-masuk.index')->with('success','Kas masuk berhasil ditambahkan');
@@ -117,43 +144,24 @@ class KasMasukController extends Controller
     public function store_details(Request $request){
 
         $request->validate([
-            'inputs.*.no_kas_masuk' => 'required',
-            'inputs.*.perkiraan'    => 'required',
-            'inputs.*.akuntansi_to' => 'required',
-            'inputs.*.total'        => 'required',
+            'no_kas_masuk' => 'required',
+            'perkiraan'    => 'required',
+            'akuntansi_to' => 'required',
+            'total'        => 'required',
         ]);
-        
-        $totalSum = 0;
-        $noKasMasuk = null; // Initialize the variable to hold no_kas_masuk value
     
-        foreach ($request->inputs as $key => $value) {
-            $perkiraan = MasterPerkiraan::findOrFail($value['perkiraan']);
-        
-            KasMasukDetails::create([
-                'no_kas_masuk'  => $value['no_kas_masuk'],
-                'perkiraan'     => $perkiraan ? $perkiraan->perkiraan . '.' . $perkiraan->sub_perkiraan : null,
-                'sub_perkiraan' => $perkiraan->sub_perkiraan,
-                'akuntansi_to'  => $value['akuntansi_to'],
-                'total'         => $value['total'],
-                'created_at'    => NOW(),
-            ]);
+        $perkiraan = MasterPerkiraan::findOrFail($request['perkiraan']);
     
-            if ($value['akuntansi_to'] === 'D') {
-                $totalSum += $value['total'];
-            }
-
-            if ($noKasMasuk === null) {
-                $noKasMasuk = $value['no_kas_masuk'];
-            }
-        }
-    
-        if ($noKasMasuk !== null) {
-            KasMasukHeader::where('no_kas_masuk', $noKasMasuk)->update([
-                'nominal' => $totalSum,
-            ]);
-        }
+        KasMasukDetails::create([
+            'no_kas_masuk'  => $request['no_kas_masuk'],
+            'perkiraan'     => $perkiraan->id_perkiraan,
+            'sub_perkiraan' => $perkiraan->sub_perkiraan,
+            'akuntansi_to'  => $request['akuntansi_to'],
+            'total'         => $request['total'],
+            'created_at'    => NOW(),
+        ]);
             
-        return redirect()->route('kas-masuk.index')->with('success','Data kas masuk baru berhasil ditambahkan!');
+        return redirect()->route('kas-masuk.details', ['no_kas_masuk' => $request->no_kas_masuk])->with('success','Data kas masuk baru berhasil ditambahkan!');
     }
 
     public function cetak_tanda_terima($no_kas_masuk)
@@ -193,14 +201,14 @@ class KasMasukController extends Controller
     {
         try {
 
-            $detail_kas_masuk = KasMasukHeader::findOrFail($id);
+            $detail_kas_masuk = KasMasukDetails::findOrFail($id);
             $detail_kas_masuk->delete();
 
-            return redirect()->route('kas-masuk.details', ['no_kas_masuk' => $detail_kas_masuk->no_kas_masuk])->with('success', 'Data kas keluar berhasil dihapus!');
+            return redirect()->route('kas-masuk.details', ['no_kas_masuk' => $detail_kas_masuk->no_kas_masuk])->with('success', 'Data kas masuk berhasil dihapus!');
 
         } catch (\Exception $e) {
 
-            return redirect()->route('kas-masuk.details', ['no_kas_masuk' => $detail_kas_masuk->no_kas_masuk])->with('danger', 'Terjadi kesalahan saat menghapus data Kas Keluar.');
+            return redirect()->route('kas-masuk.details', ['no_kas_masuk' => $detail_kas_masuk->no_kas_masuk])->with('danger', 'Terjadi kesalahan saat menghapus data Kas masuk.');
         }
     }
 

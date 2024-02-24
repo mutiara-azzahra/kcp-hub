@@ -23,6 +23,12 @@
         </div>
     @endif
 
+    @if ($balancing != 0)
+        <div class="alert alert-danger text-center">
+            <p style="color:white; text-transform: uppercase;"><b>Kas Keluar Tidak Balance, Periksa Kembali Data Anda!</b></p>
+        </div>
+    @endif
+
     <div class="card" style="padding: 10px;">
         <div class="card-body">
             <div class="col-lg-8 p-1">
@@ -64,7 +70,6 @@
                                     <th class="text-center">Perkiraan</th>
                                     <th class="text-center">Akuntansi To</th>
                                     <th class="text-center">Total</th>
-                                    <th class="text-center"></th>
                                 </tr>
                             </thead>
                             <tbody class="input-fields">

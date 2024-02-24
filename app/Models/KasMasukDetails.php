@@ -17,4 +17,9 @@ class KasMasukDetails extends Model
         'status','created_at', 'created_by', 'updated_at',
         'updated_by'
     ];
+
+    public function details_perkiraan()
+    {
+        return $this->belongsTo(MasterPerkiraan::class, 'perkiraan', 'id_perkiraan');
+    }
 }

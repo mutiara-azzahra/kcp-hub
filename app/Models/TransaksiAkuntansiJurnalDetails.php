@@ -9,7 +9,7 @@ class TransaksiAkuntansiJurnalDetails extends Model
 {
     use HasFactory;
 
-    protected $table = 'transaksi_akuntansi_jurnal_header';
+    protected $table = 'transaksi_akuntansi_jurnal_details';
     public $primaryKey = 'id';
 
     protected $fillable = [

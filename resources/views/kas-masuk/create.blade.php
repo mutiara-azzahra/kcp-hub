@@ -52,7 +52,7 @@
                             <select name="pembayaran_via" class="form-control my-select" >
                                 <option value="">--Pilih Pembayaran--</option>
                                 <option value="CASH">CASH</option>
-                                <option value="TRANSFER">TRANSFER</option>
+                                {{-- <option value="TRANSFER">TRANSFER</option> --}}
                                 <option value="BG">BG</option>
                             </select>
                         </div>
@@ -60,7 +60,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <strong>Nominal</strong>
-                            <input type="text" name="nominal" class="form-control" placeholder="Isi Nominal">
+                            <input type="text" name="nominal" class="form-control" placeholder="0">
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -75,17 +75,17 @@
                             <input type="date" name="jatuh_tempo_bg" class="form-control">
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    {{-- <div class="col-md-12">
                         <div class="form-group">
                             <strong>Pilih Bank</strong>
-                            <select name="bank" class="form-control my-select" >
+                            <select name="bank" class="form-control my-select">
                                 <option value="">--Pilih Bank--</option>
                                 <option value="BRI">BRI</option>
                                 <option value="BNI">BNI</option>
                                 <option value="DANAMON">DANAMON</option>
                             </select>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                         <div class="float-right">
                             <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Data</button>                            
