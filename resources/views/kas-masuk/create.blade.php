@@ -52,7 +52,6 @@
                             <select name="pembayaran_via" class="form-control my-select" >
                                 <option value="">--Pilih Pembayaran--</option>
                                 <option value="CASH">CASH</option>
-                                {{-- <option value="TRANSFER">TRANSFER</option> --}}
                                 <option value="BG">BG</option>
                             </select>
                         </div>

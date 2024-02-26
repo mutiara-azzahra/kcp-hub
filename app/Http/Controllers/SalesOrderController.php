@@ -146,11 +146,8 @@ class SalesOrderController extends Controller
                     } elseif($d->qty < $stok_ready ){
                        
                     }
-
                 }
-        
             }
-        
         }
 
         //Ubah status SP
@@ -216,9 +213,9 @@ class SalesOrderController extends Controller
                         'qty'           => $d->qty,
                         'hrg_pcs'       => $d->hrg_pcs,
                         'disc'          => $d->disc,
-                        'nominal'       => $d->nominal,
-                        'nominal_disc'  => $d->nominal_disc,
-                        'nominal_total' => $d->nominal_total,
+                        'nominal'       => $d->qty * $d->hrg_pcs,
+                        'nominal_disc'  => $d->qty * $d->hrg_pcs * $d->disc / 100,
+                        'nominal_total' => ($d->qty * $d->hrg_pcs) - ($d->qty * $d->hrg_pcs * $d->disc / 100),
                         'status'        => 'O',
                         'ket_status'    => 'OPEN',
                         'user_sales'    => $d->user_sales,
@@ -239,9 +236,9 @@ class SalesOrderController extends Controller
                         'qty'           => $d->qty,
                         'hrg_pcs'       => $d->hrg_pcs,
                         'disc'          => $d->disc,
-                        'nominal'       => $d->nominal,
-                        'nominal_disc'  => $d->nominal_disc,
-                        'nominal_total' => $d->nominal_total,
+                        'nominal'       => $d->qty * $d->hrg_pcs,
+                        'nominal_disc'  => $d->qty * $d->hrg_pcs * $d->disc / 100,
+                        'nominal_total' => ($d->qty * $d->hrg_pcs) - ($d->qty * $d->hrg_pcs * $d->disc / 100),
                         'status'        => 'O',
                         'ket_status'    => 'OPEN',
                         'user_sales'    => $d->user_sales,

@@ -18,8 +18,8 @@ class KasMasukController extends Controller
 {
     public function index(){
 
-        $belum_selesai  = KasMasukHeader::orderBy('created_at', 'desc')->where('status', 'O')->get();
-        $selesai        = KasMasukHeader::orderBy('created_at', 'desc')->where('status', 'C')->get();
+        $belum_selesai  = KasMasukHeader::where('status', 'O')->get();
+        $selesai        = KasMasukHeader::where('status', 'C')->get();
 
         return view('kas-masuk.index', compact('belum_selesai', 'selesai'));
     }
@@ -103,7 +103,6 @@ class KasMasukController extends Controller
             'no_bg'             => $request->no_bg,
             'jatuh_tempo_bg'    => $request->jatuh_tempo_bg,
             'no_kas_masuk'      => $newKas->no_kas_masuk,
-            'nominal'           => $request->nominal,
             'status'            => 'O',
             'created_by'        => Auth::user()->nama_user
         ]);
@@ -208,6 +207,7 @@ class KasMasukController extends Controller
 
     public function cetak($no_kas_masuk)
     {
+
         $data  = KasMasukHeader::where('no_kas_masuk', $no_kas_masuk)->first();
         $pdf   = PDF::loadView('reports.kas-masuk', ['data'=> $data]);
         $pdf->setPaper('letter', 'potrait');

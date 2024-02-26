@@ -145,7 +145,13 @@
         <table class="table atas">
             <tr>
                 <td class="atas-isi">Telah Diterima Dari</td>
+
+                @if(isset($data->kd_outlet))
                 <td class="atas">{{ $data->outlet->nm_outlet }} [{{ $data->kd_outlet }}]</td>
+                @else
+                <td class="atas">{{ $data->terima_dari }}</td>
+                @endif
+
             </tr>
             <tr>
                 <td class="atas-isi">Uang Sejumlah</td>
@@ -199,17 +205,32 @@
     <div class="isi">
         <table class="table atas">
             <tr>
-                <td class="atas-isi">Sudah Diterima Dari</td>
+                <td class="atas-isi">Telah Diterima Dari</td>
+                @if(isset($data->kd_outlet))
                 <td class="atas">{{ $data->outlet->nm_outlet }} [{{ $data->kd_outlet }}]</td>
+                @else
+                <td class="atas">{{ $data->terima_dari }}</td>
+                @endif
             </tr>
             <tr>
                 <td class="atas-isi">Uang Sejumlah</td>
                 <td class="atas">Rp. {{number_format( $data->nominal, 0, ',', '.') }}</td>
             </tr>
+
+            @if(isset($data->kd_outlet))
             <tr>
                 <td class="atas-isi">Untuk Pembayaran</td>
                 <td class="atas">{{ $data->keterangan }} A/N {{ $data->outlet->nm_outlet }} / {{ $data->no_piutang }} / {{ $data->id_transfer }} </td>
             </tr>
+            @else
+
+            <tr>
+                <td class="atas-isi">Untuk Pembayaran</td>
+                <td class="atas">{{ $data->keterangan }}</td>
+            </tr>
+            @endif
+
+
         </table>
     </div>
     <div>

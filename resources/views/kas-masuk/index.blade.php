@@ -58,7 +58,7 @@
                         @endif
 
                         <td class="text-left">{{ $p->pembayaran_via }}</td>
-                        <td class="text-right">{{ number_format($p->nominal, 0, '.', ',') }}</td>
+                        <td class="text-right">{{ number_format($p->details->where('akuntansi_to', 'D')->sum('total'), 0, '.', ',') }}</td>
                         <td class="text-center">
                             <a class="btn btn-warning btn-sm" onClick="printAndRefresh('{{ route('kas-masuk.cetak-tanda-terima', $p->no_kas_masuk) }}')" href="{{ route('kas-masuk.cetak', $p->no_kas_masuk) }}" target="_blank"><i class="fas fa-print"></i></a>
                         </td>
@@ -104,8 +104,8 @@
                             <th class="text-center">No. Kas Masuk</th>
                             <th class="text-center">Tgl. Kas Masuk</th>
                             <th class="text-center">Potong Faktur</th>
-                            <th class="text-center">Keterangan</th>
                             <th class="text-center">Terima Dari</th>
+                            <th class="text-center">Keterangan</th>
                             <th class="text-center">Nominal</th>
                         </tr>
                     </thead>
