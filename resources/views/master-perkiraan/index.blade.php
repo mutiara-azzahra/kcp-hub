@@ -30,13 +30,11 @@
                     <thead>
                         <tr style="background-color: #6082B6; color:white">
                             <th class="text-center">No</th>
-                            <th class="text-center">Part Nomor</th>
-                            <th class="text-center">Part Nama</th>
-                                @if(in_array(Auth::user()->id_role, [10]))
-                                @else
-                                <th class="text-center">HET</th>
-                                @endif
-                            <th class="text-center">Kode Produk</th>
+                            <th class="text-center">Perkiraan - Sub Perkiraan</th>
+                            <th class="text-center">Nama Perkiraan</th>
+                            <th class="text-center">Kategori</th>
+                            <th class="text-center">Akuntansi To</th>
+                            <th class="text-center">Saldo</th>
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
@@ -45,25 +43,34 @@
                         $no=1;
                         @endphp
 
-                        @foreach($master_part as $p)
+                        @foreach($list_perkiraan as $p)
                         <tr>
                             <td class="text-center">{{ $no++ }}.</td>
-                            <td class="text-left">{{ $p->part_no }}</td>
-                            <td class="text-left">{{ $p->part_nama }}</td>
-                                @if(in_array(Auth::user()->id_role, [10]))
-                                @else
-                                <td class="text-right">{{ number_format($p->het, 0, ',', ',') }}</td>
+                            <td class="text-left">{{ $p->nm_perkiraan }}</td>
+                            <td class="text-center">{{ $p->perkiraan }}.{{ $p->sub_perkiraan }}</td>
+                            <td class="text-left">{{ $p->kategori }}</td>
+                            <td class="text-left">
+                                @if($p->sts_perkiraan == 'D')
+                                DEBIT
+                                @elseif($p->sts_perkiraan == 'K')
+                                KREDIT
                                 @endif
-                            <td class="text-center">{{ $p->kode_produk }}</td>
+                            </td>
+                            <td class="text-left">{{ $p->saldo }}</td>
                             <td class="text-center"> 
-                                <form action="{{ route('master-part.delete', $p->id) }}" method="POST" id="form_delete_{{ $p->id }}" data-id="{{ $p->id }}">                                       
-                                    <a class="btn btn-info btn-sm" href="{{ route('master-part.edit',$p->id) }}"><i class="fas fa-edit"></i></a>
-                                    
+                                <form action="{{ route('master-perkiraan.nonaktif', $p->id) }}" method="GET" id="form_nonaktif_{{ $p->id }}" data-nonaktif="{{ $p->id }}">                                       
+                                    @csrf
+                                    @method('GET')
+                                </form>
+
+                                <form action="{{ route('master-perkiraan.delete', $p->id) }}" method="POST" id="form_delete_{{ $p->id }}" data-id="{{ $p->id }}">
                                     @csrf
                                     @method('DELETE')
-                                   
-                                    <a class="btn btn-danger btn-sm" onclick="Hapus('{{ $p->id }}')"><i class="fas fa-times"></i></a>
                                 </form>
+
+                                <a class="btn btn-info btn-sm" href="{{ route('master-perkiraan.edit',$p->id) }}"><i class="fas fa-edit"></i></a>
+                                <a class="btn btn-warning btn-sm" onclick="Nonaktif('{{ $p->id }}')"><i class="fas fa-ban"></i></a>
+                                <a class="btn btn-danger btn-sm" onclick="Hapus('{{ $p->id }}')"><i class="fas fa-times"></i></a>
                             </td>
                         </tr>
                         @endforeach
@@ -92,6 +99,24 @@
             }).then((result) => {
                 if (result.value) {
                     document.getElementById('form_delete_' + id).submit();
+                }
+        })
+    }
+
+    Nonaktif = (nonaktif)=>{
+
+        Swal.fire({
+            title: 'Apa anda yakin menonaktifkan data ini?',
+            text:  "Data tidak dapat kembali" ,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6' ,
+            cancelButtonColor: 'red' ,
+            confirmButtonText: 'hapus data' ,
+            cancelButtonText: 'batal' ,
+            reverseButtons: false
+            }).then((result) => {
+                if (result.value) {
+                    document.getElementById('form_nonaktif_' + nonaktif).submit();
                 }
         })
     }

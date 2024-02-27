@@ -52,6 +52,7 @@ use App\Http\Controllers\MutasiPartController;
 use App\Http\Controllers\RincianTagihanController;
 use App\Http\Controllers\PembayaranTokoController;
 use App\Http\Controllers\MasterProvinsiController;
+use App\Http\Controllers\MasterPerkiraanController;
 use App\Http\Controllers\MasterAreaOutletController;
 
 /*
@@ -91,6 +92,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/master-provinsi', [MasterProvinsiController::class, 'index'])->name('master-provinsi.index');
     Route::get('/master-provinsi/create', [MasterProvinsiController::class, 'create'])->name('master-provinsi.create');
     Route::post('/master-provinsi/store', [MasterProvinsiController::class, 'store'])->name('master-provinsi.store');
+
+    //MASTER PERKIRAAN
+    Route::get('/master-perkiraan', [MasterPerkiraanController::class, 'index'])->name('master-perkiraan.index');
+    Route::get('/master-perkiraan/create', [MasterPerkiraanController::class, 'create'])->name('master-perkiraan.create');
+    Route::get('/master-perkiraan/edit/{id}', [MasterPerkiraanController::class, 'edit'])->name('master-perkiraan.edit');
+    Route::get('/master-perkiraan/nonaktif/{id}', [MasterPerkiraanController::class, 'nonaktif'])->name('master-perkiraan.nonaktif');
+    Route::post('/master-perkiraan/store', [MasterPerkiraanController::class, 'store'])->name('master-perkiraan.store');
+    Route::delete('/master-perkiraan/delete/{id}', [MasterAreaOutletController::class, 'delete'])->name('master-perkiraan.delete');
 
     //MASTER AREA OUTLET
     Route::get('/master-area-outlet', [MasterAreaOutletController::class, 'index'])->name('master-area-outlet.index');
