@@ -35,7 +35,7 @@
                             <th class="text-center">Bank</th>
                             <th class="text-center">Keterangan</th>
                             <th class="text-center">Nominal</th>
-                            <th class="text-center"></th>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -51,9 +51,7 @@
                         <td class="text-left">{{ $p->keterangan }}</td>
                         <td class="text-right">{{ number_format($p->details->where('akuntansi_to', 'D')->sum('total'), 0, '.', ',') }}</td>
                         <td class="text-center">
-                            <a class="btn btn-info btn-sm" href="{{ route('transfer-masuk.edit', $p->id_transfer ) }}">
-                                <i class="fas fa-edit"></i>
-                            </a>
+                            <a class="btn btn-primary btn-sm" href="{{ route('transfer-masuk.details', $p->id_transfer ) }}"><i class="fas fa-eye"></i></a>
                         </td>
                     </tr>
                     @endforeach
@@ -77,6 +75,7 @@
                             <th class="text-center">Bank</th>
                             <th class="text-center">Keterangan</th>
                             <th class="text-center">Nominal</th>
+                            <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
 
@@ -88,10 +87,13 @@
                     @foreach($tf_masuk_validated as $p)
                     <tr>
                         <td class="text-left">{{ $p->id_transfer }}</td>
-                        <td class="text-left">{{ $p->tanggal_bank }}</td>
+                         <td class="text-center">{{ Carbon\Carbon::parse($p->tanggal_bank)->format('d-m-Y') }}</td>
                         <td class="text-center">{{ $p->bank }}</td>
                         <td class="text-right">{{ $p->keterangan }}</td>
                         <td class="text-right">{{ number_format($p->details->where('akuntansi_to', 'D')->sum('total'), 0, ',', ',') }}</td>
+                        <td class="text-center">
+                            <a class="btn btn-warning btn-sm" href="{{ route('transfer-masuk.cetak', $p->id_transfer ) }}"><i class="fas fa-print"></i></a>
+                        </td>
                     </tr>
                     @endforeach
                     </tbody>

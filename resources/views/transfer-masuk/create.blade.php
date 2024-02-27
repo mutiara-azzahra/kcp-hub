@@ -45,7 +45,9 @@
                                 <option value="MANDIRI">MANDIRI</option>
                                 <option value="BCA">BCA</option>
                                 <option value="DANAMON">DANAMON</option>
-                                <option value="BANK_KALSEL">BANK KALSEL</option>
+                                <option value="KALSEL">BANK KALSEL</option>
+                                <option value="BTN">BTN</option>
+                                <option value="MUAMALAT">MUAMALAT</option>
                             </select>
                         </div>
                     </div>

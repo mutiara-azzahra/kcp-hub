@@ -23,6 +23,13 @@
         </div>
     @endif
 
+
+    @if ($balancing != 0)
+        <div class="alert alert-danger text-center">
+            <p style="color:white; text-transform: uppercase;"><b>Transfer Masuk Tidak Balance, Periksa Kembali Data Anda!</b></p>
+        </div>
+    @endif
+
     <div class="card" style="padding: 10px;">
         <div class="card-body">
             <div class="col-lg-8 p-1">
@@ -146,7 +153,7 @@
                                     </td>
                                     @endif
                                     <td class="text-center">
-                                        <form action="{{ route('kas-keluar.delete-details', $i->id) }}" method="POST" id="form_delete_{{ $i->id }}" data-id="{{ $i->id }}">
+                                        <form action="{{ route('transfer-masuk.delete-details', $i->id) }}" method="POST" id="form_delete_{{ $i->id }}" data-id="{{ $i->id }}">
 
                                             @csrf
                                             @method('DELETE')
@@ -201,7 +208,7 @@
 
     Hapus = (id)=>{
         Swal.fire({
-            title: 'Apa anda yakin menghapus data detail kas masuk ini?',
+            title: 'Apa anda yakin menghapus data detail transfer masuk ini?',
             text:  "Data tidak dapat kembali" ,
             showCancelButton: true,
             confirmButtonColor: '#3085d6' ,
