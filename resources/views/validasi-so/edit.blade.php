@@ -34,8 +34,6 @@
                                 <tr style="background-color: #6082B6; color:white">
                                     <th class="text-center">Part No</th>
                                     <th class="text-center">Qty SO</th>
-                                    <th class="text-center">Pilih Rak</th>
-                                    <th class="text-center">Qty Rak</th>
                                     <th class="text-center">Diskon (%)</th>
                                 </tr>
                             </thead>
@@ -48,19 +46,6 @@
                                 <td class="text-center">
                                     <div class="form-group col-12">
                                         <input type="number" name="qty" class="form-control" value="{{ $details->qty }}">
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <select name="id_rak" class="form-control mr-2 my-select" id="package" onchange="updateData()">
-                                        <option value="">-- Pilih --</option>
-                                        @foreach($rak as $k)
-                                            <option value="{{ $k->id_rak }}" data-rak="{{ $k->stok }}">{{ $k->rak->kode_rak_lokasi }}</option>
-                                        @endforeach
-                                    </select>
-                                </td>
-                                <td class="text-center">
-                                    <div class="form-group col-12">
-                                        <input type="text" name="qty_gudang" for="rak" id="rak" class="form-control" readonly>
                                     </div>
                                 </td>
                                 <td class="text-center">
@@ -84,15 +69,5 @@
 @endsection
 
 @section('script')
-
-<script>
-    function updateData(){
-        const rak = $(`#package option:selected`).data('rak');
-
-        const formattedRak = Number(rak).toLocaleString('id-ID');
-
-        $(`#rak`).val(formattedRak);
-    }
-</script>
 
 @endsection

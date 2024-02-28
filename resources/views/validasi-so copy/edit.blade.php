@@ -5,10 +5,10 @@
     <div class="row mt-2">
         <div class="col-lg-12 pb-3">
             <div class="float-left">
-                <h4>Edit Detail Packingsheet</h4>
+                <h4>Edit Detail Sales Order</h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-success" href="{{ route('packingsheet.details', $details->nops) }}"><i class="fas fa-arrow-left"></i> Kembali</a>
+                <a class="btn btn-success" href="{{ route('validasi-so.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
             </div>
         </div>
     </div>
@@ -23,8 +23,8 @@
         </div>
     @endif
 
-    <form action="{{ route('packingsheet.store_edit', [$details->id , $details->nops])}}" method="POST">
-    @csrf
+    <form action="{{ route('validasi-so.store_edit', ['id' => $details->id]) }}" method="POST">
+        @csrf
         <div class="card" style="padding: 10px;">
             <div class="card-body">
                 <div class="row">
@@ -33,9 +33,8 @@
                             <thead>
                                 <tr style="background-color: #6082B6; color:white">
                                     <th class="text-center">Part No</th>
-                                    <th class="text-center">Stok Rak</th>
-                                    <th class="text-center">Rak</th>
-                                    <th class="text-center">Qty</th>
+                                    <th class="text-center">Qty SO</th>
+                                    <th class="text-center">Diskon (%)</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,17 +45,12 @@
                                 </td>
                                 <td class="text-center">
                                     <div class="form-group col-12">
-                                        <input type="text" name="part_no" class="form-control" value="{{ $details->rak->where('part_no', $details->part_no)->first()->rak->kode_rak_lokasi }}" readonly>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <div class="form-group col-12">
-                                        <input type="text" name="part_no" class="form-control" value="{{ $details->rak->where('part_no', $details->part_no)->value('stok') }}" readonly>
-                                    </div>
-                                </td>
-                                <td class="text-center">
-                                    <div class="form-group col-12">
                                         <input type="number" name="qty" class="form-control" value="{{ $details->qty }}">
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <div class="form-group col-12">
+                                        <input type="text" name="disc" class="form-control" value="{{ $details->disc }}">
                                     </div>
                                 </td>
                             </tbody>
@@ -71,10 +65,19 @@
             </div>
         </div>
     </form>
-
 </div>
 @endsection
 
 @section('script')
+
+<script>
+    function updateData(){
+        const rak = $(`#package option:selected`).data('rak');
+
+        const formattedRak = Number(rak).toLocaleString('id-ID');
+
+        $(`#rak`).val(formattedRak);
+    }
+</script>
 
 @endsection

@@ -62,34 +62,37 @@ class BackOrderController extends Controller
 
         $created_header = TransaksiSOHeader::create($data);
 
-        foreach($store_bo->details as $i){
+        if($created_header){
 
-            $nominal      = $i->qty * $i->hrg_pcs;
-            $nominal_disc = $i->qty * $i->hrg_pcs * $i->disc / 100;
-            $stok_ready   = MasterStokGudang::where('part_no', $i->part_no)->value('stok');
+            foreach($store_bo->details as $i){
 
-            $details = [
-                'noso'              => $created_header->noso,
-                'area_so'           => $area,
-                'kd_outlet'         => $store_bo->kd_outlet,
-                'part_no'           => $i->part_no,
-                'qty'               => $i->qty,
-                'hrg_pcs'           => $i->hrg_pcs,
-                'disc'              => $i->disc,
-                'nominal'           => $nominal,
-                'nominal_disc'      => $nominal_disc,
-                'nominal_total'     => $nominal - $nominal_disc,
-                'qty_gudang'        => $stok_ready,
-                'status'            => 'O', 
-                'ket_status'        => 'OPEN',
-                'user_sales'        => $store_bo->user_sales,
-                'flag_approve_date' => NOW(),
-                'crea_date'         => NOW(),
-                'crea_by'           => Auth::user()->nama_user,
-            ];
-    
-            TransaksiSODetails::create($details);
+                $nominal      = $i->qty * $i->hrg_pcs;
+                $nominal_disc = $i->qty * $i->hrg_pcs * $i->disc / 100;
+                $stok_ready   = MasterStokGudang::where('part_no', $i->part_no)->value('stok');
 
+                $details = [
+                    'noso'              => $created_header->noso,
+                    'area_so'           => $area,
+                    'kd_outlet'         => $store_bo->kd_outlet,
+                    'part_no'           => $i->part_no,
+                    'qty'               => $i->qty,
+                    'hrg_pcs'           => $i->hrg_pcs,
+                    'disc'              => $i->disc,
+                    'nominal'           => $nominal,
+                    'nominal_disc'      => $nominal_disc,
+                    'nominal_total'     => $nominal - $nominal_disc,
+                    'qty_gudang'        => $stok_ready,
+                    'status'            => 'O', 
+                    'ket_status'        => 'OPEN',
+                    'user_sales'        => $store_bo->user_sales,
+                    'flag_approve_date' => NOW(),
+                    'crea_date'         => NOW(),
+                    'crea_by'           => Auth::user()->nama_user,
+                ];
+        
+                TransaksiSODetails::create($details);
+
+            }
         }
 
         return redirect()->route('back-order.index')->with('success','Data Back Order berhasil diteruskan menjadi SO!');

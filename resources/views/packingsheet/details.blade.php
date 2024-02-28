@@ -57,7 +57,6 @@
                                 <th class="text-center">Part No</th>
                                 <th class="text-center">Nama Part</th>
                                 <th class="text-center">Qty SO</th>
-                                <!-- <th class="text-center">Stok Rak</th> -->
                                 <th class="text-center">Dus</th>
                             </tr>
                         </thead>
