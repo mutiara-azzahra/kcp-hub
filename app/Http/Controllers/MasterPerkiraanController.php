@@ -28,43 +28,35 @@ class MasterPerkiraanController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
 
-        dd($request->all());
-        $request -> validate([
+        $request->validate([
             'perkiraan'         => 'required',
             'sub_perkiraan'     => 'required',
             'nm_perkiraan'      => 'required',
             'nm_sub_perkiraan'  => 'required',
             'flag_head'         => 'required',
-            'head_kategori'     => 'required',
             'kategori'          => 'required',
             'saldo'             => 'required',
             'sts_perkiraan'     => 'required',
+            'head_kategori'     => 'required',
         ]);
-
-
-        // "perkiraan" => "1"
-        // "sub_perkiraan" => "111111"
-        // "nm_perkiraan" => "test"
-        // "nm_sub_perkiraan" => "test"
-        // "head_kategori" => "Y"
-        // "kategori" => "test2"
-        // "sts_perkiraan" => "D"
-        // "status" => "AKTIF"
-
-        try {
-
-            MasterPerkiraan::create($request->all());
-
-            return redirect()->route('master-perkiraan.index')->with('success','Data perkiraan baru berhasil ditambahkan!');
-
-        } catch (Throwable $e) {
-            report($e);
-    
-            return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data perkiraan. Data sudah ada');
-        }
         
+        // $created = MasterPerkiraan::create($request->all());
+
+        $value['perkiraan']         = $request->perkiraan;
+        $value['sub_perkiraan']     = $request->sub_perkiraan;
+        $value['nm_perkiraan']      = $request->nm_perkiraan;
+        $value['nm_sub_perkiraan']  = $request->nm_sub_perkiraan;
+        $value['flag_head']         = $request->flag_head;
+        $value['kategori']          = $request->kategori;
+        $value['head_kategori']     = $request->head_kategori; // Add this line
+
+        $created = MasterPerkiraan::create($value);
+    
+        return redirect()->route('master-perkiraan.index')->with('success','Data perkiraan baru berhasil ditambahkan!');
     }
+
 
     public function update(Request $request, $id)
     {

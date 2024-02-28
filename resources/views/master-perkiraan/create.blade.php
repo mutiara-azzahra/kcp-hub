@@ -28,13 +28,13 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <strong>Perkiraan</strong>
-                            <input type="number" name="perkiraan" class="form-control" placeholder="0">
+                            <input type="text" name="perkiraan" class="form-control" placeholder="0">
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
                             <strong>Sub Pekiraan</strong>
-                            <input type="number" name="sub_perkiraan" class="form-control" placeholder="0">
+                            <input type="text" name="sub_perkiraan" class="form-control" placeholder="0">
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -51,12 +51,18 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <strong>Head Kategori</strong><br>
-                            <select name="head_kategori" class="form-control my-select" >
+                            <strong>Pilih Head Kategori</strong><br>
+                            <select name="flag_head" class="form-control my-select" >
                                 <option value="">--Pilih--</option>
                                 <option value="Y">Ya</option>
                                 <option value="N">Tidak</option>
                             </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <strong>Head Kategori</strong>
+                            <input type="text" name="head_kategori" class="form-control" placeholder="Isi Nama Head Kategori">
                         </div>
                     </div>
                     <div class="col-md-12">
