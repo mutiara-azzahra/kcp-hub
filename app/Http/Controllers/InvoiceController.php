@@ -74,11 +74,28 @@ class InvoiceController extends Controller
                 $stok_awal_rak = StokGudang::where('id_rak', $s->id_rak)->where('part_no', $s->part_no)->first(); 
 
                 //Update Stok Rak
-                StokGudang::where('id_rak', $s->id_rak)->where('part_no', $s->part_no)->update([
-                    'stok'      => $stok_awal_rak->stok - $s->qty,
-                    'updated_at'=> now(),
-                    'updated_by'=> Auth::user()->nama_user,
-                ]);
+
+                if($s->qty <= $stok_awal_rak->stok){
+                    StokGudang::where('id_rak', $s->id_rak)->where('part_no', $s->part_no)->first()->update([
+                        'stok'      => $stok_awal_rak->stok - $s->qty,
+                        'updated_at'=> now(),
+                        'updated_by'=> Auth::user()->nama_user,
+                    ]);
+                } elseif($s->qty > $stok_awal_rak->stok) {
+                    StokGudang::where('id_rak', $s->id_rak)->where('part_no', $s->part_no)->first()->update([
+                        'stok'      => $stok_awal_rak->stok - $stok_awal_rak->stok,
+                        'updated_at'=> now(),
+                        'updated_by'=> Auth::user()->nama_user,
+                    ]);
+
+                    $next_stok = StokGudang::where('id_rak', $s->id_rak)->where('part_no', $s->part_no)->data(1)->value('stok');
+
+                    StokGudang::where('id_rak', $s->id_rak)->where('part_no', $s->part_no)->data(1)->update([
+                        'stok'      => ($s->qty - $stok_awal_rak->stok) - $next_stok,
+                        'updated_at'=> now(),
+                        'updated_by'=> Auth::user()->nama_user,
+                    ]);
+                }
 
                 if(($stok_ready != 0) && ($stok_ready > 0)){
                     
