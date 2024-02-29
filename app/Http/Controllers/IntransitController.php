@@ -140,33 +140,32 @@ class IntransitController extends Controller
  
             MasterStokGudang::where('part_no', $itemPartNo)->update(['stok' => $stok_lama + $stok_masuk]);
 
-            $stok_akhir = FlowStokGudang::where('part_no', $itemPartNo)->first();
-
-            if(isset($stok_akhir)){
-                $stok_awal = $stok_akhir->stok_akhir;
-            } else{
-                $stok_awal = 0;
-            }
-
             $rak = BarangMasukDetails::where('part_no', $itemPartNo)
                 ->where('invoice_non', $no_surat_pesanan)
                 ->value('id_rak');
 
-            //Intransit, barang masuk ke flow stok gudang
-            $flow_stok                          = new FlowStokGudang();
-            $flow_stok->part_no                 = $itemPartNo;
-            $flow_stok->tanggal_barang_masuk    = now();
-            $flow_stok->tanggal_barang_keluar   = null;
-            $flow_stok->id_rak                  = $rak;
-            $flow_stok->keterangan              = 'BARANG_MASUK';
-            $flow_stok->referensi               = $no_surat_pesanan;
-            $flow_stok->stok_awal               = $stok_awal;
-            $flow_stok->stok_masuk              = $stok_masuk;
-            $flow_stok->stok_keluar             = 0;
-            $flow_stok->stok_akhir              = $flow_stok->stok_awal + $flow_stok->stok_masuk - $flow_stok->stok_keluar;
-            $flow_stok->created_by              = Auth::user()->nama_user;
-            $flow_stok->save();
+            //Intransit Barang, Stok masuk ke Rak (StokGudang: modal) stok_part db
+            $part_no_ada  = StokGudang::where('part_no', $itemPartNo)->where('rak', $rak)->first();
 
+            //If no data existing
+            if(!$part_no_ada){
+                $masuk_rak              = new StokGudang();
+                $masuk_rak->part_no     = $itemPartNo;
+                $masuk_rak->id_rak      = $rak;
+                $masuk_rak->stok        = $stok_masuk;
+                $masuk_rak->created_by  = Auth::user()->nama_user;
+                $masuk_rak->created_at  = now();
+                $masuk_rak->save();
+
+            } else {
+                
+                StokGudang::where('part_no', $part_no)->where('rak', $rak)->update([
+                    'stok'          => $part_no_ada->stok + $stok_masuk,
+                    'ket_status'    => 'CLOSE',
+                    'modi_date'     => NOW()
+                ]);
+            }
+            
         }
 
         return redirect()->route('intransit.index')->with('success', 'Barang berhasil dimasukkan ke gudang');

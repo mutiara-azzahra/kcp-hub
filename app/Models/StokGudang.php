@@ -13,7 +13,7 @@ class StokGudang extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [ 
-        'invoice_non', 'id_rak','part_no' ,'stok' ,'status', 'created_at', 'updated_at', 'created_by', 'updated_by'
+        'id_rak','part_no' ,'stok' ,'status', 'created_at', 'updated_at', 'created_by', 'updated_by'
     ];
 
     public function rak()

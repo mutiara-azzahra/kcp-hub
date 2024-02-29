@@ -7,9 +7,9 @@
              <div class="float-left">
                 <h4>List Mutasi</h4>
             </div>
-            <!-- <div class="float-right m-1">
+            <div class="float-right m-1">
                 <a class="btn btn-success m-1" href=""><i class="fas fa-plus"></i> Tambah Mutasi Manual</a>
-            </div> -->
+            </div>
         </div>
     </div>
     
