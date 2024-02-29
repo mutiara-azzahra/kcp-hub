@@ -28,7 +28,6 @@ class MasterPerkiraanController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
 
         $request->validate([
             'perkiraan'         => 'required',
@@ -37,22 +36,11 @@ class MasterPerkiraanController extends Controller
             'nm_sub_perkiraan'  => 'required',
             'flag_head'         => 'required',
             'kategori'          => 'required',
-            'saldo'             => 'required',
             'sts_perkiraan'     => 'required',
             'head_kategori'     => 'required',
         ]);
         
-        // $created = MasterPerkiraan::create($request->all());
-
-        $value['perkiraan']         = $request->perkiraan;
-        $value['sub_perkiraan']     = $request->sub_perkiraan;
-        $value['nm_perkiraan']      = $request->nm_perkiraan;
-        $value['nm_sub_perkiraan']  = $request->nm_sub_perkiraan;
-        $value['flag_head']         = $request->flag_head;
-        $value['kategori']          = $request->kategori;
-        $value['head_kategori']     = $request->head_kategori; // Add this line
-
-        $created = MasterPerkiraan::create($value);
+        $created = MasterPerkiraan::create($request->all());
     
         return redirect()->route('master-perkiraan.index')->with('success','Data perkiraan baru berhasil ditambahkan!');
     }

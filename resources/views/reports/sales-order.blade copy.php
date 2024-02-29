@@ -208,7 +208,13 @@
                         <td class="td-qty">{{$p->part_no}}</td>
                         <td class="td-qty">{{$p->nama_part->part_nama}}</td>
                         <td class="td-qty">{{$p->qty}}</td>
-                        <td class="td-qty">{{$p->rak->first()->rak->kode_rak_lokasi}}</td>
+                        @if($p->qty <=$p->rak->first()->stok)
+                            <td class="td-qty">{{$p->rak->first()->rak->kode_rak_lokasi}}</td>
+                        @elseif($p->qty >=$p->rak->first()->stok)
+                            <td class="td-qty">{{$p->rak->data(0)->rak->kode_rak_lokasi}}, {{$p->rak->data(1)->rak->kode_rak_lokasi}}</td>
+                        @elseif($p->qty >= $p->rak->first()->stok && $p->qty >= ($p->rak->data(0)->stok + $p->rak->data(1)->stok))
+                            <td class="td-qty">{{$p->rak->data(0)->rak->kode_rak_lokasi}}, {{$p->rak->data(1)->rak->kode_rak_lokasi}}, {{$p->rak->data(2)->rak->kode_rak_lokasi}}</td>
+                        @endif
                         <td class="td-qty"></td>
                     </tr>
                     @endforeach

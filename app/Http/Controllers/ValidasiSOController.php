@@ -50,7 +50,7 @@ class ValidasiSOController extends Controller
     public function store_reset($noso){
 
         $validasi_so = TransaksiSOHeader::where('noso', $noso)->update([
-            'flag_cetak_gudang'         => 'Y',
+            'flag_cetak_gudang'         => 'N',
             'flag_cetak_gudang_date'    => NULL
         ]);
 
