@@ -97,8 +97,6 @@ class InvoiceController extends Controller
 
                     TransaksiInvoiceDetails::create($details);
 
-                    // $retur_approved = ReturHeader::where('id', $id)->first();
-
                     //FLOW STOK GUDANG
                     $stok_akhir     = FlowStokGudang::where('part_no', $s->part_no)->first();
 

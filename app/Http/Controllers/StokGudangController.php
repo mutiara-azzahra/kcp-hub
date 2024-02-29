@@ -12,6 +12,7 @@ use App\Models\BarangMasukDetails;
 use App\Models\MasterKodeRak;
 use App\Models\IntransitDetails;
 use App\Models\TransaksiInvoiceDetails;
+use App\Models\StokGudang;
 
 class StokGudangController extends Controller
 {
@@ -170,8 +171,9 @@ class StokGudangController extends Controller
         $stok_id        = MasterStokGudang::findOrFail($id);
         $barang_terjual = TransaksiInvoiceDetails::where('part_no', $stok_id->part_no)->get();
         $barang_masuk   = BarangMasukDetails::where('part_no', $stok_id->part_no)->get();
+        $stok_rak       = StokGudang::where('part_no', $stok_id->part_no)->get();
 
-        return view('stok-gudang.show',compact('stok_id', 'barang_masuk', 'barang_terjual'));
+        return view('stok-gudang.show',compact('stok_id', 'barang_masuk', 'barang_terjual', 'stok_rak'));
     }
 
 

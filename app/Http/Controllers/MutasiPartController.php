@@ -48,7 +48,6 @@ class MutasiPartController extends Controller
         } else{
 
             $value = [
-                'invoice_non'       => $check_details->invoice_non,
                 'part_no'           => $check_details->part_no,
                 'stok'              => $check_details->qty,
                 'id_rak'            => $check_details->header->rak_tujuan,
