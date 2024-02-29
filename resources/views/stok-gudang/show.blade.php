@@ -33,7 +33,7 @@
 
     <div class="card" style="padding: 10px;">
         <div class="card-header">
-            <b>Lokasi Rak</b>
+            <b>Barang Masuk dan Keluar</b>
         </div>
         <div class="card-body">
             <div class="col-lg-12">  
@@ -84,7 +84,7 @@
 
     <div class="card" style="padding: 10px;">
         <div class="card-header">
-            <b>Barang Masuk dan Keluar</b>
+            <b>Lokasi Rak</b>
         </div>
         <div class="card-body">
             <div class="col-lg-12">  
@@ -108,7 +108,7 @@
                             <td class="text-center">{{ $no++ }}</td>
                             <td class="text-left">{{ $p->part_no }}</td>
                             <td class="text-right">{{ number_format($p->stok, 0, ',', '.') }}</td>
-                            <td class="text-center"></td>
+                            <td class="text-center">{{ $p->rak->kode_rak_lokasi}}</td>
                             <td class="text-center">{{ $p->created_at }}</td>
                         </tr>
                         @endforeach
