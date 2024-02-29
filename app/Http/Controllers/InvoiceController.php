@@ -75,26 +75,41 @@ class InvoiceController extends Controller
 
                 //Update Stok Rak
 
-                if($s->qty <= $stok_awal_rak->stok){
-                    StokGudang::where('id_rak', $s->id_rak)->where('part_no', $s->part_no)->first()->update([
-                        'stok'      => $stok_awal_rak->stok - $s->qty,
-                        'updated_at'=> now(),
-                        'updated_by'=> Auth::user()->nama_user,
-                    ]);
-                } elseif($s->qty > $stok_awal_rak->stok) {
-                    StokGudang::where('id_rak', $s->id_rak)->where('part_no', $s->part_no)->first()->update([
-                        'stok'      => $stok_awal_rak->stok - $stok_awal_rak->stok,
-                        'updated_at'=> now(),
-                        'updated_by'=> Auth::user()->nama_user,
-                    ]);
+                $so_kanvas = TransaksiSOHeader::where('noso', $noso)->where('kd_outlet', 'NW')->first();
 
-                    $next_stok = StokGudang::where('id_rak', $s->id_rak)->where('part_no', $s->part_no)->data(1)->value('stok');
+                if(!$so_kanvas){
+                    if($s->qty <= $stok_awal_rak->stok){
+                        StokGudang::where('id_rak', $s->id_rak)->where('part_no', $s->part_no)->first()->update([
+                            'stok'      => $stok_awal_rak->stok - $s->qty,
+                            'updated_at'=> now(),
+                            'updated_by'=> Auth::user()->nama_user,
+                        ]);
+                    } elseif($s->qty > $stok_awal_rak->stok) {
+                        StokGudang::where('id_rak', $s->id_rak)->where('part_no', $s->part_no)->first()->update([
+                            'stok'      => $stok_awal_rak->stok - $stok_awal_rak->stok,
+                            'updated_at'=> now(),
+                            'updated_by'=> Auth::user()->nama_user,
+                        ]);
 
-                    StokGudang::where('id_rak', $s->id_rak)->where('part_no', $s->part_no)->data(1)->update([
-                        'stok'      => ($s->qty - $stok_awal_rak->stok) - $next_stok,
-                        'updated_at'=> now(),
-                        'updated_by'=> Auth::user()->nama_user,
-                    ]);
+                        $next_stok = StokGudang::where('id_rak', $s->id_rak)->where('part_no', $s->part_no)->data(1)->value('stok');
+
+                        StokGudang::where('id_rak', $s->id_rak)->where('part_no', $s->part_no)->data(1)->update([
+                            'stok'      => ($s->qty - $stok_awal_rak->stok) - $next_stok,
+                            'updated_at'=> now(),
+                            'updated_by'=> Auth::user()->nama_user,
+                        ]);
+                    }
+
+                } elseif($so_kanvas) {
+
+                    $stok_kanvas = StokGudang::where('id_rak', 33)->where('part_no', $s->part_no)->value('stok');
+
+                    StokGudang::where('id_rak', 33)->where('part_no', $s->part_no)->first()->update([
+                            'stok'      => $stok_kanvas - $s->qty,
+                            'updated_at'=> now(),
+                            'updated_by'=> Auth::user()->nama_user,
+                        ]);
+
                 }
 
                 if(($stok_ready != 0) && ($stok_ready > 0)){
