@@ -59,7 +59,7 @@
                                     @method('GET')
                                 </form>
 
-                                <form action="{{ route('kas-keluar.delete', $p->id) }}" method="POST" id="form_hapus_{{ $p->id }}" data-id="{{ $p->id }}">
+                                <form action="{{ route('kas-keluar.delete', $p->id) }}" method="POST" id="form_delete_{{ $p->id }}" data-id="{{ $p->id }}">
                                     @csrf
                                     @method('DELETE')
                                 </form>
@@ -122,7 +122,7 @@
                             <td class="text-left">{{ $p->keterangan }}</td>
                             <td class="text-right">{{ number_format($p->details_keluar->where('akuntansi_to', 'D')->sum('total'), 0, '.', ',') }}</td>
                             <td class="text-center">
-                                <form action="{{ route('kas-keluar.delete', $p->id) }}" method="POST" id="form_hapus_{{ $p->id }}" data-id="{{ $p->id }}">
+                                <form action="{{ route('kas-keluar.delete', $p->id) }}" method="POST" id="form_hapus_{{ $p->id }}" data-hapus="{{ $p->id }}">
                                     
                                     <a class="btn btn-info btn-sm" href="{{ route('kas-keluar.details', $p->no_keluar)}}"><i class="fas fa-eye"></i></a>
                                     <a class="btn btn-warning btn-sm" href="{{ route('kas-keluar.cetak', $p->no_keluar)}}" target="_blank"><i class="fas fa-print"></i></a>
@@ -146,7 +146,7 @@
 @section('script')
 
 <script>
-    Hapus = (id)=>{
+    Hapus = (hapus)=>{
         Swal.fire({
             title: 'Apa anda yakin menghapus data ini?',
             text:  "Data tidak dapat kembali" ,
@@ -158,7 +158,7 @@
             reverseButtons: false
             }).then((result) => {
                 if (result.value) {
-                    document.getElementById('form_delete_' + id).submit();
+                    document.getElementById('form_hapus_' + hapus).submit();
                 }
         })
     }
@@ -175,14 +175,12 @@
             reverseButtons: false
             }).then((result) => {
                 if (result.value) {
-                    document.getElementById('form_hapus_' + id).submit();
+                    document.getElementById('form_delete_' + id).submit();
                 }
         })
     }
 
     Selesai = (selesai)=>{
-
-
         console.log(selesai)
 
         Swal.fire({
