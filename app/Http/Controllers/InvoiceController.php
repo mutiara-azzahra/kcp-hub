@@ -21,7 +21,7 @@ class InvoiceController extends Controller
         ->where('flag_invoice', 'N')
         ->get();
 
-        $invoice = TransaksiInvoiceHeader::all();
+        $invoice = TransaksiInvoiceHeader::where('flag_batal', 'N')->get();
 
         return view('invoice.index', compact('so_approved', 'invoice'));
     }
