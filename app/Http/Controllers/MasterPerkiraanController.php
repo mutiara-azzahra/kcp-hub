@@ -39,6 +39,11 @@ class MasterPerkiraanController extends Controller
             'sts_perkiraan'     => 'required',
             'head_kategori'     => 'required',
         ]);
+
+        $request->merge([
+            'id_perkiraan'      => $request->perkiraan.'.'.$request->sub_perkiraan,
+            'created_by'        => Auth::user()->nama_user
+        ]);
         
         $created = MasterPerkiraan::create($request->all());
     
@@ -66,7 +71,6 @@ class MasterPerkiraanController extends Controller
         }   
     }
 
-
     public function nonaktif($id)
     {
         try {
@@ -84,6 +88,21 @@ class MasterPerkiraanController extends Controller
         } catch (\Exception $e) {
 
             return redirect()->route('master-perkiraan.index')->with('danger', 'Data master perkiraan gagal dinonaktifkan');
+        }
+    }
+
+    public function delete($id)
+    {
+        try {
+
+            $perkiraan = MasterPerkiraan::findOrFail($id);
+            $perkiraan->delete();
+
+            return redirect()->route('master-perkiraan.index')->with('success', 'Data master perkiraan berhasil dihapus!');
+
+        } catch (\Exception $e) {
+
+            return redirect()->route('master-perkiraan.index')->with('danger', 'Data master perkiraan gagal dihapus');
         }
     }
 }
