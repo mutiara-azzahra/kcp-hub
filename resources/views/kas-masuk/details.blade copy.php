@@ -76,18 +76,17 @@
                                 <tr>
                                     <td class="text-center">
                                         <div class="form-group col-12">
-                                            <select name="perkiraan" class="form-control mr-2 my-select" id="perkiraan-selection">     
-                                                <option value="">-- Pilih Perkiraan --</option>
-                                                                                                
+                                            <select name="akuntansi_to" class="form-control mr-2" id="package" onchange="updateData()">
+                                                <option value="">-- Pilih --</option>
+                                                <option value="D" data-id="D">DEBET</option>
+                                                <option value="K" data-id="K">KREDIT</option>
                                             </select>
                                         </div>
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group col-12">
-                                            <select name="akuntansi_to" class="form-control mr-2" id="package" onchange="updateData()">
-                                                <option value="">-- Pilih --</option>
-                                                <option value="D" data-id="D">DEBET</option>
-                                                <option value="K" data-id="K">KREDIT</option>
+                                            <select name="perkiraan" class="form-control mr-2 my-select" id="perkiraan-selection">     
+                                                <option value="">-- Pilih Perkiraan --</option>
                                             </select>
                                         </div>
                                     </td>

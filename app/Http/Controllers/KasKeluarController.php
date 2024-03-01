@@ -59,8 +59,11 @@ class KasKeluarController extends Controller
 
     public function details($no_keluar){
 
-        $debet = MasterPerkiraan::where('sts_perkiraan', 'D')->get();
-        $kredit = MasterPerkiraan::where('sts_perkiraan', 'K')->get();
+        // $debet = MasterPerkiraan::where('sts_perkiraan', 'D')->get();
+        // $kredit = MasterPerkiraan::where('sts_perkiraan', 'K')->get();
+
+
+        $perkiraan = MasterPerkiraan::where('status', 'AKTIF')->get();
 
         $kas_keluar = TransaksiKasKeluarHeader::where('no_keluar', $no_keluar)->first();
 
@@ -73,7 +76,7 @@ class KasKeluarController extends Controller
 
         $balancing = $balance_debet - $balance_kredit;
 
-        return view('kas-keluar.details', compact('kas_keluar', 'debet', 'kredit', 'balancing'));
+        return view('kas-keluar.details', compact('kas_keluar', 'perkiraan', 'balancing'));
     }
 
 
