@@ -39,6 +39,9 @@
                             <th class="text-center">Pembayaran Via</th>
                             <th class="text-center">Tgl. BG</th>
                             <th class="text-center">Nominal</th>
+                            <th class="text-center">Potong Bonus</th>
+                            <th class="text-center">Nominal Bonus</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -53,8 +56,17 @@
                             <td class="text-center">{{ $p->kd_outlet }}</td>
                             <td class="text-left">{{ $p->outlet->nm_outlet }}</td>
                             <td class="text-center">{{ $p->pembayaran_via }}</td>
-                            <td class="text-center">{{ $p->no_bg }}</td>
+                            <td class="text-center">-</td>
                             <td class="text-right">{{ number_format($p->nominal, 0, '.', ',') }}</td>
+                            @if($p->flag_potong_bonus == 'Y')
+                            <td class="text-center">Ya</td>
+                            <td class="text-center">{{ number_format($p->nominal_bonus, 0, '.', ',') }}</td>
+                            @else
+                            <td class="text-center">Tidak</td>
+                            <td class="text-center">-</td>
+                            @endif
+
+                            <td></td>
                         </tr>
                         @endforeach
 

@@ -2,7 +2,7 @@
  
 @section('content')
 <div class="container" style="padding: 10px;">
-    <div class="row mt-5">
+    <div class="row mt-2">
         <div class="col-lg-12 pb-3">
              <div class="float-left">
                 <h4>Pemotongan Piutang Toko</h4>
@@ -41,21 +41,6 @@
                         <th class="text-left">Potongan</th>
                         <td>:</td>
                         <td class="text-left"><b>Rp. {{ $data->nominal_potong }} ,-</b></td>
-                    </tr>
-                    <tr>
-                        <th class="text-left">Pembayaran Via</th>
-                        <td>:</td>
-                        <td class="text-left"></td>
-                    </tr>
-                    <tr>
-                        <th class="text-left">No. BG</th>
-                        <td>:</td>
-                        <td class="text-left"></td>
-                    </tr>
-                    <tr>
-                        <th class="text-left">Bank</th>
-                        <td>:</td>
-                        <td class="text-left"></td>
                     </tr>
                 </table>
             </div>

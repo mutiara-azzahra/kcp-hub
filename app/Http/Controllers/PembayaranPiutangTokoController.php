@@ -18,7 +18,7 @@ class PembayaranPiutangTokoController extends Controller
     public function index(){
 
         $piutang_header = TransaksiPembayaranPiutangHeader::orderBy('no_piutang', 'desc')->get();
-        $kas_masuk = KasMasukHeader::orderBy('no_kas_masuk', 'desc')->get();
+        $kas_masuk      = KasMasukHeader::orderBy('no_kas_masuk', 'desc')->where('flag_kas_manual', 'N')->get();
 
         return view('piutang-toko.index', compact('piutang_header', 'kas_masuk'));
     }

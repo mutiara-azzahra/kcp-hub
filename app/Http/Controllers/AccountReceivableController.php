@@ -15,7 +15,7 @@ class AccountReceivableController extends Controller
     public function index(){
 
         $piutang_header = TransaksiPembayaranPiutangHeader::all();
-        $invoice        = TransaksiInvoiceHeader::orderBy('noinv', 'asc')->get();
+        $invoice        = TransaksiInvoiceHeader::orderBy('noinv', 'asc')->where('flag_batal', 'N')->get();
 
         return view('account-receivable.index', compact('piutang_header', 'invoice'));
     }
