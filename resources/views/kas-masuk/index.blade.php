@@ -56,11 +56,18 @@
                         <td class="text-center">{{ $p->kd_outlet }}</td>
                         <td class="text-left">{{ $p->outlet->nm_outlet }}</td>
                         @endif
-
                         <td class="text-left">{{ $p->pembayaran_via }}</td>
-                        <td class="text-right">{{ number_format($p->details->where('akuntansi_to', 'D')->sum('total'), 0, '.', ',') }}</td>
+                        {{-- <td class="text-right">{{ number_format($p->details->where('akuntansi_to', 'D')->sum('total'), 0, '.', ',') }}</td> --}}
+                        <td class="text-right">{{ number_format($p->nominal) }}</td>
                         <td class="text-center">
-                            <a class="btn btn-warning btn-sm" onClick="printAndRefresh('{{ route('kas-masuk.cetak-tanda-terima', $p->no_kas_masuk) }}')" href="{{ route('kas-masuk.cetak', $p->no_kas_masuk) }}" target="_blank"><i class="fas fa-print"></i></a>
+                            <form action="{{ route('kas-masuk.delete', $p->id) }}" method="POST" id="form_delete_{{ $p->id }}" data-id="{{ $p->id }}">    
+                                <a class="btn btn-warning btn-sm" onClick="printAndRefresh('{{ route('kas-masuk.cetak-tanda-terima', $p->no_kas_masuk) }}')" href="{{ route('kas-masuk.cetak', $p->no_kas_masuk) }}" target="_blank"><i class="fas fa-print"></i></a>
+
+                                @csrf
+                                @method('DELETE')
+                                
+                                <a class="btn btn-danger btn-sm" onclick="Delete('{{ $p->id }}')"><i class="fas fa-times"></i></a>
+                            </form>
                         </td>
                     </tr>
                     @endforeach
@@ -117,7 +124,8 @@
                         <td class="text-center">{{ Carbon\Carbon::parse($p->tanggal_rincian_tagihan)->format('d-m-Y') }}</td>
                         <td class="text-left">{{ $p->keterangan }}</td>
                         <td class="text-left">{{ $p->pembayaran_via }}</td>
-                        <td class="text-right">{{ number_format($p->details->where('akuntansi_to', 'D')->sum('total'), 0, '.', ',') }}</td>
+                        {{-- <td class="text-right">{{ number_format($p->details->where('akuntansi_to', 'D')->sum('total'), 0, '.', ',') }}</td> --}}
+                        <td class="text-right">{{ number_format($p->nominal) }}</td>
                         <td class="text-center">
                             <form action="{{ route('kas-masuk.delete', $p->id) }}" method="POST" id="form_delete_{{ $p->id }}" data-id="{{ $p->id }}">
                                 

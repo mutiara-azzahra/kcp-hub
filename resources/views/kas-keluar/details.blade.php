@@ -78,17 +78,20 @@
                                 <tr>
                                     <td class="text-center">
                                         <div class="form-group col-12">
-                                            <select name="akuntansi_to" class="form-control mr-2" id="package" onchange="updateData()">
-                                                <option value="">-- Pilih --</option>
-                                                <option value="D" data-id="D">DEBET</option>
-                                                <option value="K" data-id="K">KREDIT</option>
+                                            <select name="perkiraan" class="form-control mr-2 my-select">     
+                                                <option value="">-- Pilih Perkiraan --</option>
+                                                @foreach($perkiraan as $s)
+                                                    <option value="{{ $s->perkiraan }}">{{ $s->id_perkiraan }} - {{ $s->nm_perkiraan }} </option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group col-12">
-                                            <select name="perkiraan" class="form-control mr-2 my-select" id="perkiraan-selection">     
-                                                <option value="">-- Pilih Perkiraan --</option>
+                                            <select name="akuntansi_to" class="form-control mr-2">
+                                                <option value="">-- Pilih --</option>
+                                                <option value="D">DEBET</option>
+                                                <option value="K">KREDIT</option>
                                             </select>
                                         </div>
                                     </td>
@@ -176,36 +179,6 @@
 @section('script')
 
 <script>
-
-    //AKUN DEBET DAN KREDIT
-
-    function updateData() {
-        var selectedOption = document.querySelector('select[name="akuntansi_to"]');
-        var dataId         = selectedOption.options[selectedOption.selectedIndex].getAttribute('data-id');
-
-        var kdOutletDropdown = document.getElementById('perkiraan-selection');
-        var options = kdOutletDropdown.options;
-
-        while (options.length > 0) {
-            options.remove(0);
-        }
-
-        if (dataId == 'D') {
-            @foreach($debet as $s)
-                var option      = document.createElement('option');
-                option.value    = "{{ $s->id }}";
-                option.text     = "{{ $s->perkiraan }}.{{ $s->sub_perkiraan }} - {{ $s->nm_perkiraan }}";
-                kdOutletDropdown.add(option);
-            @endforeach
-        } else {
-            @foreach($kredit as $s)
-                var option      = document.createElement('option');
-                option.value    = "{{ $s->id }}";
-                option.text     = "{{ $s->perkiraan }}.{{ $s->sub_perkiraan }} - {{ $s->nm_perkiraan }}";
-                kdOutletDropdown.add(option);
-            @endforeach
-        }
-    }
 
     //HAPUS
 

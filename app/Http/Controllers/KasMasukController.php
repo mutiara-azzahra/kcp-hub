@@ -65,7 +65,6 @@ class KasMasukController extends Controller
         }
     }
 
-
     public function details($no_kas_masuk){
 
         $perkiraan  = MasterPerkiraan::where('status', 'AKTIF')->get();
@@ -78,8 +77,7 @@ class KasMasukController extends Controller
 
         $balance_debet  = $kas_masuk->details->where('akuntansi_to', 'D')->sum('total');
         $balance_kredit = $kas_masuk->details->where('akuntansi_to', 'K')->sum('total');
-
-        $balancing = $balance_debet - $balance_kredit;
+        $balancing      = $balance_debet - $balance_kredit;
 
         return view('kas-masuk.details', compact('kas_masuk', 'balancing', 'perkiraan'));
     }
