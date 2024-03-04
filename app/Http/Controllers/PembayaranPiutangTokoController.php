@@ -32,9 +32,11 @@ class PembayaranPiutangTokoController extends Controller
 
     public function tanda_terima($no_kas_masuk){
 
-        $nominal = KasMasukHeader::where('no_kas_masuk', $no_kas_masuk)->first();
+        $nominal_diterima = KasMasukHeader::where('no_kas_masuk', $no_kas_masuk)->first();
+        $invoice_toko     = TransaksiInvoiceHeader::where('kd_outlet', $nominal_diterima->kd_outlet)->get();
+        $no_kas_masuk     = $no_kas_masuk;
 
-        return view('piutang-toko.count', compact('nominal'));
+        return view('piutang-toko.count', compact('nominal_diterima', 'invoice_toko', 'no_kas_masuk'));
     }
 
     public function store(Request $request){
@@ -147,5 +149,63 @@ class PembayaranPiutangTokoController extends Controller
         $pdf->setPaper('letter', 'potrait');
 
         return $pdf->stream('piutang.pdf');
+    }
+
+    public function store_tanda_terima(Request $request)
+    {
+
+        $selectedItems  = $request->input('selected_items', []);
+
+        $nominal_potong= 0;
+
+        for ($i = 0; $i < count($selectedItems); $i++) {
+            $itemInvoice = $selectedItems[$i];
+
+            $invoice = TransaksiInvoiceHeader::where('noinv', $itemInvoice)->first();
+
+            $nominal_potong += $invoice->details_invoice->sum('nominal_total');
+
+            $value = [
+                'noinv'                 => $invoice->noinv,
+                'no_piutang'            => $request->no_piutang,
+                'nominal'               => $invoice->details_invoice->sum('nominal_total'),
+                'status'                => 'O',
+                'created_at'            => NOW(),
+                'created_by'            => Auth::user()->nama_user,
+            ];
+
+            $created = TransaksiPembayaranPiutang::create($value);
+        }
+
+        //CREATE NEW PIUTANG BY PIUTANG TOKO
+        $selected_invoice = TransaksiInvoiceHeader::where('noinv', $selectedItems[0])->first();
+        
+        $area_piutang     = MasterOutlet::where('kd_outlet', $selected_invoice->kd_oulet)->value('kode_prp');
+
+        if($area_piutang == '6300'){
+            $area_piutang = 'KS';
+        } elseif ($area_piutang == '6200'){
+            $area_piutang = 'KT';
+        }
+
+        $newPiutang              = new TransaksiPembayaranPiutangHeader();
+        $newPiutang->no_piutang  = TransaksiPembayaranPiutangHeader::no_piutang();
+
+        $request->merge([
+            'no_piutang'      => $newPiutang->no_piutang,
+            'area_piutang'    => $area_piutang,
+            'tanggal_piutang' => now(),
+            'kd_outlet'       => $selected_invoice->kd_outlet,
+            'nm_outlet'       => $selected_invoice->nm_outlet,
+            'nominal_potong'  => $nominal_potong,
+            'no_kas_masuk'    => $request->no_kas_masuk,
+            'status'          => 'O',
+            'created_at'      => now(),
+            'created_by'      => Auth::user()->nama_user
+        ]);
+
+        $created = TransaksiPembayaranPiutangHeader::create($request->all());
+
+        return redirect()->route('piutang-toko.index')->with('success', 'Piutang baru berhasil ditambahkan!');
     }
 }
