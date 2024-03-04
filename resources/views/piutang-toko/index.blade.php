@@ -65,8 +65,7 @@
                             <td class="text-center">Tidak</td>
                             <td class="text-center">-</td>
                             @endif
-
-                            <td></td>
+                            <td class="text-center"><a class="btn btn-warning btn-sm m-1" href="{{ route('piutang-toko.tanda-terima', $p->no_kas_masuk )}}" target="_blank"><i class="fas fa-folder-open"></i></a></td>
                         </tr>
                         @endforeach
 

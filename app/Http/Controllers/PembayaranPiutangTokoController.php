@@ -30,6 +30,13 @@ class PembayaranPiutangTokoController extends Controller
         return view('piutang-toko.create', compact('outlet'));
     }
 
+    public function tanda_terima($no_kas_masuk){
+
+        $nominal = KasMasukHeader::where('no_kas_masuk', $no_kas_masuk)->first();
+
+        return view('piutang-toko.count', compact('nominal'));
+    }
+
     public function store(Request $request){
 
         $newPiutang              = new TransaksiPembayaranPiutangHeader();

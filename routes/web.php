@@ -339,6 +339,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/piutang-toko/store-details', [PembayaranPiutangTokoController::class, 'store_details'])->name('piutang-toko.store-details');
     Route::post('/piutang-toko/store-kas', [PembayaranPiutangTokoController::class, 'store_kas'])->name('piutang-toko.store-kas');
     Route::get('/piutang-toko/cetak/{no_piutang}', [PembayaranPiutangTokoController::class, 'cetak'])->name('piutang-toko.cetak');
+    Route::get('/piutang-toko/tanda-terima/{no_kas_masuk}', [PembayaranPiutangTokoController::class, 'tanda_terima'])->name('piutang-toko.tanda-terima');
 
     //ROUTE PEMBAYARAN PIUTANG TOKO
     Route::get('/pembayaran-toko', [PembayaranTokoController::class, 'index'])->name('pembayaran-toko.index');
