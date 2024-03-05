@@ -153,7 +153,13 @@
                             <td class="atas">{{ $header->outlet->nm_outlet }} ({{ $header->outlet->kd_outlet }})</td>
                         </tr>
                         <tr>
-                            <td class="atas">{{ $header->outlet->almt_pengiriman }}, {{ $header->outlet->kode_area->provinsi->provinsi}}</td>
+                            <td class="atas">{{ $header->outlet->almt_pengiriman }},
+                                @if($header->outlet->kode_prp == 6300)
+                                Kalimantan Selatan
+                                @else
+                                Kalimantan Tengah
+                                @endif
+                            </td>
                         </tr>
                     </table>
                 </td>
@@ -165,7 +171,7 @@
                         <tr>
                             <td class="atas">No. SO</td>
                             <td class="atas">:</td>
-                            @if($header->outlet->kode_area->provinsi->kode_prp == 6200)
+                            @if($header->outlet->kode_prp == 6200)
                             <td class="atas">KCP/NON/{{ $header->area_so }}/{{ $header->noso }}</td>
 
                             @else

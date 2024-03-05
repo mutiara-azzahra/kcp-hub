@@ -53,4 +53,9 @@ class BgMasukHeader extends Model
     {
         return $this->hasOne(KasMasukHeader::class, 'no_bg', 'from_bg');
     }
+
+    public function details_bg()
+    {
+        return $this->hasMany(BgMasukDetails::class, 'id', 'id_bg');
+    }
 }

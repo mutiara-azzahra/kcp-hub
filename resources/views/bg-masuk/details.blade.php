@@ -117,6 +117,66 @@
             </form>
         </div>
     </div>
+
+
+    <div class="card" style="padding: 10px;">
+        <div class="card-body">
+            <div class="col-lg-12 p-1" id="main" data-loading="true">
+                    <div class="table-container">
+                        <table class="table table-hover table-sm bg-light table-striped table-bordered" id="table">
+                            <thead>
+                                <tr style="background-color: #6082B6; color:white">
+                                    <th class="text-center">Perkiraan</th>
+                                    <th class="text-center">Akuntansi To</th>
+                                    <th class="text-center">DEBET</th>
+                                    <th class="text-center">KREDIT</th>
+                                    <th class="text-center"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="input-fields">
+                                @foreach($transfer->details as $i)
+                                <tr>
+                                    <td class="text-left">
+                                        {{ $i->details_perkiraan->id_perkiraan }} - {{ $i->details_perkiraan->nm_sub_perkiraan }}
+                                    </td>
+                                    <td class="text-center">
+                                        @if($i->akuntansi_to == 'D')
+
+                                        DEBET
+                                        @else
+
+                                        KREDIT
+                                        @endif
+                                    </td>
+                                    @if($i->akuntansi_to == 'D')
+                                    <td class="text-right">
+                                        {{ number_format($i->total, 0, ',', '.') }}
+                                    </td>
+                                    <td></td>
+                                    
+                                    @else
+                                    <td></td>
+                                    <td class="text-right">
+                                        {{ number_format($i->total, 0, ',', '.') }}
+                                    </td>
+                                    @endif
+                                    <td class="text-center">
+                                        <form action="{{ route('transfer-masuk.delete-details', $i->id) }}" method="POST" id="form_delete_{{ $i->id }}" data-id="{{ $i->id }}">
+
+                                            @csrf
+                                            @method('DELETE')
+                                            
+                                            <a class="btn btn-danger btn-sm" onclick="Hapus('{{$i->id}}')"><i class="fas fa-times"></i></a>
+                                        </form>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        </div>
+    </div>
 </div>
 @endsection
 
