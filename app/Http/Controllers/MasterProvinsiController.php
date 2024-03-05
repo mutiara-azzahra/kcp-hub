@@ -40,4 +40,59 @@ class MasterProvinsiController extends Controller
         
     }
 
+    public function update(Request $request, $id)
+    {
+
+        $request->validate([
+            'kode_prp'    => 'required',
+            'provinsi'    => 'required',
+        ]);
+
+        MasterPerkiraan::where('id', $id)->update([
+                'kode_prp'      => $request->role,
+                'updated_at'    => NOW(),
+                'updated_by'    => Auth::user()->nama_user
+            ]);
+        
+        if ($updated){
+            return redirect()->route('master-provinsi.index')->with('success','Master provinsi berhasil diubah!');
+        } else{
+            return redirect()->route('master-provinsi.index')->with('danger','Master provinsi gagal diubah');
+        }   
+    }
+
+    public function nonaktif($id)
+    {
+        try {
+
+            $provinsi = MasterProvinsi::findOrFail($id);
+
+            $provinsi->update([
+                'modi_date'     => now(),
+                'modi_by'       => Auth::user()->nama_user
+            ]);
+
+            return redirect()->route('master-provinsi.index')->with('success', 'Data master provinsi berhasil dinonaktifkan!');
+
+        } catch (\Exception $e) {
+
+            return redirect()->route('master-provinsi.index')->with('danger', 'Data master provinsi gagal dinonaktifkan');
+        }
+    }
+
+    public function delete($id)
+    {
+        try {
+
+            $provinsi = MasterProvinsi::findOrFail($id);
+            $provinsi->delete();
+
+            return redirect()->route('master-provinsi.index')->with('success', 'Data master provinsi berhasil dihapus!');
+
+        } catch (\Exception $e) {
+
+            return redirect()->route('master-provinsi.index')->with('danger', 'Data master provinsi gagal dihapus');
+        }
+    }
+
 }

@@ -11,7 +11,7 @@ class MasterProvinsi extends Model
     use HasFactory;
 
     protected $table    = 'mst_provinsi';
-    public $primaryKey  = 'kode_prp';
+    public $primaryKey  = 'id';
     public $timestamps  = false;
 
     protected $fillable = [
