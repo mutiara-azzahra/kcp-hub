@@ -23,6 +23,13 @@
         </div>
     @endif
 
+
+    @if ($balancing != 0)
+        <div class="alert alert-danger text-center">
+            <p style="color:white; text-transform: uppercase;"><b>Transfer Masuk Tidak Balance, Periksa Kembali Data Anda!</b></p>
+        </div>
+    @endif
+
     <div class="card" style="padding: 10px;">
         <div class="card-body">
             <div class="col-lg-8 p-1">
@@ -97,11 +104,6 @@
                                         <div class="form-group col-12">
                                             <input type="hidden" name="id_bg" value="{{ $header->id_bg }}">
                                             <input type="text" name="total" class="form-control">
-                                        </div>
-                                    </td>
-                                    <td class="text-center">
-                                        <div class="form-group col-12">
-                                            <a type="button" class="btn btn-primary m-1" id="add"><i class="fas fa-plus"></i></a>                                                                                  
                                         </div>
                                     </td>
                                 </tr>

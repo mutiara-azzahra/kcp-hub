@@ -17,8 +17,8 @@ use App\Models\BgMasukDetails;
 class BGMasukController extends Controller
 {
     public function index(){
-
-        $bg_gantung = KasMasukHeader::where('pembayaran_via', 'BG')->orderBy('created_at', 'desc')->where('status', 'O')->get();
+        
+        $bg_gantung = KasMasukHeader::where('pembayaran_via', 'BG')->orderBy('created_at', 'desc')->where('status', 'C')->get();
         $bg_cair    = BgMasukHeader::orderBy('created_at', 'desc')->get();
 
         return view('bg-masuk.index', compact('bg_gantung', 'bg_cair'));
@@ -59,10 +59,10 @@ class BGMasukController extends Controller
         }
 
         KasMasukHeader::where('no_bg', $no_bg)->update([
-                'status'        => 'C',
-                'updated_at'    => now(),
-                'updated_by'    => Auth::user()->nama_user
-            ]);
+            'status'        => 'C',
+            'updated_at'    => now(),
+            'updated_by'    => Auth::user()->nama_user
+        ]);
     
         if ($created) {
             return redirect()->route('bg-masuk.index')->with('success', 'BG masuk berhasil dicairkan');
@@ -73,10 +73,15 @@ class BGMasukController extends Controller
 
     public function details($id_bg){
 
-        $perkiraan  = MasterPerkiraan::all();
-        $header     = BgMasukHeader::where('id_bg', $id_bg)->first();
+        $perkiraan      = MasterPerkiraan::all();
+        $header         = BgMasukHeader::where('id_bg', $id_bg)->first();
 
-        return view('bg-masuk.details', compact('perkiraan', 'header'));
+        $balance_debet  = $header->details->where('akuntansi_to', 'D')->sum('total');
+        $balance_kredit = $header->details->where('akuntansi_to', 'K')->sum('total');
+
+        $balancing      = $balance_debet - $balance_kredit;
+
+        return view('bg-masuk.details', compact('perkiraan', 'header', 'balancing'));
     }
 
     public function validasi_data($id_transfer){

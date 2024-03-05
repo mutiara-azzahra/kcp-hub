@@ -98,6 +98,7 @@ class KasMasukController extends Controller
             'terima_dari'       => $request->terima_dari,
             'keterangan'        => $request->keterangan,
             'no_bg'             => $request->no_bg,
+            'flag_kas_manual'   => 'N',
             'jatuh_tempo_bg'    => $request->jatuh_tempo_bg,
             'no_kas_masuk'      => $newKas->no_kas_masuk,
             'status'            => 'O',
