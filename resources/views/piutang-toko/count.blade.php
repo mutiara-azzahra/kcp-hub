@@ -114,28 +114,28 @@
 
 <script>
 
-
     document.querySelectorAll('input[name="selected_items[]"]').forEach(function(checkbox) {
         checkbox.addEventListener('change', function() {
             updateNominalValue();
-        });
-    });
+        })
+    })
 
     function updateNominalValue() {
-        var total = 0;
+    var total = 0;
 
-        document.querySelectorAll('input[name="selected_items[]"]').forEach(function(checkbox) {
-            // Check if the checkbox is checked
-            if (checkbox.checked) {
-              
-                var row = checkbox.closest('tr');
-                var value = parseFloat(row.querySelector('.text-right').textContent.replace(/[^0-9.-]+/g, '')); // Extract number from text
-                total += value;
-            }
-        });
+    document.querySelectorAll('input[name="selected_items[]"]').forEach(function(checkbox) {
+        if (checkbox.checked) {
+            var row = checkbox.closest('tr');
+            var value = parseFloat(row.querySelector('.text-right').textContent.replace(/[^0-9.-]+/g, ''));
+            total += value;
+        }
+    })
 
-        document.getElementById('nominal').value = total;
-    }
+    var formattedTotal = total.toLocaleString('en-US');
+
+    document.getElementById('nominal').value = formattedTotal
+}
+
 
 </script>
 
