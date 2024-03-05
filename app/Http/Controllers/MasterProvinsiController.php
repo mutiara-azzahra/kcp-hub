@@ -9,7 +9,7 @@ class MasterProvinsiController extends Controller
 {
     public function index(){
 
-        $list_provinsi = MasterProvinsi::all();
+        $list_provinsi = MasterProvinsi::where('status', 'Y')->get();
 
         return view('master-provinsi.index', compact('list_provinsi'));
     }
@@ -61,13 +61,14 @@ class MasterProvinsiController extends Controller
         }   
     }
 
-    public function nonaktif($id)
+    public function nonaktif($kode_prp)
     {
         try {
 
-            $provinsi = MasterProvinsi::findOrFail($id);
+            $provinsi = MasterProvinsi::findOrFail($kode_prp);
 
             $provinsi->update([
+                'status'     => 'Y',
                 'modi_date'     => now(),
                 'modi_by'       => Auth::user()->nama_user
             ]);
@@ -80,11 +81,11 @@ class MasterProvinsiController extends Controller
         }
     }
 
-    public function delete($id)
+    public function delete($kode_prp)
     {
         try {
 
-            $provinsi = MasterProvinsi::findOrFail($id);
+            $provinsi = MasterProvinsi::findOrFail($kode_prp);
             $provinsi->delete();
 
             return redirect()->route('master-provinsi.index')->with('success', 'Data master provinsi berhasil dihapus!');

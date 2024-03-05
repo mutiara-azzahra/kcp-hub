@@ -46,19 +46,19 @@
                             <td class="text-center">{{ $p->kode_prp }}</td>
                             <td class="text-left">{{ $p->provinsi }}</td>
                             <td class="text-center"> 
-                                <form action="{{ route('master-provinsi.nonaktif', $p->id) }}" method="GET" id="form_nonaktif_{{ $p->id }}" data-nonaktif="{{ $p->id }}">                                       
+                                <form action="{{ route('master-provinsi.nonaktif', $p->kode_prp) }}" method="GET" id="form_nonaktif_{{ $p->kode_prp }}" data-nonaktif="{{ $p->kode_prp }}">                                       
                                     @csrf
                                     @method('GET')
                                 </form>
 
-                                <form action="{{ route('master-provinsi.delete', $p->id) }}" method="POST" id="form_delete_{{ $p->id }}" data-id="{{ $p->id }}">
+                                <form action="{{ route('master-provinsi.delete', $p->kode_prp) }}" method="POST" id="form_delete_{{ $p->kode_prp }}" data-id="{{ $p->kode_prp }}">
                                     @csrf
                                     @method('DELETE')
                                 </form>
 
-                                <a class="btn btn-info btn-sm" href="{{ route('master-provinsi.edit',$p->id) }}" data-toggle="tooltip" data-placement="top" title="Ubah"><i class="fas fa-edit"></i></a>
-                                <a class="btn btn-warning btn-sm" onclick="Nonaktif('{{ $p->id }}')" data-toggle="tooltip" data-placement="top" title="Nonaktifkan"><i class="fas fa-ban"></i></a>
-                                <a class="btn btn-danger btn-sm" onclick="Hapus('{{ $p->id }}')"><i class="fas fa-times" data-toggle="tooltip" data-placement="top" title="Hapus"></i></a>
+                                <a class="btn btn-info btn-sm" href="{{ route('master-provinsi.edit',$p->kode_prp) }}" data-toggle="tooltip" data-placement="top" title="Ubah"><i class="fas fa-edit"></i></a>
+                                <a class="btn btn-warning btn-sm" onclick="Nonaktif('{{ $p->kode_prp }}')" data-toggle="tooltip" data-placement="top" title="Nonaktifkan"><i class="fas fa-ban"></i></a>
+                                <a class="btn btn-danger btn-sm" onclick="Hapus('{{ $p->kode_prp }}')" data-toggle="tooltip" data-placement="top" title="Hapus"><i class="fas fa-times"></i></a>
                             </td>
                         </tr>
                         @endforeach

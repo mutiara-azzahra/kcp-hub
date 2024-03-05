@@ -92,10 +92,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/master-provinsi', [MasterProvinsiController::class, 'index'])->name('master-provinsi.index');
     Route::get('/master-provinsi/create', [MasterProvinsiController::class, 'create'])->name('master-provinsi.create');
     Route::post('/master-provinsi/store', [MasterProvinsiController::class, 'store'])->name('master-provinsi.store');
-     Route::get('/master-provinsi/edit/{id}', [MasterProvinsiController::class, 'edit'])->name('master-provinsi.edit');
-    Route::get('/master-provinsi/nonaktif/{id}', [MasterProvinsiController::class, 'nonaktif'])->name('master-provinsi.nonaktif');
+     Route::get('/master-provinsi/edit/{kode_prp}', [MasterProvinsiController::class, 'edit'])->name('master-provinsi.edit');
+    Route::get('/master-provinsi/nonaktif/{kode_prp}', [MasterProvinsiController::class, 'nonaktif'])->name('master-provinsi.nonaktif');
     Route::post('/master-provinsi/store', [MasterProvinsiController::class, 'store'])->name('master-provinsi.store');
-    Route::delete('/master-provinsi/delete/{id}', [MasterProvinsiController::class, 'delete'])->name('master-provinsi.delete');
+    Route::delete('/master-provinsi/delete/{kode_prp}', [MasterProvinsiController::class, 'delete'])->name('master-provinsi.delete');
 
     //MASTER PERKIRAAN
     Route::get('/master-perkiraan', [MasterPerkiraanController::class, 'index'])->name('master-perkiraan.index');
