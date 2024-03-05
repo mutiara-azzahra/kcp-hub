@@ -19,6 +19,14 @@ class MasterProvinsiController extends Controller
         return view('master-provinsi.create');
     }
 
+
+    public function edit($kode_prp){
+
+        $provinsi = MasterProvinsi::findOrFail($id);
+
+        return view('master-provinsi.update', compact('provinsi'));
+    }
+
     public function store(Request $request)
     {
         $request -> validate([
@@ -68,7 +76,7 @@ class MasterProvinsiController extends Controller
             $provinsi = MasterProvinsi::findOrFail($kode_prp);
 
             $provinsi->update([
-                'status'     => 'Y',
+                'status'        => 'Y',
                 'modi_date'     => now(),
                 'modi_by'       => Auth::user()->nama_user
             ]);
