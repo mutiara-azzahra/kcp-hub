@@ -43,6 +43,21 @@ class BGMasukController extends Controller
         ];
     
         $created = BgMasukHeader::create($requestData);
+
+        foreach ($bg->details as $i) {
+            $created = BgMasukDetails::create([
+                'id_bg'         => $newBg->id_bg,
+                'status_bg'     => '',
+                'from_bg'       => $bg->no_bg,
+                'perkiraan'     => $i->perkiraan,
+                'akuntansi_to'  => $i->akuntansi_to,
+                'total'         => $i->total,
+                'status'        => 'C',
+                'created_at'    => now(),
+                'created_by'    => Auth::user()->nama_user
+            ]);
+        }
+
     
         if ($created) {
             return redirect()->route('bg-masuk.index')->with('success', 'BG masuk berhasil dicairkan');

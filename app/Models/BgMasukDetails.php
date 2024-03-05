@@ -13,7 +13,7 @@ class BgMasukDetails extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [ 
-        'id_bg','status_bg', 'from_bg','perkiraan', 'sub_perkiraan','akuntansi_to', 'total',
+        'id_bg','status_bg', 'from_bg','perkiraan', 'akuntansi_to', 'total',
         'status','created_at', 'created_by', 'updated_at',
         'updated_by'
     ];
