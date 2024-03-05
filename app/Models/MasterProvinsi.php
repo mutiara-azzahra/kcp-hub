@@ -17,6 +17,7 @@ class MasterProvinsi extends Model
     protected $fillable = [
         'kode_prp', 
         'provinsi',
+        'status',
         'crea_by',
         'modi_by',
         'crea_date', 

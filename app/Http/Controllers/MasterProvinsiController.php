@@ -29,6 +29,7 @@ class MasterProvinsiController extends Controller
 
     public function store(Request $request)
     {
+
         $request -> validate([
             'kode_prp'    => 'required',
             'provinsi'    => 'required',
@@ -47,6 +48,7 @@ class MasterProvinsiController extends Controller
         }
         
     }
+
 
     public function update(Request $request, $id)
     {
