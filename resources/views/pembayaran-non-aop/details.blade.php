@@ -127,48 +127,48 @@
         $('#add').click(function(){
             ++i;
             $('#table').append(`<tr>
-                                                    <td class="text-center">
-                                                        <div class="form-group col-12">
-                                                            <select name="inputs[${i}][part_no]" class="form-control mr-2">
-                                                                <option value="">-- Pilih --</option>
-                                                                @foreach($master_part as $k)
-                                                                    <option value="{{ $k->part_no }}"> {{ $k->part_no }} | {{ $k->part_nama }} </option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="form-group col-12">
-                                                            <input type="hidden" name="inputs[${i}][invoice_non]" value="{{ $pembelian->invoice_non }}">
-                                                            <input type="number" name="inputs[${i}][qty]" class="form-control" placeholder="0">
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="form-group col-12">
-                                                            <input type="number" name="inputs[${i}][harga]" class="form-control" placeholder="0">
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="form-group col-12">
-                                                            <input type="number" name="inputs[${i}][ppn_persen]" class="form-control" placeholder="0">
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="form-group col-12">
-                                                            <input type="number" name="inputs[${i}][diskon_persen]" class="form-control" placeholder="0">
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="form-group col-12">
-                                                            <input type="number" name="inputs[${i}][total_diskon_persen]" class="form-control" placeholder="0">
-                                                        </div>
-                                                    </td>
-                                                    <td class="text-center">
-                                                        <div class="form-group col-12">
-                                                            <button type="submit" class="btn btn-danger remove-table-row"><i class="fas fa-minus"></i></button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                <td class="text-center">
+                    <div class="form-group col-12">
+                        <select name="inputs[${i}][part_no]" class="form-control mr-2">
+                            <option value="">-- Pilih --</option>
+                            @foreach($master_part as $k)
+                                <option value="{{ $k->part_no }}"> {{ $k->part_no }} | {{ $k->part_nama }} </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <div class="form-group col-12">
+                        <input type="hidden" name="inputs[${i}][invoice_non]" value="{{ $pembelian->invoice_non }}">
+                        <input type="number" name="inputs[${i}][qty]" class="form-control" placeholder="0">
+                    </div>
+                </td>
+                <td class="text-center">
+                    <div class="form-group col-12">
+                        <input type="number" name="inputs[${i}][harga]" class="form-control" placeholder="0">
+                    </div>
+                </td>
+                <td class="text-center">
+                    <div class="form-group col-12">
+                        <input type="number" name="inputs[${i}][ppn_persen]" class="form-control" placeholder="0">
+                    </div>
+                </td>
+                <td class="text-center">
+                    <div class="form-group col-12">
+                        <input type="number" name="inputs[${i}][diskon_persen]" class="form-control" placeholder="0">
+                    </div>
+                </td>
+                <td class="text-center">
+                    <div class="form-group col-12">
+                        <input type="number" name="inputs[${i}][total_diskon_persen]" class="form-control" placeholder="0">
+                    </div>
+                </td>
+                <td class="text-center">
+                    <div class="form-group col-12">
+                        <button type="submit" class="btn btn-danger remove-table-row"><i class="fas fa-minus"></i></button>
+                    </div>
+                </td>
+            </tr>
             `);
         });
 
