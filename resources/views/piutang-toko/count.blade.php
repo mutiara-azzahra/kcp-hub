@@ -35,7 +35,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <strong>Nominal Diterima Kasir</strong>
-                            <input type="text" name="nominal" class="form-control" value="{{ $nominal_diterima->nominal }}" readonly>
+                            <input type="text" name="nominal" class="form-control" value="{{ number_format($nominal_diterima->nominal, 0, ',', ',') }}" readonly>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -124,18 +124,16 @@
     function updateNominalValue() {
         var total = 0;
 
-        // Iterate over all checkboxes
         document.querySelectorAll('input[name="selected_items[]"]').forEach(function(checkbox) {
             // Check if the checkbox is checked
             if (checkbox.checked) {
-                // Find the corresponding row and sum its value
+              
                 var row = checkbox.closest('tr');
                 var value = parseFloat(row.querySelector('.text-right').textContent.replace(/[^0-9.-]+/g, '')); // Extract number from text
                 total += value;
             }
         });
 
-        // Update the value of the Nominal input field
         document.getElementById('nominal').value = total;
     }
 
