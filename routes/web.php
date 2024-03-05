@@ -92,6 +92,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/master-provinsi', [MasterProvinsiController::class, 'index'])->name('master-provinsi.index');
     Route::get('/master-provinsi/create', [MasterProvinsiController::class, 'create'])->name('master-provinsi.create');
     Route::post('/master-provinsi/store', [MasterProvinsiController::class, 'store'])->name('master-provinsi.store');
+     Route::get('/master-provinsi/edit/{id}', [MasterProvinsiController::class, 'edit'])->name('master-provinsi.edit');
+    Route::get('/master-provinsi/nonaktif/{id}', [MasterProvinsiController::class, 'nonaktif'])->name('master-provinsi.nonaktif');
+    Route::post('/master-provinsi/store', [MasterProvinsiController::class, 'store'])->name('master-provinsi.store');
+    Route::delete('/master-provinsi/delete/{id}', [MasterProvinsiController::class, 'delete'])->name('master-provinsi.delete');
 
     //MASTER PERKIRAAN
     Route::get('/master-perkiraan', [MasterPerkiraanController::class, 'index'])->name('master-perkiraan.index');
@@ -99,7 +103,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/master-perkiraan/edit/{id}', [MasterPerkiraanController::class, 'edit'])->name('master-perkiraan.edit');
     Route::get('/master-perkiraan/nonaktif/{id}', [MasterPerkiraanController::class, 'nonaktif'])->name('master-perkiraan.nonaktif');
     Route::post('/master-perkiraan/store', [MasterPerkiraanController::class, 'store'])->name('master-perkiraan.store');
-    Route::delete('/master-perkiraan/delete/{id}', [MasterAreaOutletController::class, 'delete'])->name('master-perkiraan.delete');
+    Route::delete('/master-perkiraan/delete/{id}', [MasterPerkiraanController::class, 'delete'])->name('master-perkiraan.delete');
 
     //MASTER AREA OUTLET
     Route::get('/master-area-outlet', [MasterAreaOutletController::class, 'index'])->name('master-area-outlet.index');
