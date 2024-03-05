@@ -154,66 +154,67 @@ class PembayaranPiutangTokoController extends Controller
     public function store_tanda_terima(Request $request)
     {
 
+        $selectedItems  = $request->input('selected_items', []);
 
-        dd($request->all());
-        // $selectedItems  = $request->input('selected_items', []);
-
-        // //CREATE NEW PIUTANG BY PIUTANG TOKO
-        // $selected_invoice = TransaksiInvoiceHeader::where('noinv', $selectedItems[0])->first();
+        //CREATE NEW PIUTANG BY PIUTANG TOKO
+        $selected_invoice = TransaksiInvoiceHeader::where('noinv', $selectedItems[0])->first();
         
-        // $area_piutang     = MasterOutlet::where('kd_outlet', $selected_invoice->kd_oulet)->value('kode_prp');
+        $area_piutang     = MasterOutlet::where('kd_outlet', $selected_invoice->kd_oulet)->value('kode_prp');
 
-        // if($area_piutang == '6300'){
-        //     $area_piutang = 'KS';
-        // } elseif ($area_piutang == '6200'){
-        //     $area_piutang = 'KT';
-        // }
+        if($area_piutang == '6300'){
+            $area_piutang = 'KS';
+        } elseif ($area_piutang == '6200'){
+            $area_piutang = 'KT';
+        }
 
-        // $newPiutang              = new TransaksiPembayaranPiutangHeader();
-        // $newPiutang->no_piutang  = TransaksiPembayaranPiutangHeader::no_piutang();
+        $newPiutang              = new TransaksiPembayaranPiutangHeader();
+        $newPiutang->no_piutang  = TransaksiPembayaranPiutangHeader::no_piutang();
 
-        // $request->merge([
-        //     'no_piutang'      => $newPiutang->no_piutang,
-        //     'area_piutang'    => $area_piutang,
-        //     'tanggal_piutang' => now(),
-        //     'kd_outlet'       => $selected_invoice->kd_outlet,
-        //     'nm_outlet'       => $selected_invoice->nm_outlet,
-        //     'nominal_potong'  => $nominal_potong,
-        //     'no_kas_masuk'    => $request->no_kas_masuk,
-        //     'status'          => 'O',
-        //     'created_at'      => now(),
-        //     'created_by'      => Auth::user()->nama_user
-        // ]);
+        $request->merge([
+            'no_piutang'      => $newPiutang->no_piutang,
+            'area_piutang'    => $area_piutang,
+            'tanggal_piutang' => now(),
+            'kd_outlet'       => $selected_invoice->kd_outlet,
+            'nm_outlet'       => $selected_invoice->nm_outlet,
+            'nominal_potong'  => $nominal_potong,
+            'no_kas_masuk'    => $request->no_kas_masuk,
+            'status'          => 'O',
+            'created_at'      => now(),
+            'created_by'      => Auth::user()->nama_user
+        ]);
 
-        // $created = TransaksiPembayaranPiutangHeader::create($request->all());
+        $created = TransaksiPembayaranPiutangHeader::create($request->all());
 
-        // //DETAILS PIUTANG
+        //DETAILS PIUTANG
+        $nominal_potong = 0;
 
-        // for ($i = 0; $i < count($selectedItems); $i++) {
-        //     $itemInvoice = $selectedItems[$i];
+        for ($i = 0; $i < count($selectedItems); $i++) {
+            $itemInvoice = $selectedItems[$i];
 
-        //     $invoice = TransaksiInvoiceHeader::where('noinv', $itemInvoice)->first();
+            $invoice = TransaksiInvoiceHeader::where('noinv', $itemInvoice)->first();
 
-        //     $value = [
-        //         'noinv'                 => $invoice->noinv,
-        //         'no_piutang'            => $newPiutang->no_piutang,
-        //         'no_kas_masuk'          => $request->no_kas_masuk,
-        //         'nominal'               => $request->nominal,
-        //         'status'                => 'O',
-        //         'created_at'            => NOW(),
-        //         'created_by'            => Auth::user()->nama_user,
-        //     ];
+            $nominal_potong += $invoice->details_invoice->sum('nominal_total');
 
-        //     $created = TransaksiPembayaranPiutang::create($value);
+            $value = [
+                'noinv'                 => $invoice->noinv,
+                'no_piutang'            => $invoice->noinv,
+                'no_kas_masuk'          => $request->no_kas_masuk,
+                'nominal'               => $invoice->details_invoice->sum('nominal_total'),
+                'status'                => 'O',
+                'created_at'            => NOW(),
+                'created_by'            => Auth::user()->nama_user,
+            ];
 
-        //     //UPDATE STATUS FLAG PEMBAYARAN
-        //     TransaksiInvoiceHeader::where('noinv', $itemInvoice)->update([
-        //         'flag_pembayaran_lunas' => 'Y',
-        //         'updated_at'            => NOW(),
-        //         'updated_by'            => Auth::user()->nama_user
-        //     ]);
+            $created = TransaksiPembayaranPiutang::create($value);
 
-        // }
+            //UPDATE STATUS FLAG PEMBAYARAN
+            TransaksiInvoiceHeader::where('noinv', $itemInvoice)->update([
+                'flag_pembayaran_lunas' => 'Y',
+                'updated_at'            => NOW(),
+                'updated_by'            => Auth::user()->nama_user
+            ]);
+
+        }
 
         return redirect()->route('piutang-toko.index')->with('success', 'Piutang baru berhasil ditambahkan!');
     }

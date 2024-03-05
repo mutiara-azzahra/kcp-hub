@@ -35,7 +35,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <strong>Nominal Diterima Kasir</strong>
-                            <input type="text" name="nominal" class="form-control" value="{{ number_format($nominal_diterima->nominal, 0, ',', ',') }}" readonly>
+                            <input type="text" name="nominal_kasir" class="form-control" value="{{ number_format($nominal_diterima->nominal, 0, ',', ',') }}" readonly>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -50,16 +50,12 @@
         </div>
     </div>
 
-
     <div class="card" style="padding: 10px;">
         <div class="card-body">
             <div class="col-lg-12">
-                @foreach($invoice_toko as $i)
                         
                 <form action="{{ route('piutang-toko.store-tanda-terima')}}" method="POST">
                 @csrf
-                
-                @endforeach
 
                 <table class="table table-hover table-bordered table-sm bg-light table-striped" id="example2">
                     <thead>
@@ -135,6 +131,20 @@
 
     document.getElementById('nominal').value = formattedTotal
 }
+
+
+//INPUT SEPARATOR JS
+    function formatNumberWithCommas(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    document.getElementById('nominal').addEventListener('input', function() {
+     
+        let valueWithoutCommas = this.value.replace(/,/g, '');
+        let formattedValue = formatNumberWithCommas(valueWithoutCommas);
+        
+        this.value = formattedValue;
+    });
 
 
 </script>
