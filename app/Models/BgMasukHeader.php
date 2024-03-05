@@ -14,7 +14,8 @@ class BgMasukHeader extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [ 
-        'id_bg', 'status_bg', 'from_bg', 'keterangan', 'nominal', 'status','flag_balik', 'flag_batal', 'flag_batal_keterangan','created_at', 'updated_at', 'created_by', 'updated_by'
+        'id_bg', 'status_bg', 'from_bg', 'keterangan', 'nominal', 'status','flag_balik', 'flag_batal', 
+        'flag_batal_keterangan','created_at', 'updated_at', 'created_by', 'updated_by'
     ];
 
     public static function id_bg()
@@ -54,8 +55,8 @@ class BgMasukHeader extends Model
         return $this->hasOne(KasMasukHeader::class, 'no_bg', 'from_bg');
     }
 
-    public function details_bg()
+    public function details()
     {
-        return $this->hasMany(BgMasukDetails::class, 'id', 'id_bg');
+        return $this->hasMany(BgMasukDetails::class, 'id_bg', 'id_bg');
     }
 }

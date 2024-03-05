@@ -386,6 +386,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/bg-masuk/pembayaran-manual', [BgMasukController::class, 'pembayaran_manual'])->name('bg-masuk.bayar_manual');
     Route::get('/bg-masuk/cetak/{no_kas_masuk}', [BgMasukController::class, 'cetak'])->name('bg-masuk.cetak');
     Route::get('/bg-masuk/cetak-tanda-terima/{no_kas_masuk}', [BgMasukController::class, 'cetak_tanda_terima'])->name('bg-masuk.cetak-tanda-terima');
+    Route::delete('/bg-masuk/delete-details/{id}', [BgMasukController::class, 'delete_details'])->name('bg-masuk.delete-details');
+    Route::delete('/bg-masuk/delete/{id}', [BgMasukController::class, 'delete'])->name('bg-masuk.delete');
 
      //BG Keluar
     Route::get('/bg-keluar', [BgKeluarController::class, 'index'])->name('bg-keluar.index');

@@ -35,7 +35,7 @@
                     <tr>
                         <th class="text-left">Kode / Toko</th>
                         <td>:</td>
-                        <td class="text-left"><b>{{ $header->kas_masuk->kd_outlet }} / {{ $header->kas_masuk->outlet->nm_outlet }}</b></td>
+                        <td class="text-left"><b>{{ $header->kas_masuk->outlet->nm_outlet }}</b></td>
                     </tr>
                     <tr>
                         <th class="text-left">Provinsi</th>
@@ -45,7 +45,7 @@
                     <tr>
                         <th class="text-left">Nominal</th>
                         <td>:</td>
-                        <td class="text-left"><b>{{ $header->nominal }}</b></td>
+                        <td class="text-left"><b>Rp. {{ $header->nominal }}</b></td>
                     </tr>
                     <tr>
                         <th class="text-left">Keterangan</th>
