@@ -18,7 +18,7 @@ class BGMasukController extends Controller
 {
     public function index(){
 
-        $bg_gantung = KasMasukHeader::where('pembayaran_via', 'BG')->orderBy('created_at', 'desc')->get();
+        $bg_gantung = KasMasukHeader::where('pembayaran_via', 'BG')->orderBy('created_at', 'desc')->where('status', 'O')->get();
         $bg_cair    = BgMasukHeader::orderBy('created_at', 'desc')->get();
 
         return view('bg-masuk.index', compact('bg_gantung', 'bg_cair'));
@@ -45,7 +45,7 @@ class BGMasukController extends Controller
         $created = BgMasukHeader::create($requestData);
 
         foreach ($bg->details as $i) {
-            $created = BgMasukDetails::create([
+            BgMasukDetails::create([
                 'id_bg'         => $newBg->id_bg,
                 'status_bg'     => '',
                 'from_bg'       => $bg->no_bg,
@@ -58,6 +58,11 @@ class BGMasukController extends Controller
             ]);
         }
 
+        KasMasukHeader::where('no_bg', $no_bg)->update([
+                'status'        => 'C',
+                'updated_at'    => now(),
+                'updated_by'    => Auth::user()->nama_user
+            ]);
     
         if ($created) {
             return redirect()->route('bg-masuk.index')->with('success', 'BG masuk berhasil dicairkan');
@@ -85,10 +90,10 @@ class BGMasukController extends Controller
     public function store_details(Request $request){
 
         $request->validate([
-            'inputs.*.id_bg'        => 'required',
-            'inputs.*.perkiraan'    => 'required',
-            'inputs.*.akuntansi_to' => 'required',
-            'inputs.*.total'        => 'required',
+            'id_bg'        => 'required',
+            'perkiraan'    => 'required',
+            'akuntansi_to' => 'required',
+            'total'        => 'required',
         ]);
         
         $totalSum = 0;
