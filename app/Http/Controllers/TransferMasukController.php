@@ -89,16 +89,17 @@ class TransferMasukController extends Controller
             'status'              => 'O',
         ]);
 
-        $created = KasMasukHeader::create($request->all());
+        $created_kas_masuk = KasMasukHeader::create($request->all());
 
         if ($created) {
-            return redirect()->route('transfer-masuk.details', ['id_transfer' => $newTransfer->id_transfer])->with('success', 'Transfer masuk berhasil ditambahkan. Tambahkan Details');
+            return redirect()->route('transfer-masuk.details', ['id_transfer' => $newTransfer->id_transfer, 'no_kas_masuk' => $created_kas_masuk->no_kas_masuk])
+                ->with('success', 'Transfer masuk berhasil ditambahkan. Tambahkan Details');
         } else {
             return redirect()->route('transfer-masuk.index')->with('danger', 'Transfer masuk gagal ditambahkan');
         }
     }
 
-    public function details($id_transfer){
+    public function details($id_transfer, $no_kas_masuk){
 
         $perkiraan  = MasterPerkiraan::where('status', 'AKTIF')->get();
 
@@ -140,6 +141,15 @@ class TransferMasukController extends Controller
             'created_by'    => Auth::user()->nama_user,
             'created_at'    => now()
         ]);
+
+        //STORE TO KAS MASUK
+        KasMasukDetails::create([
+            'no_kas_masuk'  => $created->no_kas_masuk,
+            'perkiraan'     => 1.1101,
+            'akuntansi_to'  => 'D',
+            'total'         => $request->nominal,
+            'created_at'    => NOW(),
+        ]);
             
         return redirect()->route('transfer-masuk.details', ['id_transfer' => $request['id_transfer']])->with('success','Data detail transfer baru berhasil ditambahkan!');
     }
@@ -171,24 +181,6 @@ class TransferMasukController extends Controller
             ]);
 
         }
-
-        // //KAS MASUK DEBET
-        // KasMasukDetails::create([
-        //     'no_kas_masuk'  => $created->no_kas_masuk,
-        //     'perkiraan'     => 1.1101,
-        //     'akuntansi_to'  => 'D',
-        //     'total'         => $request->nominal,
-        //     'created_at'    => NOW(),
-        // ]);
-
-        // //KAS MASUK KREDIT
-        // KasMasukDetails::create([
-        //     'no_kas_masuk'  => $created->no_kas_masuk,
-        //     'perkiraan'     => 2.1702,
-        //     'akuntansi_to'  => 'K',
-        //     'total'         => $request->nominal,
-        //     'created_at'    => NOW(),
-        // ]);
 
         return redirect()->route('transfer-masuk.index')->with('success', 'Transfer masuk baru berhasil ditambahkan kedalam kas masuk');
     }
