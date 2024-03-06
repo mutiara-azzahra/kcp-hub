@@ -25,7 +25,9 @@ class TransferMasukController extends Controller
 
     public function create(){
 
-        return view('transfer-masuk.create');
+        $all_toko   = MasterOutlet::where('status', 'Y')->get();
+
+        return view('transfer-masuk.create', compact('all_toko'));
     }
 
     public function validasi(){
@@ -68,6 +70,26 @@ class TransferMasukController extends Controller
         ];
     
         $created = TransferMasukHeader::create($requestData);
+
+
+        //MENAMBAHKAN KAS MASUK DARI TF MASUK
+        $newKas                 = new KasMasukHeader();
+        $newKas->no_kas_masuk   = KasMasukHeader::no_kas_masuk();
+        
+        $request->merge([
+            'no_kas_masuk'        => $newKas->no_kas_masuk,
+            'id_transfer'         => $created->id_transfer,
+            'kd_outlet'           => $request->kd_outlet,
+            'pembayaran_via'      => 'TRANSFER',
+            'flag_transfer_masuk' => 'Y',
+            'bank'                => $request->bank,
+            'flag_kas_manual'     => 'N',
+            'terima_dari'         => $request->keterangan,
+            'keterangan'          => $request->keterangan,
+            'status'              => 'O',
+        ]);
+
+        $created = KasMasukHeader::create($request->all());
 
         if ($created) {
             return redirect()->route('transfer-masuk.details', ['id_transfer' => $newTransfer->id_transfer])->with('success', 'Transfer masuk berhasil ditambahkan. Tambahkan Details');

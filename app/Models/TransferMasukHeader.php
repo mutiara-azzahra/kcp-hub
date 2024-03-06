@@ -14,9 +14,20 @@ class TransferMasukHeader extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [ 
-        'id_transfer', 'status_transfer', 'tanggal_bank', 'bank', 'keterangan', 'flag_by_toko', 'catatan', 'status','flag_kas_ar','flag_batal','flag_batal_date','created_at', 'updated_at', 'created_by', 'updated_by'
+        'id_transfer',
+        'status_transfer',
+        'tanggal_bank',
+        'bank',
+        'kd_outlet',
+        'keterangan',
+        'flag_by_toko',
+        'catatan',
+        'status',
+        'flag_kas_ar',
+        'flag_batal',
+        'flag_batal_date',
+        'created_at', 'updated_at', 'created_by', 'updated_by'
     ];
-
 
     public static function id_transfer()
     {
