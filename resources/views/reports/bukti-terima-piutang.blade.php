@@ -181,7 +181,7 @@
                                 <td class="kotak"></td>
                             </tr>
                             <tr>
-                                <td class="kotak"><b>{{ $data->kas_masuk->pembayaran_via }}</b></td>
+                                <td class="kotak"><b>{{ $data->pembayaran_via }}</b></td>
                                 <td class="kotak">Rp. {{ number_format($data->nominal_potong, 0, ',', '.')}}</td>
                             </tr>
                             <tr>
