@@ -46,6 +46,7 @@
                             </div>
                         </div>
                     </div>
+                </form>
                 </div>
             </div>
         </div>
@@ -66,9 +67,11 @@
                             </tr>
                         </thead>
                         <tbody class="input-fields">
+
                             @php
                             $no=1;
                             @endphp
+                            
                             @foreach($invoice_toko as $s)
                             <tr>
                                 <td>
@@ -95,8 +98,8 @@
                 </div>
             </div>
         </div>
-    </form>
 
+    </form>
 </div>
 @endsection
 
