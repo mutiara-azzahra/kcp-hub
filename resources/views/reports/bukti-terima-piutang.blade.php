@@ -141,6 +141,7 @@
                         <tr>
                             <td class="atas">No. Piutang</td>
                             <td class="atas">:</td>
+                            <td class="atas">{{ $data->no_piutang}}</td>
 
                             @if($data->area_piutang == 'KS')
                             <td class="atas">KCP/NON/KS/{{ $data->no_piutang }}</td>

@@ -63,6 +63,26 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
+                            <strong>Dari Toko</strong>
+                            <select name="dari_toko" class="form-control my-select" >
+                                <option value="">--Pilih--</option>
+                                <option value="1">YA</option>
+                                <option value="2">TIDAK</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <strong>Pilih Toko</strong>
+                            <select name="dari_toko" class="form-control my-select" >
+                                <option value="">--Pilih--</option>
+                                <option value="1">YA</option>
+                                <option value="2">TIDAK</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
                             <strong>Keterangan</strong>
                             <input type="hidden" name="status_transfer" value="1">
                             <input type="text" name="keterangan" class="form-control" placeholder="Isi Keterangan">

@@ -17,7 +17,7 @@ class TransferMasukController extends Controller
 {
     public function index(){
 
-        $tf_masuk = TransferMasukHeader::where('status_transfer', 'IN')->orderBy('created_at', 'desc')->get();
+        $tf_masuk           = TransferMasukHeader::where('status_transfer', 'IN')->orderBy('created_at', 'desc')->get();
         $tf_masuk_validated = TransferMasukHeader::where('flag_kas_ar', 'Y')->orderBy('created_at', 'desc')->get();
 
         return view('transfer-masuk.index', compact('tf_masuk', 'tf_masuk_validated'));
@@ -45,7 +45,7 @@ class TransferMasukController extends Controller
             'status_transfer'   => 'required',
         ]);
     
-        $newTransfer = new TransferMasukHeader();
+        $newTransfer              = new TransferMasukHeader();
         $newTransfer->id_transfer = TransferMasukHeader::id_transfer();
     
         $status_transfer = '';
@@ -68,7 +68,7 @@ class TransferMasukController extends Controller
         ];
     
         $created = TransferMasukHeader::create($requestData);
-    
+
         if ($created) {
             return redirect()->route('transfer-masuk.details', ['id_transfer' => $newTransfer->id_transfer])->with('success', 'Transfer masuk berhasil ditambahkan. Tambahkan Details');
         } else {
@@ -78,8 +78,7 @@ class TransferMasukController extends Controller
 
     public function details($id_transfer){
 
-        $debet      = MasterPerkiraan::where('sts_perkiraan', 'D')->get();
-        $kredit     = MasterPerkiraan::where('sts_perkiraan', 'K')->get();
+        $perkiraan  = MasterPerkiraan::where('status', 'AKTIF')->get();
 
         $transfer   = TransferMasukHeader::where('id_transfer', $id_transfer)->first();
 
@@ -88,7 +87,7 @@ class TransferMasukController extends Controller
 
         $balancing  = $balance_debet - $balance_kredit;
 
-        return view('transfer-masuk.details', compact('transfer', 'debet', 'kredit', 'balancing'));
+        return view('transfer-masuk.details', compact('transfer', 'balancing', 'perkiraan'));
     }
 
     public function validasi_data($id_transfer){
@@ -150,6 +149,24 @@ class TransferMasukController extends Controller
             ]);
 
         }
+
+        // //KAS MASUK DEBET
+        // KasMasukDetails::create([
+        //     'no_kas_masuk'  => $created->no_kas_masuk,
+        //     'perkiraan'     => 1.1101,
+        //     'akuntansi_to'  => 'D',
+        //     'total'         => $request->nominal,
+        //     'created_at'    => NOW(),
+        // ]);
+
+        // //KAS MASUK KREDIT
+        // KasMasukDetails::create([
+        //     'no_kas_masuk'  => $created->no_kas_masuk,
+        //     'perkiraan'     => 2.1702,
+        //     'akuntansi_to'  => 'K',
+        //     'total'         => $request->nominal,
+        //     'created_at'    => NOW(),
+        // ]);
 
         return redirect()->route('transfer-masuk.index')->with('success', 'Transfer masuk baru berhasil ditambahkan kedalam kas masuk');
     }
