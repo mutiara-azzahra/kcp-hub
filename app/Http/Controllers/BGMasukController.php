@@ -17,9 +17,8 @@ use App\Models\BgMasukDetails;
 class BGMasukController extends Controller
 {
     public function index(){
-
-        $bg_gantung = KasMasukHeader::where('pembayaran_via', 'BG')->orderBy('created_at', 'desc')->
-                    where('status', 'O')->get();
+        
+        $bg_gantung = KasMasukHeader::where('pembayaran_via', 'BG')->orderBy('created_at', 'desc')->where('status', 'C')->get();
         $bg_cair    = BgMasukHeader::orderBy('created_at', 'desc')->get();
 
         return view('bg-masuk.index', compact('bg_gantung', 'bg_cair'));
@@ -44,6 +43,26 @@ class BGMasukController extends Controller
         ];
     
         $created = BgMasukHeader::create($requestData);
+
+        foreach ($bg->details as $i) {
+            BgMasukDetails::create([
+                'id_bg'         => $newBg->id_bg,
+                'status_bg'     => '',
+                'from_bg'       => $bg->no_bg,
+                'perkiraan'     => $i->perkiraan,
+                'akuntansi_to'  => $i->akuntansi_to,
+                'total'         => $i->total,
+                'status'        => 'C',
+                'created_at'    => now(),
+                'created_by'    => Auth::user()->nama_user
+            ]);
+        }
+
+        KasMasukHeader::where('no_bg', $no_bg)->update([
+            'status'        => 'C',
+            'updated_at'    => now(),
+            'updated_by'    => Auth::user()->nama_user
+        ]);
     
         if ($created) {
             return redirect()->route('bg-masuk.index')->with('success', 'BG masuk berhasil dicairkan');
@@ -54,10 +73,15 @@ class BGMasukController extends Controller
 
     public function details($id_bg){
 
-        $perkiraan  = MasterPerkiraan::all();
-        $header     = BgMasukHeader::where('id_bg', $id_bg)->first();
+        $perkiraan      = MasterPerkiraan::all();
+        $header         = BgMasukHeader::where('id_bg', $id_bg)->first();
 
-        return view('bg-masuk.details', compact('perkiraan', 'header'));
+        $balance_debet  = $header->details->where('akuntansi_to', 'D')->sum('total');
+        $balance_kredit = $header->details->where('akuntansi_to', 'K')->sum('total');
+
+        $balancing      = $balance_debet - $balance_kredit;
+
+        return view('bg-masuk.details', compact('perkiraan', 'header', 'balancing'));
     }
 
     public function validasi_data($id_transfer){
@@ -71,10 +95,10 @@ class BGMasukController extends Controller
     public function store_details(Request $request){
 
         $request->validate([
-            'inputs.*.id_bg'        => 'required',
-            'inputs.*.perkiraan'    => 'required',
-            'inputs.*.akuntansi_to' => 'required',
-            'inputs.*.total'        => 'required',
+            'id_bg'        => 'required',
+            'perkiraan'    => 'required',
+            'akuntansi_to' => 'required',
+            'total'        => 'required',
         ]);
         
         $totalSum = 0;
@@ -132,7 +156,7 @@ class BGMasukController extends Controller
 
         }
 
-        return redirect()->route('bg-masuk.index')->with('success', 'Transfer masuk baru berhasil ditambahkan kedalam kas masuk');
+        return redirect()->route('bg-masuk.index')->with('success', 'Transfer masuk baru berhasil ditambahkan kedalam bg masuk');
     }
 
     public function store_validasi($id_transfer)
@@ -144,23 +168,39 @@ class BGMasukController extends Controller
             'updated_by'         => Auth::user()->nama_user
         ]);
 
-        return redirect()->route('bg-masuk.index')->with('success', 'Transfer masuk baru berhasil ditambahkan kedalam kas masuk');
+        return redirect()->route('bg-masuk.index')->with('success', 'Transfer masuk baru berhasil ditambahkan kedalam bg masuk');
     }
 
     public function delete($id)
     {
-        $updated = MasterSales::where('id', $id)->update([
-                'status'         => 'N',
-                'updated_at'     => NOW(),
-                'updated_by'     => Auth::user()->nama_user
-            ]);
+        try {
 
-        if ($updated){
-            return redirect()->route('bg-masuk.index')->with('success','Stok Gudang berhasil dihapus!');
-        } else{
-            return redirect()->route('bg-masuk.index')->with('danger','Stok Gudang gagal dihapus');
+            $bg_masuk = BgMasukHeader::findOrFail($id);
+            $bg_masuk->delete();
+
+            $details = BgMasukDetails::where('id_bg', $bg_masuk->id_bg)->delete();
+
+            return redirect()->route('bg-masuk.details', ['id_bg' => $bg_masuk->id])->with('success', 'Data bg masuk berhasil dihapus!');
+
+        } catch (\Exception $e) {
+
+            return redirect()->route('bg-masuk.details', ['id_bg' => $bg_masuk->id])->with('danger', 'Terjadi kesalahan saat menghapus data Bg masuk.');
         }
-        
+    }
+
+    public function delete_details($id)
+    {
+        try {
+
+            $detail_bg = BgMasukDetails::findOrFail($id);
+            $detail_bg->delete();
+
+            return redirect()->route('bg-masuk.details', ['id_bg' => $details_bg->no_kas_masuk])->with('success', 'Data bg masuk berhasil dihapus!');
+
+        } catch (\Exception $e) {
+
+            return redirect()->route('bg-masuk.details', ['id_bg' => $details_bg->no_kas_masuk])->with('danger', 'Terjadi kesalahan saat menghapus data Bg masuk.');
+        }
     }
 
     

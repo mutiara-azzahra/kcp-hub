@@ -19,7 +19,10 @@ class MasterDiskonPartController extends Controller
 
     public function create(){
 
-        $master_part = MasterPart::where('status', 'A')->get();
+        $part_diskon = MasterDiskonPart::where('status', 'A')->get();
+
+        $master_part = MasterPart::where('status', 'A')->whereNotIn('part_no', $part_diskon->pluck('part_no'))
+            ->get();
 
         return view('master-diskon.create', compact('master_part'));
     }
@@ -36,7 +39,7 @@ class MasterDiskonPartController extends Controller
 
         $request -> validate([
             'part_no'           => 'required', 
-            'maksimal_diskon'   => 'required',
+            'diskon_maksimal'   => 'required',
         ]);
 
         $created = MasterDiskonPart::create($request->all());
@@ -57,36 +60,36 @@ class MasterDiskonPartController extends Controller
 
     public function delete($id)
     {
-        $updated = MasterDiskonPart::where('id', $id)->update([
-                'status'         => 'N',
-                'updated_at'     => NOW(),
-                'updated_by'     => Auth::user()->nama_user
-            ]);
+        try {
 
-        if ($updated){
-            return redirect()->route('master-diskon.index')->with('success','Master diskon part berhasil dihapus!');
-        } else{
-            return redirect()->route('master-diskon.index')->with('danger','Master diskon part gagal dihapus');
+            $master_diskon = MasterDiskonPart::findOrFail($id);
+            $master_diskon->delete();
+
+            return redirect()->route('master-diskon.index')->with('success', 'Data master diskon berhasil dihapus!');
+
+        } catch (\Exception $e) {
+
+            return redirect()->route('master-diskon.index')->with('danger', 'Data master diskon gagal dihapus');
         }
-        
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'part_no'           => 'required',
-            'maksimal_diskon'   => 'required|integer',
+            'part_no'         => 'required',
+            'diskon_maksimal' => 'required',
         ]);
 
-        $masterDiskonPart = MasterDiskonPart::find($id);
+        $masterDiskon = MasterDiskonPart::find($id);
 
-        if (!$masterDiskonPart) {
-            return redirect()->route('master-diskon.index')->with('danger', 'Data diskon part part tidak ditemukan');
+        if (!$masterDiskon) {
+            return redirect()->route('master-diskon.index')->with('danger', 'Data master diskon tidak ditemukan');
         }
 
-        $masterDiskonPart->update($request->all());
+        $masterDiskon->update($request->all());
 
-        return redirect()->route('master-diskon.index')->with('success', 'Data diskon part berhasil diubah!');
+        return redirect()->route('master-diskon.index')->with('success', 'Data master diskon berhasil diubah');
     }
+
 
 }

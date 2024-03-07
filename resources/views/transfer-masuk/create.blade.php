@@ -45,19 +45,27 @@
                                 <option value="MANDIRI">MANDIRI</option>
                                 <option value="BCA">BCA</option>
                                 <option value="DANAMON">DANAMON</option>
-                                <option value="KALSEL">BANK KALSEL</option>
-                                <option value="BTN">BTN</option>
-                                <option value="MUAMALAT">MUAMALAT</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
                             <strong>Dari Toko</strong>
-                            <select name="dari_toko" class="form-control my-select" >
+                            <select name="dari_toko" class="form-control my-select" onchange="updateData()">
                                 <option value="">--Pilih--</option>
-                                <option value="1">YA</option>
-                                <option value="2">TIDAK</option>
+                                <option value="1" data-id="1">YA</option>
+                                <option value="2" data-id="2">TIDAK</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-12" id="toko-selection" style="display: none;">
+                        <div class="form-group">
+                            <strong>Pilih Toko</strong><br>
+                            <select name="kd_outlet" class="form-control mb-2 my-select">     
+                                <option value="">-- Pilih Toko --</option>
+                                @foreach($all_toko as $s)
+                                    <option value="{{ $s->kd_outlet }}">{{ $s->kd_outlet }} / {{ $s->nm_outlet }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -82,5 +90,18 @@
 @endsection
 
 @section('script')
+
+<script>
+    function updateData() {
+        var dariToko = document.getElementsByName('dari_toko')[0];
+        var tokoSelection = document.getElementById('toko-selection');
+
+        if (dariToko.value == '1') {
+            tokoSelection.style.display = 'block'; // Show the dropdown
+        } else {
+            tokoSelection.style.display = 'none'; // Hide the dropdown
+        }
+    }
+</script>
 
 @endsection

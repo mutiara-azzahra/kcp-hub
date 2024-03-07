@@ -92,6 +92,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/master-provinsi', [MasterProvinsiController::class, 'index'])->name('master-provinsi.index');
     Route::get('/master-provinsi/create', [MasterProvinsiController::class, 'create'])->name('master-provinsi.create');
     Route::post('/master-provinsi/store', [MasterProvinsiController::class, 'store'])->name('master-provinsi.store');
+     Route::get('/master-provinsi/edit/{kode_prp}', [MasterProvinsiController::class, 'edit'])->name('master-provinsi.edit');
+    Route::get('/master-provinsi/nonaktif/{kode_prp}', [MasterProvinsiController::class, 'nonaktif'])->name('master-provinsi.nonaktif');
+    Route::post('/master-provinsi/store', [MasterProvinsiController::class, 'store'])->name('master-provinsi.store');
+    Route::delete('/master-provinsi/delete/{kode_prp}', [MasterProvinsiController::class, 'delete'])->name('master-provinsi.delete');
 
     //MASTER PERKIRAAN
     Route::get('/master-perkiraan', [MasterPerkiraanController::class, 'index'])->name('master-perkiraan.index');
@@ -99,7 +103,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/master-perkiraan/edit/{id}', [MasterPerkiraanController::class, 'edit'])->name('master-perkiraan.edit');
     Route::get('/master-perkiraan/nonaktif/{id}', [MasterPerkiraanController::class, 'nonaktif'])->name('master-perkiraan.nonaktif');
     Route::post('/master-perkiraan/store', [MasterPerkiraanController::class, 'store'])->name('master-perkiraan.store');
-    Route::delete('/master-perkiraan/delete/{id}', [MasterAreaOutletController::class, 'delete'])->name('master-perkiraan.delete');
+    Route::delete('/master-perkiraan/delete/{id}', [MasterPerkiraanController::class, 'delete'])->name('master-perkiraan.delete');
 
     //MASTER AREA OUTLET
     Route::get('/master-area-outlet', [MasterAreaOutletController::class, 'index'])->name('master-area-outlet.index');
@@ -112,7 +116,7 @@ Route::group(['middleware' => 'auth'], function () {
     //MASTER PART
     Route::get('/master-part', [MasterPartController::class, 'index'])->name('master-part.index');
     Route::get('/master-part/create', [MasterPartController::class, 'create'])->name('master-part.create');
-    Route::get('/master-part/update/{id}', [MasterPartController::class, 'edit'])->name('master-part.edit');
+    Route::get('/master-part/edit/{id}', [MasterPartController::class, 'edit'])->name('master-part.edit');
     Route::delete('/master-part/delete/{id}', [MasterPartController::class, 'delete'])->name('master-part.delete');
     Route::get('/master-part/show/{id}', [MasterPartController::class, 'show'])->name('master-part.show');
     Route::post('/master-part/store', [MasterPartController::class, 'store'])->name('master-part.store');
@@ -121,8 +125,8 @@ Route::group(['middleware' => 'auth'], function () {
     //MASTER PART DISKON
     Route::get('/master-diskon', [MasterDiskonPartController::class, 'index'])->name('master-diskon.index');
     Route::get('/master-diskon/create', [MasterDiskonPartController::class, 'create'])->name('master-diskon.create');
-    Route::get('/master-diskon/update/{id}', [MasterDiskonPartController::class, 'edit'])->name('master-diskon.edit');
-    Route::get('/master-diskon/delete/{id}', [MasterDiskonPartController::class, 'delete'])->name('master-diskon.delete');
+    Route::get('/master-diskon/edit/{id}', [MasterDiskonPartController::class, 'edit'])->name('master-diskon.edit');
+    Route::delete('/master-diskon/delete/{id}', [MasterDiskonPartController::class, 'delete'])->name('master-diskon.delete');
     Route::get('/master-diskon/show/{id}', [MasterDiskonPartController::class, 'show'])->name('master-diskon.show');
     Route::post('/master-diskon/store', [MasterDiskonPartController::class, 'store'])->name('master-diskon.store');
     Route::post('/master-diskon/update/{id}', [MasterDiskonPartController::class, 'update'])->name('master-diskon.update');
@@ -134,7 +138,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/master-role/delete/{id}', [MasterRoleController::class, 'delete'])->name('master-role.delete');
     Route::get('/master-role/show/{id}', [MasterRoleController::class, 'show'])->name('master-role.show');
     Route::post('/master-role/store', [MasterRoleController::class, 'store'])->name('master-role.store');
-    Route::post('/master-role/update/{id}', [MasterRoleController::class, 'update'])->name('master-role.update');
+    Route::post('/master-role/update', [MasterRoleController::class, 'update'])->name('master-role.update');
 
     //MASTER PLAFOND
     Route::get('/master-plafond', [PlafondController::class, 'index'])->name('master-plafond.index');
@@ -214,7 +218,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/sales-order/list-approved-so', [SalesOrderController::class, 'so_approved'])->name('sales-order.approved');
     Route::get('/sales-order/list-rejected-so', [SalesOrderController::class, 'so_rejected'])->name('sales-order.rejected');
     Route::get('/sales-order/edit/{id}', [SalesOrderController::class, 'edit'])->name('sales-order.edit');
-    Route::post('/sales-order/update', [SalesOrderController::class, 'store_edit'])->name('sales-order.store_edit');
+    Route::post('/sales-order/update/{id}', [SalesOrderController::class, 'store_edit'])->name('sales-order.store_edit');
     Route::get('/sales-order/tolak/{noso}', [SalesOrderController::class, 'tolak'])->name('sales-order.tolak');
     
     //ROUTE BO
@@ -340,6 +344,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/piutang-toko/store-kas', [PembayaranPiutangTokoController::class, 'store_kas'])->name('piutang-toko.store-kas');
     Route::get('/piutang-toko/cetak/{no_piutang}', [PembayaranPiutangTokoController::class, 'cetak'])->name('piutang-toko.cetak');
     Route::get('/piutang-toko/tanda-terima/{no_kas_masuk}', [PembayaranPiutangTokoController::class, 'tanda_terima'])->name('piutang-toko.tanda-terima');
+    Route::post('/piutang-toko/store-tanda-terima', [PembayaranPiutangTokoController::class, 'store_tanda_terima'])->name('piutang-toko.store-tanda-terima');
 
     //ROUTE PEMBAYARAN PIUTANG TOKO
     Route::get('/pembayaran-toko', [PembayaranTokoController::class, 'index'])->name('pembayaran-toko.index');
@@ -385,6 +390,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/bg-masuk/pembayaran-manual', [BgMasukController::class, 'pembayaran_manual'])->name('bg-masuk.bayar_manual');
     Route::get('/bg-masuk/cetak/{no_kas_masuk}', [BgMasukController::class, 'cetak'])->name('bg-masuk.cetak');
     Route::get('/bg-masuk/cetak-tanda-terima/{no_kas_masuk}', [BgMasukController::class, 'cetak_tanda_terima'])->name('bg-masuk.cetak-tanda-terima');
+    Route::delete('/bg-masuk/delete-details/{id}', [BgMasukController::class, 'delete_details'])->name('bg-masuk.delete-details');
+    Route::delete('/bg-masuk/delete/{id}', [BgMasukController::class, 'delete'])->name('bg-masuk.delete');
 
      //BG Keluar
     Route::get('/bg-keluar', [BgKeluarController::class, 'index'])->name('bg-keluar.index');
@@ -397,7 +404,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/transfer-masuk/store', [TransferMasukController::class, 'store'])->name('transfer-masuk.store');
     Route::get('/transfer-masuk/list-validasi', [TransferMasukController::class, 'validasi'])->name('transfer-masuk.validasi');
     Route::get('/transfer-masuk/validasi/{id_transfer}', [TransferMasukController::class, 'validasi_data'])->name('transfer-masuk.validasi-data');
-    Route::get('/transfer-masuk/details/{id_transfer}', [TransferMasukController::class, 'details'])->name('transfer-masuk.details');
+    Route::get('/transfer-masuk/details/{id_transfer}/kas-masuk/{no_kas_masuk}', [TransferMasukController::class, 'details'])->name('transfer-masuk.details');
     Route::post('/transfer-masuk/store-details', [TransferMasukController::class, 'store_details'])->name('transfer-masuk.store-details');
     Route::post('/transfer-masuk/store-validasi/{id_transfer}', [TransferMasukController::class, 'store_validasi'])->name('transfer-masuk.store-validasi');
     Route::get('/transfer-masuk/edit/{id_transfer}', [TransferMasukController::class, 'edit'])->name('transfer-masuk.edit');
@@ -411,7 +418,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/transfer-keluar/store', [TransferKeluarController::class, 'store'])->name('transfer-keluar.store');
     Route::get('/transfer-keluar/list-validasi', [TransferKeluarController::class, 'validasi'])->name('transfer-keluar.validasi');
     Route::get('/transfer-keluar/validasi/{id_transfer}', [TransferKeluarController::class, 'validasi_data'])->name('transfer-keluar.validasi-data');
-    Route::get('/transfer-keluar/details/{id_transfer}', [TransferKeluarController::class, 'details'])->name('transfer-keluar.details');
+    Route::get('/transfer-keluar/details/{id_transfer}/kas-masuk/{no_kas_masuk}', [TransferKeluarController::class, 'details'])->name('transfer-keluar.details');
     Route::post('/transfer-keluar/store-details', [TransferKeluarController::class, 'store_details'])->name('transfer-keluar.store-details');
     Route::post('/transfer-keluar/store-validasi/{id_transfer}', [TransferKeluarController::class, 'store_validasi'])->name('transfer-keluar.store-validasi');
     Route::get('/transfer-keluar/edit/{id_transfer}', [TransferKeluarController::class, 'edit'])->name('transfer-keluar.edit');

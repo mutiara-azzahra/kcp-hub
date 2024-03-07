@@ -153,28 +153,18 @@ class PembayaranPiutangTokoController extends Controller
 
     public function store_tanda_terima(Request $request)
     {
+
         $selectedItems  = $request->input('selected_items', []);
-        $nominal        = str_replace(',', '', $request->input('nominal'));
-
-        $all_total_nominal = 0;
-
-        foreach($selectedItems as $noinv){
-            $nominal_total = TransaksiInvoiceHeader::where('noinv', $noinv)->first()->details_invoice->sum('nominal_total');
-            $all_total_nominal += $nominal_total;
-        }
 
         //CREATE NEW PIUTANG BY PIUTANG TOKO
         $selected_invoice = TransaksiInvoiceHeader::where('noinv', $selectedItems[0])->first();
         
         $area_piutang     = MasterOutlet::where('kd_outlet', $selected_invoice->kd_oulet)->value('kode_prp');
-        $pembayaran_via   = KasMasukHeader::where('no_kas_masuk', $request->no_kas_masuk)->value('pembayaran_via');
-
-        $area = '';
 
         if($area_piutang == '6300'){
-            $area = 'KS';
+            $area_piutang = 'KS';
         } elseif ($area_piutang == '6200'){
-            $area = 'KT';
+            $area_piutang = 'KT';
         }
 
         $newPiutang              = new TransaksiPembayaranPiutangHeader();
@@ -182,14 +172,12 @@ class PembayaranPiutangTokoController extends Controller
 
         $request->merge([
             'no_piutang'      => $newPiutang->no_piutang,
-            'area_piutang'    => $area,
+            'area_piutang'    => $area_piutang,
             'tanggal_piutang' => now(),
             'kd_outlet'       => $selected_invoice->kd_outlet,
             'nm_outlet'       => $selected_invoice->nm_outlet,
-            'nominal_potong'  => $nominal,
-            'nominal_total'   => $all_total_nominal,
-            'pembayaran_via'  => $pembayaran_via,
-            'no_kasir_masuk'  => $request->no_kas_masuk,
+            'nominal_potong'  => $nominal_potong,
+            'no_kas_masuk'    => $request->no_kas_masuk,
             'status'          => 'O',
             'created_at'      => now(),
             'created_by'      => Auth::user()->nama_user
@@ -198,15 +186,18 @@ class PembayaranPiutangTokoController extends Controller
         $created = TransaksiPembayaranPiutangHeader::create($request->all());
 
         //DETAILS PIUTANG
+        $nominal_potong = 0;
 
         for ($i = 0; $i < count($selectedItems); $i++) {
             $itemInvoice = $selectedItems[$i];
 
             $invoice = TransaksiInvoiceHeader::where('noinv', $itemInvoice)->first();
 
+            $nominal_potong += $invoice->details_invoice->sum('nominal_total');
+
             $value = [
                 'noinv'                 => $invoice->noinv,
-                'no_piutang'            => $newPiutang->no_piutang,
+                'no_piutang'            => $invoice->noinv,
                 'no_kas_masuk'          => $request->no_kas_masuk,
                 'nominal'               => $invoice->details_invoice->sum('nominal_total'),
                 'status'                => 'O',

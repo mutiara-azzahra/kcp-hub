@@ -79,7 +79,7 @@ class ExportPajak implements FromCollection, WithCustomCsvSettings
 
             foreach ($header->details_invoice as $detail) {
                 $detailData = [
-                    'OF;' . $detail->part_no . ';' . $detail->nama_part->part_nama . ';' . $detail->hrg_pcs . ';'. $detail->qty .';'.
+                    'OF;' . $detail->part_no . ';' . $detail->nama_part->part_nama . ';' . $detail->hrg_pcs/1.11 . ';'. $detail->qty .';'.
                     number_format(($detail->qty * $detail->hrg_pcs/1.11), 0, ',', '') .';'.
                     number_format(($detail->qty * $detail->hrg_pcs * $detail->disc/100 /1.11), 0, ',', '') . ';'.
                     

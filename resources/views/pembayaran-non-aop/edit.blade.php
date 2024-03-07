@@ -198,11 +198,8 @@
             $('#totalNominal').val(totalDisplay);
         });
 
-        
-
     }
 
 </script>
-
 
 @endsection

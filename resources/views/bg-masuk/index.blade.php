@@ -116,8 +116,7 @@
                             <td class="text-left">{{ $p->keterangan }}</td>
                             <td class="text-right">{{ number_format($p->nominal, 0, ',', ',') }}</td>
                             <td class="text-center">
-                                <a class="btn btn-warning btn-sm" href="{{ route('bg-masuk.details', ['id_bg' => $p->id_bg]) }}"><i class="fas fa-random" data-toggle="tooltip" data-placement="top" title="Koreksi"></i>
-                                </a>
+                                <a class="btn btn-warning btn-sm" href="{{ route('bg-masuk.details', ['id_bg' => $p->id_bg]) }}"><i class="fas fa-random" data-toggle="tooltip" data-placement="top" title="Koreksi"></i></a>
                             </td>
                         </tr>
                         @endforeach

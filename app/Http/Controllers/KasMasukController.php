@@ -93,60 +93,123 @@ class KasMasukController extends Controller
 
         $newKas                 = new KasMasukHeader();
         $newKas->no_kas_masuk   = KasMasukHeader::no_kas_masuk();
-        
-        $request->merge([
-            'terima_dari'       => $request->terima_dari,
-            'keterangan'        => $request->keterangan,
-            'no_bg'             => $request->no_bg,
-            'jatuh_tempo_bg'    => $request->jatuh_tempo_bg,
-            'no_kas_masuk'      => $newKas->no_kas_masuk,
-            'status'            => 'O',
-            'created_by'        => Auth::user()->nama_user
-        ]);
 
-        $created = KasMasukHeader::create($request->all());
+        //PEMBAYARAN VIA KAS
+        if($request->pembayaran_via == 'CASH'){
 
-        //KAS MASUK DEBET
-        KasMasukDetails::create([
-            'no_kas_masuk'  => $request->no_kas_masuk,
-            'perkiraan'     => 1.1101,
-            'akuntansi_to'  => 'D',
-            'total'         => $request->nominal,
-            'created_at'    => NOW(),
-        ]);
+            $request->merge([
+                'terima_dari'       => $request->terima_dari,
+                'keterangan'        => $request->keterangan,
+                'flag_kas_manual'   => 'Y',
+                'jatuh_tempo_bg'    => $request->jatuh_tempo_bg,
+                'no_kas_masuk'      => $newKas->no_kas_masuk,
+                'status'            => 'O',
+                'created_by'        => Auth::user()->nama_user
+            ]);
 
-        //KAS MASUK DEBET
-        KasMasukDetails::create([
-            'no_kas_masuk'  => $request->no_kas_masuk,
-            'perkiraan'     => 2.1702,
-            'akuntansi_to'  => 'K',
-            'total'         => $request->nominal,
-            'created_at'    => NOW(),
-        ]);
+            $created = KasMasukHeader::create($request->all());
 
-        //JURNAL HEADER KAS MASUK CASH
-        $data['trx_date']   = now();
-        $data['trx_from']   = $request->no_kas_masuk;
-        $data['keterangan'] = $request->keterangan;
-        $data['trx_from']   = $request->no_kas_masuk;
+            //KAS MASUK DEBET
+            KasMasukDetails::create([
+                'no_kas_masuk'  => $request->no_kas_masuk,
+                'perkiraan'     => 1.1101,
+                'akuntansi_to'  => 'D',
+                'total'         => $request->nominal,
+                'created_at'    => NOW(),
+            ]);
 
-        $created = TransaksiAkuntansiJurnalHeader::create($data);
+            //KAS MASUK DEBET
+            KasMasukDetails::create([
+                'no_kas_masuk'  => $request->no_kas_masuk,
+                'perkiraan'     => 2.1702,
+                'akuntansi_to'  => 'K',
+                'total'         => $request->nominal,
+                'created_at'    => NOW(),
+            ]);
 
-        //DEBET
-        $debet['id_header']  = $created->id;
-        $debet['perkiraan']  = 1.1101;
-        $debet['debet']      = $request->nominal;
-        $debet['kredit']     = 0;
+            //JURNAL HEADER KAS MASUK CASH
+            $data['trx_date']   = now();
+            $data['trx_from']   = $request->no_kas_masuk;
+            $data['keterangan'] = $request->keterangan;
+            $data['trx_from']   = $request->no_kas_masuk;
 
-        $created = TransaksiAkuntansiJurnalDetails::create($debet);
+            $created = TransaksiAkuntansiJurnalHeader::create($data);
 
-        //KREDIT
-        $debet['id_header']  = $created->id;
-        $debet['perkiraan']  = 2.1702;
-        $debet['debet']      = 0;
-        $debet['kredit']     = $request->nominal;
+            //DEBET
+            $debet['id_header']  = $created->id;
+            $debet['perkiraan']  = 1.1101;
+            $debet['debet']      = $request->nominal;
+            $debet['kredit']     = 0;
 
-        $created = TransaksiAkuntansiJurnalDetails::create($debet);
+            $created_debet = TransaksiAkuntansiJurnalDetails::create($debet);
+
+            //KREDIT
+            $kredit['id_header']  = $created->id;
+            $kredit['perkiraan']  = 2.1702;
+            $kredit['kredit']     = 0;
+            $kredit['kredit']     = $request->nominal;
+
+            $created_kredit = TransaksiAkuntansiJurnalDetails::create($kredit);
+
+        } elseif ($request->pembayaran_via == 'TRANSFER') {
+
+            $request->merge([
+                'terima_dari'       => $request->terima_dari,
+                'keterangan'        => $request->keterangan,
+                'id_transfer'             => $request->no_bg,
+                'flag_kas_manual'   => 'Y',
+                'jatuh_tempo_bg'    => $request->jatuh_tempo_bg,
+                'no_kas_masuk'      => $newKas->no_kas_masuk,
+                'status'            => 'O',
+                'created_by'        => Auth::user()->nama_user
+            ]);
+
+            $created = KasMasukHeader::create($request->all());
+
+            //KAS MASUK DEBET
+            KasMasukDetails::create([
+                'no_kas_masuk'  => $request->no_kas_masuk,
+                'perkiraan'     => 1.1101,
+                'akuntansi_to'  => 'D',
+                'total'         => $request->nominal,
+                'created_at'    => NOW(),
+            ]);
+
+            //KAS MASUK DEBET
+            KasMasukDetails::create([
+                'no_kas_masuk'  => $request->no_kas_masuk,
+                'perkiraan'     => 2.1702,
+                'akuntansi_to'  => 'K',
+                'total'         => $request->nominal,
+                'created_at'    => NOW(),
+            ]);
+
+            //JURNAL HEADER KAS MASUK CASH
+            $data['trx_date']   = now();
+            $data['trx_from']   = $request->no_kas_masuk;
+            $data['keterangan'] = $request->keterangan;
+            $data['trx_from']   = $request->no_kas_masuk;
+
+            $created = TransaksiAkuntansiJurnalHeader::create($data);
+
+            //DEBET
+            $debet['id_header']  = $created->id;
+            $debet['perkiraan']  = 1.1101;
+            $debet['debet']      = $request->nominal;
+            $debet['kredit']     = 0;
+
+            $created_debet = TransaksiAkuntansiJurnalDetails::create($debet);
+
+            //KREDIT
+            $kredit['id_header']  = $created->id;
+            $kredit['perkiraan']  = 2.1702;
+            $kredit['kredit']     = 0;
+            $kredit['kredit']     = $request->nominal;
+
+            $created_kredit = TransaksiAkuntansiJurnalDetails::create($kredit);
+
+        }
+
 
         if ($created){
             return redirect()->route('kas-masuk.index')->with('success','Kas masuk berhasil ditambahkan');

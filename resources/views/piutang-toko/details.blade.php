@@ -39,19 +39,19 @@
                         <td class="text-left"><b>{{ $data->kd_outlet }} / {{ $data->nm_outlet }}</b></td>
                     </tr>
                     <tr>
-                        <th class="text-left">Amount Potong</th>
+                        <th class="text-left">Nominal</th>
                         <td>:</td>
-                        <td class="text-left"><b>{{ $data->kd_outlet }} / {{ $data->nm_outlet }}</b></td>
+                        <td class="text-left"><b>{{ number_format($data->nominal_total, 0, '.', ',') }}</b></td>
                     </tr>
                     <tr>
                         <th class="text-left">Potongan</th>
                         <td>:</td>
-                        <td class="text-left"><b>Rp. {{ number_format($data->nominal_potong, 0, ',', '.') }}</b></td>
+                        <td class="text-left"><b>{{ number_format($data->nominal_potong, 0, '.', ',') }}</b></td>
                     </tr>
                     <tr>
                         <th class="text-left">Pembayaran Via</th>
                         <td>:</td>
-                        <td class="text-left"></td>
+                        <td class="text-left"><b>{{ $data->pembayaran_via }}</b></td>
                     </tr>
                     <tr>
                         <th class="text-left">No. BG</th>

@@ -333,7 +333,7 @@ class SalesOrderController extends Controller
 
                 $updated_sp = TransaksiSpDetails::where('id', $id)
                     ->update([
-                    'id_rak'        => $request->id_rak,
+                    // 'id_rak'        => $request->id_rak,
                     'qty'           => $request->qty,
                     'disc'          => $request->disc,
                     'nominal'       => $request->qty * $het,

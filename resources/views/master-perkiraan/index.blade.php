@@ -68,9 +68,9 @@
                                     @method('DELETE')
                                 </form>
 
-                                <a class="btn btn-info btn-sm" href="{{ route('master-perkiraan.edit',$p->id) }}"><i class="fas fa-edit"></i></a>
-                                <a class="btn btn-warning btn-sm" onclick="Nonaktif('{{ $p->id }}')"><i class="fas fa-ban"></i></a>
-                                <a class="btn btn-danger btn-sm" onclick="Hapus('{{ $p->id }}')"><i class="fas fa-times"></i></a>
+                                <a class="btn btn-info btn-sm" href="{{ route('master-perkiraan.edit',$p->id) }}" data-toggle="tooltip" data-placement="top" title="Ubah"><i class="fas fa-edit"></i></a>
+                                <a class="btn btn-warning btn-sm" onclick="Nonaktif('{{ $p->id }}')" data-toggle="tooltip" data-placement="top" title="Nonaktifkan"><i class="fas fa-ban"></i></a>
+                                <a class="btn btn-danger btn-sm" onclick="Hapus('{{ $p->id }}')"><i class="fas fa-times" data-toggle="tooltip" data-placement="top" title="Hapus"></i></a>
                             </td>
                         </tr>
                         @endforeach
