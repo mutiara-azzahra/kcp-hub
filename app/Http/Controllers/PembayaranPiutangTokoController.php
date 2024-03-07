@@ -33,7 +33,7 @@ class PembayaranPiutangTokoController extends Controller
     public function tanda_terima($no_kas_masuk){
 
         $nominal_diterima = KasMasukHeader::where('no_kas_masuk', $no_kas_masuk)->first();
-        $invoice_toko     = TransaksiInvoiceHeader::where('kd_outlet', $nominal_diterima->kd_outlet)->get();
+        $invoice_toko     = TransaksiInvoiceHeader::where('kd_outlet', $nominal_diterima->kd_outlet)->where('flag_pembayaran_lunas', 'N')->get();
         $no_kas_masuk     = $no_kas_masuk;
 
         return view('piutang-toko.count', compact('nominal_diterima', 'invoice_toko', 'no_kas_masuk'));
@@ -214,16 +214,30 @@ class PembayaranPiutangTokoController extends Controller
                 'created_by'            => Auth::user()->nama_user,
             ];
 
-            $created = TransaksiPembayaranPiutang::create($value);
+            $created_piutang = TransaksiPembayaranPiutang::create($value);
 
-            //UPDATE STATUS FLAG PEMBAYARAN
-            TransaksiInvoiceHeader::where('noinv', $itemInvoice)->update([
-                'flag_pembayaran_lunas' => 'Y',
-                'updated_at'            => NOW(),
-                'updated_by'            => Auth::user()->nama_user
-            ]);
+
+            if ($created->nominal_potong >= $created_piutang->nominal) {
+
+                TransaksiInvoiceHeader::where('noinv', $itemInvoice)->update([
+                    'flag_pembayaran_lunas' => 'Y',
+                    'updated_at'            => NOW(),
+                    'updated_by'            => Auth::user()->nama_user
+                ]);
+                
+                $created->nominal_potong -= $created_piutang->nominal;
+
+            } else {
+
+                TransaksiInvoiceHeader::where('noinv', $itemInvoice)->update([
+                    'flag_pembayaran_lunas' => 'N',
+                    'updated_at'            => NOW(),
+                    'updated_by'            => Auth::user()->nama_user
+                ]);
+            }
 
         }
+
 
         return redirect()->route('piutang-toko.index')->with('success', 'Piutang baru berhasil ditambahkan!');
     }
