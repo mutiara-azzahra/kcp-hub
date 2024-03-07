@@ -108,6 +108,8 @@ class KasMasukController extends Controller
             $area_outlet = 'KT';
         }
 
+        $nominal  = str_replace(',', '', $request->nominal);
+
 
         //PEMBAYARAN VIA KAS
         if($request->pembayaran_via == 'CASH'){
@@ -116,7 +118,7 @@ class KasMasukController extends Controller
                 'no_kas_masuk'      => $newKas->no_kas_masuk,
                 'kd_area'           => $area_outlet,
                 'kd_outlet'         => $request->kd_outlet,
-                'nominal'           => $request->nominal,
+                'nominal'           => $nominal,
                 'pembayaran_via'    => $request->pembayaran_via,
                 'terima_dari'       => $request->terima_dari,
                 'keterangan'        => $request->keterangan,
@@ -133,7 +135,7 @@ class KasMasukController extends Controller
                 'no_kas_masuk'  => $request->no_kas_masuk,
                 'perkiraan'     => 1.1101,
                 'akuntansi_to'  => 'D',
-                'total'         => $request->nominal,
+                'total'         => $nominal,
                 'created_at'    => NOW(),
             ]);
 
@@ -142,7 +144,7 @@ class KasMasukController extends Controller
                 'no_kas_masuk'  => $request->no_kas_masuk,
                 'perkiraan'     => 2.1702,
                 'akuntansi_to'  => 'K',
-                'total'         => $request->nominal,
+                'total'         => $nominal,
                 'created_at'    => NOW(),
             ]);
 
@@ -153,7 +155,7 @@ class KasMasukController extends Controller
                 'id_transfer'         => $id_transfer,
                 'kd_area'             => $area_outlet,
                 'kd_outlet'           => $request->kd_outlet,
-                'nominal'             => $request->nominal,
+                'nominal'             => $nominal,
                 'pembayaran_via'      => $request->pembayaran_via,
                 'flag_transfer_masuk' => 'Y',
                 'bank'                => $request->bank,
@@ -184,7 +186,7 @@ class KasMasukController extends Controller
                 'no_bg'               => $request->no_bg,
                 'kd_area'             => $area_outlet,
                 'kd_outlet'           => $outlet->nm_outlet,
-                'nominal'             => $request->nominal,
+                'nominal'             => $nominal,
                 'pembayaran_via'      => $request->pembayaran_via,
                 'jatuh_tempo_bg'      => $request->jatuh_tempo_bg,
                 'terima_dari'         => $request->terima_dari,

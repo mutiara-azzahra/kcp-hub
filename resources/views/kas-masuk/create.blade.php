@@ -60,19 +60,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <strong>Nominal</strong>
-                            <input type="text" name="nominal" class="form-control" placeholder="0">
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <strong>No. BG</strong>
-                            <input type="text" name="no_bg" class="form-control" placeholder="Isi No. BG">
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <strong>Tanggal Jatuh Tempo BG</strong>
-                            <input type="date" name="jatuh_tempo_bg" class="form-control">
+                            <input type="text" id="nominal" name="nominal" class="form-control" placeholder="0">
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -86,6 +74,18 @@
                                 <option value="DANAMON">DANAMON</option>
                                 <option value="MANDIRI">MANDIRI</option>
                             </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <strong>No. BG</strong>
+                            <input type="text" name="no_bg" class="form-control" placeholder="Isi No. BG">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <strong>Tanggal Jatuh Tempo BG</strong>
+                            <input type="date" name="jatuh_tempo_bg" class="form-control">
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
@@ -102,5 +102,19 @@
 @endsection
 
 @section('script')
+
+<script>
+    function formatNumberWithCommas(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    document.getElementById('nominal').addEventListener('input', function() {
+     
+        let valueWithoutCommas = this.value.replace(/,/g, '');
+        let formattedValue = formatNumberWithCommas(valueWithoutCommas);
+        
+        this.value = formattedValue;
+    });
+</script>
 
 @endsection

@@ -25,7 +25,6 @@
 
     <form action="{{ route('piutang-toko.store-tanda-terima')}}" method="POST">
     @csrf
-
         <div class="card" style="padding: 10px;">
             <div class="card-header">
                 Saran Pemotongan :
@@ -140,7 +139,6 @@
         
         this.value = formattedValue;
     });
-
 
 </script>
 
