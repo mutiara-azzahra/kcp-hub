@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\MasterPerkiraan;
 use App\Models\KasMasukHeader;
+use App\Models\KasMasukDetails;
 use App\Models\MasterOutlet;
 use App\Models\TransferMasukHeader;
 use App\Models\TransferMasukDetails;
@@ -101,6 +102,8 @@ class TransferMasukController extends Controller
 
     public function details($id_transfer, $no_kas_masuk){
 
+        $no_kas_masuk = $no_kas_masuk;
+
         $perkiraan  = MasterPerkiraan::where('status', 'AKTIF')->get();
 
         $transfer   = TransferMasukHeader::where('id_transfer', $id_transfer)->first();
@@ -110,7 +113,7 @@ class TransferMasukController extends Controller
 
         $balancing  = $balance_debet - $balance_kredit;
 
-        return view('transfer-masuk.details', compact('transfer', 'balancing', 'perkiraan'));
+        return view('transfer-masuk.details', compact('transfer', 'balancing', 'perkiraan', 'no_kas_masuk'));
     }
 
     public function validasi_data($id_transfer){
@@ -144,14 +147,16 @@ class TransferMasukController extends Controller
 
         //STORE TO KAS MASUK
         KasMasukDetails::create([
-            'no_kas_masuk'  => $created->no_kas_masuk,
-            'perkiraan'     => 1.1101,
-            'akuntansi_to'  => 'D',
-            'total'         => $request->nominal,
+            'no_kas_masuk'  => $request->no_kas_masuk,
+            'perkiraan'     => $perkiraan->id_perkiraan,
+            'akuntansi_to'  => $request['akuntansi_to'],
+            'total'         => $request['total'],
+            'created_by'    => Auth::user()->nama_user,
             'created_at'    => NOW(),
         ]);
             
-        return redirect()->route('transfer-masuk.details', ['id_transfer' => $request['id_transfer']])->with('success','Data detail transfer baru berhasil ditambahkan!');
+        return redirect()->route('transfer-masuk.details', ['id_transfer' => $request['id_transfer'], 'no_kas_masuk' => $request->no_kas_masuk])
+            ->with('success','Data detail transfer baru berhasil ditambahkan!');
     }
 
     public function edit($id_transfer){
