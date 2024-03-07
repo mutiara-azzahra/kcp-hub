@@ -25,7 +25,7 @@
 
     <div class="card" style="padding: 10px;">
         <div class="card-header">
-            Penerimaan Piutang Toko
+            Pemotongan Toko
         </div>
         <div class="card-body">
             <div class="col-lg-12">  
@@ -50,19 +50,28 @@
                         $no=1;
                         @endphp
 
+                        @foreach($piutang_header as $i)
                         <tr>
-                            <td class="text-left"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-left"></td>
-                            <td class="text-left"></td>
-                            <td class="text-left"></td>
-                            <td class="text-center"></td>
+                            <td class="text-left">{{ $i->no_piutang }}</td>
+                            <td class="text-center">{{ Carbon\Carbon::parse($i->created_at)->format('d-m-Y') }}</td>
+                            <td class="text-center">{{ $i->kd_outlet }}</td>
+                            <td class="text-left">{{ $i->nm_outlet }}</td>
+                            <td class="text-left">{{ $i->pembayaran_via }}</td>
+                            <td class="text-left">{{ $i->id_bank }}</td>
+                            <td></td>
+                            <td class="text-right">{{ $i->nominal_potong }}</td>
                             <td class="text-right"></td>
-                            <td class="text-left"></td>
-                            <td class="text-center"></td>
                             <td class="text-right"></td>
+                            <td class="text-center">
+                                <a class="btn btn-info btn-sm m-1" href="">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a class="btn btn-warning btn-sm m-1" href="">
+                                    <i class="fas fa-print"></i>
+                                </a>
+                            </td>
                         </tr>
+                        @endforeach
 
                     </tbody>
                 </table>

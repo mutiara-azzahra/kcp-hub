@@ -59,11 +59,6 @@ class ExportPajak implements FromCollection, WithCustomCsvSettings
                 return number_format($detail->nominal_total / 1.11 * 11/ 100 , 0, ',', '');
             });
 
-            // if($header->noinv  == 'INV-202311-00005')
-            // {
-            //     dd($header->detail_dpp);
-            // }
-
             $total_dpp = array_sum($header->detail_dpp->toArray());
             $total_diskon = array_sum($header->detail_diskon->toArray());
 
