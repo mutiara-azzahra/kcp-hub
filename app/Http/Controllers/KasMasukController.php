@@ -110,7 +110,6 @@ class KasMasukController extends Controller
 
         $nominal  = str_replace(',', '', $request->nominal);
 
-
         //PEMBAYARAN VIA KAS
         if($request->pembayaran_via == 'CASH'){
 
@@ -176,7 +175,7 @@ class KasMasukController extends Controller
             $transfer_masuk->keterangan      = $request->kd_outlet;
             $transfer_masuk->flag_by_toko    = 'Y';
             $transfer_masuk->flag_kas_ar     = 'N';
-            $transfer_masuk->tanggal_bank     = 'Y';
+            $transfer_masuk->tanggal_bank    = now();
             $transfer_masuk->save();
 
         } elseif ($request->pembayaran_via == 'BG') {

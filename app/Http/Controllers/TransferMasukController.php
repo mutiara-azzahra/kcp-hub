@@ -18,7 +18,7 @@ class TransferMasukController extends Controller
 {
     public function index(){
 
-        $tf_masuk           = TransferMasukHeader::where('status_transfer', 'IN')->orderBy('created_at', 'desc')->get();
+        $tf_masuk           = TransferMasukHeader::where('status_transfer', 'IN')->where('flag_kas_ar', 'N')->orderBy('created_at', 'desc')->get();
         $tf_masuk_validated = TransferMasukHeader::where('flag_kas_ar', 'Y')->orderBy('created_at', 'desc')->get();
 
         return view('transfer-masuk.index', compact('tf_masuk', 'tf_masuk_validated'));
