@@ -52,6 +52,7 @@
                             <select name="pembayaran_via" class="form-control my-select" >
                                 <option value="">--Pilih Pembayaran--</option>
                                 <option value="CASH">CASH</option>
+                                <option value="TRANSFER">TRANSFER</option>
                                 <option value="BG">BG</option>
                             </select>
                         </div>
@@ -74,7 +75,7 @@
                             <input type="date" name="jatuh_tempo_bg" class="form-control">
                         </div>
                     </div>
-                    {{-- <div class="col-md-12">
+                    <div class="col-md-12">
                         <div class="form-group">
                             <strong>Pilih Bank</strong>
                             <select name="bank" class="form-control my-select">
@@ -84,7 +85,7 @@
                                 <option value="DANAMON">DANAMON</option>
                             </select>
                         </div>
-                    </div> --}}
+                    </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                         <div class="float-right">
                             <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan Data</button>                            
