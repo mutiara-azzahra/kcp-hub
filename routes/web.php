@@ -116,7 +116,7 @@ Route::group(['middleware' => 'auth'], function () {
     //MASTER PART
     Route::get('/master-part', [MasterPartController::class, 'index'])->name('master-part.index');
     Route::get('/master-part/create', [MasterPartController::class, 'create'])->name('master-part.create');
-    Route::get('/master-part/update/{id}', [MasterPartController::class, 'edit'])->name('master-part.edit');
+    Route::get('/master-part/edit/{id}', [MasterPartController::class, 'edit'])->name('master-part.edit');
     Route::delete('/master-part/delete/{id}', [MasterPartController::class, 'delete'])->name('master-part.delete');
     Route::get('/master-part/show/{id}', [MasterPartController::class, 'show'])->name('master-part.show');
     Route::post('/master-part/store', [MasterPartController::class, 'store'])->name('master-part.store');
@@ -125,7 +125,7 @@ Route::group(['middleware' => 'auth'], function () {
     //MASTER PART DISKON
     Route::get('/master-diskon', [MasterDiskonPartController::class, 'index'])->name('master-diskon.index');
     Route::get('/master-diskon/create', [MasterDiskonPartController::class, 'create'])->name('master-diskon.create');
-    Route::get('/master-diskon/update/{id}', [MasterDiskonPartController::class, 'edit'])->name('master-diskon.edit');
+    Route::get('/master-diskon/edit/{id}', [MasterDiskonPartController::class, 'edit'])->name('master-diskon.edit');
     Route::get('/master-diskon/delete/{id}', [MasterDiskonPartController::class, 'delete'])->name('master-diskon.delete');
     Route::get('/master-diskon/show/{id}', [MasterDiskonPartController::class, 'show'])->name('master-diskon.show');
     Route::post('/master-diskon/store', [MasterDiskonPartController::class, 'store'])->name('master-diskon.store');
@@ -138,7 +138,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/master-role/delete/{id}', [MasterRoleController::class, 'delete'])->name('master-role.delete');
     Route::get('/master-role/show/{id}', [MasterRoleController::class, 'show'])->name('master-role.show');
     Route::post('/master-role/store', [MasterRoleController::class, 'store'])->name('master-role.store');
-    Route::post('/master-role/update/{id}', [MasterRoleController::class, 'update'])->name('master-role.update');
+    Route::post('/master-role/update', [MasterRoleController::class, 'update'])->name('master-role.update');
 
     //MASTER PLAFOND
     Route::get('/master-plafond', [PlafondController::class, 'index'])->name('master-plafond.index');
