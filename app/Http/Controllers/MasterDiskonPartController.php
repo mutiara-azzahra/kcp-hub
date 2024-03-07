@@ -60,18 +60,17 @@ class MasterDiskonPartController extends Controller
 
     public function delete($id)
     {
-        $updated = MasterDiskonPart::where('id', $id)->update([
-                'status'         => 'N',
-                'updated_at'     => NOW(),
-                'updated_by'     => Auth::user()->nama_user
-            ]);
+        try {
 
-        if ($updated){
-            return redirect()->route('master-diskon.index')->with('success','Master diskon part berhasil dihapus!');
-        } else{
-            return redirect()->route('master-diskon.index')->with('danger','Master diskon part gagal dihapus');
+            $master_diskon = MasterDiskonPart::findOrFail($id);
+            $master_diskon->delete();
+
+            return redirect()->route('master-diskon.index')->with('success', 'Data master diskon berhasil dihapus!');
+
+        } catch (\Exception $e) {
+
+            return redirect()->route('master-diskon.index')->with('danger', 'Data master diskon gagal dihapus');
         }
-        
     }
 
     public function update(Request $request, $id)

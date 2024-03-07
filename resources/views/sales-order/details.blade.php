@@ -80,42 +80,44 @@
                 </div>
 
                 <div class="col-lg-12 p-1">
-                        <table class="table table-hover table-bordered table-sm bg-light table-striped" >
-                            <thead>
-                                <tr style="background-color: #6082B6; color:white">
-                                    <th class="text-center">Part No</th>
-                                    <th class="text-center">HET</th>
-                                    <th class="text-center">Qty</th>
-                                    <th class="text-center">Disc (%)</th>
-                                    <th class="text-center">Nominal</th>
-                                    <th class="text-center"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($surat_pesanan_id as $s)
-                                    @foreach($s->details_sp as $d)
-                                        <tr>
-                                            <td class="text-left">{{ $d->part_no }}</td>
-                                            <td class="text-right">Rp. {{ number_format($d->hrg_pcs, 0, ',', '.') }}</td>
-                                            <td class="text-center">{{ $d->qty }}</td>
-                                            <td class="text-center">{{ $d->disc }} %</td>
-                                            <td class="text-right">Rp. {{ number_format($d->nominal_total, 0, ',', '.') }}</td>
-                                            @if(Auth::user()->id_role == 11)
-                                            <td class="text-center">
-                                                <a class="btn btn-info btn-sm" href="{{ route('sales-order.edit', $d->id) }}">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                            </td>
-                                            @endif
-                                        </tr>
-                                    @endforeach
+                    <table class="table table-hover table-bordered table-sm bg-light table-striped" >
+                        <thead>
+                            <tr style="background-color: #6082B6; color:white">
+                                <th class="text-center">Part No</th>
+                                <th class="text-center">HET</th>
+                                <th class="text-center">Qty</th>
+                                <th class="text-center">Disc (%)</th>
+                                <th class="text-center">Nominal</th>
+                                @if(Auth::user()->id_role == 24)
+                                <th class="text-center"></th>
+                                @endif
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($surat_pesanan_id as $s)
+                                @foreach($s->details_sp as $d)
+                                    <tr>
+                                        <td class="text-left">{{ $d->part_no }}</td>
+                                        <td class="text-right">Rp. {{ number_format($d->hrg_pcs, 0, ',', '.') }}</td>
+                                        <td class="text-center">{{ $d->qty }}</td>
+                                        <td class="text-center">{{ $d->disc }} %</td>
+                                        <td class="text-right">Rp. {{ number_format($d->nominal_total, 0, ',', '.') }}</td>
+                                        @if(Auth::user()->id_role == 24)
+                                        <td class="text-center">
+                                            <a class="btn btn-info btn-sm" href="{{ route('sales-order.edit', $d->id) }}">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </td>
+                                        @endif
+                                    </tr>
                                 @endforeach
-                                <tr>
-                                    <td class="text-center" colspan="4"><b>TOTAL</b></td>
-                                    <td class="text-right"><b>Rp. {{ number_format($totalSum, 0, ',', '.') }}</b></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                            @endforeach
+                            <tr>
+                                <td class="text-center" colspan="4"><b>TOTAL</b></td>
+                                <td class="text-right"><b>Rp. {{ number_format($totalSum, 0, ',', '.') }}</b></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

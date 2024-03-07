@@ -126,7 +126,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/master-diskon', [MasterDiskonPartController::class, 'index'])->name('master-diskon.index');
     Route::get('/master-diskon/create', [MasterDiskonPartController::class, 'create'])->name('master-diskon.create');
     Route::get('/master-diskon/edit/{id}', [MasterDiskonPartController::class, 'edit'])->name('master-diskon.edit');
-    Route::get('/master-diskon/delete/{id}', [MasterDiskonPartController::class, 'delete'])->name('master-diskon.delete');
+    Route::delete('/master-diskon/delete/{id}', [MasterDiskonPartController::class, 'delete'])->name('master-diskon.delete');
     Route::get('/master-diskon/show/{id}', [MasterDiskonPartController::class, 'show'])->name('master-diskon.show');
     Route::post('/master-diskon/store', [MasterDiskonPartController::class, 'store'])->name('master-diskon.store');
     Route::post('/master-diskon/update/{id}', [MasterDiskonPartController::class, 'update'])->name('master-diskon.update');
@@ -218,7 +218,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/sales-order/list-approved-so', [SalesOrderController::class, 'so_approved'])->name('sales-order.approved');
     Route::get('/sales-order/list-rejected-so', [SalesOrderController::class, 'so_rejected'])->name('sales-order.rejected');
     Route::get('/sales-order/edit/{id}', [SalesOrderController::class, 'edit'])->name('sales-order.edit');
-    Route::post('/sales-order/update', [SalesOrderController::class, 'store_edit'])->name('sales-order.store_edit');
+    Route::post('/sales-order/update/{id}', [SalesOrderController::class, 'store_edit'])->name('sales-order.store_edit');
     Route::get('/sales-order/tolak/{noso}', [SalesOrderController::class, 'tolak'])->name('sales-order.tolak');
     
     //ROUTE BO
