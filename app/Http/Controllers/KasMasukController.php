@@ -173,7 +173,8 @@ class KasMasukController extends Controller
             $transfer_masuk->bank            = $request->bank;
             $transfer_masuk->keterangan      = $request->kd_outlet;
             $transfer_masuk->flag_by_toko    = 'Y';
-            $transfer_masuk->flag_kas_ar     = 'Y';
+            $transfer_masuk->flag_kas_ar     = 'N';
+            $transfer_masuk->tanggal_bank     = 'Y';
             $transfer_masuk->save();
 
         } elseif ($request->pembayaran_via == 'BG') {
@@ -182,7 +183,7 @@ class KasMasukController extends Controller
                 'no_kas_masuk'        => $newKas->no_kas_masuk,
                 'no_bg'               => $request->no_bg,
                 'kd_area'             => $area_outlet,
-                'kd_outlet'           => $request->kd_outlet,
+                'kd_outlet'           => $outlet->nm_outlet,
                 'nominal'             => $request->nominal,
                 'pembayaran_via'      => $request->pembayaran_via,
                 'jatuh_tempo_bg'      => $request->jatuh_tempo_bg,

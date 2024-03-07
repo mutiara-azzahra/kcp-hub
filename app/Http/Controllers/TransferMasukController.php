@@ -72,37 +72,15 @@ class TransferMasukController extends Controller
     
         $created = TransferMasukHeader::create($requestData);
 
-
-        //MENAMBAHKAN KAS MASUK DARI TF MASUK
-        $newKas                 = new KasMasukHeader();
-        $newKas->no_kas_masuk   = KasMasukHeader::no_kas_masuk();
-        
-        $request->merge([
-            'no_kas_masuk'        => $newKas->no_kas_masuk,
-            'id_transfer'         => $created->id_transfer,
-            'kd_outlet'           => $request->kd_outlet,
-            'pembayaran_via'      => 'TRANSFER',
-            'flag_transfer_masuk' => 'Y',
-            'bank'                => $request->bank,
-            'flag_kas_manual'     => 'N',
-            'terima_dari'         => $request->keterangan,
-            'keterangan'          => $request->keterangan,
-            'status'              => 'O',
-        ]);
-
-        $created_kas_masuk = KasMasukHeader::create($request->all());
-
         if ($created) {
-            return redirect()->route('transfer-masuk.details', ['id_transfer' => $newTransfer->id_transfer, 'no_kas_masuk' => $created_kas_masuk->no_kas_masuk])
+            return redirect()->route('transfer-masuk.details', ['id_transfer' => $newTransfer->id_transfer])
                 ->with('success', 'Transfer masuk berhasil ditambahkan. Tambahkan Details');
         } else {
             return redirect()->route('transfer-masuk.index')->with('danger', 'Transfer masuk gagal ditambahkan');
         }
     }
 
-    public function details($id_transfer, $no_kas_masuk){
-
-        $no_kas_masuk = $no_kas_masuk;
+    public function details($id_transfer){
 
         $perkiraan  = MasterPerkiraan::where('status', 'AKTIF')->get();
 
@@ -113,7 +91,7 @@ class TransferMasukController extends Controller
 
         $balancing  = $balance_debet - $balance_kredit;
 
-        return view('transfer-masuk.details', compact('transfer', 'balancing', 'perkiraan', 'no_kas_masuk'));
+        return view('transfer-masuk.details', compact('transfer', 'balancing', 'perkiraan'));
     }
 
     public function validasi_data($id_transfer){
@@ -145,17 +123,8 @@ class TransferMasukController extends Controller
             'created_at'    => now()
         ]);
 
-        //STORE TO KAS MASUK
-        KasMasukDetails::create([
-            'no_kas_masuk'  => $request->no_kas_masuk,
-            'perkiraan'     => $perkiraan->id_perkiraan,
-            'akuntansi_to'  => $request['akuntansi_to'],
-            'total'         => $request['total'],
-            'created_by'    => Auth::user()->nama_user,
-            'created_at'    => NOW(),
-        ]);
             
-        return redirect()->route('transfer-masuk.details', ['id_transfer' => $request['id_transfer'], 'no_kas_masuk' => $request->no_kas_masuk])
+        return redirect()->route('transfer-masuk.details', ['id_transfer' => $request['id_transfer']])
             ->with('success','Data detail transfer baru berhasil ditambahkan!');
     }
 
@@ -167,27 +136,6 @@ class TransferMasukController extends Controller
         $outlet     = MasterOutlet::where('status', 'Y')->get();
 
         return view('transfer-masuk.edit', compact('transfer', 'outlet', 'kas_masuk','check'));
-    }
-
-    public function store_transfer(Request $request)
-    {
-
-        $id_transfer     = $request->input('id_transfer');
-
-        $selectedItems  = $request->input('selected_items', []);
-
-        for ($i = 0; $i < count($selectedItems); $i++) {
-            $itemKasMasuk = $selectedItems[$i];
-
-            KasMasukHeader::where('no_kas_masuk', $itemKasMasuk)->update([
-                'id_transfer'        => $request->id_transfer,
-                'updated_at'         => NOW(),
-                'updated_by'         => Auth::user()->nama_user
-            ]);
-
-        }
-
-        return redirect()->route('transfer-masuk.index')->with('success', 'Transfer masuk baru berhasil ditambahkan kedalam kas masuk');
     }
 
     public function store_validasi($id_transfer)

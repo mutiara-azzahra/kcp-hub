@@ -97,7 +97,6 @@
                                     <td class="text-center">
                                         <div class="form-group col-12">
                                             <input type="hidden" name="id_transfer" value="{{ $transfer->id_transfer  }}">
-                                            <input type="hidden" name="no_kas_masuk" value="{{ $no_kas_masuk  }}">
                                             <input type="text" name="total" class="form-control">
                                         </div>
                                     </td>
