@@ -82,7 +82,9 @@
                                 <option value="">--Pilih Bank--</option>
                                 <option value="BRI">BRI</option>
                                 <option value="BNI">BNI</option>
+                                <option value="BCA">BCA</option>
                                 <option value="DANAMON">DANAMON</option>
+                                <option value="MANDIRI">MANDIRI</option>
                             </select>
                         </div>
                     </div>
