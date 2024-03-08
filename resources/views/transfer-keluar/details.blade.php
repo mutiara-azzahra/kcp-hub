@@ -23,6 +23,12 @@
         </div>
     @endif
 
+    @if ($balancing != 0)
+        <div class="alert alert-danger text-center">
+            <p style="color:white; text-transform: uppercase;"><b>Transfer Keluar Tidak Balance, Periksa Kembali Data Anda!</b></p>
+        </div>
+    @endif
+
     <div class="card" style="padding: 10px;">
         <div class="card-body">
             <div class="col-lg-8 p-1">
@@ -64,24 +70,23 @@
                                     <th class="text-center">Perkiraan</th>
                                     <th class="text-center">Akuntansi To</th>
                                     <th class="text-center">Total</th>
-                                    <th class="text-center"></th>
                                 </tr>
                             </thead>
                             <tbody class="input-fields">
                                 <tr>
                                     <td class="text-center">
                                         <div class="form-group col-12">
-                                            <select name="inputs[0][perkiraan]" class="form-control mr-2 my-select">
+                                            <select name="perkiraan" class="form-control mr-2 my-select">     
                                                 <option value="">-- Pilih Perkiraan --</option>
-                                                @foreach($perkiraan as $k)
-                                                    <option value="{{ $k->id }}">{{ $k->perkiraan }}.{{ $k->sub_perkiraan }} - {{ $k->nm_perkiraan }}</option>
+                                                @foreach($perkiraan as $s)
+                                                    <option value="{{ $s->perkiraan }}">{{ $s->id_perkiraan }} - {{ $s->nm_perkiraan }} </option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group col-12">
-                                            <select name="inputs[0][akuntansi_to]" class="form-control mr-2">
+                                            <select name="akuntansi_to" class="form-control mr-2">
                                                 <option value="">-- Pilih --</option>
                                                 <option value="D">DEBET</option>
                                                 <option value="K">KREDIT</option>
@@ -90,13 +95,8 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="form-group col-12">
-                                            <input type="hidden" name="inputs[0][id_transfer]" value="{{ $transfer->id_transfer }}">
-                                            <input type="text" name="inputs[0][total]" class="form-control">
-                                        </div>
-                                    </td>
-                                    <td class="text-center">
-                                        <div class="form-group col-12">
-                                            <a type="button" class="btn btn-primary m-1" id="add"><i class="fas fa-plus"></i></a>                                                                                  
+                                            <input type="hidden" name="id_transfer" value="{{ $transfer->id_transfer  }}">
+                                            <input type="text" name="total" class="form-control">
                                         </div>
                                     </td>
                                 </tr>
@@ -112,55 +112,88 @@
             </form>
         </div>
     </div>
+
+    <div class="card" style="padding: 10px;">
+        <div class="card-body">
+            <div class="col-lg-12 p-1" id="main" data-loading="true">
+                <div class="table-container">
+                    <table class="table table-hover table-sm bg-light table-striped table-bordered" id="table">
+                        <thead>
+                            <tr style="background-color: #6082B6; color:white">
+                                <th class="text-center">Perkiraan</th>
+                                <th class="text-center">Akuntansi To</th>
+                                <th class="text-center">DEBET</th>
+                                <th class="text-center">KREDIT</th>
+                                <th class="text-center"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="input-fields">
+                            @foreach($transfer->details as $i)
+                            <tr>
+                                <td class="text-left">
+                                    {{ $i->details_perkiraan->id_perkiraan }} - {{ $i->details_perkiraan->nm_sub_perkiraan }}
+                                </td>
+                                <td class="text-center">
+                                    @if($i->akuntansi_to == 'D')
+
+                                    DEBET
+                                    @else
+
+                                    KREDIT
+                                    @endif
+                                </td>
+                                @if($i->akuntansi_to == 'D')
+                                <td class="text-right">
+                                    {{ number_format($i->total, 0, ',', '.') }}
+                                </td>
+                                <td></td>
+                                
+                                @else
+                                <td></td>
+                                <td class="text-right">
+                                    {{ number_format($i->total, 0, ',', '.') }}
+                                </td>
+                                @endif
+                                <td class="text-center">
+                                    <form action="{{ route('transfer-keluar.delete-details', $i->id) }}" method="POST" id="form_delete_{{ $i->id }}" data-id="{{ $i->id }}">
+
+                                        @csrf
+                                        @method('DELETE')
+                                        
+                                        <a class="btn btn-danger btn-sm" onclick="Hapus('{{$i->id}}')"><i class="fas fa-times"></i></a>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
 
 @section('script')
     <script>
-        var i = 0;
-        $('#add').click(function(){
-            ++i;
-            $('#table').append(`<tr>
-                <td class="text-center">
-                    <div class="form-group col-12">
-                        <select name="inputs[${i}][perkiraan]" class="form-control mr-2 my-select-1">
-                            <option value="">-- Pilih Perkiraan --</option>
-                            @foreach($perkiraan as $k)
-                                <option value="{{ $k->id }}">{{ $k->perkiraan }}.{{ $k->sub_perkiraan }} - {{ $k->nm_perkiraan }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </td>
-                <td class="text-center">
-                    <div class="form-group col-12">
-                        <select name="inputs[${i}][akuntansi_to]" class="form-control mr-2">
-                            <option value="">-- Pilih --</option>
-                            <option value="D">DEBET</option>
-                            <option value="K">KREDIT</option>
-                        </select>
-                    </div>
-                </td>
-                <td class="text-center">
-                    <div class="form-group col-12">
-                        <input type="hidden" name="inputs[${i}][id_transfer]" value="{{ $transfer->id_transfer }}">
-                        <input type="text" name="inputs[${i}][total]" class="form-control">
-                    </div>
-                </td>
-                <td class="text-center">
-                    <div class="form-group col-12">
-                        <button type="submit" class="btn btn-danger remove-table-row"><i class="fas fa-minus"></i></button>
-                    </div>
-                </td>
-            </tr>
-            `);
-            $('.my-select-1').select2({
-                width: '100%'
-            });
-        });
+    //HAPUS
 
-        $(document).on('click','.remove-table-row', function(){
-            $(this).parents('tr').remove();
+    Hapus = (id)=>{
+        Swal.fire({
+            title: 'Apa anda yakin menghapus data detail transfer keluar ini?',
+            text:  "Data tidak dapat kembali" ,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6' ,
+            cancelButtonColor: 'red' ,
+            confirmButtonText: 'hapus data' ,
+            cancelButtonText: 'batal' ,
+            reverseButtons: false
+            }).then((result) => {
+                if (result.value) {
+                    document.getElementById('form_delete_' + id).submit();
+                }
         })
+    }
+        
     </script>    
-
 @endsection

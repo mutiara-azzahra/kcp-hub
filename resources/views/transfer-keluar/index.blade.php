@@ -50,7 +50,7 @@
                         <td class="text-right">{{ number_format($p->details->where('akuntansi_to', 'D')->sum('total'), 0, ',', ',') }}</td>
                         <td class="text-left">{{ $p->keterangan }}</td>
                         <td class="text-center">
-                            <a class="btn btn-info btn-sm" href="{{ route('transfer-keluar.edit', $p->id_transfer ) }}">
+                            <a class="btn btn-info btn-sm" href="{{ route('transfer-keluar.details', $p->id_transfer ) }}">
                                 <i class="fas fa-edit"></i>
                             </a>
                         </td>

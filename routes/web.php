@@ -418,7 +418,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/transfer-keluar/store', [TransferKeluarController::class, 'store'])->name('transfer-keluar.store');
     Route::get('/transfer-keluar/list-validasi', [TransferKeluarController::class, 'validasi'])->name('transfer-keluar.validasi');
     Route::get('/transfer-keluar/validasi/{id_transfer}', [TransferKeluarController::class, 'validasi_data'])->name('transfer-keluar.validasi-data');
-    Route::get('/transfer-keluar/details/{id_transfer}/kas-masuk/{no_kas_masuk}', [TransferKeluarController::class, 'details'])->name('transfer-keluar.details');
+    Route::get('/transfer-keluar/details/{id_transfer}', [TransferKeluarController::class, 'details'])->name('transfer-keluar.details');
     Route::post('/transfer-keluar/store-details', [TransferKeluarController::class, 'store_details'])->name('transfer-keluar.store-details');
     Route::post('/transfer-keluar/store-validasi/{id_transfer}', [TransferKeluarController::class, 'store_validasi'])->name('transfer-keluar.store-validasi');
     Route::get('/transfer-keluar/edit/{id_transfer}', [TransferKeluarController::class, 'edit'])->name('transfer-keluar.edit');

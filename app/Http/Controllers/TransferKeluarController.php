@@ -18,7 +18,6 @@ class TransferKeluarController extends Controller
     public function index(){
 
         $tf_keluar = TransferMasukHeader::where('status_transfer', 'OUT')->orderBy('created_at', 'desc')->get();
-        // $tf_keluar_validated = TransferMasukHeader::where('flag_kas_ar', 'Y')->orderBy('created_at', 'desc')->get();
 
         return view('transfer-keluar.index', compact('tf_keluar'));
     }
@@ -40,23 +39,21 @@ class TransferKeluarController extends Controller
         $request->validate([
             'tanggal_bank'      => 'required',
             'bank'              => 'required',
-            'dari_toko'         => 'required',
             'keterangan'        => 'required',
-            'status_transfer'   => 'required',
         ]);
     
-        $newTransfer = new TransferMasukHeader();
+        $newTransfer              = new TransferMasukHeader();
         $newTransfer->id_transfer = TransferMasukHeader::id_transfer();
         
         $status_transfer = 'OUT';
-        $flag_by_toko = ($request->dari_toko == 1) ? 'Y' : 'N';
        
         $requestData = [
             'id_transfer'       => $newTransfer->id_transfer,
             'status_transfer'   => $status_transfer,
             'tanggal_bank'      => $request->tanggal_bank,
             'bank'              => $request->bank,
-            'flag_by_toko'      => $flag_by_toko,
+            'flag_by_toko'      => 'N',
+            'flag_kas_ar'       => 'N',
             'keterangan'        => $request->keterangan,
             'status'            => 'O',
             'created_by'        => Auth::user()->nama_user
@@ -66,7 +63,7 @@ class TransferKeluarController extends Controller
     
         if ($created) {
             return redirect()->route('transfer-keluar.details', ['id_transfer' => $newTransfer->id_transfer])
-                ->with('success', 'Transfer keluar berhasil ditambahkan. Tambahkan Details');
+                ->with('success', 'Transfer keluar berhasil ditambahkan. Tambahkan Details Transfer!');
         } else {
             return redirect()->route('transfer-keluar.index')
                 ->with('danger', 'Transfer keluar gagal ditambahkan');
@@ -75,10 +72,15 @@ class TransferKeluarController extends Controller
 
     public function details($id_transfer){
 
-        $perkiraan = MasterPerkiraan::all();
+        $perkiraan  = MasterPerkiraan::where('status', 'AKTIF')->get();
         $transfer  = TransferMasukHeader::where('id_transfer', $id_transfer)->first();
 
-        return view('transfer-keluar.details', compact('perkiraan', 'transfer'));
+        $balance_debet  = $transfer->details->where('akuntansi_to', 'D')->sum('total');
+        $balance_kredit = $transfer->details->where('akuntansi_to', 'K')->sum('total');
+
+        $balancing  = $balance_debet - $balance_kredit;
+
+        return view('transfer-keluar.details', compact('perkiraan', 'transfer', 'balancing'));
     }
 
     public function validasi_data($id_transfer){
@@ -92,35 +94,27 @@ class TransferKeluarController extends Controller
     public function store_details(Request $request){
 
         $request->validate([
-            'inputs.*.id_transfer'  => 'required',
-            'inputs.*.perkiraan'    => 'required',
-            'inputs.*.akuntansi_to' => 'required',
-            'inputs.*.total'        => 'required',
+            'id_transfer'  => 'required',
+            'perkiraan'    => 'required',
+            'akuntansi_to' => 'required',
+            'total'        => 'required',
         ]);
         
-        $totalSum = 0;
-        $id_transfer = null;
+        $perkiraan = MasterPerkiraan::findOrFail($request['perkiraan']);
     
-        foreach ($request->inputs as $key => $value) {
-            $perkiraan = MasterPerkiraan::findOrFail($value['perkiraan']);
-        
-            TransferMasukDetails::create([
-                'id_transfer'  => $value['id_transfer'],
-                'perkiraan'     => $perkiraan ? $perkiraan->perkiraan . '.' . $perkiraan->sub_perkiraan : null,
-                'sub_perkiraan' => $perkiraan->sub_perkiraan,
-                'akuntansi_to'  => $value['akuntansi_to'],
-                'total'         => $value['total'],
-                'created_by'    => Auth::user()->nama_user,
-            ]);
-    
-            if ($value['akuntansi_to'] === 'D') {
-                $totalSum += $value['total'];
-            }
+        TransferMasukDetails::create([
+            'id_transfer'   => $request['id_transfer'],
+            'perkiraan'     => $perkiraan->id_perkiraan,
+            'sub_perkiraan' => $perkiraan->sub_perkiraan,
+            'akuntansi_to'  => $request['akuntansi_to'],
+            'total'         => $request['total'],
+            'created_by'    => Auth::user()->nama_user,
+            'created_at'    => now()
+        ]);
 
-            if ($id_transfer === null) {
-                $id_transfer = $value['id_transfer'];
-            }
-        }
+            
+        return redirect()->route('transfer-keluar.details', ['id_transfer' => $request['id_transfer']])
+            ->with('success','Data detail transfer baru berhasil ditambahkan!');
             
         return redirect()->route('transfer-keluar.index')->with('success','Data transfer baru berhasil ditambahkan!');
     }
@@ -170,18 +164,35 @@ class TransferKeluarController extends Controller
 
     public function delete($id)
     {
-        $updated = MasterSales::where('id', $id)->update([
-                'status'         => 'N',
-                'updated_at'     => NOW(),
-                'updated_by'     => Auth::user()->nama_user
-            ]);
+        try {
 
-        if ($updated){
-            return redirect()->route('transfer-keluar.index')->with('success','Stok Gudang berhasil dihapus!');
-        } else{
-            return redirect()->route('transfer-keluar.index')->with('danger','Stok Gudang gagal dihapus');
+            $transfer   = TransferMasukHeader::findOrFail($id);
+            $transfer->delete();
+
+            $datails    = TransferMasukDetails::where('id_transfer', $transfer->id_transfer)->delete();
+
+            return redirect()->route('transfer-keluar.details', ['id_transfer' => $transfer->id_transfer])->with('success', 'Data transfer keluar berhasil dihapus!');
+
+        } catch (\Exception $e) {
+
+            return redirect()->route('transfer-keluar.details', ['id_transfer' => $transfer->id_transfer])->with('danger', 'Terjadi kesalahan saat menghapus data transfer keluar.');
         }
-        
+    }
+
+
+    public function delete_details($id)
+    {
+        try {
+
+            $transfer = TransferMasukDetails::findOrFail($id);
+            $transfer->delete();
+
+            return redirect()->route('transfer-keluar.details', ['id_transfer' => $transfer->id_transfer])->with('success', 'Data transfer keluar berhasil dihapus!');
+
+        } catch (\Exception $e) {
+
+            return redirect()->route('transfer-keluar.details', ['id_transfer' => $transfer->id_transfer])->with('danger', 'Terjadi kesalahan saat menghapus data transfer keluar.');
+        }
     }
 
     

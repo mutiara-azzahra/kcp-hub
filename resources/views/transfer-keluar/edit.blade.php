@@ -8,7 +8,7 @@
                 <h4>Transfer dan Kas Masuk</h4>
             </div>
             <div class="float-right">
-                <a class="btn btn-success m-1" href="{{ route('transfer-masuk.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
+                <a class="btn btn-success m-1" href="{{ route('transfer-keluar.index') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
             </div>
         </div>
     </div>
