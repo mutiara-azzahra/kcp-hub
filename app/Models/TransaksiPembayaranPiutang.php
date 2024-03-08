@@ -22,7 +22,7 @@ class TransaksiPembayaranPiutang extends Model
 
     public function invoice()
     {
-        return $this->hasMany(TransaksiInvoiceHeader::class, 'noinv', 'noinv');
+        return $this->hasOne(TransaksiInvoiceHeader::class, 'noinv', 'noinv');
     }
 
 }

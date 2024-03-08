@@ -18,7 +18,7 @@ class PembayaranPiutangTokoController extends Controller
     public function index(){
 
         $piutang_header = TransaksiPembayaranPiutangHeader::orderBy('no_piutang', 'desc')->get();
-        $kas_masuk      = KasMasukHeader::orderBy('no_kas_masuk', 'desc')->where('flag_kas_manual', 'N')->where('status', 'O')->get();
+        $kas_masuk      = KasMasukHeader::orderBy('no_kas_masuk', 'desc')->where('flag_kas_manual', 'N')->where('status', 'C')->get();
 
         return view('piutang-toko.index', compact('piutang_header', 'kas_masuk'));
     }
@@ -204,20 +204,9 @@ class PembayaranPiutangTokoController extends Controller
 
             $invoice = TransaksiInvoiceHeader::where('noinv', $itemInvoice)->first();
 
-            $value = [
-                'noinv'                 => $invoice->noinv,
-                'no_piutang'            => $newPiutang->no_piutang,
-                'no_kas_masuk'          => $request->no_kas_masuk,
-                'nominal'               => $invoice->details_invoice->sum('nominal_total'),
-                'status'                => 'O',
-                'created_at'            => NOW(),
-                'created_by'            => Auth::user()->nama_user,
-            ];
+            $nominal_invoice = $invoice->details_invoice->sum('nominal_total');
 
-            $created_piutang = TransaksiPembayaranPiutang::create($value);
-
-
-            if ($created->nominal_potong >= $created_piutang->nominal) {
+            if ($created->nominal_potong >= $nominal_invoice) {
 
                 TransaksiInvoiceHeader::where('noinv', $itemInvoice)->update([
                     'flag_pembayaran_lunas' => 'Y',
@@ -225,7 +214,19 @@ class PembayaranPiutangTokoController extends Controller
                     'updated_by'            => Auth::user()->nama_user
                 ]);
                 
-                $created->nominal_potong -= $created_piutang->nominal;
+                $value = [
+                    'noinv'                 => $invoice->noinv,
+                    'no_piutang'            => $newPiutang->no_piutang,
+                    'no_kas_masuk'          => $request->no_kas_masuk,
+                    'nominal'               => $nominal_invoice,
+                    'status'                => 'O',
+                    'created_at'            => NOW(),
+                    'created_by'            => Auth::user()->nama_user,
+                ];
+
+                $created_piutang = TransaksiPembayaranPiutang::create($value);
+
+                $created->nominal_potong -= $nominal_invoice;
 
             } else {
 
@@ -234,6 +235,18 @@ class PembayaranPiutangTokoController extends Controller
                     'updated_at'            => NOW(),
                     'updated_by'            => Auth::user()->nama_user
                 ]);
+
+                $value = [
+                    'noinv'                 => $invoice->noinv,
+                    'no_piutang'            => $newPiutang->no_piutang,
+                    'no_kas_masuk'          => $request->no_kas_masuk,
+                    'nominal'               => $created->nominal_potong,
+                    'status'                => 'O',
+                    'created_at'            => NOW(),
+                    'created_by'            => Auth::user()->nama_user,
+                ];
+
+                $created_piutang = TransaksiPembayaranPiutang::create($value);
             }
 
         }
