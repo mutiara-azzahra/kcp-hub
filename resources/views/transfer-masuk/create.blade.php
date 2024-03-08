@@ -45,6 +45,7 @@
                                 <option value="MANDIRI">MANDIRI</option>
                                 <option value="BCA">BCA</option>
                                 <option value="DANAMON">DANAMON</option>
+                                <option value="DANAMON_REGULER">DANAMON REGULER</option>
                             </select>
                         </div>
                     </div>

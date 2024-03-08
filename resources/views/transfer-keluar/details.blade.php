@@ -175,25 +175,25 @@
 @endsection
 
 @section('script')
-    <script>
-    //HAPUS
+<script>
+//HAPUS
 
-    Hapus = (id)=>{
-        Swal.fire({
-            title: 'Apa anda yakin menghapus data detail transfer keluar ini?',
-            text:  "Data tidak dapat kembali" ,
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6' ,
-            cancelButtonColor: 'red' ,
-            confirmButtonText: 'hapus data' ,
-            cancelButtonText: 'batal' ,
-            reverseButtons: false
-            }).then((result) => {
-                if (result.value) {
-                    document.getElementById('form_delete_' + id).submit();
-                }
-        })
-    }
-        
-    </script>    
+Hapus = (id)=>{
+    Swal.fire({
+        title: 'Apa anda yakin menghapus data detail transfer keluar ini?',
+        text:  "Data tidak dapat kembali" ,
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6' ,
+        cancelButtonColor: 'red' ,
+        confirmButtonText: 'hapus data' ,
+        cancelButtonText: 'batal' ,
+        reverseButtons: false
+        }).then((result) => {
+            if (result.value) {
+                document.getElementById('form_delete_' + id).submit();
+            }
+    })
+}
+    
+</script>    
 @endsection

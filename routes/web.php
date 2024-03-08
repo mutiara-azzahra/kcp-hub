@@ -423,7 +423,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/transfer-keluar/store-validasi/{id_transfer}', [TransferKeluarController::class, 'store_validasi'])->name('transfer-keluar.store-validasi');
     Route::get('/transfer-keluar/edit/{id_transfer}', [TransferKeluarController::class, 'edit'])->name('transfer-keluar.edit');
     Route::post('/transfer-keluar/store-transfer', [TransferKeluarController::class, 'store_transfer'])->name('transfer-keluar.store-transfer');
-    Route::delete('/transfer-masuk/delete-details/{id}', [TransferMasukController::class, 'delete_details'])->name('transfer-masuk.delete-details');
+    Route::delete('/transfer-keluar/delete-details/{id}', [TransferMasukController::class, 'delete_details'])->name('transfer-keluar.delete-details');
     
     //MUTASI
     Route::get('/kode-rak-lokasi', [KodeRakLokasiController::class, 'index'])->name('kode-rak-lokasi.index');
