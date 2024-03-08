@@ -92,7 +92,17 @@
                         <td class="text-left">{{ $p->keterangan }}</td>
                         <td class="text-right">{{ number_format($p->details->where('akuntansi_to', 'D')->sum('total'), 0, ',', ',') }}</td>
                         <td class="text-center">
+
+                            <form action="{{ route('transfer-masuk.delete', $p->id) }}" method="POST" id="form_delete_{{ $p->id }}" data-id="{{ $p->id }}">    
+
+                                @csrf
+                                @method('DELETE')
+                                
+                            </form>
+                            
                             <a class="btn btn-warning btn-sm" href="{{ route('transfer-masuk.cetak', $p->id_transfer ) }}"><i class="fas fa-print"></i></a>
+                            <a class="btn btn-danger btn-sm" onclick="Delete('{{ $p->id }}')"><i class="fas fa-times"></i></a>
+                            
                         </td>
                     </tr>
                     @endforeach

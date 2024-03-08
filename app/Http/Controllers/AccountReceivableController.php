@@ -117,7 +117,7 @@ class AccountReceivableController extends Controller
 
     public function dpt($kd_outlet){
 
-        $invoice_selected  = TransaksiInvoiceHeader::where('kd_outlet', $kd_outlet)->where('flag_pembayaran_lunas', 'N')->get();
+        $invoice_selected  = TransaksiInvoiceHeader::where('kd_outlet', $kd_outlet)->get();
 
         return view('account-receivable.dpt', compact('invoice_selected'));
     }

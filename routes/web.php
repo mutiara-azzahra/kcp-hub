@@ -410,7 +410,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/transfer-masuk/edit/{id_transfer}', [TransferMasukController::class, 'edit'])->name('transfer-masuk.edit');
     Route::get('/transfer-masuk/cetak/{id_transfer}', [TransferMasukController::class, 'cetak'])->name('transfer-masuk.cetak');
     Route::post('/transfer-masuk/store-transfer', [TransferMasukController::class, 'store_transfer'])->name('transfer-masuk.store-transfer');
-    Route::delete('/transfer-masuk/delete-details/{id}', [TransferMasukController::class, 'delete_details'])->name('transfer-masuk.delete-details');
+    Route::delete('/transfer-masuk/details/{id}', [TransferMasukController::class, 'delete_details'])->name('transfer-masuk.delete-details');
+    Route::delete('/transfer-masuk/delete-details/{id}', [TransferMasukController::class, 'delete_details'])->name('transfer-masuk.delete');
 
     //TRANSFER
     Route::get('/transfer-keluar', [TransferKeluarController::class, 'index'])->name('transfer-keluar.index');
