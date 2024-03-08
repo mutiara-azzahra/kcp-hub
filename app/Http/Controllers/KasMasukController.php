@@ -233,14 +233,14 @@ class KasMasukController extends Controller
 
         $update_header = KasMasukHeader::where('no_kas_masuk', $no_kas_masuk)
             ->update([
-            'status'        => 'C',
+            'status'        => 'O',
             'updated_at'    => NOW(),
             'updated_by'    => Auth::user()->nama_user
         ]);
 
         $update_details = KasMasukDetails::where('no_kas_masuk', $no_kas_masuk)
             ->update([
-            'status'        => 'C',
+            'status'        => 'O',
             'updated_at'    => NOW(),
             'updated_by'    => Auth::user()->nama_user
         ]);

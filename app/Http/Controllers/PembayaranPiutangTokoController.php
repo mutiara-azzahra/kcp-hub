@@ -17,8 +17,8 @@ class PembayaranPiutangTokoController extends Controller
 {
     public function index(){
 
-        $piutang_header = TransaksiPembayaranPiutangHeader::orderBy('no_piutang', 'desc')->get();
-        $kas_masuk      = KasMasukHeader::orderBy('no_kas_masuk', 'desc')->where('flag_kas_manual', 'N')->where('status', 'C')->get();
+        $kas_masuk      = KasMasukHeader::orderBy('no_kas_masuk', 'desc')->get();
+        $piutang_header = TransaksiPembayaranPiutangHeader::orderBy('no_piutang', 'desc')->where('status', 'O')->get();
 
         return view('piutang-toko.index', compact('piutang_header', 'kas_masuk'));
     }
@@ -251,6 +251,13 @@ class PembayaranPiutangTokoController extends Controller
 
         }
 
+        //UPDATE STATUS KAS MASUK
+
+        KasMasukHeader::where('no_kas_masuk', $request->no_kas_masuk)->update([
+            'status'        => 'C',
+            'updated_at'    => NOW(),
+            'updated_by'    => Auth::user()->nama_user
+        ]);
 
         return redirect()->route('piutang-toko.index')->with('success', 'Piutang baru berhasil ditambahkan!');
     }
