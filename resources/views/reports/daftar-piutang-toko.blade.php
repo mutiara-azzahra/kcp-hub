@@ -192,37 +192,34 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($data as $p)
-                    <tr>
-                        @php
+                @foreach ($data as $p)
+                <tr>
+                    @php
+                    $nominal_invoice = $p->details_invoice->sum('nominal_total');
+                    $piutang_terbayar = $p->piutang_details->sum('nominal');
+                    $sisa = $nominal_invoice - $piutang_terbayar;
+                    @endphp
 
-                        $nominal_invoice    = $p->details_invoice->sum('nominal_total');
-                        $piutang_terbayar   = $p->piutang_details->sum('nominal');
-                        $sisa               = $p->details_invoice->sum('nominal_total') - $p->piutang_details->sum('nominal');
-
-                        $sum_sisa = 0;
-                        $sum_sisa += $sisa;
-
-                        @endphp
-                        <td class="td-qty">{{$loop->iteration}}.</td>
-                        <td class="td-qty">{{ Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
-                        <td class="td-part">{{ $p->noinv }}</td>
-                        <td class="td-qty">{{ Carbon\Carbon::parse($p->tgl_jatuh_tempo)->format('d-m-Y') }}</td>
-                        <td class="td-angka">{{ number_format($nominal_invoice, 0, ',', '.') }}</td>
-                        <td class="td-angka"> - </td>
-                        <td class="td-angka">{{ number_format($piutang_terbayar, 0, ',', '.') }}</td> piutang_details
-                        <td class="td-qty">{{ Carbon\Carbon::parse($p->first()->piutang_details->sortByDesc('created_at')->first()->created_at)->format('d-m-Y') }}</td>
-                        <td class="td-angka">{{ number_format($sisa, 0, ',', '.') }}</td>
-                        <td class="td-angka"> - </td>
-                    </tr>
-                    @endforeach
+                    <td class="td-qty">{{$loop->iteration}}.</td>
+                    <td class="td-qty">{{ Carbon\Carbon::parse($p->created_at)->format('d-m-Y') }}</td>
+                    <td class="td-part">{{ $p->noinv }}</td>
+                    <td class="td-qty">{{ Carbon\Carbon::parse($p->tgl_jatuh_tempo)->format('d-m-Y') }}</td>
+                    <td class="td-angka">{{ number_format($nominal_invoice, 0, ',', '.') }}</td>
+                    <td class="td-angka"> - </td>
+                    <td class="td-angka">{{ number_format($piutang_terbayar, 0, ',', '.') }}</td>
+                    <td class="td-qty">{{ Carbon\Carbon::parse($p->first()->piutang_details->sortByDesc('created_at')->first()->created_at)->format('d-m-Y') }}</td>
+                    <td class="td-angka">{{ number_format($sisa, 0, ',', '.') }}</td>
+                    <td class="td-angka"> - </td>
+                </tr>
+                @endforeach
                 </tbody>
             </table>
 
+
+          
             <table class="atas" style="line-height: 15px;">
                 <tr>
                     <td class="atas-total"><b>Harap dibayar pada tangal:</b></td>
-                    <td class="atas-total"><b>Rp. {{ $sum_sisa }}</b></td>
                 </tr>
             </table>
 
