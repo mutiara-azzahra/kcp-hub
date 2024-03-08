@@ -17,7 +17,7 @@ class PembayaranPiutangTokoController extends Controller
 {
     public function index(){
 
-        $kas_masuk      = KasMasukHeader::orderBy('no_kas_masuk', 'desc')->get();
+        $kas_masuk      = KasMasukHeader::orderBy('no_kas_masuk', 'desc')->where('status', 'O')->get();
         $piutang_header = TransaksiPembayaranPiutangHeader::orderBy('no_piutang', 'desc')->where('status', 'O')->get();
 
         return view('piutang-toko.index', compact('piutang_header', 'kas_masuk'));
@@ -202,11 +202,12 @@ class PembayaranPiutangTokoController extends Controller
         for ($i = 0; $i < count($selectedItems); $i++) {
             $itemInvoice = $selectedItems[$i];
 
-            $invoice = TransaksiInvoiceHeader::where('noinv', $itemInvoice)->first();
+            $invoice     = TransaksiInvoiceHeader::where('noinv', $itemInvoice)->first();
+            $all_piutang = TransaksiPembayaranPiutang::where('noinv', $itemInvoice)->sum('nominal');
 
             $nominal_invoice = $invoice->details_invoice->sum('nominal_total');
 
-            if ($created->nominal_potong >= $nominal_invoice) {
+            if ($created->nominal_potong >= $nominal_invoice || $created->nominal_potong == $all_piutang ) {
 
                 TransaksiInvoiceHeader::where('noinv', $itemInvoice)->update([
                     'flag_pembayaran_lunas' => 'Y',
