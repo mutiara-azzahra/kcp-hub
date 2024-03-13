@@ -145,26 +145,26 @@ class IntransitController extends Controller
                 ->value('id_rak');
 
             //Intransit Barang, Stok masuk ke Rak (StokGudang: modal) stok_part db
-            $part_no_ada  = StokGudang::where('part_no', $itemPartNo)->where('rak', $rak)->first();
+            // $part_no_ada  = StokGudang::where('part_no', $itemPartNo)->where('rak', $rak)->first();
 
             //If no data existing
-            if(!$part_no_ada){
-                $masuk_rak              = new StokGudang();
-                $masuk_rak->part_no     = $itemPartNo;
-                $masuk_rak->id_rak      = $rak;
-                $masuk_rak->stok        = $stok_masuk;
-                $masuk_rak->created_by  = Auth::user()->nama_user;
-                $masuk_rak->created_at  = now();
-                $masuk_rak->save();
+            // if(!$part_no_ada){
+            //     $masuk_rak              = new StokGudang();
+            //     $masuk_rak->part_no     = $itemPartNo;
+            //     $masuk_rak->id_rak      = $rak;
+            //     $masuk_rak->stok        = $stok_masuk;
+            //     $masuk_rak->created_by  = Auth::user()->nama_user;
+            //     $masuk_rak->created_at  = now();
+            //     $masuk_rak->save();
 
-            } else {
+            // } else {
                 
-                StokGudang::where('part_no', $part_no)->where('rak', $rak)->update([
-                    'stok'          => $part_no_ada->stok + $stok_masuk,
-                    'ket_status'    => 'CLOSE',
-                    'modi_date'     => NOW()
-                ]);
-            }
+            //     StokGudang::where('part_no', $part_no)->where('rak', $rak)->update([
+            //         'stok'          => $part_no_ada->stok + $stok_masuk,
+            //         'ket_status'    => 'CLOSE',
+            //         'modi_date'     => NOW()
+            //     ]);
+            // }
             
         }
 

@@ -82,7 +82,7 @@
         </div>
     </div>
 
-    <div class="card" style="padding: 10px;">
+    {{-- <div class="card" style="padding: 10px;">
         <div class="card-header">
             <b>Lokasi Rak</b>
         </div>
@@ -116,6 +116,6 @@
                 </table>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 @endsection
