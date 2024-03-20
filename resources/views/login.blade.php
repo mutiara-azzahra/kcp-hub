@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>KCP Shop | Log In</title>
+  <link rel = "icon" href ="{{ asset('dist/img/logo_1.png')}}">
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -17,7 +18,7 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="#"><b>KCP</b> Shop</a>
+            <a href="#"><b>KCP</b> Hub</a>
         </div>
 
         <div class="card">
@@ -73,13 +74,12 @@
 
             </div>
         </div>
-
-                <div class="text-center pt-5">
-                    Jl. Sutoyo.S No. 144 RT. 36 RW. 03<br>
-                    Telp. (0511) 4417127, 4416579<br>
-                    Fax. (0511) 3364674<br>
-                    Banjarmasin, Kalimantan Selatan<br>
-                </div>
+        <div class="text-center pt-5">
+            Jl. Sutoyo.S No. 144 RT. 36 RW. 03<br>
+            Telp. (0511) 4417127, 4416579<br>
+            Fax. (0511) 3364674<br>
+            Banjarmasin, Kalimantan Selatan<br>
+        </div>
     </div>
 
 <!-- jQuery -->
