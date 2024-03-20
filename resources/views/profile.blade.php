@@ -33,7 +33,7 @@
   <header id="header" class="header">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">
-          <img src="{{ asset('logo-dinasperkin.png') }}" alt="" class="img-fluid img-logo-navbar">
+          <img src="{{ asset('dist/img/logo_1.png')}}" alt="" class="img-fluid img-logo-navbar">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -96,7 +96,7 @@
       </div>
       <div class="col-lg-6 order-sm-2">
         <div>
-          <img class="img-fluid" src="{{asset('dist/img/logo-aspira.jpg')}}" style="width: 100%;" alt="">
+          <img class="img-fluid" src="{{asset('dist/img/dashboard.png')}}" style="width: 100%;" alt="">
         </div>
       </div>
     </div>    
@@ -105,27 +105,27 @@
 
 <!-- Pendaftaran Rusunawa -->
 <div style="background-color: #0047AB;">
-  <div class="container text-left">
+  <div class="container text-left p-3">
     <div style="padding-left: 10px; padding-right: 10px;">
-      <div class="col" style="color: white;">
-        <h2>Pendaftaran Akun Toko Baru</h2>
+      <div style="color: white;">
+        <h3>Pendaftaran Akun Toko Baru</h3>
       </div>
-      <div class="col" style="color: #dcdddc;">
-        <h5>Pendaftaran dapat dilakukan untuk toko yang sudah melakukan pengajuan</h5>
+      <div style="color: #dcdddc;">
+        <h6>Pendaftaran dapat dilakukan untuk toko yang sudah melakukan pengajuan</h6>
       </div>
     </div>
   </div>
 </div>
 
 <div class="container justify-content-center" style="margin-top: 100px;">
-  <h3 data-aos="zoom-in-up"><b>Informasi Pada Aplikasi Rusunawa</b></h3>
+  <h3 data-aos="zoom-in-up"><b>Informasi yang Tersedia</b></h3>
 <div class="underline-title mx-auto" data-aos="zoom-in-up"></div>
 
 <div class="container">
   <div class="row">
     <div class="col-md">
       <div class="card shadow p-3 mb-5 bg-white rounded" style=" height: 300px;">
-        <img class="card-img-top" src="{{ asset('loupe.png') }}"  style="width: 50px;">
+        <img class="card-img-top" src="{{ asset('dist/img/shopping.png') }}"  style="width: 50px;">
         <div class="card-body">
           <h5 class="card-title">ONLINE SHOP</h5>
           <p class="card-text">Berisi informasi mengenai ketersediaan barang yang dijual oleh PT. KCP 
@@ -135,7 +135,7 @@
     </div>
     <div class="col-md">
         <div class="card shadow p-3 mb-5 bg-white rounded"  style=" height: 300px;">
-          <img class="card-img-top" src="{{ asset('information.png') }}" style="width: 50px;">
+          <img class="card-img-top" src="{{ asset('dist/img/search.png') }}" style="width: 50px;">
           <div class="card-body">
             <h5 class="card-title">INFORMASI PENGAJUAN TOKO BARU</h5>
             <p class="card-text">Halaman ini dapat
@@ -146,7 +146,7 @@
     </div>
     <div class="col-md">
       <div class="card shadow p-3 mb-5 bg-white rounded" style=" height: 300px;">
-        <img class="card-img-top" src="{{ asset('group.png') }}" style="width: 50px; ">
+        <img class="card-img-top" src="{{ asset('dist/img/store.png') }}" style="width: 50px; ">
         <div class="card-body">
           <h5 class="card-title">BUAT AKUN TOKO</h5>
           <p class="card-text">Register akun untuk dapat melanjutkan
@@ -176,7 +176,7 @@
             <div class="beranda-syarat text-left">
             <h4 class="beranda-syarat-judul">Syarat Mendaftar</h4>
               <ul class="beranda-syarat">
-                <li class="beranda-syarat-list"><i class="fas fa-check-circle" style="padding-right: 5px; color: green;"></i>{{ $s->syarat_mendaftar}}</li>           
+                <li class="beranda-syarat-list"><i class="fas fa-check-circle" style="padding-right: 5px; color: green;"></i></li>           
               </ul>
             </div>
           </div>
@@ -263,14 +263,14 @@
   </div>
 </div>
 
-<footer style="background-color: #ffc168; margin:0px !important;">
+<footer style="background-color: #4682B4; margin:0px !important;">
   <div class=" container container-fluid">
     <div class="row mb-3 pt-3">
       <div class="col-lg-2 text-center pt-2 pb-2">
-        <img class="logo-footer" src="{{ asset('logo.png') }}" style="width: 100px">
+        <img class="logo-footer" src="{{ asset('dist/img/logo_1.png')}}" style="width: 100px">
       </div>
       <div class="col-lg-7 text-left ">
-        <div class="text footer-bawah"><h4><b>UPT Rusunawa Kota Banjarmasin</b></h4>
+        <div class="text footer-bawah"><h4><b>PT . Kumala Central Partindo</b></h4>
         </div>
         <div class="text footer-bawah">
           <h5><b>Rusunawa Teluk Kelayan</b></h5>
@@ -280,14 +280,16 @@
         <div class="text footer-bawah">
             <div class="col-11" style="padding: 0 !important">
               <b>Jam Operasional:</b></h5><br>
-              <p class="font-weight-light">Senin - Minggu<br>
-                Pukul 08.00 - 20.00 WITA</p>
+              <p class="font-weight-light">Senin - Jumat<br>
+                Pukul 08.00 - 17.00 WITA</p>
+              <p class="font-weight-light">Sabtu<br>
+                Pukul 08.00 - 12.00 WITA</p>
             </div>  
         </div>
       </div>
       <div class="col-lg-3 col-sm-12">
         <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 200px">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.1195505013516!2d114.57874827505098!3d-3.3206215412339057!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de423cf961eb86f%3A0x2d087665bc89cc79!2sPT.%20Kumala%20Central%20Partindo!5e0!3m2!1sid!2sid!4v1710895092289!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.1195505013516!2d114.57874827505098!3d-3.3206215412339057!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2de423cf961eb86f%3A0x2d087665bc89cc79!2sPT.%20Kumala%20Central%20Partindo!5e0!3m2!1sid!2sid!4v1710895092289!5m2!1sid!2sid" width="400" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
     </div>
