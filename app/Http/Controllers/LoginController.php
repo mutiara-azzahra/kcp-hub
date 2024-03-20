@@ -12,9 +12,7 @@ class LoginController extends Controller
 {
 
     public function landingPage() {
-    if (Auth::check()) {
-        return redirect()->route('dashboard');
-        }
+
         return view('profile');
     }
 

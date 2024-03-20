@@ -76,7 +76,7 @@
             </li>
           @else
             <li class="nav-item">
-              <a class="nav-link dropdown" href="">Masuk</a>
+              <a class="nav-link dropdown" href="{{ route('login')}}">Masuk</a>
             </li> 
           @endif
         </ul>
