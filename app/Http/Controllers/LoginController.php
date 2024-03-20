@@ -11,8 +11,14 @@ use Illuminate\Http\RedirectResponse;
 class LoginController extends Controller
 {
 
-    public function formLogin(){
+    public function landingPage() {
+    if (Auth::check()) {
+        return redirect()->route('dashboard');
+        }
+        return view('profile');
+    }
 
+    public function formLogin() {
         if (Auth::check()) {
             return redirect()->route('dashboard');
         }

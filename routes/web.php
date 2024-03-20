@@ -54,6 +54,7 @@ use App\Http\Controllers\PembayaranTokoController;
 use App\Http\Controllers\MasterProvinsiController;
 use App\Http\Controllers\MasterPerkiraanController;
 use App\Http\Controllers\MasterAreaOutletController;
+use App\Http\Controllers\LandingPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,14 +67,16 @@ use App\Http\Controllers\MasterAreaOutletController;
 |
 */
 
+Route::get('/', [LoginController::class, 'landingPage'])->name('profile');
+Route::get('/login', [LoginController::class, 'formLogin'])->name('login.formLogin');
+Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/register', [LoginController::class, 'formRegister'])->name('login.formRegister');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-
-    Route::get('/', function () {
-        return view('profile');
-    })->name('profile');
 
     //USER
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
@@ -518,11 +521,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/retur/history', [ReturController::class, 'history'])->name('retur.history');
 
 });
-
-Route::get('/login', [LoginController::class, 'formLogin'])->name('login.formLogin');
-Route::post('/login', [LoginController::class, 'login'])->name('login');
-Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
-Route::get('/register', [LoginController::class, 'formRegister'])->name('login.formRegister');
 
 
 
